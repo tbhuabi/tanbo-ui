@@ -1,0 +1,30 @@
+// 全局文字大小
+$font-size-base: 14px;              // 基础文字大小
+
+
+// 基础颜色
+$color-default:     #333;           // 基础文字颜色
+$color-primary:     #2f4050;        // 主色调
+$color-danger:      #ed5565;        // 危险操作警告颜色
+$color-info:        #23c6c8;        // 信息提示颜色
+$color-warning:     #f8ac59;        // 负面操作警告颜色
+$color-success:     #1ab394;        // 正向操作提示颜色
+
+
+// 栅格化配置
+$grid-columns: 12;                  // 栅格列数
+$grid-column-padding: 15px;         // 每列的距离
+
+
+// 媒体查询配置
+$screen-xs-min: 320px;
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+
+
+// 盒模型圆角配置
+$radius-base: 4px;                      // 基本圆角
+$radius-sm: $radius-base - 1px;         // 小圆角
+$radius-xs: $radius-sm - 1px;           // 更小的圆角
+$radius-lg: $radius-base + 2px;         // 大圆角

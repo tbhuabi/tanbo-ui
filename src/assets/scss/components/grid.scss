@@ -1,0 +1,34 @@
+@import "../varibles";
+@import "../mixins/clearfix";
+
+@mixin grid($class) {
+    @for $i from 1 through $grid-columns {
+        $width: #{$i / $grid-columns * 100};
+        > .col-#{$class}-#{$i} {
+            width: $width + '%';
+            float: left;
+            padding-left: $grid-column-padding;
+            padding-right: $grid-column-padding;
+        }
+        > .col-#{$class}-offset-#{$i} {
+            margin-left: $width + '%';
+        }
+        > .col-#{$class}-pull-#{$i} {
+            margin-left: -$width + '%';
+        }
+    }
+}
+
+@mixin grid-responsive($class, $screen) {
+    @media (min-width: $screen) {
+        @include grid($class);
+    }
+}
+
+.row {
+    @include clearfix;
+    @include grid(xs);
+    @include grid-responsive(sm, $screen-sm-min);
+    @include grid-responsive(md, $screen-md-min);
+    @include grid-responsive(lg, $screen-lg-min);
+}
