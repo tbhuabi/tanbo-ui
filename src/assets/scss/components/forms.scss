@@ -2,7 +2,7 @@
 
 @mixin inputs($v, $h, $radius, $border-color, $border-focus-color) {
     padding: $v $h;
-    border: $border-color;
+    border: 1px solid $border-color;
     @if $form-control-radius-is-open {
         border-radius: $radius;
     }
@@ -23,5 +23,5 @@
 .form-control {
     display: block;
     width: 100%;
-    @include inputs($form-control-padding-vertical, $form-control-padding-horizontal);
+    @include inputs($form-control-padding-vertical, $form-control-padding-horizontal, $form-control-radius, $form-control-border-color, $form-control-focus-border-color);
 }
