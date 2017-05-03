@@ -5,10 +5,10 @@
   "rules": {
     "no-attribute-parameter-decorator": true,
     "no-forward-ref": true,
-    "pipe-naming": [true, "camelCase", ""],
+    "pipe-naming": [true, "camelCase", "ui"],
     "template-to-ng-template": true,
-    "directive-selector": [true, "attribute", "", "camelCase"],
-    "component-selector": [true, "element", "", "kebab-case"],
+    "directive-selector": [true, "attribute", "ui", "camelCase"],
+    "component-selector": [true, "element", "ui", "kebab-case"],
     "component-class-suffix": [true, "Component"],
     "directive-class-suffix": [true, "Directive"],
     "class-name": true,

@@ -1,11 +1,6 @@
-<div class="page">
-    <div class="header">
-        header
-    </div>
-    <div class="page-content">
-        <router-outlet></router-outlet>
-    </div>
-</div>
-<div class="footer">
-    footer
+<div class="container">
+  <br><br><br><br><br><br><br>
+  <ui-select [(ngModel)]="data.a">
+    <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
+  </ui-select>
 </div>

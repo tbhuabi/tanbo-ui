@@ -1,0 +1,8 @@
+<ui-drop-down [open]="open" (trigger)="open = !open" (escape)="open = false">
+  <button class="form-control text-left" renderTo="fixed">{{text}}
+    <i class="pull-right"><span class="caret"></span></i>
+  </button>
+  <div class="menu" renderTo="menu">
+    <ng-content selector="ui-option"></ng-content>
+  </div>
+</ui-drop-down>

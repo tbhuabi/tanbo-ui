@@ -31,6 +31,7 @@
 .form-control {
     display: block;
     width: 100%;
+    background: none;
     @include input-style($form-control-border-color, $form-control-focus-border-color);
     @include input-size($form-control-padding-vertical, $form-control-padding-horizontal, $form-control-radius, $form-control-font-size-base);
     &.input-sm {
