@@ -1,20 +1,17 @@
 // 全局文字大小
-$font-size-base: 14px;              // 基础文字大小
-
+$font-size-base: 14px; // 基础文字大小
 
 // 基础颜色
-$color-default:     #333;           // 基础文字颜色
-$color-primary: #4c6882;        // 主色调
-$color-danger:      #ed5565;        // 危险操作警告颜色
-$color-info:        #23c6c8;        // 信息提示颜色
-$color-warning:     #f8ac59;        // 负面操作警告颜色
-$color-success:     #1ab394;        // 正向操作提示颜色
-
+$color-default: #333; // 基础文字颜色
+$color-primary: #4c6882; // 主色调
+$color-danger: #ed5565; // 危险操作警告颜色
+$color-info: #23c6c8; // 信息提示颜色
+$color-warning: #f8ac59; // 负面操作警告颜色
+$color-success: #1ab394; // 正向操作提示颜色
 
 // 栅格化配置
-$grid-columns: 12;                  // 栅格列数
-$grid-column-padding: 15px;         // 每列的距离
-
+$grid-columns: 12; // 栅格列数
+$grid-column-padding: 15px; // 每列的距离
 
 // 媒体查询配置
 $screen-xs-min: 320px;
@@ -22,13 +19,11 @@ $screen-sm-min: 768px;
 $screen-md-min: 992px;
 $screen-lg-min: 1200px;
 
-
 // 盒模型圆角配置
-$radius-base: 4px;                      // 基本圆角
-$radius-sm: $radius-base - 1px;         // 小圆角
-$radius-xs: $radius-sm - 1px;           // 更小的圆角
-$radius-lg: $radius-base + 2px;         // 大圆角
-
+$radius-base: 4px; // 基本圆角
+$radius-sm: $radius-base - 1px; // 小圆角
+$radius-xs: $radius-sm - 1px; // 更小的圆角
+$radius-lg: $radius-base + 2px; // 大圆角
 
 // 表单
 $form-control-padding-vertical: 6px;
@@ -41,13 +36,20 @@ $form-control-padding-horizontal-sm: $form-control-padding-horizontal - 4px;
 $form-control-padding-horizontal-xs: $form-control-padding-horizontal-sm - 4px;
 $form-control-padding-horizontal-lg: $form-control-padding-horizontal + 4px;
 
-
 $form-control-radius-is-open: false;
 $form-control-radius: $radius-base;
 $form-control-radius-lg: $radius-lg;
 $form-control-radius-xs: $radius-xs;
 $form-control-radius-sm: $radius-sm;
 
-$form-control-border-color: #ccc;
-$form-control-border: 1px solid $form-control-border-color;
+$form-control-font-size-base: $font-size-base;
+$form-control-font-size-sm: $form-control-font-size-base - 1;
+$form-control-font-size-xs: $form-control-font-size-sm - 1;
+$form-control-font-size-lg: $form-control-font-size-base + 4;
+
+$form-control-border-color: hsla(hue($color-primary), saturation($color-primary), lightness($color-primary), .5);
 $form-control-focus-border-color: $color-primary;
+$form-control-border-color-success: $color-success;
+$form-control-border-color-info: $color-info;
+$form-control-border-color-warning: $color-warning;
+$form-control-border-color-danger: $color-danger;
