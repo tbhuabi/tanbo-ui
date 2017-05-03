@@ -9,6 +9,11 @@ $color-info: #23c6c8; // 信息提示颜色
 $color-warning: #f8ac59; // 负面操作警告颜色
 $color-success: #1ab394; // 正向操作提示颜色
 
+// 基础线条颜色配置
+$border-color-base: lighten($color-default, 22);
+$border-color-light: lighten($border-color-base, 20);
+$border-color-lighter: lighten($border-color-light, 28);
+
 // 栅格化配置
 $grid-columns: 12; // 栅格列数
 $grid-column-padding: 15px; // 每列的距离
@@ -43,13 +48,40 @@ $form-control-radius-xs: $radius-xs;
 $form-control-radius-sm: $radius-sm;
 
 $form-control-font-size-base: $font-size-base;
-$form-control-font-size-sm: $form-control-font-size-base - 1;
-$form-control-font-size-xs: $form-control-font-size-sm - 1;
-$form-control-font-size-lg: $form-control-font-size-base + 4;
+$form-control-font-size-sm: $form-control-font-size-base - 1px;
+$form-control-font-size-xs: $form-control-font-size-sm - 1px;
+$form-control-font-size-lg: $form-control-font-size-base + 4px;
 
-$form-control-border-color: hsla(hue($color-primary), saturation($color-primary), lightness($color-primary), .5);
+$form-control-border-color: $border-color-base;
 $form-control-focus-border-color: $color-primary;
 $form-control-border-color-success: $color-success;
 $form-control-border-color-info: $color-info;
 $form-control-border-color-warning: $color-warning;
 $form-control-border-color-danger: $color-danger;
+
+// 分页控件
+$pagination-radius-is-open: true;
+$pagination-radius: $radius-base;
+$pagination-radius-sm: $pagination-radius - 1px;
+$pagination-radius-xs: $pagination-radius-sm - 1px;
+$pagination-radius-lg: $pagination-radius + 2px;
+
+$pagination-padding-vertical: 2px;
+$pagination-padding-vertical-sm: $pagination-padding-vertical - 1px;
+$pagination-padding-vertical-xs: $pagination-padding-vertical-sm - 1px;
+$pagination-padding-vertical-lg: $pagination-padding-vertical + 2px;
+
+$pagination-padding-horizontal: 9px;
+$pagination-padding-horizontal-sm: $pagination-padding-horizontal - 1px;
+$pagination-padding-horizontal-xs: $pagination-padding-horizontal-sm - 1px;
+$pagination-padding-horizontal-lg: $pagination-padding-horizontal + 2px;
+
+$pagination-font-size-base: $font-size-base;
+$pagination-font-size-sm: $pagination-font-size-base - 1px;
+$pagination-font-size-xs: $pagination-font-size-sm - 1px;
+$pagination-font-size-lg: $pagination-font-size-base + 4px;
+
+$pagination-border-color: $border-color-lighter;
+$pagination-disabled-color: darken($pagination-border-color, 15);
+$pagination-disabled-bg-color: lighten($pagination-border-color, 7);
+$pagination-hover-bg-color: lighten($pagination-border-color, 2);
