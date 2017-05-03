@@ -1,6 +1,6 @@
 @import "../varibles";
 
-@mixin input-theme($border-color, $border-focus-color) {
+@mixin input-style($border-color, $border-focus-color) {
     border: 1px solid $border-color;
     &:hover:not(.disabled, [disabled]) {
         border-color: darken($border-color, 20);
@@ -16,7 +16,9 @@
 
 @mixin input-size($v, $h, $radius, $font-size) {
     padding: $v $h;
+    line-height: $font-size;
     font-size: $font-size;
+    height: $font-size + ($h - 1) * 2;
     @if $form-control-radius-is-open {
         border-radius: $radius;
     }
@@ -29,8 +31,7 @@
 .form-control {
     display: block;
     width: 100%;
-    line-height: inherit;
-    @include input-theme($form-control-border-color, $form-control-focus-border-color);
+    @include input-style($form-control-border-color, $form-control-focus-border-color);
     @include input-size($form-control-padding-vertical, $form-control-padding-horizontal, $form-control-radius, $form-control-font-size-base);
     &.input-sm {
         @include input-size($form-control-padding-vertical-sm, $form-control-padding-horizontal-sm, $form-control-radius-sm, $form-control-font-size-sm);
@@ -38,19 +39,16 @@
     &.input-lg {
         @include input-size($form-control-padding-vertical-lg, $form-control-padding-horizontal-lg, $form-control-radius-lg, $form-control-font-size-lg);
     }
-    &.input-xs {
-        @include input-size($form-control-padding-vertical-xs, $form-control-padding-horizontal-xs, $form-control-radius-xs, $form-control-font-size-xs);
-    }
     &.has-success {
-        @include input-theme($form-control-border-color-success, $form-control-border-color-success);
+        @include input-style($form-control-border-color-success, $form-control-border-color-success);
     }
     &.has-info {
-        @include input-theme($form-control-border-color-info, $form-control-border-color-info);
+        @include input-style($form-control-border-color-info, $form-control-border-color-info);
     }
     &.has-warning {
-        @include input-theme($form-control-border-color-warning, $form-control-border-color-warning);
+        @include input-style($form-control-border-color-warning, $form-control-border-color-warning);
     }
     &.has-danger {
-        @include input-theme($form-control-border-color-danger, $form-control-border-color-danger);
+        @include input-style($form-control-border-color-danger, $form-control-border-color-danger);
     }
 }

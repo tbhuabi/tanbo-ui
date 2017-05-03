@@ -27,6 +27,7 @@
 
 .pagination {
     @include list-unstyled;
+    line-height: $line-height;
     display: inline-block;
     > li {
         display: inline;
