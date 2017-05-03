@@ -11,7 +11,7 @@ export class OptionComponent implements OnInit {
 
     get selected() {
         if (this.parentComponent instanceof SelectComponent) {
-            return this.value === this.parentComponent.ngModel;
+            return this.value === this.parentComponent.value;
         }
         return false;
     };
@@ -28,7 +28,7 @@ export class OptionComponent implements OnInit {
     updateSelectValue() {
         if (this.parentComponent instanceof SelectComponent) {
             this.parentComponent.text = this.elementRef.nativeElement.innerText;
-            this.parentComponent.ngModelChange.emit(this.value);
+            this.parentComponent.value = this.value;
         }
     }
 }

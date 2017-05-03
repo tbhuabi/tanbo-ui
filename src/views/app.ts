@@ -25,4 +25,8 @@ export class AppComponent {
         key: 'name5',
         value: '666'
     }];
+
+    show(value) {
+        console.log(value);
+    }
 }

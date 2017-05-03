@@ -1,4 +1,4 @@
-<ui-drop-down [open]="open" (trigger)="open = !open" (escape)="open = false">
+<ui-drop-down [open]="open" (trigger)="trigger()" (escape)="open = false">
   <button class="form-control text-left" renderTo="fixed">{{text}}
     <i class="pull-right"><span class="caret"></span></i>
   </button>
