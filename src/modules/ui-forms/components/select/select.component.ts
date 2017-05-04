@@ -74,8 +74,9 @@ export class SelectComponent implements ControlValueAccessor {
     trigger() {
         let isReadonly = (this as any).hasOwnProperty('readonly');
         isReadonly = isReadonly && this.readonly !== false;
-
-        if (!this.disabled && !isReadonly) {
+        let isDisabled = (this as any).hasOwnProperty('disabled');
+        isDisabled = isDisabled && this.disabled !== false;
+        if (!isDisabled && !isReadonly) {
             this.open = !this.open;
             this.focus = true;
         }

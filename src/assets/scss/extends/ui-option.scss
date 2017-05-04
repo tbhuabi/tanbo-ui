@@ -1,8 +1,13 @@
 @import "../varibles";
+
 .ui-option {
     padding: 0 $grid-column-padding;
     line-height: 2em;
     transition: all .2s;
+    > div {
+        white-space: normal;
+        overflow: hidden;
+    }
     &:hover {
         cursor: pointer;
         background-color: lighten($color-primary, 50);

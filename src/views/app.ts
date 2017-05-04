@@ -11,7 +11,7 @@ export class AppComponent {
         b: ''
     };
     dataList: Array<any> = [{
-        key: 'name1',
+        key: 'name133333333333333333333333333333333333333333333333333333333333333333333333333333333333',
         value: '000'
     }, {
         key: 'name2',

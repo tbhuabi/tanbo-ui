@@ -1,8 +1,7 @@
 @import "../varibles";
 @import "mixins/input";
-ui-radio {
+ui-checkbox {
     display: inline-block;
-    border-radius: 50%;
     cursor: pointer;
     position: relative;
     vertical-align: middle;
@@ -14,17 +13,17 @@ ui-radio {
     font-size: 1.2em;
     line-height: 1.2em;
     @include input-styles;
-    > .ui-radio-checked {
+    > .ui-checkbox-checked {
         transform: scale(0);
         opacity: 0;
     }
     &.checked {
-        animation: radio-focus .3s;
-        > .ui-radio-checked {
+        animation: checkbox-focus .3s;
+        > .ui-checkbox-checked {
             transform: scale(1);
             opacity: 1;
         }
-        > .ui-radio-unchecked {
+        > .ui-checkbox-unchecked {
             transform: scale(0);
             opacity: 0;
         }
@@ -40,11 +39,13 @@ ui-radio {
     }
 }
 
-@keyframes radio-focus {
+@keyframes checkbox-focus {
     0% {
+        border-radius: 50%;
         box-shadow: 0 0 0 2px $border-color-lighter;
     }
     100% {
+        border-radius: 50%;
         box-shadow: 0 0 0 6px $border-color-lighter;
     }
 }

@@ -1,5 +1,5 @@
 @import "../varibles";
-@import "../mixins/list-unstyled";
+@import "mixins/list-unstyled";
 
 @mixin pagination($v, $h, $radius, $font-size) {
     font-size: $font-size;

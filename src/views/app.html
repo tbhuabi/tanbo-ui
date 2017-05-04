@@ -2,11 +2,28 @@
   <br>
   <form class="col-md-5 col-md-offset-3" (ngSubmit)="submit()">
     <br><br><br><br><br>
-    <ui-select class="form-control">
+    <ui-select class="form-control" disabled>
       <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
     </ui-select>
     <br><br><br><br><br>
-    <span>radio</span> <ui-radio class="focus"></ui-radio> <span>这是一个人</span>
+    <ui-select class="form-control input-sm">
+      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
+    </ui-select>
+    <br><br><br><br><br>
+    <ui-select class="form-control input-lg">
+      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
+    </ui-select>
+    <br><br><br><br><br>
+    <span>radio</span> <ui-radio></ui-radio> <span>这是一个人</span><br>
+    <span>radio</span> <ui-radio class="has-success"></ui-radio> <span>这是一个人</span><br>
+    <span>radio</span> <ui-radio class="has-danger"></ui-radio> <span>这是一个人</span><br>
+    <br><br><br><br><br>
+    <span>radio</span> <ui-checkbox></ui-checkbox> <span>这是一个人</span>
+    <span>radio</span> <ui-checkbox class="has-success"></ui-checkbox> <span>这是一个人</span>
+    <span>radio</span> <ui-checkbox class="has-danger"></ui-checkbox> <span>这是一个人</span>
+    <span>radio</span> <ui-checkbox disabled></ui-checkbox> <span>这是一个人</span>
+    <span>radio</span> <ui-checkbox disabled class="has-danger"></ui-checkbox> <span>这是一个人</span>
+    <span>radio</span> <ui-checkbox readonly class="has-danger"></ui-checkbox> <span>这是一个人</span>
   </form>
   <div>
     <span class="icon icon-address-book"></span>

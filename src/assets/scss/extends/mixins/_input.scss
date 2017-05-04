@@ -1,0 +1,23 @@
+@import "../../varibles";
+
+@mixin input-styles {
+    &.has-danger {
+        color: $color-danger;
+    }
+    &.has-warning {
+        color: $color-warning;
+    }
+    &.has-info {
+        color: $color-info;
+    }
+    &.has-success {
+        color: $color-success;
+    }
+    &[disabled], &.disabled {
+        opacity: .5;
+        cursor: not-allowed;
+    }
+    &[readonly] {
+        cursor: default;
+    }
+}

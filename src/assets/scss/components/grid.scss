@@ -1,5 +1,5 @@
 @import "../varibles";
-@import "../mixins/clearfix";
+@import "mixins/clearfix";
 
 @mixin grid($class) {
     @for $i from 1 through $grid-columns {
