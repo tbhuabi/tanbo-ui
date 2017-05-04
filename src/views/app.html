@@ -1,16 +1,7 @@
 <div class="container">
   <br>
   <form class="col-md-5 col-md-offset-3" (ngSubmit)="submit()">
-    <br><br><br><br><br>
-    <ui-select class="form-control" disabled>
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-    </ui-select>
-    <br><br><br><br><br>
-    <ui-select class="form-control input-sm" [(ngModel)]="data.a" name="aa">
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-    </ui-select>
-    <br><br><br><br><br>
-    <ui-select class="form-control input-lg" [(ngModel)]="data.a" name="bb">
+    <ui-select class="form-control" [(ngModel)]="data.a" name="bb">
       <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
     </ui-select>
     <br><br><br><br><br>

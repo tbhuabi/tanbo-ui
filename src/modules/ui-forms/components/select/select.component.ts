@@ -11,7 +11,6 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { OptionComponent } from '../option/option.component';
-import { isEmptyInputValue } from '../../../../utils/is-empty-input-value';
 
 @Component({
     selector: 'ui-select',
@@ -43,15 +42,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit {
         if (value === this._value) {
             return;
         }
-        this.options.forEach((option: OptionComponent) => {
-            if (option.selected) {
-                this.text = option.text;
-            }
-        });
-        if (isEmptyInputValue(value)) {
-            value = '';
-        }
-        this._value = value + '';
+        this._value = value;
         if (this.registerOnChangeFn) {
             this.registerOnChangeFn(this._value);
         }
@@ -59,6 +50,11 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit {
             this.registerOnTouchedFn(this._value);
         }
         this.change.emit(this._value);
+        this.options.forEach((option: OptionComponent) => {
+            if (option.selected) {
+                this.text = option.text;
+            }
+        });
     };
 
     get value() {
