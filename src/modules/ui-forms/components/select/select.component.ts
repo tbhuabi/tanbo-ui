@@ -1,6 +1,16 @@
-import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
+import {
+    Component,
+    ContentChildren,
+    QueryList,
+    AfterContentInit,
+    Input,
+    Output,
+    EventEmitter,
+    HostBinding
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { OptionComponent } from '../option/option.component';
 import { isEmptyInputValue } from '../../../../utils/is-empty-input-value';
 
 @Component({
@@ -12,7 +22,10 @@ import { isEmptyInputValue } from '../../../../utils/is-empty-input-value';
         multi: true
     }]
 })
-export class SelectComponent implements ControlValueAccessor {
+export class SelectComponent implements ControlValueAccessor, AfterContentInit {
+    @ContentChildren(OptionComponent)
+    options: QueryList<OptionComponent>;
+
     @HostBinding('class.focus')
     focus: boolean = false;
     @Input()
@@ -24,13 +37,17 @@ export class SelectComponent implements ControlValueAccessor {
     @Output()
     change = new EventEmitter<string>();
 
-    @Input()
     set value(value: any) {
         this.open = false;
         this.focus = false;
         if (value === this._value) {
             return;
         }
+        this.options.forEach((option: OptionComponent) => {
+            if (option.selected) {
+                this.text = option.text;
+            }
+        });
         if (isEmptyInputValue(value)) {
             value = '';
         }
@@ -54,6 +71,14 @@ export class SelectComponent implements ControlValueAccessor {
     private _value = '';
     private registerOnChangeFn: (_: any) => {};
     private registerOnTouchedFn: (_: any) => {};
+
+    ngAfterContentInit() {
+        this.options.forEach((option: OptionComponent) => {
+            option.checked.subscribe((params: OptionComponent) => {
+                this.value = params.value;
+            });
+        });
+    }
 
     writeValue(value: any) {
         this.value = value;

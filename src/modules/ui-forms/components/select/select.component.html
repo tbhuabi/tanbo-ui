@@ -1,10 +1,10 @@
 <ui-drop-down [open]="open" (trigger)="trigger()" (escape)="escape()">
   <div class="ui-select-fixed" renderTo="fixed">
-    <input
-            [name]="name"
-            readonly
-            type="text"
-            [value]="text">
+    <input [disabled]="disabled"
+           [name]="name"
+           readonly
+           type="text"
+           [value]="text">
     <span>{{text}}</span>
     <div class="ui-select-arrow">
       <span class="caret"></span>
