@@ -1,0 +1,49 @@
+@import "../varibles";
+
+ui-radio {
+    display: inline-block;
+    width: 1.2em;
+    height: 1.2em;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    overflow: hidden;
+    color: $border-color-base;
+    > .ui-radio-checked {
+        transform: scale(0);
+        opacity: 0;
+    }
+    &.checked {
+        animation: radio-focus .3s;
+        > .ui-radio-checked {
+            transform: scale(1);
+            opacity: 1;
+        }
+        > .ui-radio-unchecked {
+            transform: scale(0);
+            opacity: 0;
+        }
+    }
+    > div {
+        transition: all .3s;
+        position: absolute;
+        margin-top: 1px;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+@keyframes radio-focus {
+    0% {
+        box-shadow: 0 0 0 2px $border-color-lighter;
+    }
+    100% {
+        box-shadow: 0 0 0 6px $border-color-lighter;
+    }
+}

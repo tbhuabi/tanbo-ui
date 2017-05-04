@@ -6,7 +6,6 @@ import { isEmptyInputValue } from '../../../../utils/is-empty-input-value';
 @Component({
     selector: 'ui-select',
     templateUrl: './select.component.html',
-    styleUrls: ['./select.component.scss'],
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: SelectComponent,

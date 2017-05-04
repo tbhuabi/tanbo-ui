@@ -8,6 +8,7 @@
         }
     }
     > .drop-down-menu {
+        z-index: 2;
         display: none;
         position: absolute;
         left: 0;

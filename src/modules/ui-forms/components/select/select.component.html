@@ -1,5 +1,5 @@
 <ui-drop-down [open]="open" (trigger)="trigger()" (escape)="escape()">
-  <div class="fixed" renderTo="fixed">
+  <div class="ui-select-fixed" renderTo="fixed">
     <input
             [name]="name"
             readonly
@@ -7,7 +7,7 @@
             [value]="text">
     <span>{{text}}</span>
   </div>
-  <div class="menu" renderTo="menu">
+  <div class="ui-select-menu" renderTo="menu">
     <ng-content selector="ui-option"></ng-content>
   </div>
 </ui-drop-down>

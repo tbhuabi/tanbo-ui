@@ -2,8 +2,7 @@ import { Component, Input, ViewContainerRef, ElementRef, OnInit } from '@angular
 import { SelectComponent } from '../select/select.component';
 @Component({
     selector: 'ui-option',
-    templateUrl: './option.component.html',
-    styleUrls: ['./option.component.scss']
+    templateUrl: './option.component.html'
 })
 export class OptionComponent implements OnInit {
     @Input()

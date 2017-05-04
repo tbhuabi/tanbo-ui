@@ -4,6 +4,7 @@ import { UiComponentsModule } from '../ui-components/ui-components.module';
 
 import { SelectComponent } from './components/select/select.component';
 import { OptionComponent } from './components/option/option.component';
+import { RadioComponent } from './components/radio/radio.component';
 
 @NgModule({
     imports: [
@@ -12,11 +13,13 @@ import { OptionComponent } from './components/option/option.component';
     ],
     declarations: [
         SelectComponent,
-        OptionComponent
+        OptionComponent,
+        RadioComponent
     ],
     exports: [
         SelectComponent,
-        OptionComponent
+        OptionComponent,
+        RadioComponent
     ]
 })
 export class UiFormsModule {

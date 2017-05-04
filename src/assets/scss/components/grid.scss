@@ -4,16 +4,16 @@
 @mixin grid($class) {
     @for $i from 1 through $grid-columns {
         $width: #{$i / $grid-columns * 100};
-        > .col-#{$class}-#{$i} {
+        .col-#{$class}-#{$i} {
             width: $width + '%';
             float: left;
             padding-left: $grid-column-padding;
             padding-right: $grid-column-padding;
         }
-        > .col-#{$class}-offset-#{$i} {
+        .col-#{$class}-offset-#{$i} {
             margin-left: $width + '%';
         }
-        > .col-#{$class}-pull-#{$i} {
+        .col-#{$class}-pull-#{$i} {
             margin-left: -$width + '%';
         }
     }
@@ -27,8 +27,10 @@
 
 .row {
     @include clearfix;
-    @include grid(xs);
-    @include grid-responsive(sm, $screen-sm-min);
-    @include grid-responsive(md, $screen-md-min);
-    @include grid-responsive(lg, $screen-lg-min);
+    margin-left: -$grid-column-padding;
+    margin-right: -$grid-column-padding;
 }
+@include grid(xs);
+@include grid-responsive(sm, $screen-sm-min);
+@include grid-responsive(md, $screen-md-min);
+@include grid-responsive(lg, $screen-lg-min);

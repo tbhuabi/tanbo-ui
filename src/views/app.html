@@ -1,5 +1,14 @@
 <div class="container">
   <br>
-  <form (ngSubmit)="submit()">
+  <form class="col-md-5 col-md-offset-3" (ngSubmit)="submit()">
+    <br><br><br><br><br>
+    <ui-select class="form-control">
+      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
+    </ui-select>
+    <br><br><br><br><br>
+    <span>radio</span> <ui-radio class="focus"></ui-radio> <span>这是一个人</span>
   </form>
+  <div>
+    <span class="icon icon-address-book"></span>
+  </div>
 </div>
