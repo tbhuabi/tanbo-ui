@@ -42,9 +42,9 @@ ui-radio {
 
 @keyframes radio-focus {
     0% {
-        box-shadow: 0 0 0 2px $border-color-lighter;
+        box-shadow: 0 0 0 2px $ui-input-focus-box-shadow-color;
     }
     100% {
-        box-shadow: 0 0 0 6px $border-color-lighter;
+        box-shadow: 0 0 0 6px $ui-input-focus-box-shadow-color;
     }
 }

@@ -1,5 +1,6 @@
 @import "../varibles";
 @import "mixins/input";
+
 ui-checkbox {
     display: inline-block;
     cursor: pointer;
@@ -42,10 +43,10 @@ ui-checkbox {
 @keyframes checkbox-focus {
     0% {
         border-radius: 50%;
-        box-shadow: 0 0 0 2px $border-color-lighter;
+        box-shadow: 0 0 0 2px $ui-input-focus-box-shadow-color;
     }
     100% {
         border-radius: 50%;
-        box-shadow: 0 0 0 6px $border-color-lighter;
+        box-shadow: 0 0 0 6px $ui-input-focus-box-shadow-color;
     }
 }
