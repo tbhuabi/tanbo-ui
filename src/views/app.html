@@ -1,6 +1,8 @@
 <div class="container">
   <br>
-  <ui-select [(ngModel)]="data.a" (change)="show($event)">
-    <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-  </ui-select>
+  <form (ngSubmit)="submit()">
+    <ui-select [(ngModel)]="data.a" (change)="show($event)" name="bbb" class="form-control">
+      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
+    </ui-select>
+  </form>
 </div>

@@ -1,0 +1,6 @@
+ui-select{
+    position: relative;
+    > ui-drop-down > .drop-down {
+        position: static;
+    }
+}

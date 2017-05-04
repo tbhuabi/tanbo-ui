@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { isEmptyInputValue } from '../../../../utils/is-empty-input-value';
@@ -13,13 +13,13 @@ import { isEmptyInputValue } from '../../../../utils/is-empty-input-value';
         multi: true
     }]
 })
-export class SelectComponent implements ControlValueAccessor, AfterViewInit {
+export class SelectComponent implements ControlValueAccessor {
+    @HostBinding('class.focus')
+    focus: boolean = false;
     @Input()
     set value(value: any) {
-        if (!this.isInit) {
-            return;
-        }
         this.open = false;
+        this.focus = false;
         if (value === this._value) {
             return;
         }
@@ -27,8 +27,12 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit {
             value = '';
         }
         this._value = value + '';
-        this.registerOnChangeFn(this._value);
-        this.registerOnTouchedFn(this._value);
+        if (this.registerOnChangeFn) {
+            this.registerOnChangeFn(this._value);
+        }
+        if (this.registerOnTouchedFn) {
+            this.registerOnTouchedFn(this._value);
+        }
         this.change.emit(this._value);
     };
 
@@ -37,7 +41,9 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit {
     };
 
     @Input()
-    disabled: boolean = false;
+    disabled: boolean;
+    @Input()
+    name: string = '';
     @Output()
     change = new EventEmitter<string>();
     open: boolean = false;
@@ -46,11 +52,6 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit {
     private _value = '';
     private registerOnChangeFn: (_: any) => {};
     private registerOnTouchedFn: (_: any) => {};
-    private isInit: boolean = false;
-
-    ngAfterViewInit() {
-        this.isInit = true;
-    }
 
     writeValue(value: any) {
         this.value = value;

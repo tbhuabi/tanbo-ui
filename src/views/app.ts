@@ -29,4 +29,7 @@ export class AppComponent {
     show(value) {
         console.log(value);
     }
+
+    submit() {
+    }
 }

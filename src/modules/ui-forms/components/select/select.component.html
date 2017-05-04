@@ -1,7 +1,12 @@
-<ui-drop-down [open]="open" (trigger)="trigger()" (escape)="open = false">
-  <button class="form-control text-left" renderTo="fixed">{{text}}
-    <i class="pull-right"><span class="caret"></span></i>
-  </button>
+<ui-drop-down [open]="open" (trigger)="trigger()" (escape)="open = false; focus = false" (click)="focus = true">
+  <div class="fixed" renderTo="fixed">
+    <input
+            [name]="name"
+            readonly
+            type="text"
+            [value]="text">
+    <span>{{text}}</span>
+  </div>
   <div class="menu" renderTo="menu">
     <ng-content selector="ui-option"></ng-content>
   </div>
