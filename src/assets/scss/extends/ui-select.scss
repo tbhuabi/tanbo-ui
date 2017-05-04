@@ -1,5 +1,7 @@
-ui-select{
+ui-select {
     position: relative;
+    display: inline-block;
+    line-height: inherit;
     > ui-drop-down > .drop-down {
         position: static;
     }

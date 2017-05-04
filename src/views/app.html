@@ -1,18 +1,5 @@
 <div class="container">
   <br>
   <form (ngSubmit)="submit()">
-    <ui-select #bbb="ngModel" disabled readonly [(ngModel)]="data.a" required minlength="5" (change)="show($event)" name="a" class="form-control">
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-    </ui-select>
-    <br><br><br><br><br>
-    <ui-select #bbb="ngModel" [(ngModel)]="data.b" required minlength="5" (change)="show($event)" name="b" class="form-control">
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-    </ui-select>
-    <p>
-      {{bbb.errors | json}}
-    </p>
-    <div>
-      <button type="submit">submit</button>
-    </div>
   </form>
 </div>
