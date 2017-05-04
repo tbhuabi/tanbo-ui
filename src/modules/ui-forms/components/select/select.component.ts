@@ -17,6 +17,15 @@ export class SelectComponent implements ControlValueAccessor {
     @HostBinding('class.focus')
     focus: boolean = false;
     @Input()
+    disabled: boolean = false;
+    @Input()
+    readonly: boolean;
+    @Input()
+    name: string = '';
+    @Output()
+    change = new EventEmitter<string>();
+
+    @Input()
     set value(value: any) {
         this.open = false;
         this.focus = false;
@@ -40,12 +49,6 @@ export class SelectComponent implements ControlValueAccessor {
         return this._value;
     };
 
-    @Input()
-    disabled: boolean;
-    @Input()
-    name: string = '';
-    @Output()
-    change = new EventEmitter<string>();
     open: boolean = false;
     text: string = '';
 
@@ -70,8 +73,17 @@ export class SelectComponent implements ControlValueAccessor {
     }
 
     trigger() {
-        if (!this.disabled) {
+        let isReadonly = (this as any).hasOwnProperty('readonly');
+        isReadonly = isReadonly && this.readonly !== false;
+
+        if (!this.disabled && !isReadonly) {
             this.open = !this.open;
+            this.focus = true;
         }
+    }
+
+    escape() {
+        this.open = false;
+        this.focus = false;
     }
 }

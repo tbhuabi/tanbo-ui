@@ -1,4 +1,4 @@
-<ui-drop-down [open]="open" (trigger)="trigger()" (escape)="open = false; focus = false" (click)="focus = true">
+<ui-drop-down [open]="open" (trigger)="trigger()" (escape)="escape()">
   <div class="fixed" renderTo="fixed">
     <input
             [name]="name"
