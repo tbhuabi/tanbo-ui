@@ -13,7 +13,15 @@
   <!--</div>-->
   <!--</ui-drop-down>-->
   <br><br><br>
-  <ui-select [(ngModel)]="data.a" class="form-control">
-    <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-  </ui-select>
+  <div class="row">
+    <div class="col-md-3">
+      <input type="text" class="form-control">
+    </div>
+    <div class="col-md-5">
+      <ui-select [(ngModel)]="data.a" class="form-control">
+        <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
+      </ui-select>
+    </div>
+  </div>
+
 </div>
