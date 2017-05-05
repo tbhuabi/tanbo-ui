@@ -1,9 +1,9 @@
 <div class="container">
   <br>
   <form (submit)="submit()">
-    <ui-checkbox [(ngModel)]="data.a" name="a"></ui-checkbox>
-    <ui-checkbox [(ngModel)]="data.b" name="b" disabled checked></ui-checkbox>
-    <input [(ngModel)]="data.b" type="checkbox" name="c" checked value="b">
+    <ui-select [(ngModel)]="data.a" name="a" class="form-control">
+      <ui-option *ngFor="let item of dataList" [value]="item.value" disabled>{{item.key}}</ui-option>
+    </ui-select>
     <button type="submit">submit</button>
   </form>
 

@@ -1,7 +1,7 @@
 @import "../varibles";
 
-.ui-option {
-    padding: 0 $grid-column-padding;
+ui-option {
+
     line-height: 2em;
     transition: all .2s;
     display: block;
@@ -10,15 +10,26 @@
     border: 0;
     font-size: inherit;
     text-align: left;
-    > div {
-        white-space: normal;
-        overflow: hidden;
+    .ui-option {
+        padding: 0 $grid-column-padding;
+        width: 100%;
+        border: none;
+        background: none;
+        line-height: inherit;
+        font-size: inherit;
+        cursor: inherit;
+        text-align: left;
+        > div {
+            white-space: normal;
+            overflow: hidden;
+        }
     }
+
     &:hover {
         cursor: pointer;
         background-color: lighten($color-primary, 50);
     }
-    &.active {
+    &.selected {
         background-color: lighten($color-primary, 45);
     }
     &.disabled {
