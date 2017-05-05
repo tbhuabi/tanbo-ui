@@ -87,5 +87,8 @@ $pagination-disabled-color: darken($pagination-border-color, 15);
 $pagination-disabled-bg-color: lighten($pagination-border-color, 7);
 $pagination-hover-bg-color: lighten($pagination-border-color, 2);
 
+// 表格
+$table-cell-padding: 8px;
+
 // 模拟radio/checkbox
 $ui-input-focus-box-shadow-color: hsla(hue($border-color-lighter), saturation($border-color-lighter), lightness($border-color-lighter), .5);
