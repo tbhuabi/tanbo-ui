@@ -67,8 +67,8 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     text: string = '';
 
     private _value = '';
-    private registerOnChangeFn: (_: any) => {};
-    private registerOnTouchedFn: (_: any) => {};
+    private registerOnChangeFn: (_: any) => any;
+    private registerOnTouchedFn: (_: any) => any;
     private subs: Array<Subscription> = [];
 
     ngAfterContentInit() {

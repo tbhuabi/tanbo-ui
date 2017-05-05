@@ -13,7 +13,19 @@ export class OptionComponent implements AfterViewInit {
     checked = new EventEmitter<OptionComponent>();
     text: string = '';
 
+    @Input()
+    set selected(isSelected: any) {
+        if (isSelected !== false) {
+            this._selected = true;
+            this.updateSelectValue();
+        }
+        this._selected = false;
+    }
+
     get selected() {
+        if (this._selected) {
+            return true;
+        }
         if (this.parentComponent instanceof SelectComponent) {
             return this.value === this.parentComponent.value;
         }
@@ -25,6 +37,7 @@ export class OptionComponent implements AfterViewInit {
         return isDisabled && this.disabled !== false;
     }
 
+    private _selected: boolean = false;
     private parentComponent: SelectComponent;
 
     constructor(private viewContainerRef: ViewContainerRef,

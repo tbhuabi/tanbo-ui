@@ -1,5 +1,6 @@
 @import "../varibles";
 @import "mixins/input";
+
 ui-radio {
     display: inline-block;
     border-radius: 50%;
@@ -14,29 +15,41 @@ ui-radio {
     font-size: 1.2em;
     line-height: 1.2em;
     @include input-styles;
-    > .ui-radio-checked {
-        transform: scale(0);
-        opacity: 0;
-    }
-    &.checked {
-        animation: radio-focus .3s;
+    .ui-radio {
+        width: 100%;
+        height: 100%;
+        background: none;
+        border: none;
+        font-size: inherit;
+        line-height: inherit;
+        color: inherit;
+        cursor: inherit;
         > .ui-radio-checked {
-            transform: scale(1);
-            opacity: 1;
-        }
-        > .ui-radio-unchecked {
             transform: scale(0);
             opacity: 0;
         }
+        > div {
+            transition: all .3s;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin-top: 1px;
+        }
     }
-    > div {
-        transition: all .3s;
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        margin-top: 1px;
+    &.checked {
+        animation: radio-focus .3s;
+        .ui-radio {
+            > .ui-radio-checked {
+                transform: scale(1);
+                opacity: 1;
+            }
+            > .ui-radio-unchecked {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
     }
 }
 
