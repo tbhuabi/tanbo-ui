@@ -5,12 +5,12 @@ import { NgModel, FormControl } from '@angular/forms';
 })
 export class ModelValidatorDirective {
     @Input()
-    doValidate: NgModel;
+    uiValidateModel: NgModel;
 
     @HostListener('click') click() {
-        if (this.doValidate) {
-            if (!this.doValidate.valid) {
-                let control: FormControl = this.doValidate.formDirective.controls[this.doValidate.name];
+        if (this.uiValidateModel) {
+            if (!this.uiValidateModel.valid) {
+                let control: FormControl = this.uiValidateModel.formDirective.controls[this.uiValidateModel.name];
                 control.markAsDirty();
                 control.markAsTouched();
             }

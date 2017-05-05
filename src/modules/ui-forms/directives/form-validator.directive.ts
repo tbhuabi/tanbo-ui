@@ -5,12 +5,12 @@ import { NgForm } from '@angular/forms';
 })
 export class FormValidatorDirective {
     @Input()
-    validate: NgForm;
+    uiValidateForm: NgForm;
 
     @HostListener('submit') submit() {
-        if (this.validate && !this.validate.valid) {
-            this.validate.ngSubmit.isStopped = true;
-            let controls = this.validate.controls;
+        if (this.uiValidateForm && !this.uiValidateForm.valid) {
+            this.uiValidateForm.ngSubmit.isStopped = true;
+            let controls = this.uiValidateForm.controls;
             for (let key in controls) {
                 if (controls.hasOwnProperty(key)) {
                     let formControl = controls[key];
@@ -20,7 +20,7 @@ export class FormValidatorDirective {
             }
             return false;
         } else {
-            this.validate.ngSubmit.isStopped = false;
+            this.uiValidateForm.ngSubmit.isStopped = false;
         }
     }
 }
