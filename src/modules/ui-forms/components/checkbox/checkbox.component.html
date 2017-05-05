@@ -1,0 +1,10 @@
+<button class="ui-input" type="button">
+  <div class="ui-input-checked">
+    <span [ngClass]="checkedIcon"></span>
+  </div>
+  <div class="ui-input-unchecked">
+    <span [ngClass]="uncheckedIcon"></span>
+  </div>
+</button>
+<input (change)="click()" [disabled]="disabled" class="ui-input-raw" [type]="type" [name]="name" [value]="value">
+
