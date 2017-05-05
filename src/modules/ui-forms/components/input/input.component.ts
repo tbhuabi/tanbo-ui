@@ -99,6 +99,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
             self.click();
         };
         if (typeof this.id === 'string' && this.id !== '') {
+            // TODO 这里对document有依赖，后续要处理掉
             this.labelElement = document.querySelector(`label[for=${this.id}]`);
             this.labelElement.addEventListener('click', this.labelEventCallback);
         }
