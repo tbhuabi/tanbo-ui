@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: 'app.html'
 })
 export class AppComponent {
-    data: any = {a: '1'};
+    data: any = {a: '000'};
     list: Array<string> = ['1', '2', '3'];
     dataList: Array<any> = [{
         key: 'name133333333333333333333333333333333333333333333333333333333333333333333333333333333333',

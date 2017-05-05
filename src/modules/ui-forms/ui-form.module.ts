@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UiComponentsModule } from '../ui-components/ui-components.module';
 
+import { UiCheckboxRequiredValidatorDirective } from './directives/required-validator.directive';
+
 import { SelectComponent } from './components/select/select.component';
 import { OptionComponent } from './components/option/option.component';
-import { RadioComponent } from './components/radio/radio.component';
-import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { InputComponent } from './components/input/input.component';
 
 @NgModule({
     imports: [
@@ -15,14 +16,16 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
     declarations: [
         SelectComponent,
         OptionComponent,
-        RadioComponent,
-        CheckboxComponent
+        InputComponent,
+
+        UiCheckboxRequiredValidatorDirective
     ],
     exports: [
         SelectComponent,
         OptionComponent,
-        RadioComponent,
-        CheckboxComponent
+        InputComponent,
+
+        UiCheckboxRequiredValidatorDirective
     ]
 })
 export class UiFormsModule {
