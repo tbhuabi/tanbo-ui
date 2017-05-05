@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, HostBinding, HostListener } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+// TODO 后续可以通过子组件事件，完成多个type的封装，而不用在`ui-input`组件中实现具体逻辑，以达到解耦的效果
 @Component({
     selector: 'ui-input',
     templateUrl: './input.component.html',
