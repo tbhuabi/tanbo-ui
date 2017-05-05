@@ -1,4 +1,4 @@
-import { Component, Input, Renderer2, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, HostBinding, Input, Renderer2, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'ui-drop-down',
@@ -9,6 +9,7 @@ export class DropDownComponent implements OnInit {
     @Input()
     placement: string = 'bottom';
     @Input()
+    @HostBinding('class.open')
     open: boolean = false;
     @Output()
     escape = new EventEmitter();

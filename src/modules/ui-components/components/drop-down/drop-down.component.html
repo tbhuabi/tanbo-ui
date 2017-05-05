@@ -1,8 +1,8 @@
-<div class="drop-down open">
+<div class="drop-down">
   <div class="drop-down-fixed" (click)="onTrigger()">
     <ng-content select="[renderTo=fixed]"></ng-content>
   </div>
-  <div uiStopPropagation class="drop-down-menu" [ngClass]="[placement, open ? 'open' : '']">
+  <div uiStopPropagation class="drop-down-menu" [ngClass]="placement">
     <ng-content select="[renderTo=menu]"></ng-content>
   </div>
 </div>

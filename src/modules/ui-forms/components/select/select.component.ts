@@ -52,11 +52,13 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
             this.registerOnTouchedFn(this._value);
         }
         this.change.emit(this._value);
-        this.options.forEach((option: OptionComponent) => {
-            if (option.selected) {
-                this.text = option.text;
-            }
-        });
+        if (this.options) {
+            this.options.forEach((option: OptionComponent) => {
+                if (option.selected) {
+                    this.text = option.text;
+                }
+            });
+        }
     };
 
     get value() {
@@ -79,6 +81,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
             this.subs.push(sub);
         });
     }
+
     ngOnDestroy() {
         this.subs.forEach(item => {
             item.unsubscribe();

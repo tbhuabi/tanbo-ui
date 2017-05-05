@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'ui-my-app',
+    selector: 'ui-app',
     templateUrl: 'app.html'
 })
 export class AppComponent {
+    open: boolean = false;
     data: any = {a: '000'};
     list: Array<string> = ['1', '2', '3'];
     dataList: Array<any> = [{
@@ -23,6 +24,7 @@ export class AppComponent {
         key: 'name5',
         value: '666'
     }];
+
     submit() {
         console.log(this.data);
     }
