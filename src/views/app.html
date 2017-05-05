@@ -1,22 +1,24 @@
 <div class="container">
   <br>
-  <form class="col-md-5 col-md-offset-3" (submit)="submit()">
-    <ui-select [(ngModel)]="data.a" name="a" class="form-control">
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-    </ui-select>
-    <br>
-    <ui-input #b="ngModel" type="checkbox" required [(ngModel)]="data.b" name="b" value="bbb"></ui-input>
-    <br>aaa
-    {{b.errors |json}} <br>
-    <button type="submit">submit</button>
-  </form>
   <!--<form class="col-md-5 col-md-offset-3" (submit)="submit()">-->
-    <!--<input required #a1="ngModel" [(ngModel)]="data.a1" type="checkbox" name="0" value="0">{{a1.errors|json}}-->
-    <!--<input [(ngModel)]="data.a2" type="checkbox" name="1" [value]="'1'">-->
-    <!--<input [(ngModel)]="data.a3" type="checkbox" name="2" [value]="'2'">-->
-    <!--<input [(ngModel)]="data.a4" type="checkbox" name="3" [value]="'3'">-->
+    <!--<ui-select [(ngModel)]="data.a" name="a" class="form-control">-->
+      <!--<ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>-->
+    <!--</ui-select>-->
+    <!--<br>-->
+    <!--<ui-input #b="ngModel" type="checkbox" required [(ngModel)]="data.b" name="a" value="bbb"></ui-input>-->
+    <!--<ui-input #b="ngModel" type="checkbox" required [(ngModel)]="data.b" name="c" value="bbb"></ui-input>-->
+    <!--<ui-input #b="ngModel" type="checkbox" required [(ngModel)]="data.b" name="b" value="bbb"></ui-input>-->
+    <!--<br>aaa-->
+    <!--{{b.errors |json}} <br>-->
     <!--<button type="submit">submit</button>-->
   <!--</form>-->
+  <form class="col-md-5 col-md-offset-3" (submit)="submit()">
+    <ui-input type="checkbox" name="1" value="1" [(ngModel)]="data.a"></ui-input>
+    <ui-input type="checkbox" name="2" value="2" [(ngModel)]="data.a"></ui-input>
+    <ui-input type="checkbox" name="3" value="3" [(ngModel)]="data.a"></ui-input>
+    <ui-input type="checkbox" name="4" value="4" [(ngModel)]="data.a"></ui-input>
+    <button type="submit">submit</button>
+  </form>
   <div>
     <span class="icon icon-address-book"></span>
   </div>

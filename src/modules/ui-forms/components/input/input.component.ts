@@ -72,12 +72,18 @@ export class InputComponent implements ControlValueAccessor, OnInit {
         if (isDisabled) {
             return;
         }
-        this.checked = !this.checked;
+        let value: boolean | string;
+        if (this.type === 'checkbox') {
+            value = this.checked = !this.checked;
+        } else if (this.type === 'radio') {
+            value = this.value;
+        }
+
         if (this.registerOnChangeFn) {
-            this.registerOnChangeFn(this.checked);
+            this.registerOnChangeFn(value);
         }
         if (this.registerOnTouchedFn) {
-            this.registerOnTouchedFn(this.checked);
+            this.registerOnTouchedFn(value);
         }
     }
 
@@ -87,7 +93,11 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     }
 
     writeValue(value: any) {
-        this.checked = !!value;
+        if (this.type === 'checkbox') {
+            this.checked = !!value;
+        } else if (this.type === 'radio') {
+            this.checked = this.value === value;
+        }
     }
 
     registerOnChange(fn: any) {
