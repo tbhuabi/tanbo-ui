@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, HostBinding, HostListener } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, HostBinding, HostListener } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -10,7 +10,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         multi: true
     }]
 })
-export class InputComponent implements ControlValueAccessor, OnInit {
+export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
     @Input()
     disabled: boolean = false;
     @Input()
@@ -59,6 +59,9 @@ export class InputComponent implements ControlValueAccessor, OnInit {
         this._uncheckedIcon = iconName;
     }
 
+    labelElement: any;
+    labelEventCallback: any;
+
     private _checkedIcon: string = '';
     private _uncheckedIcon: string = '';
     private checkboxIcons: Array<string> = ['icon icon-checkbox-checked', 'icon icon-checkbox-unchecked'];
@@ -73,8 +76,9 @@ export class InputComponent implements ControlValueAccessor, OnInit {
             return;
         }
         let value: boolean | string;
+        this.checked = !this.checked;
         if (this.type === 'checkbox') {
-            value = this.checked = !this.checked;
+            value = this.checked;
         } else if (this.type === 'radio') {
             value = this.value;
         }
@@ -90,6 +94,20 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     ngOnInit() {
         let isChecked = (this as any).hasOwnProperty('checked');
         this.checked = isChecked && this.checked !== false;
+        let self = this;
+        this.labelEventCallback = function () {
+            self.click();
+        };
+        if (typeof this.id === 'string' && this.id !== '') {
+            this.labelElement = document.querySelector(`label[for=${this.id}]`);
+            this.labelElement.addEventListener('click', this.labelEventCallback);
+        }
+    }
+
+    ngOnDestroy() {
+        if (this.labelElement) {
+            this.labelElement.removeEventListener('click', this.labelEventCallback);
+        }
     }
 
     writeValue(value: any) {

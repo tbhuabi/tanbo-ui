@@ -6,5 +6,5 @@
     <span [ngClass]="uncheckedICon"></span>
   </div>
 </button>
-<input class="ui-input-raw" [type]="type" [id]="id" [name]="name" [value]="value">
+<input (change)="click()" [disabled]="disabled" class="ui-input-raw" [type]="type" [name]="name" [value]="value">
 

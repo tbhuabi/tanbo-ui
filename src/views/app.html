@@ -13,10 +13,9 @@
     <!--<button type="submit">submit</button>-->
   <!--</form>-->
   <form class="col-md-5 col-md-offset-3" (submit)="submit()">
-    <ui-input type="checkbox" name="1" value="1" [(ngModel)]="data.a"></ui-input>
-    <ui-input type="checkbox" name="2" value="2" [(ngModel)]="data.a"></ui-input>
-    <ui-input type="checkbox" name="3" value="3" [(ngModel)]="data.a"></ui-input>
-    <ui-input type="checkbox" name="4" value="4" [(ngModel)]="data.a"></ui-input>
+    <ui-input type="radio" id="id1" name="1" value="1" [(ngModel)]="data.a"></ui-input>
+    <br>
+    <label for="id1">aaaaa</label>
     <button type="submit">submit</button>
   </form>
   <div>
