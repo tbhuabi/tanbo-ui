@@ -1,10 +1,30 @@
 <div class="container">
   <br>
   <form (submit)="submit()">
+    <ui-select class="form-control" disabled>
+      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
+    </ui-select>
+    <br><br><br><br><br>
+    <ui-select class="form-control input-sm" [(ngModel)]="data.a" name="aa">
+      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
+    </ui-select>
+    <br><br><br><br><br>
+    <ui-select class="form-control input-lg" [(ngModel)]="data.a" name="bb">
+      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
+    </ui-select>
     <p *ngFor="let item of list">
 
       <input [(ngModel)]="data.a" type="checkbox" [name]="item" [value]="item">
     </p>
+    <ui-checkbox class="has-success"></ui-checkbox>
+    <br>
+    <ui-radio></ui-radio>
+    <br>
+    <select name="" id="">
+      <option value="aaa" >aaa</option>
+      <option value="bbb"selected>bbb</option>
+      <option value="ccc" disabled>ccc</option>
+    </select>
 
     <button type="submit">submit</button>
   </form>

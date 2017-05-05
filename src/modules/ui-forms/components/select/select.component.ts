@@ -5,10 +5,12 @@ import {
     AfterContentInit,
     Input,
     Output,
+    OnDestroy,
     EventEmitter,
     HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { OptionComponent } from '../option/option.component';
 
@@ -21,7 +23,7 @@ import { OptionComponent } from '../option/option.component';
         multi: true
     }]
 })
-export class SelectComponent implements ControlValueAccessor, AfterContentInit {
+export class SelectComponent implements ControlValueAccessor, AfterContentInit, OnDestroy {
     @ContentChildren(OptionComponent)
     options: QueryList<OptionComponent>;
 
@@ -67,12 +69,19 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit {
     private _value = '';
     private registerOnChangeFn: (_: any) => {};
     private registerOnTouchedFn: (_: any) => {};
+    private subs: Array<Subscription> = [];
 
     ngAfterContentInit() {
         this.options.forEach((option: OptionComponent) => {
-            option.checked.subscribe((params: OptionComponent) => {
+            let sub = option.checked.subscribe((params: OptionComponent) => {
                 this.value = params.value;
             });
+            this.subs.push(sub);
+        });
+    }
+    ngOnDestroy() {
+        this.subs.forEach(item => {
+            item.unsubscribe();
         });
     }
 

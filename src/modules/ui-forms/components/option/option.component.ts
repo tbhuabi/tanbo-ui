@@ -7,6 +7,8 @@ import { SelectComponent } from '../select/select.component';
 export class OptionComponent implements AfterViewInit {
     @Input()
     value: string = '';
+    @Input()
+    disabled: boolean = false;
     @Output()
     checked = new EventEmitter<OptionComponent>();
     text: string = '';
@@ -17,6 +19,11 @@ export class OptionComponent implements AfterViewInit {
         }
         return false;
     };
+
+    get isDisabled() {
+        let isDisabled = (this as any).hasOwnProperty('disabled');
+        return isDisabled && this.disabled !== false;
+    }
 
     private parentComponent: SelectComponent;
 
@@ -30,6 +37,8 @@ export class OptionComponent implements AfterViewInit {
     }
 
     updateSelectValue() {
-        this.checked.emit(this);
+        if (!this.isDisabled) {
+            this.checked.emit(this);
+        }
     }
 }

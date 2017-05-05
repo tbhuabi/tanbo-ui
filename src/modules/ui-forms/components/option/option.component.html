@@ -1,4 +1,4 @@
-<div class="ui-option" [ngClass]="{active: selected}" (click)="updateSelectValue()">
+<div class="ui-option" [ngClass]="{active: selected, disabled: isDisabled}" (click)="updateSelectValue()">
   <div>
     <ng-content></ng-content>
   </div>
