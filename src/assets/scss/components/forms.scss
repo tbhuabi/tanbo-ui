@@ -18,7 +18,6 @@
     padding: $v $h;
     line-height: $line-height;
     font-size: $font-size;
-    height: $font-size + ($h - 1) * 2;
     @if $form-control-radius-is-open {
         border-radius: $radius;
     }
