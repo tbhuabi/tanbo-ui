@@ -12,6 +12,7 @@ import { OptionComponent } from './components/option/option.component';
 import { InputComponent } from './components/input/input.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { RadioComponent } from './components/radio/radio.component';
+import { RangeComponent } from './components/range/range.component';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import { RadioComponent } from './components/radio/radio.component';
         InputComponent,
         CheckboxComponent,
         RadioComponent,
+        RangeComponent,
 
         UiCheckboxRequiredValidatorDirective,
         ModelValidatorDirective,
@@ -32,7 +34,8 @@ import { RadioComponent } from './components/radio/radio.component';
     ],
     entryComponents: [
         CheckboxComponent,
-        RadioComponent
+        RadioComponent,
+        RangeComponent
     ],
     exports: [
         SelectComponent,

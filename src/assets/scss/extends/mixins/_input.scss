@@ -18,6 +18,7 @@
         cursor: not-allowed;
     }
     &[readonly] {
+        opacity: .5;
         cursor: default;
     }
 }

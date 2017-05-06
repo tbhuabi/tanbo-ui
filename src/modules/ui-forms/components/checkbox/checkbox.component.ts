@@ -3,7 +3,7 @@ import { Component, Input, Output, HostListener, EventEmitter } from '@angular/c
 import { InputType } from '../../utils/input-type';
 
 @Component({
-    selector: 'ui-checkbox',
+    selector: 'ui-input-checkbox',
     templateUrl: './checkbox.component.html'
 })
 export class CheckboxComponent implements InputType {

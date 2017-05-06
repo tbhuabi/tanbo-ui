@@ -3,7 +3,11 @@
 
 ui-input {
     display: inline-block;
-    &[type=checkbox], &[type=radio] {
+    &[type=range] {
+        display: block;
+    }
+    &[type=checkbox], &[type=radio], &[type=range] {
+        cursor: pointer;
         > .ui-input-raw {
             width: 0;
             height: 0;
@@ -11,14 +15,17 @@ ui-input {
             overflow: hidden;
             opacity: 0;
         }
-        > ui-checkbox, > ui-radio {
+        > ui-input-checkbox, > ui-input-radio {
             display: inline-block;
+        }
+        > ui-input-range {
+            display: block;
         }
     }
 
     @include input-styles;
     &[checked], &.checked {
-        > ui-checkbox, > ui-radio {
+        > ui-input-checkbox, > ui-input-radio {
             animation: checkbox-focus .3s;
             > .ui-input {
                 > .ui-input-checked {
@@ -32,7 +39,7 @@ ui-input {
             }
         }
     }
-    > ui-checkbox, > ui-radio {
+    > ui-input-checkbox, > ui-input-radio {
         display: none;
         cursor: inherit;
         position: relative;
@@ -67,6 +74,32 @@ ui-input {
                 right: 0;
                 bottom: 0;
                 margin-top: 1px;
+            }
+        }
+    }
+    > ui-input-range {
+        display: none;
+        height: 6px;
+        box-shadow: inset 1px 1px 3px $border-color-light;
+        border-radius: 3px;
+        line-height: 0;
+        > .ui-input-range {
+            display: inline-block;
+            height: 100%;
+            position: relative;
+            width: 50%;
+            box-shadow: inset 1px 1px 3px darken($border-color-light, 50);
+            border-radius: inherit;
+            > .ui-input-range-btn {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                right: -10px;
+                top: -7px;
+                border-radius: 50%;
+                background-color: $border-color-base;
+                border: none;
+                cursor: inherit;
             }
         }
     }

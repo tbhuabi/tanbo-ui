@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter, HostListener } from '@angular/c
 import { InputType } from '../../utils/input-type';
 
 @Component({
-    selector: 'ui-radio',
+    selector: 'ui-input-radio',
     templateUrl: './radio.component.html'
 })
 export class RadioComponent implements InputType {

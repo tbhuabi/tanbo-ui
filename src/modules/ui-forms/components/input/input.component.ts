@@ -15,6 +15,7 @@ import { InputHostDirective } from '../../directives/input-host.directive';
 
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { RadioComponent } from '../radio/radio.component';
+import { RangeComponent } from '../range/range.component';
 
 import { InputType } from '../../utils/input-type';
 
@@ -67,6 +68,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
                 this.inputComponentFactory = this.componentFactoryResolver.resolveComponentFactory(RadioComponent);
                 this.renderInputComponent();
                 break;
+            case 'range':
+                this.inputComponentFactory = this.componentFactoryResolver.resolveComponentFactory(RangeComponent);
+                this.renderInputComponent();
         }
     }
 
