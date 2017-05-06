@@ -1,7 +1,13 @@
-import { Component, Input, OnInit, OnDestroy, HostBinding, HostListener } from '@angular/core';
+import { Component, Input, ViewChild, ComponentFactoryResolver, ComponentFactory } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-// TODO 后续可以通过子组件事件，完成多个type的封装，而不用在`ui-input`组件中实现具体逻辑，以达到解耦的效果
+import { InputHostDirective } from '../../directives/input-host.directive';
+
+import { CheckboxComponent } from '../checkbox/checkbox.component';
+import { RadioComponent } from '../radio/radio.component';
+
+import { InputType } from '../../utils/input-type';
+
 @Component({
     selector: 'ui-input',
     templateUrl: './input.component.html',
@@ -11,13 +17,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         multi: true
     }]
 })
-export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class InputComponent implements ControlValueAccessor {
     @Input()
     disabled: boolean = false;
     @Input()
-    type: string = '';
+    readonly: boolean = false;
     @Input()
-    @HostBinding('class.checked')
     checked: boolean = false;
     @Input()
     name: string = '';
@@ -25,99 +30,66 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
     value: string = '';
     @Input()
     id: string = '';
+    @Input()
+    max: number | string;
+    @Input()
+    min: number | string;
+    @Input()
+    checkedIcon: string;
+    @Input()
+    uncheckedICon: string;
+
+    @ViewChild(InputHostDirective)
+    inputHost: InputHostDirective;
 
     @Input()
-    get checkedIcon() {
-        if (this._checkedIcon) {
-            return this._checkedIcon;
-        }
-        if (this.type === 'radio') {
-            return this.radioIcons[0];
-        }
-        if (this.type === 'checkbox') {
-            return this.checkboxIcons[0];
-        }
-    }
-
-    set checkedIcon(iconName: string) {
-        this._checkedIcon = iconName;
-    }
-
-    @Input()
-    get uncheckedICon() {
-        if (this._checkedIcon) {
-            return this._checkedIcon;
-        }
-        if (this.type === 'radio') {
-            return this.radioIcons[1];
-        }
-        if (this.type === 'checkbox') {
-            return this.checkboxIcons[1];
+    set type(inputType: string) {
+        this._type = inputType;
+        switch (inputType) {
+            case 'checkbox':
+                this.inputComponentFactory = this.componentFactoryResolver.resolveComponentFactory(CheckboxComponent);
+                this.renderInputComponent();
+                break;
+            case 'radio':
+                this.inputComponentFactory = this.componentFactoryResolver.resolveComponentFactory(RadioComponent);
+                this.renderInputComponent();
+                break;
         }
     }
 
-    set uncheckedIcon(iconName: string) {
-        this._uncheckedIcon = iconName;
+    get type() {
+        return this._type;
     }
 
-    labelElement: any;
-    labelEventCallback: any;
-
-    private _checkedIcon: string = '';
-    private _uncheckedIcon: string = '';
-    private checkboxIcons: Array<string> = ['icon icon-checkbox-checked', 'icon icon-checkbox-unchecked'];
-    private radioIcons: Array<string> = ['icon icon-radio-checked', 'icon icon-radio-unchecked'];
+    private _type: string;
     private registerOnChangeFn: (_: any) => any;
     private registerOnTouchedFn: (_: any) => any;
+    private inputComponentFactory: ComponentFactory<InputType>;
 
-    @HostListener('click') click() {
-        let isDisabled = (this as any).hasOwnProperty('disabled');
-        isDisabled = isDisabled && this.disabled !== false;
-        if (isDisabled) {
-            return;
-        }
-        let value: boolean | string;
-        this.checked = !this.checked;
-        if (this.type === 'checkbox') {
-            value = this.checked;
-        } else if (this.type === 'radio') {
-            value = this.value;
-        }
-
-        if (this.registerOnChangeFn) {
-            this.registerOnChangeFn(value);
-        }
-        if (this.registerOnTouchedFn) {
-            this.registerOnTouchedFn(value);
-        }
+    constructor(private componentFactoryResolver: ComponentFactoryResolver) {
     }
 
-    ngOnInit() {
-        let isChecked = (this as any).hasOwnProperty('checked');
-        this.checked = isChecked && this.checked !== false;
-        let self = this;
-        this.labelEventCallback = function () {
-            self.click();
-        };
-        if (typeof this.id === 'string' && this.id !== '') {
-            // TODO 这里对document有依赖，后续要处理掉
-            this.labelElement = document.querySelector(`label[for=${this.id}]`);
-            this.labelElement.addEventListener('click', this.labelEventCallback);
+    renderInputComponent() {
+        let viewContainerRef = this.inputHost.viewContainerRef;
+        viewContainerRef.clear();
+        let componentRef = viewContainerRef.createComponent(this.inputComponentFactory);
+        let componentInstance = (<InputType> componentRef.instance);
+        componentInstance.checked = this.checked;
+        componentInstance.disabled = this.disabled;
+        componentInstance.readonly = this.readonly;
+        if (this.type === 'checkbox' || this.type === 'radio') {
+            componentInstance.checkedIcon = this.checkedIcon;
+            componentInstance.uncheckedIcon = this.uncheckedICon;
         }
-    }
+        if (this.type === 'range') {
+            componentInstance.max = this.max;
+            componentInstance.min = this.min;
+        }
 
-    ngOnDestroy() {
-        if (this.labelElement) {
-            this.labelElement.removeEventListener('click', this.labelEventCallback);
-        }
     }
 
     writeValue(value: any) {
-        if (this.type === 'checkbox') {
-            this.checked = !!value;
-        } else if (this.type === 'radio') {
-            this.checked = this.value === value;
-        }
+        this.value = value;
     }
 
     registerOnChange(fn: any) {

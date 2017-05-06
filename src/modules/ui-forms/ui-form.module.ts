@@ -5,10 +5,13 @@ import { UiComponentsModule } from '../ui-components/ui-components.module';
 import { UiCheckboxRequiredValidatorDirective } from './directives/required-validator.directive';
 import { ModelValidatorDirective } from './directives/model-validator.directive';
 import { FormValidatorDirective } from './directives/form-validator.directive';
+import { InputHostDirective } from './directives/input-host.directive';
 
 import { SelectComponent } from './components/select/select.component';
 import { OptionComponent } from './components/option/option.component';
 import { InputComponent } from './components/input/input.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { RadioComponent } from './components/radio/radio.component';
 
 @NgModule({
     imports: [
@@ -19,10 +22,17 @@ import { InputComponent } from './components/input/input.component';
         SelectComponent,
         OptionComponent,
         InputComponent,
+        CheckboxComponent,
+        RadioComponent,
 
         UiCheckboxRequiredValidatorDirective,
         ModelValidatorDirective,
-        FormValidatorDirective
+        FormValidatorDirective,
+        InputHostDirective
+    ],
+    entryComponents: [
+        CheckboxComponent,
+        RadioComponent
     ],
     exports: [
         SelectComponent,

@@ -1,5 +1,8 @@
 import { Component, Input, OnInit, OnDestroy, HostBinding, HostListener } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { InputType } from '../../utils/input-type';
+
 @Component({
     selector: 'ui-radio',
     templateUrl: './radio.component.html',
@@ -9,9 +12,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         multi: true
     }]
 })
-export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class RadioComponent implements ControlValueAccessor, InputType, OnInit, OnDestroy {
     @Input()
     disabled: boolean = false;
+    @Input()
+    readonly: boolean = false;
     @Input()
     type: string = '';
     @Input()

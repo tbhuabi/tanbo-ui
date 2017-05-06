@@ -2,10 +2,7 @@
 @import "mixins/input";
 
 ui-input {
-    .ui-input {
-        display: none;
-    }
-    &[type=checkbox], &[type=radio] {
+    > ui-checkbox, > ui-radio {
         display: inline-block;
         cursor: pointer;
         position: relative;
@@ -49,20 +46,24 @@ ui-input {
             }
         }
         @include input-styles;
-        &.checked {
-            animation: checkbox-focus .3s;
-            > .ui-input {
-                > .ui-input-checked {
-                    transform: scale(1);
-                    opacity: 1;
-                }
-                > .ui-input-unchecked {
-                    transform: scale(0);
-                    opacity: 0;
-                }
+
+    }
+    &.checked {
+        animation: checkbox-focus .3s;
+        > .ui-input {
+            > .ui-input-checked {
+                transform: scale(1);
+                opacity: 1;
+            }
+            > .ui-input-unchecked {
+                transform: scale(0);
+                opacity: 0;
             }
         }
     }
+    //.ui-input {
+    //    display: none;
+    //}
 }
 
 @keyframes checkbox-focus {

@@ -1,27 +1,6 @@
 <div class="container">
   <br><br><br>
-  <!--<ui-drop-down [open]="open" (trigger)="open = !open" (escape)="open = false">-->
-  <!--<input type="text" readonly class="form-control" renderTo="fixed">-->
-  <!--<div renderTo="menu">-->
-  <!--<ul>-->
-  <!--<li>001</li>-->
-  <!--<li>002</li>-->
-  <!--<li>003</li>-->
-  <!--<li>004</li>-->
-  <!--<li>005</li>-->
-  <!--</ul>-->
-  <!--</div>-->
-  <!--</ui-drop-down>-->
+  <ui-input type="checkbox"></ui-input>
   <br><br><br>
-  <div class="row">
-    <div class="col-md-3">
-      <input type="text" class="form-control">
-    </div>
-    <div class="col-md-5">
-      <ui-select [(ngModel)]="data.a" class="form-control">
-        <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-      </ui-select>
-    </div>
-  </div>
-
+  <ui-input type="radio"></ui-input>
 </div>
