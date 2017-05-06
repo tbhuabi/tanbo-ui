@@ -7,8 +7,6 @@
         .col-#{$class}-#{$i} {
             width: $width + '%';
             float: left;
-            padding-left: $grid-column-padding;
-            padding-right: $grid-column-padding;
         }
         .col-#{$class}-offset-#{$i} {
             margin-left: $width + '%';
@@ -29,6 +27,24 @@
     @include clearfix;
     margin-left: -$grid-column-padding;
     margin-right: -$grid-column-padding;
+}
+@for $i from 1 through $grid-columns {
+    .col-xs-#{$i} {
+        padding-left: $grid-column-padding;
+        padding-right: $grid-column-padding;
+    }
+    col-sm-#{$i} {
+        padding-left: $grid-column-padding;
+        padding-right: $grid-column-padding;
+    }
+    .col-md-#{$i} {
+        padding-left: $grid-column-padding;
+        padding-right: $grid-column-padding;
+    }
+    .col-lg-#{$i} {
+        padding-left: $grid-column-padding;
+        padding-right: $grid-column-padding;
+    }
 }
 @include grid(xs);
 @include grid-responsive(sm, $screen-sm-min);
