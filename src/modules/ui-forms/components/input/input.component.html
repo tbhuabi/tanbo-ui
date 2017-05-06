@@ -1,2 +1,11 @@
 <ng-template uiInputHost></ng-template>
-<input class="ui-input-raw" type="text">
+<input class="ui-input-raw"
+       [value]="value"
+       [id]="id"
+       [name]="name"
+       [type]="type"
+       [disabled]="disabled"
+       [max]="max"
+       [min]="min"
+       [check]="checked"
+       [readonly]="readonly">
