@@ -1,5 +1,15 @@
-import { Component, Input, ViewChild, ComponentFactoryResolver, ComponentFactory } from '@angular/core';
+import {
+    Component,
+    Input,
+    ViewChild,
+    ComponentFactoryResolver,
+    ComponentFactory,
+    HostBinding,
+    OnChanges,
+    OnDestroy
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { InputHostDirective } from '../../directives/input-host.directive';
 
@@ -17,27 +27,30 @@ import { InputType } from '../../utils/input-type';
         multi: true
     }]
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor, OnChanges, OnDestroy {
     @Input()
+    @HostBinding('class.disabled')
     disabled: boolean = false;
     @Input()
+    @HostBinding('class.readonly')
     readonly: boolean = false;
     @Input()
+    @HostBinding('class.checked')
     checked: boolean = false;
     @Input()
-    name: string = '';
+    name: string;
     @Input()
-    value: string = '';
+    value: string;
     @Input()
-    id: string = '';
+    max: string | number;
     @Input()
-    max: number | string;
-    @Input()
-    min: number | string;
+    min: string | number;
     @Input()
     checkedIcon: string;
     @Input()
     uncheckedICon: string;
+    @Input()
+    id: string;
 
     @ViewChild(InputHostDirective)
     inputHost: InputHostDirective;
@@ -62,30 +75,62 @@ export class InputComponent implements ControlValueAccessor {
     }
 
     private _type: string;
+
     private registerOnChangeFn: (_: any) => any;
     private registerOnTouchedFn: (_: any) => any;
     private inputComponentFactory: ComponentFactory<InputType>;
+    private componentInstance: any;
+    private sub: Subscription;
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver) {
     }
 
+    ngOnChanges() {
+        this.updateComponentStatus();
+    }
+
+    ngOnDestroy() {
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
+    }
+
     renderInputComponent() {
+        this.ngOnDestroy();
         let viewContainerRef = this.inputHost.viewContainerRef;
         viewContainerRef.clear();
         let componentRef = viewContainerRef.createComponent(this.inputComponentFactory);
-        let componentInstance = (<InputType> componentRef.instance);
-        componentInstance.checked = this.checked;
-        componentInstance.disabled = this.disabled;
-        componentInstance.readonly = this.readonly;
+        this.componentInstance = (<InputType> componentRef.instance);
+        this.sub = this.componentInstance.change.subscribe((params: boolean | number) => {
+            console.log(params);
+            switch (this.type) {
+                case 'checkbox':
+                    this.checked = !!params;
+                    break;
+                case 'radio':
+                    this.checked = !!params;
+                    break;
+            }
+            this.updateComponentStatus();
+        });
+        this.updateComponentStatus();
+    }
+
+    updateComponentStatus() {
+        if (!this.componentInstance) {
+            return;
+        }
+        this.componentInstance.checked = this.checked;
+        this.componentInstance.disabled = this.disabled;
+        this.componentInstance.readonly = this.readonly;
         if (this.type === 'checkbox' || this.type === 'radio') {
-            componentInstance.checkedIcon = this.checkedIcon;
-            componentInstance.uncheckedIcon = this.uncheckedICon;
+            this.componentInstance.checkedIcon = this.checkedIcon;
+            this.componentInstance.uncheckedIcon = this.uncheckedICon;
         }
         if (this.type === 'range') {
-            componentInstance.max = this.max;
-            componentInstance.min = this.min;
+            this.componentInstance.max = this.max;
+            this.componentInstance.min = this.min;
         }
-
     }
 
     writeValue(value: any) {

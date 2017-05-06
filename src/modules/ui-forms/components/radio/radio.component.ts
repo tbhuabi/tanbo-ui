@@ -1,91 +1,58 @@
-import { Component, Input, OnInit, OnDestroy, HostBinding, HostListener } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 
 import { InputType } from '../../utils/input-type';
 
 @Component({
     selector: 'ui-radio',
-    templateUrl: './radio.component.html',
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: RadioComponent,
-        multi: true
-    }]
+    templateUrl: './radio.component.html'
 })
-export class RadioComponent implements ControlValueAccessor, InputType, OnInit, OnDestroy {
+export class RadioComponent implements InputType {
     @Input()
-    disabled: boolean = false;
-    @Input()
-    readonly: boolean = false;
-    @Input()
-    type: string = '';
-    @Input()
-    @HostBinding('class.checked')
-    checked: boolean = false;
-    @Input()
-    name: string = '';
-    @Input()
-    value: string = '';
-    @Input()
-    forId: string = '';
-    @Input()
-    checkedIcon: string = 'icon icon-radio-checked';
-    @Input()
-    uncheckedIcon: string = 'icon icon-radio-unchecked';
+    set disabled(isDisabled: any) {
+        this._disabled = isDisabled;
+    }
 
-    labelElement: any;
-    labelEventCallback: any;
-    private registerOnChangeFn: (_: any) => any;
-    private registerOnTouchedFn: (_: any) => any;
+    get disabled() {
+        let isDisabled = (this as any).hasOwnProperty('_disabled');
+        return isDisabled && this._disabled !== false;
+    }
+
+    @Input()
+    set readonly(isReadonly: any) {
+        this._readonly = isReadonly;
+    }
+
+    get readonly() {
+        let isReadonly = (this as any).hasOwnProperty('_readonly');
+        return isReadonly && this._readonly !== false;
+    }
+
+    @Input()
+    set checked(isChecked: any) {
+        this._checked = isChecked;
+    }
+
+    get checked() {
+        let isChecked = (this as any).hasOwnProperty('_checked');
+        return isChecked && this._checked !== false;
+    }
+
+    @Input()
+    checkedIcon: string;
+    @Input()
+    uncheckedIcon: string;
+
+    @Output()
+    change = new EventEmitter<boolean>();
+
+    private _disabled: boolean;
+    private _readonly: boolean;
+    private _checked: boolean;
 
     @HostListener('click') click() {
-        let isDisabled = (this as any).hasOwnProperty('disabled');
-        isDisabled = isDisabled && this.disabled !== false;
-        if (isDisabled) {
+        if (this.disabled || this.readonly) {
             return;
         }
-        this.checked = true;
-        if (this.registerOnChangeFn) {
-            this.registerOnChangeFn(this.value);
-        }
-        if (this.registerOnTouchedFn) {
-            this.registerOnTouchedFn(this.value);
-        }
-    }
-
-    ngOnInit() {
-        let isChecked = (this as any).hasOwnProperty('checked');
-        this.checked = isChecked && this.checked !== false;
-        let self = this;
-        this.labelEventCallback = function () {
-            self.click();
-        };
-        if (typeof this.forId === 'string' && this.forId !== '') {
-            // TODO 这里对document有依赖，后续要处理掉
-            this.labelElement = document.querySelector(`label[for=${this.forId}]`);
-            this.labelElement.addEventListener('click', this.labelEventCallback);
-        }
-    }
-
-    ngOnDestroy() {
-        if (this.labelElement) {
-            this.labelElement.removeEventListener('click', this.labelEventCallback);
-        }
-    }
-
-    writeValue(value: any) {
-        this.checked = this.value === value;
-    }
-
-    registerOnChange(fn: any) {
-        this.registerOnChangeFn = fn;
-    }
-
-    registerOnTouched(fn: any) {
-        this.registerOnTouchedFn = fn;
-    }
-
-    setDisabledState(isDisabled: boolean) {
-        this.disabled = isDisabled;
+        this.change.emit(true);
     }
 }

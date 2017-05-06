@@ -2,9 +2,39 @@
 @import "mixins/input";
 
 ui-input {
+    display: inline-block;
+    &[type=checkbox], &[type=radio] {
+        > .ui-input-raw {
+            width: 0;
+            height: 0;
+            position: absolute;
+            overflow: hidden;
+            opacity: 0;
+        }
+        > ui-checkbox, > ui-radio {
+            display: inline-block;
+        }
+    }
+
+    @include input-styles;
+    &[checked], &.checked {
+        > ui-checkbox, > ui-radio {
+            animation: checkbox-focus .3s;
+            > .ui-input {
+                > .ui-input-checked {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+                > .ui-input-unchecked {
+                    transform: scale(0);
+                    opacity: 0;
+                }
+            }
+        }
+    }
     > ui-checkbox, > ui-radio {
-        display: inline-block;
-        cursor: pointer;
+        display: none;
+        cursor: inherit;
         position: relative;
         vertical-align: middle;
         text-align: center;
@@ -14,13 +44,7 @@ ui-input {
         height: 1.2em;
         font-size: 1.2em;
         line-height: 1.2em;
-        > .ui-input-raw {
-            width: 0;
-            height: 0;
-            position: absolute;
-            overflow: hidden;
-            opacity: 0;
-        }
+
         > .ui-input {
             display: block;
             width: 100%;
@@ -45,25 +69,7 @@ ui-input {
                 margin-top: 1px;
             }
         }
-        @include input-styles;
-
     }
-    &.checked {
-        animation: checkbox-focus .3s;
-        > .ui-input {
-            > .ui-input-checked {
-                transform: scale(1);
-                opacity: 1;
-            }
-            > .ui-input-unchecked {
-                transform: scale(0);
-                opacity: 0;
-            }
-        }
-    }
-    //.ui-input {
-    //    display: none;
-    //}
 }
 
 @keyframes checkbox-focus {
