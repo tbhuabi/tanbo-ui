@@ -41,9 +41,10 @@ export class RadioComponent implements InputType {
     checkedIcon: string;
     @Input()
     uncheckedIcon: string;
-
+    @Input()
+    value: string = '';
     @Output()
-    change = new EventEmitter<boolean>();
+    change = new EventEmitter<string>();
 
     private _disabled: boolean;
     private _readonly: boolean;
@@ -53,6 +54,6 @@ export class RadioComponent implements InputType {
         if (this.disabled || this.readonly) {
             return;
         }
-        this.change.emit(true);
+        this.change.emit(this.value);
     }
 }

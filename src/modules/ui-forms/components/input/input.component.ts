@@ -76,8 +76,8 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
 
     private _type: string;
 
-    private registerOnChangeFn: (_: any) => any;
-    private registerOnTouchedFn: (_: any) => any;
+    private onChange: (_: any) => any;
+    private onTouched: (_: any) => any;
     private inputComponentFactory: ComponentFactory<InputType>;
     private componentInstance: any;
     private sub: Subscription;
@@ -102,7 +102,6 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
         let componentRef = viewContainerRef.createComponent(this.inputComponentFactory);
         this.componentInstance = (<InputType> componentRef.instance);
         this.sub = this.componentInstance.change.subscribe((params: boolean | number) => {
-            console.log(params);
             switch (this.type) {
                 case 'checkbox':
                     this.checked = !!params;
@@ -110,6 +109,12 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
                 case 'radio':
                     this.checked = !!params;
                     break;
+            }
+            if (this.onChange) {
+                this.onChange(params);
+            }
+            if (this.onTouched) {
+                this.onTouched(params);
             }
             this.updateComponentStatus();
         });
@@ -123,6 +128,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
         this.componentInstance.checked = this.checked;
         this.componentInstance.disabled = this.disabled;
         this.componentInstance.readonly = this.readonly;
+        this.componentInstance.value = this.value;
         if (this.type === 'checkbox' || this.type === 'radio') {
             this.componentInstance.checkedIcon = this.checkedIcon;
             this.componentInstance.uncheckedIcon = this.uncheckedICon;
@@ -134,15 +140,24 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     }
 
     writeValue(value: any) {
-        this.value = value;
+        switch (this.type) {
+            case 'checkbox':
+                this.checked = !!value;
+                break;
+            case 'radio':
+                this.checked = this.value === value;
+                break;
+            default:
+                this.value = value;
+        }
     }
 
     registerOnChange(fn: any) {
-        this.registerOnChangeFn = fn;
+        this.onChange = fn;
     }
 
     registerOnTouched(fn: any) {
-        this.registerOnTouchedFn = fn;
+        this.onTouched = fn;
     }
 
     setDisabledState(isDisabled: boolean) {
