@@ -1,7 +1,6 @@
 @import "../varibles";
 
 ui-option {
-
     line-height: 2em;
     transition: all .2s;
     display: block;
@@ -27,10 +26,10 @@ ui-option {
 
     &:hover {
         cursor: pointer;
-        background-color: lighten($color-primary, 50);
+        background-color: lighten($color-default, 50);
     }
     &.selected {
-        background-color: lighten($color-primary, 45);
+        background-color: lighten($color-default, 45);
     }
     &.disabled {
         background-color: hsla(hue($color-default), saturation($color-default), lightness($color-default), .2);

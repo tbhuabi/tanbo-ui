@@ -1,5 +1,4 @@
 @import "../varibles";
-@import "mixins/input";
 
 ui-input {
     display: inline-block;
@@ -23,7 +22,29 @@ ui-input {
         }
     }
 
-    @include input-styles;
+    &.primary {
+        color: $color-primary;
+    }
+    &.danger {
+        color: $color-danger;
+    }
+    &.warning {
+        color: $color-warning;
+    }
+    &.info {
+        color: $color-info;
+    }
+    &.success {
+        color: $color-success;
+    }
+    &[disabled], &.disabled {
+        opacity: .5;
+        cursor: not-allowed;
+    }
+    &[readonly] {
+        opacity: .5;
+        cursor: default;
+    }
     &[checked], &.checked {
         > ui-input-checkbox, > ui-input-radio {
             animation: checkbox-focus .3s;
@@ -46,7 +67,7 @@ ui-input {
         vertical-align: middle;
         text-align: center;
         overflow: hidden;
-        color: $color-primary;
+        color: $color-default;
         width: 1.2em;
         height: 1.2em;
         font-size: 1.2em;
