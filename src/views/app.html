@@ -1,19 +1,17 @@
 <div class="container">
   <br><br><br>
+  <ui-input type="checkbox" [disabled]="disabled"></ui-input>
   <ui-input type="checkbox"></ui-input>
   <ui-input type="checkbox"></ui-input>
   <ui-input type="checkbox"></ui-input>
   <ui-input type="checkbox"></ui-input>
   <ui-input type="checkbox"></ui-input>
-  <ui-input type="checkbox"></ui-input>fdfdsafdsfdsa
+  fdfdsafdsfdsa
   <br><br><br>
-  <form>
-    <input type="text" class="form-control">
-    <input type="range" id="range">
-    <ui-input type="radio" [(ngModel)]="data.a" name="a" value="a"></ui-input>
-    <ui-input type="radio" [(ngModel)]="data.a" name="a" value="b"></ui-input>dfdsafdsa
-
-    <br><br>
-    <ui-input type="range"></ui-input>
+  <button type="button" (click)="disabled = !disabled">fdsafdsa</button>
+  <form class="col-md-5">
+    <p>{{data.a}}</p>
+    <br>
+    <ui-input [(ngModel)]="data.a" min="20" step="3" max="30" name="bbb" class="primary" type="range"></ui-input>
   </form>
 </div>

@@ -47,6 +47,8 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     @Input()
     min: string | number;
     @Input()
+    step: string | number;
+    @Input()
     checkedIcon: string;
     @Input()
     uncheckedICon: string;
@@ -113,6 +115,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
                 case 'radio':
                     this.checked = !!params;
                     break;
+                case 'range':
+                    this.value = params + '';
+                    break;
             }
             if (this.onChange) {
                 this.onChange(params);
@@ -140,6 +145,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
         if (this.type === 'range') {
             this.componentInstance.max = this.max;
             this.componentInstance.min = this.min;
+            this.componentInstance.step = this.step;
         }
     }
 
@@ -151,9 +157,13 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
             case 'radio':
                 this.checked = this.value === value;
                 break;
+            case 'range':
+                this.value = value;
+                break;
             default:
                 this.value = value;
         }
+        this.updateComponentStatus();
     }
 
     registerOnChange(fn: any) {

@@ -1,5 +1,27 @@
 @import "../varibles";
 
+@mixin input-style($name, $color) {
+    &.#{$name} {
+        color: $color;
+        > ui-input-range > .ui-input-range {
+            background-color: hsla(hue($color), saturation($color), lightness($color), .3);
+            > .ui-input-range-btn {
+                background-color: lighten($color, 10);
+                &:hover, &:active {
+                    background-color: $color;
+                }
+            }
+        }
+        &[disabled], &[readonly], &.disabled {
+            > ui-input-range > .ui-input-range > .ui-input-range-btn {
+                &:hover, &:active {
+                    background-color: lighten($color, 10);
+                }
+            }
+        }
+    }
+}
+
 ui-input {
     display: inline-block;
     &[type=range] {
@@ -22,32 +44,33 @@ ui-input {
         }
     }
 
-    &.primary {
-        color: $color-primary;
-    }
-    &.danger {
-        color: $color-danger;
-    }
-    &.warning {
-        color: $color-warning;
-    }
-    &.info {
-        color: $color-info;
-    }
-    &.success {
-        color: $color-success;
-    }
-    &[disabled], &.disabled {
+    @include input-style(primary, $color-primary);
+    @include input-style(info, $color-info);
+    @include input-style(warning, $color-warning);
+    @include input-style(success, $color-success);
+    @include input-style(danger, $color-danger);
+    &[disabled], &[readonly], &.disabled {
         opacity: .5;
         cursor: not-allowed;
+        > ui-input-range > .ui-input-range > .ui-input-range-btn {
+            transition: none;
+            &:hover, &:active {
+                right: -10px;
+                width: 20px;
+                height: 20px;
+                background-color: lighten($border-color-base, 20);
+            }
+            &:active {
+                box-shadow: none;
+            }
+        }
     }
     &[readonly] {
-        opacity: .5;
         cursor: default;
     }
     &[checked], &.checked {
         > ui-input-checkbox, > ui-input-radio {
-            animation: checkbox-focus .3s;
+            animation: input-focus .3s;
             > .ui-input {
                 > .ui-input-checked {
                     transform: scale(1);
@@ -100,8 +123,9 @@ ui-input {
     }
     > ui-input-range {
         display: none;
-        height: 6px;
-        box-shadow: inset 1px 1px 3px $border-color-light;
+        height: 10px;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+        background-color: #f5f5f5;
         border-radius: 3px;
         line-height: 0;
         > .ui-input-range {
@@ -109,24 +133,37 @@ ui-input {
             height: 100%;
             position: relative;
             width: 50%;
-            box-shadow: inset 1px 1px 3px darken($border-color-light, 50);
+            background-color: $border-color-lighter;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
             border-radius: inherit;
             > .ui-input-range-btn {
                 position: absolute;
                 width: 20px;
                 height: 20px;
                 right: -10px;
-                top: -7px;
+                top: 50%;
                 border-radius: 50%;
-                background-color: $border-color-base;
+                transform: translateY(-50%);
+                transform-origin: 50% 50%;
+                background-color: lighten($border-color-base, 20);
                 border: none;
                 cursor: inherit;
+                transition: all .2s;
+                &:hover, &:active {
+                    right: -12px;
+                    width: 24px;
+                    height: 24px;
+                    background-color: $border-color-base;
+                }
+                &:active {
+                    box-shadow: 0 0 0 6px $ui-input-focus-box-shadow-color;
+                }
             }
         }
     }
 }
 
-@keyframes checkbox-focus {
+@keyframes input-focus {
     0% {
         border-radius: 50%;
         box-shadow: 0 0 0 2px $ui-input-focus-box-shadow-color;
