@@ -77,13 +77,7 @@ export class RangeComponent implements InputType {
                 } else if (v > this.max) {
                     v = this.max;
                 }
-                let position = (v - this.min) / (this.max - this.min) * 100;
-                if (position <= 0) {
-                    position = 0;
-                } else if (position >= 100) {
-                    position = 100;
-                }
-                this.position = position;
+                this.position = (v - this.min) / (this.max - this.min) * 100;
             }
         }
     }
@@ -133,10 +127,10 @@ export class RangeComponent implements InputType {
             let temporaryValue = Math.floor(section * proportion / this.step) * this.step;
 
             let value = this.min + temporaryValue;
-            if (value <= this.min) {
+            if (value < this.min) {
                 value = this.min;
-            } else if (value >= this.max) {
-                value = this.max;
+            } else if (value > this.max) {
+                value = this.max - (this.max - this.min) % this.step;
             }
             this.change.emit(value);
         });
