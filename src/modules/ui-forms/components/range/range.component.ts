@@ -132,7 +132,9 @@ export class RangeComponent implements InputType {
             } else if (value > this.max) {
                 value = this.max - (this.max - this.min) % this.step;
             }
-            this.change.emit(value);
+            if (value !== this.value) {
+                this.change.emit(value);
+            }
         });
         let moseUpUnbindFn = this.eventManager.addGlobalEventListener('document', 'mouseup', () => {
             mouseMoveUnbindFn();
