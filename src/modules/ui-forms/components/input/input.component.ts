@@ -1,6 +1,8 @@
 import {
     Component,
     Input,
+    Output,
+    EventEmitter,
     ViewChild,
     ComponentFactoryResolver,
     ComponentFactory,
@@ -54,6 +56,8 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     uncheckedICon: string;
     @Input()
     id: string;
+    @Output()
+    change = new EventEmitter<any>();
 
     @ViewChild(InputHostDirective)
     inputHost: InputHostDirective;
@@ -119,6 +123,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
                     this.value = params + '';
                     break;
             }
+            this.change.emit(this);
             if (this.onChange) {
                 this.onChange(params);
             }
