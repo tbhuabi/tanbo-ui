@@ -7,6 +7,7 @@ export default {
     entry: 'lib/modules/index.js',
     dest: 'dist/index.js', // output a single application bundle
     sourceMap: false,
+    moduleName: '@angular-ui',
     format: 'iife',
     onwarn: function(warning) {
         // Skip certain warnings

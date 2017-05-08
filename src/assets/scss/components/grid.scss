@@ -33,7 +33,7 @@
         padding-left: $grid-column-padding;
         padding-right: $grid-column-padding;
     }
-    col-sm-#{$i} {
+    .col-sm-#{$i} {
         padding-left: $grid-column-padding;
         padding-right: $grid-column-padding;
     }
