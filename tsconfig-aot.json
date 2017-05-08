@@ -16,7 +16,7 @@
   ],
 
   "angularCompilerOptions": {
-    "genDir": "aot",
+    "genDir": "lib",
     "skipMetadataEmit" : true
   }
 }
