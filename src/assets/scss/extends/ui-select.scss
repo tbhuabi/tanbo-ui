@@ -26,6 +26,10 @@ ui-select {
         margin-right: $form-control-padding-horizontal * 1.5;
         line-height: inherit;
         cursor: inherit;
+        &:after {
+            content: "";
+            display: inline-block;
+        }
         > input {
             cursor: inherit;
             opacity: 0;

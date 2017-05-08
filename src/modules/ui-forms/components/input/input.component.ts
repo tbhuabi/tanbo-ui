@@ -24,6 +24,11 @@ import { InputType } from '../../utils/input-type';
 @Component({
     selector: 'ui-input',
     templateUrl: './input.component.html',
+    entryComponents: [
+        CheckboxComponent,
+        RadioComponent,
+        RangeComponent
+    ],
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: InputComponent,

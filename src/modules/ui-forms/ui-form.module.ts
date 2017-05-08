@@ -32,11 +32,6 @@ import { RangeComponent } from './components/range/range.component';
         FormValidatorDirective,
         InputHostDirective
     ],
-    entryComponents: [
-        CheckboxComponent,
-        RadioComponent,
-        RangeComponent
-    ],
     exports: [
         SelectComponent,
         OptionComponent,

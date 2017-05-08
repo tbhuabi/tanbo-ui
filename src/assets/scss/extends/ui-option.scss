@@ -26,13 +26,13 @@ ui-option {
 
     &:hover {
         cursor: pointer;
-        background-color: lighten($color-default, 50);
+        background-color: lighten($color-primary, 50);
     }
     &.selected {
-        background-color: lighten($color-default, 45);
+        background-color: lighten($color-primary, 45);
     }
     &.disabled {
-        background-color: hsla(hue($color-default), saturation($color-default), lightness($color-default), .2);
+        background-color: hsla(hue($color-primary), saturation($color-primary), lightness($color-primary), .2);
         cursor: not-allowed;
         color: #fff;
     }

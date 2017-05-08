@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { UiComponentsModule } from '../modules/ui-components/ui-components.module';
 import { UiFormsModule } from '../modules/ui-forms/ui-form.module';
+import { UiChartsModule } from '../modules/ui-charts/ui-charts.module';
 
 import { AppComponent } from './app';
 
@@ -12,6 +13,7 @@ import { AppComponent } from './app';
         FormsModule,
         UiComponentsModule,
         UiFormsModule,
+        UiComponentsModule,
         BrowserModule
     ],
     declarations: [

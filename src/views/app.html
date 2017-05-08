@@ -1,17 +1,7 @@
 <div class="container">
   <br><br><br>
-  <ui-input type="checkbox" [disabled]="disabled"></ui-input>
+  <ui-select class="form-control danger">
+    <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
+  </ui-select>
   <ui-input type="checkbox"></ui-input>
-  <ui-input type="checkbox"></ui-input>
-  <ui-input type="checkbox"></ui-input>
-  <ui-input type="checkbox"></ui-input>
-  <ui-input type="checkbox"></ui-input>
-  fdfdsafdsfdsa
-  <br><br><br>
-  <button type="button" (click)="disabled = !disabled">fdsafdsa</button>
-  <form class="col-md-5">
-    <p>{{data.a}}</p>
-    <br>
-    <ui-input [(ngModel)]="data.a" readonly name="bbb" class="primary" type="range"></ui-input>
-  </form>
 </div>
