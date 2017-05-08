@@ -33,11 +33,13 @@
     "@angular/router": "4.1.1",
     "bootstrap": "3.3.7",
     "core-js": "2.4.1",
+    "echarts": "^3.5.4",
     "normalize.css": "7.0.0",
     "rxjs": "5.3.1",
     "zone.js": "0.8.10"
   },
   "devDependencies": {
+    "@types/echarts": "0.0.6",
     "@types/jasmine": "2.5.47",
     "@types/node": "7.0.18",
     "angular2-template-loader": "0.6.2",

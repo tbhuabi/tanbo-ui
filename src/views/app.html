@@ -1,21 +1,6 @@
 <div class="container">
   <br><br><br>
-  <ui-select disabled class="form-control primary input-sm">
-    <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-  </ui-select>
-  <ui-input type="checkbox"></ui-input>
-  <ui-drop-down class="top" [open]="open" (escape)="open = false" (trigger)="open = !open">
-    <ui-drop-down-fixed>
-      <input type="text" class="form-control" readonly>
-    </ui-drop-down-fixed>
-    <ui-drop-down-menu>
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-      </ul>
-    </ui-drop-down-menu>
-  </ui-drop-down>
+  <ui-charts class="chart" [options]="options">
+
+  </ui-charts>
 </div>
