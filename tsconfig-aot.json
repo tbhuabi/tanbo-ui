@@ -12,8 +12,7 @@
   },
 
   "files": [
-    "src/app/app.module.ts",
-    "src/main.ts"
+    "src/modules/index.ts"
   ],
 
   "angularCompilerOptions": {
