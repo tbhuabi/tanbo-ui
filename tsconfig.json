@@ -13,5 +13,8 @@
     "typeRoots": [
       "./node_modules/@types"
     ]
-  }
+  },
+  "files": [
+    "./src/modules/index.ts"
+  ]
 }
