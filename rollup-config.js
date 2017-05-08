@@ -4,7 +4,7 @@ import commonjs    from 'rollup-plugin-commonjs';
 import uglify      from 'rollup-plugin-uglify'
 
 export default {
-    entry: 'src/modules/index.js',
+    entry: 'lib/modules/index.js',
     dest: 'dist/index.js', // output a single application bundle
     sourceMap: false,
     format: 'iife',

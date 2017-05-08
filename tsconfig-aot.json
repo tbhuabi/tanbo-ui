@@ -12,11 +12,11 @@
   },
 
   "files": [
-    "src/modules/index.ts"
+    "lib/modules/index.ts"
   ],
 
   "angularCompilerOptions": {
-    "genDir": "lib",
+    "genDir": "aot",
     "skipMetadataEmit" : true
   }
 }
