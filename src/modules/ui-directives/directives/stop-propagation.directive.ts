@@ -1,12 +1,14 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Renderer2, OnDestroy, Input, OnInit } from '@angular/core';
 @Directive({
     selector: '[uiStopPropagation]'
 })
-export class StopPropagationDirective implements OnInit {
+export class StopPropagationDirective implements OnInit, OnDestroy {
     @Input()
     stopPropagation: Array<string> | string = 'click';
 
-    constructor(private el: ElementRef) {
+    private callbacks: Array<any> = [];
+
+    constructor(private elementRef: ElementRef, private renderer: Renderer2) {
     }
 
     ngOnInit() {
@@ -19,9 +21,16 @@ export class StopPropagationDirective implements OnInit {
         }
     }
 
+    ngOnDestroy() {
+        this.callbacks.forEach(fn => {
+            fn();
+        });
+    }
+
     private addEvent(eventType: string) {
-        this.el.nativeElement.addEventListener(eventType, ev => {
+        let fn = this.renderer.listen(this.elementRef.nativeElement, eventType, (ev: any) => {
             ev.stopPropagation();
-        }, false);
+        });
+        this.callbacks.push(fn);
     }
 }
