@@ -6,11 +6,11 @@ import { ECharts, init } from 'echarts';
     templateUrl: './charts.component.html'
 })
 export class ChartsComponent implements OnInit, OnChanges {
-    @ViewChild('chart')
-    private chart: ElementRef;
     @Input()
     options: any = {};
     eChartsInstance: ECharts;
+    @ViewChild('chart')
+    private chart: ElementRef;
 
     ngOnInit() {
         this.eChartsInstance = init(this.chart.nativeElement);
@@ -23,7 +23,7 @@ export class ChartsComponent implements OnInit, OnChanges {
 
     update() {
         if (this.eChartsInstance) {
-            this.eChartsInstance.setOption(this.options)
+            this.eChartsInstance.setOption(this.options);
         }
     }
 }
