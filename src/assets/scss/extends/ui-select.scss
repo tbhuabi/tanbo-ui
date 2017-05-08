@@ -7,60 +7,57 @@ ui-select {
     cursor: pointer;
     > ui-drop-down {
         cursor: inherit;
-        > .drop-down {
-            position: static;
+        position: static;
+        > ui-drop-down-menu > .ui-select-menu {
+            padding-top: $container-vertical-padding;
+            padding-bottom: $container-vertical-padding;
+        }
+        > ui-drop-down-fixed {
             cursor: inherit;
-            > .drop-down-fixed {
+            > .ui-select-fixed {
+                white-space: nowrap;
+                overflow: hidden;
+                margin-right: $form-control-padding-horizontal * 1.5;
+                line-height: inherit;
                 cursor: inherit;
+                &:after {
+                    content: "";
+                    display: inline-block;
+                }
+                > input {
+                    cursor: inherit;
+                    opacity: 0;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 2;
+                }
+                > span {
+                    position: relative;
+                    z-index: 1;
+                }
+                > .ui-select-arrow {
+                    padding: $form-control-padding-vertical $form-control-padding-horizontal;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                }
             }
         }
     }
-    .ui-select-menu {
-        padding-top: $container-vertical-padding;
-        padding-bottom: $container-vertical-padding;
-    }
 
-    .ui-select-fixed {
-        white-space: nowrap;
-        overflow: hidden;
-        margin-right: $form-control-padding-horizontal * 1.5;
-        line-height: inherit;
-        cursor: inherit;
-        &:after {
-            content: "";
-            display: inline-block;
-        }
-        > input {
-            cursor: inherit;
-            opacity: 0;
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-        }
-        > span {
-            position: relative;
-            z-index: 1;
-        }
-        > .ui-select-arrow {
-            padding: $form-control-padding-vertical $form-control-padding-horizontal;
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-        }
-    }
-    &.input-sm .ui-select-fixed {
+    &.input-sm > ui-drop-down > ui-drop-down-fixed > .ui-select-fixed {
         margin-right: $form-control-padding-horizontal-sm * 1.5;
         > .ui-select-arrow {
             padding: $form-control-padding-vertical-sm $form-control-padding-horizontal-sm;
         }
     }
-    &.input-lg .ui-select-fixed {
+    &.input-lg > ui-drop-down > ui-drop-down-fixed > .ui-select-fixed {
         margin-right: $form-control-padding-horizontal-lg * 1.5;
         > .ui-select-arrow {
             padding: $form-control-padding-vertical-lg $form-control-padding-horizontal-lg;

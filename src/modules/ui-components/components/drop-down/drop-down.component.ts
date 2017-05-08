@@ -1,13 +1,31 @@
-import { Component, HostBinding, Input, Renderer2, OnInit, EventEmitter, Output } from '@angular/core';
+import {
+    Component,
+    HostBinding,
+    Input,
+    OnInit,
+    QueryList,
+    AfterContentInit,
+    EventEmitter,
+    Output,
+    OnDestroy,
+    Renderer2,
+    ContentChildren
+} from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { DropDownFixedComponent } from '../drop-down-fixed/drop-down-fixed.component';
+import { DropDownMenuComponent } from '../drop-down-menu/drop-down-menu.component';
 
 @Component({
     selector: 'ui-drop-down',
     templateUrl: './drop-down.component.html'
 })
 
-export class DropDownComponent implements OnInit {
-    @Input()
-    placement: string = 'bottom';
+export class DropDownComponent implements AfterContentInit, OnInit, OnDestroy {
+    @ContentChildren(DropDownFixedComponent)
+    fixed: QueryList<DropDownFixedComponent>;
+    @ContentChildren(DropDownMenuComponent)
+    menu: QueryList<DropDownMenuComponent>;
     @Input()
     @HostBinding('class.open')
     open: boolean = false;
@@ -16,6 +34,7 @@ export class DropDownComponent implements OnInit {
     @Output()
     trigger = new EventEmitter();
 
+    private subs: Array<Subscription> = [];
     private isTriggerEvent: boolean = false;
 
     constructor(private renderer: Renderer2) {
@@ -23,15 +42,27 @@ export class DropDownComponent implements OnInit {
 
     ngOnInit() {
         this.renderer.listen('document', 'click', () => {
-            if (!this.isTriggerEvent) {
-                this.escape.emit();
+            if (this.isTriggerEvent) {
+                this.isTriggerEvent = false;
+                return;
             }
-            this.isTriggerEvent = false;
+            this.escape.emit();
         });
     }
 
-    onTrigger() {
-        this.isTriggerEvent = true;
-        this.trigger.emit();
+    ngAfterContentInit() {
+        this.fixed.forEach(item => {
+            let sub = item.trigger.subscribe(() => {
+                this.isTriggerEvent = true;
+                this.trigger.emit();
+            });
+            this.subs.push(sub);
+        });
+    }
+
+    ngOnDestroy() {
+        this.subs.forEach(item => {
+            item.unsubscribe();
+        });
     }
 }

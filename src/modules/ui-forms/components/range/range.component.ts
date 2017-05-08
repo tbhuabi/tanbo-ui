@@ -1,5 +1,4 @@
-import { Component, Input, ViewChild, Output, ElementRef, EventEmitter } from '@angular/core';
-import { EventManager } from '@angular/platform-browser';
+import { Component, Input, ViewChild, Output, Renderer2, ElementRef, EventEmitter } from '@angular/core';
 
 import { InputType } from '../../utils/input-type';
 
@@ -106,7 +105,7 @@ export class RangeComponent implements InputType {
     }
 
     constructor(private elementRef: ElementRef,
-                private eventManager: EventManager) {
+                private renderer: Renderer2) {
 
     }
 
@@ -121,7 +120,7 @@ export class RangeComponent implements InputType {
         let maxWidth = this.elementRef.nativeElement.offsetWidth;
         let nowWidth = this.rangeBar.nativeElement.offsetWidth;
         let oldX = event.clientX;
-        let mouseMoveUnbindFn = this.eventManager.addGlobalEventListener('document', 'mousemove', (ev) => {
+        let mouseMoveUnbindFn = this.renderer.listen('document', 'mousemove', (ev) => {
             let dragDistance = ev.clientX - oldX;
             let proportion = (nowWidth + dragDistance) / maxWidth;
             let temporaryValue = Math.floor(section * proportion / this.step) * this.step;
@@ -136,7 +135,7 @@ export class RangeComponent implements InputType {
                 this.change.emit(value);
             }
         });
-        let moseUpUnbindFn = this.eventManager.addGlobalEventListener('document', 'mouseup', () => {
+        let moseUpUnbindFn = this.renderer.listen('document', 'mouseup', () => {
             mouseMoveUnbindFn();
             moseUpUnbindFn();
         });

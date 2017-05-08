@@ -14,6 +14,7 @@ import { AppComponent } from './app';
         UiComponentsModule,
         UiFormsModule,
         UiComponentsModule,
+        UiChartsModule,
         BrowserModule
     ],
     declarations: [
