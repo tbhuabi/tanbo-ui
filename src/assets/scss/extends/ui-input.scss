@@ -147,7 +147,7 @@ ui-input {
             height: 100%;
             position: relative;
             width: 50%;
-            background-color: $border-color-lighter;
+            background-color: hsla(hue($border-color-base), saturation($border-color-base), lightness($border-color-base), .3);
             box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
             border-radius: inherit;
             cursor: default;
@@ -160,7 +160,7 @@ ui-input {
                 border-radius: 50%;
                 transform: translateY(-50%);
                 transform-origin: 50% 50%;
-                background-color: lighten($border-color-base, 20);
+                background-color: lighten($border-color-base, 10);
                 border: none;
                 cursor: pointer;
                 transition: all .2s;
