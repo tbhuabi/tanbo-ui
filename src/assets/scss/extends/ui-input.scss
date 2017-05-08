@@ -2,7 +2,9 @@
 
 @mixin input-style($name, $color) {
     &.#{$name} {
-        color: $color;
+        > ui-input-checkbox, > ui-input-radio {
+            color: $color;
+        }
         > ui-input-range > .ui-input-range {
             background-color: hsla(hue($color), saturation($color), lightness($color), .3);
             > .ui-input-range-btn {

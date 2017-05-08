@@ -122,19 +122,19 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
                     this.checked = !!params;
                     break;
                 case 'radio':
-                    this.checked = !!params;
+                    this.checked = true;
                     break;
                 case 'range':
                     this.value = params + '';
                     break;
             }
-            this.change.emit(this);
             if (this.onChange) {
                 this.onChange(params);
             }
             if (this.onTouched) {
                 this.onTouched(params);
             }
+            this.change.emit(this);
             this.updateComponentStatus();
         });
         this.updateComponentStatus();
