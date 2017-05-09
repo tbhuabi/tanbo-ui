@@ -9,7 +9,7 @@ const gulpTypeScript = require('gulp-typescript');
 const gulpConcat = require('gulp-concat');
 const gulpSourceMap = require('gulp-sourcemaps');
 
-const tsProject = gulpTypeScript.createProject('tsconfig.json');
+const tsProject = gulpTypeScript.createProject('./tsconfig.json');
 
 gulp.task('clean', function () {
     return gulp.src('./bundles/', {
