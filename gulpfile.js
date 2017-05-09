@@ -43,7 +43,7 @@ gulp.task('templateTransfer', ['copy'], function () {
 });
 
 gulp.task('copyFonts', function () {
-   return gulp.src('./src/assets/fonts/angular-ui/fonts/*').pipe(gulp.dest('./dist/fonts/'));
+   return gulp.src('./src/assets/fonts/angular-ui/fonts/**.*').pipe(gulp.dest('./dist/fonts/'));
 });
 gulp.task('scss', ['copyFonts'], function () {
     return gulp.src('./src/assets/scss/index.scss')

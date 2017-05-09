@@ -1,16 +1,16 @@
 {
-  "name": "angular-ui",
+  "name": "test-ui",
   "version": "1.0.0",
   "description": "A webpack starter for Angular",
-  "main": "server/server.js",
-  "private": true,
+  "main": "./dist/index.js",
+  "module": "./lib/modules/index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development node server/server.js",
     "doc": "cross-env NODE_ENV=documentation node server/doc-server.js",
     "pack": "webpack-dev-server --inline --progress --port 8080",
     "test": "karma start",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config config/webpack.prod.js --progress --profile --bail --optimize-minimize",
-    "build:aot": "gulp && node_modules/.bin/ngc -p tsconfig-aot.json && rollup -c rollup-config.js"
+    "build:aot": "gulp && node_modules/.bin/ngc -d && rollup -c rollup-config.js"
   },
   "keywords": [
     "angular2",
