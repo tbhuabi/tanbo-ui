@@ -4,8 +4,8 @@ import commonjs    from 'rollup-plugin-commonjs';
 import uglify      from 'rollup-plugin-uglify'
 
 export default {
-    entry: 'lib/modules/index.js',
-    dest: 'dist/index.js', // output a single application bundle
+    entry: './bundles/index.js',
+    dest: './bundles/index.umd.js', // output a single application bundle
     sourceMap: false,
     moduleName: require('./package.json').name,
     format: 'iife',

@@ -50,7 +50,7 @@ gulp.task('scss', ['copyFonts'], function () {
         .pipe(gulpSass())
         .pipe(gulpAutoPrefix())
         .pipe(gulpConcat({
-            path: 'index.min.css'
+            path: require('./package.json').name + '.min.css'
         }))
         .pipe(gulpCssMin())
         .pipe(gulpSourceMap.write('./maps'))
