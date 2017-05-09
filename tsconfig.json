@@ -5,7 +5,7 @@
     "experimentalDecorators": true,
     "lib": ["es6", "dom"],
     "mapRoot": "./src/",
-    "module": "commonjs",
+    "module": "es2015",
     "moduleResolution": "node",
     "outDir": "./bundles/",
     "sourceMap": true,
