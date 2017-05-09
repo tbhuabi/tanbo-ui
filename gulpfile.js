@@ -5,25 +5,26 @@ const htmlMin = require('html-minifier');
 const gulpSass = require('gulp-sass');
 const gulpAutoPrefix = require('gulp-autoprefixer');
 const gulpCssMin = require('gulp-cssmin');
+const gulpTypeScript = require('gulp-typescript');
+const gulpConcat = require('gulp-concat');
+const gulpSourceMap = require('gulp-sourcemaps');
 
-gulp.task('clean:aot', function () {
-    return gulp.src('./aot', {read: false}).pipe(gulpClean());
-});
-gulp.task('clean:dist', function () {
-    return gulp.src('./dist', {read: false}).pipe(gulpClean());
-});
-gulp.task('clean:lib', function () {
-    return gulp.src('./lib', {read: false}).pipe(gulpClean());
-});
+const tsProject = gulpTypeScript.createProject('tsconfig.json');
 
-gulp.task('clean', ['clean:aot', 'clean:dist', 'clean:lib']);
-
-gulp.task('copy', ['clean'], function () {
-    return gulp.src('./src/assets/**/*').pipe(gulp.dest('./lib/assets/'));
+gulp.task('clean', function () {
+    return gulp.src('./bundles/', {
+        read: false
+    }).pipe(gulpClean());
 });
 
-gulp.task('templateTransfer', ['copy'], function () {
-    return gulp.src('./src/modules/**/*.ts').pipe(gulpInlineNg2Template({
+gulp.task('copyFonts', ['clean'], function () {
+    return gulp.src('./src/assets/fonts/angular-ui/fonts/**.*').pipe(gulp.dest('./bundles/fonts/'));
+});
+
+gulp.task('tsCompile', ['copyFonts'], function () {
+    return gulp.src('./src/modules/**/*.ts')
+        .pipe(gulpSourceMap.init())
+        .pipe(gulpInlineNg2Template({
         useRelativePaths: true,
         templateProcessor(path, ext, file, cb) {
             try {
@@ -39,18 +40,22 @@ gulp.task('templateTransfer', ['copy'], function () {
                 cb(err);
             }
         }
-    })).pipe(gulp.dest('./lib/modules/'));
-});
-
-gulp.task('copyFonts', function () {
-   return gulp.src('./src/assets/fonts/angular-ui/fonts/**.*').pipe(gulp.dest('./dist/fonts/'));
+    })).pipe(tsProject())
+        .pipe(gulpSourceMap.write('./maps'))
+        .pipe(gulp.dest('./bundles/'));
 });
 gulp.task('scss', ['copyFonts'], function () {
-    return gulp.src('./src/assets/scss/index.scss')
+    return gulp.src(['./src/assets/scss/index.scss', './src/assets/fonts/angular-ui/style.css', './node_modules/normalize.css/normalize.css'])
+        .pipe(gulpSourceMap.init())
         .pipe(gulpSass())
         .pipe(gulpAutoPrefix())
+        .pipe(gulpConcat({
+            path: 'index.min.css'
+        }))
         .pipe(gulpCssMin())
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulpSourceMap.write('./maps'))
+        .pipe(gulp.dest('./bundles'));
 });
 
-gulp.task('default', ['templateTransfer', 'scss']);
+
+gulp.task('default', ['tsCompile', 'scss']);
