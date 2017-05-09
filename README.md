@@ -1,45 +1,70 @@
-# angular2-webpack项目模板
+# 简介
 
-本项目demo是基于webpack的angular2项目，语言为typescript+es6  
-本项目为单页应用，历史纪录基于angular2默认的html5 history api，在正式发布后，后台需配置相关页面解析逻辑，防止404页面出现
+tanbo-ui是一个基于Angular4.0的拓展包，并基于最小改动，最小学习成本的前提下，拓展了部分表单控件，提供了很多网页上觉的交互组件、指令、服务、过滤器等等。并提供了一套侵入性很小的底层css样式表。
 
-## 如何使用？
+可以这么说，如果你会使用angular，那使用tanbo-ui基本就无需看文档。
 
-1. 打开控制台，并进入项目根目录
-2. 在控制台输入以下代码`npm install`并回车，等待安装完毕 
-3. 确保安装没有错误，运行`npm start`，如无意外，这时将自动打开chrome浏览器，并显示出demo的默认页面了
+---
 
-## 项目约定
+## 最小更改原则 + 最低学习成本原则
 
-**所有src目录以外的文件，请勿更改**
+就拿常见的表单控件来说，原来你可能是这么写的：
 
-+ assets目录存放公共的图片和样式表
-+ directives目录存放全局指令
-+ components目录存放全局组件
-+ views存放页面文件夹  
+```html
+<input type="checkbox" name="name" [(ngModel)]="model">
+```
 
-你可以在src内扩展你需要的目录
+现在你可以这样写：
 
-## 代码风格
-+ 项目采用了**tslint**作为代码检查工具
-+ 请确保代码风格符合[codelyzer](https://angular.cn/docs/ts/latest/guide/style-guide.html)标准，否则启动和构建会不成功，如果不小心写出的代码不符合代码规范，请注意控制台输出错误的信息，并做出相应更改，直到没有代码语法错误
+```html
+<ui-input type="checkbox" name="name" [(ngModel)]="model"></ui-input>
+```
 
-## 自动化测试
-`npm run test`
-为确保项目的健壮性、可维护性和可预期，建议为每一个项目中的文件写单元测试，测试工具为karma，框架为jasmine，相关文档可上互联网上搜索  
-
-默认情况下，单元测试文件以XXX.spec.ts命名
-
-## 构建发布
-
-1. 确认本地在开发过程中，没有代码错误，及编译警告
-2. 在控制台输入`npm run build`
-3. 等编译完成后，会在根目录下生成一个dist的目录，里面存有打包编译后的文件
+基本无需改动就可以实现功能，且运行`disabled`、`readonly`等等原生属性
 
 
-## 调试代理
+## 安装
+请确保你项目中的angular版本不低于4.0
+```
+npm install tanbo-ui --save
+```
 
-接口代理默认拦截以`/api/`开头的请求，并会重写url为`/`,你需要把全局的api请求加上`/api`前缀，并在上线发布时去掉这个请求头，推荐的做法是通过配置环境变量的方式实现。
+## 在你的项目中引入tanbo-ui
 
+```typescript
+import { UiFormsModule, UiDirectivesModule, UiComponentsModule } from 'tanbo-ui';
 
+@NgModule({
+    imports: [
+        /* ..other modules.. */
+        UiFormsModule,
+        UiDirectivesModule,
+        UiComponentsModule
+    ]
+})
+```
 
+现在你就可以使用tanbo-ui所提供的所有功能了。当然，如果你只用到其中一个模块，也可以只导入其中一个。
+
+## 主要功能概览
+
+### UiFormsModule
++ components
+    - `<ui-input type="checkbox|radio|range"></ui-input>`
+    - `<ui-select></ui-select>`
+    - `<ui-option></ui-option>`
++ directives
+    - **uiValidateForm** `<form #formVarible="ngForm" [uiValidateForm]="formVarible" (ngSubmit)="submit()"></form>`
+    - **uiValidateModel** 
+    
+### UiDirectivesModule
++ directives
+    - **uiStopPropagation** `<div uiStopPropagation></div><div uiStopPropagation="mousedown"></div><div [uiStopPropagation]="['mousedown', 'click', ...]"></div>`
+    
+### UiComponents
++ components
+    - `<ui-drop-down></ui-drop-down>`
+    - `<ui-drop-down-fixed></ui-drop-down-fixed>`
+    - `<ui-drop-down-menu></ui-drop-down-menu>`
+    
+**更详细的文档请关注近期更新，目前正在撰写gitbook**
