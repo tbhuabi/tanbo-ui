@@ -14,6 +14,8 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { RangeComponent } from './components/range/range.component';
 
+import { InputStateService } from './services/input-state.service';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -31,6 +33,9 @@ import { RangeComponent } from './components/range/range.component';
         ModelValidatorDirective,
         FormValidatorDirective,
         InputHostDirective
+    ],
+    providers: [
+        InputStateService
     ],
     exports: [
         SelectComponent,

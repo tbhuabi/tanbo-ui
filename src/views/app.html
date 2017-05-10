@@ -10,27 +10,27 @@
   </div>
   <br>
   <div>
-    <ui-input type="radio"></ui-input>
-    <ui-input type="radio" class="primary"></ui-input>
-    <ui-input type="radio" class="info"></ui-input>
-    <ui-input type="radio" class="danger"></ui-input>
-    <ui-input type="radio" class="warning"></ui-input>
-    <ui-input type="radio" class="success"></ui-input>
+    <ui-input type="radio" [(ngModel)]="data.a" value="10"></ui-input>
+    <ui-input type="radio" [(ngModel)]="data.a" value="20" class="primary"></ui-input>
+    <ui-input type="radio" [(ngModel)]="data.a" value="30" class="info"></ui-input>
+    <ui-input type="radio" [(ngModel)]="data.a" value="40" class="danger"></ui-input>
+    <ui-input type="radio" [(ngModel)]="data.a" value="50" class="warning"></ui-input>
+    <ui-input type="radio" [(ngModel)]="data.a" value="60" class="success"></ui-input>
   </div>
   <br>
   {{data.a}}
   <div>
-    <ui-input [(ngModel)]="data.a" step="4" min="20" max="80" type="range"></ui-input>
+    <ui-input [(ngModel)]="data.a" step="5" min="20" max="80" type="range"></ui-input>
     <br>
-    <ui-input type="range" class="primary"></ui-input>
+    <ui-input [(ngModel)]="data.a" type="range" class="primary"></ui-input>
     <br>
-    <ui-input type="range" class="info"></ui-input>
+    <ui-input [(ngModel)]="data.a" type="range" class="info"></ui-input>
     <br>
-    <ui-input type="range" class="danger"></ui-input>
+    <ui-input [(ngModel)]="data.a" type="range" class="danger"></ui-input>
     <br>
-    <ui-input type="range" class="warning"></ui-input>
+    <ui-input [(ngModel)]="data.a" type="range" class="warning"></ui-input>
     <br>
-    <ui-input type="range" class="success"></ui-input>
+    <ui-input [(ngModel)]="data.a" type="range" class="success"></ui-input>
   </div>
   <br>
   <div>

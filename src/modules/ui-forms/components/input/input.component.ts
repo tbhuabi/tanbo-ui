@@ -2,10 +2,12 @@ import {
     Component,
     Input,
     Output,
+    OnInit,
     EventEmitter,
     ViewChild,
     ComponentFactoryResolver,
     ComponentFactory,
+    ElementRef,
     HostBinding,
     OnChanges,
     OnDestroy
@@ -14,6 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { InputHostDirective } from '../../directives/input-host.directive';
+import { InputStateService } from '../../services/input-state.service';
 
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { RadioComponent } from '../radio/radio.component';
@@ -35,7 +38,7 @@ import { InputType } from '../../utils/input-type';
         multi: true
     }]
 })
-export class InputComponent implements ControlValueAccessor, OnChanges, OnDestroy {
+export class InputComponent implements ControlValueAccessor, OnChanges, OnDestroy, OnInit {
     @Input()
     @HostBinding('class.disabled')
     disabled: boolean = false;
@@ -66,6 +69,8 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
 
     @ViewChild(InputHostDirective)
     inputHost: InputHostDirective;
+    @ViewChild('rawInput')
+    rawInput: ElementRef;
 
     @Input()
     set type(inputType: string) {
@@ -96,8 +101,24 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     private inputComponentFactory: ComponentFactory<InputType>;
     private componentInstance: any;
     private sub: Subscription;
+    private inputStateSub: Subscription;
 
-    constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+    constructor(private componentFactoryResolver: ComponentFactoryResolver,
+                private inputStateService: InputStateService) {
+    }
+
+    ngOnInit() {
+        this.inputStateSub = this.inputStateService.state$.subscribe((c: any) => {
+            switch (this.type) {
+                case 'checkbox':
+                    break;
+                case 'radio':
+                    if (c !== this) {
+                        this.checked = this.rawInput.nativeElement.checked;
+                    }
+                    break;
+            }
+        });
     }
 
     ngOnChanges() {
@@ -105,6 +126,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     }
 
     ngOnDestroy() {
+        if (this.inputStateSub) {
+            this.inputStateSub.unsubscribe();
+        }
         if (this.sub) {
             this.sub.unsubscribe();
         }
@@ -123,6 +147,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
                     break;
                 case 'radio':
                     this.checked = true;
+                    this.rawInput.nativeElement.checked = true;
                     break;
                 case 'range':
                     this.value = params + '';
@@ -134,6 +159,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
             if (this.onTouched) {
                 this.onTouched(params);
             }
+            this.inputStateService.publishState(this);
             this.change.emit(this);
             this.updateComponentStatus();
         });
@@ -165,7 +191,11 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
                 this.checked = !!value;
                 break;
             case 'radio':
-                this.checked = this.value === value;
+                if (typeof value === 'number') {
+                    this.checked = this.value === ('' + value);
+                } else {
+                    this.checked = this.value === value;
+                }
                 break;
             case 'range':
                 this.value = value;
