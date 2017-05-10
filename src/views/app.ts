@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
     disabled: boolean = false;
     open: boolean = false;
-    data: any = {a: 8};
+    data: any = {a: 20};
     list: Array<string> = ['1', '2', '3'];
     dataList: Array<any> = [{
         key: 'name133333333333333333333333333333333333333333333333333333333333333333333333333333333333',

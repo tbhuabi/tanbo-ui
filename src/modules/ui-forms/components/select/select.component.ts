@@ -2,11 +2,12 @@ import {
     Component,
     ContentChildren,
     QueryList,
-    AfterContentInit,
+    AfterViewInit,
     Input,
     Output,
     OnDestroy,
     EventEmitter,
+    ChangeDetectorRef,
     HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -23,63 +24,81 @@ import { OptionComponent } from '../option/option.component';
         multi: true
     }]
 })
-export class SelectComponent implements ControlValueAccessor, AfterContentInit, OnDestroy {
+export class SelectComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
     @ContentChildren(OptionComponent)
     options: QueryList<OptionComponent>;
 
     @HostBinding('class.focus')
     focus: boolean = false;
     @Input()
-    disabled: boolean = false;
+    disabled: boolean;
     @Input()
     readonly: boolean;
     @Input()
     name: string = '';
     @Output()
     change = new EventEmitter<string>();
-
-    set value(value: any) {
-        this.open = false;
-        this.focus = false;
-        if (value === this._value) {
-            return;
-        }
-        this._value = value;
-        if (this.registerOnChangeFn) {
-            this.registerOnChangeFn(this._value);
-        }
-        if (this.registerOnTouchedFn) {
-            this.registerOnTouchedFn(this._value);
-        }
-        this.change.emit(this._value);
-        if (this.options) {
-            this.options.forEach((option: OptionComponent) => {
-                if (option.selected) {
-                    this.text = option.text;
-                }
-            });
-        }
-    };
-
-    get value() {
-        return this._value;
-    };
+    @Input()
+    selectedIndex: number = 0;
 
     open: boolean = false;
     text: string = '';
 
-    private _value = '';
-    private registerOnChangeFn: (_: any) => any;
-    private registerOnTouchedFn: (_: any) => any;
+    private value: string = '';
+    private onChange: (_: any) => any;
+    private onTouched: (_: any) => any;
     private subs: Array<Subscription> = [];
+    private isWrite: boolean = false;
 
-    ngAfterContentInit() {
-        this.options.forEach((option: OptionComponent) => {
+    constructor(private changeDetectorRef: ChangeDetectorRef) {
+    }
+
+    ngAfterViewInit() {
+        let defaultOption: OptionComponent;
+        this.options.forEach((option: OptionComponent, index: number) => {
+            if (option.selected) {
+                defaultOption = option;
+                this.selectedIndex = index;
+            }
             let sub = option.checked.subscribe((params: OptionComponent) => {
                 this.value = params.value;
+                this.text = params.text;
+                this.focus = false;
+                this.open = false;
+                this.options.forEach((o: OptionComponent, i: number) => {
+                    o.selected = false;
+                    if (o === params) {
+                        this.selectedIndex = i;
+                    }
+                });
+                params.selected = true;
+                if (this.onChange) {
+                    this.onChange(this.value);
+                }
+                if (this.onTouched) {
+                    this.onTouched(this.value);
+                }
+                this.change.emit(this.value);
             });
             this.subs.push(sub);
         });
+        if (!defaultOption) {
+            defaultOption = this.options.toArray()[this.selectedIndex];
+        }
+        if (!defaultOption) {
+            defaultOption = this.options.first;
+            this.selectedIndex = 0;
+        }
+        if (defaultOption) {
+            this.value = defaultOption.value;
+            this.text = defaultOption.text;
+            this.changeDetectorRef.detectChanges();
+            setTimeout(() => {
+                if (this.isWrite) {
+                    defaultOption.selected = true;
+                }
+            });
+        }
     }
 
     ngOnDestroy() {
@@ -89,15 +108,33 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     }
 
     writeValue(value: any) {
+        this.isWrite = true;
         this.value = value;
+        if (this.options) {
+            let selectedOption: OptionComponent;
+            this.options.forEach((item: OptionComponent) => {
+                item.selected = false;
+                if (`${item.value}` === `${value}`) {
+                    selectedOption = item;
+                }
+            });
+            if (selectedOption) {
+                this.text = selectedOption.text;
+                selectedOption.selected = true;
+            } else {
+                this.text = '';
+            }
+        } else {
+            this.text = '';
+        }
     }
 
     registerOnChange(fn: any) {
-        this.registerOnChangeFn = fn;
+        this.onChange = fn;
     }
 
     registerOnTouched(fn: any) {
-        this.registerOnTouchedFn = fn;
+        this.onTouched = fn;
     }
 
     setDisabledState(isDisabled: boolean) {

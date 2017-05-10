@@ -1,8 +1,13 @@
 import {
-    Component, Input, Output, EventEmitter, ViewContainerRef, ElementRef, AfterViewInit,
-    HostBinding, HostListener
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ElementRef,
+    AfterViewInit,
+    HostBinding,
+    HostListener
 } from '@angular/core';
-import { SelectComponent } from '../select/select.component';
 @Component({
     selector: 'ui-option',
     templateUrl: './option.component.html'
@@ -10,50 +15,49 @@ import { SelectComponent } from '../select/select.component';
 export class OptionComponent implements AfterViewInit {
     @Input()
     value: string = '';
+
     @Input()
-    disabled: boolean = false;
+    @HostBinding('class.disabled')
+    set disabled(isDisabled: any) {
+        this._disabled = isDisabled;
+    }
+
+    get disabled() {
+        let isDisabled = (this as any).hasOwnProperty('_disabled');
+        return isDisabled && this._disabled !== false;
+    }
+
+    @Input()
+    @HostBinding('class.selected')
+    set selected(isSelected: any) {
+        this._selected = isSelected;
+    }
+
+    get selected() {
+        let isSelected = (this as any).hasOwnProperty('_selected');
+        return isSelected && this._selected !== false;
+    }
+
     @Output()
     checked = new EventEmitter<OptionComponent>();
     text: string = '';
 
-    @Input()
-    @HostBinding('class.selected')
-    get selected() {
-        if (this._selected) {
-            return true;
-        }
-        if (this.parentComponent instanceof SelectComponent) {
-            return this.value === this.parentComponent.value;
-        }
-        return false;
-    };
-    set selected(isSelected: any) {
-        if (isSelected !== false) {
-            this._selected = true;
-        }
-        this._selected = false;
-    }
-    @HostBinding('class.disabled')
-    get isDisabled() {
-        let isDisabled = (this as any).hasOwnProperty('disabled');
-        return isDisabled && this.disabled !== false;
-    }
+    private _disabled: boolean;
+    private _selected: boolean;
 
-    private parentComponent: SelectComponent;
-    private _selected: boolean = false;
-
-    constructor(private viewContainerRef: ViewContainerRef,
-                private elementRef: ElementRef) {
+    constructor(private elementRef: ElementRef) {
     }
 
     @HostListener('click') click() {
-        if (!this.isDisabled) {
+        if (!this.disabled) {
             this.checked.emit(this);
         }
     }
 
     ngAfterViewInit() {
-        this.parentComponent = this.viewContainerRef.parentInjector.get(SelectComponent);
         this.text = this.elementRef.nativeElement.innerText;
+        if (this.selected) {
+            this.checked.emit(this);
+        }
     }
 }

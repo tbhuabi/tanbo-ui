@@ -33,29 +33,13 @@
     <ui-input [(ngModel)]="data.a" type="range" class="success"></ui-input>
   </div>
   <br>
+
   <div>
-    <ui-select class="form-control">
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-    </ui-select>
-    <br><br>
-    <ui-select class="form-control primary">
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-    </ui-select>
-    <br><br>
-    <ui-select class="form-control success">
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-    </ui-select>
-    <br><br>
-    <ui-select class="form-control info">
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-    </ui-select>
-    <br><br>
-    <ui-select class="form-control danger">
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-    </ui-select>
-    <br><br>
-    <ui-select class="form-control warning">
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
+    <ui-select [(ngModel)]="data.a" class="form-control">
+      <ui-option value="20">20</ui-option>
+      <ui-option value="30">30</ui-option>
+      <ui-option value="40">40</ui-option>
+      <ui-option value="50">50</ui-option>
     </ui-select>
   </div>
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
