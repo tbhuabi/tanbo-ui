@@ -10,26 +10,21 @@
   </div>
   <br>
   <div>
-    <ui-input type="radio" [(ngModel)]="data.a" value="10"></ui-input>
-    <ui-input type="radio" [(ngModel)]="data.a" value="20" class="primary"></ui-input>
-    <ui-input type="radio" [(ngModel)]="data.a" value="30" class="info"></ui-input>
-    <ui-input type="radio" [(ngModel)]="data.a" value="40" class="danger"></ui-input>
-    <ui-input type="radio" [(ngModel)]="data.a" value="50" class="warning"></ui-input>
-    <ui-input type="radio" [(ngModel)]="data.a" value="60" class="success"></ui-input>
+    <ui-input type="radio" name="a" value="10"></ui-input>
+    <ui-input type="radio" name="a" value="20" class="primary"></ui-input>
+    <ui-input type="radio" name="a" value="30" class="info"></ui-input>
+    <ui-input type="radio" name="b" value="40" class="danger"></ui-input>
+    <ui-input type="radio" name="b" value="50" class="warning"></ui-input>
+    <ui-input type="radio" name="b" value="60" class="success"></ui-input>
   </div>
   <br>
   {{data.a}}
   <div>
     <ui-input [(ngModel)]="data.a" step="5" min="20" max="80" type="range"></ui-input>
-    <br>
     <ui-input [(ngModel)]="data.a" type="range" class="primary"></ui-input>
-    <br>
     <ui-input [(ngModel)]="data.a" type="range" class="info"></ui-input>
-    <br>
     <ui-input [(ngModel)]="data.a" type="range" class="danger"></ui-input>
-    <br>
     <ui-input [(ngModel)]="data.a" type="range" class="warning"></ui-input>
-    <br>
     <ui-input [(ngModel)]="data.a" type="range" class="success"></ui-input>
   </div>
   <br>
@@ -42,5 +37,7 @@
       <ui-option value="50">50</ui-option>
     </ui-select>
   </div>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <br><br>
+  <ui-pagination [pages]="20" [currentPage]="2" (change)="show($event)"></ui-pagination>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>

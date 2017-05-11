@@ -9,7 +9,7 @@ ui-option {
     border: 0;
     font-size: inherit;
     text-align: left;
-    .ui-option {
+    > .ui-option {
         padding: 0 $grid-column-padding;
         width: 100%;
         border: none;

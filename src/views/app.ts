@@ -72,7 +72,7 @@ export class AppComponent {
         ]
     };
 
-    submit() {
-        console.log(this.data);
+    show(p) {
+        console.log(p);
     }
 }

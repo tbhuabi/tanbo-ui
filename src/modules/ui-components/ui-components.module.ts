@@ -5,6 +5,7 @@ import { UiDirectivesModule } from '../ui-directives/ui-directives.module';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
 import { DropDownFixedComponent } from './components/drop-down-fixed/drop-down-fixed.component';
 import { DropDownMenuComponent } from './components/drop-down-menu/drop-down-menu.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -13,12 +14,14 @@ import { DropDownMenuComponent } from './components/drop-down-menu/drop-down-men
     declarations: [
         DropDownComponent,
         DropDownFixedComponent,
-        DropDownMenuComponent
+        DropDownMenuComponent,
+        PaginationComponent
     ],
     exports: [
         DropDownComponent,
         DropDownFixedComponent,
-        DropDownMenuComponent
+        DropDownMenuComponent,
+        PaginationComponent
     ]
 })
 export class UiComponentsModule {

@@ -37,9 +37,6 @@
 
 ui-input {
     display: inline-block;
-    &[type=range] {
-        display: block;
-    }
     &[type=checkbox], &[type=radio], &[type=range] {
         cursor: pointer;
         > .ui-input-raw {
@@ -142,6 +139,12 @@ ui-input {
         border-radius: 3px;
         line-height: 0;
         cursor: default;
+        &:before {
+            content: '';
+            display: block;
+            width: 140px;
+            height: 0;
+        }
         > .ui-input-range {
             display: inline-block;
             height: 100%;
