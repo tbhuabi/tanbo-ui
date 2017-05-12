@@ -31,13 +31,10 @@
 
   <div>
     <ui-select [(ngModel)]="data.a" class="form-control">
-      <ui-option value="20">20</ui-option>
-      <ui-option value="30">30</ui-option>
-      <ui-option value="40">40</ui-option>
-      <ui-option value="50">50</ui-option>
+      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
     </ui-select>
   </div>
   <br><br>
-  <ui-pagination [pages]="20" [currentPage]="2" (change)="show($event)"></ui-pagination>
+  <ui-pagination class="pagination-lg" [btnLength]="2" [pages]="20" [currentPage]="2" (change)="show($event)"></ui-pagination>
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>

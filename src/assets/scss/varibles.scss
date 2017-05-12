@@ -82,7 +82,7 @@ $pagination-font-size-sm: $pagination-font-size-base - 1px;
 $pagination-font-size-xs: $pagination-font-size-sm - 1px;
 $pagination-font-size-lg: $pagination-font-size-base + 4px;
 
-$pagination-border-color: $border-color-lighter;
+$pagination-border-color: lighten($border-color-lighter, 5);
 $pagination-disabled-color: darken($pagination-border-color, 15);
 $pagination-disabled-bg-color: lighten($pagination-border-color, 7);
 $pagination-hover-bg-color: lighten($pagination-border-color, 2);

@@ -4,7 +4,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["es6", "dom"],
-    "mapRoot": "./src/",
+    "mapRoot": "./src/modules/",
     "module": "es2015",
     "moduleResolution": "node",
     "outDir": "./bundles/",
