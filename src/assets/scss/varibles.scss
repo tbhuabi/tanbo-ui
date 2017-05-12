@@ -1,7 +1,7 @@
 // 全局配置
 $font-size-base: 14px; // 基础文字大小
 $line-height: 1.6;
-$is-open-radius: false;
+$is-open-radius: true;
 
 // 辅助配置
 $container-vertical-padding: 6px;
@@ -37,7 +37,7 @@ $radius-lg: $radius-base + 2px; // 大圆角
 
 // 表单
 $form-control-padding-vertical: 5px;
-$form-control-padding-vertical-sm: $form-control-padding-vertical - 2px;
+$form-control-padding-vertical-sm: $form-control-padding-vertical - 3px;
 $form-control-padding-vertical-lg: $form-control-padding-vertical + 2px;
 
 $form-control-padding-horizontal: 12px;
@@ -53,12 +53,34 @@ $form-control-font-size-base: $font-size-base;
 $form-control-font-size-sm: $form-control-font-size-base - 1px;
 $form-control-font-size-lg: $form-control-font-size-base + 4px;
 
-$form-control-border-color: $border-color-base;
+$form-control-border-color: $border-color-light;
 $form-control-border-color-primary: $color-primary;
 $form-control-border-color-success: $color-success;
 $form-control-border-color-info: $color-info;
 $form-control-border-color-warning: $color-warning;
 $form-control-border-color-danger: $color-danger;
+
+// 按扭
+$button-padding-vertical: 5px;
+$button-padding-vertical-sm: $button-padding-vertical - 3px;
+$button-padding-vertical-xs: $button-padding-vertical-sm - 1px;
+$button-padding-vertical-lg: $button-padding-vertical + 2px;
+
+$button-padding-horizontal: 12px;
+$button-padding-horizontal-sm: $button-padding-horizontal - 4px;
+$button-padding-horizontal-xs: $button-padding-horizontal - 2px;
+$button-padding-horizontal-lg: $button-padding-horizontal + 4px;
+
+$button-radius-is-open: $is-open-radius;
+$button-radius: $radius-base;
+$button-radius-sm: $radius-sm;
+$button-radius-xs: $radius-xs;
+$button-radius-lg: $radius-lg;
+
+$button-font-size: $font-size-base;
+$button-font-size-sm: $button-font-size - 1px;
+$button-font-size-xs: $button-font-size-sm - 1px;
+$button-font-size-lg: $button-font-size + 4px;
 
 // 分页控件
 $pagination-radius-is-open: $is-open-radius;
@@ -67,20 +89,20 @@ $pagination-radius-sm: $pagination-radius - 1px;
 $pagination-radius-xs: $pagination-radius-sm - 1px;
 $pagination-radius-lg: $pagination-radius + 2px;
 
-$pagination-padding-vertical: 2px;
-$pagination-padding-vertical-sm: $pagination-padding-vertical - 1px;
+$pagination-padding-vertical: 5px;
+$pagination-padding-vertical-sm: $pagination-padding-vertical - 3px;
 $pagination-padding-vertical-xs: $pagination-padding-vertical-sm - 1px;
 $pagination-padding-vertical-lg: $pagination-padding-vertical + 2px;
 
-$pagination-padding-horizontal: 9px;
-$pagination-padding-horizontal-sm: $pagination-padding-horizontal - 1px;
+$pagination-padding-horizontal: 12px;
+$pagination-padding-horizontal-sm: $pagination-padding-horizontal - 3px;
 $pagination-padding-horizontal-xs: $pagination-padding-horizontal-sm - 1px;
 $pagination-padding-horizontal-lg: $pagination-padding-horizontal + 2px;
 
-$pagination-font-size-base: $font-size-base;
-$pagination-font-size-sm: $pagination-font-size-base - 1px;
+$pagination-font-size: $font-size-base;
+$pagination-font-size-sm: $pagination-font-size - 1px;
 $pagination-font-size-xs: $pagination-font-size-sm - 1px;
-$pagination-font-size-lg: $pagination-font-size-base + 4px;
+$pagination-font-size-lg: $pagination-font-size + 4px;
 
 $pagination-border-color: lighten($border-color-lighter, 5);
 $pagination-disabled-color: darken($pagination-border-color, 15);

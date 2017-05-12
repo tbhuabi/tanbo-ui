@@ -1,40 +1,59 @@
 <div class="container">
-  <h3>checkbox</h3>
-  <div>
-    <ui-input type="checkbox"></ui-input>
-    <ui-input type="checkbox" class="primary"></ui-input>
-    <ui-input type="checkbox" class="info"></ui-input>
-    <ui-input type="checkbox" class="danger"></ui-input>
-    <ui-input type="checkbox" class="warning"></ui-input>
-    <ui-input type="checkbox" class="success"></ui-input>
+  <br>
+  <button type="button" class="btn">按扭</button>
+  <button type="button" class="btn btn-sm">按扭</button>
+  <button type="button" class="btn btn-lg">按扭</button>
+  <button type="button" class="btn btn-lg btn-default">按扭</button>
+  <button type="button" class="btn btn-lg btn-success">按扭</button>
+  <button type="button" class="btn btn-lg btn-info">按扭</button>
+  <button type="button" class="btn btn-lg btn-danger">按扭</button>
+  <button type="button" class="btn btn-lg btn-warning">按扭</button>
+  <button type="button" class="btn btn-lg btn-primary">按扭</button>
+  <br><br><br>
+  <button disabled type="button" class="btn btn-lg btn-default">按扭</button>
+  <button disabled type="button" class="btn btn-lg btn-success">按扭</button>
+  <button disabled type="button" class="btn btn-lg btn-info">按扭</button>
+  <button disabled type="button" class="btn btn-lg btn-danger">按扭</button>
+  <button disabled type="button" class="btn btn-lg btn-warning">按扭</button>
+  <button disabled type="button" class="btn btn-lg btn-primary">按扭</button>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-md-2 text-right">
+      <button class="btn btn-sm btn-default">按扭</button>
+    </div>
+    <div class="col-md-2">
+      <input type="text" class="form-control input-sm">
+    </div>
+    <div class="col-md-6">
+      <ui-pagination [pages]="20" class="pagination-sm"></ui-pagination>
+    </div>
   </div>
   <br>
-  <div>
-    <ui-input type="radio" name="a" value="10"></ui-input>
-    <ui-input type="radio" name="a" value="20" class="primary"></ui-input>
-    <ui-input type="radio" name="a" value="30" class="info"></ui-input>
-    <ui-input type="radio" name="b" value="40" class="danger"></ui-input>
-    <ui-input type="radio" name="b" value="50" class="warning"></ui-input>
-    <ui-input type="radio" name="b" value="60" class="success"></ui-input>
+  <div class="row">
+    <div class="col-md-2 text-right">
+      <button class="btn btn-default">按扭</button>
+    </div>
+    <div class="col-md-2">
+      <input type="text" class="form-control">
+    </div>
+    <div class="col-md-6">
+      <ui-pagination [pages]="20"></ui-pagination>
+    </div>
   </div>
   <br>
-  {{data.a}}
-  <div>
-    <ui-input [(ngModel)]="data.a" step="5" min="20" max="80" type="range"></ui-input>
-    <ui-input [(ngModel)]="data.a" type="range" class="primary"></ui-input>
-    <ui-input [(ngModel)]="data.a" type="range" class="info"></ui-input>
-    <ui-input [(ngModel)]="data.a" type="range" class="danger"></ui-input>
-    <ui-input [(ngModel)]="data.a" type="range" class="warning"></ui-input>
-    <ui-input [(ngModel)]="data.a" type="range" class="success"></ui-input>
+  <div class="row">
+    <div class="col-md-2 text-right">
+      <button class="btn btn-lg btn-default">按扭</button>
+    </div>
+    <div class="col-md-2">
+      <input type="text" class="form-control input-lg">
+    </div>
+    <div class="col-md-6">
+      <ui-pagination [pages]="20" class="pagination-lg"></ui-pagination>
+    </div>
   </div>
-  <br>
-
-  <div>
-    <ui-select [(ngModel)]="data.a" class="form-control">
-      <ui-option *ngFor="let item of dataList" [value]="item.value">{{item.key}}</ui-option>
-    </ui-select>
-  </div>
-  <br><br>
-  <ui-pagination class="pagination-lg" [btnLength]="2" [pages]="20" [currentPage]="2" (change)="show($event)"></ui-pagination>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <button class="btn btn-lg btn-block btn-success">按扭</button>
 </div>

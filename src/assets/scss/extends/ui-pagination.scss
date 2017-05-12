@@ -33,6 +33,8 @@ ui-pagination {
         @include list-unstyled;
         line-height: $line-height;
         display: inline-block;
+        margin-top: 0;
+        margin-bottom: 0;
         > li {
             display: inline;
             > a {
@@ -59,7 +61,7 @@ ui-pagination {
                         cursor: default;
                     }
                 }
-                &.disabled{
+                &.disabled {
                     background: none;
                     color: $pagination-disabled-color;
                     cursor: not-allowed;
@@ -67,7 +69,7 @@ ui-pagination {
             }
         }
     }
-    @include pagination($pagination-padding-vertical, $pagination-padding-horizontal, $pagination-radius, $pagination-font-size-base);
+    @include pagination($pagination-padding-vertical, $pagination-padding-horizontal, $pagination-radius, $pagination-font-size);
     &.pagination-sm {
         @include pagination($pagination-padding-vertical-sm, $pagination-padding-horizontal-sm, $pagination-radius-sm, $pagination-font-size-sm);
     }
