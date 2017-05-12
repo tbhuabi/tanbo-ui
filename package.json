@@ -1,7 +1,7 @@
 {
   "name": "tanbo-ui",
-  "version": "1.0.7",
-  "description": "A webpack starter for Angular",
+  "version": "1.0.8",
+  "description": "angular components & directives & pipes ...",
   "main": "./bundles/index.js",
   "module": "./bundles/index.js",
   "typings": "./bundles/index.d.ts",

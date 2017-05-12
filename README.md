@@ -20,7 +20,7 @@ tanbo-ui是一个基于Angular4.0的拓展包，并基于最小改动，最小�
 <ui-input type="checkbox" name="name" [(ngModel)]="model"></ui-input>
 ```
 
-基本无需改动就可以实现功能，且运行`disabled`、`readonly`等等原生属性
+基本无需改动就可以实现功能，且支持`disabled`、`readonly`等等原生属性
 
 
 ## 安装
