@@ -56,4 +56,9 @@
     </div>
   </div>
   <button class="btn btn-lg btn-block btn-success">按扭</button>
+
+  <br>
+  <ui-select class="form-control col-md-2">
+    <ui-option *ngFor="let item of dataList" [value]="item.valid">{{item.key}}</ui-option>
+  </ui-select>
 </div>
