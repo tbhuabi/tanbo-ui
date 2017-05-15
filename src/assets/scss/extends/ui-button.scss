@@ -35,6 +35,7 @@ ui-button {
         }
     }
     &.loading {
+        opacity: .8;
         > .btn-text {
             transform: scale(0);
         }
