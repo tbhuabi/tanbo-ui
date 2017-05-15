@@ -42,6 +42,7 @@
     font-size: $button-font-size;
     cursor: pointer;
     line-height: $line-height;
+    text-align: center;
     padding: $button-padding-vertical $button-padding-horizontal;
 
     @if $button-radius-is-open {
