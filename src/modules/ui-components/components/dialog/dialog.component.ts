@@ -8,20 +8,20 @@ import { Subscription } from 'rxjs';
     templateUrl: './dialog.component.html',
     animations: [trigger('dialogContentAnimate', [state('*', style({
         opacity: 0,
-        transform: 'translateY(-100%)'
+        transform: 'translateY(-50%)'
     })), state('in', style({
         opacity: 1,
-        transform: 'translateY(100%)'
+        transform: 'translateY(20%)'
     })), state('out', style({
         opacity: 0,
-        transform: 'translateY(-100%)'
-    })), transition('in <=> out', animate('0.3s linear'))]), trigger('dialogBgAnimate', [state('*', style({
+        transform: 'translateY(-50%)'
+    })), transition('in <=> out', animate('0.2s'))]), trigger('dialogBgAnimate', [state('*', style({
         opacity: 0
     })), state('in', style({
         opacity: 1
     })), state('out', style({
         opacity: 0
-    })), transition('in <=> out', animate('0.3s linear'))])]
+    })), transition('in <=> out', animate('0.2s'))])]
 })
 
 export class DialogComponent implements OnInit, OnDestroy {

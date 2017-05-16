@@ -24,7 +24,7 @@ export class DialogService {
             const sub = this.dialogAction$.subscribe((result: boolean) => {
                 result ? resolve(result) : reject(result);
                 sub.unsubscribe();
-            })
+            });
         });
     }
 }

@@ -18,9 +18,9 @@ ui-dialog {
         height: $dialog-height;
         background-color: #fff;
         left: 50%;
-        top: 0;
+        top: 50px;
         margin-left: -$dialog-width / 2;
-        margin-top: -$dialog-height / 2;
+        //margin-top: -$dialog-height / 2;
         > .ui-dialog-title {
             padding: 10px $grid-column-padding;
             margin-top: 0;
