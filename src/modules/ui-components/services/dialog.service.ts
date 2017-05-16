@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 
 export interface DialogConfig {
     title: string;
-    content: string
+    content: string;
 }
 
 @Injectable()
