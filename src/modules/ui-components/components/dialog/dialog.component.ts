@@ -15,13 +15,13 @@ import { Subscription } from 'rxjs';
     })), state('out', style({
         opacity: 0,
         transform: 'translateY(-100%)'
-    })), transition('in <=> out', animate('2s linear'))]), trigger('dialogBgAnimate', [state('*', style({
+    })), transition('in <=> out', animate('0.3s linear'))]), trigger('dialogBgAnimate', [state('*', style({
         opacity: 0
     })), state('in', style({
         opacity: 1
     })), state('out', style({
         opacity: 0
-    })), transition('in <=> out', animate('2s linear'))])]
+    })), transition('in <=> out', animate('0.3s linear'))])]
 })
 
 export class DialogComponent implements OnInit, OnDestroy {

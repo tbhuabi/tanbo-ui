@@ -8,7 +8,7 @@ import { DialogService, DialogConfig } from '../modules/index';
     styleUrls: ['./app.scss']
 })
 export class AppComponent implements OnInit {
-    open: boolean = true;
+    open: boolean = false;
 
     constructor(private dialogService: DialogService) {
     }
@@ -22,8 +22,10 @@ export class AppComponent implements OnInit {
             content: 'bbb'
         };
         this.dialogService.show(config).then(y => {
+            this.open = true;
             console.log(y);
         }, n => {
+            this.open = false;
             console.log(n);
         });
     }
