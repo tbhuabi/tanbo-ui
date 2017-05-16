@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
-import { UiComponentsModule } from '../modules/ui-components/ui-components.module';
-import { DialogService } from '../modules/ui-components/services/dialog.service';
-import { UiFormsModule } from '../modules/ui-forms/ui-form.module';
+import { UiComponentsModule, UiFormsModule, DialogService } from '../modules/index';
 
 import { AppComponent } from './app';
 

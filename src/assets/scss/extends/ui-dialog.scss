@@ -1,0 +1,44 @@
+@import "../varibles";
+
+ui-dialog {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .3);
+    > .ui-dialog {
+        position: absolute;
+        width: $dialog-width;
+        height: $dialog-height;
+        background-color: #fff;
+        left: 50%;
+        top: 40%;
+        margin-left: -$dialog-width / 2;
+        margin-top: -$dialog-height / 2;
+        > .ui-dialog-title {
+            padding: 10px $grid-column-padding;
+            margin-top: 0;
+            margin-bottom: 0;
+            font-weight: normal;
+            > button {
+                background: none;
+                border: none;
+                cursor: pointer;
+                transition: all .3s;
+                &:hover {
+                    transform: rotateZ(-360deg);
+                }
+            }
+        }
+        > .ui-dialog-body {
+            height: $dialog-height - 64 - 46;
+            border-top: 1px solid $border-color-lighter;
+            border-bottom: 1px solid $border-color-lighter;
+            padding: $grid-column-padding;
+        }
+        > .ui-dialog-footer {
+            padding: $grid-column-padding;
+        }
+    }
+}

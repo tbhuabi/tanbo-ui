@@ -1,3 +1,12 @@
-<ng-content select="ui-dialog-title"></ng-content>
-<ng-content select="ui-dialog-body"></ng-content>
-<ng-content select="ui-dialog-footer"></ng-content>
+<div class="ui-dialog">
+  <h3 class="ui-dialog-title clearfix">
+    {{title || '系统消息'}} <button type="button" class="pull-right"><span>&times;</span></button>
+  </h3>
+  <div class="ui-dialog-body">
+    {{content}}
+  </div>
+  <div class="ui-dialog-footer text-right">
+    <button type="button" class="btn btn-success">确定</button>
+    <button type="button" class="btn btn-default">取消</button>
+  </div>
+</div>

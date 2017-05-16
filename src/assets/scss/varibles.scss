@@ -114,3 +114,9 @@ $table-cell-padding: 8px;
 
 // 模拟radio/checkbox
 $ui-input-focus-box-shadow-color: hsla(hue($border-color-lighter), saturation($border-color-lighter), lightness($border-color-lighter), .5);
+
+// dialog
+$dialog-radius-is-open: $is-open-radius;
+
+$dialog-width: 300px;
+$dialog-height: 220px;

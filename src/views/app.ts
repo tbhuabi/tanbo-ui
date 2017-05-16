@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DialogService, DialogConfig } from '../modules/ui-components/services/dialog.service';
+import { DialogService, DialogConfig } from '../modules/index';
 
 @Component({
     selector: 'ui-app',

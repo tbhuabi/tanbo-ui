@@ -7,11 +7,7 @@ import { DropDownFixedComponent } from './components/drop-down-fixed/drop-down-f
 import { DropDownMenuComponent } from './components/drop-down-menu/drop-down-menu.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { DialogTitleComponent } from './components/dialog-title/dialog-title.component';
-import { DialogBodyComponent } from './components/dialog-body/dialog-body.component';
-import { DialogFooterComponent } from './components/dialog-footer/dialog-footer.component';
 
-import { DialogService } from './services/dialog.service';
 
 @NgModule({
     imports: [
@@ -23,27 +19,14 @@ import { DialogService } from './services/dialog.service';
         DropDownFixedComponent,
         DropDownMenuComponent,
         PaginationComponent,
-        DialogComponent,
-        DialogTitleComponent,
-        DialogBodyComponent,
-        DialogFooterComponent,
-
-        DialogService
+        DialogComponent
     ],
     exports: [
         DropDownComponent,
         DropDownFixedComponent,
         DropDownMenuComponent,
         PaginationComponent,
-        DialogComponent,
-        DialogTitleComponent,
-        DialogBodyComponent,
-        DialogFooterComponent,
-
-        DialogService
-    ],
-    providers: [
-        // DialogService
+        DialogComponent
     ]
 })
 export class UiComponentsModule {
