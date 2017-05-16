@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 export interface DialogConfig {
     title: string;
@@ -7,16 +8,23 @@ export interface DialogConfig {
 
 @Injectable()
 export class DialogService {
+    dialogAction$: Observable<boolean>;
+    dialogConfig$: Observable<DialogConfig>;
+    dialogActionSource = new Subject<boolean>();
+    private dialogConfigSource = new Subject<DialogConfig>();
+
+    constructor() {
+        this.dialogAction$ = this.dialogActionSource.asObservable();
+        this.dialogConfig$ = this.dialogConfigSource.asObservable();
+    }
 
     show(params: DialogConfig): Promise<any> {
+        this.dialogConfigSource.next(params);
         return new Promise((resolve, reject) => {
-            let n = Math.random();
-            console.log(n);
-            if (n > 0.5) {
-                resolve('ok');
-            } else {
-                reject('error');
-            }
+            const sub = this.dialogAction$.subscribe((result: boolean) => {
+                result ? resolve(result) : reject(result);
+                sub.unsubscribe();
+            })
         });
     }
 }

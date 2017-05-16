@@ -8,10 +8,15 @@ import { DialogService, DialogConfig } from '../modules/index';
     styleUrls: ['./app.scss']
 })
 export class AppComponent implements OnInit {
+    open: boolean = true;
+
     constructor(private dialogService: DialogService) {
     }
 
     ngOnInit() {
+    }
+
+    show() {
         let config: DialogConfig = {
             title: 'aaa',
             content: 'bbb'
