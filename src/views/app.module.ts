@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
-import { UiComponentsModule, UiFormsModule, DialogService } from '../modules/index';
+import { UiComponentsModule, UiFormsModule, DialogService, NotifyService } from '../modules/index';
 
 import { AppComponent } from './app';
 
@@ -17,7 +17,8 @@ import { AppComponent } from './app';
         AppComponent,
     ],
     providers: [
-        DialogService
+        DialogService,
+        NotifyService
     ],
     bootstrap: [AppComponent]
 })

@@ -30,18 +30,22 @@
 }
 @for $i from 1 through $grid-columns {
     .col-xs-#{$i} {
+        min-height: 1px;
         padding-left: $grid-column-padding;
         padding-right: $grid-column-padding;
     }
     .col-sm-#{$i} {
+        min-height: 1px;
         padding-left: $grid-column-padding;
         padding-right: $grid-column-padding;
     }
     .col-md-#{$i} {
+        min-height: 1px;
         padding-left: $grid-column-padding;
         padding-right: $grid-column-padding;
     }
     .col-lg-#{$i} {
+        min-height: 1px;
         padding-left: $grid-column-padding;
         padding-right: $grid-column-padding;
     }

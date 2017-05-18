@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DialogService, DialogConfig } from '../modules/index';
+import { DialogConfig, DialogService, NotifyService, NotifyConfig } from '../modules/index';
 
 @Component({
     selector: 'ui-app',
@@ -10,7 +10,8 @@ import { DialogService, DialogConfig } from '../modules/index';
 export class AppComponent implements OnInit {
     open: boolean = false;
 
-    constructor(private dialogService: DialogService) {
+    constructor(private notifyService: NotifyService,
+                private dialogService: DialogService) {
     }
 
     ngOnInit() {
@@ -18,8 +19,8 @@ export class AppComponent implements OnInit {
 
     show() {
         let config: DialogConfig = {
-            title: 'aaa',
-            content: 'bbb'
+            title: '标题',
+            content: '内容'
         };
         this.dialogService.show(config).then(y => {
             this.open = true;
@@ -28,5 +29,14 @@ export class AppComponent implements OnInit {
             this.open = false;
             console.log(n);
         });
+    }
+
+    notify() {
+        let config: NotifyConfig = {
+            type: 'success',
+            autoHide: false,
+            content: '这里是内容'
+        };
+        this.notifyService.push(config);
     }
 }
