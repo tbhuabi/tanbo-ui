@@ -8,6 +8,7 @@ import { DialogConfig, DialogService, NotifyService, NotifyConfig } from '../mod
     styleUrls: ['./app.scss']
 })
 export class AppComponent implements OnInit {
+    width: number = 0;
     open: boolean = false;
 
     constructor(private notifyService: NotifyService,

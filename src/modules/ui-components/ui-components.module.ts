@@ -10,6 +10,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { DialogComponent } from './components/dialog/dialog.component';
 import { NotifyComponent } from './components/notify/notify.component';
 import { StarrySkyComponent } from './components/starry-sky/starry-sky.component';
+import { ViewLoadingBarComponent } from './components/view-loading-bar/view-loading-bar.component';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { StarrySkyComponent } from './components/starry-sky/starry-sky.component
         PaginationComponent,
         DialogComponent,
         NotifyComponent,
-        StarrySkyComponent
+        StarrySkyComponent,
+        ViewLoadingBarComponent
     ],
     exports: [
         DropDownComponent,
@@ -33,7 +35,8 @@ import { StarrySkyComponent } from './components/starry-sky/starry-sky.component
         PaginationComponent,
         DialogComponent,
         NotifyComponent,
-        StarrySkyComponent
+        StarrySkyComponent,
+        ViewLoadingBarComponent
     ]
 })
 export class UiComponentsModule {

@@ -6,6 +6,11 @@ $is-open-radius: false;
 // 辅助配置
 $container-vertical-padding: 6px;
 
+$starry-sky-z-index: -1;
+$notify-z-index: 1000;
+$dialog-z-index: 1100;
+$view-loading-bar-z-index: 1200;
+
 // 基础颜色
 $color-default: #333; // 基础文字颜色
 $color-primary: #4c6882; // 主色调

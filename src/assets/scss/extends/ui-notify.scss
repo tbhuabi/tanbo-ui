@@ -16,6 +16,7 @@ ui-notify {
     right: 40px;
     top: 10%;
     margin-left: -300px;
+    z-index: $notify-z-index;
     > .ui-notify {
         position: relative;
         width: 300px;

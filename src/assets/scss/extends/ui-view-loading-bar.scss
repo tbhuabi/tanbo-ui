@@ -1,0 +1,36 @@
+@import "../varibles";
+
+ui-view-loading-bar {
+    position: fixed;
+    z-index: $view-loading-bar-z-index;
+    left: 0;
+    right: 0;
+    > .ui-view-loading-bar {
+        left: 0;
+        top: 0;
+        background-image: linear-gradient(to right, $color-success + 30, $color-success);
+        border-radius: 0 3px 3px 0;
+        height: 3px;
+        transition: width .3s;
+        > .ui-view-loading-bar-shadow {
+            float: right;
+            height: 100%;
+            width: 100px;
+            border-radius: inherit;
+            animation: view-loading-bar-shadow 3s infinite;
+        }
+    }
+}
+
+@keyframes view-loading-bar-shadow {
+    $shadow-color: hsla(hue($color-success), saturation($color-success), lightness($color-success), .4);
+    0% {
+        box-shadow: 0 0 0 $shadow-color;
+    }
+    50% {
+        box-shadow: 0 0 30px $shadow-color;
+    }
+    100% {
+        box-shadow: 0 0 0 $shadow-color;
+    }
+}
