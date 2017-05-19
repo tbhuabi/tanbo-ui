@@ -9,6 +9,7 @@ import { DropDownMenuComponent } from './components/drop-down/drop-down-menu/dro
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { NotifyComponent } from './components/notify/notify.component';
+import { StarrySkyComponent } from './components/starry-sky/starry-sky.component';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { NotifyComponent } from './components/notify/notify.component';
         DropDownMenuComponent,
         PaginationComponent,
         DialogComponent,
-        NotifyComponent
+        NotifyComponent,
+        StarrySkyComponent
     ],
     exports: [
         DropDownComponent,
@@ -30,7 +32,8 @@ import { NotifyComponent } from './components/notify/notify.component';
         DropDownMenuComponent,
         PaginationComponent,
         DialogComponent,
-        NotifyComponent
+        NotifyComponent,
+        StarrySkyComponent
     ]
 })
 export class UiComponentsModule {
