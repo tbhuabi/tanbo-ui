@@ -8,10 +8,10 @@ ui-view-loading-bar {
     > .ui-view-loading-bar {
         left: 0;
         top: 0;
-        background-image: linear-gradient(to right, $color-success + 30, $color-success);
-        border-radius: 0 3px 3px 0;
-        height: 3px;
+        background-image: linear-gradient(to right, $color-success + 60, $color-success);
+        height: 2px;
         transition: width .3s;
+        float: left;
         > .ui-view-loading-bar-shadow {
             float: right;
             height: 100%;

@@ -1,4 +1,5 @@
 <ui-starry-sky></ui-starry-sky>
+<ui-view-loading-bar></ui-view-loading-bar>
 <div class="container">
   <br><br>
   <button type="button" (click)="show()">dialog</button>
@@ -8,4 +9,11 @@
   <ui-notify></ui-notify>
 
   <ui-input type="range" [(ngModel)]="width"></ui-input>
+
+  <p>
+    <a routerLink="page1">page1</a>
+    <a routerLink="page2">page2</a>
+  </p>
+
+  <router-outlet></router-outlet>
 </div>
