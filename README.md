@@ -3,7 +3,7 @@
 tanbo-ui是一个基于Angular4.0的拓展包，并基于最小改动，最小学习成本的前提下，拓展了部分表单控件，提供了很多网页上觉的交互组件、指令、服务、过滤器等等。并提供了一套侵入性很小的底层css样式表。
 
 可以这么说，如果你会使用angular，那使用tanbo-ui基本就无需看文档。
-
+**目前很多功能还在开发中，还不稳定，不建议用于生产环境**
 ---
 
 ## 最小更改原则 + 最低学习成本原则
@@ -66,5 +66,10 @@ import { UiFormsModule, UiDirectivesModule, UiComponentsModule } from 'tanbo-ui'
     - `<ui-drop-down></ui-drop-down>`
     - `<ui-drop-down-fixed></ui-drop-down-fixed>`
     - `<ui-drop-down-menu></ui-drop-down-menu>`
+    - `<ui-dialog></ui-dialog>`
+    - `<ui-notify></ui-notify>`
+    - `<ui-pagination [currentPage]="20" [pages]="1" (change)="doSomething($event)"></ui-notify>`
+    - `<ui-starry-sky></ui-starry-sky>`
+    - `<ui-view-loading-bar></ui-view-loading-bar>`
     
 **更详细的文档请关注近期更新，目前正在撰写gitbook**
