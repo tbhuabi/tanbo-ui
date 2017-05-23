@@ -34,6 +34,7 @@ npm install tanbo-ui --save
 ## 在你的项目中引入tanbo-ui
 
 ```typescript
+import 'tanbo-ui/bundles/tanbo-ui.min.css';
 import { UiFormsModule, UiDirectivesModule, UiComponentsModule } from 'tanbo-ui';
 
 @NgModule({
