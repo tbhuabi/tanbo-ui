@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DialogConfig, DialogService, NotifyService, NotifyConfig } from '../modules/index';
+import { ConfirmConfig, ConfirmService, NotifyService, NotifyConfig } from '../modules/index';
 
 @Component({
     selector: 'ui-app',
@@ -12,14 +12,14 @@ export class AppComponent implements OnInit {
     open: boolean = false;
 
     constructor(private notifyService: NotifyService,
-                private dialogService: DialogService) {
+                private dialogService: ConfirmService) {
     }
 
     ngOnInit() {
     }
 
     show() {
-        let config: DialogConfig = {
+        let config: ConfirmConfig = {
             title: '标题',
             content: '内容'
         };

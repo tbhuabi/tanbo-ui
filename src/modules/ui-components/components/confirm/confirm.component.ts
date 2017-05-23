@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { DialogService, DialogConfig } from '../../services/dialog.service';
+import { ConfirmService, ConfirmConfig } from '../../services/confirm.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'ui-dialog',
-    templateUrl: './dialog.component.html',
-    animations: [trigger('dialogContentAnimate', [state('*', style({
+    selector: 'ui-confirm',
+    templateUrl: './confirm.component.html',
+    animations: [trigger('confirmContentAnimate', [state('*', style({
         opacity: 0,
         transform: 'translateY(-50%)'
     })), state('in', style({
@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
     })), state('out', style({
         opacity: 0,
         transform: 'translateY(-50%)'
-    })), transition('in <=> out', animate('0.2s'))]), trigger('dialogBgAnimate', [state('*', style({
+    })), transition('in <=> out', animate('0.2s'))]), trigger('confirmBgAnimate', [state('*', style({
         opacity: 0
     })), state('in', style({
         opacity: 1
@@ -24,12 +24,12 @@ import { Subscription } from 'rxjs';
     })), transition('in <=> out', animate('0.2s'))])]
 })
 
-export class DialogComponent implements OnInit, OnDestroy {
+export class ConfirmComponent implements OnInit, OnDestroy {
     @HostBinding('class.show')
     isShow: boolean = false;
 
-    @HostBinding('@dialogBgAnimate')
-    get dialogBgState() {
+    @HostBinding('@confirmBgAnimate')
+    get confirmBgState() {
         return this.animateState ? 'in' : 'out';
     }
 
@@ -40,11 +40,11 @@ export class DialogComponent implements OnInit, OnDestroy {
 
     private sub: Subscription;
 
-    constructor(private dialogService: DialogService) {
+    constructor(private confirmService: ConfirmService) {
     }
 
     ngOnInit() {
-        this.sub = this.dialogService.dialogConfig$.subscribe((params: DialogConfig) => {
+        this.sub = this.confirmService.confirmConfig$.subscribe((params: ConfirmConfig) => {
             this.isShow = true;
             this.animateState = true;
 
@@ -65,7 +65,7 @@ export class DialogComponent implements OnInit, OnDestroy {
     done() {
         if (!this.animateState) {
             this.isShow = false;
-            this.dialogService.dialogActionSource.next(this.result);
+            this.confirmService.confirmActionSource.next(this.result);
         }
     }
 }

@@ -1,27 +1,27 @@
 @import "../varibles";
 
-ui-dialog {
+ui-confirm {
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, .3);
-    z-index: $dialog-z-index;
+    z-index: $confirm-z-index;
     display: none;
     &.show {
         display: block;
     }
-    > .ui-dialog {
+    > .ui-confirm {
         position: absolute;
-        width: $dialog-width;
-        height: $dialog-height;
+        width: $confirm-width;
+        height: $confirm-height;
         background-color: #fff;
         left: 50%;
         top: 50px;
-        margin-left: -$dialog-width / 2;
+        margin-left: -$confirm-width / 2;
         //margin-top: -$dialog-height / 2;
-        > .ui-dialog-title {
+        > .ui-confirm-title {
             padding: 10px $grid-column-padding;
             margin-top: 0;
             margin-bottom: 0;
@@ -36,13 +36,13 @@ ui-dialog {
                 }
             }
         }
-        > .ui-dialog-body {
-            height: $dialog-height - 64 - 46;
+        > .ui-confirm-body {
+            height: $confirm-height - 64 - 46;
             border-top: 1px solid $border-color-lighter;
             border-bottom: 1px solid $border-color-lighter;
             padding: $grid-column-padding;
         }
-        > .ui-dialog-footer {
+        > .ui-confirm-footer {
             padding: $grid-column-padding;
         }
     }

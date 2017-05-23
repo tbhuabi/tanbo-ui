@@ -15,8 +15,8 @@
 
 // 扩展样式主要用于各个组件搭配使用时，样式不符合预期的修改
 @import "extends/ui-starry-sky";
+@import "extends/ui-confirm";
 @import "extends/ui-button";
-@import "extends/ui-dialog";
 @import "extends/ui-drop-down";
 @import "extends/ui-drop-down-fixed";
 @import "extends/ui-drop-down-menu";
@@ -25,5 +25,6 @@
 @import "extends/ui-option";
 @import "extends/ui-pagination";
 @import "extends/ui-select";
+@import "extends/ui-toolbar";
 @import "extends/ui-view-loading-bar";
 

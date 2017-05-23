@@ -1,12 +1,12 @@
-import { Component, Input, Output, HostListener, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 
-import { InputType } from '../../utils/input-type';
+import { InputType } from '../../../utils/input-type';
 
 @Component({
-    selector: 'ui-input-checkbox',
-    templateUrl: './checkbox.component.html'
+    selector: 'ui-input-radio',
+    templateUrl: './radio.component.html'
 })
-export class CheckboxComponent implements InputType {
+export class RadioComponent implements InputType {
     @Input()
     set disabled(isDisabled: any) {
         this._disabled = isDisabled;
@@ -41,9 +41,10 @@ export class CheckboxComponent implements InputType {
     checkedIcon: string;
     @Input()
     uncheckedIcon: string;
-
+    @Input()
+    value: string = '';
     @Output()
-    change = new EventEmitter<boolean>();
+    change = new EventEmitter<string>();
 
     private _disabled: boolean;
     private _readonly: boolean;
@@ -53,7 +54,6 @@ export class CheckboxComponent implements InputType {
         if (this.disabled || this.readonly) {
             return;
         }
-        this.change.emit(!this.checked);
+        this.change.emit(this.value);
     }
-
 }

@@ -18,9 +18,9 @@ import { Subscription } from 'rxjs';
 import { InputHostDirective } from '../../directives/input-host.directive';
 import { InputStateService } from '../../services/input-state.service';
 
-import { CheckboxComponent } from '../checkbox/checkbox.component';
-import { RadioComponent } from '../radio/radio.component';
-import { RangeComponent } from '../range/range.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+import { RadioComponent } from './radio/radio.component';
+import { RangeComponent } from './range/range.component';
 
 import { InputType } from '../../utils/input-type';
 

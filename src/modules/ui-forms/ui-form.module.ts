@@ -10,9 +10,9 @@ import { InputHostDirective } from './directives/input-host.directive';
 import { SelectComponent } from './components/select/select.component';
 import { OptionComponent } from './components/option/option.component';
 import { InputComponent } from './components/input/input.component';
-import { CheckboxComponent } from './components/checkbox/checkbox.component';
-import { RadioComponent } from './components/radio/radio.component';
-import { RangeComponent } from './components/range/range.component';
+import { CheckboxComponent } from './components/input/checkbox/checkbox.component';
+import { RadioComponent } from './components/input/radio/radio.component';
+import { RangeComponent } from './components/input/range/range.component';
 import { ButtonComponent } from './components/button/button.component';
 
 import { InputStateService } from './services/input-state.service';

@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, Output, Renderer2, ElementRef, EventEmitter } from '@angular/core';
 
-import { InputType } from '../../utils/input-type';
+import { InputType } from '../../../utils/input-type';
 
 @Component({
     selector: 'ui-input-range',

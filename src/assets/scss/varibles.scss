@@ -8,8 +8,9 @@ $container-vertical-padding: 6px;
 
 $starry-sky-z-index: -1;
 $notify-z-index: 1000;
-$dialog-z-index: 1100;
-$view-loading-bar-z-index: 1200;
+$toolbar-z-index: 1100;
+$confirm-z-index: 1200;
+$view-loading-bar-z-index: 1300;
 
 // 基础颜色
 $color-default: #333; // 基础文字颜色
@@ -120,14 +121,17 @@ $table-cell-padding: 8px;
 // 模拟radio/checkbox
 $ui-input-focus-box-shadow-color: hsla(hue($border-color-lighter), saturation($border-color-lighter), lightness($border-color-lighter), .5);
 
-// dialog
-$dialog-radius-is-open: $is-open-radius;
+// confirm
+$confirm-radius-is-open: $is-open-radius;
 
-$dialog-width: 300px;
-$dialog-height: 220px;
+$confirm-width: 300px;
+$confirm-height: 220px;
 
 // notify
 $notify-radius-is-open: $is-open-radius;
 
 $notify-width: 340px;
 $notify-height: 140px;
+
+// toolbar
+$toolbar-width: 40px;

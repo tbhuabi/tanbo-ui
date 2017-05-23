@@ -7,10 +7,11 @@ import { DropDownComponent } from './components/drop-down/drop-down.component';
 import { DropDownFixedComponent } from './components/drop-down/drop-down-fixed/drop-down-fixed.component';
 import { DropDownMenuComponent } from './components/drop-down/drop-down-menu/drop-down-menu.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
-import { DialogComponent } from './components/dialog/dialog.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 import { NotifyComponent } from './components/notify/notify.component';
 import { StarrySkyComponent } from './components/starry-sky/starry-sky.component';
 import { ViewLoadingBarComponent } from './components/view-loading-bar/view-loading-bar.component';
+import { ToolbarComponent } from './components/toolbar/ui-toolbar.component';
 
 @NgModule({
     imports: [
@@ -23,20 +24,22 @@ import { ViewLoadingBarComponent } from './components/view-loading-bar/view-load
         DropDownFixedComponent,
         DropDownMenuComponent,
         PaginationComponent,
-        DialogComponent,
+        ConfirmComponent,
         NotifyComponent,
         StarrySkyComponent,
-        ViewLoadingBarComponent
+        ViewLoadingBarComponent,
+        ToolbarComponent
     ],
     exports: [
         DropDownComponent,
         DropDownFixedComponent,
         DropDownMenuComponent,
         PaginationComponent,
-        DialogComponent,
+        ConfirmComponent,
         NotifyComponent,
         StarrySkyComponent,
-        ViewLoadingBarComponent
+        ViewLoadingBarComponent,
+        ToolbarComponent
     ]
 })
 export class UiComponentsModule {
