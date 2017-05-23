@@ -27,6 +27,6 @@ export class ToolbarComponent implements OnInit {
             if (n === m) {
                 clearInterval(this.timer);
             }
-        }, 20)
+        }, 20);
     }
 }
