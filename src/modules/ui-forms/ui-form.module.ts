@@ -8,7 +8,7 @@ import { FormValidatorDirective } from './directives/form-validator.directive';
 import { InputHostDirective } from './directives/input-host.directive';
 
 import { SelectComponent } from './components/select/select.component';
-import { OptionComponent } from './components/option/option.component';
+import { OptionComponent } from './components/select/option/option.component';
 import { InputComponent } from './components/input/input.component';
 import { CheckboxComponent } from './components/input/checkbox/checkbox.component';
 import { RadioComponent } from './components/input/radio/radio.component';

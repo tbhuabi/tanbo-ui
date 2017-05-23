@@ -12,6 +12,8 @@ import { NotifyComponent } from './components/notify/notify.component';
 import { StarrySkyComponent } from './components/starry-sky/starry-sky.component';
 import { ViewLoadingBarComponent } from './components/view-loading-bar/view-loading-bar.component';
 import { ToolbarComponent } from './components/toolbar/ui-toolbar.component';
+import { SlideComponent } from './components/slide/slide.component';
+import { SlideItemComponent } from './components/slide/slide-item/slide-item.component';
 
 @NgModule({
     imports: [
@@ -28,7 +30,9 @@ import { ToolbarComponent } from './components/toolbar/ui-toolbar.component';
         NotifyComponent,
         StarrySkyComponent,
         ViewLoadingBarComponent,
-        ToolbarComponent
+        ToolbarComponent,
+        SlideComponent,
+        SlideItemComponent
     ],
     exports: [
         DropDownComponent,
@@ -39,7 +43,9 @@ import { ToolbarComponent } from './components/toolbar/ui-toolbar.component';
         NotifyComponent,
         StarrySkyComponent,
         ViewLoadingBarComponent,
-        ToolbarComponent
+        ToolbarComponent,
+        SlideComponent,
+        SlideItemComponent
     ]
 })
 export class UiComponentsModule {
