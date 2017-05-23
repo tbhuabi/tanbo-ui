@@ -119,9 +119,29 @@ export class RangeComponent implements InputType {
         let section = this.max - this.min;
         let maxWidth = this.elementRef.nativeElement.offsetWidth;
         let nowWidth = this.rangeBar.nativeElement.offsetWidth;
-        let oldX = event.clientX;
-        let mouseMoveUnbindFn = this.renderer.listen('document', 'mousemove', (ev) => {
-            let dragDistance = ev.clientX - oldX;
+
+        let eventType = event.type;
+        let moveEventType: string = '';
+        let endEventType: string = '';
+        let oldX: number;
+        if (eventType === 'mousedown') {
+            moveEventType = 'mousemove';
+            endEventType = 'mouseup';
+            oldX = event.clientX;
+        } else if (eventType === 'touchstart') {
+            moveEventType = 'touchmove';
+            endEventType = 'touchend';
+            oldX = event.touches[0].clientX;
+        }
+
+        function move(ev) {
+
+            let dragDistance: number = 0;
+            if (eventType === 'mousedown') {
+                dragDistance = ev.clientX - oldX;
+            } else if (eventType === 'touchstart') {
+                dragDistance = ev.touches[0].clientX - oldX;
+            }
             let proportion = (nowWidth + dragDistance) / maxWidth;
             let temporaryValue = Math.floor(section * proportion / this.step) * this.step;
 
@@ -134,10 +154,12 @@ export class RangeComponent implements InputType {
             if (value !== this.value) {
                 this.change.emit(value);
             }
-        });
-        let moseUpUnbindFn = this.renderer.listen('document', 'mouseup', () => {
-            mouseMoveUnbindFn();
-            moseUpUnbindFn();
+        }
+
+        let moveUnbindFn = this.renderer.listen('document', moveEventType, move.bind(this));
+        let upUnbindFn = this.renderer.listen('document', endEventType, () => {
+            moveUnbindFn();
+            upUnbindFn();
         });
     }
 }

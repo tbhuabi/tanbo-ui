@@ -15,6 +15,13 @@ ui-notify {
     top: 10%;
     margin-left: -300px;
     z-index: $notify-z-index;
+    @media (max-width: $screen-sm-min) {
+        top: 5%;
+        right: auto;
+        left: 50%;
+        margin-left: -150px;
+    }
+
     > .ui-notify {
         position: relative;
         width: 300px;

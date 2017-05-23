@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     notify() {
         let config: NotifyConfig = {
             type: 'success',
-            autoHide: true,
+            autoHide: false,
             content: '这里是内容'
         };
         this.notifyService.push(config);
