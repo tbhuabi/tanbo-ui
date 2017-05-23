@@ -1,7 +1,5 @@
-@import "../varibles";
-
 @mixin btn-size($name, $v, $h, $font-size, $radius) {
-    &.btn-#{$name} {
+    &.#{$name} {
         padding: $v $h;
         font-size: $font-size;
         @if $button-radius-is-open {
@@ -11,7 +9,7 @@
 }
 
 @mixin btn-theme($name, $color, $bg-color) {
-    &.btn-#{$name} {
+    &.#{$name} {
         color: $color;
         background-color: $bg-color;
         @if $name != default {
@@ -66,7 +64,7 @@
     &[readonly] {
         cursor: default;
     }
-    &.btn-block {
+    &.block {
         width: 100%;
         display: block;
     }

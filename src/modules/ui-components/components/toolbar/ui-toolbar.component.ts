@@ -20,6 +20,7 @@ export class ToolbarComponent implements OnInit {
         let n = 0;
         let m = 20;
         let rawDistance = this.distanceTop;
+        clearInterval(this.timer);
         this.timer = setInterval(() => {
             n++;
             let a = n / m;

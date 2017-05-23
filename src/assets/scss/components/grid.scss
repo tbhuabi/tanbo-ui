@@ -1,6 +1,3 @@
-@import "../varibles";
-@import "../mixins/clearfix";
-
 @mixin grid($class) {
     @for $i from 1 through $grid-columns {
         $width: #{$i / $grid-columns * 100};

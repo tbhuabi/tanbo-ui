@@ -1,6 +1,3 @@
-@import "../varibles";
-@import "../mixins/list-unstyled";
-
 @mixin pagination($v, $h, $radius, $font-size) {
     > .ui-pagination {
         font-size: $font-size;

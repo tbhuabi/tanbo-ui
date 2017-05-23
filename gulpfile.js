@@ -18,7 +18,8 @@ gulp.task('clean', function () {
 });
 
 gulp.task('copyFonts', ['clean'], function () {
-    return gulp.src('./src/assets/fonts/angular-ui/fonts/**.*').pipe(gulp.dest('./bundles/fonts/'));
+    gulp.src('./src/assets/fonts/angular-ui/fonts/**.*').pipe(gulp.dest('./bundles/fonts/'));
+    gulp.src('./src/assets/**/*').pipe(gulp.dest('./bundles/assets/'));
 });
 
 gulp.task('tsCompile', ['copyFonts'], function () {

@@ -1,5 +1,3 @@
-@import "../varibles";
-
 @mixin table-styles {
     &.active {
         background-color: lighten($border-color-lighter, 7);
