@@ -29,7 +29,6 @@ ui-switch {
         z-index: 2;
         border-radius: .6em;
         > .ui-switch-btn {
-            cursor: inherit;
             width: 1.2em;
             height: 1.2em;
             border-radius: .6em;
@@ -42,9 +41,15 @@ ui-switch {
             box-shadow: 0 .05em .3em rgba(0, 0, 0, .4);
             overflow: hidden;
             > button {
+                cursor: inherit;
                 width: 100%;
                 height: 100%;
                 opacity: 0;
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
             }
         }
     }
