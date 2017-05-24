@@ -1,3 +1,5 @@
 <div class="ui-input-range" #rangeBar [ngStyle]="{width: position + '%'}">
-  <button class="ui-input-range-btn" type="button" (touchstart)="drag($event)" (mousedown)="drag($event)"></button>
+  <div class="ui-input-range-btn">
+    <button type="button" (touchstart)="drag($event)" (mousedown)="drag($event)"></button>
+  </div>
 </div>

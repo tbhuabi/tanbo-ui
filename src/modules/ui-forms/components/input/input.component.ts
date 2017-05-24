@@ -53,11 +53,11 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     @Input()
     value: string = '';
     @Input()
-    max: string | number = 0;
+    max: string | number;
     @Input()
-    min: string | number = 0;
+    min: string | number;
     @Input()
-    step: string | number = 1;
+    step: string | number;
     @Input()
     checkedIcon: string;
     @Input()
