@@ -3,15 +3,14 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { UiComponentsModule, UiFormsModule, ConfirmService, NotifyService } from '../modules/index';
-import { routing } from './app.routing';
-import { Page1Component } from './page1/page1';
-import { Page2Component } from './page2/page2';
+
+import { DocViewComponent } from '../components/doc-view/doc-view';
 
 import { AppComponent } from './app';
 
 @NgModule({
     imports: [
-        routing,
+        // routing,
         FormsModule,
         UiComponentsModule,
         UiFormsModule,
@@ -19,8 +18,7 @@ import { AppComponent } from './app';
     ],
     declarations: [
         AppComponent,
-        Page1Component,
-        Page2Component
+        DocViewComponent
     ],
     providers: [
         ConfirmService,

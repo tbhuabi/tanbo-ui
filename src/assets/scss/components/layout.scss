@@ -14,4 +14,8 @@
     @media (min-width: $screen-lg-min) {
         width: $screen-lg-min;
     }
+    &-fluid {
+        padding-left: $grid-column-padding;
+        padding-right: $grid-column-padding;
+    }
 }
