@@ -4,6 +4,7 @@ import { DocViewModule } from '../doc-view-module/doc-view.module';
 import { routes } from './intro.routing';
 import { NavComponent } from './components/nav.component';
 import { IntroComponent } from './components/intro/intro.component';
+import { InstallComponent } from './components/install/install.component';
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import { IntroComponent } from './components/intro/intro.component';
     ],
     declarations: [
         NavComponent,
-        IntroComponent
+        IntroComponent,
+        InstallComponent
     ]
 })
 export class IntroModule {

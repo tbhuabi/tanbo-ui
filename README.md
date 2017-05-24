@@ -56,6 +56,7 @@ import { UiFormsModule, UiDirectivesModule, UiComponentsModule } from 'tanbo-ui'
     - `<ui-input type="checkbox|radio|range"></ui-input>`
     - `<ui-select></ui-select>`
     - `<ui-option></ui-option>`
+    - `<ui-switch></ui-switch>`
 + directives
     - **uiValidateForm** `<form #formVarible="ngForm" [uiValidateForm]="formVarible" (ngSubmit)="submit()"></form>`
     - **uiValidateModel** 
@@ -75,5 +76,7 @@ import { UiFormsModule, UiDirectivesModule, UiComponentsModule } from 'tanbo-ui'
     - `<ui-pagination [currentPage]="20" [pages]="1" (change)="doSomething($event)"></ui-notify>`
     - `<ui-starry-sky></ui-starry-sky>`
     - `<ui-view-loading-bar></ui-view-loading-bar>`
+    - `<ui-slide></ui-slide>`
+    - `<ui-slide-item></ui-slide-item>`
     
 **更详细的文档请关注近期更新，目前正在撰写gitbook**

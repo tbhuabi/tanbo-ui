@@ -1,12 +1,18 @@
-<header class="container-fluid">
-  <h1 class="brand pull-left">TanBo-UI</h1>
-  <div class="header-nav pull-left">
-    <ul class="clearfix list-unstyled">
-      <li class="pull-left"><a class="active" href="javascript:;">简介</a></li>
-      <li class="pull-left"><a href="javascript:;">UiComponentsModule</a></li>
-      <li class="pull-left"><a href="javascript:;">UiDirectivesModule</a></li>
-      <li class="pull-left"><a href="javascript:;">UiFormsModule</a></li>
-    </ul>
+<div class="container">
+  <div class="slide">
+    <ui-slide>
+      <ui-slide-item>aaaaaaa</ui-slide-item>
+      <ui-slide-item>bbbbb</ui-slide-item>
+      <ui-slide-item>ccccc</ui-slide-item>
+      <ui-slide-item>dddd</ui-slide-item>
+      <ui-slide-item>eeee</ui-slide-item>
+    </ui-slide>
   </div>
-</header>
-<router-outlet></router-outlet>
+  <p>{{model}}</p>
+  <p style="font-size: 30px">
+    <ui-switch (change)="model = $event" class="primary"></ui-switch>
+    <ui-switch class="danger"></ui-switch>
+    <ui-switch class="success"></ui-switch>
+  </p>
+
+</div>

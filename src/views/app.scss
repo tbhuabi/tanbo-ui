@@ -1,33 +1,3 @@
-header {
-    height: 50px;
-    line-height: 50px;
-    overflow: hidden;
-    background-color: #333;
-    box-shadow: 0 0 3px rgba(0, 0, 0, .3);
-    .brand {
-        color: #666;
-        margin: 0;
-    }
-    .header-nav {
-        margin-left: 40px;
-        color: #999;
-        ul {
-            margin: 0;
-            li {
-                a {
-                    display: block;
-                    color: inherit;
-                    text-decoration: none;
-                    padding: 0 20px;
-                    &:hover {
-                        color: #bbb;
-                    }
-                    &.active {
-                        color: #333;
-                        background-color: #fff;
-                    }
-                }
-            }
-        }
-    }
+.slide{
+    height: 300px;
 }

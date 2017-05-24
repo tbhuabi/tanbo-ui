@@ -2,10 +2,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [{
     path: '',
-    redirectTo: '/intro',
+    redirectTo: '/base-info',
     pathMatch: 'full'
 }, {
-    path: 'intro',
+    path: 'base-info',
     loadChildren() {
         return new Promise(resolve => {
             (require as any).ensure([], require => {
