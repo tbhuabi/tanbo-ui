@@ -14,6 +14,7 @@ import { CheckboxComponent } from './components/input/checkbox/checkbox.componen
 import { RadioComponent } from './components/input/radio/radio.component';
 import { RangeComponent } from './components/input/range/range.component';
 import { ButtonComponent } from './components/button/button.component';
+import { SwitchComponent } from './components/switch/switch.component';
 
 import { InputStateService } from './services/input-state.service';
 
@@ -30,6 +31,7 @@ import { InputStateService } from './services/input-state.service';
         RadioComponent,
         RangeComponent,
         ButtonComponent,
+        SwitchComponent,
 
         UiCheckboxRequiredValidatorDirective,
         ModelValidatorDirective,
@@ -44,6 +46,7 @@ import { InputStateService } from './services/input-state.service';
         OptionComponent,
         InputComponent,
         ButtonComponent,
+        SwitchComponent,
 
         UiCheckboxRequiredValidatorDirective,
         ModelValidatorDirective,

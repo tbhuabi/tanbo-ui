@@ -6,11 +6,25 @@
         aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</ui-slide-item>
+        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      </ui-slide-item>
 
       <ui-slide-item>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</ui-slide-item>
       <ui-slide-item>cccccccccccccccccccccccccccccccccccccccccccccccccc</ui-slide-item>
     </ui-slide>
+    <br><br>
+    <form>
+      <p style="font-size: 12px;">
+        <ui-switch class="" [(ngModel)]="open" name="aaa"></ui-switch>
+        <ui-switch class=" primary" [(ngModel)]="open" name="aaa"></ui-switch>
+        <ui-switch class=" success" [(ngModel)]="open" name="aaa"></ui-switch>
+        <ui-switch class=" info" [(ngModel)]="open" name="aaa"></ui-switch>
+        <ui-switch class=" danger" [(ngModel)]="open" name="aaa"></ui-switch>
+        <ui-switch class=" warning" [(ngModel)]="open" name="aaa"></ui-switch>
+        这是一个人
+      </p>
+    </form>
+
   </div>
   <router-outlet></router-outlet>
 </div>

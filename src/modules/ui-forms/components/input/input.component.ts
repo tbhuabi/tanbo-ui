@@ -49,21 +49,21 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     @HostBinding('class.checked')
     checked: boolean = false;
     @Input()
-    name: string;
+    name: string = '';
     @Input()
-    value: string;
+    value: string = '';
     @Input()
-    max: string | number;
+    max: string | number = 0;
     @Input()
-    min: string | number;
+    min: string | number = 0;
     @Input()
-    step: string | number;
+    step: string | number = 1;
     @Input()
     checkedIcon: string;
     @Input()
     uncheckedICon: string;
     @Input()
-    id: string;
+    id: string = '';
     @Output()
     change = new EventEmitter<any>();
 
