@@ -1,30 +1,27 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, Title }  from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { BrowserModule }  from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { ComponentsModule } from './components/components.module';
+import { UiComponentsModule, UiFormsModule, ConfirmService, NotifyService } from '../../src/modules/index';
 
-// 主组件
 import { AppComponent } from './app';
-
-import { routing } from './app.routing';
+import { routes } from './app.routing';
 
 @NgModule({
     imports: [
-        BrowserModule,
-        HttpModule,
+        RouterModule.forRoot(routes),
         FormsModule,
-        ComponentsModule,
-        routing
+        UiComponentsModule,
+        UiFormsModule,
+        BrowserModule
     ],
     declarations: [
-
-        // 页面组件
         AppComponent,
     ],
     providers: [
-        Title
+        ConfirmService,
+        NotifyService
     ],
     bootstrap: [AppComponent]
 })

@@ -1,3 +1,36 @@
 .list-unstyled {
     @include list-unstyled;
 }
+
+.list {
+    @include list-unstyled;
+    border: 1px solid $border-color-lighter;
+    > a {
+        display: block;
+        text-decoration: none;
+        padding: $list-item-vertical-padding $list-item-horizontal-padding;
+        background-color: #fff;
+        color: inherit;
+        border-bottom: 1px solid $border-color-lighter;
+        &:last-child {
+            border-bottom: none;
+        }
+        &:hover {
+            background-color: $list-item-hover-bg;
+        }
+    }
+}
+
+.list-title {
+    padding: $list-title-vertical-padding $list-title-horizontal-padding;
+    font-size: .8em;
+    line-height: 2em;
+    background-color: $border-color-lighter;
+    margin: 0;
+}
+
+.nav-list-group {
+    > .list {
+        text-indent: 1em;
+    }
+}

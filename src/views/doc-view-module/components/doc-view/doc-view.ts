@@ -18,9 +18,9 @@ const md = markdownIt({
 });
 
 @Component({
-    selector: 'doc-view',
-    templateUrl: 'doc-view.html',
-    styleUrls: ['doc-view.css']
+    selector: 'ui-doc-view',
+    templateUrl: './doc-view.html',
+    styleUrls: ['./doc-view.css']
 })
 export class DocViewComponent implements OnInit {
     showType: string = 'example';
@@ -29,6 +29,8 @@ export class DocViewComponent implements OnInit {
     styleSheetHtml: string = '';
     templateHtml: string = '';
     tsHtml: string = '';
+
+    isShowExample: boolean = true;
 
     constructor(private activatedRoute: ActivatedRoute) {
     }
@@ -40,7 +42,13 @@ export class DocViewComponent implements OnInit {
             const styleSheet = value.styleSheet || '';
             const template = value.html || '';
             const ts = value.ts || '';
+
+            this.isShowExample = styleSheet || template || ts;
             this.docHtml = md.render(doc);
+            if (!this.isShowExample) {
+                return;
+            }
+
             this.templateHtml = md.render('```html\n' + template + '\n```');
             this.tsHtml = md.render('```ts\n' + ts + '\n```');
             if (styleSheet) {

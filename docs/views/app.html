@@ -1,19 +1,14 @@
-<div class="navbar navbar-fixed-top navbar-static-top navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <span class="navbar-brand">示例-前端开发文档</span>
-    </div>
-    <div class="collapse navbar-collapse">
-      <div class="navbar-left">
-        <ul class="nav navbar-nav">
-          <li class="active" routerLinkActive="active"><a href="javascript:;" routerLink="components">组件</a></li>
-          <li routerLinkActive="active"><a href="javascript:;">指令</a></li>
-          <li routerLinkActive="active"><a href="javascript:;">服务</a></li>
-        </ul>
-      </div>
-    </div>
+<header class="container-fluid">
+  <h1 class="brand pull-left">TanBo-UI</h1>
+  <div class="header-nav pull-left">
+    <ul class="clearfix list-unstyled">
+      <li class="pull-left"><a class="active" href="javascript:;">简介</a></li>
+      <li class="pull-left"><a href="javascript:;">UiComponentsModule</a></li>
+      <li class="pull-left"><a href="javascript:;">UiDirectivesModule</a></li>
+      <li class="pull-left"><a href="javascript:;">UiFormsModule</a></li>
+    </ul>
   </div>
-</div>
-<div class="content">
+</header>
+<div class="view-container">
   <router-outlet></router-outlet>
 </div>

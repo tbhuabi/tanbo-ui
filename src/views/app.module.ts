@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { UiComponentsModule, UiFormsModule, ConfirmService, NotifyService } from '../modules/index';
 
-import { DocViewComponent } from '../components/doc-view/doc-view';
-
 import { AppComponent } from './app';
+import { routes } from './app.routing';
 
 @NgModule({
     imports: [
-        // routing,
+        RouterModule.forRoot(routes),
         FormsModule,
         UiComponentsModule,
         UiFormsModule,
@@ -18,7 +18,6 @@ import { AppComponent } from './app';
     ],
     declarations: [
         AppComponent,
-        DocViewComponent
     ],
     providers: [
         ConfirmService,

@@ -1,14 +1,16 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 
-// const routes: Routes = [{
-//     path: '',
-//     redirectTo: '/page1',
-//     pathMatch: 'full'
-// }, {
-//     path: 'page1',
-//     component: Page1Component
-// }, {
-//     path: 'page2',
-//     component: Page2Component
-// }];
-// export const routing = RouterModule.forRoot(routes);
+export const routes: Routes = [{
+    path: '',
+    redirectTo: '/intro',
+    pathMatch: 'full'
+}, {
+    path: 'intro',
+    loadChildren() {
+        return new Promise(resolve => {
+            (require as any).ensure([], require => {
+                resolve(require('./intro-module/intro.module').IntroModule);
+            });
+        });
+    }
+}];
