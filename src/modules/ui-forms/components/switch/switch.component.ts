@@ -66,6 +66,7 @@ export class SwitchComponent implements ControlValueAccessor {
         if (this.onTouched) {
             this.onTouched(this.checked);
         }
+        this.change.emit(this.checked);
     }
 
     writeValue(value: any) {
