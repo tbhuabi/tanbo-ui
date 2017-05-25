@@ -1,19 +1,30 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { RouterModule } from '@angular/router';
+import { BrowserModule, Title }  from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
+import { ComponentsModule } from './components/components.module';
+
+// 主组件
 import { AppComponent } from './app';
-import { routes } from './app.routing';
+
+import { routing } from './app.routing';
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes),
         BrowserModule,
-        BrowserAnimationsModule
+        HttpModule,
+        FormsModule,
+        ComponentsModule,
+        routing
     ],
     declarations: [
+
+        // 页面组件
         AppComponent,
+    ],
+    providers: [
+        Title
     ],
     bootstrap: [AppComponent]
 })

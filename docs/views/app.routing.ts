@@ -1,25 +1,9 @@
-import { Routes } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-export const routes: Routes = [{
+const appRoutes: Routes = [{
     path: '',
-    redirectTo: '/base-info',
+    redirectTo: 'components/date-time-picker',
     pathMatch: 'full'
-}, {
-    path: 'base-info',
-    loadChildren() {
-        return new Promise(resolve => {
-            (require as any).ensure([], require => {
-                resolve(require('./intro-module/intro.module').IntroModule);
-            });
-        });
-    }
-}, {
-    path: 'components',
-    loadChildren() {
-        return new Promise(resolve => {
-            (require as any).ensure([], require => {
-                resolve(require('./components-example-module/components-example.module').ComponentsExampleModule);
-            });
-        });
-    }
 }];
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
