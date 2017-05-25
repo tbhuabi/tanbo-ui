@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiDirectivesModule } from '../ui-directives/ui-directives.module';
 
 import { DropDownComponent } from './components/drop-down/drop-down.component';
@@ -18,7 +17,6 @@ import { SlideItemComponent } from './components/slide/slide-item/slide-item.com
 @NgModule({
     imports: [
         CommonModule,
-        BrowserAnimationsModule,
         UiDirectivesModule
     ],
     declarations: [

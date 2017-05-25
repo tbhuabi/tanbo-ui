@@ -13,4 +13,13 @@ export const routes: Routes = [{
             });
         });
     }
+}, {
+    path: 'components',
+    loadChildren() {
+        return new Promise(resolve => {
+            (require as any).ensure([], require => {
+                resolve(require('./components-example-module/components-example.module').ComponentsExampleModule);
+            });
+        });
+    }
 }];

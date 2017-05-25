@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-
-import { UiComponentsModule, UiFormsModule, ConfirmService, NotifyService } from '../../src/modules/index';
 
 import { AppComponent } from './app';
 import { routes } from './app.routing';
@@ -11,17 +9,11 @@ import { routes } from './app.routing';
 @NgModule({
     imports: [
         RouterModule.forRoot(routes),
-        FormsModule,
-        UiComponentsModule,
-        UiFormsModule,
-        BrowserModule
+        BrowserModule,
+        BrowserAnimationsModule
     ],
     declarations: [
         AppComponent,
-    ],
-    providers: [
-        ConfirmService,
-        NotifyService
     ],
     bootstrap: [AppComponent]
 })
