@@ -16,7 +16,7 @@ $view-loading-bar-z-index: 1300;
 $color-default: #333; // 基础文字颜色
 $color-primary: #4c6882; // 主色调
 $color-danger: #ed5565; // 危险操作警告颜色
-$color-info: #23c6c8; // 信息提示颜色
+$color-info: #53c8c3; // 信息提示颜色
 $color-warning: #f8ac59; // 负面操作警告颜色
 $color-success: #1ab394; // 正向操作提示颜色
 
@@ -137,6 +137,10 @@ $pre-bg: #f5f5f5;
 $pre-color: $color-default;
 $pre-border-color: #ccc;
 $pre-scrollable-max-height: 340px;
+
+// panel
+$panel-radius-is-open: $is-open-radius;
+$panel-radius: $radius-base;
 
 // 模拟radio/checkbox
 $ui-input-focus-box-shadow-color: hsla(hue($border-color-lighter), saturation($border-color-lighter), lightness($border-color-lighter), .5);

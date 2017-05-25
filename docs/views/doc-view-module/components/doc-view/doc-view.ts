@@ -39,20 +39,24 @@ export class DocViewComponent implements OnInit {
         const value = this.activatedRoute.data['value'];
         if (value) {
             const doc = value.doc || '';
-            const styleSheet = value.styleSheet || '';
-            const template = value.html || '';
+            const styleSheet = value.css || '';
             const ts = value.ts || '';
-
+            let template = value.html || '';
+            template = template.replace(/^[\s\n]*<ui-doc-view>[\s\n]*|[\s\n]*<\/ui-doc-view>[\s\n]*$/g, '');
+            template = template.replace(/^\s\s/mg, '');
             this.isShowExample = styleSheet || template || ts;
-            this.docHtml = md.render(doc);
-            if (!this.isShowExample) {
-                return;
+            if (doc) {
+                this.docHtml = md.render(doc);
             }
-
-            this.templateHtml = md.render('```html\n' + template + '\n```');
-            this.tsHtml = md.render('```ts\n' + ts + '\n```');
             if (styleSheet) {
                 this.styleSheetHtml = md.render('```scss\n' + styleSheet + '\n```');
+            }
+            if (template) {
+
+                this.templateHtml = md.render('```html\n' + template + '\n```');
+            }
+            if (ts) {
+                this.tsHtml = md.render('```ts\n' + ts + '\n```');
             }
         }
 

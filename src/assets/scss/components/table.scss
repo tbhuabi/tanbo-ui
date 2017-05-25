@@ -47,7 +47,7 @@ table.table {
     }
     &.table-striped {
         > tbody > tr {
-            &:nth-child(2n) {
+            &:nth-child(2n - 1) {
                 background-color: lighten($border-color-lighter, 8);
             }
         }

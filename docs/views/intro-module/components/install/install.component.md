@@ -3,7 +3,7 @@
 
 ## 安装前准备
 请确保你本地已安装[nodejs](http://nodejs.org)最新版本。
-请确保你项目中的angular版本不低于4.0。
+请确保你项目中的[angular](https://angular.io/)版本不低于4.0。
 如果没你还没有创建项目，可通过[quick-start-cli](https://github.com/18616392776/quick-start-cli)来快速生成一个angular的项目。
 
 ## 安装tanbo-ui

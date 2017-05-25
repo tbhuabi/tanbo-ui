@@ -1,12 +1,20 @@
-<div class="panel panel-default">
+<div class="panel">
   <div *ngIf="isShowExample" class="panel-heading">
-    <ul class="nav nav-pills">
-      <li [ngClass]="{active: showType === 'example'}"><a (click)="setShowType('example')" href="javascript:;">示例</a>
+    <ul class="tab">
+      <li class="tab-item">
+        <a class="btn" [ngClass]="showType === 'example' ? 'btn-primary' : 'btn-default'" (click)="setShowType('example')" href="javascript:;">示例</a>
       </li>
-      <li [ngClass]="{active: showType === 'ts'}"><a (click)="setShowType('ts')" href="javascript:;">TYPESCRIPT</a></li>
-      <li [ngClass]="{active: showType === 'html'}"><a (click)="setShowType('html')" href="javascript:;">HTML</a></li>
-      <li *ngIf="styleSheetHtml" [ngClass]="{active: showType === 'styleSheet'}"><a (click)="setShowType('styleSheet')"
-                                                                                    href="javascript:;">STYLESHEET</a>
+      <li class="tab-item" *ngIf="tsHtml">
+        <a class="btn" [ngClass]="showType === 'ts' ? 'btn-primary' : 'btn-default'" (click)="setShowType('ts')" href="javascript:;">TypeScript</a>
+      </li>
+      <li class="tab-item" *ngIf="templateHtml">
+        <a class="btn" [ngClass]="showType === 'html' ? 'btn-primary' : 'btn-default'" (click)="setShowType('html')" href="javascript:;">HTML</a>
+      </li>
+      <li class="tab-item" *ngIf="styleSheetHtml">
+        <a class="btn"
+           [ngClass]="showType === 'styleSheet' ? 'btn-primary' : 'btn-default'"
+           (click)="setShowType('styleSheet')"
+           href="javascript:;">StyleSheet</a>
       </li>
     </ul>
   </div>
@@ -18,8 +26,9 @@
     <div [ngClass]="{active: showType === 'html'}" [innerHTML]="templateHtml"></div>
     <div *ngIf="styleSheetHtml" [ngClass]="{active: showType === 'styleSheet'}" [innerHTML]="styleSheetHtml"></div>
   </div>
-  <div *ngIf="isShowExample" class="panel-heading">
-    <h4>文档详情</h4>
+  <div *ngIf="docHtml" class="panel-heading">
+    <h3>文档详情</h3>
   </div>
-  <div class="panel-body markdown-doc" [innerHTML]="docHtml"></div>
+  <div *ngIf="docHtml"  class="panel-body markdown-doc" [innerHTML]="docHtml"></div>
 </div>
+<br><br>

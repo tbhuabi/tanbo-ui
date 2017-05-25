@@ -39,6 +39,9 @@ module.exports = {
             test: /\.ts$/,
             use: ['awesome-typescript-loader', 'angular2-template-loader', './config/ng-hot-replacement-loader']
         }, {
+            test: /\.md$/,
+            use: ['raw-loader']
+        }, {
             test: /\.html$/,
             use: [{
                 loader: 'html-loader',

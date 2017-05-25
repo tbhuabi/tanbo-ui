@@ -42,6 +42,7 @@
     line-height: $line-height;
     text-align: center;
     padding: $button-padding-vertical $button-padding-horizontal;
+    text-decoration: none;
 
     @if $button-radius-is-open {
         border-radius: $button-radius;
@@ -64,7 +65,7 @@
     &[readonly] {
         cursor: default;
     }
-    &.block {
+    &.btn-block {
         width: 100%;
         display: block;
     }
