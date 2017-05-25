@@ -1,10 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
-export class NotifyConfig {
-    autoHide: boolean;
+export enum NotifyType {
+    Default,
+    Primary,
+    Info,
+    Warning,
+    Success,
+    Danger
+}
+
+export interface NotifyConfig {
     content: string;
-    type?: string;
+    autoHide?: boolean;
+    type?: NotifyType;
     time?: number;
 }
 

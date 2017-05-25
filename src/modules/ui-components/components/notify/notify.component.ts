@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 
-import { NotifyConfig, NotifyService } from '../../services/notify.service';
+import { NotifyConfig, NotifyService, NotifyType } from '../../services/notify.service';
 
 @Component({
     selector: 'ui-notify',
@@ -23,6 +23,14 @@ import { NotifyConfig, NotifyService } from '../../services/notify.service';
 })
 export class NotifyComponent implements OnInit {
     messageList: Array<any> = [];
+    notifyType = {
+        [NotifyType.Default]: 'default',
+        [NotifyType.Primary]: 'primary',
+        [NotifyType.Info]: 'info',
+        [NotifyType.Success]: 'success',
+        [NotifyType.Warning]: 'warning',
+        [NotifyType.Danger]: 'danger',
+    };
     private timer: any = null;
 
     constructor(private notifyService: NotifyService) {
@@ -32,7 +40,7 @@ export class NotifyComponent implements OnInit {
         this.notifyService.notify$.subscribe((config: NotifyConfig) => {
             let _config: any = {};
             _config.rawConfig = config;
-            _config.type = config.type || 'default';
+            _config.type = config.type || this.notifyType[NotifyType.Default];
             _config.content = config.content || '';
             _config.time = config.time || 5000;
             _config.autoHide = config.autoHide;
