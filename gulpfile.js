@@ -41,7 +41,7 @@ gulp.task('tsCompile', ['copyFonts'], function () {
                 cb(err);
             }
         }
-    })).pipe(tsProject())
+    })).pipe(gulp.dest('./bundles/')).pipe(tsProject())
         .pipe(gulpSourceMap.write('./maps'))
         .pipe(gulp.dest('./bundles/'));
 });
