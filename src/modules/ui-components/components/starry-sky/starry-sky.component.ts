@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 
 export interface StarrySkyLine {
     beginX: number;
@@ -19,7 +19,7 @@ export interface StarrySkyCircle {
     selector: 'ui-starry-sky',
     templateUrl: './starry-sky.component.html'
 })
-export class StarrySkyComponent implements OnInit, OnDestroy {
+export class StarrySkyComponent implements AfterViewInit, OnDestroy {
     @ViewChild('canvas')
     canvas: ElementRef;
     canvasElement: HTMLCanvasElement;
@@ -82,7 +82,7 @@ export class StarrySkyComponent implements OnInit, OnDestroy {
 
     }
 
-    ngOnInit() {
+    ngAfterViewInit() {
         this.canvasElement = this.canvas.nativeElement;
         // // 定义画布宽高和生成点的个数
         let docWidth = this.canvasElement.offsetWidth;
