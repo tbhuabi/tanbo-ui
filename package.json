@@ -1,6 +1,6 @@
 {
   "name": "tanbo-ui",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "angular components & directives & pipes ...",
   "main": "./bundles/index.js",
   "module": "./bundles/index.js",
@@ -38,8 +38,6 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
-    "bootstrap": "^3.3.7",
-    "bootstrap-sass": "^3.3.7",
     "core-js": "2.4.1",
     "normalize.css": "7.0.0",
     "rxjs": "^5.3.0",

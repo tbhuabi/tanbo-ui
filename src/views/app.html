@@ -1,24 +1,4 @@
 <div class="container">
-  <div class="slide">
-    <ui-slide>
-      <ui-slide-item>aaaaaaa</ui-slide-item>
-      <ui-slide-item>bbbbb</ui-slide-item>
-      <ui-slide-item>ccccc</ui-slide-item>
-      <ui-slide-item>dddd</ui-slide-item>
-      <ui-slide-item>eeee</ui-slide-item>
-    </ui-slide>
-  </div>
-  <p>{{model}}</p>
-  <p style="font-size: 30px">
-    <ui-switch (change)="model = $event" class="primary"></ui-switch>
-    <ui-switch class="danger"></ui-switch>
-    <ui-switch class="success"></ui-switch>
-    <ui-input type="range"></ui-input>
-    <ui-input type="range"></ui-input>
-    <ui-input type="range"></ui-input>
-    <ui-input type="range"></ui-input>
-    <ui-input type="range"></ui-input>
-    <ui-input type="range"></ui-input>
-  </p>
-
+  <button type="button" class="btn btn-primary" (click)="show()">button</button>
+  <ui-notify></ui-notify>
 </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NotifyService, NotifyType, NotifyConfig } from '../modules/index';
 
 @Component({
     selector: 'ui-app',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
     model: boolean = true;
+
+    constructor(private notifyService: NotifyService) {
+    }
+
+    show() {
+        let config: NotifyConfig = {
+            content: 'afdsafdsfdsa',
+            type: NotifyType.Danger
+        };
+        this.notifyService.push(config);
+    }
 }

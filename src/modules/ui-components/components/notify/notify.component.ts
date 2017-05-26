@@ -23,14 +23,6 @@ import { NotifyConfig, NotifyService, NotifyType } from '../../services/notify.s
 })
 export class NotifyComponent implements OnInit {
     messageList: Array<any> = [];
-    notifyType = {
-        [NotifyType.Default]: 'default',
-        [NotifyType.Primary]: 'primary',
-        [NotifyType.Info]: 'info',
-        [NotifyType.Success]: 'success',
-        [NotifyType.Warning]: 'warning',
-        [NotifyType.Danger]: 'danger',
-    };
     private timer: any = null;
 
     constructor(private notifyService: NotifyService) {
@@ -40,7 +32,28 @@ export class NotifyComponent implements OnInit {
         this.notifyService.notify$.subscribe((config: NotifyConfig) => {
             let _config: any = {};
             _config.rawConfig = config;
-            _config.type = config.type || this.notifyType[NotifyType.Default];
+            switch (config.type) {
+                case NotifyType.Default:
+                    _config.type = 'default';
+                    break;
+                case NotifyType.Primary:
+                    _config.type = 'primary';
+                    break;
+                case NotifyType.Info:
+                    _config.type = 'info';
+                    break;
+                case NotifyType.Success:
+                    _config.type = 'success';
+                    break;
+                case NotifyType.Warning:
+                    _config.type = 'warning';
+                    break;
+                case NotifyType.Danger:
+                    _config.type = 'danger';
+                    break;
+                default:
+                    _config.type = 'default';
+            }
             _config.content = config.content || '';
             _config.time = config.time || 5000;
             _config.autoHide = config.autoHide;
