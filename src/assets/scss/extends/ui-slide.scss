@@ -9,6 +9,7 @@ ui-slide {
         right: 0;
         top: 0;
         bottom: 0;
+        z-index: 1;
         > ui-slide-item {
             position: absolute;
             left: 0;
@@ -27,6 +28,8 @@ ui-slide {
         text-align: center;
         position: absolute;
         bottom: 0;
+        z-index: 2;
+        padding: 3px $grid-column-padding;
         > button {
             border: none;
             background-color: hsla(hue($color-primary), saturation($color-primary), lightness($color-primary), .3);

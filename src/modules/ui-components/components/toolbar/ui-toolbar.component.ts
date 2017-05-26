@@ -1,10 +1,13 @@
-import { Component, OnInit, Inject, HostListener } from '@angular/core';
+import { Component, OnInit, Inject, HostListener, Input } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 @Component({
     selector: 'ui-toolbar',
     templateUrl: './ui-toolbar.component.html'
 })
 export class ToolbarComponent implements OnInit {
+    @Input()
+    iconClassName: string = '';
+
     distanceTop: number = 0;
     timer: any = null;
 

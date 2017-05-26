@@ -2,5 +2,5 @@
   <ng-content select="ui-slide-item"></ng-content>
 </div>
 <div class="ui-slide-buttons">
-  <button *ngFor="let item of items; let i = index" type="button" [ngClass]="{active: i === currentIndex}"></button>
+  <button *ngFor="let item of items; let i = index" type="button" [ngClass]="{active: i === initIndex}"></button>
 </div>

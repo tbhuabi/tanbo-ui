@@ -2,7 +2,7 @@
 <div class="ui-toolbar-to-top" [ngClass]="{visible: distanceTop < 100}">
   <button class="ui-toolbar-btn" type="button" (click)="toTop()">
     <div class="ui-toolbar-icon-wrap">
-      <span class="icon icon-arrow-up"></span>
+      <span [ngClass]="iconClassName || 'icon icon-arrow-up'"></span>
     </div>
     <div class="ui-toolbar-text">
       <strong>回到顶部</strong>

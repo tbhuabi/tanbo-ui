@@ -9,7 +9,7 @@ export class SlideComponent implements AfterViewInit, OnDestroy {
     @ContentChildren(SlideItemComponent)
     items: QueryList<SlideItemComponent>;
     @Input()
-    currentIndex: number = 0;
+    initIndex: number = 0;
     @Input()
     speed: number = 2000;
 
@@ -18,7 +18,7 @@ export class SlideComponent implements AfterViewInit, OnDestroy {
     ngAfterViewInit() {
         this.items.forEach((item: SlideItemComponent, index: number) => {
             setTimeout(() => {
-                if (index === this.currentIndex) {
+                if (index === this.initIndex) {
                     item.active = true;
                     this.play();
                 } else {
@@ -31,8 +31,8 @@ export class SlideComponent implements AfterViewInit, OnDestroy {
     play() {
         clearTimeout(this.timer);
         this.timer = setTimeout(() => {
-            this.currentIndex++;
-            this.currentIndex %= this.items.length;
+            this.initIndex++;
+            this.initIndex %= this.items.length;
             this.ngAfterViewInit();
         }, this.speed);
     }
