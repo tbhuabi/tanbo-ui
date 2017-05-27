@@ -3,6 +3,8 @@ ui-select {
     display: inline-block;
     line-height: inherit;
     cursor: pointer;
+    width: 8em;
+    border: 1px solid $border-color-light;
     > ui-drop-down {
         cursor: inherit;
         position: static;

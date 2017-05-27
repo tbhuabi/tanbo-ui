@@ -1,7 +1,7 @@
 ui-button {
     @extend .btn;
     position: relative;
-    > button {
+    > .ui-button {
         position: absolute;
         left: 0;
         top: 0;
