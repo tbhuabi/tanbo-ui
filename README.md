@@ -24,27 +24,49 @@ tanbo-ui是一个基于Angular4.0的拓展包，并基于最小改动，最小�
 
 基本无需改动就可以实现功能，且支持`disabled`、`readonly`等等原生属性
 
+## 在线文档及演示
+
+**[live demo](http://www.tanboui.com)**
+
 
 ## 安装
 请确保你项目中的angular版本不低于4.0
 ```
 npm install tanbo-ui --save
 ```
-
+```typescript
 ## 在你的项目中引入tanbo-ui
 
-```typescript
-import 'tanbo-ui/bundles/tanbo-ui.min.css';
-import { UiFormsModule, UiDirectivesModule, UiComponentsModule } from 'tanbo-ui';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UiFormsModule, UiDirectivesModule, UiComponentsModule, ConfirmService, NotifyService } from 'tanbo-ui';
+
+// 这里是依赖的样式表，你也可以直接通过link标签引入
+// 如果你想自定义样式，你可以通过taobo-ui提供的scss源文件来修改其中的样式
+// scss文件目录 node_modules/tanbo-ui/bundles/assets/scss/
+import 'tanbo-ui/bundles/tanbo-ui.min.css'; 
+
 
 @NgModule({
     imports: [
         /* ..other modules.. */
         UiFormsModule,
         UiDirectivesModule,
-        UiComponentsModule
+        UiComponentsModule,
+        FormsModule, // FormsModule 一定要在 UiFormsModule 之后
+        BrowserModule,
+        BrowserAnimationsModule // UiComponentsModule 依赖动画模块
+    ],
+    providers: [
+        ConfirmService,
+        NotifyService
     ]
 })
+
+export class AppModule {
+}
 ```
 
 现在你就可以使用tanbo-ui所提供的所有功能了。当然，如果你只用到其中一个模块，也可以只导入其中一个。
@@ -79,4 +101,4 @@ import { UiFormsModule, UiDirectivesModule, UiComponentsModule } from 'tanbo-ui'
     - `<ui-slide></ui-slide>`
     - `<ui-slide-item></ui-slide-item>`
     
-**更详细的文档请关注近期更新，目前正在撰写gitbook**
+**更详细的文档请点击[http://www.tanboui.com](http://www.banboui.com)**
