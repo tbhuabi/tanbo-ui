@@ -101,4 +101,4 @@ export class AppModule {
     - `<ui-slide></ui-slide>`
     - `<ui-slide-item></ui-slide-item>`
     
-**更详细的文档请点击[http://www.tanboui.com](http://www.banboui.com)**
+**更详细的文档请点击[http://www.tanboui.com](http://www.tanboui.com)**
