@@ -21,9 +21,9 @@ export interface StarrySkyCircle {
 })
 export class StarrySkyComponent implements AfterViewInit, OnDestroy {
     @Input()
-    lineColor: string = 'rgba(26,179,148,0.2)';
+    lineColor: string = 'rgba(45,140,210,0.2)';
     @Input()
-    roundColor: string = 'rgba(26,179,148,0.1)';
+    roundColor: string = 'rgba(45,140,210,0.1)';
     @ViewChild('canvas')
     canvas: ElementRef;
     canvasElement: HTMLCanvasElement;
