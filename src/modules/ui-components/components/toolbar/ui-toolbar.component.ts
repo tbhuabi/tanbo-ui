@@ -9,28 +9,31 @@ export class ToolbarComponent implements OnInit {
     iconClassName: string = '';
 
     distanceTop: number = 0;
-    timer: any = null;
+    private animateId: any = null;
 
     constructor(@Inject(DOCUMENT) private document: Document) {
     }
 
     @HostListener('window:scroll')
     ngOnInit() {
-        this.distanceTop = this.document.body.scrollTop;
+        this.distanceTop = this.document.body.scrollTop || this.document.documentElement.scrollTop;
     }
 
     toTop() {
         let n = 0;
         let m = 20;
         let rawDistance = this.distanceTop;
-        clearInterval(this.timer);
-        this.timer = setInterval(() => {
+        let self = this;
+        cancelAnimationFrame(this.animateId);
+        function animateFn() {
             n++;
             let a = n / m;
-            this.document.body.scrollTop = rawDistance * (1 - Math.pow(a, 3));
+            self.document.body.scrollTop = self.document.documentElement.scrollTop = rawDistance * (1 - Math.pow(a, 3));
             if (n === m) {
-                clearInterval(this.timer);
+                return;
             }
-        }, 20);
+            self.animateId = requestAnimationFrame(animateFn);
+        }
+        this.animateId = requestAnimationFrame(animateFn);
     }
 }
