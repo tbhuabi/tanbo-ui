@@ -44,15 +44,10 @@ ui-pagination {
                 &:hover {
                     background-color: $pagination-hover-bg-color;
                 }
-                &:focus {
-                    background-color: darken($pagination-hover-bg-color, 2);
-                }
-                &:active {
-                    background-color: darken($pagination-hover-bg-color, 5);
-                }
                 &.active {
                     color: #fff;
                     background-color: $color-primary;
+                    border-color: $color-primary;
                     &:hover {
                         background-color: $color-primary;
                         cursor: default;

@@ -27,7 +27,7 @@ ui-notify {
         width: 300px;
         padding: 0 $grid-column-padding $grid-column-padding;
         overflow: hidden;
-        border: 1px solid $border-color-lighter;
+        border: 1px solid $color-gray-light;
         margin-bottom: 10px;
 
         @if $notify-radius-is-open {

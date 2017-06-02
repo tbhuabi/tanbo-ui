@@ -36,8 +36,8 @@ ui-confirm {
         }
         > .ui-confirm-body {
             height: $confirm-height - 64 - 46;
-            border-top: 1px solid $border-color-lighter;
-            border-bottom: 1px solid $border-color-lighter;
+            border-top: 1px solid $color-gray-light;
+            border-bottom: 1px solid $color-gray-light;
             padding: $grid-column-padding;
         }
         > .ui-confirm-footer {

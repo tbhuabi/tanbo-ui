@@ -1,10 +1,111 @@
 <div class="container">
-  <button type="button" class="btn btn-primary" (click)="show()">button</button>
-  <ui-notify></ui-notify>
-  <div style="height: 300px">
-    <ui-starry-sky></ui-starry-sky>
+  <br>
+  <div>
+    <ui-pagination [pages]="20" [currentPage]="currentPage" (change)="currentPage = $event"></ui-pagination>
   </div>
-  <ui-select class="form-control"></ui-select>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <ui-toolbar></ui-toolbar>
+  <br>
+  <ui-slide class="slide">
+    <ui-slide-item style="background-color: #f7a041;">fdsa</ui-slide-item>
+    <ui-slide-item style="background-color: #366e50;">3333</ui-slide-item>
+    <ui-slide-item style="background-color: #f7797e;">bbbb</ui-slide-item>
+  </ui-slide>
+  <br>
+  <button type="button" class="btn btn-block btn-default">button</button>
+  <br>
+  <button type="button" class="btn btn-block btn-primary">button</button>
+  <br>
+  <button type="button" class="btn btn-block btn-info">button</button>
+  <br>
+  <button type="button" class="btn btn-block btn-success">button</button>
+  <br>
+  <button type="button" class="btn btn-block btn-warning">button</button>
+  <br>
+  <button type="button" class="btn btn-block btn-danger">button</button>
+  <br>
+  <ui-select class="form-control">
+    <ui-option>fdsafd</ui-option>
+    <ui-option>fdsafd</ui-option>
+    <ui-option disabled>fdsafd</ui-option>
+    <ui-option>fdsafd</ui-option>
+    <ui-option>fdsafdffdsaf</ui-option>
+  </ui-select>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="list-group list-bordered">
+    <h4 class="list-title">组件</h4>
+    <div class="list">
+      <a href="javascript:;" routerLink="./confirm" routerLinkActive="active" class="list-item active">对话框</a>
+      <a href="javascript:;" routerLink="./drop-down" routerLinkActive="active" class="list-item">下拉框</a>
+      <a href="javascript:;" routerLink="./notify" routerLinkActive="active" class="list-item">通知</a>
+      <a href="javascript:;" routerLink="./pagination" routerLinkActive="active" class="list-item">分页</a>
+      <a href="javascript:;" routerLink="./slide" routerLinkActive="active" class="list-item">轮播图</a>
+      <a href="javascript:;" routerLink="./starry-sky" routerLinkActive="active" class="list-item">星空背景墙</a>
+      <a href="javascript:;" routerLink="./toolbar" routerLinkActive="active" class="list-item">工具条</a>
+      <a href="javascript:;" routerLink="./view-loading-bar" routerLinkActive="active" class="list-item">页面加载进度条</a>
+    </div>
+    <h4 class="list-title">服务</h4>
+    <div class="list">
+      <a href="javascript:;" routerLink="./confirm-service" routerLinkActive="active"
+         class="list-item">ConfirmService</a>
+      <a href="javascript:;" routerLink="./notify-service" routerLinkActive="active" class="list-item">NotifyService</a>
+    </div>
+  </div>
+  <input type="text" class="form-control">
+  <br>
+  <input type="text" class="form-control primary"> <br>
+  <input type="text" class="form-control info"> <br>
+  <input type="text" class="form-control success"> <br>
+  <input type="text" class="form-control warning"> <br>
+  <input type="text" class="form-control danger">
+
+  <ui-input type="radio"></ui-input>
+  <br>
+  <ui-input type="radio" class="primary"></ui-input>
+  <br>
+  <ui-input type="radio" class="info"></ui-input>
+  <br>
+  <ui-input type="radio" class="success"></ui-input>
+  <br>
+  <ui-input type="radio" class="warning"></ui-input>
+  <br>
+  <ui-input type="radio" class="danger"></ui-input>
+  <br>
+  <ui-input type="checkbox"></ui-input>
+  <br>
+  <ui-input type="checkbox" class="primary"></ui-input>
+  <br>
+  <ui-input type="checkbox" class="info"></ui-input>
+  <br>
+  <ui-input type="checkbox" class="success"></ui-input>
+  <br>
+  <ui-input type="checkbox" class="warning"></ui-input>
+  <br>
+  <ui-input type="checkbox" class="danger"></ui-input>
+  <br>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>aaa</th>
+      <th>bbb</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>aaa</td>
+      <td>bbb</td>
+    </tr>
+    <tr>
+      <td>aaa</td>
+      <td>bbb</td>
+    </tr>
+    <tr>
+      <td>aaa</td>
+      <td>bbb</td>
+    </tr>
+    </tbody>
+  </table>
 </div>

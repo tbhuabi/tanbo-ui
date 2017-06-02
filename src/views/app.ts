@@ -8,6 +8,7 @@ import { NotifyService, NotifyType, NotifyConfig } from '../modules/index';
 })
 export class AppComponent {
     model: boolean = true;
+    currentPage: number = 1;
 
     constructor(private notifyService: NotifyService) {
     }

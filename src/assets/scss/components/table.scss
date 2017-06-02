@@ -1,6 +1,6 @@
 @mixin table-styles {
     &.active {
-        background-color: lighten($border-color-lighter, 7);
+        background-color: lighten($table-border-color, 7);
     }
     &.info {
         background-color: hsla(hue($color-info), saturation($color-info), lightness($color-info), .1);
@@ -31,7 +31,7 @@ table.table {
                 @include table-styles;
                 text-align: left;
                 padding: $table-cell-padding;
-                border-bottom: 2px solid $border-color-light + 50;
+                border-bottom: 2px solid $table-border-color;
             }
         }
     }
@@ -41,21 +41,21 @@ table.table {
             > td {
                 @include table-styles;
                 padding: $table-cell-padding;
-                border-top: 1px solid $border-color-lighter;
+                border-top: 1px solid $table-border-color - 10;
             }
         }
     }
     &.table-striped {
         > tbody > tr {
             &:nth-child(2n - 1) {
-                background-color: lighten($border-color-lighter, 8);
+                background-color: lighten($table-border-color, 8);
             }
         }
     }
     &.table-hover {
         > tbody > tr {
             &:hover {
-                background-color: lighten($border-color-lighter, 5);
+                background-color: lighten($table-border-color, 5);
             }
         }
     }
@@ -69,10 +69,10 @@ table.table {
         > thead > tr > th {
             border-width: 1px 1px 2px;
             border-style: solid;
-            border-color: $border-color-lighter $border-color-lighter $border-color-light + 50;
+            border-color: $table-border-color $table-border-color $table-border-color - 10;
         }
         > tbody > tr > td {
-            border: 1px solid $border-color-lighter;
+            border: 1px solid $table-border-color;
         }
     }
 }

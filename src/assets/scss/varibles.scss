@@ -12,17 +12,25 @@ $confirm-z-index: 1200;
 $view-loading-bar-z-index: 1300;
 
 // 基础颜色
-$color-default: #333; // 基础文字颜色
-$color-primary: #4c6882; // 主色调
-$color-danger: #ed5565; // 危险操作警告颜色
-$color-info: #53c8c3; // 信息提示颜色
-$color-warning: #f8ac59; // 负面操作警告颜色
-$color-success: #1ab394; // 正向操作提示颜色
+$color-darker: #1c2438; // 标题颜色
+$color-dark: #495060; // 正文颜色
+$color-gray-dark: #80848f; // 图标、icon颜色
+$color-gray: #bbbec4; // 表单边框颜色
+$color-gray-light: #dddee1; // 内边线颜色
+$color-light: #e9eaec; // 布局边框颜色
+$color-lighter: #f8f8f9; // 背景颜色
+
+$color-default: $color-dark;
+$color-primary: #2d8cf0; // 主色调
+$color-info: #6ad1ec; // 信息提示颜色
+$color-success: #19be6b; // 正向操作提示颜色
+$color-warning: #ff9900; // 负面操作警告颜色
+$color-danger: #ed3f14; // 危险操作警告颜色
 
 // 基础线条颜色配置
-$border-color-base: lighten($color-default, 22);
-$border-color-light: lighten($border-color-base, 20);
-$border-color-lighter: lighten($border-color-light, 28);
+//$border-color-base: lighten($color-default, 22);
+//$border-color-light: lighten($border-color-base, 20);
+//$border-color-lighter: lighten($border-color-light, 28);
 
 // 栅格化配置
 $grid-columns: 12; // 栅格列数
@@ -58,7 +66,7 @@ $form-control-font-size-base: $font-size-base;
 $form-control-font-size-sm: $form-control-font-size-base - 1px;
 $form-control-font-size-lg: $form-control-font-size-base + 4px;
 
-$form-control-border-color: $border-color-light;
+$form-control-border-color: $color-gray;
 $form-control-border-color-primary: $color-primary;
 $form-control-border-color-success: $color-success;
 $form-control-border-color-info: $color-info;
@@ -109,16 +117,17 @@ $pagination-font-size-sm: $pagination-font-size - 1px;
 $pagination-font-size-xs: $pagination-font-size-sm - 1px;
 $pagination-font-size-lg: $pagination-font-size + 4px;
 
-$pagination-border-color: lighten($border-color-lighter, 5);
+$pagination-border-color: lighten($color-gray-light, 5);
 $pagination-disabled-color: darken($pagination-border-color, 15);
 $pagination-disabled-bg-color: lighten($pagination-border-color, 7);
 $pagination-hover-bg-color: lighten($pagination-border-color, 2);
 
 // 表格
 $table-cell-padding: 8px;
+$table-border-color: $color-gray-light;
 
 // 列表
-$list-item-hover-bg: #f5f5f5;
+$list-item-hover-bg: $color-lighter;
 $list-item-vertical-padding: .6em;
 $list-item-horizontal-padding: $grid-column-padding;
 $list-title-vertical-padding: .2em;
@@ -141,8 +150,10 @@ $pre-scrollable-max-height: 340px;
 $panel-radius-is-open: $is-open-radius;
 $panel-radius: $radius-base;
 
+$panel-border-color: $color-gray;
+
 // 模拟radio/checkbox
-$ui-input-focus-box-shadow-color: hsla(hue($border-color-lighter), saturation($border-color-lighter), lightness($border-color-lighter), .5);
+$ui-input-focus-box-shadow-color: hsla(hue($color-gray-light), saturation($color-gray-light), lightness($color-gray-light), .5);
 
 // confirm
 $confirm-radius-is-open: $is-open-radius;

@@ -8,7 +8,7 @@ ui-switch {
     height: 1.4em;
     width: 2.4em;
     background: none;
-    box-shadow: inset 0 0 0 0.1em $border-color-lighter - 20;
+    box-shadow: inset 0 0 0 0.1em $color-gray-light - 20;
     vertical-align: middle;
     border-radius: .7em;
     position: relative;
@@ -55,7 +55,7 @@ ui-switch {
     }
 
     &.checked {
-        @include switch-theme($border-color-light);
+        @include switch-theme($color-gray-light);
         > .ui-switch > .ui-switch-btn {
             left: 1em;
         }

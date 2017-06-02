@@ -1,4 +1,4 @@
-import { Component, ElementRef, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ElementRef, Input, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 
 export interface StarrySkyLine {
     beginX: number;
@@ -20,6 +20,10 @@ export interface StarrySkyCircle {
     templateUrl: './starry-sky.component.html'
 })
 export class StarrySkyComponent implements AfterViewInit, OnDestroy {
+    @Input()
+    lineColor: string = 'rgba(26,179,148,0.2)';
+    @Input()
+    roundColor: string = 'rgba(26,179,148,0.1)';
     @ViewChild('canvas')
     canvas: ElementRef;
     canvasElement: HTMLCanvasElement;
@@ -93,9 +97,9 @@ export class StarrySkyComponent implements AfterViewInit, OnDestroy {
         canvas.width = docWidth;
         canvas.height = docHeight;
         let context: CanvasRenderingContext2D = canvas.getContext('2d');
-        context.strokeStyle = 'rgba(26,179,148,0.2)';
+        context.strokeStyle = this.lineColor;
         context.lineWidth = 1;
-        context.fillStyle = 'rgba(26,179,148,0.1)';
+        context.fillStyle = this.roundColor;
         let circleArr = [];
 
         // 每帧绘制

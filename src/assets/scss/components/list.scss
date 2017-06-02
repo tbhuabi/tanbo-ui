@@ -4,14 +4,13 @@
 
 .list {
     @include list-unstyled;
-    border: 1px solid $border-color-lighter;
-    > a {
+    > li > a, > a {
         display: block;
         text-decoration: none;
         padding: $list-item-vertical-padding $list-item-horizontal-padding;
         background-color: #fff;
         color: inherit;
-        border-bottom: 1px solid $border-color-lighter;
+        border-bottom: 1px solid transparent;
         &:last-child {
             border-bottom: none;
         }
@@ -19,8 +18,22 @@
             background-color: $list-item-hover-bg;
         }
         &.active {
-            background-color: $color-primary;
-            color: #fff;
+            color: $color-primary;
+        }
+    }
+    &.list-bordered {
+        > li > a, > a {
+            border-width: 1px;
+            border-style: solid;
+            border-color: transparent $color-light $color-light;
+            &:first-child {
+                border-top: 1px solid $color-gray-light;
+            }
+            &.active {
+                background-color: $color-primary;
+                color: #fff;
+                border-color: $color-primary;
+            }
         }
     }
 }
@@ -29,12 +42,29 @@
     padding: $list-title-vertical-padding $list-title-horizontal-padding;
     font-size: .8em;
     line-height: 2em;
-    background-color: $border-color-lighter;
+    background-color: $color-light;
     margin: 0;
 }
 
-.nav-list-group {
+.list-group {
     > .list {
         text-indent: 1em;
+    }
+    &.list-bordered {
+        > .list {
+            > li > a, > a {
+                border-width: 1px;
+                border-style: solid;
+                border-color: transparent $color-light $color-light;
+                &:first-child {
+                    border-top: 1px solid $color-light;
+                }
+                &.active {
+                    background-color: $color-primary;
+                    color: #fff;
+                    border-color: $color-primary;
+                }
+            }
+        }
     }
 }
