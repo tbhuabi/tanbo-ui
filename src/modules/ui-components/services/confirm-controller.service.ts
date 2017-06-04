@@ -7,7 +7,7 @@ export interface ConfirmConfig {
 }
 
 @Injectable()
-export class ConfirmService {
+export class ConfirmController {
     confirmAction$: Observable<boolean>;
     confirmConfig$: Observable<ConfirmConfig>;
     confirmActionSource = new Subject<boolean>();

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { ConfirmService, ConfirmConfig } from '../../services/confirm.service';
+import { ConfirmController, ConfirmConfig } from '../../services/confirm-controller.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -40,7 +40,7 @@ export class ConfirmComponent implements OnInit, OnDestroy {
 
     private sub: Subscription;
 
-    constructor(private confirmService: ConfirmService) {
+    constructor(private confirmService: ConfirmController) {
     }
 
     ngOnInit() {

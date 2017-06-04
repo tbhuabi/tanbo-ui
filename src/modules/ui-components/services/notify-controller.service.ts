@@ -18,7 +18,7 @@ export interface NotifyConfig {
 }
 
 @Injectable()
-export class NotifyService {
+export class NotifyController {
     notify$: Observable<NotifyConfig>;
     private notifySource = new Subject<NotifyConfig>();
 

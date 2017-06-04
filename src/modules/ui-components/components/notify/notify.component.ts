@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 
-import { NotifyConfig, NotifyService, NotifyType } from '../../services/notify.service';
+import { NotifyConfig, NotifyController, NotifyType } from '../../services/notify-controller.service';
 
 @Component({
     selector: 'ui-notify',
@@ -25,7 +25,7 @@ export class NotifyComponent implements OnInit {
     messageList: Array<any> = [];
     private timer: any = null;
 
-    constructor(private notifyService: NotifyService) {
+    constructor(private notifyService: NotifyController) {
     }
 
     ngOnInit() {
