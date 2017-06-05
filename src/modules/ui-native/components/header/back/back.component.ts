@@ -1,15 +1,16 @@
 import { Component, HostListener } from '@angular/core';
-import { Location } from '@angular/common';
+
+import { NavController } from '../../../services/nav-controller';
 
 @Component({
     selector: 'ui-back',
     templateUrl: './back.component.html'
 })
 export class BackComponent {
-    constructor(private location: Location) {
+    constructor(private navController: NavController) {
     }
 
     @HostListener('click') click() {
-        this.location.back();
+        this.navController.pop();
     }
 }

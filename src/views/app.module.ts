@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { BrowserModule }  from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
 import { UiNativeModule } from '../modules/index';
-import { routes } from './app.routing';
 
 import { AppComponent } from './app';
 import { Page1Component } from './page1/page1';
@@ -14,7 +12,6 @@ import { Page3Component } from './page3/page3';
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes),
         BrowserAnimationsModule,
         FormsModule,
         UiNativeModule,
@@ -22,6 +19,11 @@ import { Page3Component } from './page3/page3';
     ],
     declarations: [
         AppComponent,
+        Page1Component,
+        Page2Component,
+        Page3Component
+    ],
+    entryComponents: [
         Page1Component,
         Page2Component,
         Page3Component

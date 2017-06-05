@@ -1,39 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
-export interface OnViewEnter {
-    uiOnViewEnter: () => any;
-}
-
-export interface OnViewLeave {
-    uiOnViewLeave: () => any;
-}
-
-interface ViewConfig {
-    component: any;
-    params: { [key: string]: any }
-}
-
 @Injectable()
-export class NavController {
-    params$: Observable<{ [key: string]: any }>;
-    private views: Array<ViewConfig> = [];
-    private paramsSource = new Subject<{ [key: string]: any }>();
+export class NavControllerService {
+    component$: Observable<any>;
+    backEvent$: Observable<any>;
+    private componentSource = new Subject<any>();
+    private backEventSource = new Subject<any>();
 
     constructor() {
-        this.params$ = this.paramsSource.asObservable();
+        this.component$ = this.componentSource.asObservable();
+        this.backEvent$ = this.backEventSource.asObservable();
     }
 
-    push(component: any, params: { [key: string]: any }) {
-        this.views.push({
-            component,
-            params
-        });
-        this.paramsSource.next(params);
+    publish(component: any) {
+        this.componentSource.next(component);
     }
 
-    pop(params: { [key: string]: any }) {
-        this.views.pop();
-        this.paramsSource.next(params);
+    pop() {
+        this.backEventSource.next();
     }
 }

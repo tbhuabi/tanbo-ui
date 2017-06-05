@@ -14,15 +14,22 @@ import { TabViewComponent } from './components/tab/tab-view/tab-view.component';
 import { TabViewItemComponent } from './components/tab/tab-view/tab-view-item/tab-view-item.component';
 import { TabBarComponent } from './components/tab/tab-bar/tab-bar.component';
 import { TabBarItemComponent } from './components/tab/tab-bar/tab-bar-item/tab-bar-item.component';
+import { RouterOutLetComponent } from './components/router-outlet/router-outlet.component';
+import { RouterOutLetItemComponent } from './components/router-outlet/router-outlet-item/router-outlet-item.component';
 
 import { TabService } from './services/tab.service';
-import { NavController } from './services/nav-controller.service';
+import { NavControllerService } from './services/nav-controller.service';
+import { NavController } from './services/nav-controller';
+
+import { ComponentHostDirective } from './directives/component-host.directive';
 
 @NgModule({
     imports: [
         CommonModule
     ],
     declarations: [
+        ComponentHostDirective,
+
         AppComponent,
         ContentComponent,
         FooterComponent,
@@ -35,7 +42,9 @@ import { NavController } from './services/nav-controller.service';
         TabViewComponent,
         TabViewItemComponent,
         TabBarComponent,
-        TabBarItemComponent
+        TabBarItemComponent,
+        RouterOutLetComponent,
+        RouterOutLetItemComponent
     ],
     exports: [
         AppComponent,
@@ -54,6 +63,7 @@ import { NavController } from './services/nav-controller.service';
     ],
     providers: [
         TabService,
+        NavControllerService,
         NavController
     ]
 })
