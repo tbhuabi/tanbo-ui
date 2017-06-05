@@ -1,9 +1,7 @@
 ui-tab-view-item {
     @include fill-box;
-    &:first-child {
-        z-index: 1;
-    }
+    display: none;
     &.active {
-        z-index: 2;
+        display: block;
     }
 }

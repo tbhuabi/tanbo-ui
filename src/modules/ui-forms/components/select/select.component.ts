@@ -2,12 +2,12 @@ import {
     Component,
     ContentChildren,
     QueryList,
-    AfterViewInit,
     Input,
     Output,
     OnDestroy,
-    EventEmitter,
+    AfterContentInit,
     ChangeDetectorRef,
+    EventEmitter,
     HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -24,7 +24,7 @@ import { OptionComponent } from './option/option.component';
         multi: true
     }]
 })
-export class SelectComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
+export class SelectComponent implements ControlValueAccessor, AfterContentInit, OnDestroy {
     @ContentChildren(OptionComponent)
     options: QueryList<OptionComponent>;
 
@@ -48,12 +48,11 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit, OnD
     private onChange: (_: any) => any;
     private onTouched: (_: any) => any;
     private subs: Array<Subscription> = [];
-    private isWrite: boolean = false;
 
     constructor(private changeDetectorRef: ChangeDetectorRef) {
     }
 
-    ngAfterViewInit() {
+    ngAfterContentInit() {
         let defaultOption: OptionComponent;
         this.options.forEach((option: OptionComponent, index: number) => {
             if (option.selected) {
@@ -79,6 +78,7 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit, OnD
                     this.onTouched(this.value);
                 }
                 this.change.emit(this.value);
+                this.changeDetectorRef.detectChanges();
             });
             this.subs.push(sub);
         });
@@ -92,12 +92,7 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit, OnD
         if (defaultOption) {
             this.value = defaultOption.value;
             this.text = defaultOption.text;
-            this.changeDetectorRef.detectChanges();
-            setTimeout(() => {
-                if (this.isWrite) {
-                    defaultOption.selected = true;
-                }
-            });
+            defaultOption.selected = true;
         }
     }
 
@@ -108,7 +103,6 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit, OnD
     }
 
     writeValue(value: any) {
-        this.isWrite = true;
         this.value = value;
         if (this.options) {
             let selectedOption: OptionComponent;
