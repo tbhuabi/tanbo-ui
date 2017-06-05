@@ -7,6 +7,8 @@ import { DOCUMENT } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
     @Input()
+    rootPage: any;
+    @Input()
     baseFontSize: number = 100;
 
     private htmlElement: HTMLElement;

@@ -16,6 +16,7 @@ import { TabBarComponent } from './components/tab/tab-bar/tab-bar.component';
 import { TabBarItemComponent } from './components/tab/tab-bar/tab-bar-item/tab-bar-item.component';
 
 import { TabService } from './services/tab.service';
+import { NavController } from './services/nav-controller.service';
 
 @NgModule({
     imports: [
@@ -52,7 +53,8 @@ import { TabService } from './services/tab.service';
         TabBarItemComponent
     ],
     providers: [
-        TabService
+        TabService,
+        NavController
     ]
 })
 export class UiNativeModule {
