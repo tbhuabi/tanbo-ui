@@ -28,15 +28,17 @@ tanbo-ui是一个基于Angular4.0的拓展包，并基于最小改动，最小�
 
 **[live demo](http://www.tanboui.com)**
 
+## 更新日志
+[CHANGELOG.md](./CHANGELOG.md)
 
 ## 安装
 请确保你项目中的angular版本不低于4.0
 ```
 npm install tanbo-ui --save
 ```
-```typescript
-## 在你的项目中引入tanbo-ui
 
+## 在你的项目中引入tanbo-ui
+```typescript
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -64,8 +66,16 @@ import 'tanbo-ui/bundles/tanbo-ui.min.css';
 export class AppModule {
 }
 ```
+## 在根组件志明`<ui-app></ui-app>`组件
+```html
+<!-- app.component.html -->
 
+<ui-app>
+  <!-- your code ... -->
+</ui-app>
+```
 现在你就可以使用tanbo-ui所提供的所有功能了。当然，如果你只用到其中一个模块，也可以只导入其中一个。
+**声明`ui-app`组件主要是因为这里面封装了notify、confirm等功能，如果你不需要相应功能，也可以不声明**
 
 ## 主要功能概览
 
@@ -89,8 +99,6 @@ export class AppModule {
     - `<ui-toolbar></ui-toolbar>`
     - `<ui-drop-down-fixed></ui-drop-down-fixed>`
     - `<ui-drop-down-menu></ui-drop-down-menu>`
-    - `<ui-confirm></ui-confirm>`
-    - `<ui-notify></ui-notify>`
     - `<ui-pagination [currentPage]="20" [pages]="1" (change)="doSomething($event)"></ui-notify>`
     - `<ui-starry-sky></ui-starry-sky>`
     - `<ui-view-loading-bar></ui-view-loading-bar>`
