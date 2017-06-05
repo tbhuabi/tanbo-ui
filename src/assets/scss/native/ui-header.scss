@@ -1,6 +1,8 @@
 ui-header {
     height: $header-height;
-    display: block;
     background-color: $header-bg;
     border-bottom: $header-border-bottom;
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
 }

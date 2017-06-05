@@ -1,23 +1,4 @@
-@import "~normalize.css/normalize.css";
-
-@import "mixins/clearfix";
-@import "mixins/list-unstyled";
-
-@import "components/base";
-@import "components/buttons";
-@import "components/color";
-@import "components/code";
-@import "components/float";
-@import "components/forms";
-@import "components/grid";
-@import "components/help";
-@import "components/layout";
-@import "components/list";
-@import "components/panel";
-@import "components/table";
-@import "components/tabs";
-@import "components/text";
-@import "components/title";
+@import "common";
 
 // 扩展样式主要用于各个组件搭配使用时，样式不符合预期的修改
 @import "extends/ui-app";

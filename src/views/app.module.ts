@@ -3,7 +3,7 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
-import { UiFormsModule } from '../modules/index';
+import { UiNativeModule } from '../modules/index';
 
 import { AppComponent } from './app';
 
@@ -11,7 +11,7 @@ import { AppComponent } from './app';
     imports: [
         BrowserAnimationsModule,
         FormsModule,
-        UiFormsModule,
+        UiNativeModule,
         BrowserModule
     ],
     declarations: [

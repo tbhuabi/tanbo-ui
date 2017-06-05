@@ -17,7 +17,7 @@ export class TabViewComponent implements AfterContentInit {
         this.tabService.tabIndex$.subscribe((index: number) => {
             this.tabViewItems.forEach((item: TabViewItemComponent, i: number) => {
                 item.isActive = i === index;
-            })
+            });
         });
         let items = this.tabViewItems.toArray();
         if (items[0]) {
