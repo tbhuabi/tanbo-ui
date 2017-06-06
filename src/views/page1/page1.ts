@@ -5,7 +5,6 @@ import { NavController } from '../../modules/index';
 import { Page2Component } from '../page2/page2';
 
 @Component({
-    selector: 'ui-page1',
     templateUrl: './page1.html'
 })
 export class Page1Component {

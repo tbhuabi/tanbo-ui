@@ -30,7 +30,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.navControllerService.publish(this.component);
+        if (this.component) {
+            this.navControllerService.publish(this.component);
+        }
     }
 
     @HostListener('window:resize') resize() {

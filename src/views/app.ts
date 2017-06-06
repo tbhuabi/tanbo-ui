@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Page1Component } from './page1/page1';
-
-// import { Page3Component } from './page3/page3';
+import { TabComponent } from './tab/tab';
 
 @Component({
     selector: 'ui-test',
@@ -10,5 +9,5 @@ import { Page1Component } from './page1/page1';
     styleUrls: ['./app.scss']
 })
 export class AppComponent {
-    rootPage: any = Page1Component;
+    rootPage: any = TabComponent;
 }
