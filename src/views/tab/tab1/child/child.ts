@@ -22,6 +22,6 @@ export class ChildComponent {
     toPage2() {
         this.pageTransferStationService.push({
             component: Page1Component
-        })
+        });
     }
 }

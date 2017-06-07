@@ -103,12 +103,12 @@ export class RouterOutLetComponent implements OnInit {
             this.lifeCycleService.publishEvent({
                 component: item.component,
                 type: EventType.Enter
-            })
+            });
         } else if (['outLeft', 'outRight'].indexOf(item.state) !== -1) {
             this.lifeCycleService.publishEvent({
                 component: item.component,
                 type: EventType.Leave
-            })
+            });
         }
     }
 }

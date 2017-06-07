@@ -4,6 +4,6 @@ export enum EventType {
 }
 
 export interface Event {
-    type: EventType,
-    component: any
+    type: EventType;
+    component: any;
 }

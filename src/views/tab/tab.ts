@@ -12,7 +12,6 @@ export class TabComponent implements OnInit, OnViewEnter, OnViewLeave {
     page = ChildComponent;
     page2 = Child3Component;
 
-
     constructor(private pageTransferStationService: PageTransferStationService, private nav: NavController) {
     }
 

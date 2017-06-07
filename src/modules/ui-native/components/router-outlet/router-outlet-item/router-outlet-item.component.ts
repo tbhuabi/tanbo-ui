@@ -50,7 +50,7 @@ export class RouterOutLetItemComponent implements AfterContentInit, OnInit {
                     }
                     break;
             }
-        })
+        });
     }
 
     ngAfterContentInit() {
