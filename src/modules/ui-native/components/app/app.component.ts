@@ -5,7 +5,7 @@ import { NavigationService } from '../../services/navigation.service';
 import { RouterOutLetComponent } from '../router-outlet/router-outlet.component';
 
 @Component({
-    selector: 'ui-app',
+    selector: 'ui-native-app',
     templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit, AfterViewInit {

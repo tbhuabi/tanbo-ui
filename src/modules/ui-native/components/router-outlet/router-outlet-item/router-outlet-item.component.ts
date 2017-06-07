@@ -10,7 +10,7 @@ import {
 import { RouterOutLetComponent } from '../router-outlet.component';
 import { ComponentHostDirective } from '../../../directives/component-host.directive';
 import { NavController } from '../../../providers/navigation-controller';
-import { NavTest } from '../../../providers/nav-test';
+import { NavControllerBase } from '../../../providers/navigation-controller-base';
 
 @Component({
     selector: 'ui-router-outlet-item',
@@ -30,7 +30,7 @@ export class RouterOutLetItemComponent implements AfterContentInit {
     ngAfterContentInit() {
         const componentProviders = ReflectiveInjector.resolveAndCreate([{
             provide: NavController,
-            useValue: new NavTest(this.host, this.host.navigationService)
+            useValue: new NavControllerBase(this.host, this.host.navigationService)
         }], this.componentHost.viewContainerRef.injector);
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.component);
         this.componentHost.viewContainerRef.createComponent(componentFactory, 0, componentProviders);
