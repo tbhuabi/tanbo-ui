@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-// import { Page1Component } from './page1/page1';
 import { TabComponent } from './tab/tab';
 
 @Component({

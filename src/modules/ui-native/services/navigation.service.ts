@@ -10,21 +10,20 @@ export class NavigationService {
 
     private componentSource = new Subject<any>();
     private popEventSource = new Subject<any>();
-    private activateView: any;
 
     constructor() {
         this.component$ = this.componentSource.asObservable();
         this.popEvent$ = this.popEventSource.asObservable();
     }
 
-    publish(component: any, outlet?: RouterOutLetComponent) {
+    publish(component: any, outlet: RouterOutLetComponent) {
         this.componentSource.next({
             component,
             activateView: outlet
         });
     }
 
-    pop() {
-        this.popEventSource.next(this.activateView);
+    pop(host: RouterOutLetComponent) {
+        this.popEventSource.next(host);
     }
 }

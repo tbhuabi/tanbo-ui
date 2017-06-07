@@ -19,7 +19,7 @@ import { RouterOutLetItemComponent } from './components/router-outlet/router-out
 
 import { TabService } from './services/tab.service';
 import { NavigationService } from './services/navigation.service';
-import { NavController } from './providers/navigation-controller';
+// import { NavController } from './providers/navigation-controller';
 
 import { ComponentHostDirective } from './directives/component-host.directive';
 
@@ -64,7 +64,7 @@ import { ComponentHostDirective } from './directives/component-host.directive';
     providers: [
         TabService,
         NavigationService,
-        NavController
+        // NavController
     ]
 })
 export class UiNativeModule {

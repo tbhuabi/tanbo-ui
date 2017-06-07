@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 
 import { UiNativeModule } from '../modules/index';
 
+import { PageTransferStationService } from '../services/page-transfer-station';
+
 import { AppComponent } from './app';
 import { Page1Component } from './page1/page1';
 import { Page2Component } from './page2/page2';
@@ -43,7 +45,10 @@ import { Child4Component } from './tab/tab2/child2/child2';
         Child3Component,
         Child4Component
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    providers: [
+        PageTransferStationService
+    ]
 })
 export class AppModule {
 }

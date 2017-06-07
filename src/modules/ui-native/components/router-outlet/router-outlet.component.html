@@ -1,6 +1,7 @@
 <ui-router-outlet-item
         [@routerAnimations]="item.state"
         [component]="item.component"
+        [host]="self"
         (@routerAnimations.done)="destroy()"
         *ngFor="let item of views">
 

@@ -1,6 +1,16 @@
-import { Component, Input, ComponentFactoryResolver, ViewChild, AfterContentInit } from '@angular/core';
+import {
+    Component,
+    Input,
+    ComponentFactoryResolver,
+    ViewChild,
+    AfterContentInit,
+    ReflectiveInjector
+} from '@angular/core';
 
+import { RouterOutLetComponent } from '../router-outlet.component';
 import { ComponentHostDirective } from '../../../directives/component-host.directive';
+import { NavController } from '../../../providers/navigation-controller';
+import { NavTest } from '../../../providers/nav-test';
 
 @Component({
     selector: 'ui-router-outlet-item',
@@ -9,6 +19,8 @@ import { ComponentHostDirective } from '../../../directives/component-host.direc
 export class RouterOutLetItemComponent implements AfterContentInit {
     @Input()
     component: any;
+    @Input()
+    host: RouterOutLetComponent;
     @ViewChild(ComponentHostDirective)
     componentHost: ComponentHostDirective;
 
@@ -16,8 +28,11 @@ export class RouterOutLetItemComponent implements AfterContentInit {
     }
 
     ngAfterContentInit() {
-        let componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.component);
-        let i = this.componentHost.viewContainerRef.createComponent(componentFactory);
-        console.log(i);
+        const componentProviders = ReflectiveInjector.resolveAndCreate([{
+            provide: NavController,
+            useValue: new NavTest(this.host, this.host.navigationService)
+        }], this.componentHost.viewContainerRef.injector);
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.component);
+        this.componentHost.viewContainerRef.createComponent(componentFactory, 0, componentProviders);
     }
 }

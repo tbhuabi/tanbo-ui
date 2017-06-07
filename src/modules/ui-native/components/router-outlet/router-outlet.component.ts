@@ -53,12 +53,14 @@ import { NavigationService } from '../../services/navigation.service';
 })
 export class RouterOutLetComponent implements OnInit {
     views: Array<any> = [];
+    self: RouterOutLetComponent;
 
-    constructor(private navControllerService: NavigationService) {
+    constructor(public navigationService: NavigationService) {
+        this.self = this;
     }
 
     ngOnInit() {
-        this.navControllerService.component$.subscribe((viewConfig: any) => {
+        this.navigationService.component$.subscribe((viewConfig: any) => {
             if (viewConfig.activateView !== this) {
                 return;
             }
@@ -71,7 +73,7 @@ export class RouterOutLetComponent implements OnInit {
             });
         });
 
-        this.navControllerService.popEvent$.subscribe((activateView: any) => {
+        this.navigationService.popEvent$.subscribe((activateView: any) => {
             if (activateView !== this) {
                 return;
             }
