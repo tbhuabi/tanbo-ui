@@ -3,7 +3,7 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
-import { UiNativeModule } from '../modules/index';
+import { UiNativeModule, UiComponentsModule } from '../modules/index';
 
 import { PageTransferStationService } from '../services/page-transfer-station';
 
@@ -22,7 +22,8 @@ import { Child4Component } from './tab/tab2/child2/child2';
         BrowserAnimationsModule,
         FormsModule,
         UiNativeModule,
-        BrowserModule
+        BrowserModule,
+        UiComponentsModule
     ],
     declarations: [
         AppComponent,

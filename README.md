@@ -96,7 +96,7 @@ export class AppModule {
     + `<ui-tab-view-item></ui-tab-view-item>`
     
 + service
-    `NavController`
+    + `NavController`
 
 + 生命周期勾子
     + `OnViewEnter`
