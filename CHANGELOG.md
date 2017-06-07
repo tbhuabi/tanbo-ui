@@ -1,3 +1,33 @@
+## 1.4.0
+### 破坏性更改
+`UiComponentModule`下的`ui-button`组件改为`ui-loading-button`（原`ui-button`组件移到`UiNativeModule`下）  
+
+### 新增功能
+`UiNativeModule`基本功能完成，添加了如下组件及功能：
+
+#### 组件
++ `<ui-native-app></ui-native-app>`
++ `<ui-content></ui-content>`
++ `<ui-footer></ui-footer>`
++ `<ui-header></ui-header>`
++ `<ui-back></ui-back>`
++ `<ui-button></ui-button>`
++ `<ui-title></ui-title>`
++ `<ui-page></ui-page>`
++ `<ui-tab></ui-tab>`
++ `<ui-tab-bar></ui-tab-bar>`
++ `<ui-tab-bar-item></ui-tab-bar-item>`
++ `<ui-tab-view></ui-tab-view>`
++ `<ui-tab-view-item></ui-tab-view-item>`
+
+#### 服务
++ `NavController`
+
+#### 生命周期勾子
++ `OnViewEnter`
++ `OnViewLeave`
+
+
 ## 1.3.0
 
 ### 破坏性更改
@@ -6,9 +36,10 @@
 
 ### 新增的功能
 
++ 增加了`<ui-app></ui-app>`组件
 + 增加了NativeModule，（开发中，不可使用）
 + 增加了CHANGELOG.md
 
 ## 1.2.2
 
-### 添加项目在线文档
+添加项目在线文档
