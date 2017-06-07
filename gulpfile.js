@@ -64,7 +64,7 @@ gulp.task('nativeScss', ['copyFonts'], function () {
         .pipe(gulpSass())
         .pipe(gulpAutoPrefix())
         .pipe(gulpConcat({
-            path: require('./package.json').name + '.min.css'
+            path: require('./package.json').name + '-native.min.css'
         }))
         .pipe(gulpCssMin())
         .pipe(gulpSourceMap.write('./maps'))
