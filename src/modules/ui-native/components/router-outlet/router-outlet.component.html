@@ -3,6 +3,6 @@
         [component]="item.component"
         [host]="self"
         (@routerAnimations.done)="destroy()"
+        (@routerAnimations.start)="lifeCycle(item)"
         *ngFor="let item of views">
-
 </ui-router-outlet-item>

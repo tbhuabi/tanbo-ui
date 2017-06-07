@@ -4,8 +4,8 @@ import { RouterOutLetComponent } from '../components/router-outlet/router-outlet
 import { NavigationService } from '../services/navigation.service';
 
 export class NavControllerBase extends NavController {
-    private host: RouterOutLetComponent;
-    private navigationService: NavigationService;
+    private readonly host: RouterOutLetComponent;
+    private readonly navigationService: NavigationService;
     private params: any;
 
     constructor(host: RouterOutLetComponent, navigationService: NavigationService) {

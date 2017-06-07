@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, style, state, animate, transition, keyframes } from '@angular/animations';
 
 import { NavigationService } from '../../services/navigation.service';
+import { LifeCycleService } from '../../services/life-cycle.service';
+import { EventType } from '../../utils/event';
 
 @Component({
     selector: 'ui-router-outlet',
@@ -55,7 +57,8 @@ export class RouterOutLetComponent implements OnInit {
     views: Array<any> = [];
     self: RouterOutLetComponent;
 
-    constructor(public navigationService: NavigationService) {
+    constructor(public navigationService: NavigationService,
+                private lifeCycleService: LifeCycleService) {
         this.self = this;
     }
 
@@ -92,6 +95,20 @@ export class RouterOutLetComponent implements OnInit {
         let lastItem = this.views[this.views.length - 1];
         if (lastItem && lastItem.state === 'outRight') {
             this.views.pop();
+        }
+    }
+
+    lifeCycle(item: any) {
+        if (['inLeft', 'inRight', ''].indexOf(item.state) !== -1) {
+            this.lifeCycleService.publishEvent({
+                component: item.component,
+                type: EventType.Enter
+            })
+        } else if (['outLeft', 'outRight'].indexOf(item.state) !== -1) {
+            this.lifeCycleService.publishEvent({
+                component: item.component,
+                type: EventType.Leave
+            })
         }
     }
 }

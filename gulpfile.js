@@ -45,7 +45,7 @@ gulp.task('tsCompile', ['copyFonts'], function () {
         .pipe(gulpSourceMap.write('./maps'))
         .pipe(gulp.dest('./bundles/'));
 });
-gulp.task('scss', ['copyFonts'], function () {
+gulp.task('baseScss', ['copyFonts'], function () {
     return gulp.src(['./src/assets/scss/index.scss', './src/assets/fonts/angular-ui/style.css', './node_modules/normalize.css/normalize.css'])
         .pipe(gulpSourceMap.init())
         .pipe(gulpSass())
@@ -58,5 +58,17 @@ gulp.task('scss', ['copyFonts'], function () {
         .pipe(gulp.dest('./bundles'));
 });
 
+gulp.task('nativeScss', ['copyFonts'], function () {
+    return gulp.src(['./src/assets/scss/native-index.scss'])
+        .pipe(gulpSourceMap.init())
+        .pipe(gulpSass())
+        .pipe(gulpAutoPrefix())
+        .pipe(gulpConcat({
+            path: require('./package.json').name + '.min.css'
+        }))
+        .pipe(gulpCssMin())
+        .pipe(gulpSourceMap.write('./maps'))
+        .pipe(gulp.dest('./bundles'));
+});
 
-gulp.task('default', ['tsCompile', 'scss']);
+gulp.task('default', ['tsCompile', 'baseScss', 'nativeScss']);
