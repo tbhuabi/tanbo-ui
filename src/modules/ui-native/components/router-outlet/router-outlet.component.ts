@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, style, state, animate, transition, keyframes } from '@angular/animations';
 
-import { NavControllerService } from '../../services/nav-controller.service';
+import { NavigationService } from '../../services/navigation.service';
 
 @Component({
     selector: 'ui-router-outlet',
@@ -52,18 +52,12 @@ import { NavControllerService } from '../../services/nav-controller.service';
     ])))])]
 })
 export class RouterOutLetComponent implements OnInit {
-    @Input()
-    defaultPage: any;
     views: Array<any> = [];
 
-    constructor(private navControllerService: NavControllerService) {
+    constructor(private navControllerService: NavigationService) {
     }
 
     ngOnInit() {
-        this.views.push({
-            component: this.defaultPage,
-            state: ''
-        });
         this.navControllerService.component$.subscribe((viewConfig: any) => {
             if (viewConfig.activateView !== this) {
                 return;
@@ -73,7 +67,7 @@ export class RouterOutLetComponent implements OnInit {
             });
             this.views.push({
                 component: viewConfig.component,
-                state: 'inRight'
+                state: this.views.length ? 'inRight' : ''
             });
         });
 

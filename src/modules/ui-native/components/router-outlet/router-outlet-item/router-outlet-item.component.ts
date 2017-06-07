@@ -17,6 +17,7 @@ export class RouterOutLetItemComponent implements AfterContentInit {
 
     ngAfterContentInit() {
         let componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.component);
-        this.componentHost.viewContainerRef.createComponent(componentFactory);
+        let i = this.componentHost.viewContainerRef.createComponent(componentFactory);
+        console.log(i);
     }
 }

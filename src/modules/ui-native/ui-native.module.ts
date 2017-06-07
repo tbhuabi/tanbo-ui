@@ -18,8 +18,8 @@ import { RouterOutLetComponent } from './components/router-outlet/router-outlet.
 import { RouterOutLetItemComponent } from './components/router-outlet/router-outlet-item/router-outlet-item.component';
 
 import { TabService } from './services/tab.service';
-import { NavControllerService } from './services/nav-controller.service';
-import { NavController } from './services/nav-controller';
+import { NavigationService } from './services/navigation.service';
+import { NavController } from './providers/navigation-controller';
 
 import { ComponentHostDirective } from './directives/component-host.directive';
 
@@ -63,7 +63,7 @@ import { ComponentHostDirective } from './directives/component-host.directive';
     ],
     providers: [
         TabService,
-        NavControllerService,
+        NavigationService,
         NavController
     ]
 })

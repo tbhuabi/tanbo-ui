@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 
-import { NavControllerService } from './nav-controller.service';
+import { NavigationService } from '../services/navigation.service';
 
 @Injectable()
 export class NavController {
     private params: any;
+    // abstract push(component: any, params?: { [key: string]: any }) : void;
 
-    constructor(private navControllerService: NavControllerService) {
-    };
+    constructor(public navigationService: NavigationService) {
+    }
 
     push(component: any, params?: { [key: string]: any }) {
         this.params = params;
-        this.navControllerService.publish(component);
+        this.navigationService.publish(component);
     }
 
     pop() {
-        this.navControllerService.pop();
+        this.navigationService.pop();
     }
 
     getParam(key: string) {

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
+import { RouterOutLetComponent } from '../components/router-outlet/router-outlet.component';
+
 @Injectable()
-export class NavControllerService {
+export class NavigationService {
     component$: Observable<any>;
     popEvent$: Observable<any>;
 
@@ -15,18 +17,14 @@ export class NavControllerService {
         this.popEvent$ = this.popEventSource.asObservable();
     }
 
-    publish(component: any) {
+    publish(component: any, outlet?: RouterOutLetComponent) {
         this.componentSource.next({
             component,
-            activateView: this.activateView
+            activateView: outlet
         });
     }
 
     pop() {
         this.popEventSource.next(this.activateView);
-    }
-
-    setActivateView(component: any) {
-        this.activateView = component;
     }
 }
