@@ -79,6 +79,29 @@ export class AppModule {
 
 ## 主要功能概览
 
+### UiNativeModule
++ components
+    + `<ui-native-app></ui-native-app>`
+    + `<ui-content></ui-content>`
+    + `<ui-footer></ui-footer>`
+    + `<ui-header></ui-header>`
+    + `<ui-back></ui-back>`
+    + `<ui-button></ui-button>`
+    + `<ui-title></ui-title>`
+    + `<ui-page></ui-page>`
+    + `<ui-tab></ui-tab>`
+    + `<ui-tab-bar></ui-tab-bar>`
+    + `<ui-tab-bar-item></ui-tab-bar-item>`
+    + `<ui-tab-view></ui-tab-view>`
+    + `<ui-tab-view-item></ui-tab-view-item>`
+    
++ service
+    `NavController`
+
++ 生命周期勾子
+    + `OnViewEnter`
+    + `OnViewLeave`
+
 ### UiFormsModule
 + components
     - `<ui-input type="checkbox|radio|range"></ui-input>`
