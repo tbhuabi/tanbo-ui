@@ -5,19 +5,19 @@ import { RouterOutLetComponent } from '../components/router-outlet/router-outlet
 
 @Injectable()
 export class NavigationService {
-    component$: Observable<any>;
+    view$: Observable<any>;
     popEvent$: Observable<any>;
 
-    private componentSource = new Subject<any>();
+    private viewSource = new Subject<any>();
     private popEventSource = new Subject<any>();
 
     constructor() {
-        this.component$ = this.componentSource.asObservable();
+        this.view$ = this.viewSource.asObservable();
         this.popEvent$ = this.popEventSource.asObservable();
     }
 
     publish(component: any, outlet: RouterOutLetComponent) {
-        this.componentSource.next({
+        this.viewSource.next({
             component,
             activateView: outlet
         });

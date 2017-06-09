@@ -63,7 +63,7 @@ export class RouterOutLetComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.navigationService.component$.subscribe((viewConfig: any) => {
+        this.navigationService.view$.subscribe((viewConfig: any) => {
             if (viewConfig.activateView !== this) {
                 return;
             }
