@@ -11,7 +11,7 @@ import { EventType } from '../../utils/event';
     animations: [trigger('routerAnimations', [state('outLeft', style({
         transform: 'translateX(-50%)',
         opacity: 0
-    })), transition('* => inRight', animate('300ms ease-out', keyframes([
+    })), transition('* => inRight', animate('250ms ease-out', keyframes([
         style({
             transform: 'translateX(100%)',
             offset: 0
@@ -20,7 +20,7 @@ import { EventType } from '../../utils/event';
             transform: 'translateX(0)',
             offset: 1
         })
-    ]))), transition('* => inLeft', animate('300ms ease-out', keyframes([
+    ]))), transition('* => inLeft', animate('250ms ease-out', keyframes([
         style({
             opacity: 0.5,
             transform: 'translateX(-50%)',
@@ -31,7 +31,7 @@ import { EventType } from '../../utils/event';
             transform: 'translateX(0)',
             offset: 1
         })
-    ]))), transition('* => outRight', animate('300ms ease-out', keyframes([
+    ]))), transition('* => outRight', animate('250ms ease-out', keyframes([
         style({
             transform: 'translateX(0)',
             offset: 0
@@ -40,7 +40,7 @@ import { EventType } from '../../utils/event';
             transform: 'translateX(100%)',
             offset: 1
         })
-    ]))), transition('* => outLeft', animate('300ms ease-out', keyframes([
+    ]))), transition('* => outLeft', animate('250ms ease-out', keyframes([
         style({
             opacity: 1,
             transform: 'translateX(0)',
