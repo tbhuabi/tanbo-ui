@@ -71,7 +71,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     @Input()
     uncheckedICon: string;
     @Input()
-    id: string = '';
+    forId: string = '';
+    @Input()
+    placeholder: string = '';
     @Output()
     change = new EventEmitter<any>();
 
@@ -204,6 +206,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
             this.componentInstance.mixDate = this.maxDate;
             this.componentInstance.minDate = this.minDate;
             this.componentInstance.format = this.format;
+            this.componentInstance.placeholder = this.placeholder;
         }
 
     }

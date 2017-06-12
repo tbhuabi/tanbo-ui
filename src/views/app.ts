@@ -9,4 +9,5 @@ import { TabComponent } from './tab/tab';
 })
 export class AppComponent {
     rootPage: any = TabComponent;
+    date: string = '';
 }

@@ -39,8 +39,9 @@ export class DateComponent implements OnInit, InputType {
     }
 
     @Input()
+    placeholder: string = '';
+    @Input()
     value: string;
-
     @Input()
     format: string = '';
     @Output()
