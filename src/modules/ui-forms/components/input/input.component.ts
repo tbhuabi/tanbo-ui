@@ -21,6 +21,7 @@ import { InputStateService } from '../../services/input-state.service';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { RadioComponent } from './radio/radio.component';
 import { RangeComponent } from './range/range.component';
+import { DateComponent } from './date/date.component';
 
 import { InputType } from '../../utils/input-type';
 
@@ -30,7 +31,8 @@ import { InputType } from '../../utils/input-type';
     entryComponents: [
         CheckboxComponent,
         RadioComponent,
-        RangeComponent
+        RangeComponent,
+        DateComponent
     ],
     providers: [{
         provide: NG_VALUE_ACCESSOR,
@@ -53,6 +55,12 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     @Input()
     value: string = '';
     @Input()
+    format: string;
+    @Input()
+    maxDate: string;
+    @Input()
+    minDate: string;
+    @Input()
     max: string | number;
     @Input()
     min: string | number;
@@ -72,6 +80,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     @ViewChild('rawInput')
     rawInput: ElementRef;
 
+    @HostBinding('class.focus')
+    state: boolean;
+
     @Input()
     set type(inputType: string) {
         this._type = inputType;
@@ -87,6 +98,11 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
             case 'range':
                 this.inputComponentFactory = this.componentFactoryResolver.resolveComponentFactory(RangeComponent);
                 this.renderInputComponent();
+                break;
+            case 'date':
+                this.inputComponentFactory = this.componentFactoryResolver.resolveComponentFactory(DateComponent);
+                this.renderInputComponent();
+                break;
         }
     }
 
@@ -100,15 +116,14 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     private onTouched: (_: any) => any;
     private inputComponentFactory: ComponentFactory<InputType>;
     private componentInstance: any;
-    private sub: Subscription;
-    private inputStateSub: Subscription;
+    private subs: Array<Subscription> = [];
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private inputStateService: InputStateService) {
     }
 
     ngOnInit() {
-        this.inputStateSub = this.inputStateService.state$.subscribe((c: any) => {
+        let inputStateSub = this.inputStateService.state$.subscribe((c: any) => {
             switch (this.type) {
                 case 'checkbox':
                     break;
@@ -119,6 +134,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
                     break;
             }
         });
+        this.subs.push(inputStateSub);
     }
 
     ngOnChanges() {
@@ -126,12 +142,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
     }
 
     ngOnDestroy() {
-        if (this.inputStateSub) {
-            this.inputStateSub.unsubscribe();
-        }
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
+        this.subs.forEach((item: Subscription) => item.unsubscribe());
     }
 
     renderInputComponent() {
@@ -140,7 +151,11 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
         viewContainerRef.clear();
         let componentRef = viewContainerRef.createComponent(this.inputComponentFactory);
         this.componentInstance = (<InputType> componentRef.instance);
-        this.sub = this.componentInstance.change.subscribe((params: boolean | number) => {
+        if (this.type === 'date') {
+            let dateState = this.componentInstance.state.subscribe((state: boolean) => this.state = state);
+            this.subs.push(dateState);
+        }
+        let sub = this.componentInstance.change.subscribe((params: boolean | number) => {
             switch (this.type) {
                 case 'checkbox':
                     this.checked = !!params;
@@ -150,6 +165,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
                     this.rawInput.nativeElement.checked = true;
                     break;
                 case 'range':
+                    this.value = params + '';
+                    break;
+                case 'date':
                     this.value = params + '';
                     break;
             }
@@ -163,6 +181,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
             this.change.emit(this);
             this.updateComponentStatus();
         });
+        this.subs.push(sub);
         this.updateComponentStatus();
     }
 
@@ -177,12 +196,16 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
         if (this.type === 'checkbox' || this.type === 'radio') {
             this.componentInstance.checkedIcon = this.checkedIcon;
             this.componentInstance.uncheckedIcon = this.uncheckedICon;
-        }
-        if (this.type === 'range') {
+        } else if (this.type === 'range') {
             this.componentInstance.max = this.max;
             this.componentInstance.min = this.min;
             this.componentInstance.step = this.step;
+        } else if (this.type === 'date') {
+            this.componentInstance.mixDate = this.maxDate;
+            this.componentInstance.minDate = this.minDate;
+            this.componentInstance.format = this.format;
         }
+
     }
 
     writeValue(value: any) {
@@ -198,6 +221,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
                 }
                 break;
             case 'range':
+                this.value = value;
+                break;
+            case 'date':
                 this.value = value;
                 break;
             default:

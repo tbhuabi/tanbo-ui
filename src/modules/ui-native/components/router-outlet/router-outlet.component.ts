@@ -9,7 +9,7 @@ import { EventType } from '../../utils/event';
     selector: 'ui-router-outlet',
     templateUrl: './router-outlet.component.html',
     animations: [trigger('routerAnimations', [state('outLeft', style({
-        transform: 'translateX(-50%)',
+        transform: 'translateX(-30%)',
         opacity: 0
     })), transition('* => inRight', animate('250ms ease-out', keyframes([
         style({
@@ -23,7 +23,7 @@ import { EventType } from '../../utils/event';
     ]))), transition('* => inLeft', animate('250ms ease-out', keyframes([
         style({
             opacity: 0.5,
-            transform: 'translateX(-50%)',
+            transform: 'translateX(-30%)',
             offset: 0
         }),
         style({
@@ -48,7 +48,7 @@ import { EventType } from '../../utils/event';
         }),
         style({
             opacity: 0.5,
-            transform: 'translateX(-50%)',
+            transform: 'translateX(-30%)',
             offset: 1
         })
     ])))])]
