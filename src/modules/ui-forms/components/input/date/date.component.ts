@@ -190,7 +190,7 @@ export class DateComponent implements OnInit, InputType {
             return;
         }
         this.open = !this.open;
-        this.state.emit(this.open);
+        this.state.emit(true);
     }
 
     onEscape() {
