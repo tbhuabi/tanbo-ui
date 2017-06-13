@@ -18,6 +18,7 @@ import { ViewsComponent } from './components/views/views.component';
 import { ViewGroupComponent } from './components/views/view-group/view-group.component';
 import { RowComponent } from './components/grid/row.component';
 import { ColumnComponent } from './components/grid/column/column.component';
+import { ScrollComponent } from './components/scroll/scroll.component';
 
 import { TabService } from './services/tab.service';
 import { NavigationService } from './services/navigation.service';
@@ -48,7 +49,8 @@ import { ComponentHostDirective } from './directives/component-host.directive';
         ViewsComponent,
         ViewGroupComponent,
         RowComponent,
-        ColumnComponent
+        ColumnComponent,
+        ScrollComponent
     ],
     exports: [
         AppComponent,
@@ -65,7 +67,8 @@ import { ComponentHostDirective } from './directives/component-host.directive';
         TabBarComponent,
         TabBarItemComponent,
         RowComponent,
-        ColumnComponent
+        ColumnComponent,
+        ScrollComponent
     ],
     providers: [
         TabService,
