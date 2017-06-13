@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
-import { RouterOutLetComponent } from '../components/router-outlet/router-outlet.component';
+import { ViewsComponent } from '../components/views/views.component';
 
 @Injectable()
 export class NavigationService {
@@ -16,14 +16,14 @@ export class NavigationService {
         this.popEvent$ = this.popEventSource.asObservable();
     }
 
-    publish(component: any, outlet: RouterOutLetComponent) {
+    publish(component: any, outlet: ViewsComponent) {
         this.viewSource.next({
             component,
             activateView: outlet
         });
     }
 
-    pop(host: RouterOutLetComponent) {
+    pop(host: ViewsComponent) {
         this.popEventSource.next(host);
     }
 }

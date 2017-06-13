@@ -6,8 +6,8 @@ import { LifeCycleService } from '../../services/life-cycle.service';
 import { EventType } from '../../utils/event';
 
 @Component({
-    selector: 'ui-router-outlet',
-    templateUrl: './router-outlet.component.html',
+    selector: 'ui-views',
+    templateUrl: './views.component.html',
     animations: [trigger('routerAnimations', [state('outLeft', style({
         transform: 'translateX(-30%)',
         opacity: 0
@@ -53,9 +53,9 @@ import { EventType } from '../../utils/event';
         })
     ])))])]
 })
-export class RouterOutLetComponent implements OnInit {
+export class ViewsComponent implements OnInit {
     views: Array<any> = [];
-    self: RouterOutLetComponent;
+    self: ViewsComponent;
 
     constructor(public navigationService: NavigationService,
                 private lifeCycleService: LifeCycleService) {

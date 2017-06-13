@@ -10,20 +10,20 @@ import {
 
 import { LifeCycleService } from '../../../services/life-cycle.service';
 import { Event, EventType } from '../../../utils/event';
-import { RouterOutLetComponent } from '../router-outlet.component';
+import { ViewsComponent } from '../views.component';
 import { ComponentHostDirective } from '../../../directives/component-host.directive';
 import { NavController } from '../../../providers/navigation-controller';
 import { NavControllerBase } from '../../../providers/navigation-controller-base';
 
 @Component({
-    selector: 'ui-router-outlet-item',
-    templateUrl: './router-outlet-item.component.html'
+    selector: 'ui-view-group',
+    templateUrl: './view-group.component.html'
 })
-export class RouterOutLetItemComponent implements AfterContentInit, OnInit {
+export class ViewGroupComponent implements AfterContentInit, OnInit {
     @Input()
     component: any;
     @Input()
-    host: RouterOutLetComponent;
+    host: ViewsComponent;
     @ViewChild(ComponentHostDirective)
     componentHost: ComponentHostDirective;
 

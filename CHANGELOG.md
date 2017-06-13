@@ -1,3 +1,14 @@
+## 1.4.3
+### 新增功能
+`UiNativeModule`内，增加新组件
++ `<ui-row></ui-row>`
++ `<ui-col></ui-col>`
++ `<ui-scroll></ui-scroll>`
+
+`UiComponentModule`内，增加日历控件
+
++ `<ui-input type="date"></ui-input>`
+
 ## 1.4.0
 ### 破坏性更改
 `UiComponentModule`下的`ui-button`组件改为`ui-loading-button`（原`ui-button`组件移到`UiNativeModule`下）  

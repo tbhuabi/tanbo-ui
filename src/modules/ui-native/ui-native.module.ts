@@ -14,8 +14,10 @@ import { TabViewComponent } from './components/tab/tab-view/tab-view.component';
 import { TabViewItemComponent } from './components/tab/tab-view/tab-view-item/tab-view-item.component';
 import { TabBarComponent } from './components/tab/tab-bar/tab-bar.component';
 import { TabBarItemComponent } from './components/tab/tab-bar/tab-bar-item/tab-bar-item.component';
-import { RouterOutLetComponent } from './components/router-outlet/router-outlet.component';
-import { RouterOutLetItemComponent } from './components/router-outlet/router-outlet-item/router-outlet-item.component';
+import { ViewsComponent } from './components/views/views.component';
+import { ViewGroupComponent } from './components/views/view-group/view-group.component';
+import { RowComponent } from './components/grid/row.component';
+import { ColumnComponent } from './components/grid/column/column.component';
 
 import { TabService } from './services/tab.service';
 import { NavigationService } from './services/navigation.service';
@@ -43,8 +45,10 @@ import { ComponentHostDirective } from './directives/component-host.directive';
         TabViewItemComponent,
         TabBarComponent,
         TabBarItemComponent,
-        RouterOutLetComponent,
-        RouterOutLetItemComponent
+        ViewsComponent,
+        ViewGroupComponent,
+        RowComponent,
+        ColumnComponent
     ],
     exports: [
         AppComponent,
@@ -59,7 +63,9 @@ import { ComponentHostDirective } from './directives/component-host.directive';
         TabViewComponent,
         TabViewItemComponent,
         TabBarComponent,
-        TabBarItemComponent
+        TabBarItemComponent,
+        RowComponent,
+        ColumnComponent
     ],
     providers: [
         TabService,

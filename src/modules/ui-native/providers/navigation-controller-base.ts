@@ -1,14 +1,14 @@
 import { NavController } from './navigation-controller';
 
-import { RouterOutLetComponent } from '../components/router-outlet/router-outlet.component';
+import { ViewsComponent } from '../components/views/views.component';
 import { NavigationService } from '../services/navigation.service';
 
 export class NavControllerBase extends NavController {
-    private readonly host: RouterOutLetComponent;
+    private readonly host: ViewsComponent;
     private readonly navigationService: NavigationService;
     private params: any;
 
-    constructor(host: RouterOutLetComponent, navigationService: NavigationService) {
+    constructor(host: ViewsComponent, navigationService: NavigationService) {
         super();
         this.host = host;
         this.navigationService = navigationService;

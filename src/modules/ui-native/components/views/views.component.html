@@ -1,8 +1,8 @@
-<ui-router-outlet-item
+<ui-view-group
         [@routerAnimations]="item.state"
         [component]="item.component"
         [host]="self"
         (@routerAnimations.done)="destroy()"
         (@routerAnimations.start)="lifeCycle(item)"
         *ngFor="let item of views">
-</ui-router-outlet-item>
+</ui-view-group>

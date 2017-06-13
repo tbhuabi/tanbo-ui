@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, HostListener, Input, AfterViewInit, ViewChil
 import { DOCUMENT } from '@angular/platform-browser';
 
 import { NavigationService } from '../../services/navigation.service';
-import { RouterOutLetComponent } from '../router-outlet/router-outlet.component';
+import { ViewsComponent } from '../views/views.component';
 
 @Component({
     selector: 'ui-native-app',
@@ -11,8 +11,8 @@ import { RouterOutLetComponent } from '../router-outlet/router-outlet.component'
 export class AppComponent implements OnInit, AfterViewInit {
     @Input()
     rootPage: any;
-    @ViewChild(RouterOutLetComponent)
-    host: RouterOutLetComponent;
+    @ViewChild(ViewsComponent)
+    host: ViewsComponent;
     @Input()
     baseFontSize: number = 100;
 
