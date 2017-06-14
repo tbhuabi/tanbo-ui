@@ -24,10 +24,10 @@ export class NavigationService {
     }
 
     publish(component: any, outlet: ViewHost, transition: PageTransition = {
-        activate: AnimationType.InRight,
-        reactivate: AnimationType.InLeft,
-        destroy: AnimationType.OutRight,
-        toStack: AnimationType.OutLeft
+        activate: AnimationType.SlideInRight,
+        reactivate: AnimationType.SlideInLeft,
+        destroy: AnimationType.SlideOutRight,
+        toStack: AnimationType.SlideOutLeft
     }) {
         this.viewSource.next({
             component,
