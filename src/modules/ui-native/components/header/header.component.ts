@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'ui-header',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
 })
 
 export class HeaderComponent {
+    @HostBinding('class.native')
+    isNative: boolean = process.env.ENV === 'production';
 }
