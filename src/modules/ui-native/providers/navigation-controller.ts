@@ -1,4 +1,4 @@
-import { PageTransition } from './view-transition-animate';
+import { PageTransition } from '../utils/view-transition-animate';
 
 export abstract class NavController {
     abstract push(component: any, params?: { [key: string]: any }, transition?: PageTransition): void;

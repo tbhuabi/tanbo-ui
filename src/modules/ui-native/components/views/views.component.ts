@@ -5,7 +5,7 @@ import { NavigationService, ViewConfig } from '../../services/navigation.service
 import { LifeCycleService } from '../../services/life-cycle.service';
 import { EventType } from '../../utils/event';
 import { ViewHost } from '../../utils/views';
-import { pageTransitionAnimate, AnimationTypeBase } from '../../providers/view-transition-animate';
+import { pageTransitionAnimate, AnimationTypeBase } from '../../utils/view-transition-animate';
 
 @Component({
     selector: 'ui-views',

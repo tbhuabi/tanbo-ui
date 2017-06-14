@@ -2,7 +2,7 @@ import { NavController } from './navigation-controller';
 
 import { ViewHost } from '../utils/views';
 import { NavigationService } from '../services/navigation.service';
-import { PageTransition } from './view-transition-animate';
+import { PageTransition } from '../utils/view-transition-animate';
 
 export class NavControllerBase extends NavController {
     private readonly host: ViewHost;

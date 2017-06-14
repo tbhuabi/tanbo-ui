@@ -20,6 +20,7 @@ export const AnimationTypeBase = {
     [AnimationType.InRight]: 'inRight',
     [AnimationType.OutRight]: 'outRight'
 };
+
 export const pageTransitionAnimate: AnimationMetadata[] = [state(AnimationTypeBase[AnimationType.OutLeft], style({
     transform: 'translateX(-30%)',
     opacity: 0

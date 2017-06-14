@@ -5,5 +5,5 @@ export { ConfirmController, ConfirmConfig } from './ui-components/services/confi
 export { NotifyController, NotifyConfig, NotifyType } from './ui-components/services/notify-controller.service';
 export { UiNativeModule } from './ui-native/ui-native.module';
 export { NavController } from './ui-native/providers/navigation-controller';
-export { PageTransition, AnimationType } from './ui-native/providers/view-transition-animate';
+export { PageTransition, AnimationType } from './ui-native/utils/view-transition-animate';
 export { OnViewEnter, OnViewLeave } from './ui-native/utils/life-cycle';
