@@ -1,22 +1,23 @@
 import { NavController } from './navigation-controller';
 
-import { ViewsComponent } from '../components/views/views.component';
+import { ViewHost } from '../utils/views';
 import { NavigationService } from '../services/navigation.service';
+import { PageTransition } from './view-transition-animate';
 
 export class NavControllerBase extends NavController {
-    private readonly host: ViewsComponent;
+    private readonly host: ViewHost;
     private readonly navigationService: NavigationService;
-    private params: any;
+    private params: { [key: string]: any };
 
-    constructor(host: ViewsComponent, navigationService: NavigationService) {
+    constructor(host: ViewHost, navigationService: NavigationService) {
         super();
         this.host = host;
         this.navigationService = navigationService;
     }
 
-    push(component: any, params?: any) {
+    push(component: any, params?: { [key: string]: any }, transition?: PageTransition) {
         this.params = params;
-        this.navigationService.publish(component, this.host);
+        this.navigationService.publish(component, this.host, transition);
     }
 
     pop() {

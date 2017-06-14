@@ -1,78 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, style, state, animate, transition, keyframes } from '@angular/animations';
+import { trigger } from '@angular/animations';
 
-import { NavigationService } from '../../services/navigation.service';
+import { NavigationService, ViewConfig } from '../../services/navigation.service';
 import { LifeCycleService } from '../../services/life-cycle.service';
 import { EventType } from '../../utils/event';
+import { ViewHost } from '../../utils/views';
+import { pageTransitionAnimate, AnimationTypeBase } from '../../providers/view-transition-animate';
 
 @Component({
     selector: 'ui-views',
     templateUrl: './views.component.html',
-    animations: [trigger('routerAnimations', [state('outLeft', style({
-        transform: 'translateX(-30%)',
-        opacity: 0
-    })), transition('* => inRight', animate('250ms ease-out', keyframes([
-        style({
-            transform: 'translateX(100%)',
-            offset: 0
-        }),
-        style({
-            transform: 'translateX(0)',
-            offset: 1
-        })
-    ]))), transition('* => inLeft', animate('250ms ease-out', keyframes([
-        style({
-            opacity: 0.5,
-            transform: 'translateX(-30%)',
-            offset: 0
-        }),
-        style({
-            opacity: 1,
-            transform: 'translateX(0)',
-            offset: 1
-        })
-    ]))), transition('* => outRight', animate('250ms ease-out', keyframes([
-        style({
-            transform: 'translateX(0)',
-            offset: 0
-        }),
-        style({
-            transform: 'translateX(100%)',
-            offset: 1
-        })
-    ]))), transition('* => outLeft', animate('250ms ease-out', keyframes([
-        style({
-            opacity: 1,
-            transform: 'translateX(0)',
-            offset: 0
-        }),
-        style({
-            opacity: 0.5,
-            transform: 'translateX(-30%)',
-            offset: 1
-        })
-    ])))])]
+    animations: [trigger('pageAnimations', pageTransitionAnimate)]
 })
-export class ViewsComponent implements OnInit {
+export class ViewsComponent extends ViewHost implements OnInit {
     views: Array<any> = [];
     self: ViewsComponent;
 
     constructor(public navigationService: NavigationService,
                 private lifeCycleService: LifeCycleService) {
+        super();
         this.self = this;
     }
 
     ngOnInit() {
-        this.navigationService.view$.subscribe((viewConfig: any) => {
-            if (viewConfig.activateView !== this) {
+        this.navigationService.view$.subscribe((viewConfig: ViewConfig) => {
+            if (viewConfig.host !== this) {
                 return;
             }
             this.views.forEach(item => {
-                item.state = 'outLeft';
+                item.state = AnimationTypeBase[viewConfig.transition.toStack];
             });
             this.views.push({
-                component: viewConfig.component,
-                state: this.views.length ? 'inRight' : ''
+                viewConfig,
+                state: this.views.length ? AnimationTypeBase[viewConfig.transition.activate] : ''
             });
         });
 
@@ -82,31 +42,40 @@ export class ViewsComponent implements OnInit {
             }
             let lastItem = this.views[this.views.length - 1];
             if (lastItem) {
-                lastItem.state = 'outRight';
+                lastItem.state = AnimationTypeBase[lastItem.viewConfig.transition.destroy];
             }
             let currentItem = this.views[this.views.length - 2];
             if (currentItem) {
-                currentItem.state = 'inLeft';
+                currentItem.state = AnimationTypeBase[currentItem.viewConfig.transition.reactivate];
             }
         });
     }
 
     destroy() {
         let lastItem = this.views[this.views.length - 1];
-        if (lastItem && lastItem.state === 'outRight') {
+        if (lastItem && lastItem.state === AnimationTypeBase[lastItem.viewConfig.transition.destroy]) {
             this.views.pop();
         }
     }
 
     lifeCycle(item: any) {
-        if (['inLeft', 'inRight', ''].indexOf(item.state) !== -1) {
+        let enterStatus = [
+            AnimationTypeBase[item.viewConfig.transition.reactivate],
+            AnimationTypeBase[item.viewConfig.transition.activate],
+            ''
+        ];
+        let leaveStatus = [
+            AnimationTypeBase[item.viewConfig.transition.toStack],
+            AnimationTypeBase[item.viewConfig.transition.destroy]
+        ];
+        if (enterStatus.indexOf(item.state) !== -1) {
             this.lifeCycleService.publishEvent({
-                component: item.component,
+                component: item.viewConfig.component,
                 type: EventType.Enter
             });
-        } else if (['outLeft', 'outRight'].indexOf(item.state) !== -1) {
+        } else if (leaveStatus.indexOf(item.state) !== -1) {
             this.lifeCycleService.publishEvent({
-                component: item.component,
+                component: item.viewConfig.component,
                 type: EventType.Leave
             });
         }
