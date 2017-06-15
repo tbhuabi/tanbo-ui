@@ -21,9 +21,6 @@ import { RowComponent } from './components/grid/row.component';
 import { ColumnComponent } from './components/grid/column/column.component';
 import { ScrollComponent } from './components/scroll/scroll.component';
 
-import { TabService } from './services/tab.service';
-import { LifeCycleService } from './services/life-cycle.service';
-
 import { ComponentHostDirective } from './directives/component-host.directive';
 
 @NgModule({
@@ -71,10 +68,6 @@ import { ComponentHostDirective } from './directives/component-host.directive';
         RowComponent,
         ColumnComponent,
         ScrollComponent
-    ],
-    providers: [
-        TabService,
-        LifeCycleService
     ]
 })
 export class UiNativeModule {

@@ -9,7 +9,10 @@ import { pageTransitionAnimate, AnimationTypeBase } from '../../utils/view-trans
 @Component({
     selector: 'ui-views',
     templateUrl: './views.component.html',
-    animations: [trigger('pageAnimations', pageTransitionAnimate)]
+    animations: [trigger('pageAnimations', pageTransitionAnimate)],
+    providers: [
+        LifeCycleService
+    ]
 })
 export class ViewsComponent implements OnInit {
     views: Array<any> = [];
