@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, HostListener, Input, AfterViewInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
-import { NavController } from '../../providers/navigation-controller';
+import { NavController } from '../views/navigation-controller';
 
 @Component({
     selector: 'ui-native-app',

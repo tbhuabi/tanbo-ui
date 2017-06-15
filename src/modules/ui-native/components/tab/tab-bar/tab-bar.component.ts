@@ -1,7 +1,7 @@
 import { Component, ContentChildren, QueryList, AfterContentInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { TabService } from '../../../services/tab.service';
+import { TabService } from '../tab.service';
 import { TabBarItemComponent } from './tab-bar-item/tab-bar-item.component';
 
 @Component({

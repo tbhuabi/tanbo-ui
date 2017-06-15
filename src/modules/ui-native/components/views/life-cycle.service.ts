@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
-import { Event } from '../utils/event';
+import { Event } from '../../utils/event';
 
 @Injectable()
 export class LifeCycleService {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import { PageTransition, AnimationType } from '../utils/view-transition-animate';
+import { PageTransition, AnimationType } from '../../utils/view-transition-animate';
 
 export interface ViewConfig {
     component: any;

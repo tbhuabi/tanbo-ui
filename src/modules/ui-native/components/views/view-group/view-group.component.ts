@@ -7,7 +7,7 @@ import {
     OnInit
 } from '@angular/core';
 
-import { LifeCycleService } from '../../../services/life-cycle.service';
+import { LifeCycleService } from '../life-cycle.service';
 import { Event, EventType } from '../../../utils/event';
 import { ComponentHostDirective } from '../../../directives/component-host.directive';
 

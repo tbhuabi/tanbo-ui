@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger } from '@angular/animations';
 
-import { LifeCycleService } from '../../services/life-cycle.service';
-import { NavController, ViewConfig } from '../../providers/navigation-controller';
+import { LifeCycleService } from './life-cycle.service';
+import { NavController, ViewConfig } from './navigation-controller';
 import { EventType } from '../../utils/event';
 import { pageTransitionAnimate, AnimationTypeBase } from '../../utils/view-transition-animate';
 
