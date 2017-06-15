@@ -27,9 +27,13 @@ export class ViewsComponent extends ViewHost implements OnInit {
             if (viewConfig.host !== this) {
                 return;
             }
-            this.views.forEach(item => {
-                item.state = AnimationTypeBase[viewConfig.transition.toStack];
-            });
+            let lastItem = this.views[this.views.length - 1];
+            if (lastItem) {
+                lastItem.state = AnimationTypeBase[lastItem.viewConfig.transition.toStack];
+            }
+            // this.views.forEach(item => {
+            //     item.state = AnimationTypeBase[viewConfig.transition.toStack];
+            // });
             this.views.push({
                 viewConfig,
                 state: this.views.length ? AnimationTypeBase[viewConfig.transition.activate] : ''
@@ -46,7 +50,7 @@ export class ViewsComponent extends ViewHost implements OnInit {
             }
             let currentItem = this.views[this.views.length - 2];
             if (currentItem) {
-                currentItem.state = AnimationTypeBase[currentItem.viewConfig.transition.reactivate];
+                currentItem.state = AnimationTypeBase[lastItem.viewConfig.transition.reactivate];
             }
         });
     }

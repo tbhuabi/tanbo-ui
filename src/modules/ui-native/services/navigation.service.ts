@@ -25,9 +25,9 @@ export class NavigationService {
 
     publish(component: any, outlet: ViewHost, transition: PageTransition = {
         activate: AnimationType.SlideInRight,
-        reactivate: AnimationType.SlideInLeft,
+        reactivate: AnimationType.FadeInLeft,
         destroy: AnimationType.SlideOutRight,
-        toStack: AnimationType.SlideOutLeft
+        toStack: AnimationType.FadeOutLeft
     }) {
         this.viewSource.next({
             component,
