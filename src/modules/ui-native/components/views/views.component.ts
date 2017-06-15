@@ -29,11 +29,8 @@ export class ViewsComponent extends ViewHost implements OnInit {
             }
             let lastItem = this.views[this.views.length - 1];
             if (lastItem) {
-                lastItem.state = AnimationTypeBase[lastItem.viewConfig.transition.toStack];
+                lastItem.state = AnimationTypeBase[viewConfig.transition.toStack];
             }
-            // this.views.forEach(item => {
-            //     item.state = AnimationTypeBase[viewConfig.transition.toStack];
-            // });
             this.views.push({
                 viewConfig,
                 state: this.views.length ? AnimationTypeBase[viewConfig.transition.activate] : ''
