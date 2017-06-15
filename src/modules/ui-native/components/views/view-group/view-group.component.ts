@@ -4,16 +4,12 @@ import {
     ComponentFactoryResolver,
     ViewChild,
     AfterContentInit,
-    ReflectiveInjector,
     OnInit
 } from '@angular/core';
 
 import { LifeCycleService } from '../../../services/life-cycle.service';
 import { Event, EventType } from '../../../utils/event';
-import { ViewsComponent } from '../views.component';
 import { ComponentHostDirective } from '../../../directives/component-host.directive';
-import { NavController } from '../../../providers/navigation-controller';
-import { NavControllerBase } from '../../../providers/navigation-controller-base';
 
 @Component({
     selector: 'ui-view-group',
@@ -22,8 +18,6 @@ import { NavControllerBase } from '../../../providers/navigation-controller-base
 export class ViewGroupComponent implements AfterContentInit, OnInit {
     @Input()
     component: any;
-    @Input()
-    host: ViewsComponent;
     @ViewChild(ComponentHostDirective)
     componentHost: ComponentHostDirective;
 
@@ -55,12 +49,8 @@ export class ViewGroupComponent implements AfterContentInit, OnInit {
 
     ngAfterContentInit() {
         const viewContainerRef = this.componentHost.viewContainerRef;
-        const componentProviders = ReflectiveInjector.resolveAndCreate([{
-            provide: NavController,
-            useValue: new NavControllerBase(this.host, this.host.navigationService)
-        }], viewContainerRef.injector);
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.component);
-        this.childInstance = viewContainerRef.createComponent(componentFactory, 0, componentProviders).instance;
+        this.childInstance = viewContainerRef.createComponent(componentFactory).instance;
     }
 
 }

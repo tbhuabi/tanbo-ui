@@ -22,7 +22,6 @@ import { ColumnComponent } from './components/grid/column/column.component';
 import { ScrollComponent } from './components/scroll/scroll.component';
 
 import { TabService } from './services/tab.service';
-import { NavigationService } from './services/navigation.service';
 import { LifeCycleService } from './services/life-cycle.service';
 
 import { ComponentHostDirective } from './directives/component-host.directive';
@@ -75,7 +74,6 @@ import { ComponentHostDirective } from './directives/component-host.directive';
     ],
     providers: [
         TabService,
-        NavigationService,
         LifeCycleService
     ]
 })

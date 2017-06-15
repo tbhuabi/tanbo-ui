@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger } from '@angular/animations';
 
-import { NavigationService, ViewConfig } from '../../services/navigation.service';
 import { LifeCycleService } from '../../services/life-cycle.service';
+import { NavController, ViewConfig } from '../../providers/navigation-controller';
 import { EventType } from '../../utils/event';
-import { ViewHost } from '../../utils/views';
 import { pageTransitionAnimate, AnimationTypeBase } from '../../utils/view-transition-animate';
 
 @Component({
@@ -12,21 +11,16 @@ import { pageTransitionAnimate, AnimationTypeBase } from '../../utils/view-trans
     templateUrl: './views.component.html',
     animations: [trigger('pageAnimations', pageTransitionAnimate)]
 })
-export class ViewsComponent extends ViewHost implements OnInit {
+export class ViewsComponent implements OnInit {
     views: Array<any> = [];
-    self: ViewsComponent;
 
-    constructor(public navigationService: NavigationService,
-                private lifeCycleService: LifeCycleService) {
-        super();
-        this.self = this;
+    constructor(
+        private navController: NavController,
+        private lifeCycleService: LifeCycleService) {
     }
 
     ngOnInit() {
-        this.navigationService.view$.subscribe((viewConfig: ViewConfig) => {
-            if (viewConfig.host !== this) {
-                return;
-            }
+        this.navController.pushEvent$.subscribe((viewConfig: ViewConfig) => {
             let lastItem = this.views[this.views.length - 1];
             if (lastItem) {
                 lastItem.state = AnimationTypeBase[viewConfig.transition.toStack];
@@ -37,10 +31,8 @@ export class ViewsComponent extends ViewHost implements OnInit {
             });
         });
 
-        this.navigationService.popEvent$.subscribe((activateView: any) => {
-            if (activateView !== this) {
-                return;
-            }
+        this.navController.popEvent$.subscribe(() => {
+
             let lastItem = this.views[this.views.length - 1];
             if (lastItem) {
                 lastItem.state = AnimationTypeBase[lastItem.viewConfig.transition.destroy];

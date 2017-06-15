@@ -1,18 +1,18 @@
-import { Component, OnInit, Inject, HostListener, Input, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, HostListener, Input, AfterViewInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
-import { NavigationService } from '../../services/navigation.service';
-import { ViewsComponent } from '../views/views.component';
+import { NavController } from '../../providers/navigation-controller';
 
 @Component({
     selector: 'ui-native-app',
-    templateUrl: './app.component.html'
+    templateUrl: './app.component.html',
+    providers: [
+        NavController
+    ]
 })
 export class AppComponent implements OnInit, AfterViewInit {
     @Input()
     rootPage: any;
-    @ViewChild(ViewsComponent)
-    host: ViewsComponent;
     @Input()
     baseFontSize: number = 100;
 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     private defaultDocWidth: number = 320;
 
     constructor(@Inject(DOCUMENT) private document: Document,
-                private navigationService: NavigationService) {
+                private navController: NavController) {
     }
 
     ngOnInit() {
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.navigationService.publish(this.rootPage, this.host);
+        this.navController.push(this.rootPage);
     }
 
     @HostListener('window:resize') resize() {
