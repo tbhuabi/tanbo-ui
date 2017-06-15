@@ -1,38 +1,6 @@
 import { style, state, animate, transition, keyframes, AnimationMetadata } from '@angular/animations';
 
-export enum AnimationType {
-    SlideInLeft,
-    SlideOutLeft,
-    SlideInRight,
-    SlideOutRight,
-    SlideInUp,
-    SlideOutUp,
-    SlideInDown,
-    SlideOutDown,
-    FadeInLeft,
-    FadeOutLeft,
-    FadeInRight,
-    FadeOutRight,
-    FadeInUp,
-    FadeOutUp,
-    FadeInDown,
-    FadeOutDown,
-    ZoomInLeft,
-    ZoomOutLeft,
-    ZoomInRight,
-    ZoomOutRight,
-    ZoomInUp,
-    ZoomOutUp,
-    ZoomInDown,
-    ZoomOutDown
-}
-
-export interface PageTransition {
-    activate: AnimationType;
-    reactivate: AnimationType;
-    destroy: AnimationType;
-    toStack: AnimationType;
-}
+import { AnimationType } from '../../utils/animation-type';
 
 export const AnimationTypeBase = {
     [AnimationType.SlideInLeft]: 'slideInLeft',

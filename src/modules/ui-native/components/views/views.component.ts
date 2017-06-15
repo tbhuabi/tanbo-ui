@@ -4,7 +4,7 @@ import { trigger } from '@angular/animations';
 import { LifeCycleService } from './life-cycle.service';
 import { NavController, ViewConfig } from './navigation-controller';
 import { EventType } from '../../utils/event';
-import { pageTransitionAnimate, AnimationTypeBase } from '../../utils/view-transition-animate';
+import { pageTransitionAnimate, AnimationTypeBase } from './view-transition-animate';
 
 @Component({
     selector: 'ui-views',
