@@ -19,10 +19,10 @@ export class TabComponent implements OnInit, OnViewEnter, OnViewLeave {
     ngOnInit() {
         this.pageTransferStationService.component$.subscribe((params: ViewConfig) => {
             this.nav.push(params.component, null, {
-                activate: AnimationType.ZoomInUp,
-                reactivate: AnimationType.ZoomInDown,
-                toStack: AnimationType.ZoomOutDown,
-                destroy: AnimationType.ZoomOutUp
+                activate: AnimationType.SlideInDown,
+                reactivate: AnimationType.SlideInUp,
+                toStack: AnimationType.SlideOutDown,
+                destroy: AnimationType.SlideOutUp
             });
         });
     }
