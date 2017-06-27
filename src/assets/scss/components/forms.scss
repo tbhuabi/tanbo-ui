@@ -53,3 +53,116 @@
         @include input-style($form-control-border-color-danger, $form-control-border-color-danger);
     }
 }
+
+@mixin input-addon-style($border-color, $border-focus-color) {
+    border: 1px solid $border-color;
+    text-align: center;
+    width: 34px;
+    &:first-child {
+        border-right: 0;
+    }
+    &:last-child {
+        border-left: 0;
+    }
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    > .input-addon {
+        @include input-addon-style($form-control-border-color, $form-control-border-color);
+    }
+    &.primary {
+        > .input-addon {
+            @include input-addon-style($form-control-border-color-primary, $form-control-border-color-primary);
+        }
+        > .form-control {
+            @include input-style($form-control-border-color-primary, $form-control-border-color-primary);
+        }
+    }
+    &.success {
+        > .input-addon {
+            @include input-addon-style($form-control-border-color-success, $form-control-border-color-success);
+        }
+        .form-control {
+            @include input-style($form-control-border-color-success, $form-control-border-color-success);
+        }
+    }
+    &.info {
+        > .input-addon {
+            @include input-addon-style($form-control-border-color-info, $form-control-border-color-info);
+        }
+        > .form-control {
+            @include input-style($form-control-border-color-info, $form-control-border-color-info);
+        }
+    }
+    &.warning {
+        > .input-addon {
+            @include input-addon-style($form-control-border-color-warning, $form-control-border-color-warning);
+        }
+        > .form-control {
+            @include input-style($form-control-border-color-warning, $form-control-border-color-warning);
+        }
+    }
+    &.danger {
+        > .input-addon {
+            @include input-addon-style($form-control-border-color-danger, $form-control-border-color-danger);
+        }
+        > .form-control {
+            @include input-style($form-control-border-color-danger, $form-control-border-color-danger);
+        }
+    }
+
+    > .form-control {
+        border-radius: 0;
+    }
+    > .form-control, > .input-addon {
+        display: table-cell;
+        @if $form-control-radius-is-open {
+            &:first-child {
+                border-top-left-radius: $form-control-radius;
+                border-bottom-left-radius: $form-control-radius;
+            }
+            &:last-child {
+                border-top-right-radius: $form-control-radius;
+                border-bottom-right-radius: $form-control-radius;
+            }
+        }
+    }
+    &.input-sm {
+        > .form-control {
+            @include input-size($form-control-padding-vertical-sm, $form-control-padding-horizontal-sm, 0, $form-control-font-size-sm)
+        }
+        > .form-control, > .input-addon {
+            @if $form-control-radius-is-open {
+                &:first-child {
+                    border-top-left-radius: $form-control-radius-sm;
+                    border-bottom-left-radius: $form-control-radius-sm;
+                }
+                &:last-child {
+                    border-top-right-radius: $form-control-radius-sm;
+                    border-bottom-right-radius: $form-control-radius-sm;
+                }
+            }
+        }
+    }
+    &.input-lg {
+        > .form-control {
+            @include input-size($form-control-padding-vertical-lg, $form-control-padding-horizontal-lg, 0, $form-control-font-size-lg)
+        }
+        > .form-control, > .input-addon {
+            @if $form-control-radius-is-open {
+                &:first-child {
+                    border-top-left-radius: $form-control-radius-lg;
+                    border-bottom-left-radius: $form-control-radius-lg;
+                }
+                &:last-child {
+                    border-top-right-radius: $form-control-radius-lg;
+                    border-bottom-right-radius: $form-control-radius-lg;
+                }
+            }
+        }
+    }
+}
