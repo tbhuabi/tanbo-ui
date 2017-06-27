@@ -56,6 +56,10 @@ ui-input {
         line-height: inherit;
         border: 1px solid $color-gray-light;
         position: relative;
+        &:before {
+            content: "";
+            display: inline-block;
+        }
 
         &.left-bottom, &.right-bottom, &.top {
             ui-drop-down-menu {
@@ -92,11 +96,27 @@ ui-input {
         }
 
         > ui-input-date {
-            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            padding: inherit;
             > ui-drop-down {
                 cursor: inherit;
-                position: static;
+                position: absolute;
+                padding: inherit;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
                 > ui-drop-down-fixed {
+                    padding: inherit;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
                     > .ui-date-fixed {
                         white-space: nowrap;
                         overflow: hidden;

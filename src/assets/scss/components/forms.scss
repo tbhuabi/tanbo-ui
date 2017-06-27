@@ -58,6 +58,7 @@
     border: 1px solid $border-color;
     text-align: center;
     width: 34px;
+    min-width: 34px;
     &:first-child {
         border-right: 0;
     }
