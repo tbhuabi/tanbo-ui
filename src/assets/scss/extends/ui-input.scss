@@ -56,10 +56,10 @@ ui-input {
         line-height: inherit;
         border: 1px solid $color-gray-light;
         position: relative;
-        &:before {
-            content: "";
-            display: inline-block;
-        }
+        //&:before {
+        //    content: "";
+        //    display: inline-block;
+        //}
 
         &.left-bottom, &.right-bottom, &.top {
             ui-drop-down-menu {
@@ -96,19 +96,14 @@ ui-input {
         }
 
         > ui-input-date {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
             padding: inherit;
             > ui-drop-down {
                 cursor: inherit;
-                position: absolute;
                 padding: inherit;
+                position: absolute;
                 left: 0;
-                top: 0;
                 right: 0;
+                top: 0;
                 bottom: 0;
                 > ui-drop-down-fixed {
                     padding: inherit;
@@ -215,7 +210,9 @@ ui-input {
                         border: 1px solid $color-gray-light;
                         position: relative;
                         font-size: 14px;
-                        border-radius: 3px;
+                        @if $form-control-radius-is-open {
+                            border-radius: 3px;
+                        }
                         background-color: #fff;
                     }
 
