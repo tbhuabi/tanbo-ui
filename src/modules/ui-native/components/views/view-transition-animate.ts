@@ -29,22 +29,27 @@ export const AnimationTypeBase = {
     [AnimationType.ZoomOutDown]: 'zoomOutDown'
 };
 
-export const pageTransitionAnimate: AnimationMetadata[] = [state(AnimationTypeBase[AnimationType.SlideOutLeft], style({
-    display: 'none'
+export const pageTransitionAnimate: AnimationMetadata[] = [
+    state(AnimationTypeBase[AnimationType.SlideOutLeft], style({
+    transform: 'translateX(-30%)'
 })), state(AnimationTypeBase[AnimationType.SlideOutRight], style({
-    display: 'none'
+    transform: 'translateX(30%)'
 })), state(AnimationTypeBase[AnimationType.SlideOutUp], style({
-    display: 'none'
+    transform: 'translateY(-100%)'
 })), state(AnimationTypeBase[AnimationType.SlideOutDown], style({
-    display: 'none'
+    transform: 'translateY(100%)'
 })), state(AnimationTypeBase[AnimationType.FadeOutLeft], style({
-    display: 'none'
+    transform: 'translateX(-30%)',
+    opacity: 0.5
 })), state(AnimationTypeBase[AnimationType.FadeOutRight], style({
-    display: 'none'
+    transform: 'translateX(30%)',
+    opacity: 0.5
 })), state(AnimationTypeBase[AnimationType.FadeOutUp], style({
-    display: 'none'
+    transform: 'translateY(-100%)',
+    opacity: 0.5
 })), state(AnimationTypeBase[AnimationType.FadeOutDown], style({
-    display: 'none'
+    transform: 'translateY(100%)',
+    opacity: 0.5
 })), state(AnimationTypeBase[AnimationType.ZoomOutLeft], style({
     display: 'none'
 })), state(AnimationTypeBase[AnimationType.ZoomOutRight], style({
