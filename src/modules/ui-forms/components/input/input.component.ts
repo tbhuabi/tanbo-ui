@@ -124,6 +124,15 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
                 private inputStateService: InputStateService) {
     }
 
+    publishEvent() {
+        switch (this.type) {
+            case 'radio':
+            case 'checkbox':
+                this.componentInstance.click();
+                break;
+        }
+    }
+
     ngOnInit() {
         let inputStateSub = this.inputStateService.state$.subscribe((c: any) => {
             switch (this.type) {

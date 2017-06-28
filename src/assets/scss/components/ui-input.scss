@@ -56,10 +56,11 @@ ui-input {
         line-height: inherit;
         border: 1px solid $color-gray-light;
         position: relative;
-        //&:before {
-        //    content: "";
-        //    display: inline-block;
-        //}
+        &:before {
+            content: "";
+            display: inline-block;
+            width: 8em;
+        }
 
         &.left-bottom, &.right-bottom, &.top {
             ui-drop-down-menu {
