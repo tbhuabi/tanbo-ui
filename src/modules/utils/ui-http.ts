@@ -17,7 +17,7 @@ export interface UiHttpConfig {
     headers?: Headers;
     withCredentials?: boolean;
     responseType?: ResponseContentType;
-    openTimeStamp?: boolean;
+    openTimestamp?: boolean;
     responseHandle?(response: Observable<Response>): Promise<any>;
 }
 
@@ -31,14 +31,14 @@ export class UiHttp {
     });
     private static withCredentials: boolean = true;
     private static responseType: ResponseContentType = ResponseContentType.Json;
-    private static openTimeStamp: boolean = true;
+    private static openTimestamp: boolean = true;
 
     static config(config: UiHttpConfig) {
         UiHttp.apiPrefix = config.apiPrefix || UiHttp.apiPrefix;
         UiHttp.headers = config.headers || UiHttp.headers;
         UiHttp.withCredentials = config.withCredentials === true || config.withCredentials === undefined;
         UiHttp.responseType = config.responseType || UiHttp.responseType;
-        UiHttp.openTimeStamp = config.openTimeStamp !== undefined ? config.openTimeStamp : true;
+        UiHttp.openTimestamp = config.openTimestamp !== undefined ? config.openTimestamp : true;
         UiHttp.responseHandle = config.responseHandle || UiHttp.responseHandle;
         return UiHttp;
     }
@@ -64,7 +64,7 @@ export class UiHttp {
     }
 
     private static requestHandle(options: UiRequestOptions): RequestOptionsArgs {
-        if (UiHttp.openTimeStamp) {
+        if (UiHttp.openTimestamp) {
             if (options.params) {
                 options.params.t = Date.now();
             } else {
