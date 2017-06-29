@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { BrowserModule }  from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
-import { UiNativeModule, UiComponentsModule, UiFormsModule } from '../modules/index';
+import { UiNativeModule, UiComponentsModule, UiFormsModule, UiHttp } from '../modules/index';
 
 import { PageTransferStationService } from '../services/page-transfer-station';
 
@@ -24,7 +25,8 @@ import { Child4Component } from './tab/tab2/child2/child2';
         UiNativeModule,
         BrowserModule,
         UiComponentsModule,
-        UiFormsModule
+        UiFormsModule,
+        HttpModule
     ],
     declarations: [
         AppComponent,
@@ -49,7 +51,10 @@ import { Child4Component } from './tab/tab2/child2/child2';
     ],
     bootstrap: [AppComponent],
     providers: [
-        PageTransferStationService
+        PageTransferStationService,
+        UiHttp.config({
+            apiPrefix: '/api'
+        })
     ]
 })
 export class AppModule {
