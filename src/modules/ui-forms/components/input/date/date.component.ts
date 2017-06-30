@@ -56,11 +56,19 @@ export class DateComponent implements OnInit, InputType {
         this.update();
     }
 
+    get maxDate() {
+        return this._maxDate;
+    }
+
     @Input()
     set minDate(value) {
         this._minDate = value || '';
         this.minDateTimeDetails = DateComponent.timeAnalysisByTimeString(this._minDate);
         this.update();
+    }
+
+    get minDate() {
+        return this._minDate;
     }
 
     get showHMS(): boolean {
@@ -157,8 +165,7 @@ export class DateComponent implements OnInit, InputType {
         let hours = date.getHours();
         let minutes = date.getMinutes();
         let seconds = date.getSeconds();
-
-        this.startYearIndex = year - year % 16;
+        let timestamp = Date.UTC(year, month, day, hours, minutes, seconds, 0);
 
         this.systemDateTimeDetails = {
             year,
@@ -167,17 +174,24 @@ export class DateComponent implements OnInit, InputType {
             hours,
             minutes,
             seconds,
-            timestamp: 0
+            timestamp
         };
-        this.currentDateTimeDetails = {
-            year,
-            month,
-            day,
-            hours,
-            minutes,
-            seconds,
-            timestamp: 0
-        };
+        if (this.minDate && timestamp < this.minDateTimeDetails.timestamp) {
+            this.currentDateTimeDetails = JSON.parse(JSON.stringify(this.minDateTimeDetails));
+        } else if (this.maxDate && timestamp > this.maxDateTimeDetails.timestamp) {
+            this.currentDateTimeDetails = JSON.parse(JSON.stringify(this.maxDateTimeDetails));
+        } else {
+            this.currentDateTimeDetails = {
+                year,
+                month,
+                day,
+                hours,
+                minutes,
+                seconds,
+                timestamp
+            };
+        }
+        this.startYearIndex = this.currentDateTimeDetails.year - this.currentDateTimeDetails.year % 16;
         this.update();
     }
 
@@ -323,6 +337,9 @@ export class DateComponent implements OnInit, InputType {
     private update() {
         // 通过当前的年月日，计算显示在日历控件中的年月日
         let currentDate = this.currentDateTimeDetails;
+        if (!currentDate.year) {
+            return;
+        }
         let date = new Date();
         date.setFullYear(currentDate.year);
         date.setMonth(currentDate.month + 1, 0);
@@ -439,8 +456,7 @@ export class DateComponent implements OnInit, InputType {
         // 通过当前时间初始化date对象
         let dateInstance: Date = new Date();
         dateInstance.setFullYear(this.currentDateTimeDetails.year);
-        dateInstance.setMonth(this.currentDateTimeDetails.month);
-        dateInstance.setDate(1);
+        dateInstance.setMonth(this.currentDateTimeDetails.month, 1);
         dateInstance.setHours(0);
         dateInstance.setMinutes(0);
         dateInstance.setSeconds(0);

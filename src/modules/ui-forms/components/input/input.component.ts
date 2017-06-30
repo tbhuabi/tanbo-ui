@@ -212,7 +212,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges, OnDestro
             this.componentInstance.min = this.min;
             this.componentInstance.step = this.step;
         } else if (this.type === 'date') {
-            this.componentInstance.mixDate = this.maxDate;
+            this.componentInstance.maxDate = this.maxDate;
             this.componentInstance.minDate = this.minDate;
             this.componentInstance.format = this.format;
             this.componentInstance.placeholder = this.placeholder;
