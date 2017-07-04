@@ -1,22 +1,23 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": ["es6", "dom"],
-    "mapRoot": "./src/modules/",
+    "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
-    "outDir": "./bundles/",
     "sourceMap": true,
-    "target": "ES5",
-    "typeRoots": [
-      "./node_modules/@types"
-    ]
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2015", "dom"],
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true
   },
-  "exclude": ["./node_modules"],
-  "include": ["./src/**/*", "./docs/**/*"],
+
   "files": [
-    "./src/modules/index.ts"
-  ]
+    "src/views/app.module.ts",
+    "src/main.ts"
+  ],
+
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "skipMetadataEmit" : true
+  }
 }

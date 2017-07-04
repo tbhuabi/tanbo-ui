@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const ngAot = require('@ngtools/webpack');
 const webpackMerge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const commonConfig = require('./webpack.common.js');
@@ -16,6 +17,10 @@ module.exports = webpackMerge(commonConfig, {
         chunkFilename: path.posix.join(globalConfig.staticPublicPath, 'js/[id].[hash].chunk.js')
     },
     plugins: [
+        new ngAot.AotPlugin({
+            tsConfigPath: 'tsconfig.json',
+            mainPath: path.resolve(__dirname, '../') + '/src/views/app.module#AppModule'
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['app', 'vendor', 'polyfills']
         }),
