@@ -77,7 +77,7 @@ export class SwitchComponent implements ControlValueAccessor {
         this.onChange = fn;
     }
 
-    registerOnTouched(fn) {
+    registerOnTouched(fn: any) {
         this.onTouched = fn;
     }
 

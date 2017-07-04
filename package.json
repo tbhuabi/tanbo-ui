@@ -46,8 +46,8 @@
     "zone.js": "^0.8.12"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "^4.2.5",
-    "@ngtools/webpack": "^1.5.0",
+    "@angular/compiler-cli": "4.2.2",
+    "@ngtools/webpack": "1.5.0",
     "@types/jasmine": "2.5.47",
     "@types/node": "7.0.18",
     "angular2-template-loader": "0.6.2",
@@ -104,7 +104,7 @@
     "tslint": "4.5.1",
     "tslint-formatter-eslint-style": "0.0.1",
     "tslint-loader": "3.4.3",
-    "typescript": "2.3.2",
+    "typescript": "2.2.2",
     "url-loader": "0.5.8",
     "webpack": "2.5.0",
     "webpack-dev-middleware": "1.10.2",

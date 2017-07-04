@@ -134,7 +134,7 @@ export class RangeComponent implements InputType {
             oldX = event.touches[0].clientX;
         }
 
-        function move(ev) {
+        function move(ev: any) {
 
             let dragDistance: number = 0;
             if (eventType === 'mousedown') {

@@ -21,5 +21,5 @@ export class ButtonComponent {
         return isDisabled && this._disabled !== false;
     }
 
-    private _disabled;
+    private _disabled: boolean;
 }

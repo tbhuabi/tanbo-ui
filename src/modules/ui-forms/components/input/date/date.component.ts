@@ -195,7 +195,7 @@ export class DateComponent implements OnInit, InputType {
         this.update();
     }
 
-    changeShowType(type) {
+    changeShowType(type: string) {
         this.showType = this.showType === type ? '' : type;
     }
 
@@ -217,7 +217,7 @@ export class DateComponent implements OnInit, InputType {
         this.updateYearList();
     }
 
-    checkYear(obj) {
+    checkYear(obj: any) {
         if (obj.disable) {
             return;
         }
@@ -225,7 +225,7 @@ export class DateComponent implements OnInit, InputType {
         this.update();
     }
 
-    setMonth(obj) {
+    setMonth(obj: any) {
         if (obj.isDisable) {
             return;
         }
@@ -243,7 +243,7 @@ export class DateComponent implements OnInit, InputType {
         this.validateSelectedDate();
     }
 
-    testValue(max: number, key: string, $event) {
+    testValue(max: number, key: string, $event: any) {
         let selectedDate = this.selectedDateTimeDetails;
         if (selectedDate[key] > max) {
             let currentValue = (selectedDate[key] + '').replace(/\d$/, '');

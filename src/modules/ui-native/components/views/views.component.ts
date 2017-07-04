@@ -78,7 +78,7 @@ export class ViewsComponent implements OnInit {
         }
     }
 
-    touch($event, item: any) {
+    touch($event: any, item: any) {
         $event.stopPropagation();
         if (this.views.length < 2) {
             return;

@@ -45,7 +45,7 @@ export class StarrySkyComponent implements AfterViewInit, OnDestroy {
     }
 
     // 点：圆心xy坐标，半径，每帧移动xy的距离
-    static circle(x, y, r, moveX, moveY): StarrySkyCircle {
+    static circle(x: number, y: number, r: number, moveX: number, moveY: number): StarrySkyCircle {
         return {
             x,
             y,
@@ -100,7 +100,7 @@ export class StarrySkyComponent implements AfterViewInit, OnDestroy {
         context.strokeStyle = this.lineColor;
         context.lineWidth = 1;
         context.fillStyle = this.roundColor;
-        let circleArr = [];
+        let circleArr: Array<any> = [];
 
         // 每帧绘制
         function draw() {
