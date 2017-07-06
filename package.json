@@ -1,6 +1,6 @@
 {
   "name": "tanbo-ui",
-  "version": "1.4.14",
+  "version": "1.4.15",
   "description": "angular components & directives & pipes ...",
   "main": "./bundles/index.umd.js",
   "module": "./bundles/index.js",
@@ -104,7 +104,7 @@
     "tslint": "4.5.1",
     "tslint-formatter-eslint-style": "0.0.1",
     "tslint-loader": "3.4.3",
-    "typescript": "2.2.2",
+    "typescript": "^2.4.1",
     "url-loader": "0.5.8",
     "webpack": "2.5.0",
     "webpack-dev-middleware": "1.10.2",

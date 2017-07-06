@@ -4,7 +4,8 @@ import { trigger } from '@angular/animations';
 import { LifeCycleService } from './life-cycle.service';
 import { NavController, ViewConfig } from './navigation-controller';
 import { EventType } from '../../utils/event';
-import { pageTransitionAnimate, AnimationTypeBase } from './view-transition-animate';
+import { AnimationType } from '../../utils/animation-type';
+import { pageTransitionAnimate } from './view-transition-animate';
 
 @Component({
     selector: 'ui-views',
@@ -26,11 +27,11 @@ export class ViewsComponent implements OnInit {
         this.navController.pushEvent$.subscribe((viewConfig: ViewConfig) => {
             let lastItem = this.views[this.views.length - 1];
             if (lastItem) {
-                lastItem.state = AnimationTypeBase[viewConfig.transition.toStack];
+                lastItem.state = AnimationType[viewConfig.transition.toStack];
             }
             this.views.push({
                 viewConfig,
-                state: this.views.length ? AnimationTypeBase[viewConfig.transition.activate] : '',
+                state: this.views.length ? AnimationType[viewConfig.transition.activate] : '',
                 styles: {}
             });
         });
@@ -39,31 +40,31 @@ export class ViewsComponent implements OnInit {
 
             let lastItem = this.views[this.views.length - 1];
             if (lastItem) {
-                lastItem.state = AnimationTypeBase[lastItem.viewConfig.transition.destroy];
+                lastItem.state = AnimationType[lastItem.viewConfig.transition.destroy];
             }
             let currentItem = this.views[this.views.length - 2];
             if (currentItem) {
-                currentItem.state = AnimationTypeBase[lastItem.viewConfig.transition.reactivate];
+                currentItem.state = AnimationType[lastItem.viewConfig.transition.reactivate];
             }
         });
     }
 
     destroy() {
         let lastItem = this.views[this.views.length - 1];
-        if (lastItem && lastItem.state === AnimationTypeBase[lastItem.viewConfig.transition.destroy]) {
+        if (lastItem && lastItem.state === AnimationType[lastItem.viewConfig.transition.destroy]) {
             this.views.pop();
         }
     }
 
     lifeCycle(item: any) {
         let enterStatus = [
-            AnimationTypeBase[item.viewConfig.transition.reactivate],
-            AnimationTypeBase[item.viewConfig.transition.activate],
+            AnimationType[item.viewConfig.transition.reactivate],
+            AnimationType[item.viewConfig.transition.activate],
             ''
         ];
         let leaveStatus = [
-            AnimationTypeBase[item.viewConfig.transition.toStack],
-            AnimationTypeBase[item.viewConfig.transition.destroy]
+            AnimationType[item.viewConfig.transition.toStack],
+            AnimationType[item.viewConfig.transition.destroy]
         ];
         if (enterStatus.indexOf(item.state) !== -1) {
             this.lifeCycleService.publishEvent({
@@ -88,7 +89,7 @@ export class ViewsComponent implements OnInit {
         const oldX = touch.pageX;
         const oldY = touch.pageY;
         const styles = item.styles;
-        const state = AnimationTypeBase[item.viewConfig.transition.activate];
+        const state = AnimationType[item.viewConfig.transition.activate];
         if (!item.state) {
             return;
         }
