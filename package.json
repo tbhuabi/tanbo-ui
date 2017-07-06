@@ -1,9 +1,9 @@
 {
   "name": "tanbo-ui",
-  "version": "1.4.13",
+  "version": "1.4.14",
   "description": "angular components & directives & pipes ...",
-  "main": "./bundles/index.js",
-  "module": "./bundles/index.ts",
+  "main": "./bundles/index.umd.js",
+  "module": "./bundles/index.js",
   "typings": "./bundles/index.d.ts",
   "scripts": {
     "start": "cross-env NODE_ENV=development node server/server.js",
