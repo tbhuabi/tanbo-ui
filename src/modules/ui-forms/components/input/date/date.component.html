@@ -1,6 +1,6 @@
 <ui-drop-down [open]="open" (escape)="onEscape()" (trigger)="trigger()" >
   <ui-drop-down-fixed>
-    <div class="ui-date-fixed" renderTo="fixed">
+    <div class="ui-date-fixed">
       <span *ngIf="!value" class="ui-date-placeholder">{{placeholder}}</span>
       <span *ngIf="value">{{value}}</span>
       <div class="ui-date-arrow">

@@ -195,7 +195,7 @@ export class DateComponent implements OnInit, InputType {
         this.update();
     }
 
-    changeShowType(type: string) {
+    changeShowType(type?: string) {
         this.showType = this.showType === type ? '' : type;
     }
 
