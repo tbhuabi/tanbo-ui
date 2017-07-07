@@ -52,9 +52,7 @@ import { Child4Component } from './tab/tab2/child2/child2';
     bootstrap: [AppComponent],
     providers: [
         PageTransferStationService,
-        UiHttp.config({
-            apiPrefix: '/api'
-        })
+        UiHttp
     ]
 })
 export class AppModule {
