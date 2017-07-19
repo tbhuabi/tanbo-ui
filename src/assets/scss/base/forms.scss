@@ -167,3 +167,13 @@
         }
     }
 }
+
+.form-inline {
+    .form-control {
+        display: inline-block;
+        width: auto;
+    }
+    .input-group {
+        width: auto;
+    }
+}
