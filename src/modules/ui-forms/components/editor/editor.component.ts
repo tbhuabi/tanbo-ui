@@ -158,6 +158,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
 
     insertTable() {
         let template = `
+
 | 项目        | 价格   |  数量  |
 | --------   | -----:  | :----:  |
 | 计算机     | \$1600 |   5     |
