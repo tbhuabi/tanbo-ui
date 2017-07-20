@@ -1,3 +1,8 @@
+## 1.4.20
+### 新增功能
+`UiFormsModeule`内，增加新组件
++ `<ui-editor></ui-editor>`
+
 ## 1.4.3
 ### 新增功能
 `UiNativeModule`内，增加新组件

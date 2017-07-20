@@ -4,6 +4,7 @@ import { AppModule } from './views/app.module';
 
 import './assets/scss/index.scss';
 import './assets/scss/native-index.scss';
+// import 'codemirror/lib/codemirror.css';
 
 if (process.env.ENV === 'production') {
     enableProdMode();

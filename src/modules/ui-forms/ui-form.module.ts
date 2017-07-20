@@ -18,6 +18,7 @@ import { RangeComponent } from './components/input/range/range.component';
 import { DateComponent } from './components/input/date/date.component';
 import { ButtonComponent } from './components/button/button.component';
 import { SwitchComponent } from './components/switch/switch.component';
+import { EditorComponent } from './components/editor/editor.component';
 
 import { InputStateService } from './services/input-state.service';
 
@@ -38,6 +39,7 @@ import { InputStateService } from './services/input-state.service';
         DateComponent,
         ButtonComponent,
         SwitchComponent,
+        EditorComponent,
 
         UiCheckboxRequiredValidatorDirective,
         ModelValidatorDirective,
@@ -53,6 +55,7 @@ import { InputStateService } from './services/input-state.service';
         InputComponent,
         ButtonComponent,
         SwitchComponent,
+        EditorComponent,
 
         UiCheckboxRequiredValidatorDirective,
         ModelValidatorDirective,

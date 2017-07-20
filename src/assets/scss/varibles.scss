@@ -1,7 +1,7 @@
 // 全局配置
 $font-size-base: 14px; // 基础文字大小
 $line-height: 1.6;
-$is-open-radius: false;
+$is-open-radius: true;
 
 // 辅助配置
 $container-vertical-padding: 6px;
@@ -134,7 +134,7 @@ $list-title-vertical-padding: .2em;
 $list-title-horizontal-padding: $grid-column-padding;
 
 // code
-$code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+$code-font-family: "Microsoft YaHei Mono", Menlo, Monaco, Consolas, "Courier New", monospace;;
 $code-color: $color-danger;
 $code-bg: $color-light;
 
@@ -169,3 +169,7 @@ $notify-height: 140px;
 
 // toolbar
 $toolbar-width: 40px;
+
+// editor
+$editor-radius-is-open: $is-open-radius;
+$editor-selection-color: rgba(red($color-primary), green($color-primary), blue($color-primary), .2);
