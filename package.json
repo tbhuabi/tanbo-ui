@@ -1,6 +1,6 @@
 {
   "name": "tanbo-ui",
-  "version": "1.4.22",
+  "version": "1.4.23",
   "description": "angular components & directives & pipes ...",
   "main": "./bundles/index.umd.js",
   "module": "./bundles/index.js",
