@@ -4,7 +4,7 @@
 
 .list {
     @include list-unstyled;
-    > li > a, > a {
+    > .list-item > a, > a.list-item {
         display: block;
         text-decoration: none;
         padding: $list-item-vertical-padding $list-item-horizontal-padding;
@@ -22,7 +22,7 @@
         }
     }
     &.list-bordered {
-        > li > a, > a {
+        > .list-item > a, > a.list-item {
             border-width: 1px;
             border-style: solid;
             border-color: transparent $color-light $color-light;
@@ -52,7 +52,7 @@
     }
     &.list-bordered {
         > .list {
-            > li > a, > a {
+            > .list-item > a, > a.list-item {
                 border-width: 1px;
                 border-style: solid;
                 border-color: transparent $color-light $color-light;
