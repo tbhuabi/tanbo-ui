@@ -1,7 +1,7 @@
 // 全局配置
 $font-size-base: 14px; // 基础文字大小
 $line-height: 1.6;
-$is-open-radius: true;
+$is-open-radius: false;
 
 // 辅助配置
 $container-vertical-padding: 6px;
@@ -75,7 +75,7 @@ $form-control-border-color-danger: $color-danger;
 
 // 按扭
 $button-padding-vertical: 5px;
-$button-padding-vertical-sm: $button-padding-vertical - 4px;
+$button-padding-vertical-sm: $button-padding-vertical - 3px;
 $button-padding-vertical-xs: $button-padding-vertical-sm - 1px;
 $button-padding-vertical-lg: $button-padding-vertical + 2px;
 

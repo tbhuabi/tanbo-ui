@@ -48,7 +48,7 @@
         border-radius: $button-radius;
     }
 
-    @include btn-size(sm, $button-padding-vertical-sm, $button-padding-horizontal-sm, $button-font-size, $button-radius-sm);
+    @include btn-size(sm, $button-padding-vertical-sm, $button-padding-horizontal-sm, $button-font-size-sm, $button-radius-sm);
     @include btn-size(xs, $button-padding-vertical-xs, $button-padding-horizontal-xs, $button-font-size-xs, $button-radius-sm);
     @include btn-size(lg, $button-padding-vertical-lg, $button-padding-horizontal-lg, $button-font-size-lg, $button-radius-lg);
 
