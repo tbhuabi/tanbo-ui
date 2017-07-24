@@ -1,7 +1,3 @@
 <div class="container-fluid form-inline">
-  <ui-select (change)="show($event)">
-    <ui-option value="">empty</ui-option>
-    <ui-option value="aa">aa</ui-option>
-    <ui-option value="bb">bb</ui-option>
-  </ui-select>
+  <ui-editor (change)="show($event)" [value]="date"></ui-editor>
 </div>

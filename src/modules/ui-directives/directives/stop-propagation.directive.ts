@@ -4,7 +4,7 @@ import { Directive, ElementRef, Renderer2, OnDestroy, Input, OnInit } from '@ang
 })
 export class StopPropagationDirective implements OnInit, OnDestroy {
     @Input()
-    stopPropagation: Array<string> | string = 'click';
+    uiStopPropagation: Array<string> | string = 'click';
 
     private callbacks: Array<any> = [];
 
@@ -12,10 +12,10 @@ export class StopPropagationDirective implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        if (typeof this.stopPropagation === 'string') {
-            this.addEvent(this.stopPropagation);
+        if (typeof this.uiStopPropagation === 'string') {
+            this.addEvent(this.uiStopPropagation);
         } else {
-            this.stopPropagation.forEach(eventType => {
+            this.uiStopPropagation.forEach(eventType => {
                 this.addEvent(eventType);
             });
         }

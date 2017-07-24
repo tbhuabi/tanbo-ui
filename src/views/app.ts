@@ -11,7 +11,8 @@ export class AppComponent {
     rootPage: any = TabComponent;
     date: string = '';
 
-    show(event: any) {
-        console.error('event: ' + event);
+    show(event: string) {
+        this.date = event;
+        console.log(event);
     }
 }
