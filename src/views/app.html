@@ -1,18 +1,7 @@
 <div class="container-fluid form-inline">
-
-  <button class="btn btn-lg pull-left">按扭</button>
-  <input type="text" class="form-control input-lg pull-left" value="text">
-  <ui-pagination class="pagination-lg pull-left" [pages]="10"></ui-pagination>
-</div>
-<div class="container-fluid form-inline">
-
-  <button class="btn pull-left">按扭</button>
-  <input type="text" class="form-control pull-left" value="text">
-  <ui-pagination class="pull-left" [pages]="10"></ui-pagination>
-</div>
-<div class="container-fluid form-inline">
-
-  <button class="btn btn-sm pull-left">按扭</button>
-  <input type="text" class="form-control input-sm pull-left" value="text">
-  <ui-pagination class="pagination-sm pull-left" [pages]="10"></ui-pagination>
+  <ui-select (change)="show($event)">
+    <ui-option value="">empty</ui-option>
+    <ui-option value="aa">aa</ui-option>
+    <ui-option value="bb">bb</ui-option>
+  </ui-select>
 </div>

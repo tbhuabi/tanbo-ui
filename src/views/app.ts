@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
-import { UiHttp } from '../modules/index';
+import { Component } from '@angular/core';
 
 import { TabComponent } from './tab/tab';
 
@@ -9,22 +7,11 @@ import { TabComponent } from './tab/tab';
     templateUrl: 'app.html',
     styleUrls: ['./app.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
     rootPage: any = TabComponent;
     date: string = '';
 
-    constructor(private http: UiHttp) {
-    }
-
-    ngOnInit() {
-        this.http.get('/test', {
-            params: {
-                a: '3'
-            }
-        }).then(response => {
-            console.log(response);
-        }, error => {
-            console.log(error);
-        });
+    show(event: any) {
+        console.error('event: ' + event);
     }
 }

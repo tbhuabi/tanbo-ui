@@ -53,6 +53,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     }
 
     ngAfterContentInit() {
+        let isInit = true;
         let defaultOption: OptionComponent;
         this.options.forEach((option: OptionComponent, index: number) => {
             if (option.selected) {
@@ -71,6 +72,11 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
                     }
                 });
                 params.selected = true;
+                if (isInit) {
+                    isInit = false;
+                    this.changeDetectorRef.detectChanges();
+                    return;
+                }
                 if (this.onChange) {
                     this.onChange(this.value);
                 }
@@ -78,7 +84,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
                     this.onTouched(this.value);
                 }
                 this.change.emit(this.value);
-                this.changeDetectorRef.detectChanges();
+
             });
             this.subs.push(sub);
         });
