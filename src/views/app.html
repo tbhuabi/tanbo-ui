@@ -1,3 +1,4 @@
 <div class="container-fluid form-inline">
-  <ui-editor (change)="show($event)" [value]="date"></ui-editor>
+  <ui-editor (change)="show($event)" [(ngModel)]="date"></ui-editor>
+  <input type="text" class="form-control" [(ngModel)]="date">
 </div>

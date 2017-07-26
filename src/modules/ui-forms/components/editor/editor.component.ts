@@ -50,7 +50,10 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
         });
         this.cmDoc = this.cmInstance.getDoc();
 
-        this.cmInstance.on('change', (instance: CodeMirror.Editor) => {
+        this.cmInstance.on('change', (instance: CodeMirror.Editor, change: CodeMirror.EditorChangeLinkedList) => {
+            if (change.origin === 'setValue') {
+                return;
+            }
             let value = instance.getValue();
             if (this.onChange) {
                 this.onChange(value);
@@ -170,7 +173,10 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
     }
 
     writeValue(value: any) {
-        this.value = value + '';
+        this.value = value;
+        if (this.cmInstance) {
+            this.cmInstance.setValue(value);
+        }
     }
 
     registerOnChange(fn: any) {
