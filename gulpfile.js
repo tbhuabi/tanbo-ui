@@ -1,30 +1,20 @@
 const gulp = require('gulp');
-const gulpClean = require('gulp-clean');
 const gulpInlineNg2Template = require('gulp-inline-ng2-template');
 const htmlMin = require('html-minifier');
 const gulpSass = require('gulp-sass');
 const gulpAutoPrefix = require('gulp-autoprefixer');
 const gulpCssMin = require('gulp-cssmin');
-const gulpTypeScript = require('gulp-typescript');
 const gulpConcat = require('gulp-concat');
 const gulpSourceMap = require('gulp-sourcemaps');
 
-const tsProject = gulpTypeScript.createProject('./tsconfig.json');
 
-gulp.task('clean', function () {
-    return gulp.src('./bundles/', {
-        read: false
-    }).pipe(gulpClean());
-});
-
-gulp.task('copyFonts', ['clean'], function () {
+gulp.task('copyFonts', function () {
     gulp.src('./src/assets/fonts/angular-ui/fonts/**.*').pipe(gulp.dest('./bundles/fonts/'));
     gulp.src('./src/assets/**/*').pipe(gulp.dest('./bundles/assets/'));
 });
 
-gulp.task('tsCompile', ['copyFonts'], function () {
+gulp.task('tsCompile', function () {
     return gulp.src('./src/modules/**/*.ts')
-        .pipe(gulpSourceMap.init())
         .pipe(gulpInlineNg2Template({
         useRelativePaths: true,
         templateProcessor(path, ext, file, cb) {
@@ -41,9 +31,7 @@ gulp.task('tsCompile', ['copyFonts'], function () {
                 cb(err);
             }
         }
-    })).pipe(gulp.dest('./bundles/')).pipe(tsProject())
-        .pipe(gulpSourceMap.write('./maps'))
-        .pipe(gulp.dest('./bundles/'));
+    })).pipe(gulp.dest('./middle-file/'));
 });
 gulp.task('baseScss', ['copyFonts'], function () {
     return gulp.src(['./src/assets/scss/index.scss', './src/assets/fonts/angular-ui/style.css', './node_modules/normalize.css/normalize.css'])
@@ -57,7 +45,7 @@ gulp.task('baseScss', ['copyFonts'], function () {
         .pipe(gulpSourceMap.write('./maps'))
         .pipe(gulp.dest('./bundles'));
 });
-
+//
 gulp.task('nativeScss', ['copyFonts'], function () {
     return gulp.src(['./src/assets/scss/native-index.scss'])
         .pipe(gulpSourceMap.init())

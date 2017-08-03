@@ -3,6 +3,7 @@ aot/
 config/
 docs/
 node_modules/
+middle-file/
 server/
 src/
 .editorconfig

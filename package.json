@@ -11,7 +11,7 @@
     "pack": "webpack-dev-server --inline --progress --port 8080",
     "test": "karma start",
     "build": "npm run clean && npm run ngc && cross-env NODE_ENV=production webpack --config config/webpack.prod.js --progress --profile --bail --optimize-minimize && rimraf aot",
-    "build:lib": "gulp && node_modules/.bin/rollup -c rollup-config.js",
+    "build:lib": "rimraf middle-file bundles && gulp && npm run ngc && node_modules/.bin/rollup -c rollup-config.js",
     "production": "npm run build && node server/product-server.js",
     "clean": "rimraf dist && rimraf aot",
     "ngc": "node_modules/.bin/ngc -p tsconfig-aot.json"

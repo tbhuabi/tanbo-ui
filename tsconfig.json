@@ -10,14 +10,9 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "./bundles/"
+    "outDir": "./build"
   },
-  "files": [
-    "src/views/app.module.ts",
-    "src/main.ts"
-  ],
-  "angularCompilerOptions": {
-    "genDir": "aot",
-    "skipMetadataEmit": true
-  }
+  "include": [
+    "middle-file/"
+  ]
 }
