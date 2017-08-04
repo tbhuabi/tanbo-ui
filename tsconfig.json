@@ -10,7 +10,7 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "./build"
+    "noEmit": true
   },
   "include": [
     "middle-file/"

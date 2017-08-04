@@ -18,6 +18,7 @@ export interface UiHttpConfig {
     withCredentials?: boolean;
     responseType?: ResponseContentType;
     openTimestamp?: boolean;
+
     responseHandle?(response: Observable<Response>): Promise<any>;
 }
 
@@ -26,8 +27,7 @@ export class UiHttp {
     private static apiPrefix: string = '';
     private static headers: Headers = new Headers({
         'Content-type': 'application/json; charset=UTF-8',
-        'Accept': 'application/json; charset=UTF-8',
-        'X-Requested-With': 'XMLHttpRequest'
+        'Accept': 'application/json; charset=UTF-8'
     });
     private static withCredentials: boolean = true;
     private static responseType: ResponseContentType = ResponseContentType.Json;
@@ -44,7 +44,7 @@ export class UiHttp {
     }
 
     static responseHandle(response: Observable<Response>): Promise<any> {
-        return new Promise((resolve, reject) => {
+        return new Promise<any>((resolve, reject) => {
             response.toPromise().then(response => {
                 if (response.status === 200) {
                     try {
@@ -63,7 +63,7 @@ export class UiHttp {
         });
     }
 
-    private static requestHandle(options: UiRequestOptions): RequestOptionsArgs {
+    private static requestHandle(options: UiRequestOptions, isUpload: boolean = false): RequestOptionsArgs {
         if (UiHttp.openTimestamp) {
             if (options.params) {
                 options.params.t = Date.now();
@@ -74,9 +74,13 @@ export class UiHttp {
             }
         }
 
+        const headers = options.headers || isUpload ? new Headers({
+            'Accept': 'application/json; charset=UTF-8'
+        }) : UiHttp.headers;
+
         return {
             params: options.params,
-            headers: options.headers || UiHttp.headers,
+            headers,
             body: options.body,
             withCredentials: options.withCredentials || UiHttp.withCredentials,
             responseType: options.responseType || UiHttp.responseType
@@ -113,7 +117,7 @@ export class UiHttp {
     upload(url: string, options: UiRequestOptions = {}): Promise<any> {
         const result: Observable<Response> = this.http.post(UiHttp.apiPrefix + url,
             options.body,
-            UiHttp.requestHandle(options));
+            UiHttp.requestHandle(options, true));
         return UiHttp.responseHandle(result);
     }
 }
