@@ -31,7 +31,7 @@ gulp.task('tsCompile', function () {
                 cb(err);
             }
         }
-    })).pipe(gulp.dest('./middle-file/'));
+    })).pipe(gulp.dest('./bundles/'));
 });
 gulp.task('baseScss', ['copyFonts'], function () {
     return gulp.src(['./src/assets/scss/index.scss', './src/assets/fonts/angular-ui/style.css', './node_modules/normalize.css/normalize.css'])

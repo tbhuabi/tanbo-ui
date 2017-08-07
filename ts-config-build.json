@@ -9,7 +9,9 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noEmit": true
-  }
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "include": [
+    "bundles/"
+  ]
 }
