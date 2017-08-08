@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "declaration": true,
+    "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["es2015", "dom"],
@@ -11,5 +11,8 @@
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "noEmit": true
-  }
+  },
+  "include": [
+    "src/"
+  ]
 }
