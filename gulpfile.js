@@ -45,18 +45,6 @@ gulp.task('baseScss', ['copyFonts'], function () {
         .pipe(gulpSourceMap.write('./maps'))
         .pipe(gulp.dest('./bundles'));
 });
-//
-gulp.task('nativeScss', ['copyFonts'], function () {
-    return gulp.src(['./src/assets/scss/native-index.scss'])
-        .pipe(gulpSourceMap.init())
-        .pipe(gulpSass())
-        .pipe(gulpAutoPrefix())
-        .pipe(gulpConcat({
-            path: require('./package.json').name + '-native.min.css'
-        }))
-        .pipe(gulpCssMin())
-        .pipe(gulpSourceMap.write('./maps'))
-        .pipe(gulp.dest('./bundles'));
-});
 
-gulp.task('default', ['tsCompile', 'baseScss', 'nativeScss']);
+
+gulp.task('default', ['tsCompile', 'baseScss']);
