@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 
-import { NotifyConfig, NotifyController, NotifyType } from '../../services/notify-controller.service';
+import { NotifyConfig, NotifyController, NotifyType } from './notify-controller.service';
 
 @Component({
     selector: 'ui-notify',

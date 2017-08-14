@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { ConfirmController, ConfirmConfig } from '../../services/confirm-controller.service';
+import { ConfirmController, ConfirmConfig } from './confirm-controller.service';
 import { Subscription } from 'rxjs';
 
 @Component({
