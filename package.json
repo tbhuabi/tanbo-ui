@@ -1,6 +1,6 @@
 {
   "name": "tanbo-ui",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "angular components & directives & pipes ...",
   "main": "./bundles/index.js",
   "module": "./bundles/index.ts",
@@ -39,6 +39,8 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@types/codemirror": "0.0.42",
+    "@types/echarts": "0.0.6",
     "codemirror": "^5.27.4",
     "core-js": "^2.4.0",
     "echarts": "^3.6.2",
@@ -50,8 +52,6 @@
   "devDependencies": {
     "@angular/compiler-cli": "4.2.2",
     "@ngtools/webpack": "1.5.0",
-    "@types/codemirror": "0.0.42",
-    "@types/echarts": "0.0.6",
     "@types/jasmine": "2.5.47",
     "@types/node": "7.0.18",
     "angular2-template-loader": "0.6.2",

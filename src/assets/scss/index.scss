@@ -18,7 +18,6 @@
 @import "components/ui-drop-down";
 @import "components/ui-drop-down-fixed";
 @import "components/ui-drop-down-menu";
-@import "components/ui-loading-button";
 @import "components/ui-notify";
 @import "components/ui-slide";
 @import "components/ui-slide-item";
@@ -29,6 +28,7 @@
 
 
 // 扩展表单
+@import "forms/ui-button";
 @import "forms/ui-checkbox";
 @import "forms/ui-date";
 @import "forms/ui-editor";
