@@ -14,24 +14,26 @@
 
 // 扩展样式主要用于各个组件搭配使用时，样式不符合预期的修改
 @import "components/ui-app";
-@import "components/ui-checkbox";
 @import "components/ui-confirm";
-@import "components/ui-date";
 @import "components/ui-drop-down";
 @import "components/ui-drop-down-fixed";
 @import "components/ui-drop-down-menu";
-@import "components/ui-editor";
 @import "components/ui-loading-button";
 @import "components/ui-notify";
-@import "components/ui-option";
-@import "components/ui-pagination";
-@import "components/ui-radio";
-@import "components/ui-range";
-@import "components/ui-select";
 @import "components/ui-slide";
 @import "components/ui-slide-item";
+@import "components/ui-pagination";
 @import "components/ui-starry-sky";
-@import "components/ui-switch";
 @import "components/ui-toolbar";
 @import "components/ui-view-loading-bar";
 
+
+// 扩展表单
+@import "forms/ui-checkbox";
+@import "forms/ui-date";
+@import "forms/ui-editor";
+@import "forms/ui-option";
+@import "forms/ui-radio";
+@import "forms/ui-range";
+@import "forms/ui-select";
+@import "forms/ui-switch";
