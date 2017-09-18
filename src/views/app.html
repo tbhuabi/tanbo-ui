@@ -2,5 +2,5 @@
 <br>
 fdsa
 <div class="container-fluid">
-  <ui-editor [(ngModel)]="html"></ui-editor>
+  <ui-editor [(ngModel)]="html" (change)="show($event)"></ui-editor>
 </div>
