@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Http, Headers, Response, RequestOptionsArgs, ResponseContentType } from '@angular/http';
+import { Headers, Http, RequestOptionsArgs, Response, ResponseContentType } from '@angular/http';
 
 export interface UiRequestOptions {
     params?: {
@@ -10,6 +10,7 @@ export interface UiRequestOptions {
     body?: any;
     withCredentials?: boolean;
     responseType?: ResponseContentType;
+    apiPrefix?: string;
 }
 
 export interface UiHttpConfig {
@@ -87,35 +88,44 @@ export class UiHttp {
         };
     }
 
+    private static urlHandle(url: string, options: UiRequestOptions): string {
+        if ((options as any).hasOwnProperty('apiPrefix')) {
+            return options.apiPrefix + url;
+        }
+        return UiHttp.apiPrefix + url;
+    }
+
     constructor(private http: Http) {
     }
 
     get(url: string, options: UiRequestOptions = {}): Promise<any> {
-        const result: Observable<Response> = this.http.get(UiHttp.apiPrefix + url, UiHttp.requestHandle(options));
+        const result: Observable<Response> = this.http.get(UiHttp.urlHandle(url, options),
+            UiHttp.requestHandle(options));
         return UiHttp.responseHandle(result);
     }
 
     post(url: string, options: UiRequestOptions = {}): Promise<any> {
-        const result: Observable<Response> = this.http.post(UiHttp.apiPrefix + url,
+        const result: Observable<Response> = this.http.post(UiHttp.urlHandle(url, options),
             options.body,
             UiHttp.requestHandle(options));
         return UiHttp.responseHandle(result);
     }
 
     put(url: string, options: UiRequestOptions = {}): Promise<any> {
-        const result: Observable<Response> = this.http.put(UiHttp.apiPrefix + url,
+        const result: Observable<Response> = this.http.put(UiHttp.urlHandle(url, options),
             options.body,
             UiHttp.requestHandle(options));
         return UiHttp.responseHandle(result);
     }
 
     delete(url: string, options: UiRequestOptions = {}): Promise<any> {
-        const result: Observable<Response> = this.http.delete(UiHttp.apiPrefix + url, UiHttp.requestHandle(options));
+        const result: Observable<Response> = this.http.delete(UiHttp.urlHandle(url, options),
+            UiHttp.requestHandle(options));
         return UiHttp.responseHandle(result);
     }
 
     upload(url: string, options: UiRequestOptions = {}): Promise<any> {
-        const result: Observable<Response> = this.http.post(UiHttp.apiPrefix + url,
+        const result: Observable<Response> = this.http.post(UiHttp.urlHandle(url, options),
             options.body,
             UiHttp.requestHandle(options, true));
         return UiHttp.responseHandle(result);
