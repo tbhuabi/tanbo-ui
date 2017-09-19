@@ -29,7 +29,7 @@
     display: block;
     width: 100%;
     background: none;
-    @include input-style($form-control-border-color, $form-control-border-color);
+    @include input-style($form-control-border-color, $form-control-border-color-primary);
     @include input-size($form-control-padding-vertical, $form-control-padding-horizontal, $form-control-radius, $form-control-font-size-base);
     &.input-sm {
         @include input-size($form-control-padding-vertical-sm, $form-control-padding-horizontal-sm, $form-control-radius-sm, $form-control-font-size-sm);
