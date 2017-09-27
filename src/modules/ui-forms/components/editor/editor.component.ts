@@ -55,7 +55,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
             if (change.origin === 'setValue') {
                 return;
             }
-            let value = instance.getValue().replace(/\s+\n/g, '  \n');
+            let value = instance.getValue();
             if (this.onChange) {
                 this.onChange(value);
             }
