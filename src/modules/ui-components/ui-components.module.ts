@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UiDirectivesModule } from '../ui-directives/ui-directives.module';
+import { UIDirectivesModule } from '../ui-directives/ui-directives.module';
 
 import { AppComponent } from './components/app/app.component';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
@@ -21,7 +21,7 @@ import { NotifyController } from './components/notify/notify-controller.service'
 @NgModule({
     imports: [
         CommonModule,
-        UiDirectivesModule
+        UIDirectivesModule
     ],
     declarations: [
         AppComponent,
@@ -54,5 +54,5 @@ import { NotifyController } from './components/notify/notify-controller.service'
         ConfirmController
     ]
 })
-export class UiComponentsModule {
+export class UIComponentsModule {
 }

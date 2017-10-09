@@ -43,7 +43,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UiFormsModule, UiDirectivesModule, UiComponentsModule } from 'tanbo-ui';
+import { UIFormsModule, UIDirectivesModule, UIComponentsModule } from 'tanbo-ui';
 
 // 这里是依赖的样式表，你也可以直接通过link标签引入
 // 如果你想自定义样式，你可以通过taobo-ui提供的scss源文件来修改其中的样式
@@ -54,9 +54,9 @@ import 'tanbo-ui/bundles/tanbo-ui.min.css';
 @NgModule({
     imports: [
         /* ..other modules.. */
-        UiFormsModule,
-        UiDirectivesModule,
-        UiComponentsModule,
+        UIFormsModule,
+        UIDirectivesModule,
+        UIComponentsModule,
         FormsModule, // FormsModule 一定要在 UiFormsModule 之后
         BrowserModule,
         BrowserAnimationsModule // UiComponentsModule 依赖动画模块

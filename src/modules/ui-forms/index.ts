@@ -1,1 +1,1 @@
-export { UiFormsModule } from './ui-forms.module';
+export { UIFormsModule } from './ui-forms.module';
