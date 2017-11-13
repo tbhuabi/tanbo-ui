@@ -9,7 +9,6 @@ const gulpSourceMap = require('gulp-sourcemaps');
 
 
 gulp.task('copyFonts', function () {
-    gulp.src('./src/assets/fonts/angular-ui/fonts/**.*').pipe(gulp.dest('./bundles/fonts/'));
     gulp.src('./src/assets/**/*').pipe(gulp.dest('./bundles/assets/'));
 });
 
