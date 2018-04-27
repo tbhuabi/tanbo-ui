@@ -1,8 +1,8 @@
 <ui-drop-down [open]="open" (escape)="onEscape()" (trigger)="trigger()" >
   <ui-drop-down-fixed>
     <div class="ui-date-fixed">
-      <span *ngIf="!value" class="ui-date-placeholder">{{placeholder}}</span>
-      <span *ngIf="value">{{value}}</span>
+      <span *ngIf="!value" class="ui-date-placeholder">{{ placeholder }}</span>
+      <span *ngIf="value">{{ value }}</span>
       <div class="ui-date-arrow">
         <span class="caret"></span>
       </div>
@@ -15,7 +15,7 @@
         <tr>
           <td colspan="3" [ngClass]="{active: showType === 'year'}">
             <div class="ui-date-header-content">
-              {{currentDateTimeDetails.year}}年
+              {{ currentDateTimeDetails.year }}年
               <span class="arrow"
                     uiStopPropagation
                     (click)="changeShowType('year')"
@@ -34,14 +34,14 @@
                 <li *ngFor="let item of years"
                     (click)="checkYear(item)"
                     [ngClass]="{disabled: item.isDisable}">
-                  {{item.year}}
+                  {{ item.year }}
                 </li>
               </ul>
             </div>
           </td>
           <td colspan="2" [ngClass]="{active: showType ==='month'}">
             <div class="ui-date-header-content">
-              {{currentDateTimeDetails.month + 1}}月
+              {{ currentDateTimeDetails.month + 1 }}月
               <span class="arrow"
                     uiStopPropagation
                     (click)="changeShowType('month')"
@@ -52,7 +52,7 @@
                 <li *ngFor="let item of months"
                     (click)="setMonth(item)"
                     [ngClass]="{disabled: item.isDisable}">
-                  {{item.month + 1}}月
+                  {{ item.month + 1 }}月
                 </li>
               </ul>
             </div>
@@ -82,7 +82,7 @@
         <tr *ngFor="let item of dayList">
           <td *ngFor="let day of item" (click)="selected(day)"
               [ngClass]="{'no-current-month': day.month !== currentDateTimeDetails.month, 'current-day': day.year === systemDateTimeDetails.year && day.month === systemDateTimeDetails.month && day.day === systemDateTimeDetails.day, 'selected-day': day.year === selectedDateTimeDetails.year && day.month === selectedDateTimeDetails.month && day.day === selectedDateTimeDetails.day, 'disabled': day.disabled}">
-            {{day.day}}
+            {{ day.day }}
           </td>
         </tr>
         </tbody>
