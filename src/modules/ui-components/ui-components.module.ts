@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { UIDirectivesModule } from '../ui-directives/ui-directives.module';
 
 import { AppComponent } from './components/app/app.component';
-import { DropDownComponent } from './components/drop-down/drop-down.component';
-import { DropDownFixedComponent } from './components/drop-down-fixed/drop-down-fixed.component';
-import { DropDownMenuComponent } from './components/drop-down-menu/drop-down-menu.component';
+import { DropDownComponent } from './components/dropdown/dropdown.component';
+import { DropdownFixedComponent } from './components/dropdown-fixed/dropdown-fixed.component';
+import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { NotifyComponent } from './components/notify/notify.component';
@@ -26,8 +26,8 @@ import { NotifyController } from './components/notify/notify-controller.service'
     declarations: [
         AppComponent,
         DropDownComponent,
-        DropDownFixedComponent,
-        DropDownMenuComponent,
+        DropdownFixedComponent,
+        DropdownMenuComponent,
         PaginationComponent,
         ConfirmComponent,
         NotifyComponent,
@@ -40,8 +40,8 @@ import { NotifyController } from './components/notify/notify-controller.service'
     exports: [
         AppComponent,
         DropDownComponent,
-        DropDownFixedComponent,
-        DropDownMenuComponent,
+        DropdownFixedComponent,
+        DropdownMenuComponent,
         PaginationComponent,
         StarrySkyComponent,
         ViewLoadingBarComponent,

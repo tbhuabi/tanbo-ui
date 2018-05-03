@@ -1,5 +1,5 @@
-<ui-drop-down [open]="open" (trigger)="trigger()" (escape)="escape()">
-  <ui-drop-down-fixed>
+<ui-dropdown [open]="open" (trigger)="trigger()" (escape)="escape()">
+  <ui-dropdown-fixed>
     <div class="ui-select-fixed" renderTo="fixed">
       <input [disabled]="disabled"
              [name]="name"
@@ -11,10 +11,10 @@
         <span class="caret"></span>
       </div>
     </div>
-  </ui-drop-down-fixed>
-  <ui-drop-down-menu>
+  </ui-dropdown-fixed>
+  <ui-dropdown-menu>
     <div class="ui-select-menu" renderTo="menu">
       <ng-content selector="ui-option"></ng-content>
     </div>
-  </ui-drop-down-menu>
-</ui-drop-down>
+  </ui-dropdown-menu>
+</ui-dropdown>

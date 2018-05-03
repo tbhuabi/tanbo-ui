@@ -9,7 +9,6 @@ import { UIComponentsModule } from '../ui-components/ui-components.module';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DateComponent } from './components/date/date.component';
-import { EditorComponent } from './components/editor/editor.component';
 import { OptionComponent } from './components/option/option.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { RangeComponent } from './components/range/range.component';
@@ -19,7 +18,7 @@ import { SwitchComponent } from './components/switch/switch.component';
 // 指令
 import { FormValidatorDirective } from './directives/form-validator.directive';
 import { ModelValidatorDirective } from './directives/model-validator.directive';
-import { UiCheckboxRequiredValidatorDirective } from './directives/required-validator.directive';
+import { UICheckboxRequiredValidatorDirective } from './directives/required-validator.directive';
 
 // 服务
 import { RadioStateService } from './components/radio/radio-state.service';
@@ -36,7 +35,6 @@ import { RadioStateService } from './components/radio/radio-state.service';
         ButtonComponent,
         CheckboxComponent,
         DateComponent,
-        EditorComponent,
         OptionComponent,
         RadioComponent,
         RangeComponent,
@@ -46,14 +44,13 @@ import { RadioStateService } from './components/radio/radio-state.service';
         // 指令
         FormValidatorDirective,
         ModelValidatorDirective,
-        UiCheckboxRequiredValidatorDirective
+        UICheckboxRequiredValidatorDirective
     ],
     exports: [
         // 组件
         ButtonComponent,
         CheckboxComponent,
         DateComponent,
-        EditorComponent,
         OptionComponent,
         RadioComponent,
         RangeComponent,
@@ -63,7 +60,7 @@ import { RadioStateService } from './components/radio/radio-state.service';
         // 指令
         FormValidatorDirective,
         ModelValidatorDirective,
-        UiCheckboxRequiredValidatorDirective
+        UICheckboxRequiredValidatorDirective
     ],
     providers: [
         RadioStateService

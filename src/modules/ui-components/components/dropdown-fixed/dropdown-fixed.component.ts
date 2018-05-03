@@ -1,9 +1,9 @@
 import { Component, Output, EventEmitter, HostListener } from '@angular/core';
 @Component({
-    selector: 'ui-drop-down-fixed',
-    templateUrl: './drop-down-fixed.component.html'
+    selector: 'ui-dropdown-fixed',
+    templateUrl: './dropdown-fixed.component.html'
 })
-export class DropDownFixedComponent {
+export class DropdownFixedComponent {
     @Output()
     trigger = new EventEmitter();
 

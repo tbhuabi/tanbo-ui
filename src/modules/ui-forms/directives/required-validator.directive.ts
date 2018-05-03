@@ -6,11 +6,11 @@ import { NG_VALIDATORS, AbstractControl, ValidationErrors, Validator } from '@an
     /* tslint:enable */
     providers: [{
         provide: NG_VALIDATORS,
-        useExisting: UiCheckboxRequiredValidatorDirective,
+        useExisting: UICheckboxRequiredValidatorDirective,
         multi: true
     }]
 })
-export class UiCheckboxRequiredValidatorDirective implements Validator {
+export class UICheckboxRequiredValidatorDirective implements Validator {
     private _required: boolean;
     private _onChange: () => void;
 
