@@ -2,67 +2,40 @@ import {
     Component,
     HostBinding,
     Input,
-    OnInit,
-    QueryList,
-    AfterContentInit,
-    EventEmitter,
     Output,
-    OnDestroy,
-    Renderer2,
-    ContentChildren
+    EventEmitter,
+    HostListener
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-
-import { DropdownFixedComponent } from '../dropdown-fixed/dropdown-fixed.component';
-import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 
 @Component({
     selector: 'ui-dropdown',
     templateUrl: './dropdown.component.html'
 })
 
-export class DropDownComponent implements AfterContentInit, OnInit, OnDestroy {
-    @ContentChildren(DropdownFixedComponent)
-    fixed: QueryList<DropdownFixedComponent>;
-    @ContentChildren(DropdownMenuComponent)
-    menu: QueryList<DropdownMenuComponent>;
+export class DropDownComponent {
     @Input()
     @HostBinding('class.open')
     open: boolean = false;
     @Output()
-    escape = new EventEmitter();
+    escape = new EventEmitter<void>();
     @Output()
-    trigger = new EventEmitter();
+    trigger = new EventEmitter<void>();
 
-    private subs: Array<Subscription> = [];
-    private isTriggerEvent: boolean = false;
+    private isSelfClick: boolean = false;
 
-    constructor(private renderer: Renderer2) {
+    @HostListener('document:click')
+    globalClick() {
+        const b = this.isSelfClick;
+        this.isSelfClick = false;
+        if (b) {
+            return;
+        }
+        this.escape.emit();
     }
 
-    ngOnInit() {
-        this.renderer.listen('document', 'click', () => {
-            if (this.isTriggerEvent) {
-                this.isTriggerEvent = false;
-                return;
-            }
-            this.escape.emit();
-        });
-    }
-
-    ngAfterContentInit() {
-        this.fixed.forEach(item => {
-            let sub = item.trigger.subscribe(() => {
-                this.isTriggerEvent = true;
-                this.trigger.emit();
-            });
-            this.subs.push(sub);
-        });
-    }
-
-    ngOnDestroy() {
-        this.subs.forEach(item => {
-            item.unsubscribe();
-        });
+    @HostListener('click')
+    click() {
+        this.isSelfClick = true;
+        this.trigger.emit();
     }
 }

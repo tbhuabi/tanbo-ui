@@ -1,13 +1,14 @@
-<ui-dropdown [open]="open" (escape)="onEscape()" (trigger)="trigger()" >
-  <ui-dropdown-fixed>
-    <div class="ui-date-fixed">
-      <span *ngIf="!value" class="ui-date-placeholder">{{ placeholder }}</span>
-      <span *ngIf="value">{{ value }}</span>
-      <div class="ui-date-arrow">
-        <span class="caret"></span>
-      </div>
-    </div>
-  </ui-dropdown-fixed>
+<ui-dropdown [open]="open" (escape)="onEscape()" (trigger)="trigger()">
+  <input type="text"
+         [value]="value"
+         [placeholder]="placeholder"
+         [id]="forId"
+         [name]="name"
+         class="ui-input-raw"
+         readonly [disabled]="disabled">
+  <div class="ui-date-arrow">
+    <span class="caret"></span>
+  </div>
   <ui-dropdown-menu>
     <div class="ui-date-container" (click)="changeShowType()">
       <table class="ui-date-table">

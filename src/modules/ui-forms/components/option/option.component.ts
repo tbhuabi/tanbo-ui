@@ -8,6 +8,9 @@ import {
     HostBinding,
     HostListener
 } from '@angular/core';
+
+import { SelectService } from '../select/select.service';
+
 @Component({
     selector: 'ui-option',
     templateUrl: './option.component.html'
@@ -31,6 +34,9 @@ export class OptionComponent implements AfterViewInit {
     @HostBinding('class.selected')
     set selected(isSelected: any) {
         this._selected = isSelected;
+        if (isSelected) {
+            this.selectService.checked(this);
+        }
     }
 
     get selected() {
@@ -40,24 +46,24 @@ export class OptionComponent implements AfterViewInit {
 
     @Output()
     checked = new EventEmitter<OptionComponent>();
-    text: string = '';
+    nativeElement: HTMLElement;
 
-    private _disabled: boolean;
-    private _selected: boolean;
+    private _disabled: boolean = false;
+    private _selected: boolean = false;
 
-    constructor(private elementRef: ElementRef) {
+    constructor(private elementRef: ElementRef,
+                private selectService: SelectService) {
     }
 
-    @HostListener('click') click() {
+    @HostListener('click')
+    click() {
         if (!this.disabled) {
+            this.selected = true;
             this.checked.emit(this);
         }
     }
 
     ngAfterViewInit() {
-        this.text = this.elementRef.nativeElement.innerText;
-        if (this.selected) {
-            this.checked.emit(this);
-        }
+        this.nativeElement = this.elementRef.nativeElement;
     }
 }

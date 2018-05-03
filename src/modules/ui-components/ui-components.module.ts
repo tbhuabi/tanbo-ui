@@ -4,7 +4,6 @@ import { UIDirectivesModule } from '../ui-directives/ui-directives.module';
 
 import { AppComponent } from './components/app/app.component';
 import { DropDownComponent } from './components/dropdown/dropdown.component';
-import { DropdownFixedComponent } from './components/dropdown-fixed/dropdown-fixed.component';
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
@@ -26,7 +25,6 @@ import { NotifyController } from './components/notify/notify-controller.service'
     declarations: [
         AppComponent,
         DropDownComponent,
-        DropdownFixedComponent,
         DropdownMenuComponent,
         PaginationComponent,
         ConfirmComponent,
@@ -40,7 +38,6 @@ import { NotifyController } from './components/notify/notify-controller.service'
     exports: [
         AppComponent,
         DropDownComponent,
-        DropdownFixedComponent,
         DropdownMenuComponent,
         PaginationComponent,
         StarrySkyComponent,

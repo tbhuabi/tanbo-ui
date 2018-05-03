@@ -2,19 +2,34 @@ ui-input[type=date] {
     display: inline-block;
     cursor: pointer;
     line-height: inherit;
-    border: 1px solid $color-gray-light;
+    border: 1px solid $form-control-border-color;
     position: relative;
-    > .ui-input-raw {
-        width: 0;
-        height: 0;
+    .ui-input-raw {
+        background: none;
+        border: 0;
+        width: 100%;
+        height: 100%;
+        color: inherit;
         position: absolute;
-        overflow: hidden;
-        opacity: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        cursor: inherit;
+        z-index: 1;
+        padding: inherit;
     }
     &:before {
         content: "";
         display: inline-block;
         width: 8em;
+    }
+    .ui-date-arrow {
+        padding: $form-control-padding-vertical $form-control-padding-horizontal;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
     }
 
     &.left-bottom, &.right-bottom, &.top {
@@ -58,38 +73,9 @@ ui-input[type=date] {
         right: 0;
         top: 0;
         bottom: 0;
-        > ui-dropdown-fixed {
-            padding: inherit;
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            > .ui-date-fixed {
-                white-space: nowrap;
-                overflow: hidden;
-                margin-right: $form-control-padding-horizontal * 1.5;
-                line-height: inherit;
-                cursor: inherit;
-                .ui-date-placeholder {
-                    color: #888;
-                }
-                &:after {
-                    content: "";
-                    display: inline-block;
-                }
-                > span {
-                    position: relative;
-                    z-index: 1;
-                }
-                > .ui-date-arrow {
-                    padding: $form-control-padding-vertical $form-control-padding-horizontal;
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    bottom: 0;
-                }
-            }
+        &:after {
+            content: "";
+            display: inline-block;
         }
         > ui-dropdown-menu {
             cursor: auto;

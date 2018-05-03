@@ -38,9 +38,13 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     @Input()
     placeholder: string = '';
     @Input()
-    value: string;
+    value: string = '';
     @Input()
-    format: string = '';
+    name: string = '';
+    @Input()
+    forId: string = '';
+    @Input()
+    format: string = 'yyyy-MM-dd';
     @Output()
     change = new EventEmitter<string>();
     @HostBinding('class.focus')

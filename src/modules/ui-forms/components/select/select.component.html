@@ -1,19 +1,17 @@
 <ui-dropdown [open]="open" (trigger)="trigger()" (escape)="escape()">
-  <ui-dropdown-fixed>
-    <div class="ui-select-fixed" renderTo="fixed">
-      <input [disabled]="disabled"
-             [name]="name"
-             readonly
-             type="text"
-             [value]="text">
-      <span>{{ text }}</span>
-      <div class="ui-select-arrow">
-        <span class="caret"></span>
-      </div>
-    </div>
-  </ui-dropdown-fixed>
+  <input type="text"
+         [value]="text"
+         [placeholder]="placeholder"
+         [id]="forId"
+         class="ui-input-raw"
+         readonly
+         [name]="name"
+         [disabled]="disabled">
+  <div class="ui-select-arrow">
+    <span class="caret"></span>
+  </div>
   <ui-dropdown-menu>
-    <div class="ui-select-menu" renderTo="menu">
+    <div class="ui-select-menu">
       <ng-content selector="ui-option"></ng-content>
     </div>
   </ui-dropdown-menu>
