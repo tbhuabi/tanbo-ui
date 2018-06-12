@@ -7,6 +7,7 @@ aot/
 dist/
 lib/
 proxy.config.js
+package-lock.json
 zip
 .idea
 *.swp
