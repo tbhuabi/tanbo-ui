@@ -1,1 +1,0 @@
-export { UIDirectivesModule } from './ui-directives.module';
