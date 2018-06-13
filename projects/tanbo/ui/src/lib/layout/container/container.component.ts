@@ -6,6 +6,10 @@ import { Component, Input, HostBinding } from '@angular/core';
 })
 export class ContainerComponent {
   @Input()
+  fluid = false;
+
   @HostBinding('class.ui-not-fill')
-  fill = false;
+  get _fluid() {
+    return !this.fluid;
+  }
 }

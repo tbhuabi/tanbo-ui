@@ -1,6 +1,9 @@
 ui-header {
   display: block;
-  &.ui-not-fluid {
+  height: 50px;
+  background: $color-dark;
+  color: $color-gray-light;
+  &.ui-header-fill-screen {
     margin-left: auto;
     margin-right: auto;
     @media (min-width: $screen-sm-min) {
@@ -12,5 +15,15 @@ ui-header {
     @media (min-width: $screen-lg-min) {
       width: $screen-lg-min;
     }
+  }
+
+  &.ui-header-fixed {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  > ui-container {
+    height: 100%;
   }
 }

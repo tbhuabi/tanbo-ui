@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { ContainerComponent } from './components/container/container.component';
-import { HeaderComponent } from './components/header/header.component';
+import { ContainerComponent } from './container/container.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -13,5 +13,5 @@ import { HeaderComponent } from './components/header/header.component';
       HeaderComponent
   ]
 })
-export class LayoutModule {
+export class UILayoutModule {
 }

@@ -6,8 +6,15 @@ import { Component, HostBinding, Input } from '@angular/core';
 })
 export class HeaderComponent {
   @Input()
-  @HostBinding('class.ui-fill-screen')
   fillScreenWidth = true;
   @Input()
   fluid = false;
+  @Input()
+  @HostBinding('class.ui-header-fixed')
+  fixed = false;
+
+  @HostBinding('class.ui-header-fill-screen')
+  get _fillScreen() {
+    return !this.fillScreenWidth;
+  }
 }
