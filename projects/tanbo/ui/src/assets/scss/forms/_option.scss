@@ -1,0 +1,25 @@
+ui-option {
+  line-height: 2em;
+  transition: all .15s;
+  display: block;
+  background: none;
+  width: 100%;
+  border: 0;
+  font-size: 14px;
+  text-align: left;
+  white-space: normal;
+  overflow: hidden;
+  padding: 0 $grid-column-padding;
+  cursor: pointer;
+  &:hover {
+    background-color: hsla(hue($color-primary), saturation($color-primary), lightness($color-primary), .1);
+  }
+  &.selected {
+    background-color: hsla(hue($color-primary), saturation($color-primary), lightness($color-primary), .2);
+  }
+  &.disabled {
+    background-color: hsla(hue($color-default), saturation($color-default), lightness($color-default), .2);
+    cursor: not-allowed;
+    color: #fff;
+  }
+}

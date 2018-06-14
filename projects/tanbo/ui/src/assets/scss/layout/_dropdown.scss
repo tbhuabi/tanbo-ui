@@ -1,0 +1,21 @@
+ui-dropdown {
+  display: inline-block;
+  position: relative;
+  &.ui-open {
+    > ui-dropdown-menu {
+      transform: scaleY(1);
+      opacity: 1
+    }
+  }
+  > ui-dropdown-menu {
+    transform-origin: 0 0;
+    transition: all .2s;
+    transform: scaleY(0);
+    opacity: 0;
+    z-index: 100;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+  }
+}

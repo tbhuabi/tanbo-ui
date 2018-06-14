@@ -5,11 +5,22 @@ import { Subscription } from 'rxjs';
 import { InputGroupService } from '../input-group/input-group.service';
 
 @Directive({
-  selector: 'input[ui-input]'
+  selector: 'input[ui-input]',
+  host: {
+    '[class.ui-form-control]': 'true',
+    '[class.ui-input-sm]': 'size === "sm"',
+    '[class.ui-input-lg]': 'size === "lg"',
+    '[class.ui-has-error]': 'hasError'
+  }
 })
 export class InputDirective implements OnDestroy, AfterViewInit {
   @Input()
   autofocus: boolean;
+  @Input()
+  size: string;
+
+  hasError = false;
+
   private subs: Subscription[] = [];
 
   constructor(@Optional() private inputGroupService: InputGroupService,
@@ -31,7 +42,8 @@ export class InputDirective implements OnDestroy, AfterViewInit {
     if (this.ngControl && this.inputGroupService) {
       this.subs.push(this.ngControl.valueChanges.subscribe(() => {
         if (this.ngControl.dirty) {
-          this.inputGroupService.setErrorState(this.ngControl.valid);
+          this.hasError = this.ngControl.valid;
+          this.inputGroupService.setErrorState(this.hasError);
         }
       }));
     }

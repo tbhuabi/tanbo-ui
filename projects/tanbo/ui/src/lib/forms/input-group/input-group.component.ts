@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, Input } from '@angular/core';
 
 import { InputGroupService } from './input-group.service';
 
@@ -8,26 +7,13 @@ import { InputGroupService } from './input-group.service';
   templateUrl: './input-group.component.html',
   providers: [
     InputGroupService
-  ]
+  ],
+  host: {
+    '[class.ui-input-group-lg]': 'size === "lg"',
+    '[class.ui-input-group-sm]': 'size === "sm"'
+  }
 })
-export class InputGroupComponent implements OnDestroy, OnInit {
-  subs: Subscription[] = [];
-  hasError: boolean = false;
-  isFocus: boolean = false;
-
-  constructor(private inputGroupService: InputGroupService) {
-  }
-
-  ngOnInit() {
-    this.subs.push(this.inputGroupService.hasError.subscribe(b => {
-      this.hasError = b;
-    }));
-    this.subs.push(this.inputGroupService.isFocus.subscribe(b => {
-      this.isFocus = b;
-    }));
-  }
-
-  ngOnDestroy() {
-    this.subs.forEach(item => item.unsubscribe());
-  }
+export class InputGroupComponent {
+  @Input()
+  size: string;
 }

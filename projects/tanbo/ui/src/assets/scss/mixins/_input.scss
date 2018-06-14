@@ -1,10 +1,10 @@
 @mixin input-style($border-color, $border-focus-color) {
   border: 1px solid $border-color;
-  &:focus, &.focus {
+  &:focus, &.ui-focus {
     border-color: $border-focus-color;
     box-shadow: inset 0 0 0 1px $border-focus-color;
   }
-  &.disabled, &[disabled] {
+  &[disabled], &.ui-disabled {
     background-color: hsla(hue($border-color), saturation($border-color), lightness($border-color), .2);
   }
 }
@@ -16,7 +16,7 @@
   @if $form-control-radius-is-open {
     border-radius: $radius;
   }
-  &.disabled, &[disabled] {
+  &.ui-disabled, &[disabled] {
     opacity: .5;
     cursor: not-allowed;
   }

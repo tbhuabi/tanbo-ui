@@ -1,0 +1,17 @@
+<ui-dropdown [open]="open" (escape)="escape()" (toggle)="toggle()">
+  <div class="ui-select-fixed">
+    <input [disabled]="disabled"
+           [name]="name"
+           readonly
+           type="text"
+           [class.ui-focus]="focus"
+           [id]="forId"
+           [value]="text">
+    <div class="ui-select-arrow" [class.ui-open]="open">
+      <span [ngClass]="arrowIconClassName"></span>
+    </div>
+  </div>
+  <ui-dropdown-menu>
+    <ng-content></ng-content>
+  </ui-dropdown-menu>
+</ui-dropdown>
