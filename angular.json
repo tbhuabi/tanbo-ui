@@ -162,5 +162,6 @@
         }
       }
     }
-  }
+  },
+  "defaultProject": "tanbo-ui"
 }

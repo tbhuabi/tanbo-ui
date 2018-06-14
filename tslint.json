@@ -14,7 +14,7 @@
     "deprecation": {
       "severity": "warn"
     },
-    "eofline": false,
+    "eofline": true,
     "forin": true,
     "import-blacklist": [
       true,
@@ -60,7 +60,7 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [
-      false,
+      true,
       "ignore-params"
     ],
     "no-misused-new": true,

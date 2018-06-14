@@ -1,0 +1,21 @@
+@mixin grid($class) {
+  @for $i from 1 through $grid-columns {
+    $width: #{$i / $grid-columns * 100};
+    .ui-col-#{$class}-#{$i} {
+      width: $width + '%';
+      float: left;
+    }
+    .ui-col-#{$class}-offset-#{$i} {
+      margin-left: $width + '%';
+    }
+    .ui-col-#{$class}-pull-#{$i} {
+      margin-left: -$width + '%';
+    }
+  }
+}
+
+@mixin grid-responsive($class, $screen) {
+  @media (min-width: $screen) {
+    @include grid($class);
+  }
+}

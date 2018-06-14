@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { InputComponent } from './input/input.component';
+import { InputDirective } from './input/input.directive';
+import { InputGroupComponent } from './input-group/input-group.component';
 
 @NgModule({
   imports: [
     FormsModule
   ],
   declarations: [
-    InputComponent
+    InputDirective,
+    InputGroupComponent
   ],
   exports: [
-    InputComponent
+    InputDirective,
+    InputGroupComponent
   ]
 })
 export class UIFormsModule {

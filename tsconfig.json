@@ -18,11 +18,9 @@
     ],
     "paths": {
       "@tanbo/ui": [
-        "dist/tanbo/ui",
         "dist/tanbo/ui"
       ],
       "@tanbo/ui/*": [
-        "dist/tanbo/ui/*",
         "dist/tanbo/ui/*"
       ]
     }
