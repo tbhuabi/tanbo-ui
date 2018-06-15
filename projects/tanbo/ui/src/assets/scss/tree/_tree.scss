@@ -1,0 +1,6 @@
+ui-tree {
+  display: none;
+  &.ui-open {
+    display: block;
+  }
+}

@@ -1,0 +1,6 @@
+ui-tab-view-item {
+  display: none;
+  &.ui-active {
+    display: block;
+  }
+}

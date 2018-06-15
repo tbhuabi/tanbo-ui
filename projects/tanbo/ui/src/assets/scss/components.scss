@@ -18,9 +18,6 @@
 @import "forms/radio";
 @import "forms/select";
 @import "forms/switch";
-@import "forms/tree";
-@import "forms/tree-item";
-@import "forms/tree-selector";
 
 @import "layout/container";
 @import "layout/dropdown";
@@ -33,3 +30,9 @@
 @import "layout/tab-view-item";
 
 @import "other/view-loading-bar";
+
+@import "tree/tree";
+@import "tree/tree-container";
+@import "tree/tree-inner";
+@import "tree/tree-item";
+@import "tree/tree-selector";

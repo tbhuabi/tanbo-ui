@@ -1,0 +1,44 @@
+@import "../varibles";
+
+ui-tree-item {
+  display: block;
+  position: relative;
+  ui-tree-item {
+    padding-left: 2em;
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      border-left: 1px dashed $color-gray;
+    }
+    &:last-child {
+      > ui-tree-inner {
+        &:before {
+          content: "";
+          left: -2em;
+          top: 0;
+          height: 50%;
+          position: absolute;
+          border-left: 1px dashed $color-gray;
+        }
+      }
+    }
+    ui-tree-inner {
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 1.5em;
+        transform: translateX(-2em);
+        border-bottom: 1px dashed $color-gray;
+      }
+    }
+  }
+
+  &:last-child:before {
+    height: 0;
+  }
+}
