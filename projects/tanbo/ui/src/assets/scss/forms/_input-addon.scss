@@ -27,4 +27,8 @@ ui-input-addon {
   &.ui-has-error {
     @include input-addon-style($form-control-border-color-danger, $form-control-border-color-danger);
   }
+  >.btn {
+    border: none;
+    white-space: nowrap;
+  }
 }

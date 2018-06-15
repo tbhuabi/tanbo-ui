@@ -12,6 +12,9 @@ import { OptionComponent } from './option/option.component';
 import { RadioComponent } from './radio/radio.component';
 import { SelectComponent } from './select/select.component';
 import { SwitchComponent } from './switch/switch.component';
+import { TreeComponent } from './tree/tree.component';
+import { TreeItemComponent } from './tree-item/tree-item.component';
+import { TreeSelectorComponent } from './tree-selector/tree-selector.component';
 
 import { RadioStateService } from './radio/radio-state.service';
 import { UI_SELECT_ARROW_CLASSNAME } from './config';
@@ -30,7 +33,10 @@ import { UI_SELECT_ARROW_CLASSNAME } from './config';
     OptionComponent,
     RadioComponent,
     SelectComponent,
-    SwitchComponent
+    SwitchComponent,
+    TreeComponent,
+    TreeItemComponent,
+    TreeSelectorComponent
   ],
   exports: [
     CheckboxComponent,
@@ -40,7 +46,10 @@ import { UI_SELECT_ARROW_CLASSNAME } from './config';
     OptionComponent,
     RadioComponent,
     SelectComponent,
-    SwitchComponent
+    SwitchComponent,
+    TreeComponent,
+    TreeItemComponent,
+    TreeSelectorComponent
   ],
   providers: [
     RadioStateService, {
