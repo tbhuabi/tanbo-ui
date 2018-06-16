@@ -16,6 +16,6 @@ export class TreeInnerComponent {
     return (this.depth - 1) * 2 + 'em';
   }
 
-  constructor(@Inject(UI_TREE_DEPTH) private depth: number) {
+  constructor(@Inject(UI_TREE_DEPTH) public depth: number) {
   }
 }

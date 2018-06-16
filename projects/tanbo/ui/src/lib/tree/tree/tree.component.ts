@@ -29,7 +29,7 @@ export class TreeComponent implements OnDestroy, OnInit {
   private sub: Subscription;
 
   constructor(@Optional() private treeItemService: TreeItemService,
-              @Inject(UI_TREE_DEPTH) private depth: number) {
+              @Inject(UI_TREE_DEPTH) public depth: number) {
   }
 
   ngOnInit() {
