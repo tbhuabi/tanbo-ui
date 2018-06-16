@@ -1,6 +1,23 @@
+@import "../varibles";
+
 ui-tree {
   display: none;
+  position: relative;
   &.ui-open {
     display: block;
+  }
+}
+
+.ui-tree-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 1px dashed $color-gray;
+  transform: translateX(1em);
+}
+
+ui-tree-item:last-child {
+  .ui-tree-line {
+    display: none;
   }
 }

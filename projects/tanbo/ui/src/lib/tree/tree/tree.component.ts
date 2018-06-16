@@ -1,22 +1,35 @@
-import { Component, OnInit, OnDestroy, Optional, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Optional, Input, SkipSelf, Inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { TreeItemService } from '../tree-item/tree-item.service';
+import { UI_TREE_DEPTH } from '../config';
 
 @Component({
   selector: 'ui-tree',
   templateUrl: './tree.component.html',
   host: {
     '[class.ui-open]': 'open'
-  }
+  },
+  providers: [{
+    provide: UI_TREE_DEPTH,
+    useFactory(depth: number) {
+      return depth + 1;
+    },
+    deps: [[UI_TREE_DEPTH, new SkipSelf()]]
+  }]
 })
 export class TreeComponent implements OnDestroy, OnInit {
   @Input()
   open: boolean = false;
 
+  get left() {
+    return (this.depth - 2) * 2 + 'em';
+  }
+
   private sub: Subscription;
 
-  constructor(@Optional() private treeItemService: TreeItemService) {
+  constructor(@Optional() private treeItemService: TreeItemService,
+              @Inject(UI_TREE_DEPTH) private depth: number) {
   }
 
   ngOnInit() {

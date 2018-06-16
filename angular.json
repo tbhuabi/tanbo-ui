@@ -24,7 +24,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/index.scss"
+              "projects/tanbo/ui/src/assets/scss/index.scss"
             ],
             "scripts": []
           },

@@ -1,20 +1,21 @@
-import { Component, HostListener, ElementRef, Optional } from '@angular/core';
+import { Component, Inject, HostBinding } from '@angular/core';
 
-import { TreeContainerService } from '../tree-container/tree-container.service';
+import { UI_TREE_DEPTH } from '../config';
 
 @Component({
   selector: 'ui-tree-inner',
   templateUrl: './tree-inner.component.html'
 })
 export class TreeInnerComponent {
-  constructor(@Optional() private treeContainerService: TreeContainerService,
-              private elementRef: ElementRef) {
+  @HostBinding('style.paddingLeft')
+  get paddingLeft() {
+    return this.depth * 2 + 0.5 + 'em';
   }
 
-  @HostListener('mouseover')
-  mouseOver() {
-    if (this.treeContainerService) {
-      this.treeContainerService.hover(this.elementRef.nativeElement);
-    }
+  get left() {
+    return (this.depth - 1) * 2 + 'em';
+  }
+
+  constructor(@Inject(UI_TREE_DEPTH) private depth: number) {
   }
 }
