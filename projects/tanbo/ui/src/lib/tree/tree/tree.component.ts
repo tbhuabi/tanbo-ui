@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Optional, Input, SkipSelf, Inject } from 
 import { Subscription } from 'rxjs';
 
 import { TreeItemService } from '../tree-item/tree-item.service';
-import { UI_TREE_DEPTH } from '../config';
+import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../config';
 
 @Component({
   selector: 'ui-tree',
@@ -23,13 +23,14 @@ export class TreeComponent implements OnDestroy, OnInit {
   open: boolean = false;
 
   get left() {
-    return (this.depth - 2) * 2 + 'em';
+    return (this.depth - 2) * 2 + this.offset + 'em';
   }
 
   private sub: Subscription;
 
   constructor(@Optional() private treeItemService: TreeItemService,
-              @Inject(UI_TREE_DEPTH) public depth: number) {
+              @Inject(UI_TREE_DEPTH) public depth: number,
+              @Inject(UI_TREE_OFFSET) private offset: number) {
   }
 
   ngOnInit() {

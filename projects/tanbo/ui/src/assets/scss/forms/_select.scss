@@ -15,6 +15,9 @@ ui-select {
       @include input-style($form-control-border-color-danger, $form-control-border-color-danger);
     }
   }
+  ui-dropdown-menu {
+    width: 100%;
+  }
 }
 
 .ui-select-fixed {

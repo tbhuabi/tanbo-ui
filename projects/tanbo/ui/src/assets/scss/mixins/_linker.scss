@@ -1,0 +1,21 @@
+@mixin linker {
+  display: block;
+  background: none;
+  width: 100%;
+  border: 0;
+  font-size: 14px;
+  text-align: left;
+  line-height: $line-height;
+  white-space: normal;
+  overflow: hidden;
+  padding: 3px $grid-column-padding + 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: $color-lighter;
+  }
+  &.ui-disabled {
+    background-color: hsla(hue($color-default), saturation($color-default), lightness($color-default), .2);
+    cursor: not-allowed;
+    color: #fff;
+  }
+}

@@ -34,6 +34,24 @@
   }
 }
 
+@mixin btn-group($name, $paddingX, $paddingY, $font-size, $radius) {
+  &.btn-group-#{$name} {
+    > .btn, > .btn-group > .btn {
+      @include input-size($paddingY, $paddingX, 0, $font-size);
+    }
+    @if $button-radius-is-open {
+      > .btn:first-child, > .btn-group:first-child > .btn:first-of-type {
+        border-top-left-radius: $radius;
+        border-bottom-left-radius: $radius;
+      }
+      > .btn:last-child, > .btn-group:last-child > .btn:last-of-type {
+        border-top-right-radius: $radius;
+        border-bottom-right-radius: $radius;
+      }
+    }
+  }
+}
+
 .btn {
   display: inline-block;
   border: 1px solid $color-gray;
@@ -69,4 +87,49 @@
     width: 100%;
     display: block;
   }
+}
+
+.btn-group {
+  position: relative;
+  display: inline-block;
+  > .btn {
+    border-radius: 0;
+    margin-left: -1px;
+    &:first-child {
+      margin-left: 0;
+    }
+    @if $button-radius-is-open {
+      &:first-child {
+        border-top-left-radius: $button-radius;
+        border-bottom-left-radius: $button-radius;
+      }
+      &:last-child {
+        border-top-right-radius: $button-radius;
+        border-bottom-right-radius: $button-radius;
+      }
+    }
+  }
+
+  > .btn-group {
+    margin-left: -1px;
+    &:first-child {
+      margin-left: 0;
+    }
+    > .btn {
+      border-radius: 0;
+    }
+    @if $button-radius-is-open {
+      &:first-child > .btn:first-of-type {
+        border-top-left-radius: $button-radius;
+        border-bottom-left-radius: $button-radius;
+      }
+      &:last-child > .btn:last-of-type {
+        border-top-right-radius: $button-radius;
+        border-bottom-right-radius: $button-radius;
+      }
+    }
+  }
+  @include btn-group(xs, $button-padding-horizontal-xs, $button-padding-vertical-xs, $button-font-size-xs, $button-radius-xs);
+  @include btn-group(sm, $button-padding-horizontal-sm, $button-padding-vertical-sm, $button-font-size-sm, $button-radius-sm);
+  @include btn-group(lg, $button-padding-horizontal-lg, $button-padding-vertical-lg, $button-font-size-lg, $button-radius-lg);
 }
