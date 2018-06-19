@@ -16,6 +16,32 @@ ui-dropdown {
     position: absolute;
     left: 0;
     top: 100%;
+    &.ui-left-top {
+      left: 0;
+      bottom: 100%;
+      right: auto;
+      top: auto;
+      transform-origin: 0 100%;
+    }
+    &.ui-left-bottom {
+      left: 0;
+      top: 100%;
+      right: auto;
+      bottom: auto;
+    }
+    &.ui-right-top {
+      left: auto;
+      right: 0;
+      top: auto;
+      bottom: 100%;
+      transform-origin: 0 100%;
+    }
+    &.ui-right-bottom {
+      left: auto;
+      right: 0;
+      top: 100%;
+      bottom: auto;
+    }
   }
   > .btn {
     padding-left: 8px;
