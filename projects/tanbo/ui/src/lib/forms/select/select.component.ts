@@ -27,14 +27,13 @@ import { UI_SELECT_ARROW_CLASSNAME } from '../config';
     useExisting: SelectComponent,
     multi: true
   }, SelectService
-  ],
-  host: {
-    '[class.ui-form-control]': 'true'
-  }
+  ]
 })
 export class SelectComponent implements ControlValueAccessor, AfterContentInit, OnDestroy, AfterViewInit {
   @ContentChildren(OptionComponent)
   options: QueryList<OptionComponent>;
+  @Input()
+  size: string = '';
   @Input()
   forId: string = '';
   @Input()
@@ -167,8 +166,9 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     });
   }
 
-  toggle() {
+  toggle(event: any) {
     if (this.disabled || this.readonly) {
+      event.stopPropagation();
       return;
     }
     this.focus = true;

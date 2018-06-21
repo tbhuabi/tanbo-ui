@@ -1,5 +1,5 @@
 @mixin btn-size($name, $v, $h, $font-size, $radius) {
-  &.btn-#{$name} {
+  .ui-btn-#{$name} {
     padding: $v $h;
     font-size: $font-size;
     @if $button-radius-is-open {
@@ -9,22 +9,23 @@
 }
 
 @mixin btn-theme($name, $color, $bg-color) {
-  &.btn-#{$name} {
+  .ui-btn-#{$name} {
     color: $color;
     background-color: $bg-color;
     @if $name != default {
       border: 1px solid $bg-color;
     }
     &:hover {
-      background-color: lighten($bg-color, 2);
+      background-color: darken($bg-color, 7);
     }
     &:focus {
-      background-color: darken($bg-color, 1);
+      background-color: darken($bg-color, 10);
+      z-index: 1;
     }
     &:active {
-      background-color: darken($bg-color, 5);
+      background-color: darken($bg-color, 15);
     }
-    &.disabled, &[disabled], &[readonly] {
+    &.ui-disabled, &[disabled], &[readonly] {
       opacity: .5;
       cursor: not-allowed;
       &:focus, &:hover, &:active {
@@ -34,17 +35,17 @@
   }
 }
 
-@mixin btn-group($name, $paddingX, $paddingY, $font-size, $radius) {
-  &.btn-group-#{$name} {
-    > .btn, > .btn-group > .btn {
+@mixin btn-group-size($name, $paddingX, $paddingY, $font-size, $radius) {
+  .ui-btn-group-#{$name} {
+    > .ui-btn, > .ui-btn-group > .ui-btn {
       @include input-size($paddingY, $paddingX, 0, $font-size);
     }
     @if $button-radius-is-open {
-      > .btn:first-child, > .btn-group:first-child > .btn:first-of-type {
+      > .ui-btn:first-child, > .ui-btn-group:first-child > .ui-btn:first-of-type {
         border-top-left-radius: $radius;
         border-bottom-left-radius: $radius;
       }
-      > .btn:last-child, > .btn-group:last-child > .btn:last-of-type {
+      > .ui-btn:last-child, > .ui-btn-group:last-child > .ui-btn:last-of-type {
         border-top-right-radius: $radius;
         border-bottom-right-radius: $radius;
       }
@@ -52,7 +53,7 @@
   }
 }
 
-.btn {
+.ui-btn {
   display: inline-block;
   border: 1px solid $color-gray;
   font-size: $button-font-size;
@@ -61,38 +62,39 @@
   text-align: center;
   padding: $button-padding-vertical $button-padding-horizontal;
   text-decoration: none;
-
+  white-space: nowrap;
+  position: relative;
+  user-select: none;
   @if $button-radius-is-open {
     border-radius: $button-radius;
   }
-
-  @include btn-size(sm, $button-padding-vertical-sm, $button-padding-horizontal-sm, $button-font-size-sm, $button-radius-sm);
-  @include btn-size(xs, $button-padding-vertical-xs, $button-padding-horizontal-xs, $button-font-size-xs, $button-radius-sm);
-  @include btn-size(lg, $button-padding-vertical-lg, $button-padding-horizontal-lg, $button-font-size-lg, $button-radius-lg);
-
-  @include btn-theme(default, $color-default, #fff);
-  @include btn-theme(primary, #fff, $color-primary);
-  @include btn-theme(success, #fff, $color-success);
-  @include btn-theme(info, #fff, $color-info);
-  @include btn-theme(danger, #fff, $color-danger);
-  @include btn-theme(warning, #fff, $color-warning);
-  &.disabled, &[disabled], &[readonly] {
+  &.ui-disabled, &[disabled], &[readonly] {
     opacity: .5;
     cursor: not-allowed;
   }
   &[readonly] {
     cursor: default;
   }
-  &.btn-block {
+  &.ui-btn-block {
     width: 100%;
     display: block;
   }
 }
 
-.btn-group {
+@include btn-size(sm, $button-padding-vertical-sm, $button-padding-horizontal-sm, $button-font-size-sm, $button-radius-sm);
+@include btn-size(lg, $button-padding-vertical-lg, $button-padding-horizontal-lg, $button-font-size-lg, $button-radius-lg);
+
+@include btn-theme(default, $color-default, #fff);
+@include btn-theme(primary, #fff, $color-primary);
+@include btn-theme(success, #fff, $color-success);
+@include btn-theme(info, #fff, $color-info);
+@include btn-theme(danger, #fff, $color-danger);
+@include btn-theme(warning, #fff, $color-warning);
+
+.ui-btn-group {
   position: relative;
-  display: inline-block;
-  > .btn {
+  display: inline-flex;
+  > .ui-btn {
     border-radius: 0;
     margin-left: -1px;
     &:first-child {
@@ -108,28 +110,41 @@
         border-bottom-right-radius: $button-radius;
       }
     }
+
+    &.ui-btn-primary {
+      border-left-color: darken($color-primary, 10);
+    }
+    &.ui-btn-info {
+      border-left-color: darken($color-info, 10);
+    }
+    &.ui-btn-warning {
+      border-left-color: darken($color-warning, 10);
+    }
+    &.ui-btn-danger {
+      border-left-color: darken($color-danger, 10);
+    }
   }
 
-  > .btn-group {
+  > .ui-btn-group, > ui-dropdown {
     margin-left: -1px;
     &:first-child {
       margin-left: 0;
     }
-    > .btn {
+    > .ui-btn {
       border-radius: 0;
     }
     @if $button-radius-is-open {
-      &:first-child > .btn:first-of-type {
+      &:first-child > .ui-btn:first-of-type {
         border-top-left-radius: $button-radius;
         border-bottom-left-radius: $button-radius;
       }
-      &:last-child > .btn:last-of-type {
+      &:last-child > .ui-btn:last-of-type {
         border-top-right-radius: $button-radius;
         border-bottom-right-radius: $button-radius;
       }
     }
   }
-  @include btn-group(xs, $button-padding-horizontal-xs, $button-padding-vertical-xs, $button-font-size-xs, $button-radius-xs);
-  @include btn-group(sm, $button-padding-horizontal-sm, $button-padding-vertical-sm, $button-font-size-sm, $button-radius-sm);
-  @include btn-group(lg, $button-padding-horizontal-lg, $button-padding-vertical-lg, $button-font-size-lg, $button-radius-lg);
 }
+
+@include btn-group-size(sm, $button-padding-horizontal-sm, $button-padding-vertical-sm, $button-font-size-sm, $button-radius-sm);
+@include btn-group-size(lg, $button-padding-horizontal-lg, $button-padding-vertical-lg, $button-font-size-lg, $button-radius-lg);

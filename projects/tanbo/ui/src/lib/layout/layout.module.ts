@@ -7,9 +7,10 @@ import { HeaderComponent } from './header/header.component';
 import { ItemComponent } from './item/item.component';
 import { TabComponent } from './tab/tab.component';
 import { TabBarComponent } from './tab-bar/tab-bar.component';
-import { TabBarItemComponent } from './tab-bar-item/tab-bar-item.component';
+import { TabButtonComponent } from './tab-button/tab-button.component';
 import { TabViewComponent } from './tab-view/tab-view.component';
 import { TabViewItemComponent } from './tab-view-item/tab-view-item.component';
+import { ToolBarComponent } from './tool-bar/tool-bar.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,10 @@ import { TabViewItemComponent } from './tab-view-item/tab-view-item.component';
     ItemComponent,
     TabComponent,
     TabBarComponent,
-    TabBarItemComponent,
+    TabButtonComponent,
     TabViewComponent,
-    TabViewItemComponent
+    TabViewItemComponent,
+    ToolBarComponent
   ],
   exports: [
     ContainerComponent,
@@ -32,9 +34,10 @@ import { TabViewItemComponent } from './tab-view-item/tab-view-item.component';
     ItemComponent,
     TabComponent,
     TabBarComponent,
-    TabBarItemComponent,
+    TabButtonComponent,
     TabViewComponent,
-    TabViewItemComponent
+    TabViewItemComponent,
+    ToolBarComponent
   ]
 })
 export class UILayoutModule {

@@ -1,27 +1,48 @@
 ui-input-group {
   position: relative;
-  display: table;
-  border-collapse: separate;
+  display: inline-flex;
+  font-size: $form-control-font-size-base;
   > .ui-form-control {
-    border-radius: 0;
-    width: 100%;
+    flex: 1;
   }
-  > .ui-form-control, > ui-input-addon {
-    display: table-cell;
+  > .ui-form-control, .ui-select-input, > ui-input-addon, > .ui-btn {
+    border-radius: 0;
+  }
+  > .ui-form-control, > ui-input-addon, > .ui-btn {
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
     @if $form-control-radius-is-open {
       &:first-child {
         border-top-left-radius: $form-control-radius;
         border-bottom-left-radius: $form-control-radius;
+        .ui-select-input {
+          border-top-left-radius: $form-control-radius;
+          border-bottom-left-radius: $form-control-radius;
+        }
       }
       &:last-child {
         border-top-right-radius: $form-control-radius;
         border-bottom-right-radius: $form-control-radius;
+        .ui-select-input {
+          border-top-right-radius: $form-control-radius;
+          border-bottom-right-radius: $form-control-radius;
+        }
       }
     }
   }
   &.ui-input-group-sm {
+    font-size: $form-control-font-size-sm;
     > .ui-form-control {
-      @include input-size($form-control-padding-vertical-sm, $form-control-padding-horizontal-sm, 0, $form-control-font-size-sm)
+      @include input-size($form-control-padding-vertical-sm, $form-control-padding-horizontal-sm, 0, $form-control-font-size-sm);
+      &:first-child .ui-select-input {
+        border-top-left-radius: $form-control-radius-sm;
+        border-bottom-left-radius: $form-control-radius-sm;
+      }
+      &:last-child .ui-select-input {
+        border-top-right-radius: $form-control-radius-sm;
+        border-bottom-right-radius: $form-control-radius-sm;
+      }
     }
     > .ui-form-control, > ui-input-addon {
       @if $form-control-radius-is-open {
@@ -37,8 +58,17 @@ ui-input-group {
     }
   }
   &.ui-input-group-lg {
+    font-size: $form-control-font-size-lg;
     > .ui-form-control {
-      @include input-size($form-control-padding-vertical-lg, $form-control-padding-horizontal-lg, 0, $form-control-font-size-lg)
+      @include input-size($form-control-padding-vertical-lg, $form-control-padding-horizontal-lg, 0, $form-control-font-size-lg);
+      &:first-child .ui-select-input {
+        border-top-left-radius: $form-control-radius-lg;
+        border-bottom-left-radius: $form-control-radius-lg;
+      }
+      &:last-child .ui-select-input {
+        border-top-right-radius: $form-control-radius-lg;
+        border-bottom-right-radius: $form-control-radius-lg;
+      }
     }
     > .ui-form-control, > ui-input-addon {
       @if $form-control-radius-is-open {
@@ -50,6 +80,25 @@ ui-input-group {
           border-top-right-radius: $form-control-radius-lg;
           border-bottom-right-radius: $form-control-radius-lg;
         }
+      }
+    }
+  }
+  > .ui-btn-group, > ui-dropdown {
+    margin-left: -1px;
+    &:first-child {
+      margin-left: 0;
+    }
+    > .ui-btn {
+      border-radius: 0;
+    }
+    @if $button-radius-is-open {
+      &:first-child > .ui-btn:first-of-type {
+        border-top-left-radius: $button-radius;
+        border-bottom-left-radius: $button-radius;
+      }
+      &:last-child > .ui-btn:last-of-type {
+        border-top-right-radius: $button-radius;
+        border-bottom-right-radius: $button-radius;
       }
     }
   }

@@ -1,18 +1,17 @@
 @mixin input-addon-style($border-color, $border-focus-color) {
   border: 1px solid $border-color;
   text-align: center;
-  width: 34px;
   min-width: 34px;
-  &:first-child {
-    border-right: 0;
-  }
-  &:last-child {
-    border-left: 0;
-  }
 }
 
 ui-input-addon {
-  display: table-cell;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: $line-height;
+  padding-left: 8px;
+  padding-right: 8px;
+  min-width: 32px;
   @include input-addon-style($form-control-border-color, $form-control-border-color);
   @if $form-control-radius-is-open {
     &:first-child {
@@ -26,9 +25,5 @@ ui-input-addon {
   }
   &.ui-has-error {
     @include input-addon-style($form-control-border-color-danger, $form-control-border-color-danger);
-  }
-  >.btn {
-    border: none;
-    white-space: nowrap;
   }
 }

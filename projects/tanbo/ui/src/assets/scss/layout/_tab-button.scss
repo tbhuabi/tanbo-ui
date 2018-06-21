@@ -1,0 +1,9 @@
+ui-tab-button {
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px 12px;
+  &.ui-active {
+    background-color: $color-primary;
+    color: #fff;
+  }
+}

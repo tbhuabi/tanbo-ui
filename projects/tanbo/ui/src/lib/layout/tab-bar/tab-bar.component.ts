@@ -9,7 +9,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { TabService } from '../tab/tab.service';
-import { TabBarItemComponent } from '../tab-bar-item/tab-bar-item.component';
+import { TabButtonComponent } from '../tab-button/tab-button.component';
 
 @Component({
   selector: 'ui-tab-bar',
@@ -18,8 +18,8 @@ import { TabBarItemComponent } from '../tab-bar-item/tab-bar-item.component';
 export class TabBarComponent implements OnDestroy, AfterContentInit {
   @Input()
   tabIndex: number = 0;
-  @ContentChildren(TabBarItemComponent)
-  tabBarItems: QueryList<TabBarItemComponent>;
+  @ContentChildren(TabButtonComponent)
+  tabBarItems: QueryList<TabButtonComponent>;
 
   private subs: Array<Subscription> = [];
 
@@ -28,7 +28,7 @@ export class TabBarComponent implements OnDestroy, AfterContentInit {
 
   ngAfterContentInit() {
     // 当用户点击或选中某一个按扭时，发布相应事件
-    this.tabBarItems.forEach((item: TabBarItemComponent, index: number) => {
+    this.tabBarItems.forEach((item: TabButtonComponent, index: number) => {
       const sub = item.selected.subscribe(() => {
         this.tabService.publishIndex(index);
       });
@@ -36,7 +36,7 @@ export class TabBarComponent implements OnDestroy, AfterContentInit {
     });
     // 当用户切换tab时，显示/隐藏对应视图
     this.subs.push(this.tabService.tabIndex.subscribe((index: number) => {
-      this.tabBarItems.forEach((item: TabBarItemComponent, i: number) => {
+      this.tabBarItems.forEach((item: TabButtonComponent, i: number) => {
         item.active = i === index;
       });
     }));

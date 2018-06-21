@@ -11,7 +11,7 @@
   padding: 3px $grid-column-padding + 5px;
   cursor: pointer;
   &:hover {
-    background-color: $color-lighter;
+    background-color: $color-light;
   }
   &.ui-disabled {
     background-color: hsla(hue($color-default), saturation($color-default), lightness($color-default), .2);
