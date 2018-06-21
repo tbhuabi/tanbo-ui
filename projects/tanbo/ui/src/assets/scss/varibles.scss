@@ -85,7 +85,9 @@ $button-font-size: $font-size-base !default;
 $button-font-size-sm: $button-font-size - 1px !default;
 $button-font-size-lg: $button-font-size + 4px !default;
 
-//
+// tooltip
+$tooltip-bg-color: rgba(0, 0, 0, .7) !default;
+$tooltip-text-color: #fff;
 
 // 分页控件
 $pagination-radius-is-open: $is-open-radius !default;
