@@ -54,11 +54,11 @@ export class TooltipComponent implements OnInit, OnDestroy {
       switch (this.position) {
         case 'topLeft':
           this.left = distance.left;
-          this.top = distance.top - distance.height + 5;
+          this.top = distance.top - 6;
           break;
         case 'topRight':
           this.left = distance.left + distance.width;
-          this.top = distance.top - distance.height + 5;
+          this.top = distance.top - 6;
           break;
         case 'rightTop':
           this.left = distance.left + distance.width + 10;
@@ -99,7 +99,7 @@ export class TooltipComponent implements OnInit, OnDestroy {
         default:
           this.position = 'topCenter';
           this.left = distance.left + distance.width / 2;
-          this.top = distance.top - distance.height + 5;
+          this.top = distance.top - 6;
       }
 
       this.isShow = true;

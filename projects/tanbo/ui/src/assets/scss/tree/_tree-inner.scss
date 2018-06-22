@@ -15,7 +15,7 @@ ui-tree-inner {
   left: 0;
   width: 1em;
   top: 50%;
-  border-bottom: 1px dashed $color-gray;
+  border-bottom: 1px dotted $color-gray-light;
   transform: translateX(1em);
 }
 
@@ -24,5 +24,5 @@ ui-tree-inner {
   top: 0;
   bottom: 0;
   transform: translateX(1em);
-  border-left: 1px dashed $color-gray;
+  border-left: 1px dotted $color-gray-light;
 }

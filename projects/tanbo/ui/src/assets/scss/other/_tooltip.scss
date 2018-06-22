@@ -1,7 +1,7 @@
 ui-tooltip {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: $tooltip-z-index;
   white-space: nowrap;
   padding: 5px 10px;
   background-color: $tooltip-bg-color;
@@ -17,20 +17,21 @@ ui-tooltip {
   }
 
   &.ui-top-left {
+    transform: translateY(-100%);
     .ui-tooltip-bottom-arrow {
       left: 20px;
       display: inline-block;
     }
   }
   &.ui-top-center {
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(-100%);
     .ui-tooltip-bottom-arrow {
       left: 50%;
       display: inline-block;
     }
   }
   &.ui-top-right {
-    transform: translateX(-100%);
+    transform: translateX(-100%) translateY(-100%);
     .ui-tooltip-bottom-arrow {
       left: auto;
       right: 10px;
@@ -54,7 +55,7 @@ ui-tooltip {
     transform: translateY(-100%);
     .ui-tooltip-right-arrow {
       top: auto;
-      bottom: 3px;
+      bottom: 1px;
       display: inline-block;
     }
   }
@@ -97,7 +98,7 @@ ui-tooltip {
     transform: translateX(-100%) translateY(-100%);
     .ui-tooltip-left-arrow {
       top: auto;
-      bottom: 3px;
+      bottom: 1px;
       display: inline-block;
     }
   }
@@ -108,7 +109,7 @@ ui-tooltip {
   position: absolute;
   left: 100%;
   top: 50%;
-  background-color: $tooltip-bg-color;
+  color: $tooltip-bg-color;
   transform: translateY(-50%);
   display: none;
   width: 0;
@@ -123,7 +124,7 @@ ui-tooltip {
   position: absolute;
   right: 100%;
   top: 50%;
-  background-color: $tooltip-bg-color;
+  color: $tooltip-bg-color;
   transform: translateY(-50%);
   display: none;
   width: 0;

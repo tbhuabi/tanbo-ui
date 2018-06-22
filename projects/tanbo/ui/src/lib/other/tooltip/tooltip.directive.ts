@@ -38,6 +38,7 @@ export class TooltipDirective implements OnDestroy {
     }
     this.instance.text = this.tooltip;
     this.instance.referenceElement = this.elementRef.nativeElement;
+    this.instance.position = this.tooltipPosition;
     this.instance.show();
   }
 

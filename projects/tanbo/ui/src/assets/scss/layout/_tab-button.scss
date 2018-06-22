@@ -3,7 +3,11 @@ ui-tab-button {
   cursor: pointer;
   padding: 5px 12px;
   &.ui-active {
-    background-color: $color-primary;
-    color: #fff;
+    padding-bottom: 3px;
+    border-bottom: 2px solid $color-primary;
+    color: $color-primary;
+  }
+  &:hover {
+    color: $color-primary;
   }
 }

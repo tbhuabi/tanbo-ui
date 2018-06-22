@@ -37,15 +37,15 @@
 
 @mixin btn-group-size($name, $paddingX, $paddingY, $font-size, $radius) {
   .ui-btn-group-#{$name} {
-    > .ui-btn, > .ui-btn-group > .ui-btn {
+    > .ui-btn, > .ui-btn-group > .ui-btn, > ui-dropdown > .ui-btn {
       @include input-size($paddingY, $paddingX, 0, $font-size);
     }
     @if $button-radius-is-open {
-      > .ui-btn:first-child, > .ui-btn-group:first-child > .ui-btn:first-of-type {
+      > .ui-btn:first-child, > .ui-btn-group:first-child > .ui-btn:first-of-type, > ui-dropdown:first-child > .ui-btn:first-of-type {
         border-top-left-radius: $radius;
         border-bottom-left-radius: $radius;
       }
-      > .ui-btn:last-child, > .ui-btn-group:last-child > .ui-btn:last-of-type {
+      > .ui-btn:last-child, > .ui-btn-group:last-child > .ui-btn:last-of-type, > ui-dropdown:last-child > .ui-btn:last-of-type {
         border-top-right-radius: $radius;
         border-bottom-right-radius: $radius;
       }
@@ -110,6 +110,9 @@
         border-bottom-right-radius: $button-radius;
       }
     }
+  }
+
+  > .ui-btn, ui-dropdown > .ui-btn {
 
     &.ui-btn-primary {
       border-left-color: darken($color-primary, 10);

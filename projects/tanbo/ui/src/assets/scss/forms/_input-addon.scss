@@ -12,6 +12,7 @@ ui-input-addon {
   padding-left: 8px;
   padding-right: 8px;
   min-width: 32px;
+  background-color: #fff;
   @include input-addon-style($form-control-border-color, $form-control-border-color);
   @if $form-control-radius-is-open {
     &:first-child {

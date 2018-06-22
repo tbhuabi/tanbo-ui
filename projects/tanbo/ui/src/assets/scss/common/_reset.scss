@@ -5,4 +5,8 @@
 
 body {
   color: #333;
+  font-size: $font-size-base;
+  text-size-adjust: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }

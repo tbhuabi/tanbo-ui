@@ -1,4 +1,4 @@
-import { Component, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, HostListener, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'ui-dropdown',
@@ -8,7 +8,11 @@ import { Component, HostListener, Output, EventEmitter } from '@angular/core';
   }
 })
 export class DropdownComponent {
-  open: boolean = false;
+  @Input()
+  autoDisplay = true;
+
+  @Input()
+  open = false;
 
   @Output()
   escape = new EventEmitter();
@@ -18,8 +22,10 @@ export class DropdownComponent {
   @HostListener('document:click')
   docClick() {
     if (!this.isSelfClick) {
+      if (this.autoDisplay) {
+        this.open = false;
+      }
       this.escape.emit();
-      this.open = false;
     }
     this.isSelfClick = false;
   }
@@ -27,6 +33,8 @@ export class DropdownComponent {
   @HostListener('click')
   click() {
     this.isSelfClick = true;
-    this.open = !this.open;
+    if (this.autoDisplay) {
+      this.open = !this.open;
+    }
   }
 }
