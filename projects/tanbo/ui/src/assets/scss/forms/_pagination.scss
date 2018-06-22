@@ -26,6 +26,8 @@
 
 ui-pagination {
   display: inline-block;
+  margin-top: 1em;
+  margin-bottom: 1em;
   > .ui-pagination {
     @include list-unstyled;
     line-height: $line-height;

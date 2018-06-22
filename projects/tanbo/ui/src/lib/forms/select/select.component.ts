@@ -6,7 +6,6 @@ import {
   ContentChildren,
   EventEmitter,
   Input,
-  HostBinding,
   OnDestroy,
   Output,
   Inject,
@@ -48,7 +47,6 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   arrowIconClassName: string = '';
 
   @Input()
-  @HostBinding('class.ui-disabled')
   set disabled(isDisabled: any) {
     this._disabled = isDisabled;
   }
@@ -59,7 +57,6 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   }
 
   @Input()
-  @HostBinding('class.ui-readonly')
   set readonly(isReadonly: any) {
     this._readonly = isReadonly;
   }

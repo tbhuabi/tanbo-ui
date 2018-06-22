@@ -1,0 +1,227 @@
+ui-input[type=date] {
+  display: inline-block;
+
+  cursor: auto;
+  width: auto;
+  .ui-date-panel-week {
+    border-top: 1px solid $color-gray-light;
+    border-bottom: 1px solid $color-gray-light;
+    background-color: $color-gray-light;
+  }
+
+  .ui-date-panel-day {
+    font-size: 12px;
+    cursor: pointer;
+    td:hover {
+      color: $color-primary;
+    }
+  }
+
+  .ui-date-panel {
+    position: absolute;
+    left: 0;
+    top: 29px;
+    border-top: 1px solid $color-gray-light;
+    border-bottom: 1px solid $color-gray-light;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    width: 100%;
+    display: none;
+    z-index: 1;
+    &.ui-date-panel-year {
+      .ui-date-prev, .ui-date-next {
+        position: absolute;
+        height: 100%;
+        line-height: 100px;
+      }
+      .ui-date-prev {
+        left: 0;
+      }
+      .ui-date-next {
+        right: 0;
+      }
+    }
+    .ui-date-list {
+      list-style: none;
+      width: 210px;
+      padding: 10px 25px;
+      line-height: 22px;
+      box-sizing: border-box;
+      background-color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+      margin-top: 0;
+      cursor: pointer;
+      li {
+        width: 25%;
+        float: left;
+        &:hover {
+          color: $color-primary;
+        }
+        &.disabled {
+          cursor: not-allowed;
+          color: #ccc;
+        }
+      }
+    }
+  }
+
+  .ui-date-container {
+    width: 212px;
+    position: relative;
+    font-size: 14px;
+    user-select: none;
+    @if $form-control-radius-is-open {
+      border-radius: 3px;
+    }
+    background-color: #fff;
+  }
+
+  .ui-date-table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    td {
+      padding: 0;
+    }
+    .ui-date-header-content {
+      padding: 4px 5px;
+      height: 30px;
+      position: relative;
+      z-index: 2;
+    }
+    .ui-date-head {
+      height: 30px;
+      .active .ui-date-panel {
+        display: block;
+      }
+      .active .ui-date-header-content {
+        border-bottom: 1px solid #fff;
+      }
+      td:nth-child(1).active .ui-date-header-content {
+        border-right: 1px solid $color-gray-light;
+      }
+      td:nth-child(2).active .ui-date-header-content {
+        border-left: 1px solid $color-gray-light;
+        border-right: 1px solid $color-gray-light;
+      }
+    }
+    .ui-date-body {
+      text-align: center;
+      td {
+        width: 30px;
+        height: 30px;
+        &:first-child, &:last-child {
+          color: #999
+        }
+        &.no-current-month {
+          color: #ccc;
+        }
+        &.disabled {
+          background-color: #f3f3f3;
+          color: #ccc;
+          cursor: not-allowed;
+        }
+        &.current-day {
+          color: #009ce5;
+          font-weight: bold;
+        }
+        &.selected-day {
+          color: #fff;
+          background-color: $color-primary;
+        }
+      }
+    }
+  }
+
+  .pull-right {
+    float: right
+  }
+
+  .arrow {
+    cursor: pointer;
+    &:before {
+      content: "";
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-color: transparent;
+      position: relative;
+    }
+    &.arrow-top:hover:before, &.arrow-top.active:before {
+      border-bottom-color: $color-primary;
+    }
+    &.arrow-top:before {
+      border-width: 8px 6px;
+      border-bottom-color: $color-gray;
+      top: -2px;
+    }
+    &.arrow-bottom:hover:before, &.arrow-bottom.active:before {
+      border-top-color: $color-primary;
+    }
+    &.arrow-bottom:before {
+      border-width: 8px 6px;
+      border-top-color: $color-gray;
+      top: 6px;
+    }
+    &.arrow-left:hover:before, &.arrow-left.active:before {
+      border-right-color: $color-primary;
+    }
+    &.arrow-left:before {
+      border-width: 6px 8px;
+      border-right-color: $color-gray;
+      left: -4px;
+    }
+    &.arrow-right:hover:before, &.arrow-right.active:before {
+      border-left-color: $color-primary;
+    }
+    &.arrow-right:before {
+      border-width: 6px 8px;
+      border-left-color: $color-gray;
+      left: 4px;
+    }
+  }
+
+  .ui-date-time-details {
+    text-align: center;
+    > div {
+      float: left;
+      width: 70px;
+      box-sizing: border-box;
+      padding: 5px;
+    }
+    input {
+      width: 44px;
+      padding: 3px;
+      height: 24px;
+      border-radius: 3px;
+      border: 1px solid $color-gray-light;
+    }
+  }
+
+  .ui-date-btn {
+    padding: 5px;
+  }
+}
+
+.ui-date-fixed {
+  position: relative;
+}
+
+.ui-date-arrow {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .15s;
+  &.ui-open {
+    transform: rotateZ(180deg);
+  }
+}

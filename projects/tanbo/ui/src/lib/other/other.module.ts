@@ -6,6 +6,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 import { ViewLoadingBarComponent } from './view-loading-bar/view-loading-bar.component';
 
 import { TooltipDirective } from './tooltip/tooltip.directive';
+import { StopPropagationDirective } from './stop-propagation.directive';
 
 @NgModule({
   imports: [
@@ -15,12 +16,14 @@ import { TooltipDirective } from './tooltip/tooltip.directive';
     DividerComponent,
     TooltipComponent,
     ViewLoadingBarComponent,
-    TooltipDirective
+    TooltipDirective,
+    StopPropagationDirective
   ],
   exports: [
     DividerComponent,
     ViewLoadingBarComponent,
-    TooltipDirective
+    TooltipDirective,
+    StopPropagationDirective
   ],
   entryComponents: [
     TooltipComponent

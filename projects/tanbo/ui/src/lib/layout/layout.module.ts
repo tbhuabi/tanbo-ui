@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { ContainerComponent } from './container/container.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { DropdownMenuComponent } from './dropdown-menu/dropdown-menu.component';
-import { HeaderComponent } from './header/header.component';
 import { ItemComponent } from './item/item.component';
 import { TabComponent } from './tab/tab.component';
 import { TabBarComponent } from './tab-bar/tab-bar.component';
@@ -14,10 +12,8 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
 
 @NgModule({
   declarations: [
-    ContainerComponent,
     DropdownComponent,
     DropdownMenuComponent,
-    HeaderComponent,
     ItemComponent,
     TabComponent,
     TabBarComponent,
@@ -27,10 +23,8 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
     ToolBarComponent
   ],
   exports: [
-    ContainerComponent,
     DropdownComponent,
     DropdownMenuComponent,
-    HeaderComponent,
     ItemComponent,
     TabComponent,
     TabBarComponent,
