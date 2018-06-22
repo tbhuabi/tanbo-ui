@@ -58,11 +58,6 @@ export function timeAnalysisByTimeString(date: string): TimeDetails {
   };
 }
 
-/**
- * 给0-9的数字补零，转为00、01……
- * @param {number|string} n 0-9的数字
- * @returns {string}
- */
 export function toDouble(n: number | string): string {
   if (n === undefined || n === '') {
     return '';
