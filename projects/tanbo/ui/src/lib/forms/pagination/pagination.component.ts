@@ -51,6 +51,13 @@ export class PaginationComponent {
   private _currentPage: number = 1;
   private _pages: number = 1;
 
+  onChange(currentPage: number) {
+    if (typeof currentPage === 'number') {
+      this.change.emit(currentPage);
+      this.currentPage = currentPage;
+    }
+  }
+
   private setPaginationItems() {
     this.pageList = [];
     if (this.currentPage > this.pages) {
