@@ -1,7 +1,7 @@
-<button class="ui-checkbox" type="button">
+<div class="ui-checkbox">
   <span *ngIf="checked" [ngClass]="checkedIcon">{{ text }}</span>
   <span *ngIf="!checked" [ngClass]="uncheckedIcon">{{ text }}</span>
-</button>
+</div>
 <input class="ui-input-checkbox-raw"
        type="checkbox"
        [value]="value"

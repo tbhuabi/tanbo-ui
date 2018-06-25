@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
@@ -33,7 +33,9 @@ export class ViewLoadingBarComponent implements OnInit, OnDestroy {
         this.loadingState = 'normal';
         this.stateIndex = 0;
         this.stepStart();
-      } else if (event instanceof NavigationEnd) {
+      } else if (event instanceof NavigationEnd ||
+          event instanceof NavigationError ||
+          event instanceof NavigationCancel) {
         clearInterval(this.timer);
         this.loadingState = 'loaded';
       }

@@ -9,9 +9,9 @@ export class TabButtonComponent {
     @Input()
     active: boolean = false;
     @Output()
-    selected = new EventEmitter();
+    uiSelected = new EventEmitter();
 
     @HostListener('click') click() {
-        this.selected.emit();
+        this.uiSelected.emit();
     }
 }

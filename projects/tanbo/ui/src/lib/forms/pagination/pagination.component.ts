@@ -19,7 +19,7 @@ export class PaginationComponent {
   @Input()
   btnLength: number = 4;
   @Output()
-  change = new EventEmitter<number>();
+  uiChange = new EventEmitter<number>();
 
   @Input()
   set currentPage(currentPage: number) {
@@ -53,7 +53,7 @@ export class PaginationComponent {
 
   onChange(currentPage: number) {
     if (typeof currentPage === 'number') {
-      this.change.emit(currentPage);
+      this.uiChange.emit(currentPage);
       this.currentPage = currentPage;
     }
   }

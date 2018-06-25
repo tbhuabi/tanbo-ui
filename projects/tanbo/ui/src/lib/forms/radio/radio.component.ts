@@ -73,7 +73,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
     uncheckedIcon: string = 'ui-icon-radio-unchecked';
 
     @Output()
-    change = new EventEmitter<string>();
+    uiChange = new EventEmitter<string>();
 
     @ViewChild('rawInput')
     rawInput: ElementRef;
@@ -103,7 +103,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
         }
         // 当自身被点击时，发布事件，更新其它radio状态
         this.radioStateService.publishEvent();
-        this.change.emit(this.value);
+        this.uiChange.emit(this.value);
     }
 
     ngOnInit() {

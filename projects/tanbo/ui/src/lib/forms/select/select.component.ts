@@ -39,8 +39,6 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   name: string = '';
   @Input()
   placeholder: string = '';
-  @Output()
-  change = new EventEmitter<string>();
   @Input()
   selectedIndex: number = 0;
   @Input()
@@ -66,6 +64,8 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     return isReadonly && this._readonly !== false;
   }
 
+  @Output()
+  uiChange = new EventEmitter<string>();
   focus: boolean = false;
   open: boolean = false;
   text: string = '';
@@ -142,7 +142,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
           if (this.onTouched) {
             this.onTouched(this.value);
           }
-          this.change.emit(this.value);
+          this.uiChange.emit(this.value);
         } else {
           op.selected = false;
         }

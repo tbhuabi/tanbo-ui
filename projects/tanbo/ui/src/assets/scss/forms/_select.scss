@@ -1,5 +1,6 @@
 ui-select {
   display: inline-block;
+  user-select: none;
   ui-dropdown-menu {
     width: 100%;
   }

@@ -15,7 +15,7 @@ export class DropdownComponent {
   open = false;
 
   @Output()
-  escape = new EventEmitter();
+  uiEscape = new EventEmitter();
 
   private isSelfClick: boolean = false;
 
@@ -25,7 +25,7 @@ export class DropdownComponent {
       if (this.autoDisplay) {
         this.open = false;
       }
-      this.escape.emit();
+      this.uiEscape.emit();
     }
     this.isSelfClick = false;
   }

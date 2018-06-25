@@ -51,7 +51,7 @@ export class DateComponent implements ControlValueAccessor, OnInit {
   @Input()
   format: string = 'yyyy-MM-dd';
   @Output()
-  change = new EventEmitter<string | number>();
+  uiChange = new EventEmitter<string | number>();
   focus: boolean = false;
   open: boolean = false;
 
@@ -228,7 +228,7 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     if (this.onChange) {
       this.onChange(value);
     }
-    this.change.emit(value);
+    this.uiChange.emit(value);
   }
 
   writeValue(value: any) {

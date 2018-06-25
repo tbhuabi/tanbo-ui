@@ -58,7 +58,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     uncheckedIcon: string = 'ui-icon-checkbox-unchecked';
 
     @Output()
-    change = new EventEmitter<boolean>();
+    uiChange = new EventEmitter<boolean>();
 
     private _disabled: boolean = false;
     private _readonly: boolean = false;
@@ -79,7 +79,7 @@ export class CheckboxComponent implements ControlValueAccessor {
         if (this.onTouched) {
             this.onTouched(this.checked);
         }
-        this.change.emit(this.checked);
+        this.uiChange.emit(this.checked);
     }
 
     writeValue(value: any) {

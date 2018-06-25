@@ -29,7 +29,7 @@ export class TabBarComponent implements OnDestroy, AfterContentInit {
   ngAfterContentInit() {
     // 当用户点击或选中某一个按扭时，发布相应事件
     this.tabBarItems.forEach((item: TabButtonComponent, index: number) => {
-      const sub = item.selected.subscribe(() => {
+      const sub = item.uiSelected.subscribe(() => {
         this.tabService.publishIndex(index);
       });
       this.subs.push(sub);

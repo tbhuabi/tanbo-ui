@@ -1,4 +1,4 @@
-<ui-dropdown [open]="open" [autoDisplay]="false" (escape)="onEscape()">
+<ui-dropdown [open]="open" [autoDisplay]="false" (uiEscape)="onEscape()">
   <div class="ui-date-fixed" (click)="toggle()">
     <input class="ui-date-input ui-form-control"
            [ngClass]="{'ui-input-sm': size === 'sm', 'ui-input-lg': size === 'lg'}"
