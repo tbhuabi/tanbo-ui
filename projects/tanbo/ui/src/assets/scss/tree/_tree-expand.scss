@@ -1,0 +1,10 @@
+ui-tree-expand {
+  display: inline-block;
+  margin-right: .5em;
+  vertical-align: middle;
+  color: $color-primary;
+  ui-input[type=checkbox] {
+    font-size: 1em;
+    color: inherit;
+  }
+}
