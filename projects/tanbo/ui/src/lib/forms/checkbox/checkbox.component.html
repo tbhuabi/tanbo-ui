@@ -2,9 +2,10 @@
   <span *ngIf="checked" [ngClass]="checkedIcon">{{ text }}</span>
   <span *ngIf="!checked" [ngClass]="uncheckedIcon">{{ text }}</span>
 </div>
-<input class="ui-input-checkbox-raw"
-       type="checkbox"
+<input class="ui-input-checkbox"
+       type="button"
        [value]="value"
+       (click)="click()"
        [id]="forId"
        [name]="name"
        [disabled]="disabled"

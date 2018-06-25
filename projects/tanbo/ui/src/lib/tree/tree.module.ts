@@ -8,7 +8,7 @@ import { UI_TREE_UNCHECKED_ICON, UI_TREE_CHECKED_ICON, UI_TREE_DEPTH, UI_TREE_OF
 import { TreeComponent } from './tree/tree.component';
 import { TreeInnerComponent } from './tree-inner/tree-inner.component';
 import { TreeItemComponent } from './tree-item/tree-item.component';
-import { TreeSelectorComponent } from './tree-selector/tree-selector.component';
+import { TreeExpandComponent } from './tree-expand/tree-expand.component';
 
 @NgModule({
   imports: [
@@ -19,13 +19,13 @@ import { TreeSelectorComponent } from './tree-selector/tree-selector.component';
     TreeComponent,
     TreeInnerComponent,
     TreeItemComponent,
-    TreeSelectorComponent
+    TreeExpandComponent
   ],
   exports: [
     TreeComponent,
     TreeInnerComponent,
     TreeItemComponent,
-    TreeSelectorComponent
+    TreeExpandComponent
   ],
   providers: [{
     provide: UI_TREE_CHECKED_ICON,

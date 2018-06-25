@@ -15,7 +15,7 @@ ui-input[type=checkbox] {
   height: 1em;
   font-size: 22px;
   line-height: 1em;
-  user-select: none;
+
   vertical-align: middle;
   @include checkbox-style(primary, $color-primary);
   @include checkbox-style(info, $color-info);
@@ -31,9 +31,11 @@ ui-input[type=checkbox] {
   }
 }
 
-.ui-input-checkbox-raw {
-  width: 0;
-  height: 0;
+.ui-input-checkbox {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   position: absolute;
   overflow: hidden;
   opacity: 0;

@@ -2,7 +2,7 @@
   <span *ngIf="checked" [ngClass]="checkedIcon">{{ text }}</span>
   <span *ngIf="!checked" [ngClass]="uncheckedIcon">{{ text }}</span>
 </div>
-<input #rawInput class="ui-input-raw"
+<input #rawInput class="ui-input-radio"
        type="radio"
        [value]="value"
        [id]="forId"

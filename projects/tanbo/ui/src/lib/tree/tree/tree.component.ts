@@ -1,8 +1,12 @@
-import { Component, OnInit, OnDestroy, Optional, Input, SkipSelf, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Optional, Input, SkipSelf, Inject, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { TreeItemService } from '../tree-item/tree-item.service';
 import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../config';
+
+export interface TreeData extends Object {
+  children?: TreeData[]
+}
 
 @Component({
   selector: 'ui-tree',
@@ -21,6 +25,17 @@ import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../config';
 export class TreeComponent implements OnDestroy, OnInit {
   @Input()
   open: boolean = false;
+  @Input()
+  data: Array<TreeData> = [];
+  @Input()
+  itemType = ''; // 可选link, label
+  @Input()
+  keyForText = 'text';
+  @Input()
+  openAll = false;
+
+  @Output()
+  uiItemCheck = new EventEmitter<TreeData>();
 
   get left() {
     return (this.depth - 2) * 2 + this.offset + 'em';
@@ -39,12 +54,15 @@ export class TreeComponent implements OnDestroy, OnInit {
         this.open = b;
       });
     }
-
   }
 
   ngOnDestroy() {
     if (this.sub) {
       this.sub.unsubscribe();
     }
+  }
+
+  checked(ev: TreeData) {
+    this.uiItemCheck.emit(ev);
   }
 }

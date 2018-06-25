@@ -17,14 +17,6 @@ ui-input[type=radio] {
   font-size: 22px;
   line-height: 1em;
   user-select: none;
-  > .ui-input-raw {
-    width: 0;
-    height: 0;
-    position: absolute;
-    overflow: hidden;
-    opacity: 0;
-  }
-
   @include radio-style(primary, $color-primary);
   @include radio-style(info, $color-info);
   @include radio-style(warning, $color-warning);
@@ -37,6 +29,16 @@ ui-input[type=radio] {
   &[readonly] {
     cursor: default;
   }
+}
+
+.ui-input-radio {
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+  overflow: hidden;
+  opacity: 0;
 }
 
 .ui-radio {
