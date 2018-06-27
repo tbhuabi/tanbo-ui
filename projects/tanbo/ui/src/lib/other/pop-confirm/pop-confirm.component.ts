@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ElementRef, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit, ElementRef, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -23,6 +23,12 @@ import { DOCUMENT } from '@angular/common';
   }
 })
 export class PopConfirmComponent implements OnInit, OnDestroy {
+  @Output()
+  uiEnter = new EventEmitter<void>();
+
+  @Output()
+  uiCancel = new EventEmitter<void>();
+
   isShow = false;
   text = '';
   referenceElement: HTMLElement;

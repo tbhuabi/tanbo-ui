@@ -11,6 +11,7 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { PopConfirmComponent } from './pop-confirm.component';
 
@@ -25,7 +26,6 @@ export class PopConfirmDirective implements OnDestroy {
 
   @Output()
   uiPopConfirmEnter = new EventEmitter<void>();
-
   @Output()
   uiPopConfirmCancel = new EventEmitter<void>();
 
@@ -35,6 +35,8 @@ export class PopConfirmDirective implements OnDestroy {
 
   private isSelfClick = false;
   private isShow = false;
+
+  private subs: Subscription[] = [];
 
   constructor(private elementRef: ElementRef,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -48,6 +50,12 @@ export class PopConfirmDirective implements OnDestroy {
       this.tooltipFactory = this.componentFactoryResolver.resolveComponentFactory(PopConfirmComponent);
       this.tooltipComponent = this.viewContainerRef.createComponent(this.tooltipFactory);
       this.instance = this.tooltipComponent.instance;
+      this.subs.push(this.instance.uiEnter.subscribe(() => {
+        this.uiPopConfirmEnter.emit();
+      }));
+      this.subs.push(this.instance.uiCancel.subscribe(() => {
+        this.uiPopConfirmCancel.emit();
+      }));
     }
     if (this.isShow) {
       this.instance.hide();
@@ -74,5 +82,6 @@ export class PopConfirmDirective implements OnDestroy {
     if (this.instance) {
       this.tooltipComponent.destroy();
     }
+    this.subs.forEach(item => item.unsubscribe());
   }
 }
