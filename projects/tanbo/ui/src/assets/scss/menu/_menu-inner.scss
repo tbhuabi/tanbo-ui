@@ -1,0 +1,46 @@
+ui-menu-inner {
+  display: flex;
+  padding: 8px $grid-column-padding;
+  cursor: pointer;
+  position: relative;
+  transition: all .2s;
+  &:hover {
+    background-color: $color-lighter;
+  }
+  &.ui-open {
+    > .ui-menu-inner-arrow {
+      transform: rotateX(180deg);
+    }
+  }
+  &.ui-active {
+    background-color: rgba(red($color-primary), green($color-primary), blue($color-primary), 0.1);
+    color: $color-primary;
+    &:after {
+      transform: scaleY(1);
+    }
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    width: 3px;
+    background-color: $color-primary;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    transition: transform .2s;
+    transform: scaleY(0);
+  }
+}
+
+.ui-menu-inner {
+  flex: 1;
+}
+
+.ui-menu-inner-arrow {
+  transition: transform .2s;
+  width: 1em;
+  font-size: 12px;
+  margin-left: 10px;
+  color: $color-gray;
+}
+

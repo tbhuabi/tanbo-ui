@@ -1,0 +1,54 @@
+ui-confirm {
+
+}
+
+.ui-confirm {
+  display: block;
+  background-color: #fff;
+  position: fixed;
+  box-shadow: 0 10px 10px hsla(hue($color-default), saturation($color-default), lightness($color-default), .15);
+  border-radius: 6px;
+  overflow: hidden;
+  z-index: $mask-z-index + 10;
+  width: 360px;
+  left: 50%;
+  margin-left: -180px;
+  top: 50px;
+}
+
+.ui-confirm-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: normal;
+  .ui-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      color: $color-primary;
+      opacity: 1;
+    }
+  }
+}
+
+.ui-confirm-header {
+  display: block;
+  padding: 20px $grid-column-padding;
+  min-height: 40px;
+  border-bottom: 1px solid $color-light;
+}
+
+.ui-confirm-content {
+  display: block;
+  padding: $grid-column-padding;
+}
+
+.ui-confirm-footer {
+  display: block;
+  padding: 10px $grid-column-padding;
+  text-align: right;
+  border-top: 1px solid $color-light;
+  > .ui-btn {
+    margin-left: 10px;
+  }
+}

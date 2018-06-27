@@ -1,0 +1,5 @@
+<ui-mask [show]="isShow">
+  <div class="ui-modal-base" *ngFor="let item of templates" [@modalAnimation]="show ? 'in' : 'out'">
+    <ng-container [ngTemplateOutlet]="item"></ng-container>
+  </div>
+</ui-mask>

@@ -12,12 +12,12 @@ ui-tree {
   position: absolute;
   top: 0;
   bottom: 0;
-  border-left: 1px dashed $color-gray;
+  border-left: 1px dotted $color-gray-light;
   transform: translateX(1em);
 }
 
 ui-tree-item:last-child {
-  .ui-tree-line {
+  > ui-tree > .ui-tree-line {
     display: none;
   }
 }

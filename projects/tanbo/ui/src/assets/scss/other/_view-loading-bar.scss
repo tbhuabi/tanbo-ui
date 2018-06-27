@@ -1,6 +1,7 @@
 ui-view-loading-bar {
   position: fixed;
   z-index: $view-loading-bar-z-index;
+  top: 0;
   left: 0;
   right: 0;
   > .ui-view-loading-bar {

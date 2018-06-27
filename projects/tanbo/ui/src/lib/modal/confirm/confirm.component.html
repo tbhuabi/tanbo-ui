@@ -1,0 +1,15 @@
+<ui-mask [show]="show" (uiHide)="hide()">
+  <div class="ui-confirm" *ngIf="show" [@confirmAnimation]="show ? 'in' : 'out'">
+    <div class="ui-confirm-header" *ngIf="title">
+      <button type="button" class="ui-close" (click)="checked(false)">&times;</button>
+      <h4 class="ui-confirm-title">{{ title }}</h4>
+    </div>
+    <div class="ui-confirm-content">
+      {{ content }}
+    </div>
+    <div class="ui-confirm-footer">
+      <button class="ui-btn ui-btn-default" (click)="checked(false)">{{ btnsText[0] }}</button>
+      <button class="ui-btn ui-btn-primary" (click)="checked(true)">{{ btnsText[1] }}</button>
+    </div>
+  </div>
+</ui-mask>

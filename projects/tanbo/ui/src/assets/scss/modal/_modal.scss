@@ -1,0 +1,16 @@
+ui-modal {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height: 400px;
+
+  &.ui-modal-sm {
+    width: 420px;
+    height: 280px;
+  }
+
+  &.ui-modal-lg {
+    width: 810px;
+    height: 540px;
+  }
+}

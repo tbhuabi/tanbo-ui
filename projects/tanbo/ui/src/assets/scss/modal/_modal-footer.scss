@@ -1,0 +1,9 @@
+ui-modal-footer {
+  display: block;
+  padding: 10px $grid-column-padding;
+  text-align: right;
+  border-top: 1px solid $color-light;
+  >.ui-btn {
+    margin-left: 10px;
+  }
+}

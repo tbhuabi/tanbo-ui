@@ -1,21 +1,2 @@
 <div *ngIf="depth > 1" class="ui-tree-line" [ngStyle]="{left: left}"></div>
-<ui-tree-item *ngFor="let item of data">
-  <ui-tree-inner>
-    <ng-container *ngIf="itemType === 'link'">
-      <ui-tree-expand  *ngIf="item.children && item.children.length"></ui-tree-expand>
-      <a href="javascript:;" (click)="checked(item)">{{ item[keyForText] }}</a>
-    </ng-container>
-    <ng-container *ngIf="itemType === 'label'">
-      <label><ui-tree-expand *ngIf="item.children && item.children.length"></ui-tree-expand>{{ item[keyForText] }}</label>
-    </ng-container>
-    <ng-container *ngIf="!itemType">
-      <ui-tree-expand *ngIf="item.children && item.children.length"></ui-tree-expand>{{ item[keyForText] }}
-    </ng-container>
-  </ui-tree-inner>
-  <ui-tree *ngIf="item.children"
-           [data]="item.children"
-           [itemType]="itemType"
-           [keyForText]="keyForText"
-           [open]="openAll"></ui-tree>
-</ui-tree-item>
 <ng-content></ng-content>

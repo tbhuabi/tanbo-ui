@@ -1,0 +1,21 @@
+ui-mask {
+  contain: size style layout;
+  background: inherit;
+}
+
+.ui-mask {
+  z-index: $mask-z-index;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: $mask-background-color;
+  transition: opacity .3s $cubic-bezier;
+  opacity: 0;
+  pointer-events: none;
+  &.ui-show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
