@@ -7,7 +7,9 @@ import {
   HostListener,
   ComponentFactoryResolver,
   ComponentFactory,
-  ComponentRef
+  ComponentRef,
+  Output,
+  EventEmitter
 } from '@angular/core';
 
 import { PopConfirmComponent } from './pop-confirm.component';
@@ -20,6 +22,12 @@ export class PopConfirmDirective implements OnDestroy {
   tooltip = '';
   @Input()
   popConfirmPosition: string = '';
+
+  @Output()
+  uiPopConfirmEnter = new EventEmitter<void>();
+
+  @Output()
+  uiPopConfirmCancel = new EventEmitter<void>();
 
   private instance: PopConfirmComponent;
   private tooltipComponent: ComponentRef<PopConfirmComponent>;

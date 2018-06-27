@@ -5,7 +5,7 @@
 <div class="ui-pop-confirm">
   <div class="ui-pop-confirm-content">{{ text }}</div>
   <div class="ui-pop-confirm-footer">
-    <button type="button" class="ui-btn ui-btn-default ui-btn-sm">取消</button>
-    <button type="button" class="ui-btn ui-btn-primary ui-btn-sm">确认</button>
+    <button type="button" (click)="uiPopConfirmCancel.emit()" class="ui-btn ui-btn-default ui-btn-sm">取消</button>
+    <button type="button" (click)="uiPopConfirmEnter.emit()" class="ui-btn ui-btn-primary ui-btn-sm">确认</button>
   </div>
 </div>
