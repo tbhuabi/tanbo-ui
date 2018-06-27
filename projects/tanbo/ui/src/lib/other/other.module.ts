@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DividerComponent } from './divider/divider.component';
-import { TooltipComponent } from './tooltip/tooltip.component';
+import { PopConfirmComponent } from './pop-confirm/pop-confirm.component';
 import { ViewLoadingBarComponent } from './view-loading-bar/view-loading-bar.component';
+import { TooltipComponent } from './tooltip/tooltip.component';
 
+import { PopConfirmDirective } from './pop-confirm/pop-confirm.directive';
 import { TooltipDirective } from './tooltip/tooltip.directive';
 import { StopPropagationDirective } from './stop-propagation.directive';
 
@@ -14,19 +16,25 @@ import { StopPropagationDirective } from './stop-propagation.directive';
   ],
   declarations: [
     DividerComponent,
-    TooltipComponent,
+    PopConfirmComponent,
     ViewLoadingBarComponent,
+    TooltipComponent,
+    PopConfirmDirective,
     TooltipDirective,
     StopPropagationDirective
   ],
   exports: [
     DividerComponent,
+    PopConfirmComponent,
     ViewLoadingBarComponent,
+    TooltipComponent,
+    PopConfirmDirective,
     TooltipDirective,
     StopPropagationDirective
   ],
   entryComponents: [
-    TooltipComponent
+    TooltipComponent,
+    PopConfirmComponent
   ]
 })
 export class UIOtherModule {

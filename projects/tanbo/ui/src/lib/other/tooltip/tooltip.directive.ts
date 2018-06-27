@@ -6,7 +6,8 @@ import {
   ViewContainerRef,
   HostListener,
   ComponentFactoryResolver,
-  ComponentFactory, ComponentRef
+  ComponentFactory,
+  ComponentRef
 } from '@angular/core';
 
 import { TooltipComponent } from './tooltip.component';
