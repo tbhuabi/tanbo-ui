@@ -1,9 +1,7 @@
 ui-tooltip {
   display: none;
-  position: fixed;
+  position: absolute;
   z-index: $tooltip-z-index;
-  white-space: nowrap;
-  padding: 5px 10px;
   background-color: $tooltip-bg-color;
   color: $tooltip-text-color;
   border-radius: 4px;
@@ -18,149 +16,108 @@ ui-tooltip {
 
   &.ui-top-left {
     transform: translateY(-100%);
-    .ui-tooltip-bottom-arrow {
-      left: 20px;
-      display: inline-block;
+    .ui-tooltip-arrow {
+      left: 10px;
+      bottom: -3px;
     }
   }
   &.ui-top-center {
     transform: translateX(-50%) translateY(-100%);
-    .ui-tooltip-bottom-arrow {
+    .ui-tooltip-arrow {
       left: 50%;
-      display: inline-block;
+      bottom: -3px;
+      margin-left: -5px;
     }
   }
   &.ui-top-right {
     transform: translateX(-100%) translateY(-100%);
-    .ui-tooltip-bottom-arrow {
-      left: auto;
+    .ui-tooltip-arrow {
       right: 10px;
-      display: inline-block;
+      bottom: -3px;
     }
   }
   &.ui-right-top {
-    .ui-tooltip-right-arrow {
-      top: 10px;
-      display: inline-block;
+    .ui-tooltip-arrow {
+      top: 7px;
+      left: -3px;
     }
   }
   &.ui-right-center {
     transform: translateY(-50%);
-    .ui-tooltip-right-arrow {
+    .ui-tooltip-arrow {
       top: 50%;
-      display: inline-block;
+      margin-top: -5px;
+      left: -3px;
     }
   }
   &.ui-right-bottom {
     transform: translateY(-100%);
-    .ui-tooltip-right-arrow {
-      top: auto;
-      bottom: 1px;
-      display: inline-block;
+    .ui-tooltip-arrow {
+      bottom: 7px;
+      left: -3px;
     }
   }
   &.ui-bottom-left {
-    .ui-tooltip-top-arrow {
-      left: 20px;
-      display: inline-block;
+    .ui-tooltip-arrow {
+      left: 10px;
+      top: -4px;
     }
   }
   &.ui-bottom-center {
     transform: translateX(-50%);
-    .ui-tooltip-top-arrow {
+    .ui-tooltip-arrow {
       left: 50%;
-      display: inline-block;
+      margin-left: -5px;
+      top: -4px;
     }
   }
   &.ui-bottom-right {
     transform: translateX(-100%);
-    .ui-tooltip-top-arrow {
-      left: auto;
+    .ui-tooltip-arrow {
       right: 10px;
-      display: inline-block;
+      top: -4px;
     }
 
   }
   &.ui-left-top {
     transform: translateX(-100%);
-    .ui-tooltip-left-arrow {
-      top: 10px;
-      display: inline-block;
+    .ui-tooltip-arrow {
+      top: 7px;
+      right: -3px;
     }
   }
   &.ui-left-center {
     transform: translateX(-100%) translateY(-50%);
-    .ui-tooltip-left-arrow {
-      display: inline-block;
+    .ui-tooltip-arrow {
+      top: 50%;
+      margin-top: -5px;
+      right: -3px;
     }
   }
   &.ui-left-bottom {
     transform: translateX(-100%) translateY(-100%);
-    .ui-tooltip-left-arrow {
-      top: auto;
-      bottom: 1px;
-      display: inline-block;
+    .ui-tooltip-arrow {
+      bottom: 7px;
+      right: -3px;
     }
   }
-
 }
 
-.ui-tooltip-left-arrow {
+.ui-tooltip-arrow {
+  width: 8px;
+  height: 8px;
+  background-color: $tooltip-bg-color;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, .2);
+  transform: rotateZ(45deg);
   position: absolute;
-  left: 100%;
-  top: 50%;
-  color: $tooltip-bg-color;
-  transform: translateY(-50%);
-  display: none;
-  width: 0;
-  height: 0;
-  vertical-align: middle;
-  border-left: 5px dashed;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
+  z-index: 0;
 }
 
-.ui-tooltip-right-arrow {
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  color: $tooltip-bg-color;
-  transform: translateY(-50%);
-  display: none;
-  width: 0;
-  height: 0;
-  vertical-align: middle;
-  border-right: 5px dashed;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-}
-
-.ui-tooltip-top-arrow {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  color: $tooltip-bg-color;
-  transform: translateX(-50%);
-  display: none;
-  width: 0;
-  height: 0;
-  vertical-align: middle;
-  border-bottom: 5px dashed;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-}
-
-.ui-tooltip-bottom-arrow {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  color: $tooltip-bg-color;
-  transform: translateX(-50%);
-  display: none;
-  width: 0;
-  height: 0;
-  vertical-align: middle;
-  border-top: 5px dashed;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
+.ui-tooltip {
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+  background: inherit;
+  border-radius: inherit;
+  padding: 5px 10px;
 }

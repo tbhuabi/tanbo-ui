@@ -1,167 +1,123 @@
 ui-pop-confirm {
   display: none;
-  position: fixed;
+  position: absolute;
   z-index: $tooltip-z-index;
   white-space: nowrap;
-  background-color: #fff;
-  border-radius: 6px;
   line-height: 20px;
   font-size: 12px;
   user-select: none;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
-  border-bottom: 1px solid $color-light;
   min-width: 140px;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .3);
   &.ui-show {
     display: block;
   }
 
   &.ui-top-left {
     transform: translateY(-100%);
-    .ui-pop-confirm-bottom-arrow {
-      left: 20px;
-      display: inline-block;
+    .ui-pop-confirm-arrow {
+      left: 10px;
+      bottom: -4px;
     }
   }
   &.ui-top-center {
     transform: translateX(-50%) translateY(-100%);
-    .ui-pop-confirm-bottom-arrow {
+    .ui-pop-confirm-arrow {
       left: 50%;
-      display: inline-block;
+      bottom: -4px;
+      margin-left: -5px;
     }
   }
   &.ui-top-right {
     transform: translateX(-100%) translateY(-100%);
-    .ui-pop-confirm-bottom-arrow {
-      left: auto;
+    .ui-pop-confirm-arrow {
       right: 10px;
-      display: inline-block;
+      bottom: -4px;
     }
   }
   &.ui-right-top {
-    .ui-pop-confirm-right-arrow {
+    .ui-pop-confirm-arrow {
       top: 10px;
-      display: inline-block;
+      left: -4px;
     }
   }
   &.ui-right-center {
     transform: translateY(-50%);
-    .ui-pop-confirm-right-arrow {
+    .ui-pop-confirm-arrow {
       top: 50%;
-      display: inline-block;
+      margin-top: -5px;
+      left: -4px;
     }
   }
   &.ui-right-bottom {
     transform: translateY(-100%);
-    .ui-pop-confirm-right-arrow {
-      top: auto;
-      bottom: 1px;
-      display: inline-block;
+    .ui-pop-confirm-arrow {
+      bottom: 10px;
+      left: -4px;
     }
   }
   &.ui-bottom-left {
-    .ui-pop-confirm-top-arrow {
-      left: 20px;
-      display: inline-block;
+    .ui-pop-confirm-arrow {
+      left: 10px;
+      top: -5px;
     }
   }
   &.ui-bottom-center {
     transform: translateX(-50%);
-    .ui-pop-confirm-top-arrow {
+    .ui-pop-confirm-arrow {
       left: 50%;
-      display: inline-block;
+      margin-left: -5px;
+      top: -5px;
     }
   }
   &.ui-bottom-right {
     transform: translateX(-100%);
-    .ui-pop-confirm-top-arrow {
-      left: auto;
+    .ui-pop-confirm-arrow {
       right: 10px;
-      display: inline-block;
+      top: -5px;
     }
 
   }
   &.ui-left-top {
     transform: translateX(-100%);
-    .ui-pop-confirm-left-arrow {
+    .ui-pop-confirm-arrow {
       top: 10px;
-      display: inline-block;
+      right: -4px;
     }
   }
   &.ui-left-center {
     transform: translateX(-100%) translateY(-50%);
-    .ui-pop-confirm-left-arrow {
-      display: inline-block;
+    .ui-pop-confirm-arrow {
+      top: 50%;
+      margin-top: -5px;
+      right: -4px;
     }
   }
   &.ui-left-bottom {
     transform: translateX(-100%) translateY(-100%);
-    .ui-pop-confirm-left-arrow {
-      top: auto;
-      bottom: 1px;
-      display: inline-block;
+    .ui-pop-confirm-arrow {
+      bottom: 10px;
+      right: -4px;
     }
   }
-
 }
 
-.ui-pop-confirm-left-arrow {
+.ui-pop-confirm-arrow {
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+  transform: rotateZ(45deg);
   position: absolute;
-  left: 100%;
-  top: 50%;
-  color: #fff;
-  transform: translateY(-50%);
-  display: none;
-  width: 0;
-  height: 0;
-  vertical-align: middle;
-  border-left: 5px dashed;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
+  z-index: 0;
 }
 
-.ui-pop-confirm-right-arrow {
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  color: #fff;
-  transform: translateY(-50%);
-  display: none;
-  width: 0;
-  height: 0;
-  vertical-align: middle;
-  border-right: 5px dashed;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-}
-
-.ui-pop-confirm-top-arrow {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  color: #fff;
-  transform: translateX(-50%);
-  display: none;
-  width: 0;
-  height: 0;
-  vertical-align: middle;
-  border-bottom: 5px dashed;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-}
-
-.ui-pop-confirm-bottom-arrow {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  color: #fff;
-  transform: translateX(-50%);
-  display: none;
-  width: 0;
-  height: 0;
-  vertical-align: middle;
-  border-top: 5px dashed;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
+.ui-pop-confirm {
+  position: relative;
+  z-index: 1;
+  background: inherit;
+  border-radius: inherit;
 }
 
 .ui-pop-confirm-content {

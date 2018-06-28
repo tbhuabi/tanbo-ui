@@ -7,7 +7,7 @@ $cubic-bezier: cubic-bezier(.36, .66, .04, 1);
 // 辅助配置
 $container-vertical-padding: 6px !default;
 
-$tooltip-z-index: 100 !default;
+$tooltip-z-index: 900 !default;
 $mask-z-index: 1000 !default;
 $notify-z-index: 1000 !default;
 $toolbar-z-index: 1100 !default;
@@ -91,7 +91,7 @@ $button-font-size-sm: $button-font-size - 1px !default;
 $button-font-size-lg: $button-font-size + 4px !default;
 
 // tooltip
-$tooltip-bg-color: rgba(0, 0, 0, .7) !default;
+$tooltip-bg-color: #555 !default;
 $tooltip-text-color: #fff;
 
 // 分页控件
@@ -132,43 +132,10 @@ $list-item-horizontal-padding: $grid-column-padding !default;
 $list-title-vertical-padding: .2em !default;
 $list-title-horizontal-padding: $grid-column-padding !default;
 
-// code
-$code-font-family: "Microsoft YaHei Mono", Menlo, Monaco, Consolas, "Courier New", monospace !default;
-$code-color: $color-danger !default;
-$code-bg: $color-light !default;
+// dialog
+$dialog-radius-is-open: $is-open-radius !default;
 
-$kbd-color: #fff !default;
-$kbd-bg: $color-darker !default;
-
-$pre-bg: $color-lighter !default;
-$pre-color: $color-default !default;
-$pre-border-color: $color-gray-light !default;
-$pre-scrollable-max-height: 340px !default;
-
-// panel
-$panel-radius-is-open: $is-open-radius !default;
-$panel-radius: $radius-base !default;
-
-$panel-border-color: $color-light !default;
-
-// 模拟radio/checkbox
-$ui-input-focus-box-shadow-color: hsla(hue($color-gray-light), saturation($color-gray-light), lightness($color-gray-light), .5) !default;
-
-// confirm
-$confirm-radius-is-open: $is-open-radius !default;
-
-$confirm-width: 300px !default;
-$confirm-height: 220px !default;
-
-// notify
-$notify-radius-is-open: $is-open-radius !default;
-
-$notify-width: 340px !default;
-$notify-height: 140px !default;
+$dialog-width: 360px !default;
 
 // toolbar
 $toolbar-width: 40px !default;
-
-// editor
-$editor-radius-is-open: $is-open-radius !default;
-$editor-selection-color: rgba(red($color-primary), green($color-primary), blue($color-primary), .2) !default;

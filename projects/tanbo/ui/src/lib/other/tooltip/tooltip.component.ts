@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ElementRef, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -22,7 +22,7 @@ import { DOCUMENT } from '@angular/common';
     '[style.left]': 'left + "px"'
   }
 })
-export class TooltipComponent implements OnInit, OnDestroy {
+export class TooltipComponent implements OnDestroy {
   isShow = false;
   text = '';
   referenceElement: HTMLElement;
@@ -33,24 +33,23 @@ export class TooltipComponent implements OnInit, OnDestroy {
 
   private timer: any = null;
 
-  constructor(private elementRef: ElementRef,
-              @Inject(DOCUMENT) private document: any) {
-  }
-
-  ngOnInit() {
-    this.document.body.appendChild(this.elementRef.nativeElement);
+  constructor(@Inject(DOCUMENT) private document: any) {
   }
 
   ngOnDestroy() {
     clearTimeout(this.timer);
-    this.document.body.removeChild(this.elementRef.nativeElement);
   }
 
   show() {
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
       const referenceElement = this.referenceElement;
-      const distance = referenceElement.getBoundingClientRect();
+      const distance = {
+        left: referenceElement.offsetLeft,
+        top: referenceElement.offsetTop,
+        height: referenceElement.offsetHeight,
+        width: referenceElement.offsetWidth
+      };
       switch (this.position) {
         case 'topLeft':
           this.left = distance.left;

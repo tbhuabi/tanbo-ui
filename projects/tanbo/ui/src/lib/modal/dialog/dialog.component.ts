@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { transition, trigger, state, style, animate, keyframes } from '@angular/animations';
+import { transition, trigger, style, animate, keyframes } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
-import { ConfirmConfig, ConfirmController } from './confirm-controller';
+import { DialogConfig, DialogController } from './dialog-controller';
 
 @Component({
-  selector: 'ui-confirm',
-  templateUrl: './confirm.component.html',
+  selector: 'ui-dialog',
+  templateUrl: './diolog.component.html',
   animations: [
-    trigger('confirmAnimation', [
+    trigger('dialogAnimation', [
       transition(':enter', animate('.1s', keyframes([
         style({
           transform: 'translateY(-100%)',
@@ -33,7 +33,7 @@ import { ConfirmConfig, ConfirmController } from './confirm-controller';
   ]
 })
 
-export class ConfirmComponent implements OnInit, OnDestroy {
+export class DialogComponent implements OnInit, OnDestroy {
   show: boolean = false;
 
   title: string = '';
@@ -43,12 +43,12 @@ export class ConfirmComponent implements OnInit, OnDestroy {
 
   private sub: Subscription;
 
-  constructor(private confirmService: ConfirmController) {
+  constructor(private dialogController: DialogController) {
   }
 
   ngOnInit() {
     // 订阅用户事件
-    this.sub = this.confirmService.confirmConfig.subscribe((params: ConfirmConfig) => {
+    this.sub = this.dialogController.config.subscribe((params: DialogConfig) => {
       // 设置动画状态
       this.show = true;
 
@@ -74,6 +74,6 @@ export class ConfirmComponent implements OnInit, OnDestroy {
 
   hide() {
     // 当弹窗关闭动画完成时，发布相应事件
-    this.confirmService.publishAction(this.result);
+    this.dialogController.publishAction(this.result);
   }
 }

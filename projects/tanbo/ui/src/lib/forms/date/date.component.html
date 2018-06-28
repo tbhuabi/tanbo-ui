@@ -10,11 +10,14 @@
            [id]="forId"
            [placeholder]="placeholder"
            [value]="displayValue">
-    <div class="ui-select-arrow" [class.ui-open]="open">
+    <div class="ui-date-arrow-dropdown" [class.ui-open]="open">
       <span [ngClass]="arrowIconClassName"></span>
     </div>
+    <div class="ui-date-clean" [class.ui-hide]="!value || disabled || readonly" ui-stop-propagation>
+      <span (click)="reset()">&times;</span>
+    </div>
   </div>
-  <ui-dropdown-menu>
+  <ui-dropdown-menu class="ui-date-dropdown-menu">
     <div class="ui-date-container" (click)="changeShowType()">
       <table class="ui-date-table">
         <tbody class="ui-date-head">
@@ -22,19 +25,18 @@
           <td colspan="3" [ngClass]="{active: showType === 'year'}">
             <div class="ui-date-header-content">
               {{ currentDateTimeDetails.year }}年
-              <span class="arrow"
-                    ui-stop-propagation
+              <span class="ui-date-arrow" ui-stop-propagation
                     (click)="changeShowType('year')"
-                    [ngClass]="{active: showType==='year', 'arrow-top': showType === 'year', 'arrow-bottom': showType !== 'year'}"></span>
+                    [ngClass]="{'ui-active': showType==='year', 'ui-icon-arrow2-top': showType === 'year', 'ui-icon-arrow2-bottom': showType !== 'year'}"></span>
             </div>
             <div class="ui-date-panel ui-date-panel-year">
               <div class="ui-date-prev" ui-stop-propagation (click)="setYears(years[0].year - 16)">
-                <span class="arrow arrow-left"></span>
+                <span class="ui-icon-arrow2-left ui-date-arrow"></span>
               </div>
               <div class="ui-date-next"
                    ui-stop-propagation
                    (click)="setYears(years[years.length-1].year + 1)">
-                <span class="arrow arrow-right"></span>
+                <span class="ui-icon-arrow2-right ui-date-arrow"></span>
               </div>
               <ul class="ui-date-list ui-clearfix">
                 <li *ngFor="let item of years"
@@ -48,10 +50,9 @@
           <td colspan="2" [ngClass]="{active: showType ==='month'}">
             <div class="ui-date-header-content">
               {{ currentDateTimeDetails.month + 1 }}月
-              <span class="arrow"
-                    ui-stop-propagation
+              <span class="ui-date-arrow" ui-stop-propagation
                     (click)="changeShowType('month')"
-                    [ngClass]="{active: showType==='month','arrow-top': showType === 'month', 'arrow-bottom': showType !== 'month'}"></span>
+                    [ngClass]="{'ui-active': showType==='month','ui-icon-arrow2-top': showType === 'month', 'ui-icon-arrow2-bottom': showType !== 'month'}"></span>
             </div>
             <div class="ui-date-panel">
               <ul class="ui-date-list ui-clearfix">
@@ -64,10 +65,10 @@
             </div>
           </td>
           <td colspan="2">
-            <div class="pull-right ui-date-header-content">
-                <span class="arrow arrow-left"
+            <div class="ui-pull-right ui-date-header-content">
+                <span class="ui-icon-arrow2-left ui-date-arrow"
                       (click)="setMonth({month: currentDateTimeDetails.month - 1})"></span>
-              <span class="arrow arrow-right"
+              <span class="ui-icon-arrow2-right ui-date-arrow"
                     (click)="setMonth({month: currentDateTimeDetails.month + 1})"></span>
             </div>
           </td>
@@ -87,7 +88,12 @@
         <tbody class="ui-date-body ui-date-panel-day">
         <tr *ngFor="let item of dayList">
           <td *ngFor="let day of item" (click)="selected(day)"
-              [ngClass]="{'no-current-month': day.month !== currentDateTimeDetails.month, 'current-day': day.year === systemDateTimeDetails.year && day.month === systemDateTimeDetails.month && day.day === systemDateTimeDetails.day, 'selected-day': day.year === selectedDateTimeDetails.year && day.month === selectedDateTimeDetails.month && day.day === selectedDateTimeDetails.day, 'disabled': day.disabled}">
+              [ngClass]="{
+              'no-current-month': day.month !== currentDateTimeDetails.month,
+              'current-day': day.year === systemDateTimeDetails.year && day.month === systemDateTimeDetails.month && day.day === systemDateTimeDetails.day,
+              'selected-day': day.year === selectedDateTimeDetails.year && day.month === selectedDateTimeDetails.month && day.day === selectedDateTimeDetails.day,
+              'disabled': day.disabled
+              }">
             {{ day.day }}
           </td>
         </tr>

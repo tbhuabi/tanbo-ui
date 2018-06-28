@@ -1,9 +1,10 @@
 @font-face {
   font-family: 'tanbo-ui';
-  src:
-    url('fonts/tanbo-ui.ttf?dzxt9k') format('truetype'),
-    url('fonts/tanbo-ui.woff?dzxt9k') format('woff'),
-    url('fonts/tanbo-ui.svg?dzxt9k#tanbo-ui') format('svg');
+  src:  url('fonts/tanbo-ui.eot?8wm04k');
+  src:  url('fonts/tanbo-ui.eot?8wm04k#iefix') format('embedded-opentype'),
+    url('fonts/tanbo-ui.ttf?8wm04k') format('truetype'),
+    url('fonts/tanbo-ui.woff?8wm04k') format('woff'),
+    url('fonts/tanbo-ui.svg?8wm04k#tanbo-ui') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -23,36 +24,45 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.ui-icon-spinner6:before {
-  content: "\e97f";
+.ui-icon-arrow2-top:before {
+  content: "\ea1c";
 }
-.ui-icon-arrow-down:before {
-  content: "\f123";
+.ui-icon-arrow2-right:before {
+  content: "\ea1d";
 }
-.ui-icon-arrow-left:before {
-  content: "\f124";
+.ui-icon-arrow2-bottom:before {
+  content: "\ea1e";
 }
-.ui-icon-arrow-right:before {
-  content: "\f125";
-}
-.ui-icon-arrow-up:before {
-  content: "\f126";
-}
-.ui-icon-radio-unchecked:before {
-  content: "\f3a6";
+.ui-icon-arrow2-left:before {
+  content: "\ea1f";
 }
 .ui-icon-radio-checked:before {
-  content: "\f3a7";
+  content: "\ea54";
 }
-.ui-icon-arrow-back:before {
-  content: "\f3cf";
-}
-.ui-icon-arrow-forward:before {
-  content: "\f3d1";
+.ui-icon-radio-unchecked:before {
+  content: "\ea56";
 }
 .ui-icon-checkbox-checked:before {
   content: "\ea52";
 }
 .ui-icon-checkbox-unchecked:before {
   content: "\ea53";
+}
+.ui-icon-arrow-top:before {
+  content: "\e50e";
+}
+.ui-icon-arrow-right:before {
+  content: "\e50f";
+}
+.ui-icon-arrow-bottom:before {
+  content: "\e510";
+}
+.ui-icon-arrow-dropdown:before {
+  content: "\e606";
+}
+.ui-icon-arrow-left:before {
+  content: "\e511";
+}
+.ui-icon-close:before {
+  content: "\e636";
 }

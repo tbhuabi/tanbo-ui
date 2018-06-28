@@ -1,11 +1,8 @@
-<div class="ui-pop-confirm-left-arrow"></div>
-<div class="ui-pop-confirm-right-arrow"></div>
-<div class="ui-pop-confirm-top-arrow"></div>
-<div class="ui-pop-confirm-bottom-arrow"></div>
-<div class="ui-pop-confirm">
+<div class="ui-pop-confirm-arrow"></div>
+<div class="ui-pop-confirm" ui-stop-propagation>
   <div class="ui-pop-confirm-content">{{ text }}</div>
   <div class="ui-pop-confirm-footer">
-    <button type="button" (click)="uiCancel.emit()" class="ui-btn ui-btn-default ui-btn-sm">取消</button>
-    <button type="button" (click)="uiEnter.emit()" class="ui-btn ui-btn-primary ui-btn-sm">确认</button>
+    <button type="button" (click)="cancel()" class="ui-btn ui-btn-default ui-btn-sm">取消</button>
+    <button type="button" (click)="confirm()" class="ui-btn ui-btn-primary ui-btn-sm">确认</button>
   </div>
 </div>

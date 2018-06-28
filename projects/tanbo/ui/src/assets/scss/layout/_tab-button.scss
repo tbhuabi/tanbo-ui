@@ -1,11 +1,21 @@
 ui-tab-button {
   display: inline-block;
   cursor: pointer;
-  padding: 5px 12px;
+  padding: 10px 12px;
+  position: relative;
   &.ui-active {
-    padding-bottom: 3px;
-    border-bottom: 2px solid $color-primary;
     color: $color-primary;
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background-color: $color-primary;
+    }
   }
   &:hover {
     color: $color-primary;

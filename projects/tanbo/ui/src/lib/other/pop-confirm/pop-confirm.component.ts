@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ElementRef, OnDestroy, EventEmitter, Output } from '@angular/core';
+import { Component, Inject, EventEmitter, Output } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -22,9 +22,9 @@ import { DOCUMENT } from '@angular/common';
     '[style.left]': 'left + "px"'
   }
 })
-export class PopConfirmComponent implements OnInit, OnDestroy {
+export class PopConfirmComponent {
   @Output()
-  uiEnter = new EventEmitter<void>();
+  uiConfirm = new EventEmitter<void>();
 
   @Output()
   uiCancel = new EventEmitter<void>();
@@ -37,22 +37,17 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
 
   position: string = 'topCenter';
 
-
-  constructor(private elementRef: ElementRef,
-              @Inject(DOCUMENT) private document: any) {
-  }
-
-  ngOnInit() {
-    this.document.body.appendChild(this.elementRef.nativeElement);
-  }
-
-  ngOnDestroy() {
-    this.document.body.removeChild(this.elementRef.nativeElement);
+  constructor(@Inject(DOCUMENT) private document: any) {
   }
 
   show() {
     const referenceElement = this.referenceElement;
-    const distance = referenceElement.getBoundingClientRect();
+    const distance = {
+      left: referenceElement.offsetLeft,
+      top: referenceElement.offsetTop,
+      height: referenceElement.offsetHeight,
+      width: referenceElement.offsetWidth
+    };
     switch (this.position) {
       case 'topLeft':
         this.left = distance.left;
@@ -76,15 +71,15 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
         break;
       case 'bottomLeft':
         this.left = distance.left;
-        this.top = distance.top + distance.height + 6;
+        this.top = distance.top + distance.height + 8;
         break;
       case 'bottomCenter':
         this.left = distance.left + distance.width / 2;
-        this.top = distance.top + distance.height + 6;
+        this.top = distance.top + distance.height + 8;
         break;
       case 'bottomRight':
         this.left = distance.left + distance.width;
-        this.top = distance.top + distance.height + 6;
+        this.top = distance.top + distance.height + 8;
         break;
       case 'leftTop':
         this.left = distance.left - 6;
@@ -109,5 +104,15 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
 
   hide() {
     this.isShow = false;
+  }
+
+  cancel() {
+    this.hide();
+    this.uiCancel.emit();
+  }
+
+  confirm() {
+    this.hide();
+    this.uiConfirm.emit();
   }
 }

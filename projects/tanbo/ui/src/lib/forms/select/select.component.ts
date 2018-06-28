@@ -177,6 +177,16 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     this.open = false;
   }
 
+  reset() {
+    this.value = '';
+    this.text = '';
+    this.selectedIndex = -1;
+    if (this.onChange) {
+      this.onChange('');
+    }
+    this.uiChange.emit('');
+  }
+
   writeValue(value: any) {
     this.isWrite = true;
     this.value = value;

@@ -25,9 +25,9 @@ export class PopConfirmDirective implements OnDestroy {
   popConfirmPosition: string = '';
 
   @Output()
-  uiPopConfirmEnter = new EventEmitter<void>();
+  uiConfirm = new EventEmitter<void>();
   @Output()
-  uiPopConfirmCancel = new EventEmitter<void>();
+  uiCancel = new EventEmitter<void>();
 
   private instance: PopConfirmComponent;
   private tooltipComponent: ComponentRef<PopConfirmComponent>;
@@ -50,11 +50,13 @@ export class PopConfirmDirective implements OnDestroy {
       this.tooltipFactory = this.componentFactoryResolver.resolveComponentFactory(PopConfirmComponent);
       this.tooltipComponent = this.viewContainerRef.createComponent(this.tooltipFactory);
       this.instance = this.tooltipComponent.instance;
-      this.subs.push(this.instance.uiEnter.subscribe(() => {
-        this.uiPopConfirmEnter.emit();
+      this.subs.push(this.instance.uiConfirm.subscribe(() => {
+        this.isShow = false;
+        this.uiConfirm.emit();
       }));
       this.subs.push(this.instance.uiCancel.subscribe(() => {
-        this.uiPopConfirmCancel.emit();
+        this.isShow = false;
+        this.uiCancel.emit();
       }));
     }
     if (this.isShow) {

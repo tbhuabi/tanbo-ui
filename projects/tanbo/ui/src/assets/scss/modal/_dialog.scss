@@ -1,8 +1,8 @@
-ui-confirm {
+ui-dialog {
 
 }
 
-.ui-confirm {
+.ui-dialog {
   display: block;
   background-color: #fff;
   position: fixed;
@@ -10,13 +10,13 @@ ui-confirm {
   border-radius: 6px;
   overflow: hidden;
   z-index: $mask-z-index + 10;
-  width: 360px;
+  width: $dialog-width;
   left: 50%;
-  margin-left: -180px;
+  margin-left: $dialog-width / -2;
   top: 50px;
 }
 
-.ui-confirm-title {
+.ui-dialog-title {
   margin: 0;
   font-size: 18px;
   font-weight: normal;
@@ -31,19 +31,19 @@ ui-confirm {
   }
 }
 
-.ui-confirm-header {
+.ui-dialog-header {
   display: block;
   padding: 20px $grid-column-padding;
   min-height: 40px;
   border-bottom: 1px solid $color-light;
 }
 
-.ui-confirm-content {
+.ui-dialog-content {
   display: block;
   padding: $grid-column-padding;
 }
 
-.ui-confirm-footer {
+.ui-dialog-footer {
   display: block;
   padding: 10px $grid-column-padding;
   text-align: right;

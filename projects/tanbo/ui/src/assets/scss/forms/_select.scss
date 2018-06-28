@@ -8,6 +8,11 @@ ui-select {
 
 .ui-select-fixed {
   position: relative;
+  &:hover {
+    .ui-select-clean:not(.ui-hide) {
+      display: flex;
+    }
+  }
 }
 
 .ui-select-arrow {
@@ -23,5 +28,36 @@ ui-select {
   transition: transform .15s;
   &.ui-open {
     transform: rotateZ(180deg);
+  }
+}
+
+
+.ui-select-clean {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  padding-left: 2px;
+  align-items: center;
+  font-size: 12px;
+  display: none;
+  > span {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background-color: $color-gray;
+    color: #fff;
+    text-align: center;
+    line-height: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover {
+      background-color: $color-gray-dark;
+    }
+  }
+  &.ui-hide {
+    display: none;
   }
 }

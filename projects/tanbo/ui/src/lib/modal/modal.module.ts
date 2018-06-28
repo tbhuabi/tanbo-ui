@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ConfirmComponent } from './confirm/confirm.component';
+import { DialogComponent } from './dialog/dialog.component';
 import { MaskComponent } from './mask/mask.component';
 import { ModalComponent } from './modal/modal.component';
 import { ModalBaseComponent } from './modal-base/modal-base.component';
@@ -14,7 +14,7 @@ import { ModalInnerComponent } from './modal-inner/modal-inner.component';
     CommonModule
   ],
   declarations: [
-    ConfirmComponent,
+    DialogComponent,
     MaskComponent,
     ModalComponent,
     ModalBaseComponent,
@@ -23,7 +23,7 @@ import { ModalInnerComponent } from './modal-inner/modal-inner.component';
     ModalInnerComponent
   ],
   exports: [
-    ConfirmComponent,
+    DialogComponent,
     MaskComponent,
     ModalComponent,
     ModalBaseComponent,

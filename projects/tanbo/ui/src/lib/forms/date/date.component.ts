@@ -41,7 +41,7 @@ export class DateComponent implements ControlValueAccessor, OnInit {
   @Input()
   forId: string = '';
   @Input()
-  value: string;
+  value: string | number;
   @Input()
   name = '';
   @Input()
@@ -146,6 +146,15 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     this.update();
   }
 
+  reset() {
+    this.value = '';
+    this.displayValue = '';
+    if (this.onChange) {
+      this.onChange('');
+    }
+    this.uiChange.emit('');
+  }
+
   changeShowType(type?: string) {
     this.showType = this.showType === type ? '' : type;
   }
@@ -225,6 +234,7 @@ export class DateComponent implements ControlValueAccessor, OnInit {
       value = date.getTime();
     }
     this.displayValue = dateStringFormat(this.displayFormat || this.format, selectedDate);
+    this.value = value;
     if (this.onChange) {
       this.onChange(value);
     }

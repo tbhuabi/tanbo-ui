@@ -13,6 +13,9 @@
     <div class="ui-select-arrow" [class.ui-open]="open">
       <span [ngClass]="arrowIconClassName"></span>
     </div>
+    <div class="ui-select-clean" [class.ui-hide]="!text || disabled || readonly" ui-stop-propagation>
+      <span (click)="reset()">&times;</span>
+    </div>
   </div>
   <ui-dropdown-menu>
     <ng-content></ng-content>
