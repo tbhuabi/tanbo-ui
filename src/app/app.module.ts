@@ -16,8 +16,6 @@ import { ApiInterceptor } from './api-interceptor';
     ],
     declarations: [
         AppComponent,
-        PageHeaderComponent,
-        PageFooterComponent,
         HomeComponent
     ],
     providers: [{
