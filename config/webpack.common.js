@@ -10,7 +10,7 @@ const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 const appPath = globalConfig.appPath;
 
-const commonStaticPaths = [path.resolve(appPath, 'assets'), path.resolve(__dirname, '../node_modules')];
+const commonStaticPaths = [path.resolve(appPath, 'assets'), path.resolve(__dirname, '../node_modules'), path.resolve(__dirname, '../library')];
 
 module.exports = {
     entry: {
@@ -28,7 +28,7 @@ module.exports = {
             use: [{
                 loader: 'tslint-loader',
                 options: {
-                    configuration: require('../tslint.json'),
+                    // configuration: require('../tslint.json'),
                     emitErrors: false,
                     failOnHint: false,
                     formatter: 'tslint-formatter-eslint-style'

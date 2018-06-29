@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'my-app',
+    selector: 'ui-test',
     templateUrl: './app.html'
 })
 export class AppComponent { }
