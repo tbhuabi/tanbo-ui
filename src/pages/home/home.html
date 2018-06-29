@@ -1,59 +1,29 @@
 <div class="ui-container-fluid">
-  <ng-template #modal>
-    <ui-modal size="lg">
-      <ui-modal-header>header</ui-modal-header>
-      <ui-modal-inner>{{ name }}</ui-modal-inner>
-      <ui-modal-footer>
-        <button type="button" ui-tooltip="test" class="ui-btn ui-btn-primary" (click)="hide()">close</button>
-      </ui-modal-footer>
-    </ui-modal>
-  </ng-template>
-  <button class="ui-btn ui-btn-primary" (click)="show()">button</button>
-  <br><br><br><br><br><br><br><br><br><br>
-  <br><br><br><br><br><br><br><br><br><br>
-  <br><br><br><br><br><br><br><br><br><br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="topLeft">topLeft</button>
-  <br>
-  <br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="topCenter">topCenter</button>
-  <br>
-  <br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="topRight">topRight</button>
-  <br>
-  <br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="rightTop">rightTop</button>
-  <br>
-  <br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="rightCenter">rightCenter
-  </button>
-  <br>
-  <br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="rightBottom">rightBottom
-  </button>
-  <br>
-  <br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="bottomLeft">bottomLeft</button>
-  <br>
-  <br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="bottomCenter">bottomCenter
-  </button>
-  <br>
-  <br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="bottomRight">bottomRight
-  </button>
-  <br>
-  <br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="leftTop">leftTop</button>
-  <br>
-  <br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="leftCenter">leftCenter</button>
-  <br>
-  <br>
-  <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="leftBottom">leftBottom</button>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <div class="ui-btn-group">
+    <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="topLeft">topLeft</button>
+    <ui-dropdown>
+      <button class="ui-btn ui-btn-primary">button</button>
+      <ui-dropdown-menu>
+        <ui-item>aaa</ui-item>
+        <ui-item>bbb</ui-item>
+      </ui-dropdown-menu>
+    </ui-dropdown>
+    <button class="ui-btn ui-btn-primary" ui-tooltip="testtestest" tooltipPosition="topLeft">topLeft</button>
+  </div>
+
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <div class="ui-btn-group">
+    <button class="ui-btn ui-btn-primary" ui-pop-confirm="testtestest">topLeft</button>
+    <ui-dropdown>
+      <button class="ui-btn ui-btn-primary">button</button>
+      <ui-dropdown-menu>
+        <ui-item>aaa</ui-item>
+        <ui-item>bbb</ui-item>
+      </ui-dropdown-menu>
+    </ui-dropdown>
+    <button class="ui-btn ui-btn-primary" ui-pop-confirm="testtestest">topLeft</button>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
