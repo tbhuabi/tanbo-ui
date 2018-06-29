@@ -1,9 +1,10 @@
 ui-select {
   display: inline-block;
   user-select: none;
-  ui-dropdown-menu {
-    width: 100%;
-  }
+}
+
+.ui-select-dropdown, .ui-select-dropdown-menu, .ui-select-input {
+  width: 100%;
 }
 
 .ui-select-fixed {
@@ -30,7 +31,6 @@ ui-select {
     transform: rotateZ(180deg);
   }
 }
-
 
 .ui-select-clean {
   position: absolute;

@@ -1,4 +1,4 @@
-<ui-dropdown (uiEscape)="escape()">
+<ui-dropdown class="ui-select-dropdown" (uiEscape)="escape()">
   <div class="ui-select-fixed" (click)="toggle($event)">
     <input class="ui-select-input ui-form-control"
            [ngClass]="{'ui-input-sm': size === 'sm', 'ui-input-lg': size === 'lg'}"
@@ -17,7 +17,7 @@
       <span (click)="reset()">&times;</span>
     </div>
   </div>
-  <ui-dropdown-menu>
+  <ui-dropdown-menu class="ui-select-dropdown-menu">
     <ng-content></ng-content>
   </ui-dropdown-menu>
 </ui-dropdown>

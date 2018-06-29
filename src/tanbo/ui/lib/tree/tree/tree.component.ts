@@ -21,6 +21,8 @@ import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../config';
 export class TreeComponent implements OnDestroy, OnInit {
   @Input()
   open: boolean = false;
+  @Input()
+  depth = 0;
 
   get left() {
     return (this.depth - 2) * 2 + this.offset + 'em';
@@ -29,8 +31,9 @@ export class TreeComponent implements OnDestroy, OnInit {
   private sub: Subscription;
 
   constructor(@Optional() private treeItemService: TreeItemService,
-              @Inject(UI_TREE_DEPTH) public depth: number,
+              @Inject(UI_TREE_DEPTH) depth: number,
               @Inject(UI_TREE_OFFSET) private offset: number) {
+    this.depth = depth;
   }
 
   ngOnInit() {

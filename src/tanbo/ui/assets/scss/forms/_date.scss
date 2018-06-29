@@ -2,7 +2,10 @@ ui-input[type=date] {
   display: inline-block;
   cursor: auto;
   width: auto;
+}
 
+.ui-date-dropdown, .ui-date-input {
+  width: 100%;
 }
 
 .ui-date-dropdown-menu {

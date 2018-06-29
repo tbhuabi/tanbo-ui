@@ -1,4 +1,4 @@
-import { Component, Inject, HostBinding } from '@angular/core';
+import { Component, Inject, HostBinding, Input } from '@angular/core';
 
 import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../config';
 
@@ -7,6 +7,8 @@ import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../config';
   templateUrl: './tree-inner.component.html'
 })
 export class TreeInnerComponent {
+  @Input()
+  depth = 0;
   @HostBinding('style.paddingLeft')
   get paddingLeft() {
     return this.depth * 2 + 0.5 + this.offset + 'em';
@@ -16,7 +18,8 @@ export class TreeInnerComponent {
     return (this.depth - 1) * 2 + this.offset + 'em';
   }
 
-  constructor(@Inject(UI_TREE_DEPTH) public depth: number,
+  constructor(@Inject(UI_TREE_DEPTH) depth: number,
               @Inject(UI_TREE_OFFSET) private offset: number) {
+    this.depth = depth;
   }
 }
