@@ -1,7 +1,5 @@
-import { Component, Inject, OnDestroy, OnInit, ElementRef } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-
-import { getPosition } from '../helper';
 
 @Component({
   selector: 'ui-tooltip',
@@ -20,22 +18,37 @@ import { getPosition } from '../helper';
     '[class.ui-left-top]': 'position === "leftTop"',
     '[class.ui-left-center]': 'position === "leftCenter"',
     '[class.ui-left-bottom]': 'position === "leftBottom"',
-    '[style.top]': 'top + "px"',
-    '[style.left]': 'left + "px"'
+    '[style.top]': 'y + "px"',
+    '[style.left]': 'x + "px"'
   }
 })
 export class TooltipComponent implements OnInit, OnDestroy {
   isShow = false;
   text = '';
   referenceElement: HTMLElement;
-  left: number;
-  top: number;
 
   position: string = 'topCenter';
+
+  get x() {
+    return this.left + this.scrollX;
+  }
+
+  get y() {
+    return this.top + this.scrollY;
+  }
+
+  private left: number = 0;
+  private top: number = 0;
+
+  private scrollX: number = 0;
+  private scrollY: number = 0;
+
+  private unbindFn: () => any;
 
   private timer: any = null;
 
   constructor(@Inject(DOCUMENT) private document: any,
+              private renderer: Renderer2,
               private elementRef: ElementRef) {
   }
 
@@ -45,13 +58,16 @@ export class TooltipComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     clearTimeout(this.timer);
+    if (this.unbindFn) {
+      this.unbindFn();
+    }
     this.document.body.removeChild(this.elementRef.nativeElement);
   }
 
   show() {
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
-      const distance = getPosition(this.referenceElement);
+      const distance = this.referenceElement.getBoundingClientRect();
       switch (this.position) {
         case 'topLeft':
           this.left = distance.left;
@@ -102,13 +118,22 @@ export class TooltipComponent implements OnInit, OnDestroy {
           this.left = distance.left + distance.width / 2;
           this.top = distance.top - 6;
       }
+      this.scrollX = window.scrollX;
+      this.scrollY = window.scrollY;
 
+      this.unbindFn = this.renderer.listen('window', 'scroll', () => {
+        this.scrollX = window.scrollX;
+        this.scrollY = window.scrollY;
+      });
       this.isShow = true;
     }, 150);
   }
 
   hide() {
     clearTimeout(this.timer);
+    if (this.unbindFn) {
+      this.unbindFn();
+    }
     this.timer = setTimeout(() => {
       this.isShow = false;
     }, 100);

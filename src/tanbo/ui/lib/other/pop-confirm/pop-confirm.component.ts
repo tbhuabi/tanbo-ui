@@ -1,7 +1,5 @@
-import { Component, Inject, EventEmitter, Output, OnDestroy, OnInit, ElementRef } from '@angular/core';
+import { Component, Inject, EventEmitter, Output, OnDestroy, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-
-import { getPosition } from '../helper';
 
 @Component({
   selector: 'ui-pop-confirm',
@@ -20,8 +18,8 @@ import { getPosition } from '../helper';
     '[class.ui-left-top]': 'position === "leftTop"',
     '[class.ui-left-center]': 'position === "leftCenter"',
     '[class.ui-left-bottom]': 'position === "leftBottom"',
-    '[style.top]': 'top + "px"',
-    '[style.left]': 'left + "px"'
+    '[style.top]': 'y + "px"',
+    '[style.left]': 'x + "px"'
   }
 })
 export class PopConfirmComponent implements OnInit, OnDestroy {
@@ -34,12 +32,27 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
   isShow = false;
   text = '';
   referenceElement: HTMLElement;
-  left: number;
-  top: number;
+
+  get x() {
+    return this.left + this.scrollX;
+  }
+
+  get y() {
+    return this.top + this.scrollY;
+  }
 
   position: string = 'topCenter';
 
+  private left: number = 0;
+  private top: number = 0;
+
+  private scrollX: number = 0;
+  private scrollY: number = 0;
+
+  private unbindFn: () => any;
+
   constructor(@Inject(DOCUMENT) private document: any,
+              private renderer: Renderer2,
               private elementRef: ElementRef) {
   }
 
@@ -48,11 +61,14 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.unbindFn) {
+      this.unbindFn();
+    }
     this.document.body.removeChild(this.elementRef.nativeElement);
   }
 
   show() {
-    const distance = getPosition(this.referenceElement);
+    const distance = this.referenceElement.getBoundingClientRect();
     switch (this.position) {
       case 'topLeft':
         this.left = distance.left;
@@ -104,11 +120,22 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
         this.top = distance.top - 6;
     }
 
+    this.scrollX = window.scrollX;
+    this.scrollY = window.scrollY;
+
+    this.unbindFn = this.renderer.listen('window', 'scroll', () => {
+      this.scrollX = window.scrollX;
+      this.scrollY = window.scrollY;
+    });
+
     this.isShow = true;
   }
 
   hide() {
     this.isShow = false;
+    if (this.unbindFn) {
+      this.unbindFn();
+    }
   }
 
   cancel() {
