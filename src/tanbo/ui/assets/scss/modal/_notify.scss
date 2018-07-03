@@ -20,12 +20,14 @@ ui-notify {
 .ui-notify {
   position: relative;
   width: 360px;
-  padding: 8px $grid-column-padding;
+  padding: 15px $grid-column-padding;
   overflow: hidden;
   margin-bottom: 10px;
-  box-shadow: 0 10px 10px hsla(hue($color-default), saturation($color-default), lightness($color-default), .15);
+  box-shadow: 0 5px 10px hsla(hue($color-default), saturation($color-default), lightness($color-default), .25);
   display: flex;
   align-items: center;
+  border: 1px solid $color-light;
+  border-bottom: none;
   background-color: #fff;
   @if $notify-radius-is-open {
     border-radius: $radius-base;

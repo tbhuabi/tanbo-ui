@@ -86,7 +86,7 @@ export class NotifyComponent implements OnInit {
   }
 
   restart(item: any) {
-    if (item.rawConfig.autoHide) {
+    if (item.rawConfig.autoHide || item.rawConfig.autoHide === undefined) {
       item.autoHide = true;
     }
     this.start();
