@@ -130,6 +130,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     }
     this.subs.push(this.selectService.onChecked.subscribe((option: OptionComponent) => {
       this.focus = true;
+      this.open = false;
       this.options.forEach((op: OptionComponent, index: number) => {
         if (op === option) {
           op.selected = true;
