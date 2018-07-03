@@ -1,3 +1,3 @@
-export * from './dialog/dialog-controller';
-export * from './modal-base/modal-controller';
-export * from './notify/notify-controller';
+export { DialogController, DialogConfig } from './dialog/dialog-controller';
+export { ModalController } from './modal-base/modal-controller';
+export { NotifyController, NotifyType, NotifyConfig } from './notify/notify-controller';

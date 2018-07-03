@@ -62,7 +62,7 @@ export class NotifyComponent implements OnInit {
       }
       _config.content = config.content || '';
       _config.timeOut = config.timeOut || 5000;
-      _config.autoHide = config.autoHide;
+      _config.autoHide = config.autoHide === undefined ? true : config.autoHide;
 
       _config.currentTime = 0;
       _config.proportion = 100;
