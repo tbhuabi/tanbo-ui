@@ -84,7 +84,7 @@
 @include btn-size(sm, $button-padding-vertical-sm, $button-padding-horizontal-sm, $button-font-size-sm, $button-radius-sm);
 @include btn-size(lg, $button-padding-vertical-lg, $button-padding-horizontal-lg, $button-font-size-lg, $button-radius-lg);
 
-@include btn-theme(default, $color-default, #fff);
+@include btn-theme(default, $color-default, $color-lighter);
 @include btn-theme(primary, #fff, $color-primary);
 @include btn-theme(success, #fff, $color-success);
 @include btn-theme(info, #fff, $color-info);
