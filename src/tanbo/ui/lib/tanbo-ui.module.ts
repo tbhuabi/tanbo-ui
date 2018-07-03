@@ -9,7 +9,7 @@ import { UIOtherModule } from './other/other.module';
 import { UITableModule } from './table/table.module';
 import { UITreeModule } from './tree/tree.module';
 
-import { DialogController, ModalController } from './modal/config';
+import { DialogController, ModalController, NotifyController } from './modal/config';
 
 @NgModule({
   exports: [
@@ -29,7 +29,8 @@ export class UIModule {
       ngModule: UIModule,
       providers: [
         DialogController,
-        ModalController
+        ModalController,
+        NotifyController
       ]
     };
   }

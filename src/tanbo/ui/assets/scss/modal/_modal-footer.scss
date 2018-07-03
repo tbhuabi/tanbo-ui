@@ -1,6 +1,6 @@
 ui-modal-footer {
   display: block;
-  padding: 10px $grid-column-padding;
+  padding: 10px $grid-column-padding + 5;
   text-align: right;
   border-top: 1px solid $color-light;
   >.ui-btn {

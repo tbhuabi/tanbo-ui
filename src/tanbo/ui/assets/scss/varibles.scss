@@ -134,8 +134,10 @@ $list-title-horizontal-padding: $grid-column-padding !default;
 
 // dialog
 $dialog-radius-is-open: $is-open-radius !default;
-
 $dialog-width: 360px !default;
+
+// notify
+$notify-radius-is-open: $is-open-radius;
 
 // toolbar
 $toolbar-width: 40px !default;

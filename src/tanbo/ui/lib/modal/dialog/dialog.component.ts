@@ -48,9 +48,15 @@ export class DialogComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // 订阅用户事件
-    this.sub = this.dialogController.config.subscribe((params: DialogConfig) => {
+    this.sub = this.dialogController.config.subscribe((params: DialogConfig | string) => {
       // 设置动画状态
       this.show = true;
+
+      if (typeof params === 'string') {
+        params = {
+          content: params
+        };
+      }
 
       // 赋值相应参数
       this.title = params.title;

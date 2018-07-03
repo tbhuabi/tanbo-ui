@@ -9,17 +9,17 @@ export interface DialogConfig {
 
 @Injectable()
 export class DialogController {
-  config: Observable<DialogConfig>;
+  config: Observable<DialogConfig | string>;
   private action: Observable<boolean>;
   private actionSource = new Subject<boolean>();
-  private configSource = new Subject<DialogConfig>();
+  private configSource = new Subject<DialogConfig | string>();
 
   constructor() {
     this.action = this.actionSource.asObservable();
     this.config = this.configSource.asObservable();
   }
 
-  show(params: DialogConfig): Promise<any> {
+  show(params: DialogConfig | string): Promise<any> {
     this.configSource.next(params);
     return new Promise((resolve) => {
       const sub = this.action.subscribe((result: boolean) => {

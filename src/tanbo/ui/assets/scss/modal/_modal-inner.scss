@@ -1,7 +1,10 @@
 ui-modal-inner {
   display: block;
   flex: 1;
-  padding: $grid-column-padding;
+  padding: $grid-column-padding + 5;
   overflow-y: auto;
   background-color: $color-lighter;
+  &:first-child {
+    padding-top: $grid-column-padding * 2;
+  }
 }

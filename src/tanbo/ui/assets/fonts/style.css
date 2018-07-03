@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'tanbo-ui';
-  src:  url('fonts/tanbo-ui.eot?8wm04k');
-  src:  url('fonts/tanbo-ui.eot?8wm04k#iefix') format('embedded-opentype'),
-    url('fonts/tanbo-ui.ttf?8wm04k') format('truetype'),
-    url('fonts/tanbo-ui.woff?8wm04k') format('woff'),
-    url('fonts/tanbo-ui.svg?8wm04k#tanbo-ui') format('svg');
+  src:  url('fonts/tanbo-ui.eot?19y5gj');
+  src:  url('fonts/tanbo-ui.eot?19y5gj#iefix') format('embedded-opentype'),
+    url('fonts/tanbo-ui.ttf?19y5gj') format('truetype'),
+    url('fonts/tanbo-ui.woff?19y5gj') format('woff'),
+    url('fonts/tanbo-ui.svg?19y5gj#tanbo-ui') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -47,6 +47,21 @@
 }
 .ui-icon-checkbox-unchecked:before {
   content: "\ea53";
+}
+.ui-icon-warning:before {
+  content: "\ea07";
+}
+.ui-icon-notification:before {
+  content: "\ea08";
+}
+.ui-icon-info:before {
+  content: "\ea0c";
+}
+.ui-icon-cancel-circle:before {
+  content: "\ea0d";
+}
+.ui-icon-checkmark:before {
+  content: "\ea10";
 }
 .ui-icon-arrow-top:before {
   content: "\e50e";

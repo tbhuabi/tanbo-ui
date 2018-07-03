@@ -1,0 +1,20 @@
+<div [@notifyState]="true" *ngFor="let config of messageList; let i = index"
+     class="ui-notify"
+     (mouseenter)="stop(config)"
+     (mouseleave)="restart(config)"
+     [ngClass]="'ui-' + config.type">
+  <div *ngIf="config.type !== 'default'" class="ui-notify-icon" [ngSwitch]="config.type">
+    <span *ngSwitchCase="'primary'" class="ui-color-primary ui-icon-notification"></span>
+    <span *ngSwitchCase="'info'" class="ui-color-info ui-icon-info"></span>
+    <span *ngSwitchCase="'success'" class="ui-color-success ui-icon-checkmark"></span>
+    <span *ngSwitchCase="'warning'" class="ui-color-warning ui-icon-warning"></span>
+    <span *ngSwitchCase="'danger'" class="ui-color-danger ui-icon-cancel-circle"></span>
+  </div>
+  <div class="ui-notify-context">
+    {{ config.content }}
+  </div>
+  <div class="ui-notify-close">
+    <button class="ui-close" (click)="close(i)" type="button">&times;</button>
+  </div>
+  <div *ngIf="config.autoHide" class="ui-notify-time-down-bar" [ngStyle]="{width: 100 - config.proportion + '%'}"></div>
+</div>
