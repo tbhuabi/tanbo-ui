@@ -35,6 +35,12 @@ table.ui-table {
         padding: $table-cell-padding;
         background-color: $table-thead-bg-color;
         border-bottom: 2px solid $table-thead-border-color;
+        &:first-child {
+          padding-left: $container-horizontal-padding;
+        }
+        &:last-child {
+          padding-right: $container-horizontal-padding;
+        }
       }
     }
   }
@@ -46,6 +52,12 @@ table.ui-table {
         @include table-styles;
         padding: $table-cell-padding;
         border-bottom: 1px solid $table-border-color;
+        &:first-child {
+          padding-left: $container-horizontal-padding;
+        }
+        &:last-child {
+          padding-right: $container-horizontal-padding;
+        }
       }
     }
   }

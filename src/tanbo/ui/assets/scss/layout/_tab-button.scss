@@ -1,7 +1,7 @@
 ui-tab-button {
   display: inline-block;
   cursor: pointer;
-  padding: 10px 12px;
+  padding: 10px $container-horizontal-padding;
   position: relative;
   &.ui-active {
     color: $color-primary;

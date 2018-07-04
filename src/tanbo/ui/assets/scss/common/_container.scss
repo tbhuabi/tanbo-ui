@@ -2,8 +2,8 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding-left: $grid-column-padding;
-  padding-right: $grid-column-padding;
+  padding-left: $container-horizontal-padding;
+  padding-right: $container-horizontal-padding;
   @media (min-width: $screen-sm-min) {
     width: $screen-sm-min;
   }
@@ -15,7 +15,7 @@
     width: $screen-lg-min;
   }
   &-fluid {
-    padding-left: $grid-column-padding;
-    padding-right: $grid-column-padding;
+    padding-left: $container-horizontal-padding;
+    padding-right: $container-horizontal-padding;
   }
 }

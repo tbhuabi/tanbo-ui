@@ -20,7 +20,7 @@ ui-notify {
 .ui-notify {
   position: relative;
   width: 360px;
-  padding: 15px $grid-column-padding;
+  padding: 15px $container-horizontal-padding;
   overflow: hidden;
   margin-bottom: 10px;
   box-shadow: 0 5px 10px hsla(hue($color-default), saturation($color-default), lightness($color-default), .25);

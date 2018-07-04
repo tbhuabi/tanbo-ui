@@ -8,7 +8,7 @@
   line-height: $line-height;
   white-space: normal;
   overflow: hidden;
-  padding: 3px $grid-column-padding + 5px;
+  padding: 3px $container-horizontal-padding + 5px;
   cursor: pointer;
   &:hover {
     background-color: $color-light;

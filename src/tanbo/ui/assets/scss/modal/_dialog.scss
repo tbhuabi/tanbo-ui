@@ -33,19 +33,19 @@ ui-dialog {
 
 .ui-dialog-header {
   display: block;
-  padding: 20px $grid-column-padding;
+  padding: 20px $container-horizontal-padding;
   min-height: 40px;
   border-bottom: 1px solid $color-light;
 }
 
 .ui-dialog-content {
   display: block;
-  padding: $grid-column-padding;
+  padding: $container-horizontal-padding;
 }
 
 .ui-dialog-footer {
   display: block;
-  padding: 10px $grid-column-padding;
+  padding: 10px $container-horizontal-padding;
   text-align: right;
   border-top: 1px solid $color-light;
   > .ui-btn {
