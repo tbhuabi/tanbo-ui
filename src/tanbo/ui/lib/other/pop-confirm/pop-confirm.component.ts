@@ -1,5 +1,6 @@
-import { Component, Inject, EventEmitter, Output, OnDestroy, OnInit, ElementRef, Renderer2 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, EventEmitter, Output, OnDestroy, OnInit, ElementRef, Renderer2 } from '@angular/core';
+
+import { TooltipBaseService } from '../config';
 
 @Component({
   selector: 'ui-pop-confirm',
@@ -51,20 +52,19 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
 
   private unbindFn: () => any;
 
-  constructor(@Inject(DOCUMENT) private document: any,
-              private renderer: Renderer2,
+  constructor(private renderer: Renderer2,
+              private tooltipBaseService: TooltipBaseService,
               private elementRef: ElementRef) {
   }
 
   ngOnInit() {
-    this.document.body.appendChild(this.elementRef.nativeElement);
+    this.tooltipBaseService.push(this.elementRef);
   }
 
   ngOnDestroy() {
     if (this.unbindFn) {
       this.unbindFn();
     }
-    this.document.body.removeChild(this.elementRef.nativeElement);
   }
 
   show() {

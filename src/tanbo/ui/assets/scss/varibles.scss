@@ -11,7 +11,6 @@ $tooltip-z-index: 900 !default;
 $mask-z-index: 1000 !default;
 $notify-z-index: 1000 !default;
 $toolbar-z-index: 1100 !default;
-$confirm-z-index: 1200 !default;
 $view-loading-bar-z-index: 1300 !default;
 
 $mask-background-color: rgba(0, 0, 0, .4) !default;
@@ -78,7 +77,7 @@ $button-padding-vertical-sm: $button-padding-vertical - 3px !default;
 $button-padding-vertical-lg: $button-padding-vertical + 2px !default;
 
 $button-padding-horizontal: 12px !default;
-$button-padding-horizontal-sm: $button-padding-horizontal - 4px !default;
+$button-padding-horizontal-sm: $button-padding-horizontal - 6px !default;
 $button-padding-horizontal-lg: $button-padding-horizontal + 4px !default;
 
 $button-radius-is-open: $is-open-radius !default;

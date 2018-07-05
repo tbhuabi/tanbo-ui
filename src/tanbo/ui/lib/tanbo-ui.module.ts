@@ -10,6 +10,7 @@ import { UITableModule } from './table/table.module';
 import { UITreeModule } from './tree/tree.module';
 
 import { DialogController, ModalController, NotifyController } from './modal/config';
+import { TooltipBaseService } from './other/config';
 
 @NgModule({
   exports: [
@@ -30,7 +31,8 @@ export class UIModule {
       providers: [
         DialogController,
         ModalController,
-        NotifyController
+        NotifyController,
+        TooltipBaseService
       ]
     };
   }

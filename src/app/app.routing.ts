@@ -14,5 +14,8 @@ const appRoutes: Routes = [{
 }, {
   path: 'detail',
   component: DetailComponent
+}, {
+  path: 'lazy',
+  loadChildren: '../pages/lazy/lazy.module#LazyModule'
 }];
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

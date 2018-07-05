@@ -1,5 +1,6 @@
-import { Component, Inject, OnDestroy, OnInit, ElementRef, Renderer2 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, OnDestroy, OnInit, ElementRef, Renderer2 } from '@angular/core';
+
+import { TooltipBaseService } from '../config';
 
 @Component({
   selector: 'ui-tooltip',
@@ -47,13 +48,13 @@ export class TooltipComponent implements OnInit, OnDestroy {
 
   private timer: any = null;
 
-  constructor(@Inject(DOCUMENT) private document: any,
-              private renderer: Renderer2,
+  constructor(private renderer: Renderer2,
+              private tooltipBaseService: TooltipBaseService,
               private elementRef: ElementRef) {
   }
 
   ngOnInit() {
-    this.document.body.appendChild(this.elementRef.nativeElement);
+    this.tooltipBaseService.push(this.elementRef);
   }
 
   ngOnDestroy() {
@@ -61,7 +62,6 @@ export class TooltipComponent implements OnInit, OnDestroy {
     if (this.unbindFn) {
       this.unbindFn();
     }
-    this.document.body.removeChild(this.elementRef.nativeElement);
   }
 
   show() {

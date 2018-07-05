@@ -4,4 +4,7 @@ ui-modal-header {
   min-height: 40px;
   border-bottom: 1px solid $color-light;
   font-size: 18px;
+  > .ui-close {
+    transform: translateY(-5px);
+  }
 }

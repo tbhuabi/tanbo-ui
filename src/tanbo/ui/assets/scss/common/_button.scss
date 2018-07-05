@@ -17,13 +17,22 @@
     }
     &:hover {
       background-color: darken($bg-color, 7);
+      @if $name != default {
+        border-color: darken($bg-color, 7);
+      }
     }
     &:focus {
       background-color: darken($bg-color, 10);
       z-index: 1;
+      @if $name != default {
+        border-color: darken($bg-color, 7);
+      }
     }
     &:active {
       background-color: darken($bg-color, 15);
+      @if $name != default {
+        border-color: darken($bg-color, 7);
+      }
     }
     &.ui-disabled, &[disabled], &[readonly] {
       opacity: .5;
@@ -94,6 +103,7 @@
 .ui-btn-group {
   position: relative;
   display: inline-flex;
+  line-height: 1;
   > .ui-btn {
     border-radius: 0;
     margin-left: -1px;
@@ -119,6 +129,9 @@
     }
     &.ui-btn-info {
       border-left-color: darken($color-info, 10);
+    }
+    &.ui-btn-success {
+      border-left-color: darken($color-success, 10);
     }
     &.ui-btn-warning {
       border-left-color: darken($color-warning, 10);

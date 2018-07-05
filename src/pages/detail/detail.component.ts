@@ -26,5 +26,5 @@ export class DetailComponent {
     children: [{
       text: 21
     }]
-  }]
+  }];
 }

@@ -20,15 +20,6 @@ ui-dialog {
   margin: 0;
   font-size: 18px;
   font-weight: normal;
-  .ui-close {
-    background: none;
-    border: none;
-    cursor: pointer;
-    &:hover {
-      color: $color-primary;
-      opacity: 1;
-    }
-  }
 }
 
 .ui-dialog-header {
@@ -36,6 +27,9 @@ ui-dialog {
   padding: 20px $container-horizontal-padding;
   min-height: 40px;
   border-bottom: 1px solid $color-light;
+  > .ui-close {
+    transform: translateY(-5px);
+  }
 }
 
 .ui-dialog-content {

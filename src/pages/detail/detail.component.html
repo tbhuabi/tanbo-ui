@@ -4,7 +4,7 @@
   <ui-tree [open]="open">
     <ui-tree-item *ngFor="let item of list">
       <ui-tree-inner [depth]="depth">
-        <ui-tree-expand #expand></ui-tree-expand>{{item.text}}
+        <ui-tree-expand #expand></ui-tree-expand>{{ item.text }}
       </ui-tree-inner>
       <ng-container *ngIf="item.children"
                     [ngTemplateOutlet]="temp"
