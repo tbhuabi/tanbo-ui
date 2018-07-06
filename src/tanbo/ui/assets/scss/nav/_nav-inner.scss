@@ -1,15 +1,15 @@
-ui-menu-inner {
+ui-nav-inner {
   display: flex;
   padding: 8px $container-horizontal-padding;
   cursor: pointer;
   position: relative;
   transition: all .2s;
   &:hover {
-    background-color: $color-lighter;
+    color: $color-primary;
   }
   &.ui-open {
-    > .ui-menu-inner-arrow {
-      transform: rotateX(180deg);
+    > .ui-nav-inner-arrow {
+      transform: rotateZ(90deg);
     }
   }
   &.ui-active {
@@ -32,11 +32,12 @@ ui-menu-inner {
   }
 }
 
-.ui-menu-inner {
+.ui-nav-inner {
   flex: 1;
 }
 
-.ui-menu-inner-arrow {
+.ui-nav-inner-arrow {
+  transform-origin: 50%;
   transition: transform .2s;
   width: 1em;
   font-size: 12px;

@@ -31,6 +31,9 @@ $color-success: #19be6b !default; // 正向操作提示颜色
 $color-warning: #ff9900 !default; // 负面操作警告颜色
 $color-danger: #ed3f14 !default; // 危险操作警告颜色
 
+$color-primary-dark: #2b85e4 !default;
+$color-primary-light: #5cadff !default;
+
 // 栅格化配置
 $grid-columns: 12 !default; // 栅格列数
 $grid-column-padding: $container-horizontal-padding !default; // 每列的距离
@@ -137,6 +140,3 @@ $dialog-width: 360px !default;
 
 // notify
 $notify-radius-is-open: $is-open-radius;
-
-// toolbar
-$toolbar-width: 40px !default;

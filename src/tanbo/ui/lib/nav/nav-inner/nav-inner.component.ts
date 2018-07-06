@@ -17,14 +17,14 @@ import {
 import { Router, RouterLink, RouterLinkWithHref, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { MenuItemService } from '../menu-item/menu-item.service';
-import { UI_MENU_OFFSET, UI_MENU_DEPTH } from '../config';
+import { NavItemService } from '../nav-item/nav-item.service';
+import { UI_NAV_OFFSET, UI_NAV_DEPTH } from '../config';
 
 @Component({
-  selector: 'ui-menu-inner',
-  templateUrl: './menu-inner.component.html'
+  selector: 'ui-nav-inner',
+  templateUrl: './nav-inner.component.html'
 })
-export class MenuInnerComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit {
+export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit {
   @HostBinding('class.ui-open')
   isOpen = false;
 
@@ -46,9 +46,9 @@ export class MenuInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCo
   private classes: string[] = ['ui-active'];
   private subs: Subscription[] = [];
 
-  constructor(@Optional() private menuItemService: MenuItemService,
-              @Inject(UI_MENU_DEPTH) public depth: number,
-              @Inject(UI_MENU_OFFSET) private offset: number,
+  constructor(@Optional() private navItemService: NavItemService,
+              @Inject(UI_NAV_DEPTH) public depth: number,
+              @Inject(UI_NAV_OFFSET) private offset: number,
               private router: Router,
               private element: ElementRef,
               private renderer: Renderer2) {
@@ -61,11 +61,11 @@ export class MenuInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCo
         this.update();
       }
     }));
-    if (this.menuItemService) {
-      this.subs.push(this.menuItemService.isOpen.subscribe(b => {
+    if (this.navItemService) {
+      this.subs.push(this.navItemService.isOpen.subscribe(b => {
         this.isOpen = b;
       }));
-      this.subs.push(this.menuItemService.hasMenu.subscribe(b => {
+      this.subs.push(this.navItemService.hasMenu.subscribe(b => {
         if (b) {
           this.totalMenu++;
         } else {
@@ -81,8 +81,8 @@ export class MenuInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCo
 
   @HostListener('click')
   click() {
-    if (this.menuItemService) {
-      this.menuItemService.change(!this.isOpen);
+    if (this.navItemService) {
+      this.navItemService.change(!this.isOpen);
     }
   }
 
@@ -90,8 +90,8 @@ export class MenuInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCo
     this.links.changes.subscribe(_ => this.update());
     this.linksWithHrefs.changes.subscribe(_ => this.update());
     this.update();
-    if (this.menuItemService) {
-      this.menuItemService.change(this.isActive);
+    if (this.navItemService) {
+      this.navItemService.change(this.isActive);
     }
   }
 
@@ -115,8 +115,8 @@ export class MenuInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCo
         (this as {
           isActive: boolean
         }).isActive = active;
-        if (this.menuItemService.parent && active) {
-          this.menuItemService.parent.change(active);
+        if (this.navItemService.parent && active) {
+          this.navItemService.parent.change(active);
         }
       });
     }

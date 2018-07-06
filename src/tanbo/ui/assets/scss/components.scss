@@ -26,10 +26,6 @@
 @import "forms/select";
 @import "forms/switch";
 
-@import "menu/menu";
-@import "menu/menu-inner";
-@import "menu/menu-item";
-
 @import "layout/dropdown";
 @import "layout/dropdown-menu";
 @import "layout/item";
@@ -49,10 +45,17 @@
 @import "modal/modal-inner";
 @import "modal/notify";
 
+@import "nav/nav";
+@import "nav/nav-inner";
+@import "nav/nav-item";
+
 @import "other/divider";
 @import "other/pop-confirm";
 @import "other/tooltip";
 @import "other/view-loading-bar";
+
+@import "timeline/timeline";
+@import "timeline/timeline-item";
 
 @import "tree/tree";
 @import "tree/tree-expand";
