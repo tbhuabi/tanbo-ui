@@ -1,5 +1,5 @@
-<ui-dropdown class="ui-select-dropdown" (uiEscape)="escape()">
-  <div class="ui-select-fixed" (click)="toggle($event)">
+<ui-dropdown [autoDisplay]="false" [open]="open" class="ui-select-dropdown" (uiEscape)="escape()">
+  <div class="ui-select-fixed" (click)="toggle()">
     <input class="ui-select-input ui-form-control"
            [ngClass]="{'ui-input-sm': size === 'sm', 'ui-input-lg': size === 'lg'}"
            [disabled]="disabled"

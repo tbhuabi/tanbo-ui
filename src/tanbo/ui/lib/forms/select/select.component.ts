@@ -77,7 +77,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   private onTouched: (_: any) => any;
   private subs: Array<Subscription> = [];
 
-  private defaultOption: OptionComponent;
+  private selectedOption: OptionComponent;
   private isWrite: boolean = false;
 
   static getTextByElement(element: HTMLElement): string {
@@ -100,7 +100,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
       for (const item of this.options.toArray()) {
         if (item.value === this.value && !isFindDefaultOption) {
           isFindDefaultOption = true;
-          this.defaultOption = item;
+          this.selectedOption = item;
           item.selected = true;
         } else {
           item.selected = false;
@@ -125,7 +125,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
         setTimeout(() => {
           defaultOption.selected = true;
         });
-        this.defaultOption = defaultOption;
+        this.selectedOption = defaultOption;
       }
     }
     this.subs.push(this.selectService.onChecked.subscribe((option: OptionComponent) => {
@@ -133,6 +133,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
       this.open = false;
       this.options.forEach((op: OptionComponent, index: number) => {
         if (op === option) {
+          this.selectedOption = op;
           op.selected = true;
           this.value = option.value;
           this.text = SelectComponent.getTextByElement(option.nativeElement);
@@ -152,8 +153,8 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   }
 
   ngAfterViewInit() {
-    if (this.defaultOption) {
-      this.text = SelectComponent.getTextByElement(this.defaultOption.nativeElement);
+    if (this.selectedOption) {
+      this.text = SelectComponent.getTextByElement(this.selectedOption.nativeElement);
       this.changeDetectorRef.detectChanges();
     }
   }
@@ -164,12 +165,14 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     });
   }
 
-  toggle(event: any) {
-    if (this.disabled || this.readonly) {
-      event.stopPropagation();
+  toggle() {
+    if (this.disabled) {
       return;
     }
     this.focus = true;
+    if (this.readonly) {
+      return;
+    }
     this.open = !this.open;
   }
 
@@ -182,6 +185,8 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     this.value = '';
     this.text = '';
     this.selectedIndex = -1;
+    this.selectedOption.selected = false;
+    this.selectedOption = null;
     if (this.onChange) {
       this.onChange('');
     }
