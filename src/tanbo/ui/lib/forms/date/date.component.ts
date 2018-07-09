@@ -149,6 +149,7 @@ export class DateComponent implements ControlValueAccessor, OnInit {
   reset() {
     this.value = '';
     this.displayValue = '';
+    this.selectedDateTimeDetails = {};
     if (this.onChange) {
       this.onChange('');
     }
