@@ -61,7 +61,7 @@ export class NotifyComponent implements OnInit {
           _config.type = 'primary';
       }
       _config.content = config.content || '';
-      _config.timeOut = config.timeOut || 5000;
+      _config.time = config.time || 5000;
       _config.autoHide = config.autoHide === undefined ? true : config.autoHide;
 
       _config.currentTime = 0;
@@ -78,7 +78,7 @@ export class NotifyComponent implements OnInit {
   }
 
   stop(item: any) {
-    item.timeOut = item.rawConfig.timeOut || 5000;
+    item.time = item.rawConfig.time || 5000;
     item.currentTime = 0;
     item.proportion = 100;
     item.autoHide = false;
@@ -102,7 +102,7 @@ export class NotifyComponent implements OnInit {
           isClear = false;
 
           item.currentTime += 20;
-          let n = item.currentTime / item.timeOut;
+          let n = item.currentTime / item.time;
           item.proportion = (n > 1 ? 1 : n) * 100;
           if (n > 1) {
             this.messageList.splice(i, 1);

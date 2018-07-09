@@ -3,12 +3,14 @@ ui-modal {
   flex-direction: column;
   width: 600px;
   height: 400px;
-
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 10px 10px hsla(hue($color-default), saturation($color-default), lightness($color-default), .15);
   &.ui-modal-sm {
     width: 420px;
     height: 280px;
   }
-
   &.ui-modal-lg {
     width: 810px;
     height: 540px;

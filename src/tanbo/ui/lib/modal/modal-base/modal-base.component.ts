@@ -9,7 +9,7 @@ import { ModalController } from './modal-controller';
   templateUrl: './modal-base.component.html',
   animations: [
     trigger('modalAnimation', [
-      transition(':enter', animate('.1s', keyframes([
+      transition(':enter', animate(160, keyframes([
         style({
           marginTop: -300,
           opacity: 0,
@@ -23,13 +23,13 @@ import { ModalController } from './modal-controller';
       ]))),
       transition(':leave', animate(100, keyframes([
         style({
-          marginTop: 0,
+          transform: 'scale(1)',
           opacity: 1,
           offset: 0
         }),
         style({
-          marginTop: -300,
-          opacity: 0,
+          transform: 'scale(0.8)',
+          opacity: 0.8,
           offset: 1
         })
       ])))

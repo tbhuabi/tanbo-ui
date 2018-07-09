@@ -30,6 +30,6 @@
   <ui-modal>
     <ui-modal-header>title</ui-modal-header>
     <ui-modal-inner>inner</ui-modal-inner>
-    <ui-modal-footer>footer</ui-modal-footer>
+    <ui-modal-footer (click)="modalController.hide()">footer</ui-modal-footer>
   </ui-modal>
 </ng-template>

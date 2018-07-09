@@ -16,10 +16,12 @@ import { UI_NAV_DEPTH } from '../config';
     deps: [[UI_NAV_DEPTH, new SkipSelf()]]
   }],
   animations: [trigger('navAnimation', [state('open', style({
-    height: '*'
+    height: '*',
+    opacity: 1
   })), state('close', style({
-    height: 0
-  })), transition('open <=> close', animate(200))])],
+    height: 0,
+    opacity: 0.5
+  })), transition('open <=> close', animate(150))])],
   host: {
     '[@navAnimation]': 'isOpen ? "open" : "close"'
   }

@@ -14,7 +14,7 @@ export interface NotifyConfig {
   content: string;
   autoHide?: boolean;
   type?: NotifyType;
-  timeOut?: number;
+  time?: number;
 }
 
 @Injectable()

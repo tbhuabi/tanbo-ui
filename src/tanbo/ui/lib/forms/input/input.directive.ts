@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { InputGroupService } from '../input-group/input-group.service';
 
 @Directive({
-  selector: 'input[ui-input]',
+  selector: 'input[ui-input],textarea[ui-input]',
   host: {
     '[class.ui-form-control]': 'true',
     '[class.ui-input-sm]': 'size === "sm"',

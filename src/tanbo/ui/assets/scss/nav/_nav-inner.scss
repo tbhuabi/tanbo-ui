@@ -8,7 +8,7 @@ ui-nav-inner {
     color: $color-primary;
   }
   &.ui-open {
-    > .ui-nav-inner-arrow {
+    > .ui-nav-inner-arrow > span {
       transform: rotateZ(90deg);
     }
   }
@@ -37,11 +37,13 @@ ui-nav-inner {
 }
 
 .ui-nav-inner-arrow {
-  transform-origin: 50%;
-  transition: transform .2s;
   width: 1em;
   font-size: 12px;
   margin-left: 10px;
   color: $color-gray;
+  > span {
+    display: inline-block;
+    transition: transform .2s;
+  }
 }
 
