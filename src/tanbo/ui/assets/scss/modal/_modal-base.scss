@@ -1,12 +1,12 @@
 .ui-modal-base {
-  //background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #fff;
   position: fixed;
   left: 50%;
   top: 50%;
   z-index: $mask-z-index + 10;
-  width: 0;
-  height: 0;
-  > ui-modal {
-    transform: translateX(-50%) translateY(-50%);
-  }
+  transform: translateX(-50%) translateY(-50%);
+  box-shadow: 0 10px 10px hsla(hue($color-default), saturation($color-default), lightness($color-default), .15);
+  transform-origin: 0;
 }

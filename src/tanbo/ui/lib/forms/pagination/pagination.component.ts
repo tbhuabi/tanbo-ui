@@ -17,22 +17,9 @@ export class PaginationComponent {
   @Input()
   size: string = '';
   @Input()
-  btnLength: number = 4;
+  btnLength: number = 8;
   @Output()
   uiChange = new EventEmitter<number>();
-
-  @Input()
-  set currentPage(currentPage: number) {
-    if (!currentPage || currentPage < 1) {
-      currentPage = 1;
-    }
-    this._currentPage = currentPage;
-    this.setPaginationItems();
-  }
-
-  get currentPage() {
-    return this._currentPage;
-  }
 
   @Input()
   set pages(pages: number) {
@@ -47,9 +34,26 @@ export class PaginationComponent {
     return this._pages;
   }
 
+  @Input()
+  set currentPage(currentPage: number) {
+    if (!currentPage || currentPage < 1) {
+      currentPage = 1;
+    }
+    this._currentPage = currentPage;
+    this.setPaginationItems();
+  }
+
+  get currentPage() {
+    return this._currentPage;
+  }
+
   pageList: Array<PaginationItem> = [];
   private _currentPage: number = 1;
   private _pages: number = 1;
+
+  private get _btnLength() {
+    return Math.floor(this.btnLength / 2);
+  }
 
   onChange(currentPage: number) {
     if (typeof currentPage === 'number') {
@@ -61,46 +65,45 @@ export class PaginationComponent {
   private setPaginationItems() {
     this.pageList = [];
     if (this.currentPage > this.pages) {
-      this.currentPage = this.pages;
+      this._currentPage = this.pages;
     }
     if (this.currentPage !== 1) {
       this.pageList.push({
         pageIndex: 1,
-        label: '首页'
+        label: '&laquo;'
       });
       this.pageList.push({
         pageIndex: this.currentPage - 1,
-        label: '上一页'
+        label: '&lsaquo;'
       });
     }
 
-    let smallIndex = this.currentPage - this.btnLength;
-    let maxIndex = this.currentPage + this.btnLength;
-
-    if (this.currentPage < this.btnLength + 1) {
-      maxIndex = maxIndex - this.currentPage + this.btnLength;
+    let smallIndex = this.currentPage - this._btnLength;
+    let maxIndex = this.currentPage + this._btnLength;
+    if (this.currentPage < this._btnLength + 1) {
+      maxIndex = maxIndex - this.currentPage + this._btnLength;
     }
 
-    if (this.pages - this.btnLength < this.currentPage) {
-      smallIndex = this.pages - this.btnLength * 2;
+    if (this.pages - this._btnLength < this.currentPage) {
+      smallIndex = this.pages - this._btnLength * 2;
     }
     smallIndex = smallIndex < 1 ? 1 : smallIndex;
     maxIndex = maxIndex > this.pages ? this.pages : maxIndex;
-
-    for (let i = smallIndex; i < maxIndex + 1; i++) {
+    for (let i = smallIndex; i <= maxIndex; i++) {
       this.pageList.push({
         pageIndex: i,
         label: i
       });
     }
+
     if (this.currentPage !== this.pages) {
       this.pageList.push({
         pageIndex: this.currentPage + 1,
-        label: '下一页'
+        label: '&rsaquo;'
       });
       this.pageList.push({
         pageIndex: this.pages,
-        label: '尾页'
+        label: '&raquo;'
       });
     }
   }

@@ -21,18 +21,10 @@ import { ModalController } from './modal-controller';
           offset: 1
         })
       ]))),
-      transition(':leave', animate(100, keyframes([
-        style({
-          transform: 'scale(1)',
-          opacity: 1,
-          offset: 0
-        }),
-        style({
-          transform: 'scale(0.8)',
-          opacity: 0.8,
-          offset: 1
-        })
-      ])))
+      transition(':leave', animate(100, style({
+        transform: 'scale(.8) translateX(-50%) translateY(-50%)',
+        opacity: .8
+      })))
     ])
   ]
 })
