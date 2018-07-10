@@ -34,7 +34,7 @@ table.ui-table {
         font-weight: 500;
         padding: $table-cell-padding;
         background-color: $table-thead-bg-color;
-        border-bottom: 2px solid $table-thead-border-color;
+        border-bottom: 1px solid $table-thead-border-color;
         &:first-child {
           padding-left: $container-horizontal-padding;
         }
@@ -45,6 +45,11 @@ table.ui-table {
     }
   }
   > tbody {
+    &:first-child {
+      > tr > td {
+        border-top: 1px solid $table-border-color;
+      }
+    }
     > tr {
       @include table-styles;
       > td {
