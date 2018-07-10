@@ -121,7 +121,7 @@ $pagination-hover-bg-color: lighten($pagination-border-color, 2) !default;
 // 表格
 $table-cell-padding: 8px !default;
 $table-border-color: #e9e9ea !default;
-$table-thead-bg-color: $table-border-color + 12 !default;
+$table-thead-bg-color: $table-border-color + 10 !default;
 $table-thead-border-color: $table-border-color - 15 !default;
 $table-striped-bg-color: #fbfbfc !default;
 $table-hover-bg-color: $table-striped-bg-color - 3 !default;
