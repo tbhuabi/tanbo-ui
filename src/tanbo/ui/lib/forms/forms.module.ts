@@ -13,6 +13,7 @@ import { InputGroupComponent } from './input-group/input-group.component';
 import { OptionComponent } from './option/option.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { RadioComponent } from './radio/radio.component';
+import { RangeComponent } from './range/range.component';
 import { SelectComponent } from './select/select.component';
 import { SwitchComponent } from './switch/switch.component';
 
@@ -35,6 +36,7 @@ import { UI_SELECT_ARROW_CLASSNAME } from './config';
     OptionComponent,
     PaginationComponent,
     RadioComponent,
+    RangeComponent,
     SelectComponent,
     SwitchComponent
   ],
@@ -47,6 +49,7 @@ import { UI_SELECT_ARROW_CLASSNAME } from './config';
     OptionComponent,
     PaginationComponent,
     RadioComponent,
+    RangeComponent,
     SelectComponent,
     SwitchComponent
   ],

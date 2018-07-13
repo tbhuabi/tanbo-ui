@@ -12,5 +12,10 @@ ui-modal {
   &.ui-modal-lg {
     width: 810px;
     height: 540px;
+
+    ui-modal-inner {
+      padding-left: $container-horizontal-padding + 15;
+      padding-right: $container-horizontal-padding + 15;
+    }
   }
 }

@@ -17,16 +17,16 @@ export class HomeComponent {
   }
 
   show() {
-    this.modalController.show(this.modal);
+    // this.modalController.show(this.modal);
     // this.dialogController.show({
     //   title: 'title',
     //   content: 'content'
     // });
     //
-    // this.notifyController.push({
-    //   content: 'testeste',
-    //   autoHide: false
-    // })
+    this.notifyController.push({
+      content: 'testeste',
+      type: NotifyType.Success,
+    })
   }
 
   hide() {

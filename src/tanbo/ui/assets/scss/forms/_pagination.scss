@@ -37,6 +37,7 @@ ui-pagination {
     > li {
       display: inline;
       > a {
+        background-color: #fff;
         text-decoration: none;
         color: $color-default;
         cursor: pointer;

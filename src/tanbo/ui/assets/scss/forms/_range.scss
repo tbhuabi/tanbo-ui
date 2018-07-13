@@ -1,0 +1,123 @@
+@mixin range-style($name, $color) {
+  &.ui-#{$name} {
+    .ui-range-progress-bar {
+      background-color: $color;
+    }
+    &[disabled], &[readonly], &.disabled {
+      .ui-range-btn {
+        cursor: not-allowed;
+        &:hover, &:active {
+          background-color: lighten($color, 10);
+        }
+      }
+    }
+    &[disabled], &.disabled {
+      .ui-range-btn {
+        cursor: not-allowed;
+      }
+    }
+    &[readonly] {
+      .ui-range-btn {
+        cursor: default;
+      }
+    }
+  }
+}
+
+ui-input[type=range] {
+  vertical-align: middle;
+  display: inline-block;
+  cursor: pointer;
+  line-height: 0;
+  height: 1em;
+  width: 8em;
+  text-align: left;
+  @include range-style(primary, $color-primary);
+  @include range-style(info, $color-info);
+  @include range-style(warning, $color-warning);
+  @include range-style(success, $color-success);
+  @include range-style(danger, $color-danger);
+  &[disabled], &[readonly], &.disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+  &[readonly] {
+    cursor: default;
+  }
+
+}
+
+.ui-input-range-raw {
+  width: 0;
+  height: 0;
+  position: absolute;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.ui-range {
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  width: 100%;
+  background-color: $color-gray;
+  border-radius: inherit;
+  cursor: default;
+}
+
+.ui-range-progress-bar {
+  height: 100%;
+  display: inline-block;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  background-color: $color-dark;
+}
+
+.ui-range-btn {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  right: -14px;
+  line-height: 28px;
+  top: 50%;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transform-origin: 50% 50%;
+  background-color: #fff;
+  box-shadow: 0 3px 1px rgba(0, 0, 0, .1), 0 4px 8px rgba(0, 0, 0, .13), 0 0 0 1px rgba(0, 0, 0, .02);
+  border: none;
+  cursor: pointer;
+}
+
+.ui-range-btn-raw {
+  cursor: inherit;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #fff;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border: 0;
+  border-radius: 50%;
+}
+
+.ui-range-progress {
+  top: 0;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 14px;
+  color: #000;
+  display: block;
+  opacity: 0;
+  transition: all .2s;
+  &.ui-touched {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-26px);
+  }
+}

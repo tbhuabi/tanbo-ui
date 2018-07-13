@@ -25,6 +25,7 @@ table.ui-table {
   width: 100%;
   min-width: 100%;
   margin-bottom: 1em;
+  background-color: #fff;
   > thead {
     > tr {
       @include table-styles;
