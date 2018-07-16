@@ -16,7 +16,8 @@ import { Subscription } from 'rxjs';
 
 import { OptionComponent } from '../option/option.component';
 import { SelectService } from './select.service';
-import { UI_SELECT_ARROW_CLASSNAME } from '../config';
+import { UI_SELECT_ARROW_CLASSNAME } from '../help';
+import { inputAttrToBoolean } from '../help';
 
 @Component({
   selector: 'ui-select',
@@ -46,22 +47,20 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
 
   @Input()
   set disabled(isDisabled: any) {
-    this._disabled = isDisabled;
+    this._disabled = inputAttrToBoolean(isDisabled);
   }
 
   get disabled() {
-    const isDisabled = (this as any).hasOwnProperty('_disabled');
-    return isDisabled && this._disabled !== false;
+    return this._disabled;
   }
 
   @Input()
   set readonly(isReadonly: any) {
-    this._readonly = isReadonly;
+    this._readonly = inputAttrToBoolean(isReadonly);
   }
 
   get readonly() {
-    const isReadonly = (this as any).hasOwnProperty('_readonly');
-    return isReadonly && this._readonly !== false;
+    return this._readonly;
   }
 
   @Output()
@@ -123,7 +122,9 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
       if (defaultOption) {
         this.value = defaultOption.value;
         setTimeout(() => {
-          defaultOption.selected = true;
+          if (!this.isWrite) {
+            defaultOption.selected = true;
+          }
         });
         this.selectedOption = defaultOption;
       }

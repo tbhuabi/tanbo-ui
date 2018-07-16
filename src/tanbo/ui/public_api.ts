@@ -3,8 +3,9 @@
  */
 export * from './lib/tanbo-ui.module';
 
-export * from './lib/forms/config';
-export * from './lib/modal/config';
-export * from './lib/nav/config';
-export * from './lib/other/config';
-export * from './lib/tree/config';
+export * from './lib/forms/index';
+export * from './lib/modal/index';
+export * from './lib/nav/index';
+export * from './lib/other/index';
+export * from './lib/table/index';
+export * from './lib/tree/index';

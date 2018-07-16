@@ -10,8 +10,8 @@ import { UITableModule } from './table/table.module';
 import { UITimelineModule } from './timeline/timeline.module';
 import { UITreeModule } from './tree/tree.module';
 
-import { DialogController, ModalController, NotifyController } from './modal/config';
-import { TooltipBaseService } from './other/config';
+import { DialogController, ModalController, NotifyController } from './modal/index';
+import { TooltipBaseService } from './other/index';
 
 @NgModule({
   exports: [

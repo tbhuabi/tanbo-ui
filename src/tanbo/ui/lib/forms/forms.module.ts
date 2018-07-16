@@ -18,7 +18,7 @@ import { SelectComponent } from './select/select.component';
 import { SwitchComponent } from './switch/switch.component';
 
 import { RadioStateService } from './radio/radio-state.service';
-import { UI_SELECT_ARROW_CLASSNAME } from './config';
+import { UI_SELECT_ARROW_CLASSNAME } from './help';
 
 @NgModule({
   imports: [

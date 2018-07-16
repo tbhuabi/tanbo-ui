@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { UIFormsModule } from '../forms/forms.module';
 
-import { UI_TREE_UNCHECKED_ICON, UI_TREE_CHECKED_ICON, UI_TREE_DEPTH, UI_TREE_OFFSET } from './config';
+import { UI_TREE_UNCHECKED_ICON, UI_TREE_CHECKED_ICON, UI_TREE_DEPTH, UI_TREE_OFFSET } from './help';
 
 import { TreeComponent } from './tree/tree.component';
 import { TreeInnerComponent } from './tree-inner/tree-inner.component';

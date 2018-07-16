@@ -1,89 +1,17 @@
-<div class="ui-container-fluid">
-  <button type="button" class="ui-btn-primary ui-btn" (click)="show()">show</button>
-  <br>
-  <br>
-  <ui-input type="range" showProgress="true"></ui-input>
-  <br><br>
-  <div>
-    <div class="ui-btn-group ui-btn-group-sm">
-      <button class="ui-btn ui-btn-default" ui-tooltip="fdsafdsa" type="button">aaa</button>
-      <button class="ui-btn ui-btn-default" type="button">bbb</button>
-    </div>
-  </div>
-  <br>
-  <br>
-  <br>
-  <ui-select disabled>
-    <ui-option>aaa</ui-option>
-    <ui-option>bbb</ui-option>
-    <ui-option>ccc</ui-option>
-  </ui-select>
-
-  <ui-select>
-    <ui-option>aaa</ui-option>
-    <ui-option>bbb</ui-option>
-    <ui-option>ccc</ui-option>
-  </ui-select>
-  <br><br><br>
-  <ui-pagination [currentPage]="30" [pages]="20"></ui-pagination>
-  <br><br>
-  <ui-input type="date"></ui-input>
-</div>
-<ui-tool-bar>fdsa</ui-tool-bar>
-<table class="ui-table ui-table-striped ui-table-hover">
+<table ui-table (uiChecked)="show($event)" class="ui-table">
   <thead>
-  <tr>
-    <th>1</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+  <tr ui-table-selector>
+    <th>标题</th>
+    <th>内容</th>
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5
-      <button type="button" class="ui-btn ui-btn-default">button</button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
+  <tr [ui-selectable]="item" *ngFor="let item of list; let i = index">
+    <td>{{ item }}</td>
+    <td><button type="button" (click)="remove(i)">remove</button></td>
   </tr>
   </tbody>
 </table>
-<ng-template #modal>
-  <ui-modal>
-    <ui-modal-header>title</ui-modal-header>
-    <ui-modal-inner>inner</ui-modal-inner>
-    <ui-modal-footer (click)="modalController.hide()">footer</ui-modal-footer>
-  </ui-modal>
-</ng-template>
+
+
+<button type="button" (click)="add()">add</button>

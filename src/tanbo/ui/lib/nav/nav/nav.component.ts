@@ -3,7 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Subscription } from 'rxjs';
 
 import { NavItemService } from '../nav-item/nav-item.service';
-import { UI_NAV_DEPTH } from '../config';
+import { UI_NAV_DEPTH } from '../help';
 
 @Component({
   selector: 'ui-nav',

@@ -11,18 +11,22 @@ ui-input[type=radio] {
   vertical-align: middle;
   text-align: center;
   overflow: hidden;
-  color: $color-default;
-  width: 1em;
-  height: 1em;
-  font-size: 22px;
+  color: $color-gray-dark;
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
   line-height: 1em;
   user-select: none;
+  &:hover, &.ui-checked {
+    color: $color-primary;
+  }
   @include radio-style(primary, $color-primary);
   @include radio-style(info, $color-info);
   @include radio-style(warning, $color-warning);
   @include radio-style(success, $color-success);
   @include radio-style(danger, $color-danger);
-  &[disabled], &[readonly], &.disabled {
+
+  &[disabled], &[readonly], &.ui-disabled, &.ui-readonly {
     opacity: .5;
     cursor: not-allowed;
   }

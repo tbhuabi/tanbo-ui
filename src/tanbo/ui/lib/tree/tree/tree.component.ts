@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Optional, Input, SkipSelf, Inject } from 
 import { Subscription } from 'rxjs';
 
 import { TreeItemService } from '../tree-item/tree-item.service';
-import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../config';
+import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../help';
 
 @Component({
   selector: 'ui-tree',

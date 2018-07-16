@@ -5,15 +5,15 @@ import { OptionComponent } from '../option/option.component';
 
 @Injectable()
 export class SelectService {
-    onChecked: Observable<OptionComponent>;
+  onChecked: Observable<OptionComponent>;
 
-    private checkedSource = new Subject<OptionComponent>();
+  private checkedSource = new Subject<OptionComponent>();
 
-    constructor() {
-        this.onChecked = this.checkedSource.asObservable();
-    }
+  constructor() {
+    this.onChecked = this.checkedSource.asObservable();
+  }
 
-    checked(option: OptionComponent) {
-        this.checkedSource.next(option);
-    }
+  checked(option: OptionComponent) {
+    this.checkedSource.next(option);
+  }
 }

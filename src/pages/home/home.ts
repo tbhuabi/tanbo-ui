@@ -1,35 +1,21 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
-
-import { ModalController, NotifyController, NotifyType, DialogController } from '../../tanbo/ui/public_api';
+import { Component } from '@angular/core';
 
 @Component({
   templateUrl: './home.html',
   styleUrls: ['./home.scss']
 })
 export class HomeComponent {
-  @ViewChild('modal')
-  modal: TemplateRef<any>;
-  name = 'testname';
+  list: any[] = ['aaa', 'bbb', 'ccc', 'ddd'];
 
-  constructor(private modalController: ModalController,
-              private dialogController: DialogController,
-              private notifyController: NotifyController) {
+  show(v: any) {
+    console.log(v);
   }
 
-  show() {
-    // this.modalController.show(this.modal);
-    // this.dialogController.show({
-    //   title: 'title',
-    //   content: 'content'
-    // });
-    //
-    this.notifyController.push({
-      content: 'testeste',
-      type: NotifyType.Success,
-    })
+  add() {
+    this.list.push(Math.random());
   }
 
-  hide() {
-    this.modalController.hide();
+  remove(i: number) {
+    this.list.splice(i, 1);
   }
 }

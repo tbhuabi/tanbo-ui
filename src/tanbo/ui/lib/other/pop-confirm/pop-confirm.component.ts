@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, OnDestroy, OnInit, ElementRef, Renderer2 } from '@angular/core';
 
-import { TooltipBaseService } from '../config';
+import { TooltipBaseService } from '../index';
 
 @Component({
   selector: 'ui-pop-confirm',

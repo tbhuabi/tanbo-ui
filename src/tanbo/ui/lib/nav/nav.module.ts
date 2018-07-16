@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UI_NAV_DEPTH, UI_NAV_OFFSET } from './config';
+import { UI_NAV_DEPTH, UI_NAV_OFFSET } from './help';
 
 import { NavComponent } from './nav/nav.component';
 import { NavInnerComponent } from './nav-inner/nav-inner.component';

@@ -1,6 +1,6 @@
 import { Component, Inject, HostBinding, Input } from '@angular/core';
 
-import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../config';
+import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../help';
 
 @Component({
   selector: 'ui-tree-inner',

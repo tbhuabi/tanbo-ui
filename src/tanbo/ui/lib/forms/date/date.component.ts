@@ -1,8 +1,10 @@
 import { Component, Input, EventEmitter, OnInit, Output, Inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { UI_SELECT_ARROW_CLASSNAME } from '../config';
+import { UI_SELECT_ARROW_CLASSNAME } from '../help';
 import { TimeDetails, timeAnalysisByTimeString, dateStringFormat } from './date-utils';
+
+import { inputAttrToBoolean } from '../help';
 
 @Component({
   selector: 'ui-input[type=date]',
@@ -16,22 +18,20 @@ import { TimeDetails, timeAnalysisByTimeString, dateStringFormat } from './date-
 export class DateComponent implements ControlValueAccessor, OnInit {
   @Input()
   set disabled(isDisabled: any) {
-    this._disabled = isDisabled;
+    this._disabled = inputAttrToBoolean(isDisabled);
   }
 
   get disabled() {
-    let isDisabled = (this as any).hasOwnProperty('_disabled');
-    return isDisabled && this._disabled !== false;
+    return this._disabled;
   }
 
   @Input()
   set readonly(isReadonly: any) {
-    this._readonly = isReadonly;
+    this._readonly = inputAttrToBoolean(isReadonly);
   }
 
   get readonly() {
-    let isReadonly = (this as any).hasOwnProperty('_readonly');
-    return isReadonly && this._readonly !== false;
+    return this._readonly;
   }
 
   @Input()
