@@ -10,7 +10,7 @@ import { UI_NAV_DEPTH } from '../help';
   templateUrl: './nav.component.html',
   providers: [{
     provide: UI_NAV_DEPTH,
-    useFactory(depth: number) {
+    useFactory: function useFactory(depth: number) {
       return depth + 1;
     },
     deps: [[UI_NAV_DEPTH, new SkipSelf()]]

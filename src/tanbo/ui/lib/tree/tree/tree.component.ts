@@ -12,7 +12,7 @@ import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../help';
   },
   providers: [{
     provide: UI_TREE_DEPTH,
-    useFactory(depth: number) {
+    useFactory: function(depth: number) {
       return depth + 1;
     },
     deps: [[UI_TREE_DEPTH, new SkipSelf()]]

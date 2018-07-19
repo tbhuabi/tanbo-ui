@@ -5,7 +5,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.scss']
 })
 export class HomeComponent {
-  list: any[] = ['aaa', 'bbb', 'ccc', 'ddd'];
+  value = 'bbb';
+  list: any[] = [];
+
+  constructor() {
+    setTimeout(() => {
+      this.list = ['aaa', 'bbb', 'ccc', 'ddd'];
+    }, 2000);
+  }
 
   show(v: any) {
     console.log(v);

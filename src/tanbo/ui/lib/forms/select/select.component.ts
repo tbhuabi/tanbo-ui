@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { OptionComponent } from '../option/option.component';
 import { SelectService } from './select.service';
@@ -93,41 +94,8 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   }
 
   ngAfterContentInit() {
-    let defaultOption: OptionComponent;
-    if (this.isWrite) {
-      let isFindDefaultOption: boolean = false;
-      for (const item of this.options.toArray()) {
-        if (item.value === this.value && !isFindDefaultOption) {
-          isFindDefaultOption = true;
-          this.selectedOption = item;
-          item.selected = true;
-        } else {
-          item.selected = false;
-        }
-      }
-    } else {
-      this.options.forEach((option: OptionComponent, index: number) => {
-        if (option.selected) {
-          defaultOption = option;
-          this.selectedIndex = index;
-        }
-      });
-      if (!defaultOption) {
-        defaultOption = this.options.toArray()[this.selectedIndex];
-      }
-      if (!defaultOption) {
-        defaultOption = this.options.first;
-        this.selectedIndex = 0;
-      }
-      if (defaultOption) {
-        this.value = defaultOption.value;
-        setTimeout(() => {
-          if (!this.isWrite) {
-            defaultOption.selected = true;
-          }
-        });
-        this.selectedOption = defaultOption;
-      }
+    if (!this.isWrite) {
+      this.updateBySelf();
     }
     this.subs.push(this.selectService.onChecked.subscribe((option: OptionComponent) => {
       this.focus = true;
@@ -150,6 +118,9 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
           op.selected = false;
         }
       });
+    }));
+    this.subs.push(this.options.changes.pipe(delay(0)).subscribe(() => {
+      this.updateByNgModel();
     }));
   }
 
@@ -198,20 +169,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     this.isWrite = true;
     this.value = value;
     if (this.options) {
-      let selectedOption: OptionComponent;
-      this.options.forEach((item: OptionComponent, index: number) => {
-        item.selected = false;
-        if (item.value === value || `${item.value}` === value || item.value === `${value}`) {
-          selectedOption = item;
-          this.selectedIndex = index;
-        }
-      });
-      if (selectedOption) {
-        this.text = SelectComponent.getTextByElement(selectedOption.nativeElement);
-        selectedOption.selected = true;
-      } else {
-        this.text = '';
-      }
+      this.updateByNgModel();
     } else {
       this.text = '';
     }
@@ -227,5 +185,49 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
 
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+  }
+
+  private updateByNgModel() {
+    let selectedOption: OptionComponent;
+    this.options.forEach((item: OptionComponent, index: number) => {
+      item.selected = false;
+      if (item.value === this.value || `${item.value}` === this.value || item.value === `${this.value}`) {
+        selectedOption = item;
+        this.selectedIndex = index;
+      }
+    });
+    if (selectedOption) {
+      this.text = SelectComponent.getTextByElement(selectedOption.nativeElement);
+      selectedOption.selected = true;
+    } else {
+      this.selectedIndex = -1;
+      this.text = '';
+    }
+  }
+
+  private updateBySelf() {
+    let defaultOption: OptionComponent;
+    this.options.forEach((option: OptionComponent, index: number) => {
+      if (option.selected) {
+        defaultOption = option;
+        this.selectedIndex = index;
+      }
+    });
+    if (!defaultOption) {
+      defaultOption = this.options.toArray()[this.selectedIndex];
+    }
+    if (!defaultOption) {
+      defaultOption = this.options.first;
+      this.selectedIndex = 0;
+    }
+    if (defaultOption) {
+      this.value = defaultOption.value;
+      setTimeout(() => {
+        if (!this.isWrite) {
+          defaultOption.selected = true;
+        }
+      });
+      this.selectedOption = defaultOption;
+    }
   }
 }

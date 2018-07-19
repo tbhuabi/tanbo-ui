@@ -13,5 +13,12 @@
   </tbody>
 </table>
 
+<ui-input type="range" showProgress="true"></ui-input>
 
 <button type="button" (click)="add()">add</button>
+
+
+<ui-select [(ngModel)]="value">
+  <!--<ui-option *ngIf="list.length" value="fdsa">fdsa</ui-option>-->
+  <ui-option *ngFor="let item of list" [value]="item">{{item}}</ui-option>
+</ui-select>

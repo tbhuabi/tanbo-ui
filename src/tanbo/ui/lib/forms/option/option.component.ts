@@ -45,8 +45,8 @@ export class OptionComponent implements AfterViewInit {
   uiChecked = new EventEmitter<OptionComponent>();
   nativeElement: HTMLElement;
 
-  private _disabled: boolean;
-  private _selected: boolean;
+  private _disabled: boolean = false;
+  private _selected: boolean = false;
 
   constructor(private elementRef: ElementRef,
               private selectService: SelectService) {
