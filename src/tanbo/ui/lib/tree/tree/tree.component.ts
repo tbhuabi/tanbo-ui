@@ -4,6 +4,10 @@ import { Subscription } from 'rxjs';
 import { TreeItemService } from '../tree-item/tree-item.service';
 import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../help';
 
+export function treeDepthFactory(depth: number) {
+  return depth + 1;
+}
+
 @Component({
   selector: 'ui-tree',
   templateUrl: './tree.component.html',
@@ -12,9 +16,7 @@ import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../help';
   },
   providers: [{
     provide: UI_TREE_DEPTH,
-    useFactory: function(depth: number) {
-      return depth + 1;
-    },
+    useFactory: treeDepthFactory,
     deps: [[UI_TREE_DEPTH, new SkipSelf()]]
   }]
 })
