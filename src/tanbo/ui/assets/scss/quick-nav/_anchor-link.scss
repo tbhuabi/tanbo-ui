@@ -1,16 +1,18 @@
-ui-timeline-item {
+.ui-anchor-link {
   display: block;
   position: relative;
   padding-left: 2em;
   padding-top: .5em;
   padding-bottom: .5em;
+  color: inherit;
+  text-decoration: none;
   &:first-of-type {
-    .ui-timeline-line {
+    .ui-anchor-link-line {
       top: calc(100% - 1em);
     }
   }
   &:last-of-type {
-    .ui-timeline-line {
+    .ui-anchor-link-line {
       bottom: calc(100% - 1em);
     }
   }
@@ -24,7 +26,10 @@ ui-timeline-item {
     top: 1em;
     z-index: 1;
   }
-  &.ui-checked {
+  &:hover {
+    color: $color-primary;
+  }
+  &.ui-active {
     color: $color-primary;
     &:before {
       background-color: $color-primary;
@@ -32,22 +37,11 @@ ui-timeline-item {
   }
 }
 
-.ui-timeline-line {
+.ui-anchor-link-line {
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   width: 1px;
   background-color: $color-light;
-}
-
-ui-timeline.ui-kebab {
-  ui-timeline-item {
-    &:before {
-      background-color: $color-gray;
-    }
-    &.ui-checked:before {
-      background-color: $color-primary;
-    }
-  }
 }

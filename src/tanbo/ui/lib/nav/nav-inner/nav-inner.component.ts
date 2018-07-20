@@ -26,6 +26,10 @@ import { UI_NAV_OFFSET, UI_NAV_DEPTH } from '../help';
 })
 export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit {
   @HostBinding('class.ui-open')
+  get isOpenNext() {
+    return this.isOpen && this.totalMenu > 0;
+  }
+
   isOpen = false;
 
   @HostBinding('style.paddingLeft')

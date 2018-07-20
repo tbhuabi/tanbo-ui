@@ -1,0 +1,16 @@
+.ui-anchor {
+  .ui-anchor-link-btn {
+    display: none;
+    margin-left: .5em;
+    color: $color-gray-dark;
+    text-decoration: none;
+    &:hover {
+      color: $color-primary;
+    }
+  }
+  &:hover {
+    .ui-anchor-link-btn {
+      display: inline;
+    }
+  }
+}

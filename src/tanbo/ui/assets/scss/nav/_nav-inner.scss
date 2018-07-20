@@ -6,10 +6,15 @@ ui-nav-inner {
   transition: all .2s;
   &:hover {
     color: $color-primary;
+    background-color: $color-lighter;
   }
   &.ui-open {
-    > .ui-nav-inner-arrow > span {
-      transform: rotateZ(90deg);
+    color: $color-primary;
+    > .ui-nav-inner-arrow {
+      color: inherit;
+      > span {
+        transform: rotateZ(90deg);
+      }
     }
   }
   &.ui-active {
