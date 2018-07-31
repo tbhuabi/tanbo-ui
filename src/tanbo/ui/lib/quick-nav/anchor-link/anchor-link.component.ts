@@ -1,7 +1,7 @@
-import { Component, ElementRef, HostBinding, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, HostBinding } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { AnchorService } from '../index'
+import { AnchorService } from '../index';
 
 @Component({
   /*tslint:disable*/
@@ -13,22 +13,24 @@ import { AnchorService } from '../index'
   }
 })
 export class AnchorLinkComponent implements OnInit, OnDestroy {
-  @ViewChild('link', {read: ElementRef})
-  linkEleRef: ElementRef;
-
+  @Input('ui-anchor-link')
+  targetId = '';
   @HostBinding('class.ui-active')
   get isActive() {
     if (this.url) {
-      return this.url === this.elementRef.nativeElement.href;
+      return this.url === this.href;
     }
-    return window.location.href === this.elementRef.nativeElement.href;
+    return location.pathname + location.hash === this.href;
+  }
+  @HostBinding('href')
+  get href() {
+    return location.pathname + '#' + this.targetId;
   }
 
   private sub: Subscription;
   private url = '';
 
-  constructor(private elementRef: ElementRef,
-              private anchorService: AnchorService) {
+  constructor(private anchorService: AnchorService) {
   }
 
   ngOnInit() {

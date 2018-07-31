@@ -28,10 +28,7 @@ $color-primary: #2d8cf0 !default; // 主色调
 $color-info: #6ad1ec !default; // 信息提示颜色
 $color-success: #15bd9a !default; // 正向操作提示颜色
 $color-warning: #ff9900 !default; // 负面操作警告颜色
-$color-danger: #ed3f14 !default; // 危险操作警告颜色
-
-$color-primary-dark: #2b85e4 !default;
-$color-primary-light: #5cadff !default;
+$color-danger: #e12235 !default; // 危险操作警告颜色
 
 // 栅格化配置
 $grid-columns: 12 !default; // 栅格列数
@@ -139,3 +136,5 @@ $dialog-width: 360px !default;
 
 // notify
 $notify-radius-is-open: $is-open-radius;
+
+$tree-line-color: $color-gray;

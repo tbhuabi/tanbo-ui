@@ -29,16 +29,16 @@ import { TreeExpandComponent } from './tree-expand/tree-expand.component';
   ],
   providers: [{
     provide: UI_TREE_CHECKED_ICON,
-    useValue: 'ui-icon-checkbox-checked'
+    useValue: 'ui-icon-arrow2-bottom'
   }, {
     provide: UI_TREE_UNCHECKED_ICON,
-    useValue: 'ui-icon-checkbox-unchecked'
+    useValue: 'ui-icon-arrow2-right'
   }, {
     provide: UI_TREE_DEPTH,
     useValue: -1
   }, {
     provide: UI_TREE_OFFSET,
-    useValue: 1
+    useValue: 0
   }]
 })
 export class UITreeModule {

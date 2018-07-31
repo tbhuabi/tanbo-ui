@@ -17,6 +17,16 @@ import { RangeComponent } from './range/range.component';
 import { SelectComponent } from './select/select.component';
 import { SwitchComponent } from './switch/switch.component';
 
+import { IntegerValidator } from './integer-validator.directive';
+import {
+  CheckboxRequiredValidator,
+  RadioRequiredValidator,
+  SelectRequiredValidator,
+  SwitchRequiredValidator,
+  DateRequiredValidator
+} from './required-validator.directive';
+import { SubmitDirective } from './submit.directive';
+
 import { RadioStateService } from './radio/radio-state.service';
 import { UI_SELECT_ARROW_CLASSNAME } from './help';
 
@@ -38,7 +48,15 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     RadioComponent,
     RangeComponent,
     SelectComponent,
-    SwitchComponent
+    SwitchComponent,
+
+    IntegerValidator,
+    SubmitDirective,
+    CheckboxRequiredValidator,
+    RadioRequiredValidator,
+    SelectRequiredValidator,
+    SwitchRequiredValidator,
+    DateRequiredValidator
   ],
   exports: [
     CheckboxComponent,
@@ -51,7 +69,15 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     RadioComponent,
     RangeComponent,
     SelectComponent,
-    SwitchComponent
+    SwitchComponent,
+
+    IntegerValidator,
+    SubmitDirective,
+    CheckboxRequiredValidator,
+    RadioRequiredValidator,
+    SelectRequiredValidator,
+    SwitchRequiredValidator,
+    DateRequiredValidator
   ],
   providers: [
     RadioStateService, {

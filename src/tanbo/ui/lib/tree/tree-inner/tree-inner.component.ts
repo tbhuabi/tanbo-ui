@@ -11,11 +11,11 @@ export class TreeInnerComponent {
   depth = 0;
   @HostBinding('style.paddingLeft')
   get paddingLeft() {
-    return this.depth * 2 + 0.5 + this.offset + 'em';
+    return this.depth * 2 + 2 + this.offset + 'em';
   }
 
   get left() {
-    return (this.depth - 1) * 2 + this.offset + 'em';
+    return (this.depth - 1) * 2 + 1 + this.offset + 'em';
   }
 
   constructor(@Inject(UI_TREE_DEPTH) depth: number,

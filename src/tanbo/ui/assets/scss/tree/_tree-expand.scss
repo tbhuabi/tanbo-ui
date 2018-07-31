@@ -1,10 +1,15 @@
 ui-tree-expand {
+  float: left;
   display: inline-block;
-  margin-right: .5em;
   vertical-align: middle;
+  margin-left: -1.4em;
   color: inherit;
+  font-size: inherit;
+  margin-top: 2px;
+  height: 1em;
+  width: 1.4em;
   ui-input[type=checkbox] {
-    font-size: 1em;
+    font-size: inherit;
     color: inherit;
   }
 }

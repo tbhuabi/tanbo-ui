@@ -11,22 +11,27 @@ ui-modal-header {
   }
   &.ui-primary {
     background-color: $color-primary;
+    border-color: $color-primary;
     color: #fff;
   }
   &.ui-info {
     background-color: $color-info;
+    border-color: $color-info;
     color: #fff;
   }
   &.ui-success {
     background-color: $color-success;
+    border-color: $color-success;
     color: #fff;
   }
   &.ui-warning {
     background-color: $color-warning;
+    border-color: $color-warning;
     color: #fff;
   }
   &.ui-danger {
     background-color: $color-danger;
+    border-color: $color-danger;
     color: #fff;
   }
 }

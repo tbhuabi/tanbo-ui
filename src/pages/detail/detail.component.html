@@ -1,27 +1,85 @@
-<br><br><br>
-<ng-container [ngTemplateOutlet]="temp" [ngTemplateOutletContext]="{list: list, open: true, depth: 0}"></ng-container>
-<ng-template #temp let-list="list" let-open="open" let-depth="depth">
-  <ui-tree [open]="open">
-    <ui-tree-item *ngFor="let item of list">
-      <ui-tree-inner [depth]="depth">
-        <ui-tree-expand #expand></ui-tree-expand>{{ item.text }}
-      </ui-tree-inner>
-      <ng-container *ngIf="item.children"
-                    [ngTemplateOutlet]="temp"
-                    [ngTemplateOutletContext]="{list: item.children, open: expand.checked, depth: depth+1}"></ng-container>
-    </ui-tree-item>
-  </ui-tree>
-</ng-template>
+<p>1</p><p>2</p><p>3</p>
+<ui-tree>
+  <ui-tree-item>
+    <ui-tree-inner>
+      <ui-tree-expand></ui-tree-expand>
+      A
+    </ui-tree-inner>
+  </ui-tree-item>
+  <ui-tree-item>
+    <ui-tree-inner>
+      <ui-tree-expand></ui-tree-expand>
+      B
+    </ui-tree-inner>
+    <ui-tree>
+      <ui-tree-item>
+        <ui-tree-inner>
+          <ui-tree-expand></ui-tree-expand>
+          A
+        </ui-tree-inner>
+        <ui-tree>
+          <ui-tree-item>
+            <ui-tree-inner>
+              <ui-tree-expand></ui-tree-expand>
+              A
+            </ui-tree-inner>
+          </ui-tree-item>
+          <ui-tree-item>
+            <ui-tree-inner>
+              <ui-tree-expand></ui-tree-expand>
+              B
+            </ui-tree-inner>
+          </ui-tree-item>
+          <ui-tree-item>
+            <ui-tree-inner>
+              <ui-tree-expand></ui-tree-expand>
+              C
+            </ui-tree-inner>
+          </ui-tree-item>
+          <ui-tree-item>
+            <ui-tree-inner>
+              <ui-tree-expand></ui-tree-expand>
+              D
+            </ui-tree-inner>
+          </ui-tree-item>
+        </ui-tree>
+      </ui-tree-item>
+      <ui-tree-item>
+        <ui-tree-inner>
+          <ui-tree-expand></ui-tree-expand>
+          B
+        </ui-tree-inner>
+      </ui-tree-item>
+      <ui-tree-item>
+        <ui-tree-inner>
+          C
+        </ui-tree-inner>
+      </ui-tree-item>
+      <ui-tree-item>
+        <ui-tree-inner>
+          D
+        </ui-tree-inner>
+      </ui-tree-item>
+    </ui-tree>
+  </ui-tree-item>
+  <ui-tree-item>
+    <ui-tree-inner>
+      C
+    </ui-tree-inner>
+  </ui-tree-item>
+  <ui-tree-item>
+    <ui-tree-inner>
+      D
+    </ui-tree-inner>
+  </ui-tree-item>
+</ui-tree>
 
-
-<div>
-  <label>label</label>
-  <ui-select>
-    <ui-option>test</ui-option>
-  </ui-select>
-</div>
-
-<div>
-  <label>label</label>
-  <ui-input type="date"></ui-input>
-</div>
+<form (uiSubmit)="submit()" novalidate autocomplete="off">
+  name
+  <input type="text" ui-input required integer [(ngModel)]="name" name="name" #a="ngModel">
+  <div class="ui-invalid" *ngIf="a.invalid && (a.dirty && a.touched)">
+    <span *ngIf="a.errors.required">必填</span>
+    <span *ngIf="a.errors.integer">整数整数整数整数整数</span>
+  </div>
+  <button type="submit">submit</button>
+</form>

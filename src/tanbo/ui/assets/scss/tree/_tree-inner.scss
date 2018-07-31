@@ -1,6 +1,7 @@
 ui-tree-inner {
   display: block;
   position: relative;
+  line-height: 1.5em;
   &:hover {
     background-color: rgba(0, 0, 0, .05);
   }
@@ -9,9 +10,9 @@ ui-tree-inner {
 .ui-tree-inner-line {
   position: absolute;
   left: 0;
-  width: 1em;
+  width: 0.5em;
   top: 50%;
-  border-bottom: 1px dotted $color-gray-light;
+  border-bottom: 1px dotted $tree-line-color;
   transform: translateX(1em);
 }
 
@@ -20,5 +21,5 @@ ui-tree-inner {
   top: 0;
   bottom: 0;
   transform: translateX(1em);
-  border-left: 1px dotted $color-gray-light;
+  border-left: 1px dotted $tree-line-color;
 }

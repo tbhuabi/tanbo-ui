@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'tanbo-ui';
-  src:  url('fonts/tanbo-ui.eot?9zbk9q');
-  src:  url('fonts/tanbo-ui.eot?9zbk9q#iefix') format('embedded-opentype'),
-    url('fonts/tanbo-ui.ttf?9zbk9q') format('truetype'),
-    url('fonts/tanbo-ui.woff?9zbk9q') format('woff'),
-    url('fonts/tanbo-ui.svg?9zbk9q#tanbo-ui') format('svg');
+  src:  url('fonts/tanbo-ui.eot?2k44ef');
+  src:  url('fonts/tanbo-ui.eot?2k44ef#iefix') format('embedded-opentype'),
+    url('fonts/tanbo-ui.ttf?2k44ef') format('truetype'),
+    url('fonts/tanbo-ui.woff?2k44ef') format('woff'),
+    url('fonts/tanbo-ui.svg?2k44ef#tanbo-ui') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,29 +24,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.ui-icon-arrow2-top:before {
-  content: "\ea1c";
+.ui-icon-arrow-top:before {
+  content: "\e50e";
 }
-.ui-icon-arrow2-right:before {
-  content: "\ea1d";
+.ui-icon-arrow-right:before {
+  content: "\e50f";
 }
-.ui-icon-arrow2-bottom:before {
-  content: "\ea1e";
+.ui-icon-arrow-bottom:before {
+  content: "\e510";
 }
-.ui-icon-arrow2-left:before {
-  content: "\ea1f";
+.ui-icon-arrow-left:before {
+  content: "\e511";
 }
-.ui-icon-radio-checked:before {
-  content: "\ea54";
+.ui-icon-arrow-dropdown:before {
+  content: "\e606";
 }
-.ui-icon-radio-unchecked:before {
-  content: "\ea56";
-}
-.ui-icon-checkbox-checked:before {
-  content: "\ea52";
-}
-.ui-icon-checkbox-unchecked:before {
-  content: "\ea53";
+.ui-icon-close:before {
+  content: "\e636";
 }
 .ui-icon-warning:before {
   content: "\ea07";
@@ -63,21 +57,30 @@
 .ui-icon-checkmark:before {
   content: "\ea10";
 }
-.ui-icon-arrow-top:before {
-  content: "\e50e";
+.ui-icon-arrow2-top:before {
+  content: "\ea1c";
 }
-.ui-icon-arrow-right:before {
-  content: "\e50f";
+.ui-icon-arrow2-right:before {
+  content: "\ea1d";
 }
-.ui-icon-arrow-bottom:before {
-  content: "\e510";
+.ui-icon-arrow2-bottom:before {
+  content: "\ea1e";
 }
-.ui-icon-arrow-dropdown:before {
-  content: "\e606";
+.ui-icon-arrow2-left:before {
+  content: "\ea1f";
 }
-.ui-icon-arrow-left:before {
-  content: "\e511";
+.ui-icon-checkbox-checked:before {
+  content: "\ea52";
 }
-.ui-icon-close:before {
-  content: "\e636";
+.ui-icon-checkbox-unchecked:before {
+  content: "\ea53";
+}
+.ui-icon-radio-checked:before {
+  content: "\ea54";
+}
+.ui-icon-radio-unchecked:before {
+  content: "\ea56";
+}
+.ui-icon-link:before {
+  content: "\e9cb";
 }

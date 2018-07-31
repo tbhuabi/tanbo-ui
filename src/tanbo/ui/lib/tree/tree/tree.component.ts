@@ -22,15 +22,25 @@ export function treeDepthFactory(depth: number) {
 })
 export class TreeComponent implements OnDestroy, OnInit {
   @Input()
-  open: boolean = false;
+  set open(value: boolean) {
+    this.isWrite = true;
+    this._open = value;
+  }
+
+  get open() {
+    return this._open;
+  }
+
   @Input()
   depth = 0;
 
   get left() {
-    return (this.depth - 2) * 2 + this.offset + 'em';
+    return (this.depth - 2) * 2 + 1 + this.offset + 'em';
   }
 
   private sub: Subscription;
+  private _open = false;
+  private isWrite = false;
 
   constructor(@Optional() private treeItemService: TreeItemService,
               @Inject(UI_TREE_DEPTH) depth: number,
@@ -43,6 +53,8 @@ export class TreeComponent implements OnDestroy, OnInit {
       this.sub = this.treeItemService.isOpen.subscribe(b => {
         this.open = b;
       });
+    } else if (!this.isWrite) {
+      this.open = true;
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, HostListener, ElementRef } from '@angular/core';
 
 import { AnchorService } from './anchor.service';
 
@@ -15,8 +15,9 @@ export class AnchorComponent {
   @Input()
   id = '';
 
-  @ViewChild('link', {read: ElementRef})
-  linkEleRef: ElementRef;
+  get href() {
+    return location.pathname + '#' + this.id;
+  }
 
   constructor(private elementRef: ElementRef,
               private anchorService: AnchorService) {
@@ -26,7 +27,7 @@ export class AnchorComponent {
   scroll() {
     const distance = this.elementRef.nativeElement.getBoundingClientRect();
     if (distance.top < 100) {
-      this.anchorService.anchorIn(this.linkEleRef.nativeElement.href);
+      this.anchorService.anchorIn(this.href);
     }
   }
 }

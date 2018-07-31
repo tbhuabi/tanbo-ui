@@ -3,6 +3,6 @@ ui-option {
 
   &.ui-selected {
     color: #fff;
-    background-color: $color-primary-dark;
+    background-color: rgba(red($color-primary), green($color-primary), blue($color-primary), .2);
   }
 }

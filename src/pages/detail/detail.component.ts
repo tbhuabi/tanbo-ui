@@ -5,26 +5,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent {
-  list: any[] = [{
-    text: 1,
-    children: [{
-      text: 11
-    }, {
-      text: 12
-    }, {
-      text: 13,
-      children: [{
-        text: 131
+  list: any[] = [];
+
+  name = '';
+
+  constructor() {
+    setTimeout(() => {
+      this.list = [{
+        text: 'aaa',
+        value: 'a'
       }, {
-        text: 132
+        text: 'bbb',
+        value: 'b'
       }, {
-        text: 133
-      }]
-    }]
-  }, {
-    text: 2,
-    children: [{
-      text: 21
-    }]
-  }];
+        text: 'ccc',
+        value: 'c'
+      }];
+    }, 2000);
+  }
+
+  submit() {
+    alert(333);
+  }
 }
