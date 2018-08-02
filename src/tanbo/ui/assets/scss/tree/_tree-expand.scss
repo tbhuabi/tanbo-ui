@@ -11,5 +11,8 @@ ui-tree-expand {
   ui-input[type=checkbox] {
     font-size: inherit;
     color: inherit;
+    &:hover, &.ui-checked {
+      color: inherit;
+    }
   }
 }

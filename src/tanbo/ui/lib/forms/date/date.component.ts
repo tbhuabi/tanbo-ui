@@ -17,6 +17,8 @@ import { inputAttrToBoolean } from '../help';
 })
 export class DateComponent implements ControlValueAccessor, OnInit {
   @Input()
+  position = 'bottomLeft';
+  @Input()
   set disabled(isDisabled: any) {
     this._disabled = inputAttrToBoolean(isDisabled);
   }

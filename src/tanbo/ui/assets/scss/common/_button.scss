@@ -122,7 +122,7 @@
     }
   }
 
-  > .ui-btn:not(:first-child), ui-dropdown > .ui-btn {
+  > .ui-btn:not(:first-child), ui-dropdown:not(:first-child) > .ui-btn {
 
     &.ui-btn-primary {
       border-left-color: darken($color-primary, 10);
