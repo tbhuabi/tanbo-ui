@@ -3,25 +3,25 @@
   <ui-tree-item>
     <ui-tree-inner>
       <ui-tree-expand></ui-tree-expand>
-      A
+      A {{ name }}
     </ui-tree-inner>
   </ui-tree-item>
   <ui-tree-item>
     <ui-tree-inner>
       <ui-tree-expand></ui-tree-expand>
-      B
+      B {{ name }}
     </ui-tree-inner>
     <ui-tree>
       <ui-tree-item>
         <ui-tree-inner>
           <ui-tree-expand></ui-tree-expand>
-          A
+          A {{ name }}
         </ui-tree-inner>
         <ui-tree>
           <ui-tree-item>
             <ui-tree-inner>
               <ui-tree-expand></ui-tree-expand>
-              A
+              A {{ name }}
             </ui-tree-inner>
           </ui-tree-item>
           <ui-tree-item>
@@ -113,3 +113,17 @@
     </ui-dropdown-menu>
   </ui-dropdown>
 </div>
+
+<ui-tab>
+  <ui-tab-bar>
+    <ui-tab-button>aaa</ui-tab-button>
+    <ui-tab-button>bbb <br> bbb</ui-tab-button>
+  </ui-tab-bar>
+  <ui-tab-view>
+    <ui-tab-view-item>aaaa {{name}}</ui-tab-view-item>
+    <ui-tab-view-item>bbbb {{name}}</ui-tab-view-item>
+  </ui-tab-view>
+</ui-tab>
+<a href="#a">aaaa</a>
+<a href="#b">bbbb</a>
+<a href="#c">ccccc</a>

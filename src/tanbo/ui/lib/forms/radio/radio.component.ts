@@ -8,7 +8,8 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -23,7 +24,8 @@ import { inputAttrToBoolean } from '../help';
     provide: NG_VALUE_ACCESSOR,
     useExisting: RadioComponent,
     multi: true
-  }]
+  }],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input()

@@ -1,10 +1,11 @@
-import { Component, Inject, HostBinding, Input } from '@angular/core';
+import { Component, Inject, HostBinding, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../help';
 
 @Component({
   selector: 'ui-tree-inner',
-  templateUrl: './tree-inner.component.html'
+  templateUrl: './tree-inner.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeInnerComponent {
   @Input()

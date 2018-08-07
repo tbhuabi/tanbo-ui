@@ -13,9 +13,8 @@ export class SelectableItemComponent implements OnDestroy, OnInit {
   data: any;
   @Output()
   uiCheckStateChange = new EventEmitter<boolean>();
-
+  @Input()
   checked = false;
-
   constructor(private tableService: TableService) {
   }
 

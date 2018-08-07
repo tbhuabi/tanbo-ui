@@ -1,1 +1,12 @@
-<a href="#aaaa">aaaa</a>
+<table ui-table (uiChecked)="show($event)" class="ui-table">
+  <thead>
+  <tr ui-table-selector>
+    <th>test</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of data" [ui-selectable]="item" [checked]="item === 111">
+    <td>{{ item }}</td>
+  </tr>
+  </tbody>
+</table>

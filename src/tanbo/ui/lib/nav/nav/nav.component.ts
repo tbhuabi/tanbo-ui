@@ -1,4 +1,4 @@
-import { Component, Optional, OnInit, OnDestroy, SkipSelf, HostBinding } from '@angular/core';
+import { Component, Optional, OnInit, OnDestroy, SkipSelf, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
@@ -26,7 +26,8 @@ export function navDepthFactory(depth: number) {
   })), transition('open <=> close', animate(150))])],
   host: {
     '[@navAnimation]': 'isOpen ? "open" : "close"'
-  }
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavComponent implements OnDestroy, OnInit {
   @HostBinding('class.ui-open')

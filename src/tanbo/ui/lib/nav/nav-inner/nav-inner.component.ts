@@ -12,7 +12,8 @@ import {
   OnChanges,
   QueryList,
   Inject,
-  HostBinding
+  HostBinding,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { Router, RouterLink, RouterLinkWithHref, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -22,7 +23,8 @@ import { UI_NAV_OFFSET, UI_NAV_DEPTH } from '../help';
 
 @Component({
   selector: 'ui-nav-inner',
-  templateUrl: './nav-inner.component.html'
+  templateUrl: './nav-inner.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit {
   @HostBinding('class.ui-open')

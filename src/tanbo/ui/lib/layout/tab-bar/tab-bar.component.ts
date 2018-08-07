@@ -4,7 +4,8 @@ import {
   ContentChildren,
   Input,
   OnDestroy,
-  QueryList
+  QueryList,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -13,7 +14,8 @@ import { TabButtonComponent } from '../tab-button/tab-button.component';
 
 @Component({
   selector: 'ui-tab-bar',
-  templateUrl: './tab-bar.component.html'
+  templateUrl: './tab-bar.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabBarComponent implements OnDestroy, AfterContentInit {
   @Input()

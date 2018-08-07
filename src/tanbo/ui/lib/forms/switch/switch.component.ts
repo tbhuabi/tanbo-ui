@@ -1,4 +1,12 @@
-import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { inputAttrToBoolean } from '../help';
@@ -10,7 +18,8 @@ import { inputAttrToBoolean } from '../help';
     provide: NG_VALUE_ACCESSOR,
     useExisting: SwitchComponent,
     multi: true
-  }]
+  }],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SwitchComponent implements ControlValueAccessor {
   @Input()

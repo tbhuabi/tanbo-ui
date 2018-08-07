@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { TreeItemService } from './tree-item.service';
 
@@ -7,7 +7,8 @@ import { TreeItemService } from './tree-item.service';
   templateUrl: './tree-item.component.html',
   providers: [
     TreeItemService
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeItemComponent {
 }

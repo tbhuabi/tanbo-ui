@@ -9,7 +9,8 @@ import {
   OnDestroy,
   Output,
   Inject,
-  QueryList
+  QueryList,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -28,7 +29,8 @@ import { inputAttrToBoolean } from '../help';
     useExisting: SelectComponent,
     multi: true
   }, SelectService
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent implements ControlValueAccessor, AfterContentInit, OnDestroy, AfterViewInit {
   @ContentChildren(OptionComponent)

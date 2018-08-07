@@ -11,6 +11,7 @@ export class DetailComponent {
 
   constructor() {
     setTimeout(() => {
+      this.name = 'name';
       this.list = [{
         text: 'aaa',
         value: 'a'

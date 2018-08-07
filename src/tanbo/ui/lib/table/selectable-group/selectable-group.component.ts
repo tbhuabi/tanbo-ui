@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject, Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { SelectableItemComponent } from '../selectable-item/selectable-item.component';
 import { TableService } from '../table.service';
@@ -16,14 +17,20 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
   private items: SelectableItemComponent[] = [];
   private events: Array<{ token: SelectableItemComponent, unsub: Subscription }> = [];
   private selectedValues: any[] = [];
+  private updateCheckedItemsObs: Observable<void>;
+  private updateEvent = new Subject<void>();
 
   constructor(private tableService: TableService) {
+    this.updateCheckedItemsObs = this.updateEvent.asObservable();
   }
 
   ngOnInit() {
+    this.subs.push(this.updateCheckedItemsObs.pipe(debounceTime(0)).subscribe(() => {
+      this.updateStateAndCheckedItem();
+    }));
     this.subs.push(this.tableService.onPush.subscribe((item: SelectableItemComponent) => {
       this.items.push(item);
-      this.isChecked = false;
+      this.updateEvent.next();
       this.events.push({
         token: item,
         unsub: item.uiCheckStateChange.subscribe(() => {
@@ -44,7 +51,7 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
         return true;
       });
 
-      this.updateStateAndCheckedItem();
+      this.updateEvent.next();
     }));
   }
 

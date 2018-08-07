@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 export interface PaginationItem {
   pageIndex: number | string;
@@ -11,7 +11,8 @@ export interface PaginationItem {
   host: {
     '[class.ui-pagination-sm]': 'size === "sm"',
     '[class.ui-pagination-lg]': 'size === "lg"'
-  }
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent {
   @Input()
