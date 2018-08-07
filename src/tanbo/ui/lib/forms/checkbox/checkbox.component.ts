@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { inputAttrToBoolean } from '../help';
@@ -10,8 +10,7 @@ import { inputAttrToBoolean } from '../help';
     provide: NG_VALUE_ACCESSOR,
     useExisting: CheckboxComponent,
     multi: true
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  }]
 })
 export class CheckboxComponent implements ControlValueAccessor {
   @Input()

@@ -6,8 +6,7 @@ import {
   ElementRef,
   AfterViewInit,
   HostBinding,
-  HostListener,
-  ChangeDetectionStrategy
+  HostListener
 } from '@angular/core';
 
 import { SelectService } from '../select/select.service';
@@ -16,8 +15,7 @@ import { inputAttrToBoolean } from '../help';
 
 @Component({
   selector: 'ui-option',
-  templateUrl: './option.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './option.component.html'
 })
 export class OptionComponent implements AfterViewInit {
   @Input()

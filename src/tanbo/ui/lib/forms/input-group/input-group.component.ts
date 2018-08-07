@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { InputGroupService } from './input-group.service';
 
@@ -11,8 +11,7 @@ import { InputGroupService } from './input-group.service';
   host: {
     '[class.ui-input-group-lg]': 'size === "lg"',
     '[class.ui-input-group-sm]': 'size === "sm"'
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  }
 })
 export class InputGroupComponent {
   @Input()

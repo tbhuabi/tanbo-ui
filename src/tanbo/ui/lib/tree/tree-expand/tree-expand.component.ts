@@ -1,12 +1,11 @@
-import { Component, Input, Optional, Inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Optional, Inject } from '@angular/core';
 
 import { TreeItemService } from '../tree-item/tree-item.service';
 import { UI_TREE_UNCHECKED_ICON, UI_TREE_CHECKED_ICON } from '../help';
 
 @Component({
   selector: 'ui-tree-expand',
-  templateUrl: './tree-expand.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './tree-expand.component.html'
 })
 export class TreeExpandComponent {
   @Input()

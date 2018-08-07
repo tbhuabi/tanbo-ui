@@ -8,9 +8,11 @@ export class DetailComponent {
   list: any[] = [];
 
   name = '';
+  checked = false;
 
   constructor() {
     setTimeout(() => {
+      this.checked = true;
       this.name = 'name';
       this.list = [{
         text: 'aaa',

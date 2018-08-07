@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ui-dropdown-menu',
@@ -8,8 +8,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
     '[class.ui-top-right]': 'position === "topRight"',
     '[class.ui-bottom-left]': 'position === "bottomLeft"',
     '[class.ui-bottom-right]': 'position === "bottomRight"'
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  }
 })
 export class DropdownMenuComponent {
   @Input()

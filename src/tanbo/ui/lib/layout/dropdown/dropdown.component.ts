@@ -1,12 +1,11 @@
-import { Component, HostListener, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, HostListener, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'ui-dropdown',
   templateUrl: './dropdown.component.html',
   host: {
     '[class.ui-open]': 'open'
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  }
 })
 export class DropdownComponent {
   @Input()

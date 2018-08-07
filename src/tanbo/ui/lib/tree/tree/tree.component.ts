@@ -1,13 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  Optional,
-  Input,
-  SkipSelf,
-  Inject,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, Optional, Input, SkipSelf, Inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { TreeItemService } from '../tree-item/tree-item.service';
@@ -27,8 +18,7 @@ export function treeDepthFactory(depth: number) {
     provide: UI_TREE_DEPTH,
     useFactory: treeDepthFactory,
     deps: [[UI_TREE_DEPTH, new SkipSelf()]]
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  }]
 })
 export class TreeComponent implements OnDestroy, OnInit {
   @Input()

@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, OnInit, Output, Inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, EventEmitter, OnInit, Output, Inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { UI_SELECT_ARROW_CLASSNAME } from '../help';
@@ -13,8 +13,7 @@ import { inputAttrToBoolean } from '../help';
     provide: NG_VALUE_ACCESSOR,
     useExisting: DateComponent,
     multi: true
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  }]
 })
 export class DateComponent implements ControlValueAccessor, OnInit {
   @Input()

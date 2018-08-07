@@ -1,14 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostBinding,
-  Input,
-  Output,
-  Renderer2,
-  ViewChild,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { inputAttrToBoolean } from '../help';
@@ -20,8 +10,7 @@ import { inputAttrToBoolean } from '../help';
     provide: NG_VALUE_ACCESSOR,
     useExisting: RangeComponent,
     multi: true
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  }]
 })
 export class RangeComponent implements ControlValueAccessor {
   @Input()

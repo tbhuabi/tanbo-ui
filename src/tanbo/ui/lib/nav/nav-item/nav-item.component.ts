@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { NavItemService } from './nav-item.service';
 
@@ -7,8 +7,7 @@ import { NavItemService } from './nav-item.service';
   templateUrl: './nav-item.component.html',
   providers: [
     NavItemService
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class NavItemComponent {
 }

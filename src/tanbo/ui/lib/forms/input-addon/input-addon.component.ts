@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Optional, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { InputGroupService } from '../input-group/input-group.service';
@@ -8,8 +8,7 @@ import { InputGroupService } from '../input-group/input-group.service';
   templateUrl: './input-addon.component.html',
   host: {
     '[class.ui-has-error]': 'hasError',
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  }
 })
 export class InputAddonComponent implements OnDestroy, OnInit {
   subs: Subscription[] = [];
