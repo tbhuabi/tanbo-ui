@@ -5,8 +5,9 @@
   @include input-style($form-control-border-color, $form-control-border-color-primary);
   @include input-size($form-control-padding-vertical, $form-control-padding-horizontal, $form-control-radius, $form-control-font-size-base);
 
-  &.ui-has-error, &.ng-touched.ng-invalid {
-    @include input-style($form-control-border-color-danger, $form-control-border-color-danger);
+  &.ng-touched.ng-invalid {
+    box-shadow: none;
+    border-color: $form-control-border-color-warning;
   }
 }
 

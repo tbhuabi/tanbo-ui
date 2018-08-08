@@ -2,6 +2,10 @@ ui-input[type=date] {
   display: inline-block;
   cursor: auto;
   width: auto;
+  &.ng-touched.ng-invalid .ui-date-input {
+    box-shadow: none;
+    border-color: $form-control-border-color-warning;
+  }
 }
 
 .ui-date-dropdown, .ui-date-input {

@@ -1,6 +1,10 @@
 ui-select {
   display: inline-block;
   user-select: none;
+  &.ng-touched.ng-invalid .ui-select-input {
+    box-shadow: none;
+    border-color: $form-control-border-color-warning;
+  }
 }
 
 .ui-select-dropdown, .ui-select-dropdown-menu, .ui-select-input {
