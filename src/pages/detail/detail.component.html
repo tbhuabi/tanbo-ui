@@ -90,8 +90,11 @@
     <button type="button" class="ui-btn ui-btn-success">
       修改
     </button>
+    <button type="button" class="ui-btn ui-btn-success">新增 <span class="ui-caret"></span></button>
     <ui-dropdown>
-      <button type="button" class="ui-btn ui-btn-success">新增 <span class="ui-caret"></span></button>
+      <button type="button" class="ui-btn ui-btn-danger ui-btn-toggle">
+        <span class="ui-caret"></span>
+      </button>
       <ui-dropdown-menu>
         <ui-item>fdsafdsa</ui-item>
       </ui-dropdown-menu>
@@ -100,11 +103,12 @@
       修改
     </button>
     <button type="button" class="ui-btn ui-btn-danger">删除</button>
+
   </div>
   <button type="button" class="ui-btn ui-btn-primary">查看历史</button>
   <ui-dropdown>
-    <button type="button" class="ui-btn ui-btn-success">版本管理<span class="ui-caret"></span></button>
-    <ui-dropdown-menu>
+    <button type="button" class="ui-btn ui-btn-default">版本管理<span class="ui-caret"></span></button>
+    <ui-dropdown-menu ui-stop-propagation>
       <ui-item>查看版本</ui-item>
       <ui-item>查看版本</ui-item>
       <ui-divider></ui-divider>
@@ -121,7 +125,9 @@
   </ui-tab-bar>
   <ui-tab-view>
     <ui-tab-view-item>aaaa {{name}}</ui-tab-view-item>
-    <ui-tab-view-item>bbbb {{name}}</ui-tab-view-item>
+    <ui-tab-view-item>
+      <ui-item>{{ name }}</ui-item>
+    </ui-tab-view-item>
   </ui-tab-view>
 </ui-tab>
 <a href="#a">aaaa</a>
