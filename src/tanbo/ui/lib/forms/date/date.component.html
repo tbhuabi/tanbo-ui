@@ -3,11 +3,11 @@
     <input class="ui-date-input ui-form-control"
            [ngClass]="{'ui-input-sm': size === 'sm', 'ui-input-lg': size === 'lg'}"
            [disabled]="disabled"
-           [name]="name"
+           [attr.name]="name"
            readonly
            type="text"
            [class.ui-focus]="focus"
-           [id]="forId"
+           [attr.id]="forId"
            [placeholder]="placeholder"
            [value]="displayValue">
     <div class="ui-date-arrow-dropdown" [class.ui-open]="open">

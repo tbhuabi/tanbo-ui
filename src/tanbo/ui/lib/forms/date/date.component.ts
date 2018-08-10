@@ -41,11 +41,11 @@ export class DateComponent implements ControlValueAccessor, OnInit {
   @Input()
   placeholder: string = '';
   @Input()
-  forId: string = '';
+  forId: string;
   @Input()
   value: string | number;
   @Input()
-  name = '';
+  name: string;
   @Input()
   displayFormat: string;
   @Input()

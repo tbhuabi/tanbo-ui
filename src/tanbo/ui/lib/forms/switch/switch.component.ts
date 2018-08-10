@@ -42,11 +42,11 @@ export class SwitchComponent implements ControlValueAccessor {
   }
 
   @Input()
-  forId: string = '';
+  forId: string;
   @Input()
   value: string = '';
   @Input()
-  name: string = '';
+  name: string;
   @Output()
   uiChange = new EventEmitter<boolean>();
 

@@ -14,9 +14,9 @@ import { inputAttrToBoolean } from '../help';
 })
 export class RangeComponent implements ControlValueAccessor {
   @Input()
-  name: string = '';
+  name: string;
   @Input()
-  forId: string = '';
+  forId: string;
 
   @Input()
   showProgress: boolean = false;

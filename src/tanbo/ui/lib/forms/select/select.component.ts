@@ -36,9 +36,9 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   @Input()
   size: string = '';
   @Input()
-  forId: string = '';
+  forId: string;
   @Input()
-  name: string = '';
+  name: string;
   @Input()
   placeholder: string = '';
   @Input()

@@ -3,12 +3,12 @@
     <input class="ui-select-input ui-form-control"
            [ngClass]="{'ui-input-sm': size === 'sm', 'ui-input-lg': size === 'lg'}"
            [disabled]="disabled"
-           [name]="name"
+           [attr.name]="name"
            readonly
            type="text"
            [placeholder]="placeholder"
            [class.ui-focus]="focus"
-           [id]="forId"
+           [attr.id]="forId"
            [value]="text">
     <div class="ui-select-arrow" [class.ui-open]="open">
       <span [ngClass]="arrowIconClassName"></span>
