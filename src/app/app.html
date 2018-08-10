@@ -22,6 +22,34 @@
           </ui-nav-item>
           <ui-nav-item>
             <ui-nav-inner>菜单2</ui-nav-inner>
+            <ui-nav>
+              <ui-nav-item>
+                <ui-nav-inner [routerLinkActive]="['test-class', 'test2']" routerLink="/home">菜单11</ui-nav-inner>
+              </ui-nav-item>
+              <ui-nav-item>
+                <ui-nav-inner [routerLinkActive]="['test-class', 'test2']" routerLink="/detail">菜单12</ui-nav-inner>
+                <ui-nav>
+                  <ui-nav-item>
+                    <ui-nav-inner [routerLinkActive]="['test-class', 'test2']" routerLink="/home">菜单11</ui-nav-inner>
+                  </ui-nav-item>
+                  <ui-nav-item>
+                    <ui-nav-inner [routerLinkActive]="['test-class', 'test2']" routerLink="/detail">菜单12</ui-nav-inner>
+                  </ui-nav-item>
+                  <ui-nav-item>
+                    <ui-nav-inner routerLink="/lazy">菜单13</ui-nav-inner>
+                  </ui-nav-item>
+                  <ui-nav-item>
+                    <ui-nav-inner>菜单14</ui-nav-inner>
+                  </ui-nav-item>
+                </ui-nav>
+              </ui-nav-item>
+              <ui-nav-item>
+                <ui-nav-inner routerLink="/lazy">菜单13</ui-nav-inner>
+              </ui-nav-item>
+              <ui-nav-item>
+                <ui-nav-inner>菜单14</ui-nav-inner>
+              </ui-nav-item>
+            </ui-nav>
           </ui-nav-item>
           <ui-nav-item>
             <ui-nav-inner>菜单3</ui-nav-inner>

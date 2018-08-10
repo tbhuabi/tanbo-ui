@@ -1,37 +1,42 @@
 ui-nav-inner {
   display: flex;
-  padding: 8px $container-horizontal-padding;
+  padding: 10px $container-horizontal-padding;
   cursor: pointer;
   position: relative;
   transition: all .2s;
   &:hover {
     color: $color-primary;
-    background-color: $color-lighter;
+    background-color: rgba(0, 0, 0, .04);
   }
   &.ui-open {
-    color: $color-primary;
     > .ui-nav-inner-arrow {
-      color: inherit;
+      color: $color-primary;;
       > span {
-        transform: rotateZ(90deg);
+        transform: rotateZ(0deg);
       }
     }
   }
+  .ui-nav-inner-arrow {
+    color: inherit;
+    > span {
+      transform: rotateZ(-90deg);
+    }
+  }
   &.ui-active {
-    background-color: rgba(red($color-primary), green($color-primary), blue($color-primary), 0.1);
+    background-color: rgba(0, 0, 0, 0.06);
     color: $color-primary;
-    &:after {
+    &:before {
       transform: scaleY(1);
     }
   }
-  &:after {
+  &:before {
     content: "";
     position: absolute;
-    width: 3px;
+    width: 4px;
     background-color: $color-primary;
     top: 0;
     bottom: 0;
-    right: 0;
+    left: 0;
     transition: transform .2s;
     transform: scaleY(0);
   }

@@ -1,4 +1,7 @@
 ui-nav {
   display: block;
   overflow: hidden;
+  ui-nav {
+    background-color: rgba(0, 0, 0, .025);
+  }
 }
