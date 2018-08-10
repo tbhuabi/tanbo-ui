@@ -114,7 +114,7 @@ export class RangeComponent implements ControlValueAccessor {
   private _value: number = 50;
 
   private onChange: (_: any) => any;
-  private onTouched: (_: any) => any;
+  private onTouched: () => any;
 
   static toNumber(value: any): number {
     if (typeof value === 'number') {
@@ -171,7 +171,7 @@ export class RangeComponent implements ControlValueAccessor {
           this.onChange(value);
         }
         if (this.onTouched) {
-          this.onTouched(value);
+          this.onTouched();
         }
         this.change.emit(value);
       }

@@ -18,6 +18,7 @@ import { inputAttrToBoolean } from '../help';
 export class DateComponent implements ControlValueAccessor, OnInit {
   @Input()
   position = 'bottomLeft';
+
   @Input()
   set disabled(isDisabled: any) {
     this._disabled = inputAttrToBoolean(isDisabled);
@@ -155,6 +156,9 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     if (this.onChange) {
       this.onChange('');
     }
+    if (this.onTouched) {
+      this.onTouched();
+    }
     this.uiChange.emit('');
   }
 
@@ -269,11 +273,11 @@ export class DateComponent implements ControlValueAccessor, OnInit {
       return;
     }
     let n = Date.UTC(selectedDate.year,
-      selectedDate.month,
-      selectedDate.day,
-      selectedDate.hours || 0,
-      selectedDate.minutes || 0,
-      selectedDate.seconds || 0, 0);
+        selectedDate.month,
+        selectedDate.day,
+        selectedDate.hours || 0,
+        selectedDate.minutes || 0,
+        selectedDate.seconds || 0, 0);
     if (this.minDateTimeDetails) {
       if (n < this.minDateTimeDetails.timestamp) {
         this.selectedDateTimeDetails = JSON.parse(JSON.stringify(this.minDateTimeDetails));
@@ -398,7 +402,7 @@ export class DateComponent implements ControlValueAccessor, OnInit {
 
   private isDisableYear(year: number): boolean {
     return (this.minDateTimeDetails && year < this.minDateTimeDetails.year ||
-      this.maxDateTimeDetails && year > this.maxDateTimeDetails.year);
+        this.maxDateTimeDetails && year > this.maxDateTimeDetails.year);
   }
 
   // 通过当前时间，计算上一月，当前月，及下一月的天数，并把所有天数添加到天数的集合，以更新显示在日历控件中的数据

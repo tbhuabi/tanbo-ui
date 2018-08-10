@@ -74,7 +74,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
 
   private value: string = '';
   private onChange: (_: any) => any;
-  private onTouched: (_: any) => any;
+  private onTouched: () => any;
   private subs: Array<Subscription> = [];
 
   private selectedOption: OptionComponent;
@@ -102,18 +102,20 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
       this.open = false;
       this.options.forEach((op: OptionComponent, index: number) => {
         if (op === option) {
-          this.selectedOption = op;
-          op.selected = true;
-          this.value = option.value;
-          this.text = SelectComponent.getTextByElement(option.nativeElement);
-          this.selectedIndex = index;
-          if (this.onChange) {
-            this.onChange(this.value);
+          if (op !== this.selectedOption) {
+            this.selectedOption = op;
+            op.selected = true;
+            this.value = option.value;
+            this.text = SelectComponent.getTextByElement(option.nativeElement);
+            this.selectedIndex = index;
+            if (this.onChange) {
+              this.onChange(this.value);
+            }
+            if (this.onTouched) {
+              this.onTouched();
+            }
+            this.uiChange.emit(this.value);
           }
-          if (this.onTouched) {
-            this.onTouched(this.value);
-          }
-          this.uiChange.emit(this.value);
         } else {
           op.selected = false;
         }
@@ -162,6 +164,9 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     if (this.onChange) {
       this.onChange('');
     }
+    if (this.onTouched) {
+      this.onTouched();
+    }
     this.uiChange.emit('');
   }
 
@@ -199,6 +204,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     if (selectedOption) {
       this.text = SelectComponent.getTextByElement(selectedOption.nativeElement);
       selectedOption.selected = true;
+      this.selectedOption = selectedOption;
     } else {
       this.selectedIndex = -1;
       this.text = '';

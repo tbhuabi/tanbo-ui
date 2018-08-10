@@ -51,7 +51,7 @@ export class SwitchComponent implements ControlValueAccessor {
   uiChange = new EventEmitter<boolean>();
 
   private onChange: (_: any) => void;
-  private onTouched: (_: any) => void;
+  private onTouched: () => void;
   private _disabled: boolean;
   private _readonly: boolean;
   private _checked: boolean;
@@ -66,7 +66,7 @@ export class SwitchComponent implements ControlValueAccessor {
       this.onChange(this.checked);
     }
     if (this.onTouched) {
-      this.onTouched(this.checked);
+      this.onTouched();
     }
     this.uiChange.emit(this.checked);
   }

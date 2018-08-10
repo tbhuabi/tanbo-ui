@@ -82,7 +82,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
   private _checked: boolean = false;
 
   private onChange: (_: any) => any;
-  private onTouched: (_: any) => any;
+  private onTouched: () => any;
 
   constructor(private radioStateService: RadioStateService) {
   }
@@ -97,7 +97,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
       this.onChange(this.value);
     }
     if (this.onTouched) {
-      this.onTouched(this.value);
+      this.onTouched();
     }
     // 当自身被点击时，发布事件，更新其它radio状态
     this.radioStateService.publishEvent();
