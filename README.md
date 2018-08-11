@@ -1,46 +1,72 @@
-# angular2-webpack项目模板
+# 简介
 
-本项目demo是基于webpack的angular项目，语言为typescript+es6  
-本项目为单页应用，历史纪录基于angular默认的html5 history api，在正式发布后，后台需配置相关页面解析逻辑，防止404页面出现
+@tanbo/ui是一个基于 Angular 的组件库，并基于最小改动，最小学习成本的前提下，拓展了部分表单控件，提供了很多网页上的视觉交互组件、指令、服务、过滤器等等。并提供了一套侵入性很小的底层css样式表。
 
-## 如何使用？
+可以这么说，如果你会使用 Angular，那使用@tanbo/ui基本就无需看文档。
 
-1. 打开控制台，并进入项目根目录
-2. 在控制台输入以下代码`npm install`并回车，等待安装完毕 
-3. 确保安装没有错误，运行`npm start`，如无意外，这时将自动打开chrome浏览器，并显示出demo的默认页面了
 
-## 项目约定
+---
 
-+ assets目录存放公共的图片和样式表
-+ modules 公共模块目录
-+ views存放页面文件夹  
+## 最小更改原则 + 最低学习成本原则
 
-你可以在src内扩展你需要的目录
+就拿常见的表单控件来说，原来你可能是这么写的：
 
-## 代码风格
-+ 项目采用了**tslint**作为代码检查工具
-+ 请确保代码风格符合[codelyzer](https://angular.cn/docs/ts/latest/guide/style-guide.html)标准，否则启动和构建会不成功，如果不小心写出的代码不符合代码规范，请注意控制台输出错误的信息，并做出相应更改，直到没有代码语法错误
-
-## 自动化测试
-`npm run test`
-为确保项目的健壮性、可维护性和可预期，建议为每一个项目中的文件写单元测试，测试工具为karma，框架为jasmine，相关文档可上互联网上搜索  
-
-默认情况下，单元测试文件以XXX.spec.ts命名
-
-## 构建发布
-
-1. 确认本地在开发过程中，没有代码错误，及编译警告
-2. 在控制台输入`npm run build`
-3. 等编译完成后，会在根目录下生成一个dist的目录，里面存有打包编译后的文件
-
-## 直接运行打包后的代码
-```bash
-npm run production
+```html
+<input type="checkbox" name="name" [(ngModel)]="model">
 ```
 
-## 调试代理
+现在你可以这样写：
 
-接口代理默认拦截以`/api/`开头的请求，并会重写url为`/`,你需要把全局的api请求加上`/api`前缀，并在上线发布时去掉这个请求头，推荐的做法是通过配置环境变量的方式实现。
+```html
+<ui-input type="checkbox" name="name" [(ngModel)]="model"></ui-input>
+```
+
+基本无需改动就可以实现功能，且支持`disabled`、`readonly`等等原生属性
+
+## 在线文档及演示
+
+**[live demo](https://www.tanboui.com/ui)**
+
+## 更新日志
+[CHANGELOG.md](./CHANGELOG.md)
+
+## 安装
+```
+npm install tanbo-ui --save
+```
+
+## 在你的项目中引入tanbo-ui
+```typescript
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UIModule } from '@tanbo/ui';
+
+// 这里是依赖的样式表，你也可以直接通过 link 标签引入
+// 如果你想自定义样式，你可以通过 scss 源文件来修改其中的样式
+// scss 文件目录 node_modules/@tanbo/ui/assets/scss/
+import '@tanbo/ui/index.min.css'; 
 
 
+@NgModule({
+    imports: [
+        /* ..other modules.. */
+        UIModule.forRoot(), // 如果是子模块或异步模块，如路由模块，则不要调用
+        BrowserModule,
+        BrowserAnimationsModule // UiModule 依赖动画模块
+    ]
+})
 
+export class AppModule {
+}
+```
+## 在根组件志明`<ui-app></ui-app>`组件
+```html
+<!-- app.component.html -->
+
+<ui-app>
+  <!-- your code ... -->
+</ui-app>
+```
+现在你就可以使用@tanbo/ui所提供的所有功能了。
+**更详细的文档请点击[https://www.tanboui.com/ui](https://www.tanboui.com/ui)**
