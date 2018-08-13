@@ -208,6 +208,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     } else {
       this.selectedIndex = -1;
       this.text = '';
+      this.selectedOption = null;
     }
   }
 

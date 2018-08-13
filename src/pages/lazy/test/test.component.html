@@ -1,4 +1,4 @@
-<table ui-table (uiChecked)="show($event)" class="ui-table">
+<table ui-table class="ui-table">
   <thead>
   <tr ui-table-selector>
     <th>test</th>
@@ -10,3 +10,18 @@
   </tr>
   </tbody>
 </table>
+
+<hr>
+
+<button type="button" (click)="show()">button</button>
+
+<ng-template #modal>
+  <ui-modal>
+    <form novalidate>
+      <ui-select>
+        <ui-option value="a">aaa</ui-option>
+        <ui-option value="b">bbb</ui-option>
+      </ui-select>
+    </form>
+  </ui-modal>
+</ng-template>
