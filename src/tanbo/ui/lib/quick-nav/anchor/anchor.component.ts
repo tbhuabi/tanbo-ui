@@ -1,9 +1,9 @@
-import { Component, Input, HostListener, ElementRef, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, HostListener, ElementRef, OnInit, Inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
-import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { AnchorService } from './anchor.service';
+import { UI_ANCHOR_LINK_DISTANCE } from '../helper';
 
 @Component({
   /*tslint:disable*/
@@ -28,9 +28,10 @@ export class AnchorComponent implements OnInit {
   private scrollEvent = new Subject<string>();
 
   constructor(private elementRef: ElementRef,
-              private router: Router,
+              @Inject(UI_ANCHOR_LINK_DISTANCE) private _offset: number,
               private anchorService: AnchorService,
               private activatedRoute: ActivatedRoute) {
+    this.offset = _offset;
     this.scrollObs = this.scrollEvent.asObservable();
   }
 
