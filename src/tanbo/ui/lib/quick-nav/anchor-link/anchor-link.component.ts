@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, Input, HostBinding } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, merge } from 'rxjs';
+
+import { AnchorService } from '../anchor/anchor.service';
 
 @Component({
   /*tslint:disable*/
@@ -19,11 +21,13 @@ export class AnchorLinkComponent implements OnInit, OnDestroy {
 
   private sub: Subscription;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private anchorService: AnchorService) {
   }
 
   ngOnInit() {
-    this.sub = this.activatedRoute.fragment.subscribe(str => {
+    this.sub = merge(this.activatedRoute.fragment,
+      this.anchorService.onAnchorInScreen).subscribe(str => {
       this.isActive = str === this.fragment;
     });
   }

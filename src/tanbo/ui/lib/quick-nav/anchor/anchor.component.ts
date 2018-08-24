@@ -23,7 +23,6 @@ export class AnchorComponent implements OnInit {
   offset = 0;
 
   private hashChangeIsFromSelf = false;
-  private currentHash = '';
 
   private scrollObs: Observable<string>;
   private scrollEvent = new Subject<string>();
@@ -36,26 +35,24 @@ export class AnchorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.anchorService.onAnchorInScreen.pipe(debounceTime(300)).subscribe(fragment => {
-      if (fragment === this.id || fragment === this.name) {
-        return;
-      }
-      this.router.navigate(['./'], {
-        relativeTo: this.activatedRoute,
-        fragment
-      });
-    });
     this.activatedRoute.fragment.subscribe(str => {
+      this.hashChangeIsFromSelf = true;
       if (str === this.id || str === this.name) {
         this.elementRef.nativeElement.scrollIntoView();
+        requestAnimationFrame(() => {
+          document.documentElement.scrollTop -= this.offset;
+        });
       }
+      setTimeout(() => {
+        this.hashChangeIsFromSelf = false;
+      }, 400);
     });
   }
 
   @HostListener('window:scroll')
   scroll() {
     const distance = this.elementRef.nativeElement.getBoundingClientRect();
-    if (distance.top < 100) {
+    if (distance.top < 100 && !this.hashChangeIsFromSelf) {
       this.anchorService.anchorIn(this.id || this.name);
     }
   }
