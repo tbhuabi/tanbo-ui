@@ -7,5 +7,6 @@ export * from './lib/forms/index';
 export * from './lib/modal/index';
 export * from './lib/nav/index';
 export * from './lib/other/index';
+export * from './lib/quick-nav/index';
 export * from './lib/table/index';
 export * from './lib/tree/index';
