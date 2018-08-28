@@ -4,6 +4,7 @@
   padding-left: 1em;
   color: inherit;
   text-decoration: none;
+  line-height: 1.8em;
   &:first-of-type {
     .ui-anchor-link-line {
       top: calc(50%);
@@ -17,11 +18,11 @@
   &:before {
     content: "";
     position: absolute;
-    width: 5px;
-    height: 5px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    left: -2px;
-    top: calc(50% - 2px);
+    left: -3px;
+    top: calc(50% - 3px);
     z-index: 1;
   }
   &:hover {
