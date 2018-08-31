@@ -21,7 +21,7 @@ import { NavItemService } from '../nav-item/nav-item.service';
 import { UI_NAV_OFFSET, UI_NAV_DEPTH } from '../help';
 
 @Component({
-  selector: 'ui-nav-inner',
+  selector: 'ui-nav-inner,a[ui-nav-inner]',
   templateUrl: './nav-inner.component.html'
 })
 export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit {

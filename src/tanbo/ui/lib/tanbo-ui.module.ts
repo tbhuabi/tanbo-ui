@@ -14,7 +14,7 @@ import { UITreeModule } from './tree/tree.module';
 
 import { DialogController, ModalController, NotifyController } from './modal/index';
 import { TooltipBaseService } from './other/index';
-import { AnchorService } from './quick-nav/index';
+import { AnchorService, UI_ANCHOR_LINK_DISTANCE } from './quick-nav/index';
 
 @NgModule({
   exports: [
@@ -40,7 +40,10 @@ export class UIModule {
         ModalController,
         NotifyController,
         TooltipBaseService,
-        AnchorService
+        AnchorService, {
+          provide: UI_ANCHOR_LINK_DISTANCE,
+          useValue: 0
+        }
       ]
     };
   }
