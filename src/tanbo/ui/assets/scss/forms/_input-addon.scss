@@ -14,15 +14,13 @@ ui-input-addon {
   min-width: 32px;
   background-color: #fff;
   @include input-addon-style($form-control-border-color, $form-control-border-color);
-  @if $form-control-radius-is-open {
-    &:first-child {
-      border-top-left-radius: $form-control-radius;
-      border-bottom-left-radius: $form-control-radius;
-    }
-    &:last-child {
-      border-top-right-radius: $form-control-radius;
-      border-bottom-right-radius: $form-control-radius;
-    }
+  &:first-child {
+    border-top-left-radius: $form-control-radius;
+    border-bottom-left-radius: $form-control-radius;
+  }
+  &:last-child {
+    border-top-right-radius: $form-control-radius;
+    border-bottom-right-radius: $form-control-radius;
   }
   &.ui-has-error {
     @include input-addon-style($form-control-border-color-danger, $form-control-border-color-danger);

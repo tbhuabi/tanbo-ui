@@ -2,9 +2,7 @@
   .ui-btn-#{$name} {
     padding: $v $h;
     font-size: $font-size;
-    @if $button-radius-is-open {
-      border-radius: $radius;
-    }
+    border-radius: $radius;
   }
 }
 
@@ -49,15 +47,13 @@
     > .ui-btn, > .ui-btn-group > .ui-btn, > ui-dropdown > .ui-btn {
       @include input-size($paddingY, $paddingX, 0, $font-size);
     }
-    @if $button-radius-is-open {
-      > .ui-btn:first-child, > .ui-btn-group:first-child > .ui-btn:first-of-type, > ui-dropdown:first-child > .ui-btn:first-of-type {
-        border-top-left-radius: $radius;
-        border-bottom-left-radius: $radius;
-      }
-      > .ui-btn:last-child, > .ui-btn-group:last-child > .ui-btn:last-of-type, > ui-dropdown:last-child > .ui-btn:last-of-type {
-        border-top-right-radius: $radius;
-        border-bottom-right-radius: $radius;
-      }
+    > .ui-btn:first-child, > .ui-btn-group:first-child > .ui-btn:first-of-type, > ui-dropdown:first-child > .ui-btn:first-of-type {
+      border-top-left-radius: $radius;
+      border-bottom-left-radius: $radius;
+    }
+    > .ui-btn:last-child, > .ui-btn-group:last-child > .ui-btn:last-of-type, > ui-dropdown:last-child > .ui-btn:last-of-type {
+      border-top-right-radius: $radius;
+      border-bottom-right-radius: $radius;
     }
   }
 }
@@ -74,9 +70,7 @@
   white-space: nowrap;
   position: relative;
   user-select: none;
-  @if $button-radius-is-open {
-    border-radius: $button-radius;
-  }
+  border-radius: $button-radius;
   &.ui-disabled, &[disabled], &[readonly] {
     opacity: .5;
     cursor: not-allowed;
@@ -110,15 +104,13 @@
     &:first-child {
       margin-left: 0;
     }
-    @if $button-radius-is-open {
-      &:first-child {
-        border-top-left-radius: $button-radius;
-        border-bottom-left-radius: $button-radius;
-      }
-      &:last-child {
-        border-top-right-radius: $button-radius;
-        border-bottom-right-radius: $button-radius;
-      }
+    &:first-child {
+      border-top-left-radius: $button-radius;
+      border-bottom-left-radius: $button-radius;
+    }
+    &:last-child {
+      border-top-right-radius: $button-radius;
+      border-bottom-right-radius: $button-radius;
     }
   }
 
@@ -149,15 +141,13 @@
     > .ui-btn {
       border-radius: 0;
     }
-    @if $button-radius-is-open {
-      &:first-child > .ui-btn:first-of-type {
-        border-top-left-radius: $button-radius;
-        border-bottom-left-radius: $button-radius;
-      }
-      &:last-child > .ui-btn:last-of-type {
-        border-top-right-radius: $button-radius;
-        border-bottom-right-radius: $button-radius;
-      }
+    &:first-child > .ui-btn:first-of-type {
+      border-top-left-radius: $button-radius;
+      border-bottom-left-radius: $button-radius;
+    }
+    &:last-child > .ui-btn:last-of-type {
+      border-top-right-radius: $button-radius;
+      border-bottom-right-radius: $button-radius;
     }
   }
 }

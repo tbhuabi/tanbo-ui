@@ -29,9 +29,7 @@ ui-notify {
   border: 1px solid $color-light;
   border-bottom: none;
   background-color: #fff;
-  @if $notify-radius-is-open {
-    border-radius: $radius-base;
-  }
+  border-radius: $radius-base;
   @include notify-theme(default, $color-default);
   @include notify-theme(primary, $color-primary);
   @include notify-theme(info, $color-info);

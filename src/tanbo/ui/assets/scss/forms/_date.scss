@@ -84,9 +84,7 @@ ui-input[type=date] {
   position: relative;
   font-size: 14px;
   user-select: none;
-  @if $form-control-radius-is-open {
-    border-radius: 3px;
-  }
+  border-radius: 3px;
   background-color: #fff;
 }
 

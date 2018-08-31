@@ -9,7 +9,7 @@
     cursor: pointer;
   }
   &[disabled], &.ui-disabled {
-    background-color: hsla(hue($border-color), saturation($border-color), lightness($border-color), .2);
+    background-color: $color-light;
   }
 }
 
@@ -17,9 +17,7 @@
   padding: $v $h;
   line-height: $line-height;
   font-size: $font-size;
-  @if $form-control-radius-is-open {
-    border-radius: $radius;
-  }
+  border-radius: $radius;
   &.ui-disabled, &[disabled] {
     opacity: .5;
     cursor: not-allowed;
