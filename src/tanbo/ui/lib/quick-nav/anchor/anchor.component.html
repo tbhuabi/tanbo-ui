@@ -1,3 +1,4 @@
 <ng-content>
 </ng-content>
-<a class="ui-anchor-link-btn" routerLink="./" [fragment]="id || name"><span class="ui-icon-link"></span></a>
+<a class="ui-anchor-link-btn" [routerLink]="['./', params]"
+   [queryParams]="queryParams" [fragment]="id || name"><span class="ui-icon-link"></span></a>

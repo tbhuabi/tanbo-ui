@@ -2,6 +2,7 @@
   &-#{$type} {
     color: #fff;
     background-color: $color;
+    border: 1px solid $color;
     &.ui-tag-outline {
       @if $type == info {
         color: darken($color, 20);
@@ -24,6 +25,7 @@
   &-light {
     color: $color-dark;
     background-color: $color-light;
+    border: 1px solid $color-light;
     &.ui-tag-outline {
       border: 1px solid $color-light;
       background-color: #fff;
@@ -36,4 +38,8 @@
   @include tag(success, $color-success);
   @include tag(warning, $color-warning);
   @include tag(danger, $color-danger);
+
+  &.ui-tag-circle {
+    border-radius: 1em;
+  }
 }

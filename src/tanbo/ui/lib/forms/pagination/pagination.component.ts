@@ -56,7 +56,7 @@ export class PaginationComponent {
   }
 
   onChange(currentPage: number) {
-    if (typeof currentPage === 'number') {
+    if (typeof currentPage === 'number' && currentPage !== this.currentPage) {
       this.uiChange.emit(currentPage);
       this.currentPage = currentPage;
     }
