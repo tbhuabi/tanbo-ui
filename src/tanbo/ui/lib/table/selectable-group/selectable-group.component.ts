@@ -63,7 +63,9 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
     this.isChecked = b;
     this.selectedValues = [];
     this.items.forEach(item => {
-      item.checked = b;
+      if (item.checked !== b) {
+        item.change(b);
+      }
       if (b) {
         this.selectedValues.push(item.data);
       }
