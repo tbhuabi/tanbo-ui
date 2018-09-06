@@ -2,9 +2,13 @@ ui-input[type=date] {
   display: inline-block;
   cursor: auto;
   width: auto;
+  text-align: left;
   &.ng-touched.ng-invalid .ui-dropdown-input {
     box-shadow: none;
     border-color: $form-control-border-color-warning;
+  }
+  ui-dropdown-input {
+    text-align: inherit;
   }
 }
 

@@ -1,9 +1,13 @@
 ui-select {
   display: inline-block;
   user-select: none;
+  text-align: left;
   &.ng-touched.ng-invalid .ui-dropdown-input {
     box-shadow: none;
     border-color: $form-control-border-color-warning;
+  }
+  ui-dropdown-input {
+    text-align: inherit;
   }
 }
 
