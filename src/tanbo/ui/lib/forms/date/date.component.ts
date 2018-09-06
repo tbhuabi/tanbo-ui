@@ -97,8 +97,8 @@ export class DateComponent implements ControlValueAccessor, OnInit {
   showType: string = '';
   displayValue = '';
 
-  private _disabled: boolean;
-  private _readonly: boolean;
+  private _disabled: boolean = false;
+  private _readonly: boolean = false;
   private _maxDate = '';
   private _minDate = '';
   private onChange: (_: any) => any;

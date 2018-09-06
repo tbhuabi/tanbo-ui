@@ -69,8 +69,8 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   focus: boolean = false;
   open: boolean = false;
   text: string = '';
-  private _disabled: boolean;
-  private _readonly: boolean;
+  private _disabled: boolean = false;
+  private _readonly: boolean = false;
 
   private value: string = '';
   private onChange: (_: any) => any;
