@@ -1,21 +1,15 @@
 <ui-dropdown class="ui-date-dropdown" [open]="open" [autoDisplay]="false" (uiEscape)="onEscape()">
-  <div class="ui-date-fixed" (click)="toggle()">
-    <input class="ui-date-input ui-form-control"
-           [ngClass]="{'ui-input-sm': size === 'sm', 'ui-input-lg': size === 'lg', 'ui-focus': focus}"
-           [disabled]="disabled"
-           [attr.name]="name"
-           readonly
-           type="text"
-           [attr.id]="forId"
-           [placeholder]="placeholder"
-           [value]="displayValue">
-    <div class="ui-date-arrow-dropdown" [class.ui-open]="open">
-      <span [ngClass]="arrowIconClassName"></span>
-    </div>
-    <div class="ui-date-clean" [class.ui-hide]="!value || disabled || readonly" ui-stop-propagation>
-      <span (click)="reset()">&times;</span>
-    </div>
-  </div>
+  <ui-dropdown-input
+          (click)="toggle()"
+          (uiReset)="reset()"
+          [placeholder]="placeholder"
+          [disabled]="disabled"
+          [readonly]="readonly"
+          [name]="name"
+          [arrowIconClassName]="arrowIconClassName"
+          [value]="displayValue"
+          [forId]="forId"
+          [size]="size"></ui-dropdown-input>
   <ui-dropdown-menu class="ui-date-dropdown-menu" [position]="position">
     <div class="ui-date-container" (click)="changeShowType()">
       <table class="ui-date-table">

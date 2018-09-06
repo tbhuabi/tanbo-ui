@@ -2,15 +2,10 @@ ui-input[type=date] {
   display: inline-block;
   cursor: auto;
   width: auto;
-  &.ng-touched.ng-invalid .ui-date-input {
+  &.ng-touched.ng-invalid .ui-dropdown-input {
     box-shadow: none;
     border-color: $form-control-border-color-warning;
   }
-}
-
-.ui-date-dropdown, .ui-date-input {
-  width: 100%;
-  text-align: inherit;
 }
 
 .ui-date-dropdown-menu {
@@ -173,59 +168,4 @@ ui-input[type=date] {
 
 .ui-date-btn {
   padding: 5px;
-}
-
-.ui-date-fixed {
-  position: relative;
-  &:hover {
-    .ui-date-clean:not(.ui-hide) {
-      display: flex;
-    }
-  }
-}
-
-.ui-date-arrow-dropdown {
-  position: absolute;
-  z-index: 1;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform .15s;
-  &.ui-open {
-    transform: rotateZ(180deg);
-  }
-}
-
-.ui-date-clean {
-  position: absolute;
-  z-index: 2;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 20px;
-  padding-left: 2px;
-  align-items: center;
-  font-size: 12px;
-  display: none;
-  > span {
-    display: inline-block;
-    width: 13px;
-    height: 13px;
-    background-color: $color-gray;
-    color: #fff;
-    text-align: center;
-    line-height: 1;
-    border-radius: 50%;
-    cursor: pointer;
-    &:hover {
-      background-color: $color-gray-dark;
-    }
-  }
-  &.ui-hide {
-    display: none;
-  }
 }

@@ -1,22 +1,15 @@
 <ui-dropdown [autoDisplay]="false" [open]="open" class="ui-select-dropdown" (uiEscape)="escape()">
-  <div class="ui-select-fixed" (click)="toggle()">
-    <input class="ui-select-input ui-form-control"
-           [ngClass]="{'ui-input-sm': size === 'sm', 'ui-input-lg': size === 'lg'}"
-           [disabled]="disabled"
-           [attr.name]="name"
-           readonly
-           type="text"
-           [placeholder]="placeholder"
-           [class.ui-focus]="focus"
-           [attr.id]="forId"
-           [value]="text">
-    <div class="ui-select-arrow" [class.ui-open]="open">
-      <span [ngClass]="arrowIconClassName"></span>
-    </div>
-    <div class="ui-select-clean" [class.ui-hide]="!text || disabled || readonly" ui-stop-propagation>
-      <span (click)="reset()">&times;</span>
-    </div>
-  </div>
+  <ui-dropdown-input
+          (click)="toggle()"
+          (uiReset)="reset()"
+          [placeholder]="placeholder"
+          [disabled]="disabled"
+          [readonly]="readonly"
+          [name]="name"
+          [arrowIconClassName]="arrowIconClassName"
+          [value]="text"
+          [forId]="forId"
+          [size]="size"></ui-dropdown-input>
   <ui-dropdown-menu class="ui-select-dropdown-menu">
     <ng-content></ng-content>
   </ui-dropdown-menu>

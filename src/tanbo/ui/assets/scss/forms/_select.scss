@@ -1,67 +1,12 @@
 ui-select {
   display: inline-block;
   user-select: none;
-  &.ng-touched.ng-invalid .ui-select-input {
+  &.ng-touched.ng-invalid .ui-dropdown-input {
     box-shadow: none;
     border-color: $form-control-border-color-warning;
   }
 }
 
-.ui-select-dropdown, .ui-select-dropdown-menu, .ui-select-input {
+.ui-select-dropdown, .ui-select-dropdown-menu {
   width: 100%;
-}
-
-.ui-select-fixed {
-  position: relative;
-  &:hover {
-    .ui-select-clean:not(.ui-hide) {
-      display: flex;
-    }
-  }
-}
-
-.ui-select-arrow {
-  position: absolute;
-  z-index: 1;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform .15s;
-  &.ui-open {
-    transform: rotateZ(180deg);
-  }
-}
-
-.ui-select-clean {
-  position: absolute;
-  z-index: 2;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 20px;
-  padding-left: 2px;
-  align-items: center;
-  font-size: 12px;
-  display: none;
-  > span {
-    display: inline-block;
-    width: 13px;
-    height: 13px;
-    background-color: $color-gray;
-    color: #fff;
-    text-align: center;
-    line-height: 1;
-    border-radius: 50%;
-    cursor: pointer;
-    &:hover {
-      background-color: $color-gray-dark;
-    }
-  }
-  &.ui-hide {
-    display: none;
-  }
 }
