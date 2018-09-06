@@ -15,6 +15,8 @@ import { inputAttrToBoolean } from '../help';
 })
 export class DropdownInputComponent implements ControlValueAccessor {
   @Input()
+  open = false;
+  @Input()
   focus = false;
   @Input()
   value = '';
