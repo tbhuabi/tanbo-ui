@@ -94,7 +94,7 @@
 @include btn-theme(danger, #fff, $color-danger);
 @include btn-theme(warning, #fff, $color-warning);
 
-ui-btn-group {
+.ui-btn-group {
   position: relative;
   display: inline-flex;
   line-height: 1;
