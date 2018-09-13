@@ -1,5 +1,5 @@
 @mixin tag($type, $color) {
-  &-#{$type} {
+  &.ui-tag-#{$type} {
     color: #fff;
     background-color: $color;
     border: 1px solid $color;
@@ -17,19 +17,17 @@
   }
 }
 
-.ui-tag {
+ui-tag {
   display: inline;
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 4px;
-  &-light {
-    color: $color-dark;
-    background-color: $color-light;
+  color: $color-dark;
+  background-color: $color-light;
+  border: 1px solid $color-light;
+  &.ui-tag-outline {
     border: 1px solid $color-light;
-    &.ui-tag-outline {
-      border: 1px solid $color-light;
-      background-color: #fff;
-    }
+    background-color: #fff;
   }
   @include tag(gray, $color-gray);
   @include tag(dark, $color-dark);
@@ -41,5 +39,20 @@
 
   &.ui-tag-circle {
     border-radius: 1em;
+  }
+}
+
+.ui-tag-close {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  display: inline;
+  padding: 0 0 0 3px;
+  opacity: .5;
+  font-size: 1.2em;
+  &:hover {
+    opacity: 1;
+    font-weight: 600;
   }
 }

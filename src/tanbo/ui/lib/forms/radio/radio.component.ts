@@ -14,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { RadioStateService } from './radio-state.service';
-import { inputAttrToBoolean } from '../help';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-input[type=radio]',
@@ -38,7 +38,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input()
   @HostBinding('class.ui-disabled')
   set disabled(isDisabled: any) {
-    this._disabled = inputAttrToBoolean(isDisabled);
+    this._disabled = attrToBoolean(isDisabled);
   }
 
   get disabled() {
@@ -48,7 +48,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input()
   @HostBinding('class.ui-readonly')
   set readonly(isReadonly: any) {
-    this._readonly = inputAttrToBoolean(isReadonly);
+    this._readonly = attrToBoolean(isReadonly);
   }
 
   get readonly() {
@@ -58,7 +58,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input()
   @HostBinding('class.ui-checked')
   set checked(isChecked: any) {
-    this._checked = inputAttrToBoolean(isChecked);
+    this._checked = attrToBoolean(isChecked);
   }
 
   get checked() {

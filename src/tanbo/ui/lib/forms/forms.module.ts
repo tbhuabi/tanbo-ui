@@ -9,8 +9,6 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { DateComponent } from './date/date.component';
 import { DropdownInputComponent } from './dropdown-input/dropdown-input.component';
 import { InputDirective } from './input/input.directive';
-import { InputAddonComponent } from './input-addon/input-addon.component';
-import { InputGroupComponent } from './input-group/input-group.component';
 import { OptionComponent } from './option/option.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { RadioComponent } from './radio/radio.component';
@@ -43,8 +41,6 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     DateComponent,
     DropdownInputComponent,
     InputDirective,
-    InputAddonComponent,
-    InputGroupComponent,
     OptionComponent,
     PaginationComponent,
     RadioComponent,
@@ -65,8 +61,6 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     DateComponent,
     DropdownInputComponent,
     InputDirective,
-    InputAddonComponent,
-    InputGroupComponent,
     OptionComponent,
     PaginationComponent,
     RadioComponent,

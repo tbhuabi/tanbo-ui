@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { inputAttrToBoolean } from '../help';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-input[type=range]',
@@ -27,7 +27,7 @@ export class RangeComponent implements ControlValueAccessor {
   @Input()
   @HostBinding('class.ui-disabled')
   set disabled(isDisabled: any) {
-    this._disabled = inputAttrToBoolean(isDisabled);
+    this._disabled = attrToBoolean(isDisabled);
   }
 
   get disabled() {
@@ -37,7 +37,7 @@ export class RangeComponent implements ControlValueAccessor {
   @Input()
   @HostBinding('class.ui-readonly')
   set readonly(isReadonly: any) {
-    this._readonly = inputAttrToBoolean(isReadonly);
+    this._readonly = attrToBoolean(isReadonly);
   }
 
   get readonly() {

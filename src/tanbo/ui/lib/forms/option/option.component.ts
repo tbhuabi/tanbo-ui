@@ -11,7 +11,7 @@ import {
 
 import { SelectService } from '../select/select.service';
 
-import { inputAttrToBoolean } from '../help';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-option',
@@ -24,7 +24,7 @@ export class OptionComponent implements AfterViewInit {
   @Input()
   @HostBinding('class.ui-disabled')
   set disabled(isDisabled: any) {
-    this._disabled = inputAttrToBoolean(isDisabled);
+    this._disabled = attrToBoolean(isDisabled);
   }
 
   get disabled() {
@@ -34,7 +34,7 @@ export class OptionComponent implements AfterViewInit {
   @Input()
   @HostBinding('class.ui-selected')
   set selected(isSelected: any) {
-    this._selected = inputAttrToBoolean(isSelected);
+    this._selected = attrToBoolean(isSelected);
   }
 
   get selected() {

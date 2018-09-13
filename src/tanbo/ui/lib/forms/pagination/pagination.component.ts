@@ -67,6 +67,9 @@ export class PaginationComponent {
     if (this.currentPage > this.pages) {
       this._currentPage = this.pages;
     }
+    if (this.pages <= 1) {
+      return;
+    }
     if (this.currentPage !== 1) {
       this.pageList.push({
         pageIndex: 1,

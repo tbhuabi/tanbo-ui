@@ -18,7 +18,7 @@ import { delay } from 'rxjs/operators';
 import { OptionComponent } from '../option/option.component';
 import { SelectService } from './select.service';
 import { UI_SELECT_ARROW_CLASSNAME } from '../help';
-import { inputAttrToBoolean } from '../help';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-select',
@@ -48,7 +48,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
 
   @Input()
   set disabled(isDisabled: any) {
-    this._disabled = inputAttrToBoolean(isDisabled);
+    this._disabled = attrToBoolean(isDisabled);
   }
 
   get disabled() {
@@ -57,7 +57,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
 
   @Input()
   set readonly(isReadonly: any) {
-    this._readonly = inputAttrToBoolean(isReadonly);
+    this._readonly = attrToBoolean(isReadonly);
   }
 
   get readonly() {

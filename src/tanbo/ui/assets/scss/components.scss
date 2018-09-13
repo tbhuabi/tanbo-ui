@@ -11,24 +11,23 @@
 @import "common/float";
 @import "common/grid";
 @import "common/help";
+@import "common/input-addon";
+@import "common/input-group";
 @import "common/reset";
 @import "common/table";
-@import "common/tag";
 @import "common/text";
+@import "common/validator-feedback";
 
 @import "forms/checkbox";
 @import "forms/date";
 @import "forms/dropdown-input";
 @import "forms/input";
-@import "forms/input-addon";
-@import "forms/input-group";
 @import "forms/option";
 @import "forms/pagination";
 @import "forms/radio";
 @import "forms/range";
 @import "forms/select";
 @import "forms/switch";
-@import "forms/validator-feedback";
 
 @import "layout/dropdown";
 @import "layout/dropdown-menu";
@@ -55,6 +54,7 @@
 
 @import "other/divider";
 @import "other/pop-confirm";
+@import "other/tag";
 @import "other/tooltip";
 @import "other/view-loading-bar";
 

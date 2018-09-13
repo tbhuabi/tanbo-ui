@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DividerComponent } from './divider/divider.component';
 import { PopConfirmComponent } from './pop-confirm/pop-confirm.component';
+import { TagComponent } from './tag/tag.component';
 import { ViewLoadingBarComponent } from './view-loading-bar/view-loading-bar.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { TooltipBaseComponent } from './tooltip-base/tooltip-base.component';
@@ -18,6 +19,7 @@ import { StopPropagationDirective } from './stop-propagation.directive';
   declarations: [
     DividerComponent,
     PopConfirmComponent,
+    TagComponent,
     ViewLoadingBarComponent,
     TooltipComponent,
     TooltipBaseComponent,
@@ -29,6 +31,7 @@ import { StopPropagationDirective } from './stop-propagation.directive';
   exports: [
     DividerComponent,
     PopConfirmComponent,
+    TagComponent,
     ViewLoadingBarComponent,
     TooltipComponent,
     TooltipBaseComponent,

@@ -2,7 +2,7 @@ import { Component, Input, Inject, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { UI_SELECT_ARROW_CLASSNAME } from '../help';
-import { inputAttrToBoolean } from '../help';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-dropdown-input',
@@ -33,7 +33,7 @@ export class DropdownInputComponent implements ControlValueAccessor {
 
   @Input()
   set disabled(isDisabled: any) {
-    this._disabled = inputAttrToBoolean(isDisabled);
+    this._disabled = attrToBoolean(isDisabled);
   }
 
   get disabled() {
@@ -42,7 +42,7 @@ export class DropdownInputComponent implements ControlValueAccessor {
 
   @Input()
   set readonly(isReadonly: any) {
-    this._readonly = inputAttrToBoolean(isReadonly);
+    this._readonly = attrToBoolean(isReadonly);
   }
 
   get readonly() {
