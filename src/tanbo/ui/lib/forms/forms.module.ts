@@ -11,6 +11,7 @@ import { DropdownInputComponent } from './dropdown-input/dropdown-input.componen
 import { InputDirective } from './input/input.directive';
 import { OptionComponent } from './option/option.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { PickerComponent } from './picker/picker.component';
 import { RadioComponent } from './radio/radio.component';
 import { RangeComponent } from './range/range.component';
 import { SelectComponent } from './select/select.component';
@@ -43,6 +44,7 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     InputDirective,
     OptionComponent,
     PaginationComponent,
+    PickerComponent,
     RadioComponent,
     RangeComponent,
     SelectComponent,
@@ -63,6 +65,7 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     InputDirective,
     OptionComponent,
     PaginationComponent,
+    PickerComponent,
     RadioComponent,
     RangeComponent,
     SelectComponent,

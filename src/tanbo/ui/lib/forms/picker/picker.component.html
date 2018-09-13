@@ -1,0 +1,21 @@
+<ui-dropdown [autoDisplay]="false" [open]="open" (uiEscape)="escape()">
+  <ui-dropdown-input (click)="toggle()"
+                     (uiReset)="reset()"
+                     [placeholder]="placeholder"
+                     [disabled]="disabled"
+                     [readonly]="readonly"
+                     [name]="name"
+                     [arrowIconClassName]="arrowIconClassName"
+                     [value]="text"
+                     [forId]="forId"
+                     [size]="size"></ui-dropdown-input>
+  <ui-dropdown-menu [position]="position">
+    <div class="ui-picker-rows">
+      <div class="ui-picker-cell" *ngFor="let cell of list; let i = index">
+        <div class="ui-picker-list">
+          <ui-item [class.ui-checked]="selectedCells[i] === item" *ngFor="let item of cell" (click)="saveItem(item, i)">{{ item.text }}</ui-item>
+        </div>
+      </div>
+    </div>
+  </ui-dropdown-menu>
+</ui-dropdown>

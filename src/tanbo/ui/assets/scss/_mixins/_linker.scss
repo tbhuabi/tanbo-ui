@@ -19,4 +19,8 @@
     cursor: not-allowed;
     color: #fff;
   }
+  &.ui-checked {
+    background-color: $color-light;
+    color: inherit;
+  }
 }
