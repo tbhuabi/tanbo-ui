@@ -5,10 +5,10 @@
   > .ui-form-control {
     flex: 1;
   }
-  > .ui-form-control, .ui-select-input, > ui-input-addon, > .ui-btn {
+  > .ui-form-control, .ui-select-input, > .ui-input-addon, > .ui-btn {
     border-radius: 0;
   }
-  > .ui-form-control, > ui-input-addon {
+  > .ui-form-control, > .ui-input-addon {
     &:not(:first-child) {
       margin-left: -1px;
     }
@@ -71,7 +71,7 @@
         border-bottom-right-radius: $form-control-radius-sm;
       }
     }
-    > .ui-form-control, > ui-input-addon {
+    > .ui-form-control, > .ui-input-addon {
       &:first-child {
         border-top-left-radius: $form-control-radius-sm;
         border-bottom-left-radius: $form-control-radius-sm;
@@ -115,7 +115,7 @@
         border-bottom-right-radius: $form-control-radius-lg;
       }
     }
-    > .ui-form-control, > ui-input-addon {
+    > .ui-form-control, > .ui-input-addon {
       &:first-child {
         border-top-left-radius: $form-control-radius-lg;
         border-bottom-left-radius: $form-control-radius-lg;
