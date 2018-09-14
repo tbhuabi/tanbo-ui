@@ -44,6 +44,6 @@ export class DetailComponent implements OnInit, PickerDataProvider {
           };
         })
       }
-    })).toPromise();
+    }));
   }
 }

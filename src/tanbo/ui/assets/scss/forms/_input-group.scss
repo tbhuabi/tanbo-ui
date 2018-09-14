@@ -1,14 +1,14 @@
-.ui-input-group {
+ui-input-group {
   position: relative;
   display: inline-flex;
   font-size: $form-control-font-size-base;
   > .ui-form-control {
     flex: 1;
   }
-  > .ui-form-control, .ui-select-input, > .ui-input-addon, > .ui-btn {
+  > .ui-form-control, .ui-select-input, > ui-input-addon, > .ui-btn {
     border-radius: 0;
   }
-  > .ui-form-control, > .ui-input-addon {
+  > .ui-form-control, > ui-input-addon {
     &:not(:first-child) {
       margin-left: -1px;
     }
@@ -29,7 +29,7 @@
       }
     }
   }
-  > .ui-btn-group, > ui-dropdown {
+  > ui-btn-group, > ui-dropdown {
     &:not(:first-child) {
       margin-left: -1px;
     }
@@ -71,7 +71,7 @@
         border-bottom-right-radius: $form-control-radius-sm;
       }
     }
-    > .ui-form-control, > .ui-input-addon {
+    > .ui-form-control, > ui-input-addon {
       &:first-child {
         border-top-left-radius: $form-control-radius-sm;
         border-bottom-left-radius: $form-control-radius-sm;
@@ -91,7 +91,7 @@
         border-bottom-right-radius: $button-radius-sm;
       }
     }
-    > .ui-btn-group, > ui-dropdown {
+    > ui-btn-group, > ui-dropdown {
       &:first-child > .ui-btn:first-of-type {
         border-top-left-radius: $button-radius-sm;
         border-bottom-left-radius: $button-radius-sm;
@@ -115,7 +115,7 @@
         border-bottom-right-radius: $form-control-radius-lg;
       }
     }
-    > .ui-form-control, > .ui-input-addon {
+    > .ui-form-control, > ui-input-addon {
       &:first-child {
         border-top-left-radius: $form-control-radius-lg;
         border-bottom-left-radius: $form-control-radius-lg;
@@ -135,7 +135,7 @@
         border-bottom-right-radius: $button-radius-lg;
       }
     }
-    > .ui-btn-group, > ui-dropdown {
+    > ui-btn-group, > ui-dropdown {
       &:first-child > .ui-btn:first-of-type {
         border-top-left-radius: $button-radius-lg;
         border-bottom-left-radius: $button-radius-lg;

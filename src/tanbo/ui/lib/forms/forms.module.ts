@@ -5,10 +5,13 @@ import { CommonModule } from '@angular/common';
 import { UILayoutModule } from '../layout/layout.module';
 import { UIOtherModule } from '../other/other.module';
 
+import { BtnGroupComponent } from './btn-group/btn-group.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { DateComponent } from './date/date.component';
 import { DropdownInputComponent } from './dropdown-input/dropdown-input.component';
 import { InputDirective } from './input/input.directive';
+import { InputAddonComponent } from './input-addon/input-addon.component';
+import { InputGroupComponent } from './input-group/input-group.component';
 import { OptionComponent } from './option/option.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { PickerComponent } from './picker/picker.component';
@@ -38,10 +41,13 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     UIOtherModule
   ],
   declarations: [
+    BtnGroupComponent,
     CheckboxComponent,
     DateComponent,
     DropdownInputComponent,
     InputDirective,
+    InputAddonComponent,
+    InputGroupComponent,
     OptionComponent,
     PaginationComponent,
     PickerComponent,
@@ -59,10 +65,13 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     DateRequiredValidator
   ],
   exports: [
+    BtnGroupComponent,
     CheckboxComponent,
     DateComponent,
     DropdownInputComponent,
     InputDirective,
+    InputAddonComponent,
+    InputGroupComponent,
     OptionComponent,
     PaginationComponent,
     PickerComponent,
