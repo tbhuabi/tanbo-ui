@@ -46,7 +46,7 @@ $radius-lg: $radius-base + 2px !default; // 大圆角
 
 // 表单
 $form-control-padding-vertical: 5px !default;
-$form-control-padding-vertical-sm: $form-control-padding-vertical - 3px !default;
+$form-control-padding-vertical-sm: $form-control-padding-vertical - 2px !default;
 $form-control-padding-vertical-lg: $form-control-padding-vertical + 2px !default;
 
 $form-control-padding-horizontal: 12px !default;
@@ -70,7 +70,7 @@ $form-control-border-color-danger: $color-danger !default;
 
 // 按扭
 $button-padding-vertical: 5px !default;
-$button-padding-vertical-sm: $button-padding-vertical - 3px !default;
+$button-padding-vertical-sm: $button-padding-vertical - 2px !default;
 $button-padding-vertical-lg: $button-padding-vertical + 2px !default;
 
 $button-padding-horizontal: 12px !default;
@@ -95,7 +95,7 @@ $pagination-radius-sm: $pagination-radius - 1px !default;
 $pagination-radius-lg: $pagination-radius + 2px !default;
 
 $pagination-padding-vertical: 5px !default;
-$pagination-padding-vertical-sm: $pagination-padding-vertical - 3px !default;
+$pagination-padding-vertical-sm: $pagination-padding-vertical - 2px !default;
 $pagination-padding-vertical-lg: $pagination-padding-vertical + 2px !default;
 
 $pagination-padding-horizontal: 12px !default;

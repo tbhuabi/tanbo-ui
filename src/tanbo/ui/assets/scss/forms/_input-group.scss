@@ -1,11 +1,64 @@
+@mixin input-group-size($control-font-size, $control-x-padding, $control-y-padding, $controller-radius, $btn-radius, $btn-x-padding, $btn-y-padding, $btn-font-size) {
+  font-size: $control-font-size;
+  > .ui-form-control, > ui-select .ui-dropdown-input, > ui-input[type=date] .ui-dropdown-input {
+    @include input-size($control-y-padding, $control-x-padding, 0, $control-font-size);
+  }
+  > .ui-form-control, > ui-input-addon {
+    &:first-child {
+      border-top-left-radius: $controller-radius;
+      border-bottom-left-radius: $controller-radius;
+    }
+    &:last-child {
+      border-top-right-radius: $controller-radius;
+      border-bottom-right-radius: $controller-radius;
+    }
+  }
+  > ui-select, > ui-input[type=date] {
+    &:first-child .ui-dropdown-input {
+      border-top-left-radius: $controller-radius;
+      border-bottom-left-radius: $controller-radius;
+    }
+    &:last-child .ui-dropdown-input {
+      border-top-right-radius: $controller-radius;
+      border-bottom-right-radius: $controller-radius;
+    }
+  }
+  > .ui-btn {
+    padding: $btn-y-padding $btn-x-padding;
+    font-size: $btn-font-size;
+    &:first-child {
+      border-top-left-radius: $btn-radius;
+      border-bottom-left-radius: $btn-radius;
+    }
+    &:last-child {
+      border-top-right-radius: $btn-radius;
+      border-bottom-right-radius: $btn-radius;
+    }
+  }
+  > ui-btn-group, > ui-dropdown {
+    >.ui-btn {
+      font-size: $btn-font-size;
+      padding: $btn-y-padding $btn-x-padding;
+    }
+    &:first-child > .ui-btn:first-of-type {
+      border-top-left-radius: $btn-radius;
+      border-bottom-left-radius: $btn-radius;
+    }
+    &:last-child > .ui-btn:last-of-type {
+      border-top-right-radius: $btn-radius;
+      border-bottom-right-radius: $btn-radius;
+    }
+  }
+}
+
 ui-input-group {
   position: relative;
   display: inline-flex;
   font-size: $form-control-font-size-base;
-  > .ui-form-control {
+  > .ui-form-control, ui-select, ui-input[type=date] {
     flex: 1;
   }
-  > .ui-form-control, .ui-select-input, > ui-input-addon, > .ui-btn {
+  > .ui-form-control, .ui-dropdown-input, > ui-input-addon, > .ui-btn {
     border-radius: 0;
   }
   > .ui-form-control, > ui-input-addon {
@@ -15,18 +68,23 @@ ui-input-group {
     &:first-child {
       border-top-left-radius: $form-control-radius;
       border-bottom-left-radius: $form-control-radius;
-      .ui-select-input {
-        border-top-left-radius: $form-control-radius;
-        border-bottom-left-radius: $form-control-radius;
-      }
     }
     &:last-child {
       border-top-right-radius: $form-control-radius;
       border-bottom-right-radius: $form-control-radius;
-      .ui-select-input {
-        border-top-right-radius: $form-control-radius;
-        border-bottom-right-radius: $form-control-radius;
-      }
+    }
+  }
+  > ui-select, > ui-input[type=date] {
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
+    &:first-child .ui-dropdown-input {
+      border-top-left-radius: $form-control-radius;
+      border-bottom-left-radius: $form-control-radius;
+    }
+    &:last-child .ui-dropdown-input{
+      border-top-right-radius: $form-control-radius;
+      border-bottom-right-radius: $form-control-radius;
     }
   }
   > ui-btn-group, > ui-dropdown {
@@ -59,91 +117,25 @@ ui-input-group {
     }
   }
   &.ui-input-group-sm {
-    font-size: $form-control-font-size-sm;
-    > .ui-form-control {
-      @include input-size($form-control-padding-vertical-sm, $form-control-padding-horizontal-sm, 0, $form-control-font-size-sm);
-      &:first-child .ui-select-input {
-        border-top-left-radius: $form-control-radius-sm;
-        border-bottom-left-radius: $form-control-radius-sm;
-      }
-      &:last-child .ui-select-input {
-        border-top-right-radius: $form-control-radius-sm;
-        border-bottom-right-radius: $form-control-radius-sm;
-      }
-    }
-    > .ui-form-control, > ui-input-addon {
-      &:first-child {
-        border-top-left-radius: $form-control-radius-sm;
-        border-bottom-left-radius: $form-control-radius-sm;
-      }
-      &:last-child {
-        border-top-right-radius: $form-control-radius-sm;
-        border-bottom-right-radius: $form-control-radius-sm;
-      }
-    }
-    > .ui-btn {
-      &:first-child {
-        border-top-left-radius: $button-radius-sm;
-        border-bottom-left-radius: $button-radius-sm;
-      }
-      &:last-child {
-        border-top-right-radius: $button-radius-sm;
-        border-bottom-right-radius: $button-radius-sm;
-      }
-    }
-    > ui-btn-group, > ui-dropdown {
-      &:first-child > .ui-btn:first-of-type {
-        border-top-left-radius: $button-radius-sm;
-        border-bottom-left-radius: $button-radius-sm;
-      }
-      &:last-child > .ui-btn:last-of-type {
-        border-top-right-radius: $button-radius-sm;
-        border-bottom-right-radius: $button-radius-sm;
-      }
-    }
+    @include input-group-size($form-control-font-size-sm,
+        $form-control-padding-horizontal-sm,
+        $form-control-padding-vertical-sm,
+        $form-control-radius-sm,
+        $button-radius-sm,
+        $button-padding-horizontal-sm,
+        $button-padding-vertical-sm,
+        $button-font-size-sm
+    );
   }
   &.ui-input-group-lg {
-    font-size: $form-control-font-size-lg;
-    > .ui-form-control {
-      @include input-size($form-control-padding-vertical-lg, $form-control-padding-horizontal-lg, 0, $form-control-font-size-lg);
-      &:first-child .ui-select-input {
-        border-top-left-radius: $form-control-radius-lg;
-        border-bottom-left-radius: $form-control-radius-lg;
-      }
-      &:last-child .ui-select-input {
-        border-top-right-radius: $form-control-radius-lg;
-        border-bottom-right-radius: $form-control-radius-lg;
-      }
-    }
-    > .ui-form-control, > ui-input-addon {
-      &:first-child {
-        border-top-left-radius: $form-control-radius-lg;
-        border-bottom-left-radius: $form-control-radius-lg;
-      }
-      &:last-child {
-        border-top-right-radius: $form-control-radius-lg;
-        border-bottom-right-radius: $form-control-radius-lg;
-      }
-    }
-    > .ui-btn {
-      &:first-child {
-        border-top-left-radius: $button-radius-lg;
-        border-bottom-left-radius: $button-radius-lg;
-      }
-      &:last-child {
-        border-top-right-radius: $button-radius-lg;
-        border-bottom-right-radius: $button-radius-lg;
-      }
-    }
-    > ui-btn-group, > ui-dropdown {
-      &:first-child > .ui-btn:first-of-type {
-        border-top-left-radius: $button-radius-lg;
-        border-bottom-left-radius: $button-radius-lg;
-      }
-      &:last-child > .ui-btn:last-of-type {
-        border-top-right-radius: $button-radius-lg;
-        border-bottom-right-radius: $button-radius-lg;
-      }
-    }
+    @include input-group-size($form-control-font-size-lg,
+        $form-control-padding-horizontal-lg,
+        $form-control-padding-vertical-lg,
+        $form-control-radius-lg,
+        $button-radius-lg,
+        $button-padding-horizontal-lg,
+        $button-padding-vertical-lg,
+        $button-font-size-lg
+    );
   }
 }
