@@ -1,5 +1,5 @@
-import { Directive, Optional, Self, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { NgForm, FormControl, FormGroup, FormArray } from '@angular/forms';
+import { Directive, Optional, Host, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { NgForm, FormControl, FormGroup, FormArray, ControlContainer, FormGroupDirective } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Directive({
@@ -14,22 +14,27 @@ export class SubmitDirective implements OnInit, OnDestroy {
 
   private sub: Subscription;
 
-  constructor(@Self() @Optional() private ngForm: NgForm) {
+  constructor(@Host() @Optional() private controlContainer: ControlContainer) {
   }
 
   ngOnInit() {
-    const group = this.ngForm.form;
-    this.sub = this.ngForm.ngSubmit.subscribe((ev: Event) => {
-      if (!this.ngForm.valid) {
-        this.markAsTouched(group);
-      } else {
-        this.uiSubmit.emit(ev);
-      }
-    });
+    if (this.controlContainer instanceof FormGroupDirective || this.controlContainer instanceof NgForm) {
+      const group = this.controlContainer.form;
+      this.sub = this.controlContainer.ngSubmit.subscribe((ev: Event) => {
+        if (!this.controlContainer.valid) {
+          this.markAsTouched(group);
+        } else {
+          this.uiSubmit.emit(ev);
+        }
+      });
+    }
+
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   private markAsTouched(group: FormGroup | FormArray) {
