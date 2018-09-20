@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef, Optional } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
 import { transition, trigger, style, animate, keyframes } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
@@ -37,10 +38,18 @@ export class ModalBaseComponent implements OnDestroy, OnInit {
 
   private subs: Subscription[] = [];
 
-  constructor(private modalController: ModalController) {
+  constructor(private modalController: ModalController,
+              @Optional() private router: Router) {
   }
 
   ngOnInit() {
+    if (this.router) {
+      this.subs.push(this.router.events.subscribe(event => {
+        if (event instanceof NavigationStart) {
+          this.templates.length = 0;
+        }
+      }));
+    }
     this.subs.push(this.modalController.template.subscribe(template => {
       this.templates.push(template);
     }));
@@ -53,6 +62,9 @@ export class ModalBaseComponent implements OnDestroy, OnInit {
       } else {
         this.templates.pop();
       }
+    }));
+    this.subs.push(this.modalController.onHideAll.subscribe(() => {
+      this.templates.length = 0;
     }));
   }
 
