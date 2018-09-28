@@ -60,7 +60,7 @@ import '@tanbo/ui/index.min.css';
 export class AppModule {
 }
 ```
-## 在根组件志明`<ui-app></ui-app>`组件
+## 在根组件注明`<ui-app></ui-app>`组件
 ```html
 <!-- app.component.html -->
 
