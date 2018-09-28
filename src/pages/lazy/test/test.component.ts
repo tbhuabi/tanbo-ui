@@ -7,10 +7,7 @@ import { NotifyController, ModalController } from '../../../tanbo/ui/public_api'
   styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
-  @ViewChild('modal')
-  modal: any;
-  name = '';
-  data: any[] = [111, 222, 333, 444, 555];
+  loading = false;
 
   constructor(private notifyController: NotifyController,
               private modalController: ModalController) {
@@ -20,7 +17,7 @@ export class TestComponent implements OnInit {
     // this.notifyController.push('test');
   }
 
-  show(ev: any) {
-    this.modalController.show(this.modal);
+  show() {
+    this.loading = !this.loading;
   }
 }

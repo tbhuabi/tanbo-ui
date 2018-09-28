@@ -33,7 +33,7 @@
       }
     }
     &.ui-disabled, &[disabled], &[readonly] {
-      opacity: .5;
+      opacity: .6;
       cursor: not-allowed;
       &:focus, &:hover, &:active {
         background-color: $bg-color;
@@ -56,7 +56,7 @@
   user-select: none;
   border-radius: $button-radius;
   &.ui-disabled, &[disabled], &[readonly] {
-    opacity: .5;
+    opacity: .6;
     cursor: not-allowed;
   }
   &[readonly] {

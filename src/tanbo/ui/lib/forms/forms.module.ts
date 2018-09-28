@@ -6,6 +6,7 @@ import { UILayoutModule } from '../layout/layout.module';
 import { UIOtherModule } from '../other/other.module';
 
 import { BtnGroupComponent } from './btn-group/btn-group.component';
+import { ButtonComponent } from './button/button.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { DateComponent } from './date/date.component';
 import { DropdownInputComponent } from './dropdown-input/dropdown-input.component';
@@ -42,6 +43,7 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
   ],
   declarations: [
     BtnGroupComponent,
+    ButtonComponent,
     CheckboxComponent,
     DateComponent,
     DropdownInputComponent,
@@ -66,6 +68,7 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
   ],
   exports: [
     BtnGroupComponent,
+    ButtonComponent,
     CheckboxComponent,
     DateComponent,
     DropdownInputComponent,

@@ -1,27 +1,12 @@
-<table ui-table class="ui-table">
-  <thead>
-  <tr ui-table-selector>
-    <th>test</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let item of data" [ui-selectable]="item" [checked]="item === 111">
-    <td>{{ item }}</td>
-  </tr>
-  </tbody>
-</table>
 
-<hr>
+<button class="ui-btn ui-btn-default " type="button" ui-button [loading]="loading">test</button><br><br>
+<button class="ui-btn ui-btn-primary " type="button" ui-button [loading]="loading">test</button><br><br>
+<button class="ui-btn ui-btn-info " type="button" ui-button [loading]="loading">test</button><br><br>
+<button class="ui-btn ui-btn-success " type="button" ui-button [loading]="loading">test</button><br><br>
+<button class="ui-btn ui-btn-warning " type="button" ui-button [loading]="loading">test</button><br><br>
+<button class="ui-btn ui-btn-danger " type="button" ui-button [loading]="loading">test</button><br><br>
 
-<button type="button" (click)="show()">button</button>
 
-<ng-template #modal>
-  <ui-modal>
-    <form novalidate>
-      <ui-select>
-        <ui-option value="a">aaa</ui-option>
-        <ui-option value="b">bbb</ui-option>
-      </ui-select>
-    </form>
-  </ui-modal>
-</ng-template>
+<p>
+  <button type="button" class="ui-btn ui-btn-primary" (click)="show()">set</button>
+</p>
