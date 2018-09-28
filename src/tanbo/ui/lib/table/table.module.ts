@@ -5,6 +5,7 @@ import { UIFormsModule } from '../forms/forms.module';
 import { TableDirective } from './table.directive';
 import { SelectableGroupComponent } from './selectable-group/selectable-group.component';
 import { SelectableItemComponent } from './selectable-item/selectable-item.component';
+import { TableResponsiveComponent } from './table-responsive/table-responsive.component';
 
 @NgModule({
   imports: [
@@ -13,12 +14,14 @@ import { SelectableItemComponent } from './selectable-item/selectable-item.compo
   declarations: [
     TableDirective,
     SelectableGroupComponent,
-    SelectableItemComponent
+    SelectableItemComponent,
+    TableResponsiveComponent
   ],
   exports: [
     TableDirective,
     SelectableGroupComponent,
-    SelectableItemComponent
+    SelectableItemComponent,
+    TableResponsiveComponent
   ]
 })
 export class UITableModule {
