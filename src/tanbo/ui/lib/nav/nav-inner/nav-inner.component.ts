@@ -11,7 +11,6 @@ import {
   AfterContentInit,
   OnChanges,
   QueryList,
-  Inject,
   HostBinding
 } from '@angular/core';
 import { Router, RouterLink, RouterLinkWithHref, NavigationEnd } from '@angular/router';
