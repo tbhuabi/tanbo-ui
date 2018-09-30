@@ -1,7 +1,13 @@
 ui-nav {
+  padding-left: $grid-column-padding;
+  padding-right: $grid-column-padding;
   display: block;
   overflow: hidden;
+  font-weight: 600;
   ui-nav {
-    background-color: rgba(0, 0, 0, .025);
+    font-weight: 400;
+    padding-left: 1em;
+    font-size: .96em;
+    padding-right: 0;
   }
 }

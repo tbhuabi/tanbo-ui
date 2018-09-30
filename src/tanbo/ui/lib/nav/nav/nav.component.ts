@@ -3,20 +3,10 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Subscription } from 'rxjs';
 
 import { NavItemService } from '../nav-item/nav-item.service';
-import { UI_NAV_DEPTH } from '../help';
-
-export function navDepthFactory(depth: number) {
-  return depth + 1;
-}
 
 @Component({
   selector: 'ui-nav',
   templateUrl: './nav.component.html',
-  providers: [{
-    provide: UI_NAV_DEPTH,
-    useFactory: navDepthFactory,
-    deps: [[UI_NAV_DEPTH, new SkipSelf()]]
-  }],
   animations: [trigger('navAnimation', [state('open', style({
     height: '*',
     opacity: 1

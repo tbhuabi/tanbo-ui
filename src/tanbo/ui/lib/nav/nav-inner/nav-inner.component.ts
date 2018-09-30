@@ -18,7 +18,6 @@ import { Router, RouterLink, RouterLinkWithHref, NavigationEnd } from '@angular/
 import { Subscription } from 'rxjs';
 
 import { NavItemService } from '../nav-item/nav-item.service';
-import { UI_NAV_OFFSET, UI_NAV_DEPTH } from '../help';
 
 @Component({
   selector: 'ui-nav-inner,a[ui-nav-inner]',
@@ -31,11 +30,6 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
   }
 
   isOpen = false;
-
-  @HostBinding('style.paddingLeft')
-  get paddingLeft() {
-    return this.depth * 2 + 0.5 + this.offset + 'em';
-  }
 
   @ContentChildren(RouterLink, {descendants: true})
   links: QueryList<RouterLink>;
@@ -51,8 +45,6 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
   private subs: Subscription[] = [];
 
   constructor(@Optional() private navItemService: NavItemService,
-              @Inject(UI_NAV_DEPTH) public depth: number,
-              @Inject(UI_NAV_OFFSET) private offset: number,
               private router: Router,
               private element: ElementRef,
               private renderer: Renderer2) {
