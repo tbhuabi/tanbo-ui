@@ -1,28 +1,37 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Compiler,
+  NgModule,
+  Injector,
+  ViewChild,
+  ViewContainerRef,
+  NgModuleRef
+} from '@angular/core';
+import { UIModule } from '../../tanbo/ui/public_api';
 
 @Component({
   templateUrl: './home.html',
   styleUrls: ['./home.scss']
 })
-export class HomeComponent {
-  value = 'bbb';
-  list: any[] = [];
+export class HomeComponent implements OnInit {
+  @ViewChild('vc', {read: ViewContainerRef}) vc: ViewContainerRef;
+  isShow = false;
 
-  constructor() {
+  constructor(private compiler: Compiler,
+              private moduleRef: NgModuleRef<any>,
+              private injector: Injector) {
+  }
+
+
+  ngOnInit() {
     setTimeout(() => {
-      this.list = ['aaa', 'bbb', 'ccc', 'ddd'];
-    }, 2000);
+      this.isShow = true;
+
+    }, 1000);
   }
 
   show(v: any) {
     console.log(v);
-  }
-
-  add() {
-    this.list.push(Math.random());
-  }
-
-  remove(i: number) {
-    this.list.splice(i, 1);
   }
 }

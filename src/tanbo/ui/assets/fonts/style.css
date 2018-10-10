@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'tanbo-ui';
-  src:  url('fonts/tanbo-ui.eot?2k44ef');
-  src:  url('fonts/tanbo-ui.eot?2k44ef#iefix') format('embedded-opentype'),
-    url('fonts/tanbo-ui.ttf?2k44ef') format('truetype'),
-    url('fonts/tanbo-ui.woff?2k44ef') format('woff'),
-    url('fonts/tanbo-ui.svg?2k44ef#tanbo-ui') format('svg');
+  src:  url('fonts/tanbo-ui.eot?xy55qf');
+  src:  url('fonts/tanbo-ui.eot?xy55qf#iefix') format('embedded-opentype'),
+    url('fonts/tanbo-ui.ttf?xy55qf') format('truetype'),
+    url('fonts/tanbo-ui.woff?xy55qf') format('woff'),
+    url('fonts/tanbo-ui.svg?xy55qf#tanbo-ui') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -81,6 +81,33 @@
 .ui-icon-radio-unchecked:before {
   content: "\ea56";
 }
+.ui-icon-image:before {
+  content: "\e90d";
+}
+.ui-icon-quotes-left:before {
+  content: "\e977";
+}
+.ui-icon-list-numbered:before {
+  content: "\e9b9";
+}
+.ui-icon-list2:before {
+  content: "\e9bb";
+}
 .ui-icon-link:before {
   content: "\e9cb";
+}
+.ui-icon-font-size:before {
+  content: "\ea61";
+}
+.ui-icon-bold:before {
+  content: "\ea62";
+}
+.ui-icon-italic:before {
+  content: "\ea64";
+}
+.ui-icon-strikethrough:before {
+  content: "\ea65";
+}
+.ui-icon-table:before {
+  content: "\ea71";
 }

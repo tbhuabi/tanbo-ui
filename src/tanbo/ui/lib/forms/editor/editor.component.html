@@ -1,0 +1,20 @@
+<ui-tool-bar class="ui-editor-toolbar ui-clearfix">
+  <div class="ui-pull-left">
+    <button type="button" (click)="setBold()" title="加粗"><span class="ui-icon-bold"></span></button>
+    <button type="button" (click)="setItalic()" title="斜体"><span class="ui-icon-italic"></span></button>
+    <button type="button" (click)="setDeleteLine()" title="删除线"><span class="ui-icon-strikethrough"></span></button>
+    <button type="button" (click)="setHeader()" title="标题"><span class="ui-icon-font-size"></span></button>
+    <span class="split-line"></span>
+    <button type="button" (click)="setBlockQuote()" title="引用"><span class="ui-icon-quotes-left"></span></button>
+    <button type="button" (click)="setOrderedList()" title="有序列表"><span class="ui-icon-list-numbered"></span></button>
+    <button type="button" (click)="setUnorderedList()" title="无序列表"><span class="ui-icon-list2"></span></button>
+    <span class="split-line"></span>
+    <button type="button" (click)="insertImage()" title="插入图片"><span class="ui-icon-image"></span></button>
+    <button type="button" (click)="setLink()" title="插入链接"><span class="ui-icon-link"></span></button>
+    <span class="split-line"></span>
+    <button type="button" (click)="insertTable()" title="表格"><span class="ui-icon-table"></span></button>
+  </div>
+</ui-tool-bar>
+<div class="ui-editor-body">
+  <textarea #editor [attr.name]="name" [attr.id]="forId" [value]="value" (focus)="focus()"></textarea>
+</div>

@@ -131,3 +131,5 @@ $dialog-width: 360px !default;
 
 // notify
 $tree-line-color: $color-gray;
+
+$editor-selection-color: rgba(red($color-primary), green($color-primary), blue($color-primary), .2) !default

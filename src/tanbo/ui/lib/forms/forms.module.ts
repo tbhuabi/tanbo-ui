@@ -10,6 +10,7 @@ import { ButtonComponent } from './button/button.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { DateComponent } from './date/date.component';
 import { DropdownInputComponent } from './dropdown-input/dropdown-input.component';
+import { EditorComponent } from './editor/editor.component';
 import { InputDirective } from './input/input.directive';
 import { InputAddonComponent } from './input-addon/input-addon.component';
 import { InputGroupComponent } from './input-group/input-group.component';
@@ -47,6 +48,7 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     CheckboxComponent,
     DateComponent,
     DropdownInputComponent,
+    EditorComponent,
     InputDirective,
     InputAddonComponent,
     InputGroupComponent,
@@ -72,6 +74,7 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     CheckboxComponent,
     DateComponent,
     DropdownInputComponent,
+    EditorComponent,
     InputDirective,
     InputAddonComponent,
     InputGroupComponent,
