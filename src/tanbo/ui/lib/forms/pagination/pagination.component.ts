@@ -64,8 +64,8 @@ export class PaginationComponent {
 
   private setPaginationItems() {
     this.pageList = [];
-    if (this.currentPage > this.pages) {
-      this._currentPage = this.pages;
+    if (this._currentPage > this._pages) {
+       this._pages = this._currentPage;
     }
     if (this.pages <= 1) {
       return;
