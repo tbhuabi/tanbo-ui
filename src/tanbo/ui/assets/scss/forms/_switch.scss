@@ -18,10 +18,14 @@ ui-switch {
   cursor: pointer;
   > .ui-input-raw {
     opacity: 0;
+    padding: 0;
     position: absolute;
-    width: 0;
-    height: 0;
-    z-index: -1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    bottom: 0;
   }
 
   &.ui-checked {

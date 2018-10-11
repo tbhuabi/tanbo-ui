@@ -56,7 +56,6 @@ export class SwitchComponent implements ControlValueAccessor {
   private _readonly: boolean;
   private _checked: boolean;
 
-  @HostListener('click')
   click() {
     if (this.disabled || this.readonly) {
       return;

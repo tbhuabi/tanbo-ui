@@ -17,7 +17,7 @@ export class PaginationComponent {
   @Input()
   size: string = '';
   @Input()
-  btnLength: number = 8;
+  btnCount: number = 8;
   @Output()
   uiChange = new EventEmitter<number>();
 
@@ -52,7 +52,7 @@ export class PaginationComponent {
   private _pages: number = 1;
 
   private get _btnLength() {
-    return Math.floor(this.btnLength / 2);
+    return Math.floor(this.btnCount / 2);
   }
 
   onChange(currentPage: number) {
