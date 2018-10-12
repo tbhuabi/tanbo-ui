@@ -5,6 +5,7 @@ ui-tab {
     margin-top: 1em;
     margin-bottom: 1em;
     border-radius: 4px;
+    overflow: hidden;
     > ui-tab-bar {
       background-color: $color-lighter;
     }
