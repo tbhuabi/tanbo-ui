@@ -1,13 +1,10 @@
-<p>fdsfdsa</p>
-<div style="height: 200px; background: #ccc" #vc></div>
-
-
-<p>{{ model}}</p>
 <p>
-
-  <label><ui-input type="checkbox" [(ngModel)]="model" name="name"></ui-input>aaa</label>
-  <label><ui-switch></ui-switch>bbb</label>
+  <ui-select>
+    <ui-option>aaa</ui-option>
+    <ui-option>bbb</ui-option>
+  </ui-select>
 </p>
-<div *ngIf="isShow">
-  <ui-editor (uiChange)="show($event)"></ui-editor>
-</div>
+
+<p>
+  <ui-input type="date"></ui-input>
+</p>

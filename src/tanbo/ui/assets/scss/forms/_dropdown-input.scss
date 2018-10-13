@@ -62,12 +62,12 @@ ui-dropdown-input {
 
 ui-dropdown {
   &.ui-focus {
-    > .ui-dropdown-input:not([disabled]) {
+    > ui-dropdown-input > .ui-dropdown-input:not([disabled]) {
       @include input-focus($form-control-border-color-primary);
     }
   }
   &.ui-open {
-    > ui-dropdown-input .ui-dropdown-input-arrow {
+    > ui-dropdown-input > .ui-dropdown-input-arrow {
       transform: rotateZ(180deg);
     }
   }
