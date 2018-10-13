@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 
 export interface PickerCell {
-  text: string;
+  label: string;
   value: string | number;
   children?: PickerCell[];
 }

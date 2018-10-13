@@ -62,7 +62,7 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   open = false;
 
   get text() {
-    return this.selectedCells.map(item => item.text).join('/');
+    return this.selectedCells.map(item => item.label).join('/');
   }
 
   selectedCells: PickerCell[] = [];
