@@ -16,10 +16,8 @@ import { TabButtonComponent } from '../tab-button/tab-button.component';
   templateUrl: './tab-bar.component.html'
 })
 export class TabBarComponent implements OnDestroy, AfterContentInit {
-  @Input()
-  tabIndex: number = 0;
-  @ContentChildren(TabButtonComponent)
-  tabBarItems: QueryList<TabButtonComponent>;
+  @Input() tabIndex: number = 0;
+  @ContentChildren(TabButtonComponent) tabBarItems: QueryList<TabButtonComponent>;
 
   private subs: Array<Subscription> = [];
 

@@ -6,6 +6,5 @@ import { Component, Input, HostBinding } from '@angular/core';
 })
 export class TimelineItemComponent {
   @Input()
-  @HostBinding('class.ui-checked')
-  checked: boolean;
+  @HostBinding('class.ui-checked') checked: boolean;
 }

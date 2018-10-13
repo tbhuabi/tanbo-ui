@@ -14,22 +14,14 @@ import { attrToBoolean } from '../../utils';
   }]
 })
 export class DropdownInputComponent implements ControlValueAccessor {
-  @Input()
-  open = false;
-  @Input()
-  focus = false;
-  @Input()
-  value = '';
-  @Input()
-  size: string = '';
-  @Input()
-  forId: string;
-  @Input()
-  name: string;
-  @Input()
-  placeholder: string = '';
-  @Input()
-  arrowIconClassName: string = '';
+  @Input() open = false;
+  @Input() focus = false;
+  @Input() value = '';
+  @Input() size: string = '';
+  @Input() forId: string;
+  @Input() name: string;
+  @Input() placeholder: string = '';
+  @Input() arrowIconClassName: string = '';
 
   @Input()
   set disabled(isDisabled: any) {
@@ -49,8 +41,7 @@ export class DropdownInputComponent implements ControlValueAccessor {
     return this._readonly;
   }
 
-  @Output()
-  uiReset = new EventEmitter<any>();
+  @Output() uiReset = new EventEmitter<any>();
 
   private _disabled: boolean = false;
   private _readonly: boolean = false;

@@ -5,9 +5,6 @@ import { Component, Input } from '@angular/core';
   templateUrl: './step-item.component.html'
 })
 export class StepItemComponent {
-  @Input()
-  value: any;
-
-  @Input()
-  checked: boolean;
+  @Input() value: any;
+  @Input() checked: boolean;
 }

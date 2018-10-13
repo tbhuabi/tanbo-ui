@@ -7,8 +7,7 @@ import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../help';
   templateUrl: './tree-inner.component.html'
 })
 export class TreeInnerComponent {
-  @Input()
-  depth = 0;
+  @Input() depth = 0;
   @HostBinding('style.paddingLeft')
   get paddingLeft() {
     return this.depth * 2 + 2 + this.offset + 'em';

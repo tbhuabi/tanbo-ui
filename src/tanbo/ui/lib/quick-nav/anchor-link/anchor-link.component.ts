@@ -14,10 +14,8 @@ import { AnchorService } from '../anchor/anchor.service';
   }
 })
 export class AnchorLinkComponent implements OnInit, OnDestroy {
-  @Input()
-  fragment = '';
-  @HostBinding('class.ui-active')
-  isActive = false;
+  @Input() fragment = '';
+  @HostBinding('class.ui-active') isActive = false;
 
   private sub: Subscription;
 

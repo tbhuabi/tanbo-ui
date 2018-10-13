@@ -22,18 +22,12 @@ import 'codemirror/mode/markdown/markdown.js';
   }]
 })
 export class EditorComponent implements AfterViewInit, ControlValueAccessor {
-  @ViewChild('editor')
-  textarea: ElementRef;
-  @Input()
-  value: string = '';
-  @Input()
-  name: string;
-  @Input()
-  mode: string;
-  @Input()
-  forId: string;
-  @Output()
-  uiChange = new EventEmitter<string>();
+  @ViewChild('editor') textarea: ElementRef;
+  @Input() value: string = '';
+  @Input() name: string;
+  @Input() mode: string;
+  @Input() forId: string;
+  @Output() uiChange = new EventEmitter<string>();
 
   private onChange: (_: any) => any;
   private onTouched: (_: any) => any;

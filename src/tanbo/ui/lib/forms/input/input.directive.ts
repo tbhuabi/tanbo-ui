@@ -9,6 +9,5 @@ import { Directive, Input } from '@angular/core';
   }
 })
 export class InputDirective {
-  @Input()
-  size: string;
+  @Input() size: string;
 }

@@ -24,11 +24,8 @@ import { TooltipBaseService } from '../index';
   }
 })
 export class PopConfirmComponent implements OnInit, OnDestroy {
-  @Output()
-  uiConfirm = new EventEmitter<void>();
-
-  @Output()
-  uiCancel = new EventEmitter<void>();
+  @Output() uiConfirm = new EventEmitter<void>();
+  @Output() uiCancel = new EventEmitter<void>();
 
   isShow = false;
   text = '';

@@ -34,18 +34,12 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   @ContentChildren(OptionComponent)
   options: QueryList<OptionComponent>;
   @Input() position = 'bottomLeft';
-  @Input()
-  size: string = '';
-  @Input()
-  forId: string;
-  @Input()
-  name: string;
-  @Input()
-  placeholder: string = '';
-  @Input()
-  selectedIndex: number = 0;
-  @Input()
-  arrowIconClassName: string = '';
+  @Input() size: string = '';
+  @Input() forId: string;
+  @Input() name: string;
+  @Input() placeholder: string = '';
+  @Input() selectedIndex: number = 0;
+  @Input() arrowIconClassName: string = '';
 
   @Input()
   set disabled(isDisabled: any) {
@@ -65,8 +59,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     return this._readonly;
   }
 
-  @Output()
-  uiChange = new EventEmitter<string>();
+  @Output() uiChange = new EventEmitter<string>();
   focus: boolean = false;
   open: boolean = false;
   text: string = '';

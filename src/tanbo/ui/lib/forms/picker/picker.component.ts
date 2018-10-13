@@ -61,10 +61,8 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
     this.list = [v];
   }
 
-  @Output()
-  uiItemChecked = new EventEmitter<PickerCell>();
-  @Output()
-  uiChange = new EventEmitter<PickerCell[]>();
+  @Output() uiItemChecked = new EventEmitter<PickerCell>();
+  @Output() uiChange = new EventEmitter<PickerCell[]>();
 
   list: PickerCell[][] = [];
   open = false;

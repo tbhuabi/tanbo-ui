@@ -14,12 +14,8 @@ export interface PaginationItem {
   }
 })
 export class PaginationComponent {
-  @Input()
-  size: string = '';
-  @Input()
-  btnCount: number = 8;
-  @Output()
-  uiChange = new EventEmitter<number>();
+  @Input() size: string = '';
+  @Input() btnCount: number = 8;
 
   @Input()
   set pages(pages: number) {
@@ -42,6 +38,8 @@ export class PaginationComponent {
     this._currentPage = currentPage;
     this.setPaginationItems();
   }
+  
+  @Output() uiChange = new EventEmitter<number>();
 
   get currentPage() {
     return this._currentPage;

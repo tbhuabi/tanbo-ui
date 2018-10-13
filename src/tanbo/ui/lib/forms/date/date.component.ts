@@ -16,8 +16,15 @@ import { attrToBoolean } from '../../utils';
   }]
 })
 export class DateComponent implements ControlValueAccessor, OnInit {
-  @Input()
-  position = 'bottomLeft';
+  @Input() position = 'bottomLeft';
+  @Input() size: string = '';
+  @Input() placeholder: string = '';
+  @Input() forId: string;
+  @Input() value: string | number;
+  @Input() name: string;
+  @Input() displayFormat: string;
+  @Input() arrowIconClassName: string = '';
+  @Input() format: string = 'yyyy-MM-dd';
 
   @Input()
   set disabled(isDisabled: any) {
@@ -38,27 +45,6 @@ export class DateComponent implements ControlValueAccessor, OnInit {
   }
 
   @Input()
-  size: string = '';
-  @Input()
-  placeholder: string = '';
-  @Input()
-  forId: string;
-  @Input()
-  value: string | number;
-  @Input()
-  name: string;
-  @Input()
-  displayFormat: string;
-  @Input()
-  arrowIconClassName: string = '';
-  @Input()
-  format: string = 'yyyy-MM-dd';
-  @Output()
-  uiChange = new EventEmitter<string | number>();
-  focus: boolean = false;
-  open: boolean = false;
-
-  @Input()
   set maxDate(value) {
     this._maxDate = value || '';
     this.maxDateTimeDetails = timeAnalysisByTimeString(this._maxDate);
@@ -76,6 +62,8 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     this.update();
   }
 
+  @Output() uiChange = new EventEmitter<string | number>();
+
   get minDate() {
     return this._minDate;
   }
@@ -83,6 +71,9 @@ export class DateComponent implements ControlValueAccessor, OnInit {
   get showHMS(): boolean {
     return /[hms]/.test(this.format);
   }
+
+  focus: boolean = false;
+  open: boolean = false;
 
   dayList: Array<Array<TimeDetails>> = [];
   minDateTimeDetails: TimeDetails = {};

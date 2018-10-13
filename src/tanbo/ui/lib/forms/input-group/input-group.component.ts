@@ -9,6 +9,5 @@ import { Component, Input } from '@angular/core';
   }
 })
 export class InputGroupComponent {
-  @Input()
-  size: string;
+  @Input() size: string;
 }

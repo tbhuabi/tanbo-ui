@@ -8,14 +8,10 @@ import { UI_TREE_UNCHECKED_ICON, UI_TREE_CHECKED_ICON } from '../help';
   templateUrl: './tree-expand.component.html'
 })
 export class TreeExpandComponent {
-  @Input()
-  type: string = 'checkbox';
-  @Input()
-  checkedIcon = 'ui-icon-checkbox-checked';
-  @Input()
-  uncheckedIcon = 'ui-icon-checkbox-unchecked';
-  @Input()
-  checked: boolean = false;
+  @Input() type: string = 'checkbox';
+  @Input() checkedIcon = 'ui-icon-checkbox-checked';
+  @Input() uncheckedIcon = 'ui-icon-checkbox-unchecked';
+  @Input() checked: boolean = false;
 
   constructor(@Optional() private treeItemService: TreeItemService,
               @Inject(UI_TREE_CHECKED_ICON) _checkedIcon: string,

@@ -16,8 +16,7 @@ export class TagComponent {
     return this._closable;
   }
 
-  @Output()
-  uiClose = new EventEmitter<void>();
+  @Output() uiClose = new EventEmitter<void>();
 
   private _closable = false;
 

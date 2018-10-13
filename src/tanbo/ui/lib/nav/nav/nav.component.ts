@@ -19,8 +19,7 @@ import { NavItemService } from '../nav-item/nav-item.service';
   }
 })
 export class NavComponent implements OnDestroy, OnInit {
-  @HostBinding('class.ui-open')
-  isOpen = false;
+  @HostBinding('class.ui-open') isOpen = false;
 
   private sub: Subscription;
 

@@ -11,6 +11,5 @@ import { Component, Input } from '@angular/core';
   }
 })
 export class DropdownMenuComponent {
-  @Input()
-  position = 'bottomLeft';
+  @Input() position = 'bottomLeft';
 }

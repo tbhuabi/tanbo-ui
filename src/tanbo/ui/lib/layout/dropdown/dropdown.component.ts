@@ -9,14 +9,9 @@ import { Component, HostListener, Input, Output, EventEmitter } from '@angular/c
   }
 })
 export class DropdownComponent {
-  @Input()
-  autoDisplay = true;
-
-  @Input()
-  open = false;
-
-  @Output()
-  uiEscape = new EventEmitter();
+  @Input() autoDisplay = true;
+  @Input() open = false;
+  @Output() uiEscape = new EventEmitter();
 
   focus = false;
   private isSelfClick: boolean = false;

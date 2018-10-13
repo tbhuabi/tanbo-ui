@@ -21,6 +21,8 @@ export function treeDepthFactory(depth: number) {
   }]
 })
 export class TreeComponent implements OnDestroy, OnInit {
+  @Input() depth = 0;
+
   @Input()
   set open(value: boolean) {
     this.isWrite = true;
@@ -30,9 +32,6 @@ export class TreeComponent implements OnDestroy, OnInit {
   get open() {
     return this._open;
   }
-
-  @Input()
-  depth = 0;
 
   get left() {
     return (this.depth - 2) * 2 + 1 + this.offset + 'em';

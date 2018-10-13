@@ -9,12 +9,10 @@ import { TableService } from '../table.service';
   templateUrl: './selectable-item.component.html'
 })
 export class SelectableItemComponent implements OnDestroy, OnInit {
-  @Input('ui-selectable')
-  data: any;
-  @Output()
-  uiCheckStateChange = new EventEmitter<boolean>();
-  @Input()
-  checked = false;
+  @Input('ui-selectable') data: any;
+  @Input() checked = false;
+  @Output() uiCheckStateChange = new EventEmitter<boolean>();
+
   constructor(private tableService: TableService) {
   }
 

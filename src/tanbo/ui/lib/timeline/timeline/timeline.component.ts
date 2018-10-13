@@ -6,6 +6,5 @@ import { Component, Input, HostBinding } from '@angular/core';
 })
 export class TimelineComponent {
   @Input()
-  @HostBinding('class.ui-kebab')
-  kebab = false;
+  @HostBinding('class.ui-kebab') kebab = false;
 }

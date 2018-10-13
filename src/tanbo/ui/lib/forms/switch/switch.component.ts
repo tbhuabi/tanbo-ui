@@ -13,6 +13,11 @@ import { attrToBoolean } from '../../utils';
   }]
 })
 export class SwitchComponent implements ControlValueAccessor {
+  @Input() forId: string;
+  @Input() value: string = '';
+  @Input() name: string;
+  @Output() uiChange = new EventEmitter<boolean>();
+
   @Input()
   set disabled(isDisabled: any) {
     this._disabled = attrToBoolean(isDisabled);
@@ -40,15 +45,6 @@ export class SwitchComponent implements ControlValueAccessor {
   get checked() {
     return this._checked;
   }
-
-  @Input()
-  forId: string;
-  @Input()
-  value: string = '';
-  @Input()
-  name: string;
-  @Output()
-  uiChange = new EventEmitter<boolean>();
 
   private onChange: (_: any) => void;
   private onTouched: () => void;

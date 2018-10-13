@@ -16,12 +16,9 @@ import { UI_ANCHOR_LINK_DISTANCE } from '../helper';
   }
 })
 export class AnchorComponent implements OnInit, OnDestroy {
-  @Input()
-  id = '';
-  @Input()
-  name = '';
-  @Input()
-  offset = 0;
+  @Input() id = '';
+  @Input() name = '';
+  @Input() offset = 0;
 
   params: any = {};
   queryParams: any = {};

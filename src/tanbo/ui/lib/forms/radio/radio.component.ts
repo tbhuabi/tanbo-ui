@@ -26,14 +26,12 @@ import { attrToBoolean } from '../../utils';
   }]
 })
 export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  @Input()
-  name: string;
-  @Input()
-  value: string = '';
-  @Input()
-  forId: string;
-  @Input()
-  text: string = '';
+  @Input() name: string;
+  @Input() value: string = '';
+  @Input() forId: string;
+  @Input() text: string = '';
+  @Input() checkedIcon: string = 'ui-icon-radio-checked';
+  @Input() uncheckedIcon: string = 'ui-icon-radio-unchecked';
 
   @Input()
   @HostBinding('class.ui-disabled')
@@ -65,13 +63,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
     return this._checked;
   }
 
-  @Input()
-  checkedIcon: string = 'ui-icon-radio-checked';
-  @Input()
-  uncheckedIcon: string = 'ui-icon-radio-unchecked';
-
-  @Output()
-  uiChange = new EventEmitter<string>();
+  @Output() uiChange = new EventEmitter<string>();
 
   @ViewChild('rawInput')
   rawInput: ElementRef;

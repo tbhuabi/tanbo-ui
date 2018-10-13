@@ -5,6 +5,5 @@ import { Component, HostBinding } from '@angular/core';
   templateUrl: './tab-view-item.component.html'
 })
 export class TabViewItemComponent {
-  @HostBinding('class.ui-active')
-  active = false;
+  @HostBinding('class.ui-active') active = false;
 }
