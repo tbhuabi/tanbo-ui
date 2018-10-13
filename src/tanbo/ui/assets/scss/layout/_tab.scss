@@ -4,13 +4,21 @@ ui-tab {
     border: 1px solid $color-light;
     margin-top: 1em;
     margin-bottom: 1em;
-    border-radius: 4px;
-    overflow: hidden;
     > ui-tab-bar {
       background-color: $color-lighter;
+      border-width: 1px;
+      border-left-color: $color-light;
+      border-top-color: $color-light;
+      border-right-color: $color-light;
+      border-radius: 4px 4px 0 0;
     }
-    > ui-tab-view > ui-tab-view-item {
-      padding: 15px 20px;
+    > ui-tab-view {
+      border: 1px solid $color-light;
+      border-radius: 0 0 4px 4px;
+      border-top: none;
+      > ui-tab-view-item {
+        padding: 15px 20px;
+      }
     }
   }
 }
