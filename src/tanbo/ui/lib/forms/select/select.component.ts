@@ -33,6 +33,7 @@ import { attrToBoolean } from '../../utils';
 export class SelectComponent implements ControlValueAccessor, AfterContentInit, OnDestroy, AfterViewInit {
   @ContentChildren(OptionComponent)
   options: QueryList<OptionComponent>;
+  @Input() position = 'bottomLeft';
   @Input()
   size: string = '';
   @Input()

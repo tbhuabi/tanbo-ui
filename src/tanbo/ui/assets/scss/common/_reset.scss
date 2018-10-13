@@ -16,6 +16,7 @@ html, body {
 body {
   color: #333;
   font-size: $font-size-base;
+  line-height: $line-height;
   text-size-adjust: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -48,4 +49,8 @@ body {
 ::-webkit-scrollbar-track-piece {
   background-color: $color-gray-light;
   -webkit-border-radius: 0;
+}
+
+p, ol, ul, dl, {
+  line-height: 1.8em;
 }
