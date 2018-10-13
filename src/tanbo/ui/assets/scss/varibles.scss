@@ -73,9 +73,9 @@ $button-padding-vertical: 5px !default;
 $button-padding-vertical-sm: $button-padding-vertical - 2px !default;
 $button-padding-vertical-lg: $button-padding-vertical + 2px !default;
 
-$button-padding-horizontal: 10px !default;
+$button-padding-horizontal: 12px !default;
 $button-padding-horizontal-sm: $button-padding-horizontal - 6px !default;
-$button-padding-horizontal-lg: $button-padding-horizontal + 6px !default;
+$button-padding-horizontal-lg: $button-padding-horizontal + 4px !default;
 
 $button-radius: $radius-base !default;
 $button-radius-sm: $radius-sm !default;
@@ -98,9 +98,9 @@ $pagination-padding-vertical: 5px !default;
 $pagination-padding-vertical-sm: $pagination-padding-vertical - 2px !default;
 $pagination-padding-vertical-lg: $pagination-padding-vertical + 2px !default;
 
-$pagination-padding-horizontal: 12px !default;
+$pagination-padding-horizontal: 10px !default;
 $pagination-padding-horizontal-sm: $pagination-padding-horizontal - 3px !default;
-$pagination-padding-horizontal-lg: $pagination-padding-horizontal + 2px !default;
+$pagination-padding-horizontal-lg: $pagination-padding-horizontal + 4px !default;
 
 $pagination-font-size: $font-size-base !default;
 $pagination-font-size-sm: $pagination-font-size - 1px !default;
