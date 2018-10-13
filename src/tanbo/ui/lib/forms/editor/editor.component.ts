@@ -175,7 +175,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
 | 1       | name   | John  |
 | 2       | age    | 12    |
 | 3       | sex    | man   |
- `;
+`;
     this.cmDoc.replaceSelection(template);
     this.cmInstance.focus();
   }
