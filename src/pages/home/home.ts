@@ -15,6 +15,7 @@ import { UIModule } from '../../tanbo/ui/public_api';
   styleUrls: ['./home.scss']
 })
 export class HomeComponent implements OnInit {
+  value = '';
   model = '0';
   @ViewChild('vc', {read: ViewContainerRef}) vc: ViewContainerRef;
   isShow = false;

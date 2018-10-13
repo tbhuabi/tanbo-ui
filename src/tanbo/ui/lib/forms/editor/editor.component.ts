@@ -48,7 +48,9 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
       lineWrapping: true,
       cursorHeight: 1
     });
-    this.cmInstance.setValue(this.value);
+    if (this.value !== null && this.value !== undefined) {
+      this.cmInstance.setValue(this.value + '');
+    }
     this.cmDoc = this.cmInstance.getDoc();
     this.cmInstance.on('change', (instance: CodeMirror.Editor, change: CodeMirror.EditorChangeLinkedList) => {
       if (change.origin === 'setValue') {
@@ -186,8 +188,8 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
 
   writeValue(value: any) {
     this.value = value;
-    if (this.cmInstance) {
-      this.cmInstance.setValue(value);
+    if (this.cmInstance && value !== null && value !== undefined) {
+      this.cmInstance.setValue(value + '');
     }
   }
 

@@ -8,6 +8,6 @@
 <p>
   <ui-input type="date"></ui-input>
 </p>
-<div>
-  <ui-editor></ui-editor>
+<div *ngIf="isShow">
+  <ui-editor [(ngModel)]="value"></ui-editor>
 </div>
