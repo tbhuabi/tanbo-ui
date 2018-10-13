@@ -9,11 +9,12 @@ ui-editor {
     .split-line {
       display: inline-block;
       height: 1.2em;
-      width: 1px;
-      background-color: $color-gray-light;
+      width: 0;
+      border-left: 1px solid $color-gray;
+      border-right: 1px solid $color-lighter;
       vertical-align: text-bottom;
-      margin-left: 3px;
-      margin-right: 3px;
+      margin-left: 10px;
+      margin-right: 10px;
     }
     button {
       background: none;

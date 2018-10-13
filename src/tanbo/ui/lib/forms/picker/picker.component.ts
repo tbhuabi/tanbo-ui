@@ -24,11 +24,19 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   @Input() arrowIconClassName: string = '';
   @Input() format = ',';
   @Input() displayFormat = '/';
-  @Input() dataProvider: PickerDataProvider = {
-    getChildren() {
-      return null;
+  @Input() dataProvider: PickerDataProvider;
+
+  @Input()
+  set value(v: PickerCell[]) {
+    if (Array.isArray(v)) {
+      this._value = v;
     }
-  };
+  }
+
+  get value() {
+    return this._value;
+  }
+
 
   @Input()
   set disabled(isDisabled: any) {
@@ -62,14 +70,13 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   open = false;
 
   get text() {
-    return this.selectedCells.map(item => item.label).join(this.displayFormat);
+    return this.value.map(item => item.label).join(this.displayFormat);
   }
 
-  selectedCells: PickerCell[] = [];
-  value: any;
   focus = false;
   private _disabled: boolean = false;
   private _readonly: boolean = false;
+  private _value: PickerCell[] = [];
   private onChange: (_: any) => any;
   private onTouched: () => any;
   private sub: Subscription;
@@ -80,11 +87,6 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
 
   writeValue(value: any) {
     this.value = value;
-    if (Array.isArray(value)) {
-      this.selectedCells = value;
-    } else {
-      this.selectedCells = [];
-    }
   }
 
   registerOnChange(fn: any) {
@@ -106,14 +108,13 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   }
 
   saveItem(item: PickerCell, index: number) {
-    this.selectedCells.length = index;
-    this.selectedCells.push(item);
-    this.value = this.selectedCells;
+    this.value.length = index;
+    this.value.push(item);
     if (this.onChange) {
-      this.onChange(this.selectedCells);
+      this.onChange(this.value);
     }
     this.uiItemChecked.emit(item);
-    this.uiChange.emit(this.selectedCells);
+    this.uiChange.emit(this.value);
 
     this.list.length = index + 1;
     if (Array.isArray(item.children)) {
@@ -139,7 +140,6 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
         });
       });
     } else {
-      this.uiChange.emit(this.selectedCells);
       this.open = false;
     }
   }
@@ -165,6 +165,6 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
 
   reset() {
     this.list.length = 1;
-    this.selectedCells = [];
+    this.value = [];
   }
 }

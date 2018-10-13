@@ -22,6 +22,8 @@ import 'codemirror/mode/markdown/markdown.js';
   }]
 })
 export class EditorComponent implements AfterViewInit, ControlValueAccessor {
+  @ViewChild('editor')
+  textarea: ElementRef;
   @Input()
   value: string = '';
   @Input()
@@ -30,8 +32,6 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
   mode: string;
   @Input()
   forId: string;
-  @ViewChild('editor')
-  textarea: ElementRef;
   @Output()
   uiChange = new EventEmitter<string>();
 
@@ -46,14 +46,16 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
       mode: this.mode || 'markdown',
       lineNumbers: true,
       lineWrapping: true,
-      cursorHeight: 0.8
+      cursorHeight: 1
     });
+    this.cmInstance.setValue(this.value);
     this.cmDoc = this.cmInstance.getDoc();
     this.cmInstance.on('change', (instance: CodeMirror.Editor, change: CodeMirror.EditorChangeLinkedList) => {
       if (change.origin === 'setValue') {
         return;
       }
       let value = instance.getValue();
+      this.value = value;
       if (this.onChange) {
         this.onChange(value);
       }
@@ -172,11 +174,11 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
   insertTable() {
     let template = `
 
-| 项目        | 价格   |  数量  |
-| --------   | -----  | ------ |
-| 计算机     | \$1600 |   5     |
-| 手机        |   \$12   |   12   |
-| 管线        |    \$1    |  234  |
+| index   | key    | value |
+| ------  | -----  | ----- |
+| 1       | name   | John  |
+| 2       | age    | 12    |
+| 3       | sex    | man   |
  `;
     this.cmDoc.replaceSelection(template);
     this.cmInstance.focus();
