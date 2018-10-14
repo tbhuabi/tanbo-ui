@@ -105,9 +105,6 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
             if (this.onChange) {
               this.onChange(this.value);
             }
-            if (this.onTouched) {
-              this.onTouched();
-            }
             this.uiChange.emit(this.value);
           }
         } else {
@@ -147,6 +144,9 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   escape() {
     this.focus = false;
     this.open = false;
+    if (this.onTouched) {
+      this.onTouched();
+    }
   }
 
   reset() {
@@ -157,9 +157,6 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     this.selectedOption = null;
     if (this.onChange) {
       this.onChange('');
-    }
-    if (this.onTouched) {
-      this.onTouched();
     }
     this.uiChange.emit('');
   }

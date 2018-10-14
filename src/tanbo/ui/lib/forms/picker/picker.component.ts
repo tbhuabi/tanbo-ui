@@ -164,5 +164,9 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   reset() {
     this.list.length = 1;
     this.value = [];
+    if (this.onChange) {
+      this.onChange(this.value);
+    }
+    this.uiChange.emit(this.value);
   }
 }

@@ -147,9 +147,6 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     if (this.onChange) {
       this.onChange('');
     }
-    if (this.onTouched) {
-      this.onTouched();
-    }
     this.uiChange.emit('');
   }
 
