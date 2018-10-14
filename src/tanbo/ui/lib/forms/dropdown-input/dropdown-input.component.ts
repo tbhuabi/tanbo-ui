@@ -41,7 +41,7 @@ export class DropdownInputComponent implements ControlValueAccessor {
     return this._readonly;
   }
 
-  @Output() uiReset = new EventEmitter<any>();
+  @Output() uiClean = new EventEmitter<any>();
 
   private _disabled: boolean = false;
   private _readonly: boolean = false;
@@ -60,7 +60,7 @@ export class DropdownInputComponent implements ControlValueAccessor {
     if (this.onTouched) {
       this.onTouched();
     }
-    this.uiReset.emit(this.value);
+    this.uiClean.emit(this.value);
   }
 
   writeValue(value: any) {
