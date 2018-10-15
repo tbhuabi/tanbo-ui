@@ -1,0 +1,129 @@
+@mixin input-file-size($name, $v, $h, $font-size, $radius) {
+  .ui-input-file-#{$name} {
+    padding: $v $h;
+    font-size: $font-size;
+    border-radius: $radius;
+  }
+}
+
+@mixin input-file-theme($name, $color, $bg-color) {
+  .ui-input-file-#{$name} {
+    color: $color;
+    background-color: $bg-color;
+    @if $name != default {
+      border: 1px solid $bg-color;
+    }
+    &:hover {
+      background-color: darken($bg-color, 7);
+      @if $name != default {
+        border-color: darken($bg-color, 7);
+      }
+    }
+    &:focus {
+      background-color: darken($bg-color, 10);
+      z-index: 1;
+      @if $name != default {
+        border-color: darken($bg-color, 7);
+      }
+    }
+    &:active {
+      background-color: darken($bg-color, 15);
+      @if $name != default {
+        border-color: darken($bg-color, 7);
+      }
+    }
+    &.ui-disabled, &[disabled], &[readonly] {
+      opacity: .6;
+      cursor: not-allowed;
+      &:focus, &:hover, &:active {
+        background-color: $bg-color;
+      }
+    }
+  }
+}
+
+ui-input[type=file] {
+  display: inline-block;
+  border: 1px solid $color-gray;
+  font-size: $button-font-size;
+  cursor: pointer;
+  line-height: $line-height;
+  text-align: center;
+  padding: $button-padding-vertical $button-padding-horizontal;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  user-select: none;
+  border-radius: $button-radius;
+  &.ui-disabled, &[disabled], &[readonly] {
+    opacity: .6;
+    cursor: not-allowed;
+  }
+  &[readonly] {
+    cursor: default;
+  }
+  &.ui-btn-block {
+    width: 100%;
+    display: block;
+  }
+  &.ui-input-file-default .ui-loading-bar:before {
+    border-top-color: $color-gray;
+  }
+}
+
+.ui-input-file-label {
+  position: relative;
+  z-index: 1;
+  > .ui-loading-bar {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    margin-right: .5em;
+    overflow: hidden;
+    vertical-align: middle;
+    transition: all .3s;
+    &:before {
+      content: "";
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      border-width: 2px;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent;
+      border-radius: 50%;
+      animation: ui-button-loading-bar linear 1s infinite;
+    }
+  }
+}
+
+.ui-input-file-progress {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  transition: width .2s;
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.ui-input-file {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  cursor: inherit;
+}
+
+@include input-file-size(sm, $button-padding-vertical-sm, $button-padding-horizontal-sm, $button-font-size-sm, $button-radius-sm);
+@include input-file-size(lg, $button-padding-vertical-lg, $button-padding-horizontal-lg, $button-font-size-lg, $button-radius-lg);
+
+@include input-file-theme(default, $color-default, $color-lighter);
+@include input-file-theme(primary, #fff, $color-primary);
+@include input-file-theme(success, #fff, $color-success);
+@include input-file-theme(info, #fff, $color-info);
+@include input-file-theme(danger, #fff, $color-danger);
+@include input-file-theme(warning, #fff, $color-warning);

@@ -38,7 +38,7 @@ export class PaginationComponent {
     this._currentPage = currentPage;
     this.setPaginationItems();
   }
-  
+
   @Output() uiChange = new EventEmitter<number>();
 
   get currentPage() {
@@ -63,7 +63,7 @@ export class PaginationComponent {
   private setPaginationItems() {
     this.pageList = [];
     if (this._currentPage > this._pages) {
-       this._pages = this._currentPage;
+      this._pages = this._currentPage;
     }
     if (this.pages <= 1) {
       return;

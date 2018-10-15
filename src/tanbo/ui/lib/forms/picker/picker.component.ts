@@ -4,7 +4,7 @@ import { from, Subscription, Observable } from 'rxjs';
 
 import { attrToBoolean } from '../../utils';
 import { UI_SELECT_ARROW_CLASSNAME } from '../help';
-import { PickerCell, PickerDataProvider } from './picker-help';
+import { PickerCell } from './picker-help';
 
 @Component({
   selector: 'ui-picker',
@@ -24,7 +24,7 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   @Input() arrowIconClassName: string = '';
   @Input() format = ',';
   @Input() displayFormat = '/';
-  @Input() dataProvider: PickerDataProvider;
+  @Input() dataProvide: (cell: PickerCell) => null | PickerCell[] | Promise<null | PickerCell[]> | Observable<null | PickerCell[]>;
 
   @Input()
   set value(v: PickerCell[]) {
@@ -36,7 +36,6 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   get value() {
     return this._value;
   }
-
 
   @Input()
   set disabled(isDisabled: any) {
@@ -119,8 +118,8 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
       this.list.push(item.children);
       return;
     }
-    if (this.dataProvider && typeof this.dataProvider.getChildren === 'function') {
-      let result = this.dataProvider.getChildren(item);
+    if (typeof this.dataProvide === 'function') {
+      let result = this.dataProvide(item);
       this.sub = from(
         (result instanceof Promise || result instanceof Observable) ?
           result :

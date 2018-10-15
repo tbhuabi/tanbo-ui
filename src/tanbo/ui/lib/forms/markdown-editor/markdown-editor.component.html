@@ -1,4 +1,4 @@
-<ui-tool-bar class="ui-editor-toolbar ui-clearfix">
+<ui-tool-bar class="ui-markdown-editor-toolbar ui-clearfix">
   <div class="ui-pull-left">
     <button type="button" (click)="setBold()" title="加粗"><span class="ui-icon-bold"></span></button>
     <button type="button" (click)="setItalic()" title="斜体"><span class="ui-icon-italic"></span></button>
@@ -15,6 +15,6 @@
     <button type="button" (click)="insertTable()" title="表格"><span class="ui-icon-table"></span></button>
   </div>
 </ui-tool-bar>
-<div class="ui-editor-body">
+<div class="ui-markdown-editor-body">
   <textarea #editor [attr.name]="name" [attr.id]="forId" [value]="value" (focus)="focus()"></textarea>
 </div>

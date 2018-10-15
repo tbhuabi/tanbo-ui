@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-import { PickerDataProvider, PickerCell } from '../../tanbo/ui/public_api';
+import { PickerCell } from '../../tanbo/ui/public_api';
 import { DetailService } from './detail.service';
 
 @Component({
@@ -11,12 +11,21 @@ import { DetailService } from './detail.service';
     DetailService
   ]
 })
-export class DetailComponent implements OnInit, PickerDataProvider {
-  list: any[] = [];
+export class DetailComponent implements OnInit {
+  getChildren = (item: PickerCell) => {
+    return this.detailService.getAddressList(String(item.value)).pipe(map((response: any) => {
+      if (response.code === 10000) {
+        return response.data.map((item: any) => {
+          return {
+            text: item.regionName,
+            value: item.regionId
+          };
+        });
+      }
+    }));
+  };
 
-  get pickerDataProvider() {
-    return this;
-  }
+  list: any[] = [];
 
   constructor(private detailService: DetailService) {
   }
@@ -32,18 +41,5 @@ export class DetailComponent implements OnInit, PickerDataProvider {
         });
       }
     });
-  }
-
-  getChildren(item: PickerCell) {
-    return this.detailService.getAddressList(String(item.value)).pipe(map((response: any) => {
-      if (response.code === 10000) {
-        return response.data.map((item: any) => {
-          return {
-            text: item.regionName,
-            value: item.regionId
-          };
-        })
-      }
-    }));
   }
 }

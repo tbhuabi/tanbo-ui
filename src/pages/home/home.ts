@@ -2,38 +2,32 @@ import {
   Component,
   OnInit,
   Compiler,
-  NgModule,
   Injector,
   ViewChild,
   ViewContainerRef,
   NgModuleRef
 } from '@angular/core';
-import { UIModule } from '../../tanbo/ui/public_api';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 
 @Component({
   templateUrl: './home.html',
   styleUrls: ['./home.scss']
 })
 export class HomeComponent implements OnInit {
-  value = '';
-  model = '0';
-  @ViewChild('vc', {read: ViewContainerRef}) vc: ViewContainerRef;
-  isShow = false;
-
-  constructor(private compiler: Compiler,
-              private moduleRef: NgModuleRef<any>,
-              private injector: Injector) {
+  constructor(public http: HttpClient) {
   }
-
 
   ngOnInit() {
-    setTimeout(() => {
-      this.isShow = true;
 
-    }, 1000);
   }
 
-  show(v: any) {
-    console.log(v);
+  provide = (data: FormData) => {
+    // return this.http.post('/api/v1/files/attachments', data, {
+    //   observe: 'response',
+    //   reportProgress: true
+    // });
+    return new HttpRequest('POST', '/api/v1/files/attachments', data, {
+      reportProgress: true
+    });
   }
 }

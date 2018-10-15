@@ -13,15 +13,15 @@ import * as CodeMirror from 'codemirror';
 import 'codemirror/mode/markdown/markdown.js';
 
 @Component({
-  selector: 'ui-editor',
-  templateUrl: './editor.component.html',
+  selector: 'ui-markdown-editor',
+  templateUrl: './markdown-editor.component.html',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: EditorComponent,
+    useExisting: MarkdownEditorComponent,
     multi: true
   }]
 })
-export class EditorComponent implements AfterViewInit, ControlValueAccessor {
+export class MarkdownEditorComponent implements AfterViewInit, ControlValueAccessor {
   @ViewChild('editor') textarea: ElementRef;
   @Input() value: string = '';
   @Input() name: string;

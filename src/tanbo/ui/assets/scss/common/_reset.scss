@@ -54,3 +54,10 @@ body {
 p, ol, ul, dl, {
   line-height: 1.8em;
 }
+
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}

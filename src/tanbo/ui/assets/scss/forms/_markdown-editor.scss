@@ -1,9 +1,9 @@
-ui-editor {
+ui-markdown-editor {
   display: block;
   border: 1px solid $color-gray-light;
   overflow: hidden;
   border-radius: $radius-base;
-  > .ui-editor-toolbar {
+  > .ui-markdown-editor-toolbar {
     border-top: none;
     line-height: 1;
     .split-line {
@@ -32,7 +32,7 @@ ui-editor {
       }
     }
   }
-  .ui-editor-body {
+  .ui-markdown-editor-body {
     min-height: 200px;
   }
 }
