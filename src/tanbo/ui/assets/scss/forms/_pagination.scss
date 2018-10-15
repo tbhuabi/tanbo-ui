@@ -41,6 +41,8 @@ ui-pagination {
         cursor: pointer;
         float: left;
         margin-left: -1px;
+        min-width: 2.2em;
+        text-align: center;
         border: 1px solid $pagination-border-color;
         &:hover {
           background-color: $pagination-hover-bg-color;
