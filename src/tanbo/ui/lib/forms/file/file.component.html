@@ -1,7 +1,7 @@
 <div class="ui-input-file-progress" [style.width]="progress + '%'"></div>
 <div class="ui-input-file-label">
   <span *ngIf="!isShowLoading">+</span>
-  <span *ngIf="isShowLoading" class="ui-loading-bar"></span> 上传文件
+  <span *ngIf="isShowLoading" class="ui-loading-bar"></span> {{ placeholder }}
 </div>
 <input class="ui-input-file"
        (change)="selectedFiles($event)"

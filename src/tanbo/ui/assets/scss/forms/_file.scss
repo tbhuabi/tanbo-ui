@@ -1,5 +1,5 @@
 @mixin input-file-size($name, $v, $h, $font-size, $radius) {
-  .ui-input-file-#{$name} {
+  &.ui-input-file-#{$name} {
     padding: $v $h;
     font-size: $font-size;
     border-radius: $radius;
@@ -7,7 +7,7 @@
 }
 
 @mixin input-file-theme($name, $color, $bg-color) {
-  .ui-input-file-#{$name} {
+  &.ui-input-file-#{$name} {
     color: $color;
     background-color: $bg-color;
     @if $name != default {
@@ -69,6 +69,16 @@ ui-input[type=file] {
   &.ui-input-file-default .ui-loading-bar:before {
     border-top-color: $color-gray;
   }
+
+  @include input-file-size(sm, $button-padding-vertical-sm, $button-padding-horizontal-sm, $button-font-size-sm, $button-radius-sm);
+  @include input-file-size(lg, $button-padding-vertical-lg, $button-padding-horizontal-lg, $button-font-size-lg, $button-radius-lg);
+
+  @include input-file-theme(default, $color-default, $color-lighter);
+  @include input-file-theme(primary, #fff, $color-primary);
+  @include input-file-theme(success, #fff, $color-success);
+  @include input-file-theme(info, #fff, $color-info);
+  @include input-file-theme(danger, #fff, $color-danger);
+  @include input-file-theme(warning, #fff, $color-warning);
 }
 
 .ui-input-file-label {
@@ -117,13 +127,3 @@ ui-input[type=file] {
   bottom: 0;
   cursor: inherit;
 }
-
-@include input-file-size(sm, $button-padding-vertical-sm, $button-padding-horizontal-sm, $button-font-size-sm, $button-radius-sm);
-@include input-file-size(lg, $button-padding-vertical-lg, $button-padding-horizontal-lg, $button-font-size-lg, $button-radius-lg);
-
-@include input-file-theme(default, $color-default, $color-lighter);
-@include input-file-theme(primary, #fff, $color-primary);
-@include input-file-theme(success, #fff, $color-success);
-@include input-file-theme(info, #fff, $color-info);
-@include input-file-theme(danger, #fff, $color-danger);
-@include input-file-theme(warning, #fff, $color-warning);
