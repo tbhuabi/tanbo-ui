@@ -1,5 +1,5 @@
 @mixin input-file-size($name, $v, $h, $font-size, $radius) {
-  &.ui-input-file-#{$name} {
+  &.ui-input-#{$name} {
     padding: $v $h;
     font-size: $font-size;
     border-radius: $radius;
@@ -7,7 +7,7 @@
 }
 
 @mixin input-file-theme($name, $color, $bg-color) {
-  &.ui-input-file-#{$name} {
+  &.ui-#{$name} {
     color: $color;
     background-color: $bg-color;
     @if $name != default {
@@ -62,11 +62,11 @@ ui-input[type=file] {
   &[readonly] {
     cursor: default;
   }
-  &.ui-btn-block {
+  &.ui-input-block {
     width: 100%;
     display: block;
   }
-  &.ui-input-file-default .ui-loading-bar:before {
+  &.ui-default .ui-loading-bar:before {
     border-top-color: $color-gray;
   }
 
