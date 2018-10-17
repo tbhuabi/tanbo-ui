@@ -83,7 +83,7 @@ export class FileComponent {
     }
 
     for (const file of files) {
-      const ext = [file.name.match(/\.\w+$/) || ['']][0];
+      const ext = (file.name.match(/\.\w+$/) || ['.'])[0].substring(1);
       if (this.validate(ext, validators)) {
         data.append(this.name, file);
       } else {
