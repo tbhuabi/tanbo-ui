@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { HttpEvent, HttpRequest, HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 import { attrToBoolean } from '../../utils';
 
@@ -112,16 +112,20 @@ export class FileComponent {
 
   private upload(obs: Observable<HttpEvent<any>>) {
     this.isShowLoading = true;
-    obs.pipe(tap((event: HttpEvent<any>) => {
+    obs.pipe(filter((event: HttpEvent<any>) => {
       switch (event.type) {
         case HttpEventType.Sent:
           this.uiUploadStart.emit();
-          break;
+          return false;
         case HttpEventType.UploadProgress:
           const percentDone = Math.floor(100 * event.loaded / event.total);
           this.progress = percentDone;
           this.uiUploading.emit(percentDone);
-          break;
+          return false;
+        case HttpEventType.Response:
+          return true;
+        default:
+          return false;
       }
     })).pipe(map(response => {
       if (response instanceof HttpResponse) {

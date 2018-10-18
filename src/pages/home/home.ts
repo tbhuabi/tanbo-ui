@@ -18,7 +18,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    // this.http.post('/login', {
+    //   username: 'admin',
+    //   password: '123456'
+    // }).subscribe(b => {
+    //   // console.log(b);
+    // });
   }
 
   provide = (data: FormData) => {
@@ -29,5 +34,13 @@ export class HomeComponent implements OnInit {
     return new HttpRequest('POST', '/api/v1/files/attachments', data, {
       reportProgress: true
     });
+  };
+
+  uploaded(event: any) {
+    console.log('loaded:', event);
+  }
+
+  uploading(event: any) {
+    console.log('loading:', event);
   }
 }
