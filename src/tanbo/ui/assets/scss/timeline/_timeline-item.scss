@@ -1,12 +1,25 @@
+@mixin timeline-item-style($name, $color) {
+  &.ui-#{$name} {
+    color: $color;
+    &:before {
+      border-color: $color;
+      background-color: $color;
+    }
+    > .ui-timeline-line {
+      border-color: $color;
+    }
+  }
+}
+
 ui-timeline-item {
   display: block;
   position: relative;
-  padding-left: 2em;
-  padding-top: .5em;
-  padding-bottom: .5em;
+  padding-left: 1.5em;
+  padding-bottom: 1em;
+  font-weight: 500;
   &:first-of-type {
     .ui-timeline-line {
-      top: calc(100% - 1em);
+      top: 1em;
     }
   }
   &:last-of-type {
@@ -17,19 +30,21 @@ ui-timeline-item {
   &:before {
     content: "";
     position: absolute;
-    width: 5px;
-    height: 5px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-    left: -2px;
-    top: 1em;
+    left: -5px;
+    top: .5em;
     z-index: 1;
+    background-color: #fff;
+    border: 1px solid $color-gray;
   }
-  &.ui-checked {
-    color: $color-primary;
-    &:before {
-      background-color: $color-primary;
-    }
-  }
+  @include timeline-item-style(checked, $color-primary);
+  @include timeline-item-style(primary, $color-primary);
+  @include timeline-item-style(info, $color-info);
+  @include timeline-item-style(success, $color-success);
+  @include timeline-item-style(warning, $color-warning);
+  @include timeline-item-style(danger, $color-danger);
 }
 
 .ui-timeline-line {
@@ -37,17 +52,13 @@ ui-timeline-item {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 1px;
-  background-color: $color-light;
+  width: 0;
+  border-left: 1px solid $color-gray-light;
 }
 
-ui-timeline.ui-kebab {
-  ui-timeline-item {
-    &:before {
-      background-color: $color-gray;
-    }
-    &.ui-checked:before {
-      background-color: $color-primary;
-    }
-  }
+.ui-timeline-content {
+  font-weight: normal;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: $color-dark;
 }

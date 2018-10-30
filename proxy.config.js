@@ -1,3 +1,3 @@
 module.exports = {
-  api: ['http://192.168.0.110:8357', 'test']
+  api: ['http://121.43.187.16/metadata', 'test']
 };
