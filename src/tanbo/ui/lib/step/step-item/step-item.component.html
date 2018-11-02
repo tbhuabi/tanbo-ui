@@ -1,6 +1,6 @@
 <div class="ui-step-header">
   <div class="ui-step-icon">
-    <div class="ui-step-icon-inner" *ngIf="!isSuccess">{{index}}</div>
+    <div class="ui-step-icon-inner" [ngClass]="{'is-waitsing': isWaiting}" *ngIf="!isSuccess">{{index}}</div>
     <span class="ui-icon-checkmark ui-color-primary" *ngIf="isSuccess"></span>
   </div>
   <div class="ui-step-line" *ngIf="!isLast">

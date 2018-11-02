@@ -6,12 +6,19 @@ ui-step-item {
   }
   &.is-success {
     color: $color-primary;
+    .ui-step-line-inner {
+      color: $color-primary!important;
+    }
+  }
+  &.is-waiting {
+    color: #c0c4cc;
   }
   .ui-step-header {
     width: 100%;
     position: relative;
     .ui-step-line {
       position: absolute;
+      margin: 0 10px 0 34px;
       background-color: $color-gray-dark;
       height: 2px;
       top: 11px;
@@ -19,6 +26,7 @@ ui-step-item {
       right: 0;
       .ui-step-line-inner {
         display: block;
+        color: #c0c4cc;
         border-width: 1px;
         border-style: solid;
         border-color: inherit;
@@ -43,9 +51,6 @@ ui-step-item {
       border-width: 2px;
       border-color: inherit;
       border-radius: 50%;
-      .ui-step-line-inner {
-        display: inline-block;
-      }
     }
   }
   .ui-step-main {

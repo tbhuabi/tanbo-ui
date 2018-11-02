@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'ui-step-item',
@@ -9,7 +9,7 @@ export class StepItemComponent {
   public isLast: boolean = false;
   private _isSuccess: boolean = false;
   private _maxWidth: string = '50%';
-
+  private _isWaiting: boolean = false;
   @HostBinding('style.maxWidth')
   get maxWidth() {
     return this._maxWidth;
@@ -24,5 +24,13 @@ export class StepItemComponent {
   }
   set isSuccess(status: boolean) {
     this._isSuccess = status;
+  }
+
+  @HostBinding('class.is-waiting')
+  get isWaiting() {
+    return this._isWaiting;
+  }
+  set isWaiting(status: boolean) {
+    this._isWaiting = status;
   }
 }

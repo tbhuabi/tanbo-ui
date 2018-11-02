@@ -1,4 +1,4 @@
-import { Component, ContentChildren, QueryList, OnInit, AfterContentInit, Input } from '@angular/core';
+import { Component, ContentChildren, QueryList, AfterContentInit, Input } from '@angular/core';
 
 import { StepItemComponent } from '../step-item/step-item.component';
 
@@ -6,7 +6,7 @@ import { StepItemComponent } from '../step-item/step-item.component';
   selector: 'ui-step',
   templateUrl: './step.component.html'
 })
-export class StepComponent implements OnInit, AfterContentInit {
+export class StepComponent implements AfterContentInit {
   @ContentChildren(StepItemComponent) items: QueryList<StepItemComponent>;
 
   @Input()
@@ -20,9 +20,6 @@ export class StepComponent implements OnInit, AfterContentInit {
   }
 
   private _active: number = 0;
-
-  ngOnInit() {
-  }
 
   ngAfterContentInit() {
     this.initChildren();
@@ -43,6 +40,7 @@ export class StepComponent implements OnInit, AfterContentInit {
     if (this.items) {
       this.items.forEach((item: StepItemComponent, index: number) => {
         item.isSuccess = num > index;
+        item.isWaiting = num < index;
       });
     }
   }
