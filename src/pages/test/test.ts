@@ -1,19 +1,21 @@
 import {
   Component,
 } from '@angular/core';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   templateUrl: './test.html',
   styleUrls: ['./test.scss']
 })
 export class TestComponent {
-  private active: number = 0;
-
+  bool: boolean = false;
+  private activeIndex: number = 0;
   constructor(public http: HttpClient) {
+    setTimeout(() => {
+      this.bool = true;
+    }, 3000);
   }
   next() {
-    this.active = this.active < 4 ? this.active + 1 : 0;
-    console.log(this.active);
+    this.activeIndex = this.activeIndex < 4 ? this.activeIndex + 1 : 0;
   }
 }

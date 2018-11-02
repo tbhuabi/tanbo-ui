@@ -1,38 +1,42 @@
-import { Component, ContentChildren, QueryList, AfterContentInit, Input } from '@angular/core';
+import { Component, ContentChildren, QueryList, AfterContentInit, OnDestroy, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { StepItemComponent } from '../step-item/step-item.component';
+
 
 @Component({
   selector: 'ui-step',
   templateUrl: './step.component.html'
 })
-export class StepComponent implements AfterContentInit {
+export class StepComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(StepItemComponent) items: QueryList<StepItemComponent>;
 
   @Input()
-  get active() {
-    return this._active;
+  get activeIndex() {
+    return this._activeIndex;
   }
 
-  set active(num: number) {
-    this._active = num;
+  set activeIndex(num: number) {
+    this._activeIndex = num;
     this.updateChildren(num);
   }
 
-  private _active: number = 0;
+  private _activeIndex: number = 0;
+  private subscription: Subscription;
 
   ngAfterContentInit() {
     this.initChildren();
-    this.updateChildren(this._active);
+    this.updateChildren(this._activeIndex);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   initChildren() {
-    this.items.forEach((item: StepItemComponent, index: number) => {
-      item.index = index + 1;
-      if (index + 1 === this.items.length) {
-        item.isLast = true;
-        item.maxWidth = `${100 / this.items.length}%`;
-      }
+    this.subscription = this.items.changes.subscribe(() => {
+      debugger;
+      this.updateChildren(this._activeIndex);
     });
   }
 
@@ -41,6 +45,12 @@ export class StepComponent implements AfterContentInit {
       this.items.forEach((item: StepItemComponent, index: number) => {
         item.isSuccess = num > index;
         item.isWaiting = num < index;
+
+        item.index = index + 1;
+        if (index + 1 === this.items.length) {
+          item.maxWidth = `${100 / this.items.length}%`;
+        }
+        item.changeDetectorRef.detectChanges();
       });
     }
   }

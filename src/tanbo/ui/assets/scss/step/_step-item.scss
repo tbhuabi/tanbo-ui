@@ -3,11 +3,20 @@ ui-step-item {
   flex: 1;
   &:last-child {
     flex: none;
+    .ui-step-line {
+      display: none;
+    }
   }
   &.is-success {
-    color: $color-primary;
-    .ui-step-line-inner {
-      color: $color-primary!important;
+    .ui-step-header {
+      .ui-step-line {
+        .ui-step-line-inner {
+          color: $color-primary;
+        }
+      }
+      .ui-step-icon {
+        color: $color-primary;
+      }
     }
   }
   &.is-waiting {
@@ -20,14 +29,14 @@ ui-step-item {
       position: absolute;
       margin: 0 10px 0 34px;
       background-color: $color-gray-dark;
-      height: 2px;
+      height: 1px;
       top: 11px;
       left: 0;
       right: 0;
       .ui-step-line-inner {
         display: block;
         color: #c0c4cc;
-        border-width: 1px;
+        border-width: 0.5px;
         border-style: solid;
         border-color: inherit;
         transition: .15s ease-out;
@@ -48,7 +57,7 @@ ui-step-item {
       background: #fff;
       transition: .15s ease-out;
       border-style: solid;
-      border-width: 2px;
+      border-width: 1px;
       border-color: inherit;
       border-radius: 50%;
     }
