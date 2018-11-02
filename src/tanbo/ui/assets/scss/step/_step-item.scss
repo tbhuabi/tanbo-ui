@@ -1,0 +1,64 @@
+ui-step-item {
+  position: relative;
+  flex: 1;
+  &:last-child {
+    flex: none;
+  }
+  &.is-success {
+    color: $color-primary;
+  }
+  .ui-step-header {
+    width: 100%;
+    position: relative;
+    .ui-step-line {
+      position: absolute;
+      background-color: $color-gray-dark;
+      height: 2px;
+      top: 11px;
+      left: 0;
+      right: 0;
+      .ui-step-line-inner {
+        display: block;
+        border-width: 1px;
+        border-style: solid;
+        border-color: inherit;
+        transition: .15s ease-out;
+        box-sizing: border-box;
+        height: 0;
+      }
+    }
+    .ui-step-icon {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height: 24px;
+      font-size: 14px;
+      box-sizing: border-box;
+      background: #fff;
+      transition: .15s ease-out;
+      border-style: solid;
+      border-width: 2px;
+      border-color: inherit;
+      border-radius: 50%;
+      .ui-step-line-inner {
+        display: inline-block;
+      }
+    }
+  }
+  .ui-step-main {
+    text-align: left;
+    white-space: normal;
+    .ui-step-title {
+      font-size: 16px;
+      line-height: 38px;
+    }
+    .ui-step-description {
+      font-size: 12px;
+      line-height: 20px;
+      font-weight: 400;
+    }
+  }
+}
