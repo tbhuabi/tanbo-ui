@@ -5,7 +5,7 @@ import {
   Injector,
   ViewChild,
   ViewContainerRef,
-  NgModuleRef
+  NgModuleRef, Input
 } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 
@@ -14,6 +14,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
   styleUrls: ['./home.scss']
 })
 export class HomeComponent implements OnInit {
+  @Input() value: any = '<p>6</p>';
   constructor(public http: HttpClient) {
   }
 
