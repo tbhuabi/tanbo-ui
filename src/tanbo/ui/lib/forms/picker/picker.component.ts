@@ -24,8 +24,9 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   @Input() arrowIconClassName: string = '';
   @Input() format = ',';
   @Input() displayFormat = '/';
+  /*tslint:disable*/
   @Input() dataProvide: (cell: PickerCell) => null | PickerCell[] | Promise<null | PickerCell[]> | Observable<null | PickerCell[]>;
-
+  /*tslint:enable*/
   @Input()
   set value(v: PickerCell[]) {
     if (Array.isArray(v)) {

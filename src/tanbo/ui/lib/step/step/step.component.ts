@@ -1,8 +1,15 @@
-import { Component, ContentChildren, QueryList, AfterContentInit, OnDestroy, Input } from '@angular/core';
+import {
+  Component,
+  ContentChildren,
+  QueryList,
+  AfterContentInit,
+  OnDestroy,
+  Input
+} from '@angular/core';
 import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { StepItemComponent } from '../step-item/step-item.component';
-
 
 @Component({
   selector: 'ui-step',
@@ -34,8 +41,7 @@ export class StepComponent implements AfterContentInit, OnDestroy {
   }
 
   initChildren() {
-    this.subscription = this.items.changes.subscribe(() => {
-      debugger;
+    this.subscription = this.items.changes.pipe(delay(0)).subscribe(() => {
       this.updateChildren(this._activeIndex);
     });
   }
@@ -50,9 +56,7 @@ export class StepComponent implements AfterContentInit, OnDestroy {
         if (index + 1 === this.items.length) {
           item.maxWidth = `${100 / this.items.length}%`;
         }
-        item.changeDetectorRef.detectChanges();
       });
     }
   }
-
 }

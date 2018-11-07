@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'ui-step-item',
@@ -13,7 +13,6 @@ export class StepItemComponent {
   set maxWidth(width: string) {
     this._maxWidth = width;
   }
-  @Input()
   @HostBinding('class.is-success')
   get isSuccess() {
     return this._isSuccess;
@@ -22,7 +21,6 @@ export class StepItemComponent {
     this._isSuccess = status;
   }
 
-  @Input()
   @HostBinding('class.is-waiting')
   get isWaiting() {
     return this._isWaiting;
@@ -34,6 +32,4 @@ export class StepItemComponent {
   private _isSuccess: boolean = false;
   private _maxWidth: string = '50%';
   private _isWaiting: boolean = false;
-
-  constructor(public changeDetectorRef: ChangeDetectorRef) {}
 }

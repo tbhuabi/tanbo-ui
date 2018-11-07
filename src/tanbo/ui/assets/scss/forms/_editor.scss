@@ -1,0 +1,20 @@
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.snow.css";
+
+ui-editor {
+  display: block;
+  border-radius: $radius-base;
+  border: 1px solid $color-gray-light;
+  overflow: hidden;
+}
+
+.ui-editor {
+  height: 300px;
+  border: none !important;
+}
+
+.ql-toolbar {
+  @extend ui-tool-bar;
+  border-width: 0 0 1px !important;
+  border-bottom-color: $color-gray-light !important;
+}
