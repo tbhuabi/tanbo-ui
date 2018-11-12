@@ -11,6 +11,7 @@ import { UIStepModule } from './step/step.module';
 import { UITableModule } from './table/table.module';
 import { UITimelineModule } from './timeline/timeline.module';
 import { UITreeModule } from './tree/tree.module';
+import { UICropperModule } from './cropper/cropper.module';
 
 import { DialogController, ModalController, NotifyController } from './modal/index';
 import { TooltipBaseService } from './other/index';
@@ -28,7 +29,8 @@ import { AnchorService, UI_ANCHOR_LINK_DISTANCE } from './quick-nav/index';
     UIStepModule,
     UITableModule,
     UITimelineModule,
-    UITreeModule
+    UITreeModule,
+    UICropperModule
   ]
 })
 export class UIModule {
