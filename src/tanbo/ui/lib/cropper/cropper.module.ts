@@ -12,4 +12,5 @@ import { CropperComponent } from './cropper.component';
 })
 
 export class UICropperModule {
+
 }
