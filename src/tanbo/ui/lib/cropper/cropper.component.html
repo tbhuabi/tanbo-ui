@@ -1,14 +1,13 @@
-<div class="cropper" #cropperRef>
+<div class="ui-cropper" #cropperRef>
   <img
-    [ngStyle]="{ top: imageOffsetY + 'px', left: imageOffsetX + 'px' }"
     #imgRef
-    id="cropper-img"
+    class="ui-cropper-img"
+    [ngStyle]="{ top: imageOffsetY + 'px', left: imageOffsetX + 'px' }"
     [src]="imageURL"
-    alt="cropper-img"
-    (mousedown)="moveImage()"
+    (mousedown)="moveImage($event)"
     (mouseover)="scaleImage()"
     (mouseout)="cancelScale()"
   />
-  <div class="cropper-box" [ngStyle]="{ width: cropWidth + 'px', height: cropHeight + 'px' }">
+  <div class="ui-cropper-box" [ngStyle]="{ width: cropWidth + 'px', height: cropHeight + 'px' }">
   </div>
 </div>

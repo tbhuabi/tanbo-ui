@@ -1,5 +1,17 @@
 import { Component, ElementRef, OnInit, ViewChild, Renderer2, Input, Output, EventEmitter } from '@angular/core';
 
+export interface Coordinates {
+  // 裁剪框四角坐标
+  leftTopX: number;
+  leftTopY: number;
+  rightTopX: number;
+  rightTopY: number;
+  rightBottomX: number;
+  rightBottomY: number;
+  leftBottomX: number;
+  leftBottomY: number;
+}
+
 @Component({
   selector: 'ui-cropper',
   templateUrl: './cropper.component.html'
@@ -17,61 +29,63 @@ export class CropperComponent implements OnInit {
   @Input()
   cropHeight: number = 200;
   @Input()
-  //tslint:disable
-  imageURL: string = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541999609515&di=5fa45be22da52b4a641dac2260a94b66&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F9e3df8dcd100baa1f9fef1e94a10b912c9fc2e95.jpg';
+  imageURL: string = '';
   @Output()
-  uiChange = new EventEmitter<object>();
-  // 容器宽度
-  containerWidth: number = 0;
-  // 容器高度
-  containerHeight: number = 0;
-  // 图片原始宽度
-  imageOriginWidth: number = 0;
-  // 图片原始高度
-  imageOriginHeight: number = 0;
-  // 计算后的图片宽度
-  imageWidth: number = 0;
-  // 计算后的图片高度
-  imageHeight: number = 0;
-  // 图片缩放比例
-  proportion: number = 1;
+  public uiChange = new EventEmitter<Coordinates>();
   // 图片相对容器右上角的偏移量
-  imageOffsetX: number = 0;
-  imageOffsetY: number = 0;
+  public imageOffsetX: number = 0;
+  public imageOffsetY: number = 0;
+  // 图片缩放比例
+  private proportion: number = 1;
+  // 容器宽度
+  private containerWidth: number = 0;
+  // 容器高度
+  private containerHeight: number = 0;
+  // 图片原始宽度
+  private imageOriginWidth: number = 0;
+  // 图片原始高度
+  private imageOriginHeight: number = 0;
+  // 计算后的图片宽度
+  private imageWidth: number = 0;
+  // 计算后的图片高度
+  private imageHeight: number = 0;
   // 裁剪框四角坐标
-  leftTopX: number = 0;
-  leftTopY: number = 0;
-  rightTopX: number = 0;
-  rightTopY: number = 0;
-  rightBottomX: number = 0;
-  rightBottomY: number = 0;
-  leftBottomX: number = 0;
-  leftBottomY: number = 0;
+  private leftTopX: number = 0;
+  private leftTopY: number = 0;
+  private rightTopX: number = 0;
+  private rightTopY: number = 0;
+  private rightBottomX: number = 0;
+  private rightBottomY: number = 0;
+  private leftBottomX: number = 0;
+  private leftBottomY: number = 0;
   // 滚轮缩放的解绑函数
-  unbindWheelFn: any;
-
+  private unbindWheelFn: () => void;
+  private imgElement: HTMLImageElement;
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2) {
   }
 
   ngOnInit() {
-    this.imgRef.nativeElement.onload = () => {
+    this.imgElement = this.imgRef.nativeElement;
+    this.imgElement.onload = () => {
       // 图片加载成功后布局
       setTimeout(() => {
         this.init();
       }, 1000);
-    }
+    };
   }
 
   // 初始化
   init() {
+    const cropperElement = this.cropperRef.nativeElement;
+    const imgElement = this.imgElement;
     // 获取容器的高和宽
-    this.containerWidth = ~~(getComputedStyle(this.cropperRef.nativeElement).width.replace('px', ''));
-    this.containerHeight = ~~(getComputedStyle(this.cropperRef.nativeElement).height.replace('px', ''));
+    this.containerWidth = cropperElement.offsetWidth;
+    this.containerHeight = cropperElement.offsetHeight;
     // 获取图片的真实高度
-    this.imageOriginWidth = this.imgRef.nativeElement.width;
-    this.imageOriginHeight = this.imgRef.nativeElement.height;
+    this.imageOriginWidth = imgElement.width;
+    this.imageOriginHeight = imgElement.height;
     // 如果图片真实宽度大于容器
     if (this.imageOriginWidth > this.containerWidth) {
       this.proportion = this.containerWidth / this.imageOriginWidth;
@@ -88,8 +102,8 @@ export class CropperComponent implements OnInit {
       this.imageOffsetX = (this.containerWidth - this.imageWidth) / 2;
       this.imageOffsetY = 0;
     }
-    this.imgRef.nativeElement.width = this.imageWidth;
-    this.imgRef.nativeElement.height = this.imageHeight;
+    imgElement.width = this.imageWidth;
+    imgElement.height = this.imageHeight;
   }
   // 计算四角坐标
   computeCoordinates() {
@@ -97,10 +111,10 @@ export class CropperComponent implements OnInit {
     const cropHeight = this.cropHeight;
     const boxLeft = (this.containerWidth - cropWidth) / 2;
     const boxTop = (this.containerHeight - cropHeight) / 2;
-    const imageLeft = Number(getComputedStyle(this.imgRef.nativeElement).left.replace('px', ''));
-    const imageRight = Number(getComputedStyle(this.imgRef.nativeElement).left.replace('px', ''));
+    const imageLeft = this.imgElement.offsetLeft;
+    const imageTop = this.imgElement.offsetTop;
     this.leftTopX = boxLeft - imageLeft;
-    this.leftTopY = boxTop - imageRight;
+    this.leftTopY = boxTop - imageTop;
     this.rightTopX = this.leftTopX + cropWidth;
     this.rightTopY = this.leftTopY;
     this.rightBottomX = this.leftTopX + cropWidth;
@@ -116,31 +130,35 @@ export class CropperComponent implements OnInit {
       rightBottomY: this.rightBottomY,
       leftBottomX: this.leftBottomX,
       leftBottomY: this.leftBottomY
-    })
+    });
   }
 
   // 移动图片
-  moveImage() {
+  moveImage(ev: MouseEvent) {
+    let oldX = ev.clientX;
+    let oldY = ev.clientY;
     const move = (e: MouseEvent) => {
+      const difX = e.clientX - oldX;
+      const difY = e.clientY - oldY;
+      console.log(difX, difY);
       e.preventDefault();
       if (this.imageOffsetX < -this.imageWidth + 20 && e.movementX < 0 ||
         this.imageOffsetX > this.containerWidth - 20 && e.movementX > 0 ||
         this.imageOffsetY < -this.imageHeight + 20 && e.movementY < 0 ||
         this.imageOffsetY > this.containerHeight - 20 && e.movementY > 0) return;
-      this.imageOffsetX += e.movementX;
-      this.imageOffsetY += e.movementY;
+      this.imageOffsetX += difX;
+      this.imageOffsetY += difY;
+      oldX = e.clientX;
+      oldY = e.clientY;
       this.computeCoordinates();
-    }
+    };
     const moveEnd = () => {
-      unbindMouseDownFn();
       unbindMouseMoveFn();
       unbindMouseUpFn();
-    }
-    const unbindMouseDownFn = this.renderer.listen('document', 'mousedown', (e: MouseEvent) => {
-      e.preventDefault();
-    });
+    };
     const unbindMouseMoveFn = this.renderer.listen('document', 'mousemove', move);
     const unbindMouseUpFn = this.renderer.listen('document', 'mouseup', moveEnd);
+    ev.preventDefault();
   }
 
   // 缩放图片
@@ -148,12 +166,11 @@ export class CropperComponent implements OnInit {
     this.unbindWheelFn = this.renderer.listen('document', 'wheel', (e: WheelEvent) => {
       e.preventDefault();
       const change = e.deltaY || e.deltaX;
-      let scale;
-      scale = change < 0 ? 1.05 : 0.95;
+      const scale = change < 0 ? 1.05 : 0.95;
       this.imageHeight = this.imageHeight * scale;
-      this.imageWidth= this.imageWidth * scale;
-      this.imgRef.nativeElement.width = this.imageWidth;
-      this.imgRef.nativeElement.height = this.imageHeight;
+      this.imageWidth = this.imageWidth * scale;
+      this.imgElement.width = this.imageWidth;
+      this.imgElement.height = this.imageHeight;
       if (change < 0) {
         this.imageOffsetX -= e.offsetX * 0.05;
         this.imageOffsetY -= e.offsetY * 0.05;
@@ -162,7 +179,7 @@ export class CropperComponent implements OnInit {
         this.imageOffsetY += e.offsetY * 0.05;
       }
       this.computeCoordinates();
-    })
+    });
   }
 
   // 停止缩放
