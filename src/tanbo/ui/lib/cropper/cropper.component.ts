@@ -138,16 +138,15 @@ export class CropperComponent implements OnInit {
     let oldX = ev.clientX;
     let oldY = ev.clientY;
     const move = (e: MouseEvent) => {
-      const difX = e.clientX - oldX;
-      const difY = e.clientY - oldY;
-      console.log(difX, difY);
+      const movementX = e.clientX - oldX;
+      const movementY = e.clientY - oldY;
       e.preventDefault();
       if (this.imageOffsetX < -this.imageWidth + 20 && e.movementX < 0 ||
         this.imageOffsetX > this.containerWidth - 20 && e.movementX > 0 ||
         this.imageOffsetY < -this.imageHeight + 20 && e.movementY < 0 ||
         this.imageOffsetY > this.containerHeight - 20 && e.movementY > 0) return;
-      this.imageOffsetX += difX;
-      this.imageOffsetY += difY;
+      this.imageOffsetX += movementX;
+      this.imageOffsetY += movementY;
       oldX = e.clientX;
       oldY = e.clientY;
       this.computeCoordinates();
