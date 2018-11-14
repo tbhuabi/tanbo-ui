@@ -12,46 +12,20 @@ ui-cropper {
     bottom: 0;
     left: 0;
     user-select: none;
+    overflow: hidden;
     .cropper-box {
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: 200px;
-      height: 200px;
       border: 1px solid #fff;
+      box-shadow: 0 0 0 20000px rgba(0,0,0,0.3);
       pointer-events: none;
-      .left-top, .right-top, .left-bottom, .right-bottom {
-        position: absolute;
-        background-color: #000;
-        color: #fff;
-        width: 50px;
-        height: 20px;
-        line-height: 20px;
-      }
-      .left-top {
-        left: 0;
-        top:0;
-      }
-      .right-top {
-        right: 0;
-        top: 0;
-      }
-      .right-bottom {
-        right: 0;
-        bottom: 0;
-      }
-      .left-bottom {
-        left: 0;
-        bottom: 0;
-      }
-
     }
     img {
       position: absolute;
       top: 0;
       left: 0;
-      //width: 600px;
     }
   }
 }

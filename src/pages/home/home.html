@@ -1,3 +1,3 @@
 <div class="home">
-  <ui-cropper></ui-cropper>
+  <ui-cropper [imageURL]="imgUrl" [cropHeight]="150" [cropWidth]="150" (uiChange)="change($event)"></ui-cropper>
 </div>

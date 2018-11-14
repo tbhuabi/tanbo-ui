@@ -1,10 +1,6 @@
 <div class="cropper" #cropperRef>
-  <!--transform: 'scale(' + scale + ',' + scale + ')',-->
   <img
-    [ngStyle]="{
-      top: imageOffsetY + 'px',
-      left: imageOffsetX + 'px'
-    }"
+    [ngStyle]="{ top: imageOffsetY + 'px', left: imageOffsetX + 'px' }"
     #imgRef
     id="cropper-img"
     [src]="imageURL"
@@ -13,10 +9,6 @@
     (mouseover)="scaleImage()"
     (mouseout)="cancelScale()"
   />
-  <div class="cropper-box">
-    <div class="left-top">{{leftTopX}}.{{leftTopY}}</div>
-    <div class="right-top">{{rightTopX}}.{{rightTopY}}</div>
-    <div class="right-bottom">{{rightBottomX}}.{{rightBottomY}}</div>
-    <div class="left-bottom">{{leftBottomX}}.{{leftBottomY}}</div>
+  <div class="cropper-box" [ngStyle]="{ width: cropWidth + 'px', height: cropHeight + 'px' }">
   </div>
 </div>

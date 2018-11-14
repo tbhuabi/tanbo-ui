@@ -1,44 +1,44 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Renderer2, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'ui-cropper',
   templateUrl: './cropper.component.html'
 })
 
-export class CropperComponent implements OnInit, AfterViewInit {
+export class CropperComponent implements OnInit {
   @ViewChild('imgRef')
   imgRef: ElementRef;
   @ViewChild('cropperRef')
   cropperRef: ElementRef;
-
-  // 容器高宽
+  // 裁剪的宽度
+  @Input()
+  cropWidth: number = 200;
+  // 裁剪的高度
+  @Input()
+  cropHeight: number = 200;
+  @Input()
+  //tslint:disable
+  imageURL: string = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541999609515&di=5fa45be22da52b4a641dac2260a94b66&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F9e3df8dcd100baa1f9fef1e94a10b912c9fc2e95.jpg';
+  @Output()
+  uiChange = new EventEmitter<object>();
+  // 容器宽度
   containerWidth: number = 0;
+  // 容器高度
   containerHeight: number = 0;
-  // 图片真实宽度
+  // 图片原始宽度
   imageOriginWidth: number = 0;
-  // 图片真实高度
+  // 图片原始高度
   imageOriginHeight: number = 0;
-  // 计算后的图片宽高
+  // 计算后的图片宽度
   imageWidth: number = 0;
+  // 计算后的图片高度
   imageHeight: number = 0;
   // 图片缩放比例
   proportion: number = 1;
-  // 图片偏移x轴
-  x: number = 0;
-  // 图片偏移y轴
-  y: number = 0;
   // 图片相对容器右上角的偏移量
   imageOffsetX: number = 0;
   imageOffsetY: number = 0;
-  // 鼠标光标相对图片的左边
-  originX: number = 0;
-  originY: number = 0;
-  // 图片链接l
-  //tslint:disable
-  imageURL: string = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541999609515&di=5fa45be22da52b4a641dac2260a94b66&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F9e3df8dcd100baa1f9fef1e94a10b912c9fc2e95.jpg';
-  unbindWheelFn: any;
-  unbindMouseFn: any;
-
+  // 裁剪框四角坐标
   leftTopX: number = 0;
   leftTopY: number = 0;
   rightTopX: number = 0;
@@ -47,6 +47,8 @@ export class CropperComponent implements OnInit, AfterViewInit {
   rightBottomY: number = 0;
   leftBottomX: number = 0;
   leftBottomY: number = 0;
+  // 滚轮缩放的解绑函数
+  unbindWheelFn: any;
 
 
   constructor(private elementRef: ElementRef,
@@ -60,9 +62,6 @@ export class CropperComponent implements OnInit, AfterViewInit {
         this.init();
       }, 1000);
     }
-  }
-
-  ngAfterViewInit() {
   }
 
   // 初始化
@@ -92,20 +91,32 @@ export class CropperComponent implements OnInit, AfterViewInit {
     this.imgRef.nativeElement.width = this.imageWidth;
     this.imgRef.nativeElement.height = this.imageHeight;
   }
-
-  computeCoords() {
-    const boxLeft = (this.containerWidth - 200) / 2;
-    const boxTop = (this.containerHeight - 200) / 2;
+  // 计算四角坐标
+  computeCoordinates() {
+    const cropWidth = this.cropWidth;
+    const cropHeight = this.cropHeight;
+    const boxLeft = (this.containerWidth - cropWidth) / 2;
+    const boxTop = (this.containerHeight - cropHeight) / 2;
     const imageLeft = Number(getComputedStyle(this.imgRef.nativeElement).left.replace('px', ''));
     const imageRight = Number(getComputedStyle(this.imgRef.nativeElement).left.replace('px', ''));
     this.leftTopX = boxLeft - imageLeft;
     this.leftTopY = boxTop - imageRight;
-    this.rightTopX = this.leftTopX + 200;
+    this.rightTopX = this.leftTopX + cropWidth;
     this.rightTopY = this.leftTopY;
-    this.rightBottomX = this.leftTopX + 200;
-    this.rightBottomY = this.rightTopY +200;
+    this.rightBottomX = this.leftTopX + cropWidth;
+    this.rightBottomY = this.rightTopY + cropHeight;
     this.leftBottomX = this.leftTopX;
-    this.leftBottomY = this.leftTopY + 200;
+    this.leftBottomY = this.leftTopY + cropHeight;
+    this.uiChange.emit({
+      leftTopX: this.leftTopX,
+      leftTopY: this.leftTopY,
+      rightTopX: this.rightTopX,
+      rightTopY: this.rightTopY,
+      rightBottomX: this.rightBottomX,
+      rightBottomY: this.rightBottomY,
+      leftBottomX: this.leftBottomX,
+      leftBottomY: this.leftBottomY
+    })
   }
 
   // 移动图片
@@ -118,9 +129,8 @@ export class CropperComponent implements OnInit, AfterViewInit {
         this.imageOffsetY > this.containerHeight - 20 && e.movementY > 0) return;
       this.imageOffsetX += e.movementX;
       this.imageOffsetY += e.movementY;
-      this.computeCoords();
+      this.computeCoordinates();
     }
-
     const moveEnd = () => {
       unbindMouseDownFn();
       unbindMouseMoveFn();
@@ -151,8 +161,7 @@ export class CropperComponent implements OnInit, AfterViewInit {
         this.imageOffsetX += e.offsetX * 0.05;
         this.imageOffsetY += e.offsetY * 0.05;
       }
-      console.log(this.imageWidth, this.imageHeight);
-      this.computeCoords();
+      this.computeCoordinates();
     })
   }
 
