@@ -1,0 +1,1 @@
+export { CropperCoordinates } from './cropper/cropper.component';

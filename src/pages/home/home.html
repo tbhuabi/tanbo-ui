@@ -1,9 +1,3 @@
-<ui-timeline>
-  <ui-timeline-item [checked]="true">2042-23-23
-    <p class="ui-timeline-content">content</p>
-  </ui-timeline-item>
-  <ui-timeline-item [checked]="true">2042-23-23</ui-timeline-item>
-  <ui-timeline-item>2042-23-23
-
-    <p class="ui-timeline-content">content</p></ui-timeline-item>
-</ui-timeline>
+<div class="home">
+  <ui-cropper [imageURL]="imgUrl" [cropHeight]="150" [cropWidth]="150" (uiChange)="change($event)"></ui-cropper>
+</div>

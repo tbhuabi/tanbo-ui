@@ -11,6 +11,7 @@ import { UIModule } from '../tanbo/ui/public_api';
 
 import { HomeComponent } from '../pages/home/home';
 import { DetailComponent } from '../pages/detail/detail.component';
+import { TestComponent } from '../pages/test/test';
 import { routing } from './app.routing';
 import { ApiInterceptor } from './api-interceptor';
 
@@ -25,6 +26,7 @@ import { ApiInterceptor } from './api-interceptor';
   ],
   declarations: [
     AppComponent,
+    TestComponent,
     HomeComponent,
     DetailComponent
   ],

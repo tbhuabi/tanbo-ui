@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from '../pages/home/home';
 import { DetailComponent } from '../pages/detail/detail.component';
+import { TestComponent } from '../pages/test/test';
 
 const appRoutes: Routes = [{
   path: 'home',
@@ -10,6 +11,9 @@ const appRoutes: Routes = [{
 }, {
   path: 'detail',
   component: DetailComponent
+}, {
+  path: 'test',
+  component: TestComponent
 }, {
   path: 'lazy',
   loadChildren: '../pages/lazy/lazy.module#LazyModule'
