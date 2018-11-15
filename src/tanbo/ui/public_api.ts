@@ -3,6 +3,7 @@
  */
 export * from './lib/tanbo-ui.module';
 
+export * from './lib/cropper/index';
 export * from './lib/forms/index';
 export * from './lib/modal/index';
 export * from './lib/other/index';

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, Renderer2, Input, Output, EventEmitter } from '@angular/core';
 
-export interface Coordinates {
+export interface CropperCoordinates {
   // 裁剪框四角坐标
   leftTopX: number;
   leftTopY: number;
@@ -16,25 +16,18 @@ export interface Coordinates {
   selector: 'ui-cropper',
   templateUrl: './cropper.component.html'
 })
-
 export class CropperComponent implements OnInit {
-  @ViewChild('imgRef')
-  imgRef: ElementRef;
-  @ViewChild('cropperRef')
-  cropperRef: ElementRef;
+  @ViewChild('imgRef') imgRef: ElementRef;
+  @ViewChild('cropperRef') cropperRef: ElementRef;
   // 裁剪的宽度
-  @Input()
-  cropWidth: number = 200;
+  @Input() cropWidth: number = 200;
   // 裁剪的高度
-  @Input()
-  cropHeight: number = 200;
-  @Input()
-  imageURL: string = '';
-  @Output()
-  public uiChange = new EventEmitter<Coordinates>();
+  @Input() cropHeight: number = 200;
+  @Input() imageURL: string = '';
+  @Output() uiChange = new EventEmitter<CropperCoordinates>();
   // 图片相对容器右上角的偏移量
-  public imageOffsetX: number = 0;
-  public imageOffsetY: number = 0;
+  imageOffsetX: number = 0;
+  imageOffsetY: number = 0;
   // 图片缩放比例
   private proportion: number = 1;
   // 容器宽度
@@ -62,8 +55,7 @@ export class CropperComponent implements OnInit {
   private unbindWheelFn: () => void;
   private imgElement: HTMLImageElement;
 
-  constructor(private elementRef: ElementRef,
-              private renderer: Renderer2) {
+  constructor(private renderer: Renderer2) {
   }
 
   ngOnInit() {
@@ -105,6 +97,7 @@ export class CropperComponent implements OnInit {
     imgElement.width = this.imageWidth;
     imgElement.height = this.imageHeight;
   }
+
   // 计算四角坐标
   computeCoordinates() {
     const cropWidth = this.cropWidth;

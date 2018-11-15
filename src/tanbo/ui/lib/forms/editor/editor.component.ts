@@ -13,14 +13,14 @@ import Quill from 'quill';
 })
 export class EditorComponent implements ControlValueAccessor, AfterViewInit {
   @ViewChild('editor') editorRef: ElementRef;
-  // @Input() value: string = '';
+  @Input() value: string = '';
   @Input() placeholder = '请输入内容！';
   @Input() name: string = '';
   @Input() forId: string = '';
   @Output() uiChange = new EventEmitter<string>();
 
   private editor: Quill;
-  private value: string = '';
+  // private value: string = '';
   private onChange: (value: any) => any;
   private onTouched: () => any;
 
@@ -51,6 +51,10 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit {
         this.uiChange.emit(html);
       }
     });
+  }
+
+  focus() {
+    this.editor.focus();
   }
 
   writeValue(_val: any) {

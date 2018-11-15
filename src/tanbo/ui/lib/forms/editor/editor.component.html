@@ -1,2 +1,2 @@
 <div class="ui-editor" #editor></div>
-<input type="text" [attr.id]="forId" [attr.name]="name" [value]="value">
+<input class="ui-input-editor" type="text" (focus)="focus()" [attr.id]="forId" [attr.name]="name" [value]="value">

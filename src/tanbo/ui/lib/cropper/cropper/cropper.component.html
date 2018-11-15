@@ -6,8 +6,7 @@
     [src]="imageURL"
     (mousedown)="moveImage($event)"
     (mouseover)="scaleImage()"
-    (mouseout)="cancelScale()"
-  />
+    (mouseout)="cancelScale()">
   <div class="ui-cropper-box" [ngStyle]="{ width: cropWidth + 'px', height: cropHeight + 'px' }">
   </div>
 </div>
