@@ -4,20 +4,18 @@ ui-tab-button {
   padding: 12px $container-horizontal-padding;
   position: relative;
   &.ui-active {
-    color: $color-primary;
-
+    font-weight: 600;
     &:after {
       content: "";
       display: block;
       position: absolute;
       left: 0;
       right: 0;
-      bottom: 0;
-      height: 2px;
-      background-color: $color-primary;
+      bottom: -1px;
+      border-bottom: 3px solid $color-primary;
     }
   }
   &:hover {
-    color: $color-primary;
+    font-weight: 600;
   }
 }
