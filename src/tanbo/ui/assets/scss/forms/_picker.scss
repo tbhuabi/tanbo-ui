@@ -2,6 +2,10 @@ ui-picker {
   display: inline-block;
 }
 
+.ui-picker-dropdown {
+  display: block;
+}
+
 .ui-picker-rows {
   display: table;
   white-space: nowrap;
