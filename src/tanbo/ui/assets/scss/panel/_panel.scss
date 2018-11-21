@@ -37,13 +37,9 @@ ui-panel {
       border-right: 1px solid $color-light;
       &:first-child {
         border-top: 1px solid $color-light;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
       }
       &:last-child {
         border-bottom: 1px solid $color-light;
-        border-bottom-left-radius: 3px;
-        border-bottom-right-radius: 3px;
       }
     }
   }

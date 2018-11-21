@@ -1,7 +1,15 @@
 ui-panel-body {
   display: block;
   background-color: #fff;
-  > .ui-table:last-child {
+  > .ui-table:last-child, > ui-table-responsive > .ui-table:last-child {
     margin-bottom: -1px;
+  }
+  &:first-child {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  &:last-child {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
   }
 }
