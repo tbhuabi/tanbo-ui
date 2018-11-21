@@ -1,0 +1,10 @@
+ui-panel-footer {
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid $color-light;
+  &:last-child {
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+}

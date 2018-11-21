@@ -1,0 +1,46 @@
+@mixin panel-theme($name, $color) {
+  &.ui-#{$name} {
+    ui-panel-heading {
+      color: $color;
+    }
+    &.ui-fill {
+      ui-panel-heading {
+        border: 0;
+        background-color: $color;
+        border-bottom-color: $color;
+        color: #fff;
+      }
+    }
+  }
+}
+
+ui-panel {
+  display: block;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+  background-color: #fff;
+  border-radius: 3px;
+  overflow: hidden;
+  padding-left: $container-horizontal-padding;
+  padding-right: $container-horizontal-padding;
+  border: 1px solid $color-light;
+  &.ui-fill {
+    padding-left: 0;
+    padding-right: 0;
+    border: 0;
+    ui-panel-heading, ui-panel-footer {
+      padding-left: $container-horizontal-padding + 5px;
+      padding-right: $container-horizontal-padding + 5px;
+      border: 1px solid $color-light;
+    }
+    ui-panel-body {
+      border-left: 1px solid $color-light;
+      border-right: 1px solid $color-light;
+    }
+  }
+  @include panel-theme(default, $color-default);
+  @include panel-theme(primary, $color-primary);
+  @include panel-theme(info, $color-info);
+  @include panel-theme(success, $color-success);
+  @include panel-theme(warning, $color-warning);
+  @include panel-theme(danger, $color-danger);
+}

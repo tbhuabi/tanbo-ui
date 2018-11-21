@@ -6,6 +6,7 @@ import { UILayoutModule } from './layout/layout.module';
 import { UIModalModule } from './modal/modal.module';
 import { UINavModule } from './nav/nav.module';
 import { UIOtherModule } from './other/other.module';
+import { UIPanelModule } from './panel/panel.module';
 import { UIQuickNavModule } from './quick-nav/quick-nav.module';
 import { UIStepModule } from './step/step.module';
 import { UITableModule } from './table/table.module';
@@ -25,6 +26,7 @@ import { AnchorService, UI_ANCHOR_LINK_DISTANCE } from './quick-nav/index';
     UINavModule,
     UIModalModule,
     UIOtherModule,
+    UIPanelModule,
     UIQuickNavModule,
     UIStepModule,
     UITableModule,
