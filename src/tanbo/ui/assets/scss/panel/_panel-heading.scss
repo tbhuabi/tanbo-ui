@@ -3,7 +3,7 @@ ui-panel-heading {
   padding-top: $container-horizontal-padding;
   padding-bottom: $container-horizontal-padding;
   border-bottom: 1px solid $color-light;
-  &:last-child {
+  &:first-child {
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
   }
