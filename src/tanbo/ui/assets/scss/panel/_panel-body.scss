@@ -1,5 +1,7 @@
 ui-panel-body {
   display: block;
   background-color: #fff;
-  min-height: 50px;
+  > .ui-table:last-child {
+    margin-bottom: -1px;
+  }
 }

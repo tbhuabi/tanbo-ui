@@ -1,4 +1,4 @@
-@mixin panel-theme($name, $color) {
+@mixin panel-theme($name, $color, $fontColor: #fff) {
   &.ui-#{$name} {
     ui-panel-heading {
       color: $color;
@@ -8,7 +8,7 @@
         border: 0;
         background-color: $color;
         border-bottom-color: $color;
-        color: #fff;
+        color: $fontColor;
       }
     }
   }
@@ -28,8 +28,8 @@ ui-panel {
     padding-right: 0;
     border: 0;
     ui-panel-heading, ui-panel-footer {
-      padding-left: $container-horizontal-padding + 5px;
-      padding-right: $container-horizontal-padding + 5px;
+      padding-left: $container-horizontal-padding;
+      padding-right: $container-horizontal-padding;
       border: 1px solid $color-light;
     }
     ui-panel-body {
@@ -47,7 +47,14 @@ ui-panel {
       }
     }
   }
-  @include panel-theme(default, $color-default);
+  &.ui-default {
+    &.ui-fill {
+      ui-panel-heading {
+        background-color: $color-lighter;
+      }
+    }
+  }
+  @include panel-theme(dark, $color-dark);
   @include panel-theme(primary, $color-primary);
   @include panel-theme(info, $color-info);
   @include panel-theme(success, $color-success);
