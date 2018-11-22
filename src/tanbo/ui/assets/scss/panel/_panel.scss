@@ -1,10 +1,10 @@
 @mixin panel-theme($name, $color, $fontColor: #fff) {
   &.ui-#{$name} {
-    ui-panel-heading {
+    ui-panel-header {
       color: $color;
     }
     &.ui-fill {
-      ui-panel-heading {
+      ui-panel-header {
         border: 0;
         background-color: $color;
         border-bottom-color: $color;
@@ -22,30 +22,18 @@ ui-panel {
   overflow: hidden;
   padding-left: $container-horizontal-padding;
   padding-right: $container-horizontal-padding;
-  border: 1px solid $color-light;
   &.ui-fill {
     padding-left: 0;
     padding-right: 0;
     border: 0;
-    ui-panel-heading, ui-panel-footer {
+    ui-panel-header, ui-panel-footer {
       padding-left: $container-horizontal-padding;
       padding-right: $container-horizontal-padding;
-      border: 1px solid $color-light;
-    }
-    ui-panel-body {
-      border-left: 1px solid $color-light;
-      border-right: 1px solid $color-light;
-      &:first-child {
-        border-top: 1px solid $color-light;
-      }
-      &:last-child {
-        border-bottom: 1px solid $color-light;
-      }
     }
   }
   &.ui-default {
     &.ui-fill {
-      ui-panel-heading {
+      ui-panel-header {
         background-color: $color-lighter;
       }
     }

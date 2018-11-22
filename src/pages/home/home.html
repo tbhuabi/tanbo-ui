@@ -1,13 +1,18 @@
 <p>tst</p>
-<ui-panel class="ui-fill ui-default">
-  <ui-panel-heading>
+<ui-panel class="ui-fill ui-info">
+  <ui-panel-header>
     <h3 class="ui-panel-title">就换一个</h3>
-  </ui-panel-heading>
-  <ui-panel-body></ui-panel-body>
+  </ui-panel-header>
+  <ui-panel-body>
+    <input type="number" [(ngModel)]="pages">
+    <input type="number" [(ngModel)]="rows">
+  </ui-panel-body>
   <ui-panel-footer>
-    <ui-pagination [pages]="30"></ui-pagination>
+    <ui-pagination [pages]="pages" [rows]="rows"></ui-pagination>
   </ui-panel-footer>
 </ui-panel>
+
+<ui-pagination [pages]="pages" [rows]="rows"></ui-pagination>
 
 <!--<div style="height: 100px; overflow-y: auto">-->
   <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->

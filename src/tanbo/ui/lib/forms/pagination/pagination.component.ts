@@ -1,7 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 export interface PaginationItem {
-  pageIndex: number | string;
+  pageIndex: number;
   label: number | string;
 }
 
@@ -13,57 +13,44 @@ export interface PaginationItem {
     '[class.ui-pagination-lg]': 'size === "lg"'
   }
 })
-export class PaginationComponent {
-  @Input() size: string = '';
-  @Input() btnCount: number = 8;
-
-  @Input()
-  set pages(pages: number) {
-    if (!pages || pages < 1) {
-      pages = 1;
-    }
-    this._pages = pages;
-    this.setPaginationItems();
-  }
-
-  get pages() {
-    return this._pages;
-  }
-
-  @Input()
-  set currentPage(currentPage: number) {
-    if (!currentPage || currentPage < 1) {
-      currentPage = 1;
-    }
-    this._currentPage = currentPage;
-    this.setPaginationItems();
-  }
+export class PaginationComponent implements OnChanges {
+  @Input() size = '';
+  @Input() btnCount = 8;
+  @Input() rows = 1;
+  @Input() pageSize = 10;
+  @Input() pages = 1;
+  @Input() currentPage = 1;
 
   @Output() uiChange = new EventEmitter<number>();
 
-  get currentPage() {
-    return this._currentPage;
-  }
-
   pageList: Array<PaginationItem> = [];
-  private _currentPage: number = 1;
-  private _pages: number = 1;
 
   private get _btnLength() {
     return Math.floor(this.btnCount / 2);
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    for (let name in changes) {
+      if (/pageSize|rows/.test(name)) {
+        this.pages = Math.ceil(this.rows / this.pageSize);
+        break;
+      }
+    }
+    this.setPaginationItems();
+  }
+
   onChange(currentPage: number) {
-    if (typeof currentPage === 'number' && currentPage !== this.currentPage) {
+    if (currentPage !== this.currentPage) {
       this.uiChange.emit(currentPage);
       this.currentPage = currentPage;
+      this.setPaginationItems();
     }
   }
 
   private setPaginationItems() {
     this.pageList = [];
-    if (this._currentPage > this._pages) {
-      this._pages = this._currentPage;
+    if (this.currentPage > this.pages) {
+      this.currentPage = this.pages || 1;
     }
     if (this.pages <= 1) {
       return;

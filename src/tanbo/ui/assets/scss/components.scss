@@ -50,9 +50,9 @@
 @import "modal/mask";
 @import "modal/modal";
 @import "modal/modal-base";
+@import "modal/modal-body";
 @import "modal/modal-footer";
 @import "modal/modal-header";
-@import "modal/modal-inner";
 @import "modal/notify";
 
 @import "nav/nav";
@@ -68,7 +68,7 @@
 @import "panel/panel";
 @import "panel/panel-body";
 @import "panel/panel-footer";
-@import "panel/panel-heading";
+@import "panel/panel-header";
 
 @import "quick-nav/anchor";
 @import "quick-nav/anchor-link";
