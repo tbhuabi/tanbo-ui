@@ -14,6 +14,9 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
   styleUrls: ['./home.scss']
 })
 export class HomeComponent {
-  pages = 30;
-  rows = 50;
+  data: any = {};
+
+  submit() {
+    console.log('submit')
+  }
 }

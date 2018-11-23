@@ -1,5 +1,7 @@
 import { Directive } from '@angular/core';
-import { NG_VALIDATORS, AbstractControl, ValidationErrors, Validator } from '@angular/forms';
+import { NG_VALIDATORS, AbstractControl, Validator } from '@angular/forms';
+
+import { UIValidators } from './validators';
 
 @Directive({
   /* tslint:disable */
@@ -13,15 +15,7 @@ import { NG_VALIDATORS, AbstractControl, ValidationErrors, Validator } from '@an
 })
 export class IntegerValidator implements Validator {
 
-  validate(c: AbstractControl): ValidationErrors | null {
-    const value = c.value;
-    if (value) {
-      const r = Number(value);
-      if (isNaN(r)) {
-        return {'integer': value};
-      }
-      return r === r - (r % 1) ? null : {'integer': value};
-    }
-    return null;
+  validate(c: AbstractControl) {
+    return c.value ? UIValidators.integer(c) : null;
   }
 }

@@ -24,15 +24,12 @@ import { RangeComponent } from './range/range.component';
 import { SelectComponent } from './select/select.component';
 import { SwitchComponent } from './switch/switch.component';
 
+import { EqualValidator } from './equal-validator.directive';
 import { IntegerValidator } from './integer-validator.directive';
 import {
-  CheckboxRequiredValidator,
-  RadioRequiredValidator,
-  SelectRequiredValidator,
-  SwitchRequiredValidator,
-  DateRequiredValidator,
-  PickerRequiredValidator,
-  EditorRequiredValidator
+  RequiredTrueValidator,
+  RequiredValidator,
+  PickerRequiredValidator
 } from './required-validator.directive';
 import { SubmitDirective } from './submit.directive';
 
@@ -66,15 +63,12 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     SelectComponent,
     SwitchComponent,
 
+    EqualValidator,
     IntegerValidator,
     SubmitDirective,
-    CheckboxRequiredValidator,
-    RadioRequiredValidator,
-    SelectRequiredValidator,
-    SwitchRequiredValidator,
-    DateRequiredValidator,
-    PickerRequiredValidator,
-    EditorRequiredValidator
+    RequiredTrueValidator,
+    RequiredValidator,
+    PickerRequiredValidator
   ],
   exports: [
     BtnGroupComponent,
@@ -96,15 +90,12 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     SelectComponent,
     SwitchComponent,
 
+    EqualValidator,
     IntegerValidator,
     SubmitDirective,
-    CheckboxRequiredValidator,
-    RadioRequiredValidator,
-    SelectRequiredValidator,
-    SwitchRequiredValidator,
-    DateRequiredValidator,
-    PickerRequiredValidator,
-    EditorRequiredValidator
+    RequiredTrueValidator,
+    RequiredValidator,
+    PickerRequiredValidator
   ],
   providers: [
     RadioStateService, {

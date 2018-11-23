@@ -1,17 +1,19 @@
 import { Directive, Input } from '@angular/core';
-import { NG_VALIDATORS, AbstractControl, ValidationErrors, Validator } from '@angular/forms';
+import { NG_VALIDATORS, AbstractControl, ValidationErrors, Validator, Validators } from '@angular/forms';
+
+import { UIValidators } from './validators';
 
 @Directive({
   /* tslint:disable */
-  selector: 'ui-input[required][type=checkbox]',
+  selector: 'ui-input[required][type=checkbox],ui-switch[required]',
   /* tslint:enable */
   providers: [{
     provide: NG_VALIDATORS,
-    useExisting: CheckboxRequiredValidator,
+    useExisting: RequiredTrueValidator,
     multi: true
   }]
 })
-export class CheckboxRequiredValidator implements Validator {
+export class RequiredTrueValidator implements Validator {
   private _required: boolean;
   private _onChange: () => void;
 
@@ -28,10 +30,7 @@ export class CheckboxRequiredValidator implements Validator {
   }
 
   validate(c: AbstractControl): ValidationErrors | null {
-    if (this.required) {
-      return c.value === true ? null : {'required': true};
-    }
-    return null;
+    return this.required ? Validators.requiredTrue(c) : null;
   }
 
   registerOnValidatorChange(fn: () => void): void {
@@ -41,15 +40,15 @@ export class CheckboxRequiredValidator implements Validator {
 
 @Directive({
   /* tslint:disable */
-  selector: 'ui-switch[required]',
+  selector: 'ui-input[required][type=radio],ui-select[required],ui-input[type=date][required],ui-markdown-editor[required], ui-editor[required]',
   /* tslint:enable */
   providers: [{
     provide: NG_VALIDATORS,
-    useExisting: SwitchRequiredValidator,
+    useExisting: RequiredValidator,
     multi: true
   }]
 })
-export class SwitchRequiredValidator implements Validator {
+export class RequiredValidator implements Validator {
   private _required: boolean;
   private _onChange: () => void;
 
@@ -66,124 +65,7 @@ export class SwitchRequiredValidator implements Validator {
   }
 
   validate(c: AbstractControl): ValidationErrors | null {
-    if (this.required) {
-      return c.value === true ? null : {'required': true};
-    }
-    return null;
-  }
-
-  registerOnValidatorChange(fn: () => void): void {
-    this._onChange = fn;
-  }
-}
-
-@Directive({
-  /* tslint:disable */
-  selector: 'ui-input[required][type=radio]',
-  /* tslint:enable */
-  providers: [{
-    provide: NG_VALIDATORS,
-    useExisting: RadioRequiredValidator,
-    multi: true
-  }]
-})
-export class RadioRequiredValidator implements Validator {
-  private _required: boolean;
-  private _onChange: () => void;
-
-  @Input()
-  get required(): boolean | string {
-    return this._required;
-  }
-
-  set required(value: boolean | string) {
-    this._required = value !== false && value !== null;
-    if (this._onChange) {
-      this._onChange();
-    }
-  }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    if (this.required) {
-      return c.value !== '' && c.value !== undefined && c.value !== null ? null : {'required': true};
-    }
-    return null;
-  }
-
-  registerOnValidatorChange(fn: () => void): void {
-    this._onChange = fn;
-  }
-}
-
-@Directive({
-  /* tslint:disable */
-  selector: 'ui-select[required]',
-  /* tslint:enable */
-  providers: [{
-    provide: NG_VALIDATORS,
-    useExisting: SelectRequiredValidator,
-    multi: true
-  }]
-})
-export class SelectRequiredValidator implements Validator {
-  private _required: boolean;
-  private _onChange: () => void;
-
-  @Input()
-  get required(): boolean | string {
-    return this._required;
-  }
-
-  set required(value: boolean | string) {
-    this._required = value !== false && value !== null;
-    if (this._onChange) {
-      this._onChange();
-    }
-  }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    if (this.required) {
-      return c.value !== '' && c.value !== undefined && c.value !== null ? null : {'required': true};
-    }
-    return null;
-  }
-
-  registerOnValidatorChange(fn: () => void): void {
-    this._onChange = fn;
-  }
-}
-
-@Directive({
-  /* tslint:disable */
-  selector: 'ui-input[type=date][required]',
-  /* tslint:enable */
-  providers: [{
-    provide: NG_VALIDATORS,
-    useExisting: DateRequiredValidator,
-    multi: true
-  }]
-})
-export class DateRequiredValidator implements Validator {
-  private _required: boolean;
-  private _onChange: () => void;
-
-  @Input()
-  get required(): boolean | string {
-    return this._required;
-  }
-
-  set required(value: boolean | string) {
-    this._required = value !== false && value !== null;
-    if (this._onChange) {
-      this._onChange();
-    }
-  }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    if (this.required) {
-      return c.value !== '' && c.value !== undefined && c.value !== null ? null : {'required': true};
-    }
-    return null;
+    return this.required ? Validators.required(c) : null;
   }
 
   registerOnValidatorChange(fn: () => void): void {
@@ -218,48 +100,7 @@ export class PickerRequiredValidator implements Validator {
   }
 
   validate(c: AbstractControl): ValidationErrors | null {
-    if (this.required) {
-      return Array.isArray(c.value) && c.value.length > 0 ? null : {'required': true};
-    }
-    return null;
-  }
-
-  registerOnValidatorChange(fn: () => void): void {
-    this._onChange = fn;
-  }
-}
-
-@Directive({
-  /* tslint:disable */
-  selector: 'ui-markdown-editor[required], ui-editor[required]',
-  /* tslint:enable */
-  providers: [{
-    provide: NG_VALIDATORS,
-    useExisting: EditorRequiredValidator,
-    multi: true
-  }]
-})
-export class EditorRequiredValidator implements Validator {
-  private _required: boolean;
-  private _onChange: () => void;
-
-  @Input()
-  get required(): boolean | string {
-    return this._required;
-  }
-
-  set required(value: boolean | string) {
-    this._required = value !== false && value !== null;
-    if (this._onChange) {
-      this._onChange();
-    }
-  }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    if (this.required) {
-      return c.value !== undefined && c.value !== null && !/^\s+$/g.test(c.value) ? null : {'required': true};
-    }
-    return null;
+    return this.required ? UIValidators.pickerRequired(c) : null;
   }
 
   registerOnValidatorChange(fn: () => void): void {

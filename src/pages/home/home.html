@@ -1,32 +1,9 @@
-<p>tst</p>
-<ui-panel class="ui-fill ui-info">
-  <ui-panel-header>
-    <h3 class="ui-panel-title">就换一个</h3>
-  </ui-panel-header>
-  <ui-panel-body>
-    <input type="number" [(ngModel)]="pages">
-    <input type="number" [(ngModel)]="rows">
-  </ui-panel-body>
-  <ui-panel-footer>
-    <ui-pagination [pages]="pages" [rows]="rows"></ui-pagination>
-  </ui-panel-footer>
-</ui-panel>
-
-<ui-pagination [pages]="pages" [rows]="rows"></ui-pagination>
-
-<!--<div style="height: 100px; overflow-y: auto">-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-  <!--<p>我是一个 <ui-tag class="ui-success">小工</ui-tag></p>-->
-<!--</div>-->
+<form novalidate (uiSumit)="submit()">
+  <p>
+    <input ui-input type="text" #pwd="ngModel" [(ngModel)]="data.pwd" minlength="6" name="pwd">
+  </p>
+  <p>
+    <input ui-input type="text" [(ngModel)]="data.pwd2" [equal]="pwd" name="pwd2">
+  </p>
+  <p><button type="submit">submit</button></p>
+</form>
