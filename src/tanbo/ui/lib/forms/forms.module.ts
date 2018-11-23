@@ -30,7 +30,9 @@ import {
   RadioRequiredValidator,
   SelectRequiredValidator,
   SwitchRequiredValidator,
-  DateRequiredValidator
+  DateRequiredValidator,
+  PickerRequiredValidator,
+  EditorRequiredValidator
 } from './required-validator.directive';
 import { SubmitDirective } from './submit.directive';
 
@@ -70,7 +72,9 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     RadioRequiredValidator,
     SelectRequiredValidator,
     SwitchRequiredValidator,
-    DateRequiredValidator
+    DateRequiredValidator,
+    PickerRequiredValidator,
+    EditorRequiredValidator
   ],
   exports: [
     BtnGroupComponent,
@@ -98,7 +102,9 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     RadioRequiredValidator,
     SelectRequiredValidator,
     SwitchRequiredValidator,
-    DateRequiredValidator
+    DateRequiredValidator,
+    PickerRequiredValidator,
+    EditorRequiredValidator
   ],
   providers: [
     RadioStateService, {

@@ -190,3 +190,79 @@ export class DateRequiredValidator implements Validator {
     this._onChange = fn;
   }
 }
+
+@Directive({
+  /* tslint:disable */
+  selector: 'ui-picker[required]',
+  /* tslint:enable */
+  providers: [{
+    provide: NG_VALIDATORS,
+    useExisting: PickerRequiredValidator,
+    multi: true
+  }]
+})
+export class PickerRequiredValidator implements Validator {
+  private _required: boolean;
+  private _onChange: () => void;
+
+  @Input()
+  get required(): boolean | string {
+    return this._required;
+  }
+
+  set required(value: boolean | string) {
+    this._required = value !== false && value !== null;
+    if (this._onChange) {
+      this._onChange();
+    }
+  }
+
+  validate(c: AbstractControl): ValidationErrors | null {
+    if (this.required) {
+      return Array.isArray(c.value) && c.value.length > 0 ? null : {'required': true};
+    }
+    return null;
+  }
+
+  registerOnValidatorChange(fn: () => void): void {
+    this._onChange = fn;
+  }
+}
+
+@Directive({
+  /* tslint:disable */
+  selector: 'ui-markdown-editor[required], ui-editor[required]',
+  /* tslint:enable */
+  providers: [{
+    provide: NG_VALIDATORS,
+    useExisting: EditorRequiredValidator,
+    multi: true
+  }]
+})
+export class EditorRequiredValidator implements Validator {
+  private _required: boolean;
+  private _onChange: () => void;
+
+  @Input()
+  get required(): boolean | string {
+    return this._required;
+  }
+
+  set required(value: boolean | string) {
+    this._required = value !== false && value !== null;
+    if (this._onChange) {
+      this._onChange();
+    }
+  }
+
+  validate(c: AbstractControl): ValidationErrors | null {
+    if (this.required) {
+      return c.value !== undefined && c.value !== null && !/^\s+$/g.test(c.value) ? null : {'required': true};
+    }
+    return null;
+  }
+
+  registerOnValidatorChange(fn: () => void): void {
+    this._onChange = fn;
+  }
+}
