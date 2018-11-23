@@ -1,9 +1,9 @@
-<form novalidate (uiSumit)="submit()">
+<form novalidate (uiSubmit)="submit()">
   <p>
-    <input ui-input type="text" #pwd="ngModel" [(ngModel)]="data.pwd" minlength="6" name="pwd">
+    <input ui-input required type="text" #pwd="ngModel" [(ngModel)]="data.pwd" minlength="6" name="pwd">
   </p>
   <p>
-    <input ui-input type="text" [(ngModel)]="data.pwd2" [equal]="pwd" name="pwd2">
+    <input ui-input required type="text" [(ngModel)]="data.pwd2" [equal]="pwd" name="pwd2">
   </p>
   <p><button type="submit">submit</button></p>
 </form>

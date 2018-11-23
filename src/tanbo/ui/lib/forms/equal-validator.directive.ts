@@ -25,7 +25,9 @@ export class EqualValidator implements Validator, OnDestroy {
     if (this._onChange) {
       this._onChange();
     }
-    this.subscribe();
+    if (this.controller) {
+      this.subscribe();
+    }
   }
 
   private referenceController: AbstractControl;
