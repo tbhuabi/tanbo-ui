@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DividerComponent } from './divider/divider.component';
+import { ItemComponent } from './item/item.component';
 import { PopConfirmComponent } from './pop-confirm/pop-confirm.component';
 import { TagComponent } from './tag/tag.component';
+import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { ViewLoadingBarComponent } from './view-loading-bar/view-loading-bar.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { TooltipBaseComponent } from './tooltip-base/tooltip-base.component';
@@ -18,8 +20,10 @@ import { StopPropagationDirective } from './stop-propagation.directive';
   ],
   declarations: [
     DividerComponent,
+    ItemComponent,
     PopConfirmComponent,
     TagComponent,
+    ToolBarComponent,
     ViewLoadingBarComponent,
     TooltipComponent,
     TooltipBaseComponent,
@@ -30,8 +34,10 @@ import { StopPropagationDirective } from './stop-propagation.directive';
   ],
   exports: [
     DividerComponent,
+    ItemComponent,
     PopConfirmComponent,
     TagComponent,
+    ToolBarComponent,
     ViewLoadingBarComponent,
     TooltipComponent,
     TooltipBaseComponent,

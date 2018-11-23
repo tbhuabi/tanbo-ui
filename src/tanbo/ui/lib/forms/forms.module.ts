@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { UILayoutModule } from '../layout/layout.module';
+import { UIDropdownModule } from '../dropdown/dropdown.module';
 import { UIOtherModule } from '../other/other.module';
 
 import { BtnGroupComponent } from './btn-group/btn-group.component';
@@ -40,7 +40,7 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
   imports: [
     FormsModule,
     CommonModule,
-    UILayoutModule,
+    UIDropdownModule,
     UIOtherModule
   ],
   declarations: [
