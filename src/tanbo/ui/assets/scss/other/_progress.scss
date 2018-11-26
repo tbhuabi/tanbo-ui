@@ -1,0 +1,53 @@
+@mixin progress-theme($name, $color) {
+  &.ui-#{$name} {
+    .ui-progress-percent {
+      background-color: $color;
+    }
+    .ui-progress-circle-bar {
+      stroke: $color;
+    }
+  }
+}
+
+ui-progress {
+  @include progress-theme(default, $color-default);
+  @include progress-theme(primary, $color-primary);
+  @include progress-theme(info, $color-info);
+  @include progress-theme(success, $color-success);
+  @include progress-theme(warning, $color-warning);
+  @include progress-theme(danger, $color-danger);
+}
+
+.ui-progress-line {
+  border-radius: 3px;
+  background-color: $color-light;
+  overflow: hidden;
+  .ui-progress-percent {
+    background-color: $color-primary;
+    border-radius: 3px;
+    transition: width .3s;
+  }
+}
+
+.ui-progress-circle {
+  position: relative;
+  display: inline-block;
+  .ui-progress-circle-bg {
+    stroke: $color-light;
+  }
+  .ui-progress-circle-bar {
+    stroke: $color-primary;
+    transition: stroke-dasharray 0.3s;
+    stroke-linecap: round;
+  }
+  .ui-progress-circle-text {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    text-align: center;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,13 @@
+<div *ngIf="type === 'line'" class="ui-progress-line">
+  <div class="ui-progress-percent" [ngStyle]="{width: percent * 100 + '%', height: lineWidth + 'px'}"></div>
+</div>
+<div *ngIf="type === 'circle'" class="ui-progress-circle">
+  <svg [ngStyle]="{width: size + 'px', height: size + 'px'}" [attr.viewBox]="viewBox">
+    <path class="ui-progress-circle-bg" fill="none"
+          [attr.stroke-width]="lineWidth" [attr.d]="path"></path>
+    <path class="ui-progress-circle-bar" fill="none"
+          [ngStyle]="{'stroke-dasharray': dasharray}"
+          [attr.stroke-width]="lineWidth" [attr.d]="path"></path>
+  </svg>
+  <span class="ui-progress-circle-text">{{ text }}%</span>
+</div>

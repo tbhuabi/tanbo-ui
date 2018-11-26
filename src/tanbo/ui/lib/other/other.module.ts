@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DividerComponent } from './divider/divider.component';
 import { ItemComponent } from './item/item.component';
 import { PopConfirmComponent } from './pop-confirm/pop-confirm.component';
+import { ProgressComponent } from './progress/progress.component';
 import { TagComponent } from './tag/tag.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { ViewLoadingBarComponent } from './view-loading-bar/view-loading-bar.component';
@@ -22,6 +23,7 @@ import { StopPropagationDirective } from './stop-propagation.directive';
     DividerComponent,
     ItemComponent,
     PopConfirmComponent,
+    ProgressComponent,
     TagComponent,
     ToolBarComponent,
     ViewLoadingBarComponent,
@@ -36,6 +38,7 @@ import { StopPropagationDirective } from './stop-propagation.directive';
     DividerComponent,
     ItemComponent,
     PopConfirmComponent,
+    ProgressComponent,
     TagComponent,
     ToolBarComponent,
     ViewLoadingBarComponent,

@@ -14,9 +14,5 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
   styleUrls: ['./home.scss']
 })
 export class HomeComponent {
-  data: any = {};
-
-  submit() {
-    console.log('submit')
-  }
+  value = 30;
 }

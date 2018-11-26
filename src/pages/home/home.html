@@ -1,9 +1,7 @@
-<form novalidate (uiSubmit)="submit()">
-  <p>
-    <input ui-input required type="text" #pwd="ngModel" [(ngModel)]="data.pwd" minlength="6" name="pwd">
-  </p>
-  <p>
-    <input ui-input required type="text" [(ngModel)]="data.pwd2" [equal]="pwd" name="pwd2">
-  </p>
-  <p><button type="submit">submit</button></p>
-</form>
+<p>test</p>
+<p>
+  <ui-input type="range" [(ngModel)]="value"></ui-input>
+</p>
+<div class="ui-container-fluid">
+  <ui-progress type="circle" [lineWidth]="7" [value]="value"></ui-progress>
+</div>
