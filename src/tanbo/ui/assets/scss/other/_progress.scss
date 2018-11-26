@@ -10,6 +10,11 @@
 }
 
 ui-progress {
+  display: inline-block;
+  width: 100%;
+  &[type=circle] {
+    width: auto;
+  }
   @include progress-theme(default, $color-default);
   @include progress-theme(primary, $color-primary);
   @include progress-theme(info, $color-info);
