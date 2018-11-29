@@ -1,6 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { UIAppModule } from './app/app.module';
+import { UIBreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { UICropperModule } from './cropper/cropper.module';
 import { UIDropdownModule } from './dropdown/dropdown.module';
 import { UIFormsModule } from './forms/forms.module';
@@ -22,6 +23,7 @@ import { AnchorService, UI_ANCHOR_LINK_DISTANCE } from './quick-nav/index';
 @NgModule({
   exports: [
     UIAppModule,
+    UIBreadcrumbModule,
     UICropperModule,
     UIDropdownModule,
     UIFormsModule,

@@ -2,6 +2,18 @@
 <p>
   <ui-input type="range" [(ngModel)]="value"></ui-input>
 </p>
+<p>
+  <ui-breadcrumb>
+    <ui-breadcrumb-item>首页</ui-breadcrumb-item>
+    <ui-breadcrumb-item>
+      <a href="javascript:;">商户管理</a>
+    </ui-breadcrumb-item>
+
+    <ui-breadcrumb-item>
+      <a href="javascript:;">商户详情</a>
+    </ui-breadcrumb-item>
+  </ui-breadcrumb>
+</p>
 <div class="ui-container-fluid">
   <ui-progress type="circle" [lineWidth]="7" [value]="value"></ui-progress>
   <ui-progress type="circle" [lineWidth]="7" [value]="value"></ui-progress>

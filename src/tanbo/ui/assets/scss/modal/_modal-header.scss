@@ -9,6 +9,11 @@ ui-modal-header {
   > .ui-close {
     transform: translateY(-5px);
   }
+  &.ui-dark {
+    background-color: $color-dark;
+    border-color: $color-dark;
+    color: #fff;
+  }
   &.ui-primary {
     background-color: $color-primary;
     border-color: $color-primary;

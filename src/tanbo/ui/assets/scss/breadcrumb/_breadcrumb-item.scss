@@ -1,0 +1,23 @@
+ui-breadcrumb-item {
+  display: inline;
+  &:last-child {
+    .ui-breadcrumb-split-icon {
+      display: none;
+    }
+  }
+  > a {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+      color: $color-primary;
+    }
+  }
+  &:not(:last-child) {
+    color: $color-gray-dark;
+  }
+}
+
+.ui-breadcrumb-split-icon {
+  padding-left: .6em;
+  padding-right: .6em;
+}
