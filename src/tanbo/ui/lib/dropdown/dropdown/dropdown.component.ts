@@ -18,7 +18,7 @@ export class DropdownComponent {
 
   @HostListener('document:click')
   docClick() {
-    if (!this.isSelfClick) {
+    if (!this.isSelfClick && this.focus) {
       if (this.autoDisplay) {
         this.open = false;
       }

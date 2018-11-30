@@ -26,7 +26,9 @@ export class ProgressComponent {
 
   get path() {
     const r = (this.size - this.lineWidth ) / 2;
+    /* tslint:disable */
     return `M ${this.size / 2} ${this.lineWidth / 2} a ${r} ${r} 0 1 1 0 ${this.size - this.lineWidth} a ${r} ${r} 0 1 1 0 ${-this.size + this.lineWidth}`;
+    /* tslint:enable */
   }
 
   get dasharray() {

@@ -1,24 +1,12 @@
-<p>test</p>
-<p>
-  <ui-input type="range" [(ngModel)]="value"></ui-input>
-</p>
-<p>
-  <ui-breadcrumb>
-    <ui-breadcrumb-item>首页</ui-breadcrumb-item>
-    <ui-breadcrumb-item>
-      <a href="javascript:;">商户管理</a>
-    </ui-breadcrumb-item>
-
-    <ui-breadcrumb-item>
-      <a href="javascript:;">商户详情</a>
-    </ui-breadcrumb-item>
-  </ui-breadcrumb>
-</p>
-<div class="ui-container-fluid">
-  <ui-progress type="circle" [lineWidth]="7" [value]="value"></ui-progress>
-  <ui-progress type="circle" [lineWidth]="7" [value]="value"></ui-progress>
-  <ui-progress type="circle" [lineWidth]="7" [value]="value"></ui-progress>
-  <ui-progress type="circle" [lineWidth]="7" [value]="value"></ui-progress>
-  <ui-progress type="circle" [lineWidth]="7" [value]="value"></ui-progress>
-  <ui-progress type="circle" [lineWidth]="7" [value]="value"></ui-progress>
-</div>
+<p><button type="button" (click)="show()">button</button></p>
+<ng-template #modal>
+  <ui-modal>
+    <ui-modal-body>
+      <form (uiSubmit)="show()">
+        <ui-select required [(ngModel)]="name" name="name">
+          <ui-option value="1">1</ui-option>
+        </ui-select>
+      </form>
+    </ui-modal-body>
+  </ui-modal>
+</ng-template>
