@@ -40,7 +40,7 @@ export class SubmitDirective implements OnInit, OnDestroy {
   private markAsTouched(group: FormGroup | FormArray) {
     Object.keys(group.controls).map((field) => {
       const control = group.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof FormControl || control instanceof FormArray) {
         control.markAsDirty({onlySelf: true});
         control.markAsTouched({onlySelf: true});
       } else if (control instanceof FormGroup) {
