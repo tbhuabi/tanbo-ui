@@ -20,7 +20,6 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit {
   @Output() uiChange = new EventEmitter<string>();
 
   private editor: Quill;
-  // private value: string = '';
   private onChange: (value: any) => any;
   private onTouched: () => any;
 
@@ -36,6 +35,9 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit {
       placeholder: this.placeholder,
       theme: 'snow'  // or 'bubble'
     });
+    if (this.value !== null && this.value !== undefined) {
+      this.writeValue(this.value + '');
+    }
     // source: api/user triggered this change
     // args: delta, oldDelta, source
     this.editor.on('text-change', (delta, oldDelta, source) => {

@@ -1,1 +1,1 @@
-export { CropperCoordinates } from './cropper/cropper.component';
+export { CropResult } from './cropper/cropper.component';

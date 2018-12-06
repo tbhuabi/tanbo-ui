@@ -1,4 +1,4 @@
-<p><button type="button" (click)="show()">button</button></p>
+<!-- <p><button type="button" (click)="show()">button</button></p>
 <ng-template #modal>
   <ui-modal>
     <ui-modal-body>
@@ -9,4 +9,8 @@
       </form>
     </ui-modal-body>
   </ui-modal>
-</ng-template>
+</ng-template> -->
+<ui-editor [value]="initValue" (uiChange)="changeText($event)"></ui-editor>
+<div class="home">
+  <ui-cropper [imageURL]="imgUrl" [cropHeight]="150" [cropWidth]="150" (uiChange)="change($event)"></ui-cropper>
+</div>

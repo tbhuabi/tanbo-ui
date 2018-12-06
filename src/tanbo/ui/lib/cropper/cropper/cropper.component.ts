@@ -1,15 +1,18 @@
 import { Component, ElementRef, OnInit, ViewChild, Renderer2, Input, Output, EventEmitter } from '@angular/core';
 
-export interface CropperCoordinates {
-  // 裁剪框四角坐标
-  leftTopX: number;
-  leftTopY: number;
-  rightTopX: number;
-  rightTopY: number;
-  rightBottomX: number;
-  rightBottomY: number;
-  leftBottomX: number;
-  leftBottomY: number;
+export interface CropResult {
+  coordinates: {
+    // 裁剪框四角坐标
+    leftTopX: number;
+    leftTopY: number;
+    rightTopX: number;
+    rightTopY: number;
+    rightBottomX: number;
+    rightBottomY: number;
+    leftBottomX: number;
+    leftBottomY: number;
+  };
+  scale: number;
 }
 
 @Component({
@@ -22,9 +25,12 @@ export class CropperComponent implements OnInit {
   // 裁剪的宽度
   @Input() cropWidth: number = 200;
   // 裁剪的高度
-  @Input() cropHeight: number = 200;
-  @Input() imageURL: string = '';
-  @Output() uiChange = new EventEmitter<CropperCoordinates>();
+  @Input()
+  cropHeight: number = 200;
+  @Input()
+  imageURL: string = '';
+  @Output()
+  public uiChange = new EventEmitter<CropResult>();
   // 图片相对容器右上角的偏移量
   imageOffsetX: number = 0;
   imageOffsetY: number = 0;
@@ -42,6 +48,8 @@ export class CropperComponent implements OnInit {
   private imageWidth: number = 0;
   // 计算后的图片高度
   private imageHeight: number = 0;
+  // 缩放倍数
+  scale: number = 1;
   // 裁剪框四角坐标
   private leftTopX: number = 0;
   private leftTopY: number = 0;
@@ -115,14 +123,17 @@ export class CropperComponent implements OnInit {
     this.leftBottomX = this.leftTopX;
     this.leftBottomY = this.leftTopY + cropHeight;
     this.uiChange.emit({
-      leftTopX: this.leftTopX,
-      leftTopY: this.leftTopY,
-      rightTopX: this.rightTopX,
-      rightTopY: this.rightTopY,
-      rightBottomX: this.rightBottomX,
-      rightBottomY: this.rightBottomY,
-      leftBottomX: this.leftBottomX,
-      leftBottomY: this.leftBottomY
+      coordinates: {
+        leftTopX: this.leftTopX,
+        leftTopY: this.leftTopY,
+        rightTopX: this.rightTopX,
+        rightTopY: this.rightTopY,
+        rightBottomX: this.rightBottomX,
+        rightBottomY: this.rightBottomY,
+        leftBottomX: this.leftBottomX,
+        leftBottomY: this.leftBottomY,
+      },
+      scale: this.scale
     });
   }
 
@@ -159,6 +170,7 @@ export class CropperComponent implements OnInit {
       e.preventDefault();
       const change = e.deltaY || e.deltaX;
       const scale = change < 0 ? 1.05 : 0.95;
+      this.scale = this.scale * scale;
       this.imageHeight = this.imageHeight * scale;
       this.imageWidth = this.imageWidth * scale;
       this.imgElement.width = this.imageWidth;
