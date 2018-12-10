@@ -65,6 +65,9 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
           this.totalMenu++;
         } else {
           this.totalMenu--;
+          if (this.totalMenu < 0) {
+            this.totalMenu = 0;
+          }
         }
       }));
     }
@@ -119,11 +122,11 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
 
   private isLinkActive(router: Router): (link: (RouterLink | RouterLinkWithHref)) => boolean {
     return (link: RouterLink | RouterLinkWithHref) =>
-        router.isActive(link.urlTree, this.routerLinkActiveOptions.exact);
+      router.isActive(link.urlTree, this.routerLinkActiveOptions.exact);
   }
 
   private hasActiveLinks(): boolean {
     return this.links.some(this.isLinkActive(this.router)) ||
-        this.linksWithHrefs.some(this.isLinkActive(this.router));
+      this.linksWithHrefs.some(this.isLinkActive(this.router));
   }
 }
