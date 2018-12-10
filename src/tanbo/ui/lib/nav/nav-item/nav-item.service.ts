@@ -1,12 +1,12 @@
 import { Injectable, Optional, SkipSelf } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class NavItemService {
   isOpen: Observable<boolean>;
   hasMenu: Observable<boolean>;
   private openEvent = new Subject<boolean>();
-  private hasMenuEvent = new Subject<boolean>();
+  private hasMenuEvent = new BehaviorSubject<boolean>(false);
 
   constructor(@Optional() @SkipSelf() public parent: NavItemService) {
     this.isOpen = this.openEvent.asObservable();
