@@ -77,7 +77,8 @@ export class EqualValidator implements Validator, OnDestroy {
       this.subscribe();
       this.isFirst = false;
     }
-    if (!this.referenceController) {
+    const value = c.value;
+    if (value === '' || value === undefined || value === null || !this.referenceController) {
       return null;
     }
     return UIValidators.equal(c, this.referenceController);
