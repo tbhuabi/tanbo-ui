@@ -9,8 +9,24 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as CodeMirror from 'codemirror';
+import * as hljs from 'highlight.js';
+import * as marked from 'marked';
 
 import 'codemirror/mode/markdown/markdown.js';
+
+const md = marked.setOptions({
+  highlight: function (str: string, lang: string) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    return '';
+  },
+  breaks: true
+});
 
 @Component({
   selector: 'ui-markdown-editor',
@@ -29,8 +45,12 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
   @Input() forId: string;
   @Output() uiChange = new EventEmitter<string>();
 
+  display = 'split'; // code|view
+
+  displayHtml = '';
+
   private onChange: (_: any) => any;
-  private onTouched: (_: any) => any;
+  private onTouched: () => any;
 
   private cmInstance: CodeMirror.Editor;
   private cmDoc: CodeMirror.Doc;
@@ -55,11 +75,22 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
       if (this.onChange) {
         this.onChange(value);
       }
-      if (this.onTouched) {
-        this.onTouched(value);
-      }
+
       this.uiChange.emit(value);
+      if (this.display !== 'code') {
+        this.displayHtml = md(value);
+      }
     });
+    this.cmInstance.on('blur', () => {
+      if (this.onTouched) {
+        this.onTouched();
+      }
+    });
+  }
+
+  setDisplayState(state: string) {
+    this.display = state;
+    this.displayHtml = md(this.value);
   }
 
   setBold() {

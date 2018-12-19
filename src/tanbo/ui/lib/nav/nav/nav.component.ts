@@ -1,4 +1,4 @@
-import { Component, Optional, OnInit, OnDestroy, SkipSelf, HostBinding } from '@angular/core';
+import { Component, Optional, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Subscription } from 'rxjs';
 

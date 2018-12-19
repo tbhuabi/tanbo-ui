@@ -1,0 +1,32 @@
+@import "~highlight.js/styles/github.css";
+
+code, pre {
+  background-color: #f6f8fa;
+
+}
+
+pre code {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+code {
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 3px;
+}
+
+pre {
+  line-height: 1.418em;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid $color-light;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+
+}
+
+code, kbd, pre, samp {
+  font-family: Microsoft YaHei Mono,Menlo,Monaco,Consolas,Courier New,monospace;
+}
