@@ -21,10 +21,10 @@
   </div>
 </ui-tool-bar>
 <div class="ui-markdown-editor-body">
-  <div class="ui-markdown-editor-body-item" [class.ui-hide]="display === 'view'">
+  <div class="ui-markdown-editor-body-item" [ngClass]="{'ui-hide': display === 'view', 'ui-split': display === 'split'}">
     <textarea #editor [attr.name]="name" [attr.id]="forId" [value]="value" (focus)="focus()"></textarea>
   </div>
-  <div class="ui-markdown-editor-body-item ui-markdown-editor-viewer" [class.ui-hide]="display === 'code'" [innerHTML]="displayHtml">
+  <div class="ui-markdown-editor-body-item ui-markdown-editor-viewer" [ngClass]="{'ui-hide': display === 'code', 'ui-split': display === 'split'}" [innerHTML]="displayHtml">
 
   </div>
 </div>

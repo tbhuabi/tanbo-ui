@@ -41,6 +41,9 @@ ui-markdown-editor {
     &.ui-hide {
       display: none;
     }
+    &.ui-split {
+      max-width: 50%;
+    }
     &:not(:last-child) {
       border-right: 1px solid $color-light;
     }
