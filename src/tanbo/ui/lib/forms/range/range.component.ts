@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { attrToBoolean } from '../../utils';
 
@@ -14,9 +15,10 @@ import { attrToBoolean } from '../../utils';
 })
 export class RangeComponent implements ControlValueAccessor {
   @ViewChild('rangeBar') rangeBar: ElementRef;
+  @ViewChild('rangeProgressBar') rangeProgressBar: ElementRef;
   @Input() name: string;
   @Input() forId: string;
-  @Input() showProgress: boolean = false;
+  @Input() showProgress: boolean = true;
 
   @Input()
   @HostBinding('class.ui-disabled')
@@ -94,7 +96,7 @@ export class RangeComponent implements ControlValueAccessor {
     return this._value;
   }
 
-  @Output() uiChange = new EventEmitter<string>();
+  @Output() uiChange = new EventEmitter<number>();
 
   position: number = 50;
   isTouching: boolean = false;
@@ -116,9 +118,35 @@ export class RangeComponent implements ControlValueAccessor {
     return Number(value);
   }
 
-  constructor(private elementRef: ElementRef,
-              private renderer: Renderer2) {
+  constructor(private renderer: Renderer2) {
 
+  }
+
+  keyDown(ev: KeyboardEvent) {
+    const oldValue = this.value;
+    const updateValue = (offset: number) => {
+      this.isTouching = true;
+      if (ev.shiftKey) {
+        offset *= 10;
+      }
+      this.value += offset;
+      if (this.value < this.min) {
+        this.value = this.min;
+      } else if (this.value > this.max) {
+        this.value = this.max - (this.max - this.min) % this.step;
+      }
+      if (this.value !== oldValue) {
+        if (this.onChange) {
+          this.onChange(this.value);
+        }
+        this.uiChange.emit(this.value);
+      }
+    };
+    if (ev.keyCode === LEFT_ARROW) {
+      updateValue(-this.step);
+    } else if (ev.keyCode === RIGHT_ARROW) {
+      updateValue(this.step);
+    }
   }
 
   drag(event: any) {
@@ -139,8 +167,8 @@ export class RangeComponent implements ControlValueAccessor {
     });
 
     const section = this.max - this.min;
-    const maxWidth = this.elementRef.nativeElement.offsetWidth;
-    const nowWidth = this.rangeBar.nativeElement.offsetWidth;
+    const maxWidth = this.rangeBar.nativeElement.offsetWidth;
+    const nowWidth = this.rangeProgressBar.nativeElement.offsetWidth;
 
     const oldX: number = event.clientX;
 
@@ -163,15 +191,19 @@ export class RangeComponent implements ControlValueAccessor {
         if (this.onChange) {
           this.onChange(value);
         }
-        if (this.onTouched) {
-          this.onTouched();
-        }
+
         this.uiChange.emit(value);
       }
       ev.stopPropagation();
       ev.preventDefault();
     });
+  }
 
+  blur() {
+    this.isTouching = false;
+    if (this.onTouched) {
+      this.onTouched();
+    }
   }
 
   writeValue(value: any) {

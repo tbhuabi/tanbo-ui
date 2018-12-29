@@ -1,13 +1,18 @@
-<div class="ui-range">
-  <div class="ui-range-progress-bar" #rangeBar [ngStyle]="{width: position + '%'}">
+<div class="ui-range" #rangeBar>
+  <div class="ui-range-progress-bar" #rangeProgressBar [ngStyle]="{width: position + '%'}">
     <div class="ui-range-btn">
       <span class="ui-range-progress" *ngIf="showProgress" [ngClass]="{'ui-touched': isTouching}">{{ value }}</span>
-      <button class="ui-range-btn-raw" type="button" (mousedown)="drag($event)">
+      <button type="button"
+              (keydown)="keyDown($event)"
+              (blur)="blur()"
+              [disabled]="disabled" class="ui-range-btn-raw" (mousedown)="drag($event)">
       </button>
     </div>
   </div>
 </div>
 <input class="ui-input-range-raw"
+       #rawInput
+       tabindex="-1"
        type="range"
        [value]="value"
        [attr.id]="forId"

@@ -27,19 +27,22 @@
 ui-input[type=range] {
   vertical-align: middle;
   display: inline-block;
-  cursor: pointer;
   line-height: 0;
   height: 1em;
-  width: 8em;
+  width: 10em;
+  padding-left: 14px;
+  padding-right: 14px;
   text-align: left;
   @include range-style(primary, $color-primary);
   @include range-style(info, $color-info);
   @include range-style(warning, $color-warning);
   @include range-style(success, $color-success);
   @include range-style(danger, $color-danger);
-  &[disabled], &[readonly], &.disabled {
+  &[disabled], &[readonly], &.ui-disabled {
     opacity: .5;
-    cursor: not-allowed;
+    .ui-range-btn-raw {
+      cursor: not-allowed;
+    }
   }
   &[readonly] {
     cursor: default;
@@ -87,11 +90,10 @@ ui-input[type=range] {
   background-color: #fff;
   box-shadow: 0 3px 1px rgba(0, 0, 0, .1), 0 4px 8px rgba(0, 0, 0, .13), 0 0 0 1px rgba(0, 0, 0, .02);
   border: none;
-  cursor: pointer;
 }
 
 .ui-range-btn-raw {
-  cursor: inherit;
+  cursor: pointer;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -102,6 +104,9 @@ ui-input[type=range] {
   bottom: 0;
   border: 0;
   border-radius: 50%;
+  &.ui-focus, &:focus {
+    @include focus($color-primary);
+  }
 }
 
 .ui-range-progress {
@@ -111,13 +116,32 @@ ui-input[type=range] {
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
-  font-size: 14px;
-  color: #000;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  background-color: $color-dark;
   display: block;
+  padding-left: 6px;
+  padding-right: 6px;
+  min-width: 24px;
   opacity: 0;
   transition: all .2s;
+  border-radius: 5px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, .3);
+  &:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-width: 3px 4px;
+    border-style: solid;
+    border-color: $color-dark transparent transparent transparent;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -4px;
+  }
   &.ui-touched {
     opacity: 1;
-    transform: translateX(-50%) translateY(-26px);
+    transform: translateX(-50%) translateY(-36px);
   }
 }
