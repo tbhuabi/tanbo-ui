@@ -2,6 +2,7 @@
        [ngClass]="{'ui-input-sm': size === 'sm', 'ui-input-lg': size === 'lg', 'ui-focus': focus}"
        [disabled]="disabled"
        [attr.name]="name"
+       #rawInput
        readonly
        type="text"
        [attr.id]="forId"
@@ -10,6 +11,6 @@
 <div class="ui-dropdown-input-arrow" [class.ui-open]="open">
   <span [ngClass]="arrowIconClassName"></span>
 </div>
-<div class="ui-dropdown-input-clean" [class.ui-hide]="!value || disabled || readonly" ui-stop-propagation>
+<div class="ui-dropdown-input-clean" [class.ui-hide]="!value || disabled || readonly" uiStopPropagation>
   <span (click)="reset()">&times;</span>
 </div>

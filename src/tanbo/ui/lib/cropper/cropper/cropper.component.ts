@@ -34,6 +34,8 @@ export class CropperComponent implements OnInit {
   // 图片相对容器右上角的偏移量
   imageOffsetX: number = 0;
   imageOffsetY: number = 0;
+  // 缩放倍数
+  scale: number = 1;
   // 图片缩放比例
   private proportion: number = 1;
   // 容器宽度
@@ -48,8 +50,6 @@ export class CropperComponent implements OnInit {
   private imageWidth: number = 0;
   // 计算后的图片高度
   private imageHeight: number = 0;
-  // 缩放倍数
-  scale: number = 1;
   // 裁剪框四角坐标
   private leftTopX: number = 0;
   private leftTopY: number = 0;

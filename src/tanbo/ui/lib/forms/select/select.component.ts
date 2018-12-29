@@ -4,17 +4,21 @@ import {
   AfterViewInit,
   Component,
   ContentChildren,
+  HostListener,
   EventEmitter,
   Input,
   OnDestroy,
+  ViewChild,
   Output,
   Inject,
   QueryList
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
+import { DropdownInputComponent } from '../dropdown-input/dropdown-input.component';
 import { OptionComponent } from '../option/option.component';
 import { SelectService } from './select.service';
 import { UI_SELECT_ARROW_CLASSNAME } from '../help';
@@ -33,6 +37,7 @@ import { attrToBoolean } from '../../utils';
 export class SelectComponent implements ControlValueAccessor, AfterContentInit, OnDestroy, AfterViewInit {
   @ContentChildren(OptionComponent)
   options: QueryList<OptionComponent>;
+  @ViewChild('dropdownInput') dropdownInput: DropdownInputComponent;
   @Input() position = 'bottomLeft';
   @Input() size: string = '';
   @Input() forId: string;
@@ -72,6 +77,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   private subs: Array<Subscription> = [];
 
   private selectedOption: OptionComponent;
+  private temporaryOption: OptionComponent;
   private isWrite: boolean = false;
 
   static getTextByElement(element: HTMLElement): string {
@@ -92,7 +98,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
       this.updateBySelf();
     }
     this.subs.push(this.selectService.onChecked.subscribe((option: OptionComponent) => {
-      this.focus = true;
+      this.dropdownInput.focusIn();
       this.open = false;
       this.options.forEach((op: OptionComponent, index: number) => {
         if (op === option) {
@@ -130,6 +136,67 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     });
   }
 
+  keyDown(ev: KeyboardEvent) {
+
+    function findNext(startOption: OptionComponent,
+                      selectedOption: OptionComponent,
+                      options: OptionComponent[],
+                      offset: number): OptionComponent {
+      if (!options.length) {
+        return null;
+      }
+      let index = options.indexOf(selectedOption);
+      index += offset;
+      if (index < 0) {
+        index = options.length - 1;
+      } else if (index >= options.length) {
+        index = 0;
+      }
+
+      const nextOption = options[index];
+      if (nextOption === startOption) {
+        return nextOption;
+      }
+      if (nextOption.disabled) {
+        return findNext(startOption, nextOption, options, offset);
+      }
+      return nextOption;
+    }
+
+    const keyCode = ev.keyCode;
+    if (this.open) {
+      const options = this.options.toArray();
+      if (keyCode === DOWN_ARROW || keyCode === UP_ARROW) {
+        let nextOption = findNext(this.selectedOption,
+          this.temporaryOption || this.selectedOption,
+          options,
+          keyCode === DOWN_ARROW ? 1 : -1);
+        options.forEach(op => {
+          op.focus = op === nextOption;
+          if (op.focus) {
+            this.temporaryOption = op;
+          }
+        });
+        ev.preventDefault();
+        return false;
+      } else if (keyCode === ENTER && this.temporaryOption) {
+        this.temporaryOption.click();
+        this.temporaryOption.focus = false;
+        this.temporaryOption = null;
+        return;
+      }
+    }
+    if (keyCode === ENTER) {
+      this.toggle();
+    } else if (keyCode === BACKSPACE) {
+      if (this.temporaryOption) {
+        this.temporaryOption.focus = false;
+        this.temporaryOption = null;
+      }
+      this.reset();
+    }
+  }
+
   toggle() {
     if (this.disabled) {
       return;
@@ -144,6 +211,10 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   escape() {
     this.focus = false;
     this.open = false;
+    if (this.temporaryOption) {
+      this.temporaryOption.focus = false;
+      this.temporaryOption = null;
+    }
     if (this.onTouched) {
       this.onTouched();
     }
@@ -159,6 +230,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
       this.onChange('');
     }
     this.uiChange.emit('');
+    this.dropdownInput.focusIn();
   }
 
   writeValue(value: any) {

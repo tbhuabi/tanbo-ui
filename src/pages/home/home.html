@@ -11,6 +11,46 @@
   </ui-modal>
 </ng-template> -->
 <ui-editor [value]="initValue" (uiChange)="changeText($event)"></ui-editor>
-<div class="home">
-  <ui-cropper [imageURL]="imgUrl" [cropHeight]="150" [cropWidth]="150" (uiChange)="change($event)"></ui-cropper>
-</div>
+<!--<div class="home">-->
+<!--<ui-cropper [imageURL]="imgUrl" [cropHeight]="150" [cropWidth]="150" (uiChange)="change($event)"></ui-cropper>-->
+<!--</div>-->
+<p>
+  <a href="javascript:;">test</a>
+  <input type="text" uiInput>
+</p>
+<p>
+  <ui-select placeholder="请选择">
+    <ui-option>aaa</ui-option>
+    <ui-option>bbb</ui-option>
+    <ui-option disabled>ccc</ui-option>
+    <ui-option>ddd</ui-option>
+  </ui-select>
+</p>
+
+<p>
+  <input type="date">
+</p>
+<p>
+  <ui-input-group>
+    <input type="text" uiInput>
+    <button type="button" class="ui-btn ui-primary">button</button>
+  </ui-input-group>
+</p>
+<p>
+  <button type="button" class="ui-btn ui-default">button</button>
+  <br><br>
+  <button type="button" class="ui-btn ui-dark">button</button>
+  <br><br>
+  <button type="button" class="ui-btn ui-gray">button</button>
+  <br><br>
+  <button type="button" class="ui-btn ui-primary">button</button>
+  <br><br>
+  <button type="button" class="ui-btn ui-success">button</button>
+  <br><br>
+  <button type="button" class="ui-btn ui-info">button</button>
+  <br><br>
+  <button type="button" class="ui-btn ui-warning">button</button>
+  <br><br>
+  <button type="button" class="ui-btn ui-danger">button</button>
+  <br><br>
+</p>

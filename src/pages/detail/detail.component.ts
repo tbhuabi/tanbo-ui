@@ -12,6 +12,8 @@ import { DetailService } from './detail.service';
   ]
 })
 export class DetailComponent implements OnInit {
+  list: any[] = [];
+
   getChildren = (item: PickerCell) => {
     return this.detailService.getAddressList(String(item.value)).pipe(map((response: any) => {
       if (response.code === 10000) {
@@ -23,9 +25,7 @@ export class DetailComponent implements OnInit {
         });
       }
     }));
-  };
-
-  list: any[] = [];
+  }
 
   constructor(private detailService: DetailService) {
   }

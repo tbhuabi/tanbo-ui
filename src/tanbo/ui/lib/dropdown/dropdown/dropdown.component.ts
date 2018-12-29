@@ -16,6 +16,8 @@ export class DropdownComponent {
   focus = false;
   private isSelfClick: boolean = false;
 
+  @HostListener('uiDropdownInputBlur')
+  @HostListener('document:uiDropdownInputClick')
   @HostListener('document:click')
   docClick() {
     if (!this.isSelfClick && this.focus) {
@@ -28,6 +30,7 @@ export class DropdownComponent {
     this.isSelfClick = false;
   }
 
+  @HostListener('uiDropdownInputClick')
   @HostListener('click')
   click() {
     this.isSelfClick = true;

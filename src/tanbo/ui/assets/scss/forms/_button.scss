@@ -19,7 +19,7 @@
       animation: ui-button-loading-bar linear 1s infinite;
     }
   }
-  &.ui-btn-default > .ui-loading-bar:before {
+  &.ui-default > .ui-loading-bar:before {
     border-top-color: $color-gray;
   }
   &.ui-loading > .ui-loading-bar {

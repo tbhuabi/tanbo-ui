@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { TableService } from './table.service';
 
 @Directive({
-  selector: '[ui-table]',
+  selector: '[uiTable]',
   providers: [
     TableService
   ]

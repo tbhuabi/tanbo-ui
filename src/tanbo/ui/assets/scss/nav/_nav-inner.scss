@@ -7,6 +7,10 @@ ui-nav-inner, a[ui-nav-inner] {
   border-radius: 4px;
   text-decoration: none;
   color: inherit;
+  &:focus {
+    @include focus($color-primary, true);
+    z-index: 1;
+  }
   &:hover {
     color: $color-primary;
     background-color: rgba(0, 0, 0, .04);

@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 import { PopConfirmComponent } from './pop-confirm.component';
 
 @Directive({
-  selector: '[ui-pop-confirm]'
+  selector: '[uiPopConfirm]'
 })
 export class PopConfirmDirective implements OnDestroy {
   @Input('ui-pop-confirm')

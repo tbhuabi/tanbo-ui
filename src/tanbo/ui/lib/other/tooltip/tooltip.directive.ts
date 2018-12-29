@@ -13,7 +13,7 @@ import {
 import { TooltipComponent } from './tooltip.component';
 
 @Directive({
-  selector: '[ui-tooltip]'
+  selector: '[uiTooltip]'
 })
 export class TooltipDirective implements OnDestroy {
   @Input('ui-tooltip')

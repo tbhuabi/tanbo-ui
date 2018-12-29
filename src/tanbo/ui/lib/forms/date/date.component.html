@@ -18,16 +18,16 @@
           <td colspan="3" [ngClass]="{active: showType === 'year'}">
             <div class="ui-date-header-content">
               {{ currentDateTimeDetails.year }}年
-              <span class="ui-date-arrow" ui-stop-propagation
+              <span class="ui-date-arrow" uiStopPropagation
                     (click)="changeShowType('year')"
                     [ngClass]="{'ui-active': showType==='year', 'ui-icon-arrow2-top': showType === 'year', 'ui-icon-arrow2-bottom': showType !== 'year'}"></span>
             </div>
             <div class="ui-date-panel ui-date-panel-year">
-              <div class="ui-date-prev" ui-stop-propagation (click)="setYears(years[0].year - 16)">
+              <div class="ui-date-prev" uiStopPropagation (click)="setYears(years[0].year - 16)">
                 <span class="ui-icon-arrow2-left ui-date-arrow"></span>
               </div>
               <div class="ui-date-next"
-                   ui-stop-propagation
+                   uiStopPropagation
                    (click)="setYears(years[years.length-1].year + 1)">
                 <span class="ui-icon-arrow2-right ui-date-arrow"></span>
               </div>
@@ -43,7 +43,7 @@
           <td colspan="2" [ngClass]="{active: showType ==='month'}">
             <div class="ui-date-header-content">
               {{ currentDateTimeDetails.month + 1 }}月
-              <span class="ui-date-arrow" ui-stop-propagation
+              <span class="ui-date-arrow" uiStopPropagation
                     (click)="changeShowType('month')"
                     [ngClass]="{'ui-active': showType==='month','ui-icon-arrow2-top': showType === 'month', 'ui-icon-arrow2-bottom': showType !== 'month'}"></span>
             </div>
@@ -115,7 +115,7 @@
                  [(ngModel)]="selectedDateTimeDetails.seconds">
         </div>
       </div>
-      <div class="ui-date-btn" ui-stop-propagation>
+      <div class="ui-date-btn" uiStopPropagation>
         <button type="button" class="ui-btn ui-btn-primary ui-btn-block ui-btn-sm" [disabled]="!selectedDateTimeDetails.year"
                 (click)="getResult()">确定
         </button>

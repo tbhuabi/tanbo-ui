@@ -27,6 +27,9 @@ ui-markdown-editor {
       &:hover {
         box-shadow: 0 0 1px 0 rgba(0, 0, 0, .4);
       }
+      &:focus {
+        @include focus($color-primary);
+      }
       &:active {
         background-color: $color-gray-light;
       }
@@ -85,7 +88,6 @@ ui-markdown-editor {
 .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
   background-color: white; /* The little square between H and V scrollbars */
 }
-
 /* GUTTER */
 
 .CodeMirror-gutters {
@@ -474,7 +476,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 .CodeMirror-wrap pre {
   word-wrap: break-word;
   white-space: pre-wrap;
-  word-break: normal;
+  word-break: break-all;
 }
 
 .CodeMirror-linebackground {

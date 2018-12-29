@@ -1,7 +1,7 @@
 import { Directive, Input } from '@angular/core';
 
 @Directive({
-  selector: 'input[ui-input],textarea[ui-input]',
+  selector: 'input[uiInput],textarea[uiInput]',
   host: {
     '[class.ui-form-control]': 'true',
     '[class.ui-input-sm]': 'size === "sm"',

@@ -1,5 +1,6 @@
-import { Component, Input, Inject, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Inject, Output, EventEmitter, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ENTER, TAB } from '@angular/cdk/keycodes';
 
 import { UI_SELECT_ARROW_CLASSNAME } from '../help';
 import { attrToBoolean } from '../../utils';
@@ -14,6 +15,7 @@ import { attrToBoolean } from '../../utils';
   }]
 })
 export class DropdownInputComponent implements ControlValueAccessor {
+  @ViewChild('rawInput') rawInput: ElementRef;
   @Input() open = false;
   @Input() focus = false;
   @Input() value = '';
@@ -48,8 +50,26 @@ export class DropdownInputComponent implements ControlValueAccessor {
   private onChange: (_: any) => any;
   private onTouched: () => any;
 
-  constructor(@Inject(UI_SELECT_ARROW_CLASSNAME) arrowIcon: string) {
+  constructor(@Inject(UI_SELECT_ARROW_CLASSNAME) arrowIcon: string,
+              private elementRef: ElementRef) {
     this.arrowIconClassName = arrowIcon;
+  }
+
+  @HostListener('keydown', ['$event'])
+  keyDown(ev: KeyboardEvent) {
+    if (ev.keyCode === ENTER) {
+      const customEvent = document.createEvent('Event');
+      customEvent.initEvent('uiDropdownInputClick', true, true);
+      this.elementRef.nativeElement.dispatchEvent(customEvent);
+    } else if (ev.keyCode === TAB) {
+      const customEvent = document.createEvent('Event');
+      customEvent.initEvent('uiDropdownInputBlur', true, true);
+      this.elementRef.nativeElement.dispatchEvent(customEvent);
+    }
+  }
+
+  focusIn() {
+    this.rawInput.nativeElement.focus();
   }
 
   reset() {

@@ -1,11 +1,13 @@
 <ui-dropdown [autoDisplay]="false" [open]="open" class="ui-select-dropdown" (uiEscape)="escape()">
   <ui-dropdown-input
           (click)="toggle()"
+          (keydown)="keyDown($event)"
           (uiClean)="reset()"
           [placeholder]="placeholder"
           [disabled]="disabled"
           [readonly]="readonly"
           [name]="name"
+          #dropdownInput
           [arrowIconClassName]="arrowIconClassName"
           [value]="text"
           [forId]="forId"

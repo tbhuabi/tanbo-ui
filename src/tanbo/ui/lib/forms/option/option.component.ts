@@ -40,6 +40,13 @@ export class OptionComponent implements AfterViewInit {
     return this._selected;
   }
 
+  @HostBinding('class.ui-focus')
+  get isFocus() {
+    return this.focus && !this.disabled;
+  }
+
+  focus = false;
+
   @Output() uiChecked = new EventEmitter<OptionComponent>();
   nativeElement: HTMLElement;
 

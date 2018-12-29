@@ -11,16 +11,21 @@ import {
   AfterContentInit,
   OnChanges,
   QueryList,
+  Attribute,
   HostBinding
 } from '@angular/core';
 import { Router, RouterLink, RouterLinkWithHref, NavigationEnd } from '@angular/router';
+import { ENTER } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 
 import { NavItemService } from '../nav-item/nav-item.service';
 
 @Component({
   selector: 'ui-nav-inner,a[ui-nav-inner]',
-  templateUrl: './nav-inner.component.html'
+  templateUrl: './nav-inner.component.html',
+  host: {
+    '[attr.tabindex]': 'tabIndex || 0'
+  }
 })
 export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit {
   @HostBinding('class.ui-open')
@@ -44,10 +49,12 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
   private subs: Subscription[] = [];
 
   constructor(@Optional() private navItemService: NavItemService,
+              /*tslint:disable*/
+              @Attribute('tabindex') private tabIndex: string,
+              /*tslint:enable*/
               private router: Router,
               private element: ElementRef,
               private renderer: Renderer2) {
-
   }
 
   ngOnInit() {
@@ -77,6 +84,20 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
     this.subs.forEach(item => item.unsubscribe());
   }
 
+  @HostListener('focus')
+  focus() {
+    if (this.navItemService && this.navItemService.parent) {
+      this.navItemService.parent.change(true);
+    }
+  }
+
+  @HostListener('keydown', ['$event'])
+  keyDown(ev: KeyboardEvent) {
+    if (ev.keyCode === ENTER) {
+      this.click();
+    }
+  }
+
   @HostListener('click')
   click() {
     if (this.navItemService) {
@@ -85,8 +106,8 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
   }
 
   ngAfterContentInit(): void {
-    this.links.changes.subscribe(_ => this.update());
-    this.linksWithHrefs.changes.subscribe(_ => this.update());
+    this.links.changes.subscribe(() => this.update());
+    this.linksWithHrefs.changes.subscribe(() => this.update());
     this.update();
     if (this.navItemService) {
       this.navItemService.change(this.isActive);

@@ -17,6 +17,11 @@ ui-editor {
   @extend ui-tool-bar;
   border-width: 0 0 1px !important;
   border-bottom-color: $color-gray-light !important;
+  [tabindex], button {
+    &:focus {
+      @include focus($color-primary);
+    }
+  }
 }
 
 .ui-input-editor {

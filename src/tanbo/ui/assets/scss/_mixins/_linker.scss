@@ -10,7 +10,7 @@
   overflow: hidden;
   padding: 3px $container-horizontal-padding + 5px;
   cursor: pointer;
-  &:hover {
+  &:hover, &.ui-focus {
     background-color: $color-primary;
     color: #fff;
   }

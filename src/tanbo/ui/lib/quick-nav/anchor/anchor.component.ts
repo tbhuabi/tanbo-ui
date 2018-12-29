@@ -8,7 +8,7 @@ import { UI_ANCHOR_LINK_DISTANCE } from '../helper';
 
 @Component({
   /*tslint:disable*/
-  selector: '[ui-anchor]',
+  selector: '[uiAnchor]',
   /*tslint:enable*/
   templateUrl: './anchor.component.html',
   host: {

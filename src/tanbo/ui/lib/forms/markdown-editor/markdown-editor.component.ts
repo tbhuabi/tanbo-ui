@@ -63,6 +63,7 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
       cursorHeight: 1
     });
     if (this.value !== null && this.value !== undefined) {
+      this.displayHtml = md(this.value + '');
       this.cmInstance.setValue(this.value + '');
     }
     this.cmDoc = this.cmInstance.getDoc();
