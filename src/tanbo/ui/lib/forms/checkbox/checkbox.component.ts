@@ -50,6 +50,9 @@ export class CheckboxComponent implements ControlValueAccessor {
     return this._checked;
   }
 
+  @HostBinding('class.ui-focus')
+  focus = false;
+
   @Output() uiChange = new EventEmitter<boolean>();
 
   private _disabled: boolean = false;

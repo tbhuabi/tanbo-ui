@@ -6,6 +6,8 @@
 <input class="ui-input-file"
        (change)="selectedFiles($event)"
        [attr.id]="forId"
+       (focus)="focus = true"
+       (blur)="focus = false"
        [attr.name]="name"
        [multiple]="multiple"
        [disabled]="disabled"

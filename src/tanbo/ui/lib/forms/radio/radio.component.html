@@ -5,6 +5,8 @@
 <input #rawInput class="ui-input-radio"
        type="radio"
        [value]="value"
+       (focus)="focus = true"
+       (blur)="blur()"
        [attr.id]="forId"
        [attr.name]="name"
        [disabled]="disabled"

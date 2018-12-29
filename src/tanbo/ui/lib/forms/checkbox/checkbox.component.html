@@ -5,6 +5,8 @@
 <input class="ui-input-checkbox"
        type="button"
        [value]="value"
+       (focus)="focus = true"
+       (blur)="focus = false"
        (click)="click()"
        [attr.id]="forId"
        [attr.name]="name"

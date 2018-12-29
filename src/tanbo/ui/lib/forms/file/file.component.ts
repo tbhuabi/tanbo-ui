@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 import { HttpEvent, HttpRequest, HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -50,6 +50,9 @@ export class FileComponent {
 
   isShowLoading = false;
   progress = 0;
+
+  @HostBinding('class.ui-focus')
+  focus = false;
 
   private _disabled = false;
   private _readonly = false;

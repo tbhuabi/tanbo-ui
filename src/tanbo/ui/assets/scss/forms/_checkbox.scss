@@ -19,6 +19,11 @@ ui-input[type=checkbox] {
   &:hover, &.ui-checked {
     color: $color-primary;
   }
+  &.ui-focus {
+    @include focus($color-primary);
+  }
+  @include checkbox-style(dark, $color-dark);
+  @include checkbox-style(gray, $color-gray-dark);
   @include checkbox-style(primary, $color-primary);
   @include checkbox-style(info, $color-info);
   @include checkbox-style(warning, $color-warning);

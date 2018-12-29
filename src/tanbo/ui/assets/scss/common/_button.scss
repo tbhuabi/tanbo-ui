@@ -1,5 +1,5 @@
 @mixin btn-size($name, $v, $h, $font-size, $radius) {
-  .ui-#{$name} {
+  &.ui-#{$name} {
     padding: $v $h;
     font-size: $font-size;
     border-radius: $radius;
@@ -7,7 +7,7 @@
 }
 
 @mixin btn-theme($name, $color, $bg-color) {
-  .ui-#{$name} {
+  &.ui-#{$name} {
     color: $color;
     background-color: $bg-color;
     @if $name != default {
@@ -68,19 +68,18 @@
     width: 100%;
     display: block;
   }
+  @include btn-theme(default, $color-default, $color-lighter);
+  @include btn-theme(dark, #fff, $color-dark);
+  @include btn-theme(gray, #fff, $color-gray-dark);
+  @include btn-theme(primary, #fff, $color-primary);
+  @include btn-theme(success, #fff, $color-success);
+  @include btn-theme(info, #fff, $color-info);
+  @include btn-theme(danger, #fff, $color-danger);
+  @include btn-theme(warning, #fff, $color-warning);
+
+  @include btn-size(sm, $button-padding-vertical-sm, $button-padding-horizontal-sm, $button-font-size-sm, $button-radius-sm);
+  @include btn-size(lg, $button-padding-vertical-lg, $button-padding-horizontal-lg, $button-font-size-lg, $button-radius-lg);
 }
-
-@include btn-size(sm, $button-padding-vertical-sm, $button-padding-horizontal-sm, $button-font-size-sm, $button-radius-sm);
-@include btn-size(lg, $button-padding-vertical-lg, $button-padding-horizontal-lg, $button-font-size-lg, $button-radius-lg);
-
-@include btn-theme(default, $color-default, $color-lighter);
-@include btn-theme(dark, #fff, $color-dark);
-@include btn-theme(gray, #fff, $color-gray-dark);
-@include btn-theme(primary, #fff, $color-primary);
-@include btn-theme(success, #fff, $color-success);
-@include btn-theme(info, #fff, $color-info);
-@include btn-theme(danger, #fff, $color-danger);
-@include btn-theme(warning, #fff, $color-warning);
 
 ui-dropdown.ui-open > .ui-btn {
   box-shadow: inset 0 3px 0 rgba(0, 0, 0, .125);

@@ -1,5 +1,5 @@
 @mixin input-file-size($name, $v, $h, $font-size, $radius) {
-  &.ui-input-#{$name} {
+  &.ui-#{$name} {
     padding: $v $h;
     font-size: $font-size;
     border-radius: $radius;
@@ -19,7 +19,8 @@
         border-color: darken($bg-color, 7);
       }
     }
-    &:focus {
+    &:focus, &.ui-focus {
+      @include focus($bg-color);
       background-color: darken($bg-color, 10);
       z-index: 1;
       @if $name != default {
@@ -74,6 +75,8 @@ ui-input[type=file] {
   @include input-file-size(lg, $button-padding-vertical-lg, $button-padding-horizontal-lg, $button-font-size-lg, $button-radius-lg);
 
   @include input-file-theme(default, $color-default, $color-lighter);
+  @include input-file-theme(dark, #fff, $color-dark);
+  @include input-file-theme(gray, #fff, $color-gray-dark);
   @include input-file-theme(primary, #fff, $color-primary);
   @include input-file-theme(success, #fff, $color-success);
   @include input-file-theme(info, #fff, $color-info);

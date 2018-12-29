@@ -69,6 +69,9 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
   rawInput: ElementRef;
   sub: Subscription;
 
+  @HostBinding('class.ui-focus')
+  focus = false;
+
   private _disabled: boolean = false;
   private _readonly: boolean = false;
   private _checked: boolean = false;
@@ -85,17 +88,22 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
       return;
     }
     this.rawInput.nativeElement.checked = true;
+    this.rawInput.nativeElement.focus();
     if (this.onChange) {
       this.onChange(this.value);
     }
-    if (this.onTouched) {
-      this.onTouched();
-    }
+
     // 当自身被点击时，发布事件，更新其它radio状态
     this.radioStateService.publishEvent();
     this.uiChange.emit(this.value);
   }
 
+  blur() {
+    this.focus = false;
+    if (this.onTouched) {
+      this.onTouched();
+    }
+  }
   ngOnInit() {
     // 当某一个radio被点击时，更新其它radio状态
     this.sub = this.radioStateService.state.subscribe(() => {

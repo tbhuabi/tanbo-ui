@@ -20,11 +20,16 @@ ui-input[type=radio] {
   &:hover, &.ui-checked {
     color: $color-primary;
   }
-  @include radio-style(primary, $color-primary);
-  @include radio-style(info, $color-info);
-  @include radio-style(warning, $color-warning);
-  @include radio-style(success, $color-success);
-  @include radio-style(danger, $color-danger);
+  &.ui-focus {
+    @include focus($color-primary);
+  }
+  @include checkbox-style(dark, $color-dark);
+  @include checkbox-style(gray, $color-gray-dark);
+  @include checkbox-style(primary, $color-primary);
+  @include checkbox-style(info, $color-info);
+  @include checkbox-style(warning, $color-warning);
+  @include checkbox-style(success, $color-success);
+  @include checkbox-style(danger, $color-danger);
 
   &[disabled], &[readonly], &.ui-disabled, &.ui-readonly {
     opacity: .5;
