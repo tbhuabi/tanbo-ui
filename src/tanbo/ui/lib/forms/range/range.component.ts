@@ -144,8 +144,12 @@ export class RangeComponent implements ControlValueAccessor {
     };
     if (ev.keyCode === LEFT_ARROW) {
       updateValue(-this.step);
+      ev.preventDefault();
+      return false;
     } else if (ev.keyCode === RIGHT_ARROW) {
       updateValue(this.step);
+      ev.preventDefault();
+      return false;
     }
   }
 
