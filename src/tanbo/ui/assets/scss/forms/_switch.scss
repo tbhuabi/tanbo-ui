@@ -1,6 +1,14 @@
-@mixin switch-theme($color) {
-  box-shadow: inset 0 0 0 1em $color;
-  border-color: $color;
+@mixin switch-theme($name, $color) {
+  &.ui-#{$name}:not(.ui-checked):active {
+    box-shadow: inset 0 0 0 1em $color;
+  }
+  &.ui-#{$name}.ui-checked {
+    box-shadow: inset 0 0 0 1em $color;
+  }
+
+  &.ui-#{$name}:not(.ui-checked).ui-focus {
+    box-shadow: inset 0 0 0 2px $color;
+  }
 }
 
 ui-switch {
@@ -28,59 +36,39 @@ ui-switch {
     bottom: 0;
     cursor: pointer;
   }
-
-  &.ui-checked {
-    @include switch-theme($color-gray-light);
-    .ui-switch-btn {
-      transform: translateX(20px);
-    }
-    &.ui-primary {
-      @include switch-theme($color-primary);
-    }
-    &.ui-success {
-      @include switch-theme($color-success);
-    }
-    &.ui-info {
-      @include switch-theme($color-info);
-    }
-    &.ui-danger {
-      @include switch-theme($color-danger);
-    }
-    &.ui-warning {
-      @include switch-theme($color-warning);
-    }
-  }
   &[readonly] {
     cursor: auto;
   }
-
+  &.ui-checked {
+    .ui-switch-btn {
+      transform: translateX(20px);
+    }
+  }
   &:active {
-    @include switch-theme($color-gray-light);
-    &.ui-primary {
-      @include switch-theme($color-primary);
-    }
-    &.ui-success {
-      @include switch-theme($color-success);
-    }
-    &.ui-info {
-      @include switch-theme($color-info);
-    }
-    &.ui-danger {
-      @include switch-theme($color-danger);
-    }
-    &.ui-warning {
-      @include switch-theme($color-warning);
-    }
     .ui-switch-btn {
       width: 34px;
     }
-
     &.ui-checked {
       .ui-switch-btn {
         left: -6px;
       }
     }
   }
+  &:not(.ui-checked):active {
+    box-shadow: inset 0 0 0 1em $color-default;
+    border-color: $color-default;
+  }
+  &.ui-checked {
+    box-shadow: inset 0 0 0 1em $color-default;
+    border-color: $color-default;
+  }
+  @include switch-theme(dark, $color-dark);
+  @include switch-theme(gray, $color-gray);
+  @include switch-theme(primary, $color-primary);
+  @include switch-theme(success, $color-success);
+  @include switch-theme(info, $color-info);
+  @include switch-theme(warning, $color-warning);
+  @include switch-theme(danger, $color-danger);
 
   &.disabled, &[disabled] {
     opacity: .5;

@@ -44,6 +44,9 @@ ui-pagination {
         min-width: 2.2em;
         text-align: center;
         border: 1px solid $pagination-border-color;
+        &:focus {
+          position: relative;
+        }
         &:hover {
           background-color: $pagination-hover-bg-color;
         }

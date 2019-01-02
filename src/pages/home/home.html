@@ -14,6 +14,18 @@
 <!--<div class="home">-->
 <!--<ui-cropper [imageURL]="imgUrl" [cropHeight]="150" [cropWidth]="150" (uiChange)="change($event)"></ui-cropper>-->
 <!--</div>-->
+<ui-tab>
+  <ui-tab-bar>
+    <ui-tab-button>aaa</ui-tab-button>
+    <ui-tab-button>bbb</ui-tab-button>
+    <ui-tab-button>ccc</ui-tab-button>
+  </ui-tab-bar>
+  <ui-tab-view>
+    <ui-tab-view-item>111</ui-tab-view-item>
+    <ui-tab-view-item>222</ui-tab-view-item>
+    <ui-tab-view-item>333</ui-tab-view-item>
+  </ui-tab-view>
+</ui-tab>
 <p>
   <ui-input type="checkbox" class="ui-dark"></ui-input>&nbsp;
   <ui-input type="checkbox" class="ui-gray"></ui-input>&nbsp;
@@ -49,6 +61,20 @@
   <ui-input type="range" name="name" class="ui-info"></ui-input>&nbsp;
   <ui-input type="range" name="name" class="ui-warning"></ui-input>&nbsp;
   <ui-input type="range" name="name" class="ui-danger"></ui-input>&nbsp;
+</p>
+
+<p>
+  <ui-switch name="name"></ui-switch>&nbsp;
+  <ui-switch name="name" class="ui-dark"></ui-switch>&nbsp;
+  <ui-switch name="name" class="ui-gray"></ui-switch>&nbsp;
+  <ui-switch name="name" class="ui-primary"></ui-switch>&nbsp;
+  <ui-switch name="name" class="ui-success"></ui-switch>&nbsp;
+  <ui-switch name="name" class="ui-info"></ui-switch>&nbsp;
+  <ui-switch name="name" class="ui-warning"></ui-switch>&nbsp;
+  <ui-switch name="name" class="ui-danger"></ui-switch>&nbsp;
+</p>
+<p>
+  <ui-pagination [pages]="30"></ui-pagination>
 </p>
 <p>
   <ui-select placeholder="请选择">

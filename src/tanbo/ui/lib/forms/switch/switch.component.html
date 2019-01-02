@@ -3,6 +3,8 @@
 </div>
 <input class="ui-input-raw"
        type="button"
+       (focus)="focus = true"
+       (blur)="focus = false"
        (click)="click()"
        [value]="value"
        [attr.id]="forId"

@@ -3,6 +3,7 @@ ui-tab-button {
   cursor: pointer;
   padding: 12px $container-horizontal-padding;
   position: relative;
+  outline: none;
   &.ui-active {
     font-weight: 600;
     &:after {
@@ -17,5 +18,8 @@ ui-tab-button {
   }
   &:hover {
     font-weight: 600;
+  }
+  &:focus:not(.ui-active):not(:active) {
+    @include focus($color-primary);
   }
 }

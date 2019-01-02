@@ -45,6 +45,8 @@ export class SwitchComponent implements ControlValueAccessor {
   get checked() {
     return this._checked;
   }
+  @HostBinding('class.ui-focus')
+  focus = false;
 
   private onChange: (_: any) => void;
   private onTouched: () => void;
