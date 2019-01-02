@@ -19,8 +19,8 @@ import { PopConfirmComponent } from './pop-confirm.component';
   selector: '[uiPopConfirm]'
 })
 export class PopConfirmDirective implements OnDestroy {
-  @Input('ui-pop-confirm')
-  tooltip = '';
+  @Input()
+  uiPopConfirm = '';
   @Input()
   popConfirmPosition: string = '';
 
@@ -64,7 +64,7 @@ export class PopConfirmDirective implements OnDestroy {
       this.isShow = false;
       return;
     }
-    this.instance.text = this.tooltip;
+    this.instance.text = this.uiPopConfirm;
     this.instance.referenceElement = this.elementRef.nativeElement;
     this.instance.position = this.popConfirmPosition;
     this.instance.show();

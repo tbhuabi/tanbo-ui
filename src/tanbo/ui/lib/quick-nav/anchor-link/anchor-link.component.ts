@@ -6,7 +6,7 @@ import { AnchorService } from '../anchor/anchor.service';
 
 @Component({
   /*tslint:disable*/
-  selector: 'a[ui-anchor-link]',
+  selector: 'a[uiAnchorLink]',
   /*tslint:enable*/
   templateUrl: './anchor-link.component.html',
   host: {

@@ -4,12 +4,12 @@ import { TableService } from '../table.service';
 
 @Component({
   /*tslint:disable*/
-  selector: 'tr[ui-selectable]',
+  selector: 'tr[uiSelectable]',
   /*tslint:enable*/
   templateUrl: './selectable-item.component.html'
 })
 export class SelectableItemComponent implements OnDestroy, OnInit {
-  @Input('ui-selectable') data: any;
+  @Input() uiSelectable: any;
   @Input() checked = false;
   @Output() uiCheckStateChange = new EventEmitter<boolean>();
 

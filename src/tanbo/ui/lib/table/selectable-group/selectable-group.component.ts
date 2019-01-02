@@ -7,7 +7,7 @@ import { TableService } from '../table.service';
 
 @Component({
   /*tslint:disable*/
-  selector: 'tr[ui-table-selector]',
+  selector: 'tr[uiTableSelector]',
   /*tslint:enable*/
   templateUrl: './selectable-group.component.html'
 })
@@ -67,7 +67,7 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
         item.change(b);
       }
       if (b) {
-        this.selectedValues.push(item.data);
+        this.selectedValues.push(item.uiSelectable);
       }
     });
     this.tableService.checked(this.selectedValues);
@@ -80,7 +80,7 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
       if (!item.checked) {
         isSelectedAll = false;
       } else {
-        this.selectedValues.push(item.data);
+        this.selectedValues.push(item.uiSelectable);
       }
     }
     this.isChecked = isSelectedAll;

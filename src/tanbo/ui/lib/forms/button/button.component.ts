@@ -4,9 +4,12 @@ import { attrToBoolean } from '../../utils';
 
 @Component({
   /* tslint:disable */
-  selector: '[ui-button]',
+  selector: '[uiButton]',
   /* tslint:enable */
-  templateUrl: './button.component.html'
+  templateUrl: './button.component.html',
+  host: {
+    '[class.ui-button]': 'true'
+  }
 })
 export class ButtonComponent {
   @Input()

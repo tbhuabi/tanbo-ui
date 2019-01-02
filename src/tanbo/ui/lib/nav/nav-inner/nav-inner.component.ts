@@ -21,10 +21,11 @@ import { Subscription } from 'rxjs';
 import { NavItemService } from '../nav-item/nav-item.service';
 
 @Component({
-  selector: 'ui-nav-inner,a[ui-nav-inner]',
+  selector: 'ui-nav-inner,a[uiNavInner]',
   templateUrl: './nav-inner.component.html',
   host: {
-    '[attr.tabindex]': 'tabIndex || 0'
+    '[attr.tabindex]': 'tabIndex || 0',
+    '[class.ui-nav-inner]': 'true'
   }
 })
 export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit {

@@ -16,8 +16,8 @@ import { TooltipComponent } from './tooltip.component';
   selector: '[uiTooltip]'
 })
 export class TooltipDirective implements OnDestroy {
-  @Input('ui-tooltip')
-  tooltip = '';
+  @Input()
+  uiTooltip = '';
   @Input()
   tooltipPosition: string = '';
 
@@ -37,7 +37,7 @@ export class TooltipDirective implements OnDestroy {
       this.tooltipComponent = this.viewContainerRef.createComponent(this.tooltipFactory);
       this.instance = this.tooltipComponent.instance;
     }
-    this.instance.text = this.tooltip;
+    this.instance.text = this.uiTooltip;
     this.instance.referenceElement = this.elementRef.nativeElement;
     this.instance.position = this.tooltipPosition;
     this.instance.show();

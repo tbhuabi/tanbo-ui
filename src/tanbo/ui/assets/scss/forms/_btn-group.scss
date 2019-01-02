@@ -36,28 +36,28 @@ ui-btn-group {
 
   > .ui-btn:not(:first-child), ui-dropdown:not(:first-child) > .ui-btn {
 
-    &.ui-default {
+    &.ui-btn-default {
       border-left-color: darken($color-default, 10);
     }
-    &.ui-dark {
+    &.ui-btn-dark {
       border-left-color: darken($color-dark, 10);
     }
-    &.ui-gray {
+    &.ui-btn-gray {
       border-left-color: darken($color-gray-dark, 10);
     }
-    &.ui-primary {
+    &.ui-btn-primary {
       border-left-color: darken($color-primary, 10);
     }
-    &.ui-info {
+    &.ui-btn-info {
       border-left-color: darken($color-info, 10);
     }
-    &.ui-success {
+    &.ui-btn-success {
       border-left-color: darken($color-success, 10);
     }
-    &.ui-warning {
+    &.ui-btn-warning {
       border-left-color: darken($color-warning, 10);
     }
-    &.ui-danger {
+    &.ui-btn-danger {
       border-left-color: darken($color-danger, 10);
     }
   }

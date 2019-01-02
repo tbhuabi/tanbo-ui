@@ -1,4 +1,4 @@
-ui-nav-inner, a[ui-nav-inner] {
+.ui-nav-inner {
   display: flex;
   padding: .7em 1em;
   cursor: pointer;
@@ -35,7 +35,7 @@ ui-nav-inner, a[ui-nav-inner] {
   }
 }
 
-.ui-nav-inner {
+.ui-nav-inner-content {
   flex: 1;
 }
 
