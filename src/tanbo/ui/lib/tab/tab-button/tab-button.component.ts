@@ -13,6 +13,11 @@ export class TabButtonComponent {
   @Input() active: boolean = false;
   @Output() uiSelected = new EventEmitter();
 
+  /*tslint:disable*/
+  constructor(@Attribute('tabindex') public tabIndex: string) {
+  }
+  /*tslint:enable*/
+
   @HostListener('keydown', ['$event'])
   keyDown(ev: KeyboardEvent) {
     if (ev.keyCode === ENTER) {
@@ -24,8 +29,4 @@ export class TabButtonComponent {
   click() {
     this.uiSelected.emit();
   }
-  /*tslint:disable*/
-  constructor(@Attribute('tabindex') private tabIndex: string) {
-  }
-  /*tslint:enable*/
 }

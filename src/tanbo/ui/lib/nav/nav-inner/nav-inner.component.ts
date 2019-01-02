@@ -50,7 +50,7 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
 
   constructor(@Optional() private navItemService: NavItemService,
               /*tslint:disable*/
-              @Attribute('tabindex') private tabIndex: string,
+              @Attribute('tabindex') public tabIndex: string,
               /*tslint:enable*/
               private router: Router,
               private element: ElementRef,
