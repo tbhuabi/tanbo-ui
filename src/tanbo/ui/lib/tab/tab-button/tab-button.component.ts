@@ -25,7 +25,7 @@ export class TabButtonComponent {
     this.uiSelected.emit();
   }
   /*tslint:disable*/
-  constructor(@Attribute('tabindex') tabIndex: string) {
+  constructor(@Attribute('tabindex') private tabIndex: string) {
   }
   /*tslint:enable*/
 }
