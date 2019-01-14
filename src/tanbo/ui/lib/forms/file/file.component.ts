@@ -19,6 +19,7 @@ export class FileComponent {
   @Input() ext: string | RegExp | Array<string | RegExp> = '';
   @Input() name: string;
   @Input() forId: string;
+  @Input() accept: string;
   @Input() uploader: (data: FormData) => HttpRequest<any> | Observable<HttpEvent<any>>;
 
   @Input()
