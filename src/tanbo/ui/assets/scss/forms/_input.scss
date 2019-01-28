@@ -19,5 +19,9 @@
   @include input-size($form-control-padding-vertical-lg, $form-control-padding-horizontal-lg, $form-control-radius-lg, $form-control-font-size-lg);
 }
 
+.ui-input-block {
+  display: block;
+  width: 100%;
+}
 
 

@@ -65,6 +65,10 @@ html [type="button"],
 a {
   color: $color-primary;
   &:focus {
-    @include focus($color-primary);
+    outline: 2px solid rgba(red($color-primary), green($color-primary), blue($color-primary), .5);
   }
+  /**/
+  //  &:outline {
+  //    @include focus($color-primary);
+  //  }
 }
