@@ -1,8 +1,10 @@
-import { Component, Optional, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import { Component, Optional, OnInit, OnDestroy, HostBinding, Input } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
 import { NavItemService } from '../nav-item/nav-item.service';
+import { NavService } from './nav.service';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-nav',
@@ -12,18 +14,36 @@ import { NavItemService } from '../nav-item/nav-item.service';
     opacity: 1
   })), state('close', style({
     height: 0,
-    opacity: 0.5
+    opacity: 0.5,
+    paddingTop: 0,
+    paddingBottom: 0
   })), transition('open <=> close', animate(150))])],
   host: {
     '[@navAnimation]': 'isOpen ? "open" : "close"'
-  }
+  },
+  providers: [
+    NavService
+  ]
 })
 export class NavComponent implements OnDestroy, OnInit {
-  @HostBinding('class.ui-open') isOpen = false;
+  @Input()
+  @HostBinding('class.ui-thumbnail')
+  set thumbnail(v: any) {
+    this._thumbnail = attrToBoolean(v);
+    this.navService.thumbnail.next(this._thumbnail);
+  }
 
+  get thumbnail() {
+    return this._thumbnail;
+  }
+
+
+  @HostBinding('class.ui-open') isOpen = false;
+  private _thumbnail = false;
   private sub: Subscription;
 
-  constructor(@Optional() private navItemService: NavItemService) {
+  constructor(@Optional() private navItemService: NavItemService,
+              private navService: NavService) {
   }
 
   ngOnInit() {

@@ -1,3 +1,16 @@
 ui-nav-item {
   display: block;
+  &.ui-thumbnail {
+    position: relative;
+    > ui-nav {
+      min-width: 200px;
+      background-color: #fff;
+      position: absolute;
+      padding: 10px $grid-column-padding;
+      border-radius: 3px;
+      left: 100%;
+      top: 0;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, .15);
+    }
+  }
 }

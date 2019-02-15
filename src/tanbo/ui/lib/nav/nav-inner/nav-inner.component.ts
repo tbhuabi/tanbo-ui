@@ -19,6 +19,7 @@ import { ENTER } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 
 import { NavItemService } from '../nav-item/nav-item.service';
+import { NavService } from '../nav/nav.service';
 
 @Component({
   selector: 'ui-nav-inner,a[uiNavInner]',
@@ -35,6 +36,7 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
   }
 
   isOpen = false;
+  isThumbnail = false;
 
   @ContentChildren(RouterLink, {descendants: true})
   links: QueryList<RouterLink>;
@@ -53,12 +55,16 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
               /*tslint:disable*/
               @Attribute('tabindex') public tabIndex: string,
               /*tslint:enable*/
+              private navService: NavService,
               private router: Router,
               private element: ElementRef,
               private renderer: Renderer2) {
   }
 
   ngOnInit() {
+    this.subs.push(this.navService.thumbnail.subscribe(b => {
+      this.isThumbnail = b;
+    }));
     this.subs.push(this.router.events.subscribe(s => {
       if (s instanceof NavigationEnd) {
         this.update();
@@ -101,7 +107,7 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
 
   @HostListener('click')
   click() {
-    if (this.navItemService) {
+    if (this.navItemService && !this.isThumbnail) {
       this.navItemService.change(!this.isOpen);
     }
   }

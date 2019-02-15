@@ -1,7 +1,8 @@
-import { Component, Optional, SkipSelf, OnDestroy, OnInit } from '@angular/core';
+import { Component, Optional, SkipSelf, OnDestroy, OnInit, HostBinding, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { NavItemService } from './nav-item.service';
+import { NavService } from '../nav/nav.service';
 
 @Component({
   selector: 'ui-nav-item',
@@ -11,21 +12,41 @@ import { NavItemService } from './nav-item.service';
   ]
 })
 export class NavItemComponent implements OnInit, OnDestroy {
-  private sub: Subscription;
+  @HostBinding('class.ui-thumbnail')
+  isThumbnail = false;
+  private subs: Subscription[] = [];
 
   constructor(@Optional() @SkipSelf() private parentNavItemService: NavItemService,
+              private navService: NavService,
               private navItemService: NavItemService) {
   }
 
   ngOnInit() {
-    this.sub = this.navItemService.isOpen.subscribe(b => {
+    this.subs.push(this.navService.thumbnail.subscribe(b => {
+      this.isThumbnail = b;
+    }));
+    this.subs.push(this.navItemService.isOpen.subscribe(b => {
       if (this.parentNavItemService && b) {
         this.parentNavItemService.change(b);
       }
-    });
+    }));
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.subs.forEach(item => item.unsubscribe());
+  }
+
+  @HostListener('mouseenter')
+  mouseEnter() {
+    if (this.isThumbnail) {
+      this.navItemService.change(true);
+    }
+  }
+
+  @HostListener('mouseleave')
+  mouseLeave() {
+    if (this.isThumbnail) {
+      this.navItemService.change(false);
+    }
   }
 }
