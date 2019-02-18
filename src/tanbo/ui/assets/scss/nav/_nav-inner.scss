@@ -34,6 +34,18 @@
     background-color: $color-primary;
     color: #fff;
   }
+  &.ui-thumbnail {
+    > ui-nav-thumbnail + .ui-nav-inner-content {
+      width: 0;
+      flex: 0;
+      overflow: hidden;
+    }
+    > ui-nav-thumbnail {
+      flex: 1;
+      padding-left: 16px;
+      transform: scale(1.2);
+    }
+  }
 }
 
 .ui-nav-inner-content {

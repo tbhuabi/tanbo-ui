@@ -34,9 +34,9 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
   get isOpenNext() {
     return this.isOpen && this.totalMenu > 0;
   }
-
-  isOpen = false;
+  @HostBinding('class.ui-thumbnail')
   isThumbnail = false;
+  isOpen = false;
 
   @ContentChildren(RouterLink, {descendants: true})
   links: QueryList<RouterLink>;
