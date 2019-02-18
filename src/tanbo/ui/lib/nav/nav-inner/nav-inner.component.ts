@@ -141,9 +141,7 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
         (this as {
           isActive: boolean
         }).isActive = active;
-        if (this.navItemService.parent && active) {
-          this.navItemService.parent.change(active);
-        }
+        this.navItemService.change(active);
       });
     }
   }

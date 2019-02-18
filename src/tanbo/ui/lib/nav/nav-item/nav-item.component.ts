@@ -1,4 +1,4 @@
-import { Component, Optional, SkipSelf, OnDestroy, OnInit, HostBinding, HostListener } from '@angular/core';
+import { Component, Optional, SkipSelf, OnDestroy, OnInit, HostBinding, HostListener, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { NavItemService } from './nav-item.service';
@@ -14,19 +14,26 @@ import { NavService } from '../nav/nav.service';
 export class NavItemComponent implements OnInit, OnDestroy {
   @HostBinding('class.ui-thumbnail')
   isThumbnail = false;
+  private parentIsThumbnail = false;
   private subs: Subscription[] = [];
 
   constructor(@Optional() @SkipSelf() private parentNavItemService: NavItemService,
               private navService: NavService,
+              private elementRef: ElementRef,
               private navItemService: NavItemService) {
   }
 
   ngOnInit() {
+    if (this.navService.parent) {
+      this.subs.push(this.navService.parent.thumbnail.subscribe(b => {
+        this.parentIsThumbnail = b;
+      }));
+    }
     this.subs.push(this.navService.thumbnail.subscribe(b => {
       this.isThumbnail = b;
     }));
     this.subs.push(this.navItemService.isOpen.subscribe(b => {
-      if (this.parentNavItemService && b) {
+      if (this.parentNavItemService && b && !this.parentIsThumbnail) {
         this.parentNavItemService.change(b);
       }
     }));
