@@ -116,7 +116,7 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
     this.links.changes.subscribe(() => this.update());
     this.linksWithHrefs.changes.subscribe(() => this.update());
     this.update();
-    if (this.navItemService) {
+    if (this.navItemService && !this.isOpen) {
       this.navItemService.change(this.isActive);
     }
   }

@@ -5,10 +5,10 @@
         <p>
           <ui-switch [(ngModel)]="thumbnail"></ui-switch>
         </p>
-        <ui-nav [thumbnail]="thumbnail" style="background-color: #ccc;">
+        <ui-nav [open]="true" [thumbnail]="thumbnail" style="background-color: #ccc;">
           <ui-nav-item>
             <ui-nav-inner><ui-nav-thumbnail><span class="ui-icon-arrow-right"></span></ui-nav-thumbnail>菜单1</ui-nav-inner>
-            <ui-nav>
+            <ui-nav [open]="true">
               <ui-nav-item>
                 <a uiNavInner [routerLinkActive]="['test-class', 'test2']" routerLink="/home" [queryParams]="{name: 'aaa'}">菜单1fdsafdsa1 </a>
               </ui-nav-item>

@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './app.html'
 })
 export class AppComponent {
-  thumbnail = true;
+  thumbnail = false;
 }
