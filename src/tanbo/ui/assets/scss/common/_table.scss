@@ -47,7 +47,7 @@ table.ui-table {
   }
   > tbody {
     &:first-child {
-      > tr > td {
+      > tr > td, > tr > th {
         border-top: 1px solid $table-border-color;
       }
     }
@@ -55,6 +55,19 @@ table.ui-table {
       @include table-styles;
       > td {
         font-weight: 400;
+        @include table-styles;
+        padding: $table-cell-padding;
+        border-bottom: 1px solid $table-border-color;
+        &:first-child {
+          padding-left: $container-horizontal-padding;
+        }
+        &:last-child {
+          padding-right: $container-horizontal-padding;
+        }
+      }
+      > th {
+        font-weight: 500;
+        text-align: right;
         @include table-styles;
         padding: $table-cell-padding;
         border-bottom: 1px solid $table-border-color;
@@ -82,19 +95,27 @@ table.ui-table {
     }
   }
   &.ui-table-condensed {
-    > thead > tr > th, > tbody > tr > td {
-      padding-top: $table-cell-padding / 2;
-      padding-bottom: $table-cell-padding / 2;
+    > thead, > tbody {
+      > tr {
+        > td, > th {
+          padding-top: $table-cell-padding / 2;
+          padding-bottom: $table-cell-padding / 2;
+        }
+      }
     }
   }
   &.ui-table-bordered {
-    > thead > tr > th {
-      border-width: 1px 1px 2px;
-      border-style: solid;
-      border-color: $table-border-color $table-border-color $table-border-color - 10;
+    > thead > tr {
+      > th, > td {
+        border-width: 1px 1px 2px;
+        border-style: solid;
+        border-color: $table-border-color $table-border-color $table-border-color - 10;
+      }
     }
-    > tbody > tr > td {
-      border: 1px solid $table-border-color;
+    > tbody > tr {
+      > td, > th {
+        border: 1px solid $table-border-color;
+      }
     }
   }
 }
