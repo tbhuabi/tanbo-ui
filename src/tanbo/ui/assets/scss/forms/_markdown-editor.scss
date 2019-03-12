@@ -3,6 +3,7 @@ ui-markdown-editor {
   border: 1px solid $color-gray-light;
   overflow: hidden;
   border-radius: $radius-base;
+  background-color: #fff;
   > .ui-markdown-editor-toolbar {
     border-top: none;
     line-height: 1;
