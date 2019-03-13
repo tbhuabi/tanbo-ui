@@ -1,6 +1,34 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import Quill from 'quill';
+import { Observable, Subscription } from 'rxjs';
+
+const emptyArr: string[] = [];
+const fonts = [
+  'sans-serif', 'SimSun', 'SimHei', 'Microsoft-YaHei',
+  'KaiTi', 'FangSong', 'Arial', 'Times-New-Roman'
+];
+const toolbarOptions = [
+  [{'header': [1, 2, 3, 4, 5, 6, false]}],
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  ['blockquote', 'code-block'],
+
+  [{'list': 'ordered'}, {'list': 'bullet'}],
+  [{'script': 'sub'}, {'script': 'super'}],      // superscript/subscript
+  [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
+  // [{'direction': 'rtl'}],                         // text direction
+
+  [{'color': emptyArr}, {'background': emptyArr}],          // dropdown with defaults from theme
+  [{'font': fonts}],
+  [{'align': emptyArr}],
+  // ['image', 'video'],
+  ['link', 'image'],
+  ['clean']                                         // remove formatting button
+];
+const Font = Quill.import('formats/font');
+Font.whitelist = fonts;
+
+Quill.register(Font, true);
 
 @Component({
   selector: 'ui-editor',
@@ -11,30 +39,46 @@ import Quill from 'quill';
     multi: true
   }]
 })
-export class EditorComponent implements ControlValueAccessor, AfterViewInit {
+export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
   @ViewChild('editor') editorRef: ElementRef;
   @Input() value: string = '';
   @Input() placeholder = '请输入内容！';
   @Input() name: string = '';
   @Input() forId: string = '';
+  @Input() imageUploader: Observable<string>;
   @Output() uiChange = new EventEmitter<string>();
 
   private editor: Quill;
   private onChange: (value: any) => any;
   private onTouched: () => any;
 
+  private sub: Subscription;
+
   ngAfterViewInit() {
+
     this.editor = new Quill(this.editorRef.nativeElement, {
       modules: {
-        toolbar: [
-          [{ header: [1, 2, false] }],
-          ['bold', 'italic', 'underline'],
-          ['image', 'code-block']
-        ]
+        toolbar: toolbarOptions
       },
       placeholder: this.placeholder,
       theme: 'snow'  // or 'bubble'
     });
+
+    if (this.imageUploader) {
+      const toolbar = this.editor.getModule('toolbar');
+      toolbar.addHandler('image', () => {
+        if (this.sub) {
+          this.sub.unsubscribe();
+        }
+        this.sub = this.imageUploader.subscribe(imgUrl => {
+          const range = this.editor.getSelection();
+          if (range) {
+            this.editor.insertEmbed(range.index, 'image', imgUrl);
+          }
+        });
+      });
+    }
+
     if (this.value !== null && this.value !== undefined) {
       this.writeValue(this.value + '');
     }
@@ -53,6 +97,12 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit {
         this.uiChange.emit(html);
       }
     });
+  }
+
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   focus() {

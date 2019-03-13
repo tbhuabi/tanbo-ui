@@ -10,7 +10,8 @@
     </ui-modal-body>
   </ui-modal>
 </ng-template> -->
-<ui-editor [value]="initValue" (uiChange)="changeText($event)"></ui-editor>
+<ui-editor [imageUploader]="uploader"></ui-editor>
+<ui-markdown-editor></ui-markdown-editor>
 <!--<div class="home">-->
 <!--<ui-cropper [imageURL]="imgUrl" [cropHeight]="150" [cropWidth]="150" (uiChange)="change($event)"></ui-cropper>-->
 <!--</div>-->
