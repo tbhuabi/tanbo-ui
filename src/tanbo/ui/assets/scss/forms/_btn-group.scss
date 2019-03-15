@@ -37,7 +37,7 @@ ui-btn-group {
   > .ui-btn:not(:first-child), ui-dropdown:not(:first-child) > .ui-btn {
 
     &.ui-btn-default {
-      border-left-color: darken($color-lighter, 10);
+      border-left-color: $color-gray;
     }
     &.ui-btn-dark {
       border-left-color: darken($color-dark, 10);
