@@ -41,7 +41,7 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnD
 
       [{'list': 'ordered'}, {'list': 'bullet'}],
       [{'script': 'sub'}, {'script': 'super'}],      // superscript/subscript
-      [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
+      // [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
       // [{'direction': 'rtl'}],                         // text direction
 
       [{'color': emptyArr}, {'background': emptyArr}],          // dropdown with defaults from theme
@@ -55,7 +55,7 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnD
     Font.whitelist = fonts;
 
     Quill.register(Font, true);
-    Quill.register('modules/imageResize', ImageResize);
+    Quill.register('modules/imageResize', ImageResize, true);
     this.editor = new Quill(this.editorRef.nativeElement, {
       modules: {
         imageResize: {},
