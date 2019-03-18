@@ -1,34 +1,8 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import Quill from 'quill';
+import { ImageResize } from 'quill-image-resize';
 import { Observable, Subscription } from 'rxjs';
-
-const emptyArr: string[] = [];
-const fonts = [
-  'sans-serif', 'SimSun', 'SimHei', 'Microsoft-YaHei',
-  'KaiTi', 'FangSong', 'Arial', 'Times-New-Roman'
-];
-const toolbarOptions = [
-  [{'header': [1, 2, 3, 4, 5, 6, false]}],
-  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-  ['blockquote', 'code-block'],
-
-  [{'list': 'ordered'}, {'list': 'bullet'}],
-  [{'script': 'sub'}, {'script': 'super'}],      // superscript/subscript
-  [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
-  // [{'direction': 'rtl'}],                         // text direction
-
-  [{'color': emptyArr}, {'background': emptyArr}],          // dropdown with defaults from theme
-  [{'font': fonts}],
-  [{'align': emptyArr}],
-  // ['image', 'video'],
-  ['link', 'image'],
-  ['clean']                                         // remove formatting button
-];
-const Font = Quill.import('formats/font');
-Font.whitelist = fonts;
-
-Quill.register(Font, true);
 
 @Component({
   selector: 'ui-editor',
@@ -55,9 +29,36 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnD
   private sub: Subscription;
 
   ngAfterViewInit() {
+    const emptyArr: string[] = [];
+    const fonts = [
+      'sans-serif', 'SimSun', 'SimHei', 'Microsoft-YaHei',
+      'KaiTi', 'FangSong', 'Arial', 'Times-New-Roman'
+    ];
+    const toolbarOptions = [
+      [{'header': [1, 2, 3, 4, 5, 6, false]}],
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
 
+      [{'list': 'ordered'}, {'list': 'bullet'}],
+      [{'script': 'sub'}, {'script': 'super'}],      // superscript/subscript
+      [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
+      // [{'direction': 'rtl'}],                         // text direction
+
+      [{'color': emptyArr}, {'background': emptyArr}],          // dropdown with defaults from theme
+      [{'font': fonts}],
+      [{'align': emptyArr}],
+      // ['image', 'video'],
+      ['link', 'image'],
+      ['clean']                                         // remove formatting button
+    ];
+    const Font = Quill.import('formats/font');
+    Font.whitelist = fonts;
+
+    Quill.register(Font, true);
+    Quill.register('modules/imageResize', ImageResize);
     this.editor = new Quill(this.editorRef.nativeElement, {
       modules: {
+        imageResize: {},
         toolbar: toolbarOptions
       },
       placeholder: this.placeholder,
