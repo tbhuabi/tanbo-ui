@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Subject, Observable } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, filter } from 'rxjs/operators';
 
 import { SelectableItemComponent } from '../selectable-item/selectable-item.component';
 import { TableService } from '../table.service';
@@ -20,6 +20,8 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
   private updateCheckedItemsObs: Observable<void>;
   private updateEvent = new Subject<void>();
 
+  private eventFromSelf = false;
+
   constructor(private tableService: TableService) {
     this.updateCheckedItemsObs = this.updateEvent.asObservable();
   }
@@ -33,7 +35,7 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
       this.updateEvent.next();
       this.events.push({
         token: item,
-        unsub: item.uiCheckStateChange.subscribe(() => {
+        unsub: item.uiCheckStateChange.pipe(filter(() => !this.eventFromSelf)).subscribe(() => {
           this.updateStateAndCheckedItem();
         })
       });
@@ -60,6 +62,7 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
   }
 
   change(b: boolean) {
+    this.eventFromSelf = true;
     this.isChecked = b;
     this.selectedValues = [];
     this.items.forEach(item => {
@@ -71,6 +74,7 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
       }
     });
     this.tableService.checked(this.selectedValues);
+    this.eventFromSelf = false;
   }
 
   updateStateAndCheckedItem() {

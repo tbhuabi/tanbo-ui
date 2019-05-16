@@ -46,7 +46,7 @@
     padding-left: $grid-column-padding;
     padding-right: $grid-column-padding;
   }
-  .ui-col-lgr-#{$i} {
+  .ui-col-xl-#{$i} {
     min-height: 1px;
     padding-left: $grid-column-padding;
     padding-right: $grid-column-padding;
@@ -56,4 +56,4 @@
 @include grid-responsive(sm, $screen-sm-min);
 @include grid-responsive(md, $screen-md-min);
 @include grid-responsive(lg, $screen-lg-min);
-@include grid-responsive(lgr, $screen-xl-min);
+@include grid-responsive(xl, $screen-xl-min);

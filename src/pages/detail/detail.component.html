@@ -4,3 +4,16 @@
     <ui-tab-button>test</ui-tab-button>
   </ui-tab-bar>
 </ui-tab>
+
+<table class="ui-table" uiTable (uiChecked)="show($event)">
+  <thead>
+  <tr uiTableSelector>
+    <th>表头</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr [uiSelectable]="item" *ngFor="let item of data">
+    <td>{{ item.name }}</td>
+  </tr>
+  </tbody>
+</table>

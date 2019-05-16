@@ -12,6 +12,7 @@ import { DetailService } from './detail.service';
   ]
 })
 export class DetailComponent implements OnInit {
+  data: any[] = [{name: 'aaaa'}, {name: 'bbbb'}, {name: 'cccc'}];
   list: any[] = [];
 
   getChildren = (item: PickerCell) => {
@@ -41,5 +42,9 @@ export class DetailComponent implements OnInit {
         });
       }
     });
+  }
+
+  show(result: any) {
+    console.log(result);
   }
 }
