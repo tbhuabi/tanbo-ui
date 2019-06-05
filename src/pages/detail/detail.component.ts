@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-import { PickerCell } from '../../tanbo/ui/public_api';
 import { DetailService } from './detail.service';
 
 @Component({
@@ -11,40 +10,14 @@ import { DetailService } from './detail.service';
     DetailService
   ]
 })
-export class DetailComponent implements OnInit {
-  data: any[] = [{name: 'aaaa'}, {name: 'bbbb'}, {name: 'cccc'}];
-  list: any[] = [];
+export class DetailComponent {
+  date = '';
 
-  getChildren = (item: PickerCell) => {
-    return this.detailService.getAddressList(String(item.value)).pipe(map((response: any) => {
-      if (response.code === 10000) {
-        return response.data.map((item: any) => {
-          return {
-            text: item.regionName,
-            value: item.regionId
-          };
-        });
-      }
-    }));
+  show() {
+    console.log(this.date);
   }
 
-  constructor(private detailService: DetailService) {
-  }
-
-  ngOnInit() {
-    this.detailService.getAddressList('0').subscribe((response: any) => {
-      if (response.code === 10000) {
-        this.list = response.data.map((item: any) => {
-          return {
-            text: item.regionName,
-            value: item.regionId
-          };
-        });
-      }
-    });
-  }
-
-  show(result: any) {
-    console.log(result);
+  change() {
+    this.date = '';
   }
 }

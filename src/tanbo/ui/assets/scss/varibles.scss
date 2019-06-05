@@ -88,7 +88,7 @@ $button-font-size-lg: $button-font-size + 4px !default;
 
 // tooltip
 $tooltip-bg-color: #555 !default;
-$tooltip-text-color: #fff;
+$tooltip-text-color: #fff !default;
 
 // 分页控件
 $pagination-radius: $radius-base !default;
@@ -131,6 +131,6 @@ $list-title-horizontal-padding: $grid-column-padding !default;
 $dialog-width: 360px !default;
 
 // notify
-$tree-line-color: $color-gray;
+$tree-line-color: $color-gray !default;
 
 $editor-selection-color: rgba(red($color-primary), green($color-primary), blue($color-primary), .2) !default

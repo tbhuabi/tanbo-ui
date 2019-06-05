@@ -5,15 +5,8 @@
   </ui-tab-bar>
 </ui-tab>
 
-<table class="ui-table" uiTable (uiChecked)="show($event)">
-  <thead>
-  <tr uiTableSelector>
-    <th>表头</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr [uiSelectable]="item" *ngFor="let item of data">
-    <td>{{ item.name }}</td>
-  </tr>
-  </tbody>
-</table>
+<form (uiSubmit)="show()">
+  <ui-input type="date" name="name" [(ngModel)]="date"></ui-input>
+  <button type="submit">submit</button>
+  <button type="button" (click)="change()">reset</button>
+</form>
