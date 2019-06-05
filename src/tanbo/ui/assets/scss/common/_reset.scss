@@ -18,7 +18,7 @@ body {
   line-height: $line-height;
   text-size-adjust: none;
   text-rendering: optimizeLegibility;
-
+  -webkit-font-smoothing: antialiased;
   * {
     /*---滚动条默认显示样式--*/
     ::-webkit-scrollbar-thumb {
@@ -51,10 +51,10 @@ body {
   }
 }
 
-body, button, input, option, select, td, textarea {
-  font-family: arial, verdana, helvetica, 'PingFang SC', 'HanHei SC', STHeitiSC-Light, Microsoft Yahei, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
+//body, button, input, option, select, td, textarea {
+//  font-family: arial, verdana, helvetica, 'PingFang SC', 'HanHei SC', STHeitiSC-Light, Microsoft Yahei, sans-serif;
+//  -webkit-font-smoothing: antialiased;
+//}
 
 p, ol, ul, dl, {
   line-height: 1.8em;
