@@ -1,0 +1,15 @@
+{
+  "name": "@tanbo/ui",
+  "version": "1.0.0-alpha.1",
+  "dependencies": {
+    "codemirror": "^5.40.2",
+    "quill": "^1.3.6",
+    "quill-image-resize": "git+https://github.com/tbhuabi/quill-image-resize-module.git#338ff34c276c19deb290fbd861a1e593ed124228",
+    "highlight.js": "^9.13.1",
+    "marked": "^0.5.2"
+  },
+  "peerDependencies": {
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0"
+  }
+}

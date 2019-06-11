@@ -1,44 +1,22 @@
-import { NgModule } from '@angular/core';
-import { APP_BASE_HREF } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UIModule } from '@tanbo/ui';
 
-import { AppComponent } from './app';
-
-import { UIModule } from '../tanbo/ui/public_api';
-
-import { HomeComponent } from '../pages/home/home';
-import { DetailComponent } from '../pages/detail/detail.component';
-import { TestComponent } from '../pages/test/test';
-import { routing } from './app.routing';
-import { ApiInterceptor } from './api-interceptor';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    FormsModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
-    UIModule.forRoot(),
-    routing
+    UIModule.forRoot()
   ],
-  declarations: [
-    AppComponent,
-    TestComponent,
-    HomeComponent,
-    DetailComponent
-  ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: ApiInterceptor,
-    multi: true
-  }, {
-    provide: APP_BASE_HREF,
-    useValue: '/'
-  }],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }
