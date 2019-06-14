@@ -1,0 +1,41 @@
+ui-scroll {
+  display: block;
+  overflow: hidden;
+  position: relative;
+
+  &.ui-overflow-x:hover {
+    .ui-scroll-bar-x {
+      display: block;
+    }
+  }
+
+  &.ui-overflow-y:hover {
+    .ui-scroll-bar-y {
+      display: block;
+    }
+  }
+}
+
+.ui-scroll {
+  overflow: hidden;
+}
+
+.ui-scroll-bar-y {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: $scroll-bar-width;
+  min-height: $scroll-bar-min-height;
+  background-color: $scroll-bar-color;
+  display: none;
+}
+
+.ui-scroll-bar-x {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: $scroll-bar-width;
+  min-width: $scroll-bar-min-height;
+  background-color: $scroll-bar-color;
+  display: none;
+}

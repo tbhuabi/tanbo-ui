@@ -134,3 +134,9 @@ $dialog-width: 360px !default;
 $tree-line-color: $color-gray !default;
 
 $editor-selection-color: rgba(red($color-primary), green($color-primary), blue($color-primary), .2) !default
+
+$scroll-bar-container-color: $color-gray-light !default;
+$scroll-bar-color: $color-gray !default;
+$scroll-bar-hover-color: $color-gray-dark !default;
+$scroll-bar-width: 5px;
+$scroll-bar-min-height: 50px;

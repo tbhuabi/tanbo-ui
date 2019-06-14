@@ -10,6 +10,7 @@ import { UINavModule } from './nav/nav.module';
 import { UIOtherModule } from './other/other.module';
 import { UIPanelModule } from './panel/panel.module';
 import { UIQuickNavModule } from './quick-nav/quick-nav.module';
+import { UIScrollModule } from './scroll/scroll.module';
 import { UIStepModule } from './step/step.module';
 import { UITabModule } from './tab/tab.module';
 import { UITableModule } from './table/table.module';
@@ -35,6 +36,7 @@ import { UI_ANCHOR_LINK_DISTANCE } from './quick-nav/helper';
     UIOtherModule,
     UIPanelModule,
     UIQuickNavModule,
+    UIScrollModule,
     UIStepModule,
     UITabModule,
     UITableModule,

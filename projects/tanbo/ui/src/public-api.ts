@@ -1,21 +1,31 @@
 /*
  * Public API Surface of ui
  */
-/** 根模块 */
+/**
+ * 根模块
+ */
 export { AppComponent } from './lib/app/app/app.component';
 export { UIAppModule } from './lib/app/app.module';
-/** 面包屑 */
+/**
+ * 面包屑
+ */
 export { BreadcrumbComponent } from './lib/breadcrumb/breadcrumb/breadcrumb.component';
 export { BreadcrumbItemComponent } from './lib/breadcrumb/breadcrumb-item/breadcrumb-item.component';
 export { UIBreadcrumbModule } from './lib/breadcrumb/breadcrumb.module';
-/** 图片裁剪 */
+/**
+ * 图片裁剪
+ */
 export { CropperComponent } from './lib/cropper/cropper/cropper.component';
 export { UICropperModule } from './lib/cropper/cropper.module';
-/** 下拉框 */
+/**
+ * 下拉框
+ */
 export { DropdownComponent } from './lib/dropdown/dropdown/dropdown.component';
 export { DropdownMenuComponent } from './lib/dropdown/dropdown-menu/dropdown-menu.component';
 export { UIDropdownModule } from './lib/dropdown/dropdown.module';
-/** 表单 */
+/**
+ * 表单
+ */
 export { BtnGroupComponent } from './lib/forms/btn-group/btn-group.component';
 export { ButtonComponent } from './lib/forms/button/button.component';
 export { CheckboxComponent } from './lib/forms/checkbox/checkbox.component';
@@ -45,7 +55,9 @@ export { IntegerValidator } from './lib/forms/integer-validator.directive';
 export { RequiredTrueValidator, PickerRequiredValidator, RequiredValidator } from './lib/forms/required-validator.directive';
 export { SubmitDirective } from './lib/forms/submit.directive';
 export { UIValidators } from './lib/forms/validators';
-/** 弹窗 */
+/**
+ * 弹窗
+ */
 export { DialogComponent } from './lib/modal/dialog/dialog.component';
 export { DialogConfig, DialogController } from './lib/modal/dialog/dialog-controller';
 export { MaskComponent } from './lib/modal/mask/mask.component';
@@ -58,7 +70,9 @@ export { ModalHeaderComponent } from './lib/modal/modal-header/modal-header.comp
 export { NotifyComponent } from './lib/modal/notify/notify.component';
 export { NotifyConfig, NotifyController, NotifyType } from './lib/modal/notify/notify-controller';
 export { UIModalModule } from './lib/modal/modal.module';
-/** 导航 */
+/**
+ * 导航
+ */
 export { NavComponent } from './lib/nav/nav/nav.component';
 export { NavService } from './lib/nav/nav/nav.service';
 export { NavInnerComponent } from './lib/nav/nav-inner/nav-inner.component';
@@ -66,7 +80,9 @@ export { NavItemComponent } from './lib/nav/nav-item/nav-item.component';
 export { NavItemService } from './lib/nav/nav-item/nav-item.service';
 export { NavThumbnailComponent } from './lib/nav/nav-thumbnail/nav-thumbnail.component';
 export { UINavModule } from './lib/nav/nav.module';
-/** 其它 */
+/**
+ * 其它
+ */
 export { DividerComponent } from './lib/other/divider/divider.component';
 export { ItemComponent } from './lib/other/item/item.component';
 export { PopConfirmComponent } from './lib/other/pop-confirm/pop-confirm.component';
@@ -81,23 +97,36 @@ export { TooltipBaseService } from './lib/other/tooltip-base/tooltip-base.servic
 export { ViewLoadingBarComponent } from './lib/other/view-loading-bar/view-loading-bar.component';
 export { UIOtherModule } from './lib/other/other.module';
 export { StopPropagationDirective } from './lib/other/stop-propagation.directive';
-/** 面板 */
+/**
+ * 面板
+ */
 export { PanelComponent } from './lib/panel/panel/panel.component';
 export { PanelBodyComponent } from './lib/panel/panel-body/panel-body.component';
 export { PanelFooterComponent } from './lib/panel/panel-footer/panel-footer.component';
 export { PanelHeaderComponent } from './lib/panel/panel-header/panel-header.component';
 export { UIPanelModule } from './lib/panel/panel.module';
-/** 锚点导航 */
+/**
+ * 锚点导航
+ */
 export { AnchorComponent } from './lib/quick-nav/anchor/anchor.component';
 export { AnchorService } from './lib/quick-nav/anchor/anchor.service';
 export { AnchorLinkComponent } from './lib/quick-nav/anchor-link/anchor-link.component';
 export { UI_ANCHOR_LINK_DISTANCE } from './lib/quick-nav/helper';
 export { UIQuickNavModule } from './lib/quick-nav/quick-nav.module';
-/** 步骤条 */
+/**
+ * 滚动
+ */
+export { ScrollComponent } from './lib/scroll/scroll/scroll.component';
+export { UIScrollModule } from './lib/scroll/scroll.module';
+/**
+ * 步骤条
+ */
 export { StepComponent } from './lib/step/step/step.component';
 export { StepItemComponent } from './lib/step/step-item/step-item.component';
 export { UIStepModule } from './lib/step/step.module';
-/** tab */
+/**
+ * tab
+ */
 export { TabComponent } from './lib/tab/tab/tab.component';
 export { TabService } from './lib/tab/tab/tab.service';
 export { TabBarComponent } from './lib/tab/tab-bar/tab-bar.component';
@@ -105,18 +134,24 @@ export { TabButtonComponent } from './lib/tab/tab-button/tab-button.component';
 export { TabViewComponent } from './lib/tab/tab-view/tab-view.component';
 export { TabViewItemComponent } from './lib/tab/tab-view-item/tab-view-item.component';
 export { UITabModule } from './lib/tab/tab.module';
-/** 表格 */
+/**
+ * 表格
+ */
 export { SelectableGroupComponent } from './lib/table/selectable-group/selectable-group.component';
 export { SelectableItemComponent } from './lib/table/selectable-item/selectable-item.component';
 export { TableResponsiveComponent } from './lib/table/table-responsive/table-responsive.component';
 export { TableDirective } from './lib/table/table.directive';
 export { UITableModule } from './lib/table/table.module';
 export { TableService } from './lib/table/table.service';
-/** 时间轴 */
+/**
+ * 时间轴
+ */
 export { TimelineComponent } from './lib/timeline/timeline/timeline.component';
 export { TimelineItemComponent } from './lib/timeline/timeline-item/timeline-item.component';
 export { UITimelineModule } from './lib/timeline/timeline.module';
-/** 树 */
+/**
+ * 树
+ */
 export { TreeComponent, treeDepthFactory } from './lib/tree/tree/tree.component';
 export { TreeExpandComponent } from './lib/tree/tree-expand/tree-expand.component';
 export { TreeInnerComponent } from './lib/tree/tree-inner/tree-inner.component';
@@ -125,6 +160,8 @@ export { TreeItemService } from './lib/tree/tree-item/tree-item.service';
 export { UI_TREE_CHECKED_ICON, UI_TREE_DEPTH, UI_TREE_OFFSET, UI_TREE_UNCHECKED_ICON } from './lib/tree/help';
 export { UITreeModule } from './lib/tree/tree.module';
 
-/** 主模块 */
+/**
+ * 主模块
+ */
 export { attrToBoolean } from './lib/utils';
 export { UIModule } from './lib/tanbo-ui.module';

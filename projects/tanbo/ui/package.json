@@ -23,6 +23,9 @@
     "component",
     "theme"
   ],
+  "main": "src/public-api.ts",
+  "module": "src/public-api.ts",
+  "typings": "src/public-api.ts",
   "license": "MIT",
   "repository": {
     "type": "git",

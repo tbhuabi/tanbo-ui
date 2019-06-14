@@ -20,10 +20,10 @@
     ],
     "paths": {
       "@tanbo/ui": [
-        "dist/tanbo/ui"
+        "projects/tanbo/ui"
       ],
       "@tanbo/ui/*": [
-        "dist/tanbo/ui/*"
+        "projects/tanbo/ui/*"
       ]
     }
   }

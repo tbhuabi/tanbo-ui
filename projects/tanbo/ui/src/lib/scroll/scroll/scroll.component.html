@@ -1,0 +1,5 @@
+<div class="ui-scroll" #content [ngStyle]="{transform: transform}">
+  <ng-content></ng-content>
+</div>
+<div class="ui-scroll-bar-y" [ngStyle]="{height: scrollYBarLength + 'px', top: topDistance + 'px'}"></div>
+<div class="ui-scroll-bar-x" [style.width]="scrollXBarLength + 'px'"></div>
