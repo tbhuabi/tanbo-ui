@@ -4,6 +4,7 @@
     "eofline": false,
     "array-type": false,
     "arrow-parens": false,
+    "variable-name": false,
     "deprecation": {
       "severity": "warn"
     },
@@ -30,7 +31,7 @@
     "max-classes-per-file": false,
     "max-line-length": [
       true,
-      140
+      120
     ],
     "member-access": false,
     "member-ordering": [
