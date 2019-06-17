@@ -2,7 +2,6 @@ import {
   Component,
   ElementRef,
   HostListener,
-  ViewChild,
   Input,
   Output,
   HostBinding,
@@ -25,7 +24,6 @@ export class ScrollComponent implements OnDestroy {
   @Input() overflowX = false;
   @HostBinding('class.ui-overflow-y')
   @Input() overflowY = true;
-  @ViewChild('content', {static: true}) content: ElementRef;
   @Input() scrollBarMinLength = 50;
 
   @Input()
@@ -86,14 +84,19 @@ export class ScrollComponent implements OnDestroy {
   @HostListener('mouseenter')
   mouseEnter() {
     const containerElement = this.elementRef.nativeElement;
-    const contentElement = this.content.nativeElement;
     const fn = () => {
       this.containerHeight = containerElement.offsetHeight;
       this.containerWidth = containerElement.offsetWidth;
-      this.contentHeight = contentElement.offsetHeight;
-      this.contentWidth = contentElement.offsetWidth;
+      this.contentHeight = containerElement.scrollHeight;
+      this.contentWidth = containerElement.scrollWidth;
       this.maxScrollHeight = this.contentHeight - this.containerHeight;
       this.maxScrollWidth = this.contentWidth - this.containerWidth;
+      if (this.maxScrollHeight < 0) {
+        this.maxScrollHeight = 0;
+      }
+      if (this.maxScrollWidth < 0) {
+        this.maxScrollWidth = 0;
+      }
       this.setScrollBar();
       this.animateId = requestAnimationFrame(fn);
     };
@@ -159,6 +162,7 @@ export class ScrollComponent implements OnDestroy {
       }
     }
   }
+
   ngOnDestroy(): void {
     if (this.animateId) {
       cancelAnimationFrame(this.animateId);
