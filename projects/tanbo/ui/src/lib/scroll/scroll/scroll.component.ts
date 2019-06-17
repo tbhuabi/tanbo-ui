@@ -7,14 +7,21 @@ import {
   Output,
   AfterViewInit,
   HostBinding,
-  OnDestroy
+  OnDestroy, EventEmitter
 } from '@angular/core';
+
+export interface UIScrollEvent {
+  scrollLeft: number;
+  scrollTop: number;
+  srcEvent: WheelEvent;
+}
 
 @Component({
   selector: 'ui-scroll',
   templateUrl: './scroll.component.html'
 })
 export class ScrollComponent implements AfterViewInit, OnDestroy {
+  @Output() uiScroll = new EventEmitter<UIScrollEvent>();
   @HostBinding('class.ui-overflow-x')
   @Input() overflowX = false;
   @HostBinding('class.ui-overflow-y')
@@ -101,12 +108,17 @@ export class ScrollComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  @HostListener('mousewheel', ['$event'])
+  @HostListener('wheel', ['$event'])
   scroll(event: WheelEvent) {
     if (this.overflowY) {
       const scrollTop = this.scrollTop + event.deltaY;
       this.scrollTop = scrollTop;
       if (scrollTop >= 0 && scrollTop <= this.maxScrollHeight) {
+        this.uiScroll.emit({
+          scrollLeft: this.scrollLeft,
+          scrollTop: this.scrollTop,
+          srcEvent: event
+        });
         event.preventDefault();
       }
       this.setScrollBar();
@@ -115,6 +127,11 @@ export class ScrollComponent implements AfterViewInit, OnDestroy {
       const scrollLeft = this.scrollLeft - event.deltaX;
       this.scrollLeft = scrollLeft;
       if (scrollLeft >= 0 && scrollLeft <= this.maxScrollWidth) {
+        this.uiScroll.emit({
+          scrollLeft: this.scrollLeft,
+          scrollTop: this.scrollTop,
+          srcEvent: event
+        });
         event.preventDefault();
       }
       this.setScrollBar();
@@ -128,6 +145,8 @@ export class ScrollComponent implements AfterViewInit, OnDestroy {
         const scrollYBarLength = y * this.containerHeight;
         this.scrollYBarLength = scrollYBarLength < this.scrollBarMinLength ? this.scrollBarMinLength : scrollYBarLength;
         this.topDistance = (this.containerHeight - this.scrollYBarLength) * (this.scrollTop / this.maxScrollHeight);
+      } else {
+        this.scrollYBarLength = 0;
       }
     }
     if (this.overflowX) {
@@ -136,6 +155,8 @@ export class ScrollComponent implements AfterViewInit, OnDestroy {
         const scrollXBarLength = x * this.containerWidth;
         this.scrollXBarLength = scrollXBarLength < this.scrollBarMinLength ? this.scrollBarMinLength : scrollXBarLength;
         this.leftDistance = (this.containerWidth - this.scrollXBarLength) * (this.scrollLeft / this.maxScrollWidth);
+      } else {
+        this.scrollXBarLength = 0;
       }
     }
   }
