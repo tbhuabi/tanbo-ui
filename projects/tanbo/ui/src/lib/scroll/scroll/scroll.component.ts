@@ -5,7 +5,6 @@ import {
   ViewChild,
   Input,
   Output,
-  AfterViewInit,
   HostBinding,
   OnDestroy, EventEmitter
 } from '@angular/core';
@@ -20,7 +19,7 @@ export interface UIScrollEvent {
   selector: 'ui-scroll',
   templateUrl: './scroll.component.html'
 })
-export class ScrollComponent implements AfterViewInit, OnDestroy {
+export class ScrollComponent implements OnDestroy {
   @Output() uiScroll = new EventEmitter<UIScrollEvent>();
   @HostBinding('class.ui-overflow-x')
   @Input() overflowX = false;
@@ -160,18 +159,9 @@ export class ScrollComponent implements AfterViewInit, OnDestroy {
       }
     }
   }
-
-  ngAfterViewInit(): void {
-    this.setupScrollContainer();
-  }
-
   ngOnDestroy(): void {
     if (this.animateId) {
       cancelAnimationFrame(this.animateId);
     }
-  }
-
-  setupScrollContainer() {
-
   }
 }
