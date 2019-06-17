@@ -5,6 +5,7 @@ import { UIModule } from '@tanbo/ui';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    UIModule.forRoot()
+    UIModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

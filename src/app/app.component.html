@@ -1,25 +1,8 @@
 <ui-app>
   <ui-scroll>
-    <ui-nav>
-      <ui-nav-item>
-        <ui-nav-inner>inner</ui-nav-inner>
-        <ui-nav>
-          <ui-nav-item>
-            <ui-nav-inner>inner2</ui-nav-inner>
-          </ui-nav-item>
-          <ui-nav-item>
-            <ui-nav-inner>inner2</ui-nav-inner>
-          </ui-nav-item>
-          <ui-nav-item>
-            <ui-nav-inner>inner2</ui-nav-inner>
-          </ui-nav-item>
-          <ui-nav-item>
-            <ui-nav-inner>inner2</ui-nav-inner>
-          </ui-nav-item>
-          <ui-nav-item>
-            <ui-nav-inner>inner2</ui-nav-inner>
-          </ui-nav-item>
-        </ui-nav>
+    <ui-nav [thumbnail]="is">
+      <ui-nav-item *ngFor="let item of list">
+        <ui-nav-inner>{{ item }}</ui-nav-inner>
       </ui-nav-item>
       <ui-nav-item>
         <ui-nav-inner>inner</ui-nav-inner>
@@ -100,8 +83,34 @@
             <ui-nav-inner>inner2</ui-nav-inner>
           </ui-nav-item>
         </ui-nav>
+      </ui-nav-item>
+      <ui-nav-item>
+        <ui-nav-inner>inner</ui-nav-inner>
+        <ui-nav>
+          <ui-nav-item>
+            <ui-nav-inner>inner2</ui-nav-inner>
+          </ui-nav-item>
+          <ui-nav-item>
+            <ui-nav-inner>inner2</ui-nav-inner>
+          </ui-nav-item>
+          <ui-nav-item>
+            <ui-nav-inner>inner2</ui-nav-inner>
+          </ui-nav-item>
+          <ui-nav-item>
+            <ui-nav-inner>inner2</ui-nav-inner>
+          </ui-nav-item>
+          <ui-nav-item>
+            <ui-nav-inner>inner2</ui-nav-inner>
+          </ui-nav-item>
+        </ui-nav>
+      </ui-nav-item>
+      <ui-nav-item *ngFor="let item of list">
+        <ui-nav-inner>{{ item }}</ui-nav-inner>
       </ui-nav-item>
     </ui-nav>
   </ui-scroll>
+  <div style="margin-left: 400px;">
+    <ui-switch [(ngModel)]="is"></ui-switch>
+  </div>
 </ui-app>
 
