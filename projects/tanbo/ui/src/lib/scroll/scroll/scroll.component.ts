@@ -65,11 +65,11 @@ export class ScrollComponent implements OnDestroy {
     return `translateX(${-this.scrollLeft}px) translateY(${-this.scrollTop}px)`;
   }
 
+  topDistance = 0;
+  leftDistance = 0;
+
   private _scrollLeft = 0;
   private _scrollTop = 0;
-
-  private topDistance = 0;
-  private leftDistance = 0;
   private containerWidth: number;
   private containerHeight: number;
   private contentWidth: number;
