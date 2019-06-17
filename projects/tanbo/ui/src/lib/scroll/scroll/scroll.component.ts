@@ -94,10 +94,10 @@ export class ScrollComponent implements OnDestroy {
       this.contentWidth = contentElement.offsetWidth;
       this.maxScrollHeight = this.contentHeight - this.containerHeight;
       this.maxScrollWidth = this.contentWidth - this.containerWidth;
+      this.setScrollBar();
       this.animateId = requestAnimationFrame(fn);
     };
     fn();
-    this.setScrollBar();
   }
 
   @HostListener('mouseleave')

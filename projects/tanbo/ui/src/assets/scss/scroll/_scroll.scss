@@ -18,24 +18,32 @@ ui-scroll {
 
 .ui-scroll {
   overflow: hidden;
+  position: relative;
+  z-index: 0;
+}
+
+.ui-scroll-bar {
+  position: absolute;
+  background-color: $scroll-bar-color;
+  display: none;
+  z-index: 1;
+  box-shadow: 0 0 3px rgba(255, 255, 255, .1);
+  &:hover {
+    background-color: $scroll-bar-hover-color;
+  }
 }
 
 .ui-scroll-bar-y {
-  position: absolute;
   right: 0;
   top: 0;
   width: $scroll-bar-width;
   min-height: $scroll-bar-min-height;
-  background-color: $scroll-bar-color;
-  display: none;
+
 }
 
 .ui-scroll-bar-x {
-  position: absolute;
   left: 0;
   bottom: 0;
   height: $scroll-bar-width;
   min-width: $scroll-bar-min-height;
-  background-color: $scroll-bar-color;
-  display: none;
 }
