@@ -5,7 +5,7 @@ import {
   Input,
   Output,
   HostBinding,
-  OnDestroy, EventEmitter
+  OnDestroy, EventEmitter, ViewChild
 } from '@angular/core';
 
 export interface UIScrollEvent {
@@ -19,6 +19,7 @@ export interface UIScrollEvent {
   templateUrl: './scroll.component.html'
 })
 export class ScrollComponent implements OnDestroy {
+  @ViewChild('content', {static: true}) content: ElementRef;
   @Output() uiScroll = new EventEmitter<UIScrollEvent>();
   @HostBinding('class.ui-overflow-x')
   @Input() overflowX = false;
@@ -84,12 +85,15 @@ export class ScrollComponent implements OnDestroy {
   @HostListener('mouseenter')
   mouseEnter() {
     const containerElement = this.elementRef.nativeElement;
+    const contentElement = this.content.nativeElement;
     const fn = () => {
       this.containerHeight = containerElement.offsetHeight;
       this.containerWidth = containerElement.offsetWidth;
-      this.contentHeight = containerElement.scrollHeight;
-      this.contentWidth = containerElement.scrollWidth;
+      // 当容器有 padding 时，容器的 scrollHeight 会大于内容的 offsetHeight
+      this.contentHeight = Math.max(containerElement.scrollHeight, contentElement.offsetHeight);
+      this.contentWidth = Math.max(containerElement.scrollWidth, contentElement.offsetWidth);
       this.maxScrollHeight = this.contentHeight - this.containerHeight;
+      console.log(this.maxScrollHeight, this.containerHeight, this.contentHeight);
       this.maxScrollWidth = this.contentWidth - this.containerWidth;
       if (this.maxScrollHeight < 0) {
         this.maxScrollHeight = 0;

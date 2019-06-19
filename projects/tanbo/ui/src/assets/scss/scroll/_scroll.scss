@@ -26,6 +26,7 @@ ui-scroll {
   display: none;
   z-index: 1;
   box-shadow: 0 0 3px rgba(255, 255, 255, .1);
+  contain: size layout style;
   &:hover {
     background-color: $scroll-bar-hover-color;
   }
@@ -35,13 +36,10 @@ ui-scroll {
   right: 0;
   top: 0;
   width: $scroll-bar-width;
-  min-height: $scroll-bar-min-height;
-
 }
 
 .ui-scroll-bar-x {
   left: 0;
   bottom: 0;
   height: $scroll-bar-width;
-  min-width: $scroll-bar-min-height;
 }
