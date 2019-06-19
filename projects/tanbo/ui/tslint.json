@@ -13,6 +13,7 @@
       "ui",
       "kebab-case"
     ],
-    "only-arrow-functions": false
+    "only-arrow-functions": false,
+    "radix": false
   }
 }
