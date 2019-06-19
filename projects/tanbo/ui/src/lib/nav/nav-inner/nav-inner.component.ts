@@ -36,7 +36,7 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
 
   @HostBinding('class.ui-child-link-active')
   get isHighLight() {
-    return this.childLinkActive && this.isThumbnail;
+    return this.childLinkActive && this.isThumbnail && this.totalMenu > 0;
   }
 
   @HostBinding('class.ui-thumbnail')
