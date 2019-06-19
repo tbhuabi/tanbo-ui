@@ -1,6 +1,5 @@
 import {
   Component,
-  Optional,
   HostListener,
   OnInit,
   Input,
@@ -32,8 +31,14 @@ import { NavService } from '../nav/nav.service';
 export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterContentInit {
   @HostBinding('class.ui-open')
   get isOpenNext() {
-    return this.isOpen && this.totalMenu > 0;
+    return this.isOpen && this.totalMenu > 0 && !this.isThumbnail;
   }
+
+  @HostBinding('class.ui-child-link-active')
+  get isHighLight() {
+    return this.childLinkActive && this.isThumbnail;
+  }
+
   @HostBinding('class.ui-thumbnail')
   isThumbnail = false;
   isOpen = false;
@@ -50,8 +55,9 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
 
   private classes: string[] = ['ui-active'];
   private subs: Subscription[] = [];
+  private childLinkActive = false;
 
-  constructor(@Optional() private navItemService: NavItemService,
+  constructor(private navItemService: NavItemService,
               /*tslint:disable*/
               @Attribute('tabindex') public tabIndex: string,
               /*tslint:enable*/
@@ -70,21 +76,22 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
         this.update();
       }
     }));
-    if (this.navItemService) {
-      this.subs.push(this.navItemService.isOpen.subscribe(b => {
-        this.isOpen = b;
-      }));
-      this.subs.push(this.navItemService.hasMenu.subscribe(b => {
-        if (b) {
-          this.totalMenu++;
-        } else {
-          this.totalMenu--;
-          if (this.totalMenu < 0) {
-            this.totalMenu = 0;
-          }
+    this.subs.push(this.navItemService.expand.subscribe(b => {
+      this.isOpen = b;
+    }));
+    this.subs.push(this.navItemService.linksActive.subscribe(b => {
+      this.childLinkActive = b;
+    }));
+    this.subs.push(this.navItemService.hasMenu.subscribe(b => {
+      if (b) {
+        this.totalMenu++;
+      } else {
+        this.totalMenu--;
+        if (this.totalMenu < 0) {
+          this.totalMenu = 0;
         }
-      }));
-    }
+      }
+    }));
   }
 
   ngOnDestroy() {
@@ -93,9 +100,7 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
 
   @HostListener('focus')
   focus() {
-    if (this.navItemService && this.navItemService.parent) {
-      this.navItemService.parent.change(true);
-    }
+    this.navItemService.expandParent();
   }
 
   @HostListener('keydown', ['$event'])
@@ -107,18 +112,13 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
 
   @HostListener('click')
   click() {
-    if (this.navItemService && !this.isThumbnail) {
-      this.navItemService.change(!this.isOpen);
-    }
+    this.navItemService.changeExpandStatus(!this.isOpen);
   }
 
   ngAfterContentInit(): void {
     this.links.changes.subscribe(() => this.update());
     this.linksWithHrefs.changes.subscribe(() => this.update());
     this.update();
-    if (this.navItemService && !this.isOpen) {
-      this.navItemService.change(this.isActive);
-    }
   }
 
   ngOnChanges() {
@@ -126,7 +126,9 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
   }
 
   private update(): void {
-    if (!this.links || !this.linksWithHrefs || !this.router.navigated) return;
+    if (!this.links || !this.linksWithHrefs || !this.router.navigated) {
+      return;
+    }
     const hasActiveLinks = this.hasActiveLinks();
 
     if (this.isActive !== hasActiveLinks) {
@@ -141,7 +143,6 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
         (this as {
           isActive: boolean
         }).isActive = active;
-        this.navItemService.change(active);
       });
     }
   }

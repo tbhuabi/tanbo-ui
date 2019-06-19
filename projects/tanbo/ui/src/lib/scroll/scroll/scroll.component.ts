@@ -98,7 +98,6 @@ export class ScrollComponent implements OnDestroy {
         Number.parseInt(styles.paddingRight);
 
       this.maxScrollHeight = this.contentHeight - this.containerHeight;
-      console.log(this.maxScrollHeight, this.containerHeight, this.contentHeight);
       this.maxScrollWidth = this.contentWidth - this.containerWidth;
       if (this.maxScrollHeight < 0) {
         this.maxScrollHeight = 0;

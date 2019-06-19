@@ -24,12 +24,6 @@
       }
     }
   }
-  .ui-nav-inner-arrow {
-    color: inherit;
-    > span {
-      transform: rotateZ(-90deg);
-    }
-  }
   &.ui-active {
     background-color: $color-primary;
     color: #fff;
@@ -44,6 +38,16 @@
       flex: 1;
       padding-left: 16px;
       transform: scale(1.2);
+    }
+  }
+  &.ui-child-link-active {
+    color: $color-primary;
+  }
+
+  .ui-nav-inner-arrow {
+    color: inherit;
+    > span {
+      transform: rotateZ(-90deg);
     }
   }
 }

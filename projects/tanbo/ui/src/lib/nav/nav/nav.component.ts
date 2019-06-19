@@ -19,7 +19,7 @@ import { attrToBoolean } from '../../utils';
     paddingBottom: 0
   })), transition('open <=> close', animate(150))])],
   host: {
-    '[@navAnimation]': 'open ? "open" : "close"'
+    '[@navAnimation]': 'expand ? "open" : "close"'
   },
   providers: [
     NavService
@@ -39,7 +39,7 @@ export class NavComponent implements OnDestroy, OnInit {
 
   @Input()
   @HostBinding('class.ui-open')
-  open = false;
+  expand = false;
   private _thumbnail = false;
   private sub: Subscription;
 
@@ -50,12 +50,12 @@ export class NavComponent implements OnDestroy, OnInit {
   ngOnInit() {
     if (this.navItemService) {
       this.navItemService.publishMenu(true);
-      this.navItemService.change(this.open);
-      this.sub = this.navItemService.isOpen.subscribe(b => {
-        this.open = b;
+      this.navItemService.changeExpandStatus(this.expand);
+      this.sub = this.navItemService.expand.subscribe(b => {
+        this.expand = b;
       });
     } else {
-      this.open = true;
+      this.expand = true;
     }
   }
 
