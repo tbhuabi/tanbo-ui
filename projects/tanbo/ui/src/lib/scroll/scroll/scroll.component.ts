@@ -93,9 +93,15 @@ export class ScrollComponent implements OnDestroy {
       this.maxScrollWidth = this.contentWidth - this.containerWidth;
       if (this.maxScrollHeight < 0) {
         this.maxScrollHeight = 0;
+        this.scrollTop = 0;
+      } else if (this.scrollTop > this.maxScrollHeight) {
+        this.scrollTop = this.maxScrollHeight;
       }
       if (this.maxScrollWidth < 0) {
         this.maxScrollWidth = 0;
+        this.scrollLeft = 0;
+      } else if (this.scrollLeft > this.maxScrollWidth) {
+        this.scrollLeft = this.maxScrollWidth;
       }
       this.setScrollBar();
       this.animateId = requestAnimationFrame(fn);
