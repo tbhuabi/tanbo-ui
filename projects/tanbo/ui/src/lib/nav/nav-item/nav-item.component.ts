@@ -38,6 +38,11 @@ export class NavItemComponent implements OnInit, AfterContentInit, OnChanges, On
   ngOnInit() {
     this.subs.push(this.navService.thumbnail.subscribe(b => {
       this.isThumbnail = b;
+      if (b) {
+        this.navItemService.changeExpandStatus(false);
+      } else {
+        this.update();
+      }
     }));
     this.subs.push(this.router.events.subscribe(s => {
       if (s instanceof NavigationEnd) {
