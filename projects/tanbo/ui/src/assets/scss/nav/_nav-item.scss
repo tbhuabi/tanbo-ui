@@ -4,6 +4,12 @@ ui-nav-item {
   &.ui-thumbnail {
     position: relative;
 
+    &:hover {
+      > ui-nav-inner:not(.ui-child-link-active) {
+        color: $color-primary;
+      }
+    }
+
     > ui-nav {
       background-color: #fff;
       position: absolute;
