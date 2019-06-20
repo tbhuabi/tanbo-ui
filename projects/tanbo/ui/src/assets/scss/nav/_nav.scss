@@ -11,9 +11,11 @@ ui-nav {
     padding-right: 0;
   }
   &.ui-thumbnail {
-    overflow: visible;
     padding-left: 0;
     padding-right: 0;
     width: 80px;
+    &:hover {
+      overflow: visible;
+    }
   }
 }

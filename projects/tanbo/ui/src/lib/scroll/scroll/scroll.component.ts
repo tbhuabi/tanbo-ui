@@ -82,35 +82,16 @@ export class ScrollComponent implements OnDestroy {
   constructor(private elementRef: ElementRef) {
   }
 
+  @HostListener('window:resize')
+  windowResize() {
+    this.update();
+    this.setScrollBar();
+  }
+
   @HostListener('mouseenter')
   mouseEnter() {
-    const containerElement = this.elementRef.nativeElement;
-    const contentElement = this.content.nativeElement;
     const fn = () => {
-      this.containerHeight = containerElement.offsetHeight;
-      this.containerWidth = containerElement.offsetWidth;
-      const styles = getComputedStyle(containerElement);
-      this.contentHeight = contentElement.offsetHeight +
-        Number.parseInt(styles.paddingTop) +
-        Number.parseInt(styles.paddingBottom);
-      this.contentWidth = contentElement.offsetWidth +
-        Number.parseInt(styles.paddingLeft) +
-        Number.parseInt(styles.paddingRight);
-
-      this.maxScrollHeight = this.contentHeight - this.containerHeight;
-      this.maxScrollWidth = this.contentWidth - this.containerWidth;
-      if (this.maxScrollHeight < 0) {
-        this.maxScrollHeight = 0;
-        this.scrollTop = 0;
-      } else if (this.scrollTop > this.maxScrollHeight) {
-        this.scrollTop = this.maxScrollHeight;
-      }
-      if (this.maxScrollWidth < 0) {
-        this.maxScrollWidth = 0;
-        this.scrollLeft = 0;
-      } else if (this.scrollLeft > this.maxScrollWidth) {
-        this.scrollLeft = this.maxScrollWidth;
-      }
+      this.update();
       this.setScrollBar();
       this.animateId = requestAnimationFrame(fn);
     };
@@ -151,6 +132,35 @@ export class ScrollComponent implements OnDestroy {
         event.preventDefault();
       }
       this.setScrollBar();
+    }
+  }
+
+  update() {
+    const containerElement = this.elementRef.nativeElement;
+    const contentElement = this.content.nativeElement;
+    this.containerHeight = containerElement.offsetHeight;
+    this.containerWidth = containerElement.offsetWidth;
+    const styles = getComputedStyle(containerElement);
+    this.contentHeight = contentElement.offsetHeight +
+      Number.parseInt(styles.paddingTop) +
+      Number.parseInt(styles.paddingBottom);
+    this.contentWidth = contentElement.offsetWidth +
+      Number.parseInt(styles.paddingLeft) +
+      Number.parseInt(styles.paddingRight);
+
+    this.maxScrollHeight = this.contentHeight - this.containerHeight;
+    this.maxScrollWidth = this.contentWidth - this.containerWidth;
+    if (this.maxScrollHeight < 0) {
+      this.maxScrollHeight = 0;
+      this.scrollTop = 0;
+    } else if (this.scrollTop > this.maxScrollHeight) {
+      this.scrollTop = this.maxScrollHeight;
+    }
+    if (this.maxScrollWidth < 0) {
+      this.maxScrollWidth = 0;
+      this.scrollLeft = 0;
+    } else if (this.scrollLeft > this.maxScrollWidth) {
+      this.scrollLeft = this.maxScrollWidth;
     }
   }
 

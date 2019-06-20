@@ -112,7 +112,11 @@ export class NavInnerComponent implements OnDestroy, OnInit, OnChanges, AfterCon
 
   @HostListener('click')
   click() {
-    this.navItemService.changeExpandStatus(!this.isOpen);
+    if (this.isThumbnail) {
+      this.navItemService.changeExpandStatus(true);
+    } else {
+      this.navItemService.changeExpandStatus(!this.isOpen);
+    }
   }
 
   ngAfterContentInit(): void {
