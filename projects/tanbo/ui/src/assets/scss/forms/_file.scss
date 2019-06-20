@@ -1,5 +1,5 @@
 @mixin input-file-size($name, $v, $h, $font-size, $radius) {
-  &.ui-#{$name} {
+  &.ui-input-#{$name} {
     padding: $v $h;
     font-size: $font-size;
     border-radius: $radius;
