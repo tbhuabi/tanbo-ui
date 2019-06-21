@@ -11,7 +11,7 @@
                      [size]="size"></ui-dropdown-input>
   <ui-dropdown-menu [position]="position">
     <div class="ui-picker-rows">
-      <div class="ui-picker-cell" *ngFor="let cell of list; let i = index">
+      <div class="ui-picker-cell" *ngFor="let cell of cellsGroup; let i = index">
         <div class="ui-picker-list">
           <ui-item [class.ui-checked]="value[i] === item" *ngFor="let item of cell" (click)="saveItem(item, i)">{{ item.label }}</ui-item>
         </div>

@@ -17,21 +17,21 @@ import { PickerCell } from './picker-help';
 })
 export class PickerComponent implements OnDestroy, ControlValueAccessor {
   @Input() position = 'bottomLeft';
-  @Input() size: string = '';
+  @Input() size = '';
   @Input() forId: string;
   @Input() name: string;
-  @Input() placeholder: string = '';
-  @Input() arrowIconClassName: string = '';
+  @Input() placeholder = '';
+  @Input() arrowIconClassName = '';
   @Input() format = ',';
   @Input() displayFormat = '/';
   /*tslint:disable*/
   @Input() dataProvide: (cell: PickerCell) => null | PickerCell[] | Promise<null | PickerCell[]> | Observable<null | PickerCell[]>;
+
   /*tslint:enable*/
   @Input()
   set value(v: PickerCell[]) {
-    if (Array.isArray(v)) {
-      this._value = v;
-    }
+    this._value = v;
+    this.update();
   }
 
   get value() {
@@ -58,22 +58,23 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
 
   @Input()
   set data(v: PickerCell[]) {
-    this.list = [v];
+    this.cellsGroup = [v];
+    this.update();
   }
 
   @Output() uiItemChecked = new EventEmitter<PickerCell>();
   @Output() uiChange = new EventEmitter<PickerCell[]>();
 
-  list: PickerCell[][] = [];
+  cellsGroup: PickerCell[][] = [];
   open = false;
 
   get text() {
-    return this.value.map(item => item.label).join(this.displayFormat);
+    return (Array.isArray(this.value) ? this.value : []).map(item => item.label).join(this.displayFormat);
   }
 
   focus = false;
-  private _disabled: boolean = false;
-  private _readonly: boolean = false;
+  private _disabled = false;
+  private _readonly = false;
   private _value: PickerCell[] = [];
   private onChange: (_: any) => any;
   private onTouched: () => any;
@@ -105,6 +106,31 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
     }
   }
 
+  update() {
+    let cells = this.cellsGroup[0];
+    if (!Array.isArray(this.value) || !Array.isArray(cells)) {
+      return;
+    }
+    this.cellsGroup.length = 1;
+    for (const valueItem of this.value) {
+      let isFind = false;
+      for (const cell of cells) {
+        if (valueItem.value === cell.value) {
+          isFind = true;
+          if (Array.isArray(cell.children) && cell.children.length) {
+            cells = cell.children;
+            this.cellsGroup.push(cell.children);
+            break;
+          }
+          return;
+        }
+      }
+      if (!isFind) {
+        return;
+      }
+    }
+  }
+
   saveItem(item: PickerCell, index: number) {
     this.value.length = index;
     this.value.push(item);
@@ -114,13 +140,13 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
     this.uiItemChecked.emit(item);
     this.uiChange.emit(this.value);
 
-    this.list.length = index + 1;
+    this.cellsGroup.length = index + 1;
     if (Array.isArray(item.children)) {
-      this.list.push(item.children);
+      this.cellsGroup.push(item.children);
       return;
     }
     if (typeof this.dataProvide === 'function') {
-      let result = this.dataProvide(item);
+      const result = this.dataProvide(item);
       this.sub = from(
         (result instanceof Promise || result instanceof Observable) ?
           result :
@@ -128,8 +154,8 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
       ).subscribe(value => {
         if (Array.isArray(value) && value.length) {
           item.children = value;
-          this.list.length = index + 1;
-          this.list.push(value);
+          this.cellsGroup.length = index + 1;
+          this.cellsGroup.push(value);
         } else {
           this.open = false;
         }
@@ -162,7 +188,7 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   }
 
   reset() {
-    this.list.length = 1;
+    this.cellsGroup.length = 1;
     this.value = [];
     if (this.onChange) {
       this.onChange(this.value);
