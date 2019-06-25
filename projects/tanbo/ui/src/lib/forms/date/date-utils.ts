@@ -1,61 +1,29 @@
-export interface TimeDetails {
-  year?: number;
-  month?: number;
-  day?: number;
-  hours?: number;
-  minutes?: number;
-  seconds?: number;
-  timestamp?: number;
-  disabled?: boolean;
-}
-
-export function timeAnalysisByTimeString(date: string): TimeDetails {
+export function timeStringToDate(date: string | number | Date): Date | null {
   if (!date) {
-    return;
+    return null;
   }
-  let result = null;
-  let dateArr: Array<number> = date.match(/\d+/g).map(item => {
+  if (date instanceof Date) {
+    return date;
+  }
+  if (typeof date === 'number') {
+    const newDate = new Date();
+    newDate.setTime(date);
+    return newDate;
+  }
+  if (typeof date !== 'string') {
+    return null;
+  }
+  let times: Array<number> = date.match(/\d+/g).map(item => {
     return +item;
   });
-  if (dateArr.length === 3) {
-    dateArr = dateArr.concat([0, 0, 0]);
+  if (times.length === 3) {
+    times = times.concat([0, 0, 0]);
   }
-  if (dateArr.length !== 6) {
-    return result;
+  if (times.length !== 6) {
+    return null;
   }
-  result = {
-    year: dateArr[0],
-    month: dateArr[1] - 1,
-    day: dateArr[2],
-    hours: dateArr[3],
-    minutes: dateArr[4],
-    seconds: dateArr[5],
-    timestamp: 0
-  };
-  let dateInstance = new Date();
-  dateInstance.setFullYear(result.year);
-  dateInstance.setMonth(result.month);
-  dateInstance.setDate(result.day);
-  dateInstance.setHours(result.hours);
-  dateInstance.setMinutes(result.minutes);
-  dateInstance.setSeconds(result.seconds);
-  dateInstance.setMilliseconds(0);
-
-  let year = dateInstance.getFullYear();
-  let month = dateInstance.getMonth();
-  let day = dateInstance.getDate();
-  let hours = dateInstance.getHours();
-  let minutes = dateInstance.getMinutes();
-  let seconds = dateInstance.getSeconds();
-  return {
-    year,
-    month,
-    day,
-    hours,
-    minutes,
-    seconds,
-    timestamp: Date.UTC(year, month, day, hours, minutes, seconds, 0)
-  };
+  times[1] = times[1] - 1;
+  return Date.apply(new Date(), ...times);
 }
 
 export function toDouble(n: number | string): string {
@@ -65,33 +33,39 @@ export function toDouble(n: number | string): string {
   return n > 9 ? n + '' : '0' + n;
 }
 
-export function dateStringFormat(formatString: string, selectedDate: TimeDetails): string {
+export function dateStringFormat(formatString: string, selectedDate: Date): string {
+  const year = selectedDate.getFullYear();
+  const month = selectedDate.getMonth();
+  const day = selectedDate.getDate();
+  const hours = selectedDate.getHours();
+  const minutes = selectedDate.getMonth();
+  const seconds = selectedDate.getSeconds();
   return formatString.replace(/[yMdhms]+/g, (str: string): string => {
     switch (str) {
       case 'yy':
-        return selectedDate.year ? toDouble(selectedDate.year % 100) : '';
+        return year ? toDouble(year % 100) : '';
       case 'yyyy':
-        return selectedDate.year + '';
+        return year + '';
       case 'M':
-        return (selectedDate.month ? selectedDate.month + 1 : '') + '';
+        return (month ? month + 1 : '') + '';
       case 'MM':
-        return toDouble(selectedDate.month !== undefined ? selectedDate.month + 1 : '');
+        return toDouble(month !== undefined ? month + 1 : '');
       case 'd':
-        return selectedDate.day + '';
+        return day + '';
       case 'dd':
-        return toDouble(selectedDate.day);
+        return toDouble(day);
       case 'h':
-        return (selectedDate.hours || '0') + '';
+        return (hours || '0') + '';
       case 'hh':
-        return toDouble(selectedDate.hours) || '00';
+        return toDouble(hours) || '00';
       case 'm':
-        return (selectedDate.minutes || '0') + '';
+        return (minutes || '0') + '';
       case 'mm':
-        return toDouble(selectedDate.minutes) || '00';
+        return toDouble(minutes) || '00';
       case 's':
-        return (selectedDate.seconds || '0') + '';
+        return (seconds || '0') + '';
       case 'ss':
-        return toDouble(selectedDate.seconds) || '00';
+        return toDouble(seconds) || '00';
       default:
         return str;
     }

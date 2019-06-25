@@ -11,62 +11,57 @@
           [forId]="forId"
           [size]="size"></ui-dropdown-input>
   <ui-dropdown-menu class="ui-date-dropdown-menu" [position]="position">
-    <div class="ui-date-container" (click)="changeShowType()">
+    <div class="ui-date-container">
       <table class="ui-date-table">
         <tbody class="ui-date-head">
         <tr>
-          <td colspan="3" [ngClass]="{active: showType === 'year'}">
-            <div class="ui-date-header-content">
-              {{ currentDateTimeDetails.year }}年
-              <span class="ui-date-arrow" uiStopPropagation
+          <td class="ui-text-right">
+            <button type="button"
+                    [disabled]="showType === 'year' ? !canToPreviousYears : !canToPreviousYear"
+                    (click)="showType === 'year' ? updateYears(years[0] - 32) : toPreviousYear()">&laquo;</button>
+            <button type="button" (click)="toPrevMonth()">&lsaquo;</button>
+          </td>
+          <td class="ui-text-center">
+            <button type="button"
                     (click)="changeShowType('year')"
-                    [ngClass]="{'ui-active': showType==='year', 'ui-icon-arrow2-top': showType === 'year', 'ui-icon-arrow2-bottom': showType !== 'year'}"></span>
-            </div>
-            <div class="ui-date-panel ui-date-panel-year">
-              <div class="ui-date-prev" uiStopPropagation (click)="setYears(years[0].year - 16)">
-                <span class="ui-icon-arrow2-left ui-date-arrow"></span>
-              </div>
-              <div class="ui-date-next"
-                   uiStopPropagation
-                   (click)="setYears(years[years.length-1].year + 1)">
-                <span class="ui-icon-arrow2-right ui-date-arrow"></span>
-              </div>
-              <ul class="ui-date-list ui-clearfix">
-                <li *ngFor="let item of years"
-                    (click)="checkYear(item)"
-                    [ngClass]="{disabled: item.isDisable}">
-                  {{ item.year }}
-                </li>
-              </ul>
-            </div>
-          </td>
-          <td colspan="2" [ngClass]="{active: showType ==='month'}">
-            <div class="ui-date-header-content">
-              {{ currentDateTimeDetails.month + 1 }}月
-              <span class="ui-date-arrow" uiStopPropagation
+                    uiStopPropagation
+                    [ngClass]="{'ui-active': showType==='year'}">{{ currentDate.getFullYear() }}</button>
+            年
+            <button type="button"
                     (click)="changeShowType('month')"
-                    [ngClass]="{'ui-active': showType==='month','ui-icon-arrow2-top': showType === 'month', 'ui-icon-arrow2-bottom': showType !== 'month'}"></span>
-            </div>
-            <div class="ui-date-panel">
-              <ul class="ui-date-list ui-clearfix">
-                <li *ngFor="let item of months"
-                    (click)="setMonth(item)"
-                    [ngClass]="{disabled: item.isDisable}">
-                  {{ item.month + 1 }}月
-                </li>
-              </ul>
-            </div>
+                    uiStopPropagation
+                    [ngClass]="{'ui-active': showType==='month'}">{{ currentDate.getMonth() + 1 }}</button>
+            月
           </td>
-          <td colspan="2">
-            <div class="ui-pull-right ui-date-header-content">
-                <span class="ui-icon-arrow2-left ui-date-arrow"
-                      (click)="setMonth({month: currentDateTimeDetails.month - 1})"></span>
-              <span class="ui-icon-arrow2-right ui-date-arrow"
-                    (click)="setMonth({month: currentDateTimeDetails.month + 1})"></span>
-            </div>
+          <td>
+            <button type="button" (click)="toNextMonth()">&rsaquo;</button>
+            <button type="button"
+                    [disabled]="showType === 'year' ? !canToNextYears : !canToNextYear"
+                    (click)="updateYears(years[years.length-1] + 1)">&raquo;</button>
           </td>
         </tr>
         </tbody>
+      </table>
+      <div *ngIf="showType === 'year'" class="ui-date-years">
+        <ul>
+          <li *ngFor="let item of years">
+            <button class="ui-date-key" type="button"
+                    [disabled]="item.disable"
+                    (click)="updatePickerByYear(item.year)"
+                    [ngClass]="{'ui-active': currentDate.getFullYear() === item.year}">{{ item.year }}</button>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="showType === 'month'" class="ui-date-mouths">
+        <ul>
+          <li *ngFor="let item of months">
+            <button class="ui-date-key" type="button"
+                    (click)="updatePickerByMonth(item)"
+                    [ngClass]="{disabled: item.disable, 'ui-active': currentDate.getMonth() === item.month}">{{ item.month + 1 }}月</button>
+          </li>
+        </ul>
+      </div>
+      <table *ngIf="showType === ''" class="ui-date-table">
         <tbody class="ui-date-body ui-date-panel-week">
         <tr>
           <td>日</td>
@@ -80,43 +75,22 @@
         </tbody>
         <tbody class="ui-date-body ui-date-panel-day">
         <tr *ngFor="let item of dayList">
-          <td *ngFor="let day of item" (click)="selected(day)"
-              [ngClass]="{
-              'no-current-month': day.month !== currentDateTimeDetails.month,
-              'current-day': day.year === systemDateTimeDetails.year && day.month === systemDateTimeDetails.month && day.day === systemDateTimeDetails.day,
-              'selected-day': day.year === selectedDateTimeDetails.year && day.month === selectedDateTimeDetails.month && day.day === selectedDateTimeDetails.day,
-              'disabled': day.disabled
+          <td *ngFor="let day of item">
+            <button type="button" class="ui-date-key" (click)="selected(day)"
+                    [ngClass]="{
+              'ui-no-current-month': day.date.getMonth() !== currentDate.getMonth(),
+              'ui-current-day': day.date.getFullYear() === systemDate.getFullYear() && day.date.getMonth() === systemDate.getMonth() && day.day === systemDate.getMonth(),
+              'ui-selected-day': day.date.getFullYear() === selectedDate.getFullYear() && day.date.getMonth() === selectedDate.getMonth() && day.day === selectedDate.getDate(),
+              'ui-disabled': day.disable
               }">
-            {{ day.day }}
+              {{ day.day }}
+            </button>
           </td>
         </tr>
         </tbody>
       </table>
-      <div class="ui-date-time-details clearfix" *ngIf="showHMS">
-        <div>
-          <input placeholder="时" type="number"
-                 (input)="testValue(23, 'hours', $event)"
-                 min="0"
-                 max="23"
-                 [(ngModel)]="selectedDateTimeDetails.hours">
-        </div>
-        <div>
-          <input placeholder="分" type="number"
-                 (input)="testValue(59, 'minutes', $event)"
-                 min="0"
-                 max="59"
-                 [(ngModel)]="selectedDateTimeDetails.minutes">
-        </div>
-        <div>
-          <input placeholder="秒" type="number"
-                 (input)="testValue(59, 'seconds', $event)"
-                 min="0"
-                 max="59"
-                 [(ngModel)]="selectedDateTimeDetails.seconds">
-        </div>
-      </div>
-      <div class="ui-date-btn" uiStopPropagation>
-        <button type="button" class="ui-btn ui-btn-primary ui-btn-block ui-btn-sm" [disabled]="!selectedDateTimeDetails.year"
+      <div class="ui-date-btn-wrap" uiStopPropagation>
+        <button type="button" class="ui-btn ui-btn-primary ui-btn-block ui-btn-sm"
                 (click)="getResult()">确定
         </button>
       </div>

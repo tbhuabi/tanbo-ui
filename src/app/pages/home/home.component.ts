@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  minDate = new Date();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

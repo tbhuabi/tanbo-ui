@@ -3,10 +3,12 @@ ui-input[type=date] {
   cursor: auto;
   width: auto;
   text-align: left;
+
   &.ng-touched.ng-invalid .ui-dropdown-input {
     box-shadow: none;
     border-color: $form-control-border-color-warning;
   }
+
   ui-dropdown-input {
     text-align: inherit;
   }
@@ -17,68 +19,16 @@ ui-input[type=date] {
 }
 
 .ui-date-panel-week {
-  border-top: 1px solid $color-gray-light;
-  border-bottom: 1px solid $color-gray-light;
-  background-color: $color-gray-light;
+  border-bottom: 1px solid $color-light;
+  background-color: $color-light;
 }
 
 .ui-date-panel-day {
-  font-size: 12px;
-  cursor: pointer;
+  font-size: 14px;
   td:hover {
     color: $color-primary;
   }
 }
-
-.ui-date-panel {
-  position: absolute;
-  left: 0;
-  top: 29px;
-  border-top: 1px solid $color-gray-light;
-  border-bottom: 1px solid $color-gray-light;
-  border-left: 0;
-  border-right: 0;
-  border-radius: 0;
-  width: 100%;
-  display: none;
-  z-index: 1;
-  &.ui-date-panel-year {
-    .ui-date-prev, .ui-date-next {
-      position: absolute;
-      height: 100%;
-      line-height: 100px;
-    }
-    .ui-date-prev {
-      left: 0;
-    }
-    .ui-date-next {
-      right: 0;
-    }
-  }
-  .ui-date-list {
-    list-style: none;
-    padding: 10px 25px;
-    line-height: 22px;
-    box-sizing: border-box;
-    background-color: #fff;
-    text-align: center;
-    margin-bottom: 0;
-    margin-top: 0;
-    cursor: pointer;
-    li {
-      width: 25%;
-      float: left;
-      &:hover {
-        color: $color-primary;
-      }
-      &.disabled {
-        cursor: not-allowed;
-        color: #ccc;
-      }
-    }
-  }
-}
-
 .ui-date-container {
   width: 212px;
   position: relative;
@@ -95,28 +45,6 @@ ui-input[type=date] {
   td {
     padding: 0;
   }
-  .ui-date-header-content {
-    padding: 4px 5px;
-    height: 30px;
-    position: relative;
-    z-index: 2;
-  }
-  .ui-date-head {
-    height: 30px;
-    .active .ui-date-panel {
-      display: block;
-    }
-    .active .ui-date-header-content {
-      border-bottom: 1px solid #fff;
-    }
-    td:nth-child(1).active .ui-date-header-content {
-      border-right: 1px solid $color-gray-light;
-    }
-    td:nth-child(2).active .ui-date-header-content {
-      border-left: 1px solid $color-gray-light;
-      border-right: 1px solid $color-gray-light;
-    }
-  }
   .ui-date-body {
     text-align: center;
     td {
@@ -125,42 +53,41 @@ ui-input[type=date] {
       &:first-child, &:last-child {
         color: #999
       }
-      &.no-current-month {
-        color: #ccc;
-      }
-      &.disabled {
-        background-color: #f3f3f3;
-        color: #ccc;
-        cursor: not-allowed;
-      }
-      &.current-day {
-        color: #009ce5;
-        font-weight: bold;
-      }
-      &.selected-day {
-        color: #fff;
-        background-color: $color-primary;
+      button {
+        &.ui-no-current-month {
+          color: #ccc;
+        }
+
+        &.ui-disabled {
+          background-color: #f3f3f3;
+          color: #ccc;
+          cursor: not-allowed;
+        }
+
+        &.ui-current-day {
+          color: #009ce5;
+          font-weight: bold;
+        }
+
+        &.ui-selected-day {
+          color: #fff;
+          background-color: $color-primary;
+        }
       }
     }
   }
 }
 
-.ui-date-arrow {
-  color: $color-gray;
-  cursor: pointer;
-  &:hover, &.ui-active {
-    color: $color-primary;
-  }
-}
-
 .ui-date-time-details {
   text-align: center;
+
   > div {
     float: left;
     width: 70px;
     box-sizing: border-box;
     padding: 5px;
   }
+
   input {
     width: 44px;
     padding: 3px;
@@ -170,6 +97,74 @@ ui-input[type=date] {
   }
 }
 
-.ui-date-btn {
+.ui-date-btn-wrap {
   padding: 5px;
 }
+
+
+.ui-date-head {
+  tr {
+    height: 30px;
+    border-bottom: 1px solid $color-light;
+    td {
+      &:first-child, &:last-child {
+        button {
+          font-size: 16px;
+        }
+      }
+      .ui-active {
+        color: $color-primary;
+        font-weight: bold;
+      }
+    }
+  }
+
+  button {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    color: inherit;
+    font-size: inherit;
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+.ui-date-years, .ui-date-mouths {
+  height: 210px;
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    text-align: center;
+    li {
+      float: left;
+      width: 25%;
+    }
+  }
+}
+
+.ui-date-key {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  cursor: pointer;
+  color: inherit;
+  border-radius: 3px;
+  &:hover {
+    color: $color-primary;
+  }
+  &.ui-active {
+    color: #fff;
+    background-color: $color-primary;
+  }
+  &:disabled {
+    color: $color-gray;
+    background: none;
+    cursor: not-allowed;
+  }
+}
+
