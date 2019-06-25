@@ -17,27 +17,33 @@
         <tr>
           <td class="ui-text-right">
             <button type="button"
-                    [disabled]="showType === 'year' ? !canToPreviousYears : !canToPreviousYear"
-                    (click)="showType === 'year' ? updateYears(years[0] - 32) : toPreviousYear()">&laquo;</button>
-            <button type="button" (click)="toPrevMonth()">&lsaquo;</button>
+                    [style.visibility]="showType === 'month' ? 'hidden' : 'visible'"
+                    (click)="showType === 'year' ? updateYears(years[0].year - 32) : toPreviousYear()">&laquo;
+            </button>
+            <button [style.visibility]="showType ? 'hidden' : 'visible'"
+                    type="button"
+                    (click)="toPrevMonth()">&lsaquo;
+            </button>
           </td>
           <td class="ui-text-center">
             <button type="button"
                     (click)="changeShowType('year')"
-                    uiStopPropagation
-                    [ngClass]="{'ui-active': showType==='year'}">{{ currentDate.getFullYear() }}</button>
-            年
+                    [ngClass]="{'ui-active': showType==='year'}">{{ pickerDate.getFullYear() }}</button>
+            <span>年</span>
             <button type="button"
                     (click)="changeShowType('month')"
-                    uiStopPropagation
-                    [ngClass]="{'ui-active': showType==='month'}">{{ currentDate.getMonth() + 1 }}</button>
-            月
+                    [ngClass]="{'ui-active': showType==='month'}">{{ pickerDate.getMonth() + 1 }}</button>
+            <span>月</span>
           </td>
           <td>
-            <button type="button" (click)="toNextMonth()">&rsaquo;</button>
+            <button [style.visibility]="showType ? 'hidden' : 'visible'"
+                    type="button"
+                    (click)="toNextMonth()">&rsaquo;
+            </button>
             <button type="button"
-                    [disabled]="showType === 'year' ? !canToNextYears : !canToNextYear"
-                    (click)="updateYears(years[years.length-1] + 1)">&raquo;</button>
+                    [style.visibility]="showType === 'month' ? 'hidden' : 'visible'"
+                    (click)="showType === 'year' ? updateYears(years[years.length-1].year + 1): toNextYear()">&raquo;
+            </button>
           </td>
         </tr>
         </tbody>
@@ -48,7 +54,7 @@
             <button class="ui-date-key" type="button"
                     [disabled]="item.disable"
                     (click)="updatePickerByYear(item.year)"
-                    [ngClass]="{'ui-active': currentDate.getFullYear() === item.year}">{{ item.year }}</button>
+                    [ngClass]="{'ui-active': pickerDate.getFullYear() === item.year}">{{ item.year }}</button>
           </li>
         </ul>
       </div>
@@ -56,8 +62,10 @@
         <ul>
           <li *ngFor="let item of months">
             <button class="ui-date-key" type="button"
-                    (click)="updatePickerByMonth(item)"
-                    [ngClass]="{disabled: item.disable, 'ui-active': currentDate.getMonth() === item.month}">{{ item.month + 1 }}月</button>
+                    [disabled]="item.disable"
+                    (click)="updatePickerByMonth(item.month)"
+                    [ngClass]="{'ui-active': pickerDate.getMonth() === item.month}">{{ item.month + 1 }}月
+            </button>
           </li>
         </ul>
       </div>
@@ -77,11 +85,11 @@
         <tr *ngFor="let item of dayList">
           <td *ngFor="let day of item">
             <button type="button" class="ui-date-key" (click)="selected(day)"
+                    [disabled]="day.disable"
                     [ngClass]="{
-              'ui-no-current-month': day.date.getMonth() !== currentDate.getMonth(),
-              'ui-current-day': day.date.getFullYear() === systemDate.getFullYear() && day.date.getMonth() === systemDate.getMonth() && day.day === systemDate.getMonth(),
-              'ui-selected-day': day.date.getFullYear() === selectedDate.getFullYear() && day.date.getMonth() === selectedDate.getMonth() && day.day === selectedDate.getDate(),
-              'ui-disabled': day.disable
+              'ui-no-current-month': day.date.getMonth() !== pickerDate.getMonth(),
+              'ui-current-day': day.date.getFullYear() === systemDate.getFullYear() && day.date.getMonth() === systemDate.getMonth() && day.day === systemDate.getDate(),
+              'ui-selected-day': day.date.getFullYear() === pickerDate.getFullYear() && day.date.getMonth() === pickerDate.getMonth() && day.day === pickerDate.getDate()
               }">
               {{ day.day }}
             </button>
@@ -89,7 +97,7 @@
         </tr>
         </tbody>
       </table>
-      <div class="ui-date-btn-wrap" uiStopPropagation>
+      <div class="ui-date-btn-wrap">
         <button type="button" class="ui-btn ui-btn-primary ui-btn-block ui-btn-sm"
                 (click)="getResult()">确定
         </button>
