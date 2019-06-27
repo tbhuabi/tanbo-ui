@@ -193,3 +193,5 @@ export interface Seconds {
   seconds: number;
   disable: boolean;
 }
+
+export type DatePickerModel = 'time' | 'day' | 'month' | 'year';

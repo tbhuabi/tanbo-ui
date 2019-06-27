@@ -22,7 +22,9 @@ import {
   Day,
   Month,
   Year,
-  DateConfig, Time
+  DateConfig,
+  Time,
+  DatePickerModel
 } from './date-utils';
 
 import { attrToBoolean } from '../../utils';
@@ -93,17 +95,17 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
   minutes: Minutes[] = [];
   seconds: Seconds[] = [];
 
-  showType = '';
   displayValue: any = '';
 
-  model: 'date' | 'time' = null;
+  oldModel: DatePickerModel;
+  model: DatePickerModel = 'day';
 
   private _disabled = false;
   private _readonly = false;
   private onChange: (_: any) => any;
   private onTouched: () => any;
   private days: Array<Day> = [];
-  private viewEffects: boolean = false;
+  private viewEffects = false;
 
   constructor(@Inject(UI_SELECT_ARROW_CLASSNAME) arrowIcon: string) {
     this.arrowIconClassName = arrowIcon;
@@ -132,37 +134,30 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
           this.pickerDate = stringToDate(value);
           this.setupPicker();
           break;
-        case 'maxDate':
-          this.maxDateInstance = stringToDate(value);
-          this.setupPicker();
-          break;
         case 'minDate':
           this.minDateInstance = stringToDate(value);
           this.setupPicker();
           break;
+        case 'maxDate':
+          this.maxDateInstance = stringToDate(value);
+          this.setupPicker();
+          break;
         case 'minTime':
           this.minTimeInstance.timeString = value;
+          this.setupPicker();
           break;
         case 'maxTime':
           this.maxTimeInstance.timeString = value;
+          this.setupPicker();
           break;
         case 'displayFormat':
           this.displayValue = dateFormat(this.value, value || this.format);
           this.config.formatString = this.displayFormat || this.format;
-          if (this.config.dateModel) {
-            this.model = 'date';
-          } else if (this.config.timeModel) {
-            this.model = 'time';
-          }
+          this.updateView();
           break;
         case 'format':
           this.config.formatString = this.displayFormat || this.format;
-          if (this.config.dateModel) {
-            this.model = 'date';
-          } else if (this.config.timeModel) {
-            this.model = 'time';
-            this.viewEffects = true;
-          }
+          this.updateView();
           break;
       }
     });
@@ -193,10 +188,6 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
     this.uiChange.emit('');
   }
 
-  changeShowType(type?: string) {
-    this.showType = this.showType === type ? '' : type;
-  }
-
   toggle() {
     if (this.disabled) {
       return;
@@ -216,8 +207,24 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
     }
   }
 
-  switchModel() {
-    this.model = this.model === 'date' ? 'time' : 'date';
+  updateView() {
+    if (this.config.dateModel) {
+      if (this.config.day) {
+        this.model = 'day';
+      } else if (this.config.year) {
+        this.model = 'year';
+      } else if (this.config.month) {
+        this.model = 'month';
+      }
+    } else if (this.config.timeModel) {
+      this.model = 'time';
+      this.viewEffects = true;
+    }
+  }
+
+  switchModel(newModel: DatePickerModel) {
+    this.oldModel = this.model;
+    this.model = newModel;
     if (this.model === 'time') {
       this.viewEffects = true;
     }
@@ -240,8 +247,12 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
   }
 
   updateYearsByStart(year: number) {
-    this.startYearIndex = year;
-    this.updateYearList();
+    const a = this.minDateInstance ? year + 32 >= this.minDateInstance.getFullYear() : true;
+    const b = this.maxDateInstance ? year - 32 <= this.maxDateInstance.getFullYear() : true;
+    if (a && b) {
+      this.startYearIndex = year;
+      this.updateYearList();
+    }
   }
 
   updatePickerByYear(year: number) {
@@ -253,8 +264,10 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
       this.pickerDate.setMonth(newMonth, 0);
     }
     this.insurePickerDateBetweenMinAndMax();
-    this.setupPicker();
-    this.showType = '';
+    this.update();
+    if (this.config.day) {
+      this.model = 'day';
+    }
   }
 
   updatePickerByMonth(month: number) {
@@ -267,7 +280,9 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
     }
     this.insurePickerDateBetweenMinAndMax();
     this.update();
-    this.showType = '';
+    if (this.config.day) {
+      this.model = 'day';
+    }
   }
 
   updatePickerByDay(day: Day) {
@@ -298,7 +313,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
     this.update();
   }
 
-  getResult() {
+  check() {
     this.open = false;
     const pickerDate = this.pickerDate;
     let value: any;
@@ -436,6 +451,8 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
     const pickerDate = this.pickerDate;
     const minDate = this.minDateInstance;
     const maxDate = this.maxDateInstance;
+    const minTime = this.minTimeInstance;
+    const maxTime = this.maxTimeInstance;
 
     const date = Number(
       pickerDate.getFullYear() +
@@ -445,34 +462,41 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
       toDouble(pickerDate.getMinutes()) +
       toDouble(seconds));
 
-    const a = minDate ?
-      date >= Number(
+    const time = Number(pickerDate.getHours() + toDouble(pickerDate.getMinutes()) + toDouble(seconds));
+    const min = Number(minTime.hours + toDouble(minTime.minutes) + toDouble(minTime.seconds));
+    const max = Number(maxTime.hours + toDouble(maxTime.minutes) + toDouble(maxTime.seconds));
+
+    const lessIsMore = min > max;
+
+    const isLessThanMinDate = minDate ? date >= Number(
       minDate.getFullYear() +
       toDouble(minDate.getMonth()) +
       toDouble(minDate.getDate()) +
       toDouble(minDate.getHours()) +
       toDouble(minDate.getMinutes()) +
-      toDouble(Math.max(this.minTimeInstance.seconds, minDate.getSeconds()))
-      ) :
-      true;
-    const b = maxDate ?
-      date <= Number(
+      toDouble(minDate.getSeconds())) : true;
+
+    const isLessThanMinTime = lessIsMore ? (time >= min && time < 240000) : time >= min;
+
+    const isMoreThanMaxDate = maxDate ? date <= Number(
       maxDate.getFullYear() +
       toDouble(maxDate.getMonth()) +
       toDouble(maxDate.getDate()) +
       toDouble(maxDate.getHours()) +
       toDouble(maxDate.getMinutes()) +
-      toDouble(Math.min(this.maxTimeInstance.seconds, maxDate.getSeconds()))
-      ) :
-      true;
+      toDouble(maxDate.getSeconds())) : true;
 
-    return a && b;
+    const isMoreThanMaxTime = lessIsMore ? (time <= max && max >= 0) : time <= max;
+
+    return isLessThanMinDate && isLessThanMinTime && isMoreThanMaxDate && isMoreThanMaxTime;
   }
 
   private canSelectMinutes(minutes: number) {
     const pickerDate = this.pickerDate;
     const minDate = this.minDateInstance;
     const maxDate = this.maxDateInstance;
+    const minTime = this.minTimeInstance;
+    const maxTime = this.maxTimeInstance;
 
     const date = Number(
       pickerDate.getFullYear() +
@@ -481,32 +505,39 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
       toDouble(pickerDate.getHours()) +
       toDouble(minutes));
 
-    const a = minDate ?
-      date >= Number(
+    const time = Number(pickerDate.getHours() + toDouble(minutes));
+    const min = Number(minTime.hours + toDouble(minTime.minutes));
+    const max = Number(maxTime.hours + toDouble(maxTime.minutes));
+
+    const lessIsMore = min > max;
+
+    const isLessThanMinDate = minDate ? date >= Number(
       minDate.getFullYear() +
       toDouble(minDate.getMonth()) +
       toDouble(minDate.getDate()) +
       toDouble(minDate.getHours()) +
-      toDouble(Math.max(this.minTimeInstance.minutes, minDate.getMinutes()))
-      ) :
-      true;
-    const b = maxDate ?
-      date <= Number(
+      toDouble(minDate.getMinutes())) : true;
+
+    const isLessThanMinTime = lessIsMore ? (time >= min && time < 2400) : time >= min;
+
+    const isMoreThanMaxDate = maxDate ? date <= Number(
       maxDate.getFullYear() +
       toDouble(maxDate.getMonth()) +
       toDouble(maxDate.getDate()) +
       toDouble(maxDate.getHours()) +
-      toDouble(Math.min(this.maxTimeInstance.minutes, maxDate.getMinutes()))
-      ) :
-      true;
+      toDouble(maxDate.getMinutes())) : true;
 
-    return a && b;
+    const isMoreThanMaxTime = lessIsMore ? (time <= max && max >= 0) : time <= max;
+
+    return isLessThanMinDate && isLessThanMinTime && isMoreThanMaxDate && isMoreThanMaxTime;
   }
 
   private canSelectHours(hours: number) {
     const pickerDate = this.pickerDate;
     const minDate = this.minDateInstance;
     const maxDate = this.maxDateInstance;
+    const minTime = this.minTimeInstance;
+    const maxTime = this.maxTimeInstance;
 
     const date = Number(
       pickerDate.getFullYear() +
@@ -514,24 +545,30 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
       toDouble(pickerDate.getDate()) +
       toDouble(hours));
 
-    const a = minDate ?
-      date >= Number(
+    const lessIsMore = minTime.hours > maxTime.hours;
+
+    const isLessThanMinDate = minDate ? date >= Number(
       minDate.getFullYear() +
       toDouble(minDate.getMonth()) +
       toDouble(minDate.getDate()) +
-      toDouble(Math.max(this.minTimeInstance.hours, minDate.getHours()))
-      ) :
-      true;
-    const b = maxDate ?
-      date <= Number(
+      toDouble(minDate.getHours())
+    ) : true;
+
+    const isLessThanMinTime = lessIsMore ?
+      (hours >= minTime.hours && hours <= 24) :
+      hours >= minTime.hours;
+
+    const isMoreThanMaxDate = maxDate ? date <= Number(
       maxDate.getFullYear() +
       toDouble(maxDate.getMonth()) +
       toDouble(maxDate.getDate()) +
-      toDouble(Math.min(this.maxTimeInstance.hours, maxDate.getHours()))
-      ) :
-      true;
+      toDouble(maxDate.getHours())) : true;
 
-    return a && b;
+    const isMoreThanMaxTime = lessIsMore ?
+      (hours <= maxTime.hours && hours >= 0) :
+      hours <= maxTime.hours;
+
+    return isLessThanMinDate && isLessThanMinTime && isMoreThanMaxDate && isMoreThanMaxTime;
   }
 
   private canSelectDay(day: Date): boolean {

@@ -12,48 +12,55 @@
           [size]="size"></ui-dropdown-input>
   <ui-dropdown-menu class="ui-date-dropdown-menu" [position]="position">
     <div class="ui-date-container">
-      <div *ngIf="model === 'date'">
+      <div *ngIf="model !== 'time'">
+        <!-- 日历选择器头部 -->
         <table class="ui-date-table">
           <tbody class="ui-date-head">
           <tr>
             <td class="ui-text-right">
               <button type="button"
-                      [style.visibility]="showType === 'month' ? 'hidden' : 'visible'"
-                      (click)="showType === 'year' ? updateYearsByStart(years[0].year - 32) : toPreviousYear()">&laquo;
+                      [style.visibility]="model === 'month' ? 'hidden' : 'visible'"
+                      (click)="model === 'year' ? updateYearsByStart(years[0].year - 32) : toPreviousYear()">&laquo;
               </button>
-              <button [style.visibility]="showType ? 'hidden' : 'visible'"
+              <button [style.visibility]="model === 'day' ? 'visible' : 'hidden'"
                       type="button"
                       (click)="toPrevMonth()">&lsaquo;
               </button>
             </td>
             <td class="ui-text-center">
-              <button type="button"
-                      (click)="changeShowType('year')"
-                      [ngClass]="{'ui-active': showType==='year'}">
-                <strong>{{ pickerDate.getFullYear() }}</strong>
-              </button>
-              <span>年</span>
-              <button type="button"
-                      (click)="changeShowType('month')"
-                      [ngClass]="{'ui-active': showType==='month'}">
-                <strong>{{ pickerDate.getMonth() + 1 }}</strong>
-              </button>
-              <span>月</span>
+              <ng-container *ngIf="config.year">
+                <button type="button"
+                        (click)="switchModel('year')"
+                        [ngClass]="{'ui-active': model==='year'}">
+                  <strong>{{ pickerDate.getFullYear() }}</strong>
+                </button>
+                <span>年</span>
+              </ng-container>
+              <ng-container *ngIf="config.month">
+                <button type="button"
+                        (click)="switchModel('month')"
+                        [ngClass]="{'ui-active': model==='month'}">
+                  <strong>{{ pickerDate.getMonth() + 1 }}</strong>
+                </button>
+                <span>月</span>
+              </ng-container>
             </td>
             <td>
-              <button [style.visibility]="showType ? 'hidden' : 'visible'"
+              <button [style.visibility]="model === 'day' ? 'visible' : 'hidden'"
                       type="button"
                       (click)="toNextMonth()">&rsaquo;
               </button>
               <button type="button"
-                      [style.visibility]="showType === 'month' ? 'hidden' : 'visible'"
-                      (click)="showType === 'year' ? updateYearsByStart(years[years.length-1].year + 1): toNextYear()">&raquo;
+                      [style.visibility]="model === 'month' ? 'hidden' : 'visible'"
+                      (click)="model === 'year' ? updateYearsByStart(years[years.length-1].year + 1): toNextYear()">
+                &raquo;
               </button>
             </td>
           </tr>
           </tbody>
         </table>
-        <div *ngIf="showType === 'year'" class="ui-date-years">
+        <!-- 年选择器 -->
+        <div *ngIf="model === 'year'" class="ui-date-years">
           <ul>
             <li *ngFor="let item of years">
               <button class="ui-date-key" type="button"
@@ -63,7 +70,8 @@
             </li>
           </ul>
         </div>
-        <div *ngIf="showType === 'month'" class="ui-date-mouths">
+        <!-- 月选择器 -->
+        <div *ngIf="model === 'month'" class="ui-date-mouths">
           <ul>
             <li *ngFor="let item of months">
               <button class="ui-date-key" type="button"
@@ -74,7 +82,8 @@
             </li>
           </ul>
         </div>
-        <table *ngIf="showType === ''" class="ui-date-table">
+        <!-- 日选择器 -->
+        <table *ngIf="model === 'day'" class="ui-date-table">
           <tbody class="ui-date-body ui-date-panel-week">
           <tr>
             <td>日</td>
@@ -103,7 +112,9 @@
           </tbody>
         </table>
       </div>
+      <!-- 时间选择器 -->
       <div *ngIf="model === 'time'">
+        <!-- 时间选择器头部 -->
         <div class="ui-date-time-head">
           <span *ngIf="config.dateModel">
             <span *ngIf="config.year"><strong>{{ pickerDate.getFullYear() }}</strong>年</span>
@@ -117,6 +128,7 @@
           </span>
         </div>
         <div class="ui-date-time-picker">
+          <!-- 时选择器 -->
           <div class="ui-date-time-group" *ngIf="config.hours">
             <div class="ui-date-time-picker-head">时</div>
             <div #hoursListWrap class="ui-date-time-picker-options">
@@ -127,6 +139,7 @@
                       *ngFor="let item of hours">{{ item.hours }}</button>
             </div>
           </div>
+          <!-- 分选择器 -->
           <div class="ui-date-time-group" *ngIf="config.minutes">
             <div class="ui-date-time-picker-head">分</div>
             <div #minutesListWrap class="ui-date-time-picker-options">
@@ -137,6 +150,7 @@
                       *ngFor="let item of minutes">{{ item.minutes }}</button>
             </div>
           </div>
+          <!-- 秒选择器 -->
           <div class="ui-date-time-group" *ngIf="config.seconds">
             <div class="ui-date-time-picker-head">秒</div>
             <div #secondsListWrap class="ui-date-time-picker-options">
@@ -150,8 +164,9 @@
         </div>
       </div>
       <div class="ui-date-btn-wrap">
+        <!-- 日历和时间切换 -->
         <div *ngIf="config.dateModel && config.timeModel">
-          <button *ngIf="model === 'date'" type="button" (click)="switchModel()"
+          <button *ngIf="model !== 'time'" type="button" (click)="switchModel('time')"
                   class="ui-btn ui-btn-default ui-btn-block ui-btn-sm">
             <strong>
               <span *ngIf="config.hours">{{ pickerDate.getHours() }}:</span>
@@ -159,13 +174,14 @@
               <span *ngIf="config.seconds">{{ pickerDate.getSeconds() }}</span>
             </strong>
           </button>
-          <button *ngIf="model === 'time'" type="button" (click)="switchModel()"
+          <button *ngIf="model === 'time'" type="button" (click)="switchModel(oldModel)"
                   class="ui-btn ui-btn-default ui-btn-block ui-btn-sm">选择日期
           </button>
         </div>
+        <!-- 确认选择结果 -->
         <div>
           <button type="button" class="ui-btn ui-btn-primary ui-btn-block ui-btn-sm"
-                  (click)="getResult()">确定
+                  (click)="check()">确定
           </button>
         </div>
       </div>
