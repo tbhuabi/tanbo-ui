@@ -230,6 +230,39 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
     }
   }
 
+  check() {
+    this.open = false;
+    const pickerDate = this.pickerDate;
+    let value: any;
+    if (this.format) {
+      value = dateFormat(pickerDate, this.format);
+    } else {
+      value = pickerDate.getTime();
+    }
+    this.displayValue = dateFormat(pickerDate, this.displayFormat || this.format);
+    this.value = value;
+    if (this.onChange) {
+      this.onChange(value);
+    }
+    this.uiChange.emit(value);
+  }
+
+  writeValue(value: any) {
+    this.value = value;
+  }
+
+  registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+  }
+
   toPreviousYear() {
     this.updatePickerByYear(this.pickerDate.getFullYear() - 1);
   }
@@ -311,39 +344,6 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
     this.insurePickerDateBetweenMinAndMax();
     this.viewEffects = true;
     this.update();
-  }
-
-  check() {
-    this.open = false;
-    const pickerDate = this.pickerDate;
-    let value: any;
-    if (this.format) {
-      value = dateFormat(pickerDate, this.format);
-    } else {
-      value = pickerDate.getTime().toString();
-    }
-    this.displayValue = dateFormat(pickerDate, this.displayFormat || this.format);
-    this.value = value;
-    if (this.onChange) {
-      this.onChange(value);
-    }
-    this.uiChange.emit(value);
-  }
-
-  writeValue(value: any) {
-    this.value = value;
-  }
-
-  registerOnChange(fn: any) {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean) {
-    this.disabled = isDisabled;
   }
 
   private update() {
@@ -613,12 +613,52 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
   }
 
   private insurePickerDateBetweenMinAndMax() {
-    if (this.minDateInstance &&
-      this.pickerDate.getTime() < this.minDateInstance.getTime()) {
-      this.pickerDate.setTime(this.minDateInstance.getTime());
-    } else if (this.maxDateInstance &&
-      this.pickerDate.getTime() > this.maxDateInstance.getTime()) {
-      this.pickerDate.setTime(this.maxDateInstance.getTime());
+    const minTimeInstance = this.minTimeInstance;
+    const maxTimeInstance = this.maxTimeInstance;
+    const pickerDate = this.pickerDate;
+
+    const minTime = Number(minTimeInstance.hours + toDouble(minTimeInstance.minutes) + toDouble(minTimeInstance.seconds));
+    const maxTime = Number(maxTimeInstance.hours + toDouble(maxTimeInstance.minutes) + toDouble(maxTimeInstance.seconds));
+
+    const minDateTime = (() => {
+      const minDate = new Date();
+      if (this.minDateInstance) {
+        minDate.setTime(this.minDateInstance.getTime());
+        const min = Number(minDate.getHours() + toDouble(minDate.getMinutes()) + toDouble(minDate.getSeconds()));
+        if (minTime > min) {
+          minDate.setHours(minTimeInstance.hours, minTimeInstance.minutes, minTimeInstance.seconds);
+          return minDate.getTime();
+        }
+        return minDate.getTime();
+      }
+      minDate.setTime(pickerDate.getTime());
+      minDate.setHours(minTimeInstance.hours, minTimeInstance.minutes, minTimeInstance.seconds);
+      return minDate.getTime();
+    })();
+
+    const maxDateTime = (() => {
+      const maxDate = new Date();
+      if (this.maxDateInstance) {
+        maxDate.setTime(this.maxDateInstance.getTime());
+        const max = Number(maxDate.getHours() + toDouble(maxDate.getMinutes()) + toDouble(maxDate.getSeconds()));
+        if (maxTime < max) {
+          maxDate.setHours(maxTimeInstance.hours, maxTimeInstance.minutes, maxTimeInstance.seconds);
+          return maxDate.getTime();
+        }
+        return maxDate.getTime();
+      }
+      maxDate.setTime(pickerDate.getTime());
+      maxDate.setHours(maxTimeInstance.hours, maxTimeInstance.minutes, maxTimeInstance.seconds);
+      return maxDate.getTime();
+    })();
+
+    if (minDateTime > maxDateTime) {
+      throw new Error('No optional date or time!');
+    }
+    if (pickerDate.getTime() < minDateTime) {
+      pickerDate.setTime(minDateTime);
+    } else if (pickerDate.getTime() > maxDateTime) {
+      pickerDate.setTime(maxDateTime);
     }
   }
 }
