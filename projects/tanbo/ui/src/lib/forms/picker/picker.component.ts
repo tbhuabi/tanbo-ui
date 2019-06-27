@@ -30,8 +30,10 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   /*tslint:enable*/
   @Input()
   set value(v: PickerCell[]) {
-    this._value = v;
-    this.update();
+    if (Array.isArray(v)) {
+      this._value = v;
+      this.update();
+    }
   }
 
   get value() {
@@ -69,11 +71,7 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   open = false;
 
   get text() {
-    return (Array.isArray(this.value) ? this.value : []).map(item => item.label).join(this.displayFormat);
-  }
-
-  get viewValue() {
-    return Array.isArray(this._value) ? this._value : [];
+    return this.value.map(item => item.label).join(this.displayFormat);
   }
 
   focus = false;
@@ -112,7 +110,7 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
 
   update() {
     let cells = this.cellsGroup[0];
-    if (!Array.isArray(this.value) || !Array.isArray(cells)) {
+    if (!Array.isArray(cells)) {
       return;
     }
     this.cellsGroup.length = 1;
