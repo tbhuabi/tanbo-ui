@@ -72,6 +72,10 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
     return (Array.isArray(this.value) ? this.value : []).map(item => item.label).join(this.displayFormat);
   }
 
+  get viewValue() {
+    return Array.isArray(this._value) ? this._value : [];
+  }
+
   focus = false;
   private _disabled = false;
   private _readonly = false;
