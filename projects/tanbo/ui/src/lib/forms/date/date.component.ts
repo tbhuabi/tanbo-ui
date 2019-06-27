@@ -1,26 +1,22 @@
-import { Component, Input, EventEmitter, OnInit, Output, Inject } from '@angular/core';
+import { Component, Input, EventEmitter, OnInit, Output, Inject, OnChanges, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { UI_SELECT_ARROW_CLASSNAME } from '../help';
-import { timeStringToDate, dateStringFormat, toDouble } from './date-utils';
+import {
+  stringToDate,
+  dateFormat,
+  toDouble,
+  Hours,
+  Seconds,
+  Minutes,
+  Day,
+  Month,
+  Year,
+  DateConfig, Time
+} from './date-utils';
 
 import { attrToBoolean } from '../../utils';
-
-export interface Year {
-  year: number;
-  disable: boolean;
-}
-
-export interface Month {
-  month: number;
-  disable: boolean;
-}
-
-export interface Day {
-  date: Date;
-  day: number;
-  disable: boolean;
-}
+import { min } from 'rxjs/operators';
 
 @Component({
   selector: 'ui-input[type=date]',
@@ -31,27 +27,21 @@ export interface Day {
     multi: true
   }]
 })
-export class DateComponent implements ControlValueAccessor, OnInit {
+export class DateComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Output() uiChange = new EventEmitter<string | number>();
   @Input() position = 'bottomLeft';
   @Input() size = '';
   @Input() placeholder = '';
   @Input() forId: string;
   @Input() name: string;
-  @Input() displayFormat: string;
   @Input() arrowIconClassName = '';
+  @Input() displayFormat: string;
   @Input() format = 'yyyy-MM-dd';
-
-  @Input()
-  set value(value: string | number | Date) {
-    this._value = value;
-    this.pickerDate = timeStringToDate(value);
-    this.setupPicker();
-  }
-
-  get value() {
-    return this._value;
-  }
+  @Input() value: string | number | Date = '';
+  @Input() maxDate: string | number | Date = '';
+  @Input() minDate: string | number | Date = '';
+  @Input() minTime: string;
+  @Input() maxTime: string;
 
   @Input()
   set disabled(isDisabled: any) {
@@ -71,63 +61,98 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     return this._readonly;
   }
 
-  @Input()
-  set maxDate(value: string | number | Date) {
-    this._maxDate = value;
-    this.maxDateInstance = timeStringToDate(this._maxDate);
-    this.setupPicker();
-  }
-
-  get maxDate() {
-    return this._maxDate;
-  }
-
-  @Input()
-  set minDate(value: string | number | Date) {
-    this._minDate = value;
-    this.minDateInstance = timeStringToDate(this._minDate);
-    this.setupPicker();
-  }
-
-  get minDate() {
-    return this._minDate;
-  }
-
-  get showHMS(): boolean {
-    return /[hms]/.test(this.format);
-  }
+  config = new DateConfig();
 
   focus = false;
   open = true;
 
-  dayList: Array<Array<Day>> = [];
   minDateInstance: Date;
   maxDateInstance: Date;
+  minTimeInstance = new Time('00:00:00');
+  maxTimeInstance = new Time('24:00:00');
   systemDate: Date;
   pickerDate: Date;
   startYearIndex: number;
-  years: Array<Year> = [];
-  months: Array<Month> = [];
+
+  years: Year[] = [];
+  months: Month[] = [];
+  dayGroups: Day[][] = [];
+  hours: Hours[] = [];
+  minutes: Minutes[] = [];
+  seconds: Seconds[] = [];
 
   showType = '';
-  displayValue = '';
+  displayValue: any = '';
+
+  model: 'date' | 'time' = null;
 
   private _disabled = false;
   private _readonly = false;
-  private _maxDate: string | number | Date = '';
-  private _minDate: string | number | Date = '';
-  private _value: any = '';
   private onChange: (_: any) => any;
   private onTouched: () => any;
   private days: Array<Day> = [];
 
   constructor(@Inject(UI_SELECT_ARROW_CLASSNAME) arrowIcon: string) {
     this.arrowIconClassName = arrowIcon;
+    this.hours = Array.from({length: 24}).map((_, h) => {
+      return {hours: h, disable: true};
+    });
+    this.minutes = Array.from({length: 60}).map((_, m) => {
+      return {minutes: m, disable: true};
+    });
+    this.seconds = Array.from({length: 60}).map((_, s) => {
+      return {seconds: s, disable: true};
+    });
   }
 
   ngOnInit() {
     // 初始化日历组件，并缓存当前的年月日
     this.setupPicker();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    Object.keys(changes).forEach(key => {
+      console.log(key);
+      const value = changes[key].currentValue;
+      switch (key) {
+        case 'value':
+          this.displayValue = dateFormat(this.value, this.displayFormat || value);
+          this.pickerDate = stringToDate(value);
+          this.setupPicker();
+          break;
+        case 'maxDate':
+          this.maxDateInstance = stringToDate(value);
+          this.setupPicker();
+          break;
+        case 'minDate':
+          this.minDateInstance = stringToDate(value);
+          this.setupPicker();
+          break;
+        case 'minTime':
+          this.minTimeInstance.timeString = value;
+          break;
+        case 'maxTime':
+          this.maxTimeInstance.timeString = value;
+          break;
+        case 'displayFormat':
+          this.displayValue = dateFormat(this.value, value || this.format);
+          this.config.formatString = this.displayFormat || this.format;
+          if (this.config.dateModel) {
+            this.model = 'date';
+          } else if (this.config.timeModel) {
+            this.model = 'time';
+          }
+          break;
+        case 'format':
+          this.config.formatString = this.displayFormat || this.format;
+          if (this.config.dateModel) {
+            this.model = 'date';
+          } else if (this.config.timeModel) {
+            this.model = 'time';
+          }
+          break;
+      }
+    });
   }
 
   setupPicker() {
@@ -136,13 +161,12 @@ export class DateComponent implements ControlValueAccessor, OnInit {
       // 如果没有传入 value，则默认高亮当前时间
       this.pickerDate = new Date();
     }
-    this.insurePickerDateBetweenMinAndMax();
     this.startYearIndex = this.pickerDate.getFullYear() - this.pickerDate.getFullYear() % 32;
     this.update();
   }
 
   reset() {
-    this._value = '';
+    this.value = '';
     this.displayValue = '';
     if (this.onChange) {
       this.onChange('');
@@ -171,6 +195,10 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     if (this.onTouched) {
       this.onTouched();
     }
+  }
+
+  switchModel() {
+    this.model = this.model === 'date' ? 'time' : 'date';
   }
 
   toPreviousYear() {
@@ -232,14 +260,14 @@ export class DateComponent implements ControlValueAccessor, OnInit {
   getResult() {
     this.open = false;
     const pickerDate = this.pickerDate;
-    let value: string;
+    let value: any;
     if (this.format) {
-      value = dateStringFormat(this.format, pickerDate);
+      value = dateFormat(pickerDate, this.format);
     } else {
       value = pickerDate.getTime().toString();
     }
-    this.displayValue = dateStringFormat(this.displayFormat || this.format, pickerDate);
-    this._value = value;
+    this.displayValue = dateFormat(pickerDate, this.displayFormat || this.format);
+    this.value = value;
     if (this.onChange) {
       this.onChange(value);
     }
@@ -266,6 +294,27 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     this.updateYearList();
     this.updateMonthList();
     this.updateDayList();
+    this.updateHoursList();
+    this.updateMinutesList();
+    this.updateSecondsList();
+  }
+
+  private updateSecondsList() {
+    this.seconds.forEach(item => {
+      item.disable = !this.canSelectSeconds(item.seconds);
+    });
+  }
+
+  private updateMinutesList() {
+    this.minutes.forEach(item => {
+      item.disable = !this.canSelectMinutes(item.minutes);
+    });
+  }
+
+  private updateHoursList() {
+    this.hours.forEach(item => {
+      item.disable = !this.canSelectHours(item.hours);
+    });
   }
 
   private updateDayList() {
@@ -289,12 +338,12 @@ export class DateComponent implements ControlValueAccessor, OnInit {
       });
     }
 
-    this.dayList = [];
+    this.dayGroups = [];
     let child: Array<Day> = [];
     for (let i = 0; i < this.days.length; i++) {
       if (i % 7 === 0) {
         child = [];
-        this.dayList.push(child);
+        this.dayGroups.push(child);
       }
       child.push(this.days[i]);
     }
@@ -323,21 +372,124 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  private canSelectDay(day: Date) {
-    const date = Number(day.getFullYear() + toDouble(day.getMonth()) + toDouble(day.getDate()));
+  private canSelectSeconds(seconds: number) {
+    const pickerDate = this.pickerDate;
+    const minDate = this.minDateInstance;
+    const maxDate = this.maxDateInstance;
 
-    const a = this.minDateInstance ?
+    const date = Number(
+      pickerDate.getFullYear() +
+      toDouble(pickerDate.getMonth()) +
+      toDouble(pickerDate.getDate()) +
+      toDouble(pickerDate.getHours()) +
+      toDouble(pickerDate.getMinutes()) +
+      toDouble(seconds));
+
+    const a = minDate ?
       date >= Number(
-      this.minDateInstance.getFullYear() +
-      toDouble(this.minDateInstance.getMonth()) +
-      toDouble(this.minDateInstance.getDate())
+      minDate.getFullYear() +
+      toDouble(minDate.getMonth()) +
+      toDouble(minDate.getDate()) +
+      toDouble(minDate.getHours()) +
+      toDouble(minDate.getMinutes()) +
+      toDouble(Math.max(this.minTimeInstance.seconds, minDate.getSeconds()))
       ) :
       true;
-    const b = this.maxDateInstance ?
+    const b = maxDate ?
       date <= Number(
-      this.maxDateInstance.getFullYear() +
-      toDouble(this.maxDateInstance.getMonth()) +
-      toDouble(this.maxDateInstance.getDate())
+      maxDate.getFullYear() +
+      toDouble(maxDate.getMonth()) +
+      toDouble(maxDate.getDate()) +
+      toDouble(maxDate.getHours()) +
+      toDouble(maxDate.getMinutes()) +
+      toDouble(Math.min(this.maxTimeInstance.seconds, maxDate.getSeconds()))
+      ) :
+      true;
+
+    return a && b;
+  }
+
+  private canSelectMinutes(minutes: number) {
+    const pickerDate = this.pickerDate;
+    const minDate = this.minDateInstance;
+    const maxDate = this.maxDateInstance;
+
+    const date = Number(
+      pickerDate.getFullYear() +
+      toDouble(pickerDate.getMonth()) +
+      toDouble(pickerDate.getDate()) +
+      toDouble(pickerDate.getHours()) +
+      toDouble(minutes));
+
+    const a = minDate ?
+      date >= Number(
+      minDate.getFullYear() +
+      toDouble(minDate.getMonth()) +
+      toDouble(minDate.getDate()) +
+      toDouble(minDate.getHours()) +
+      toDouble(Math.max(this.minTimeInstance.minutes, minDate.getMinutes()))
+      ) :
+      true;
+    const b = maxDate ?
+      date <= Number(
+      maxDate.getFullYear() +
+      toDouble(maxDate.getMonth()) +
+      toDouble(maxDate.getDate()) +
+      toDouble(maxDate.getHours()) +
+      toDouble(Math.min(this.maxTimeInstance.minutes, maxDate.getMinutes()))
+      ) :
+      true;
+
+    return a && b;
+  }
+
+  private canSelectHours(hours: number) {
+    const pickerDate = this.pickerDate;
+    const minDate = this.minDateInstance;
+    const maxDate = this.maxDateInstance;
+
+    const date = Number(
+      pickerDate.getFullYear() +
+      toDouble(pickerDate.getMonth()) +
+      toDouble(pickerDate.getDate()) +
+      toDouble(hours));
+
+    const a = minDate ?
+      date >= Number(
+      minDate.getFullYear() +
+      toDouble(minDate.getMonth()) +
+      toDouble(minDate.getDate()) +
+      toDouble(Math.max(this.minTimeInstance.hours, minDate.getHours()))
+      ) :
+      true;
+    const b = maxDate ?
+      date <= Number(
+      maxDate.getFullYear() +
+      toDouble(maxDate.getMonth()) +
+      toDouble(maxDate.getDate()) +
+      toDouble(Math.min(this.maxTimeInstance.hours, maxDate.getHours()))
+      ) :
+      true;
+
+    return a && b;
+  }
+
+  private canSelectDay(day: Date): boolean {
+    const date = Number(day.getFullYear() + toDouble(day.getMonth()) + toDouble(day.getDate()));
+    const minDate = this.minDateInstance;
+    const maxDate = this.maxDateInstance;
+    const a = minDate ?
+      date >= Number(
+      minDate.getFullYear() +
+      toDouble(minDate.getMonth()) +
+      toDouble(minDate.getDate())
+      ) :
+      true;
+    const b = maxDate ?
+      date <= Number(
+      maxDate.getFullYear() +
+      toDouble(maxDate.getMonth()) +
+      toDouble(maxDate.getDate())
       ) :
       true;
 

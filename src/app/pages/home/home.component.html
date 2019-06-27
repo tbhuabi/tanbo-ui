@@ -1,3 +1,7 @@
+<p>
+  <input type="text" uiInput [(ngModel)]="displayFormat">
+</p>
 <div>
-  <ui-input type="date"></ui-input>
+  <ui-input type="date" format="yyyy-MM-dd" [value]="value" [minDate]="minDate" [displayFormat]="displayFormat"></ui-input>
 </div>
+

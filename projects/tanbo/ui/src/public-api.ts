@@ -30,7 +30,7 @@ export { BtnGroupComponent } from './lib/forms/btn-group/btn-group.component';
 export { ButtonComponent } from './lib/forms/button/button.component';
 export { CheckboxComponent } from './lib/forms/checkbox/checkbox.component';
 export { DateComponent } from './lib/forms/date/date.component';
-export { dateStringFormat, timeStringToDate, toDouble } from './lib/forms/date/date-utils';
+export { dateFormat, stringToDate, toDouble } from './lib/forms/date/date-utils';
 export { DropdownInputComponent } from './lib/forms/dropdown-input/dropdown-input.component';
 export { EditorComponent } from './lib/forms/editor/editor.component';
 export { FileComponent } from './lib/forms/file/file.component';

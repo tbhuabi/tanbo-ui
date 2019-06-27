@@ -20,22 +20,25 @@ ui-input[type=date] {
 
 .ui-date-panel-week {
   border-bottom: 1px solid $color-light;
-  background-color: $color-light;
+  background-color: $color-lighter;
 }
 
 .ui-date-panel-day {
   font-size: 14px;
+
   td:hover {
     color: $color-primary;
   }
+
   .ui-date-key {
     width: 100%;
     height: 100%;
     border-radius: 0;
   }
 }
+
 .ui-date-container {
-  width: 212px;
+  width: 210px;
   position: relative;
   font-size: 14px;
   user-select: none;
@@ -47,30 +50,35 @@ ui-input[type=date] {
   width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
+
   td {
     padding: 0;
   }
+
   .ui-date-body {
     text-align: center;
+
     td {
       width: 30px;
       height: 30px;
+
       &:first-child, &:last-child {
-        color: #999
+        color: $color-gray-dark;
       }
+
       button {
         &.ui-no-current-month {
-          color: #ccc;
+          color: $color-gray;
         }
 
         &:disabled {
-          background-color: #f3f3f3;
-          color: #ccc;
+          background-color: $color-lighter;
+          color: $color-gray;
           cursor: not-allowed;
         }
 
         &.ui-current-day {
-          color: #009ce5;
+          color: $color-primary;
           font-weight: bold;
         }
 
@@ -83,42 +91,22 @@ ui-input[type=date] {
   }
 }
 
-.ui-date-time-details {
-  text-align: center;
-
-  > div {
-    float: left;
-    width: 70px;
-    box-sizing: border-box;
-    padding: 5px;
-  }
-
-  input {
-    width: 44px;
-    padding: 3px;
-    height: 24px;
-    border-radius: 3px;
-    border: 1px solid $color-gray-light;
-  }
-}
-
-.ui-date-btn-wrap {
-  padding: 5px;
-}
-
-
 .ui-date-head {
   white-space: nowrap;
+
   tr {
     height: 30px;
     border-bottom: 1px solid $color-light;
+
     td {
       &:first-child, &:last-child {
         width: 48px;
+
         button {
           font-size: 16px;
         }
       }
+
       .ui-active {
         color: $color-primary;
         font-weight: bold;
@@ -133,6 +121,7 @@ ui-input[type=date] {
     cursor: pointer;
     color: inherit;
     font-size: inherit;
+
     &:hover {
       color: $color-primary;
     }
@@ -141,11 +130,13 @@ ui-input[type=date] {
 
 .ui-date-years, .ui-date-mouths {
   height: 210px;
+
   ul {
     list-style: none;
     padding-left: 0;
     margin: 0;
     text-align: center;
+
     li {
       float: left;
       width: 25%;
@@ -161,13 +152,16 @@ ui-input[type=date] {
   cursor: pointer;
   color: inherit;
   border-radius: 3px;
+
   &:hover {
     color: $color-primary;
   }
+
   &.ui-active {
     color: #fff;
     background-color: $color-primary;
   }
+
   &:disabled {
     color: $color-gray;
     background: none;
@@ -175,3 +169,58 @@ ui-input[type=date] {
   }
 }
 
+.ui-date-time-head {
+  height: 31px;
+  line-height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+  border-bottom: 1px solid $color-light;
+
+  strong {
+    font-size: 14px;
+  }
+}
+
+.ui-date-time-picker {
+  height: 210px;
+  border-bottom: 1px solid $color-light;
+  overflow: hidden;
+}
+
+.ui-date-time-group {
+  float: left;
+  width: 70px;
+  height: 100%;
+}
+
+.ui-date-time-picker-head {
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  background-color: $color-lighter;
+  border-bottom: 1px solid $color-light;
+}
+
+.ui-date-time-picker-options {
+  height: 186px;
+  overflow-y: scroll;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  button {
+    @include linker;
+    outline: none;
+    text-align: center;
+
+  }
+}
+
+.ui-date-btn-wrap {
+  display: flex;
+  padding: 2px 5px;
+
+  div {
+    flex: 1;
+    padding: 5px;
+  }
+}
