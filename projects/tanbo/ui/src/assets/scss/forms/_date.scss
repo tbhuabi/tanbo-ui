@@ -207,6 +207,7 @@ ui-input[type=date] {
   overflow-y: scroll;
   padding-top: 5px;
   padding-bottom: 5px;
+  position: relative;
   button {
     @include linker;
     outline: none;

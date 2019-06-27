@@ -12,8 +12,8 @@
   cursor: pointer;
   color: inherit;
   &:hover, &.ui-focus {
-    background-color: $color-light;
-    color: $color-primary;
+    background-color: $color-primary;
+    color: #fff;
   }
   &:disabled, &.ui-disabled {
     background-color: $color-light;
@@ -22,7 +22,7 @@
     color: $color-default;
   }
   &.ui-checked, &.ui-active {
-    background-color: $color-primary;
-    color: #fff;
+    background-color: $color-light;
+    color: $color-primary;
   }
 }

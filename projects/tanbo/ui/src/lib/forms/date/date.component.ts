@@ -1,4 +1,14 @@
-import { Component, Input, EventEmitter, OnInit, Output, Inject, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  EventEmitter,
+  OnInit,
+  Output,
+  Inject,
+  OnChanges,
+  SimpleChanges,
+  ViewChild, ElementRef, AfterViewChecked
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { UI_SELECT_ARROW_CLASSNAME } from '../help';
@@ -16,7 +26,6 @@ import {
 } from './date-utils';
 
 import { attrToBoolean } from '../../utils';
-import { min } from 'rxjs/operators';
 
 @Component({
   selector: 'ui-input[type=date]',
@@ -27,7 +36,10 @@ import { min } from 'rxjs/operators';
     multi: true
   }]
 })
-export class DateComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewChecked {
+  @ViewChild('hoursListWrap', {static: false, read: ElementRef}) hoursListWrap: ElementRef<HTMLDivElement>;
+  @ViewChild('minutesListWrap', {static: false, read: ElementRef}) minutesListWrap: ElementRef<HTMLDivElement>;
+  @ViewChild('secondsListWrap', {static: false, read: ElementRef}) secondsListWrap: ElementRef<HTMLDivElement>;
   @Output() uiChange = new EventEmitter<string | number>();
   @Input() position = 'bottomLeft';
   @Input() size = '';
@@ -91,6 +103,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges {
   private onChange: (_: any) => any;
   private onTouched: () => any;
   private days: Array<Day> = [];
+  private viewEffects: boolean = false;
 
   constructor(@Inject(UI_SELECT_ARROW_CLASSNAME) arrowIcon: string) {
     this.arrowIconClassName = arrowIcon;
@@ -112,7 +125,6 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     Object.keys(changes).forEach(key => {
-      console.log(key);
       const value = changes[key].currentValue;
       switch (key) {
         case 'value':
@@ -149,10 +161,17 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges {
             this.model = 'date';
           } else if (this.config.timeModel) {
             this.model = 'time';
+            this.viewEffects = true;
           }
           break;
       }
     });
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.viewEffects) {
+      this.timePickerScrollToCenter();
+    }
   }
 
   setupPicker() {
@@ -199,6 +218,9 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   switchModel() {
     this.model = this.model === 'date' ? 'time' : 'date';
+    if (this.model === 'time') {
+      this.viewEffects = true;
+    }
   }
 
   toPreviousYear() {
@@ -217,7 +239,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.updatePickerByMonth(this.pickerDate.getMonth() + 1);
   }
 
-  updateYears(year: number) {
+  updateYearsByStart(year: number) {
     this.startYearIndex = year;
     this.updateYearList();
   }
@@ -248,12 +270,31 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.showType = '';
   }
 
-  selected(day: Day) {
-    if (day.disable) {
-      return;
-    }
+  updatePickerByDay(day: Day) {
     const date = day.date;
     this.pickerDate.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+    this.insurePickerDateBetweenMinAndMax();
+    this.update();
+  }
+
+  updatePickerByHours(hours: number) {
+    this.pickerDate.setHours(hours);
+    this.insurePickerDateBetweenMinAndMax();
+    this.viewEffects = true;
+    this.update();
+  }
+
+  updatePickerByMinutes(minutes: number) {
+    this.pickerDate.setMinutes(minutes);
+    this.insurePickerDateBetweenMinAndMax();
+    this.viewEffects = true;
+    this.update();
+  }
+
+  updatePickerBySeconds(seconds: number) {
+    this.pickerDate.setSeconds(seconds);
+    this.insurePickerDateBetweenMinAndMax();
+    this.viewEffects = true;
     this.update();
   }
 
@@ -297,6 +338,25 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.updateHoursList();
     this.updateMinutesList();
     this.updateSecondsList();
+  }
+
+  private timePickerScrollToCenter() {
+    const h = this.pickerDate.getHours();
+    const m = this.pickerDate.getMinutes();
+    const s = this.pickerDate.getSeconds();
+    const options: ScrollIntoViewOptions = {
+      block: 'center',
+      behavior: 'auto'
+    };
+    if (this.hoursListWrap) {
+      this.hoursListWrap.nativeElement.children[h].scrollIntoView(options);
+    }
+    if (this.minutesListWrap) {
+      this.minutesListWrap.nativeElement.children[m].scrollIntoView(options);
+    }
+    if (this.secondsListWrap) {
+      this.secondsListWrap.nativeElement.children[s].scrollIntoView(options);
+    }
   }
 
   private updateSecondsList() {
