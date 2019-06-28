@@ -243,6 +243,14 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   }
 
   switchModel(newModel: DatePickerModel) {
+    if (this.config.day) {
+      if (this.model === 'year' && newModel === 'year') {
+        newModel = 'day';
+      } else if (this.model === 'month' && newModel === 'month') {
+        newModel = 'day';
+      }
+    }
+
     this.oldModel = this.model;
     this.model = newModel;
     if (this.model === 'time') {
@@ -287,10 +295,12 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   }
 
   toPreviousYear() {
+    this.startYearIndex = this.pickerDate.getFullYear() - this.pickerDate.getFullYear() % 32;
     this.updatePickerByYear(this.pickerDate.getFullYear() - 1);
   }
 
   toNextYear() {
+    this.startYearIndex = this.pickerDate.getFullYear() - this.pickerDate.getFullYear() % 32;
     this.updatePickerByYear(this.pickerDate.getFullYear() + 1);
   }
 
