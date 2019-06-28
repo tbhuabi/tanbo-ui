@@ -169,9 +169,7 @@
           <button *ngIf="model !== 'time'" type="button" (click)="switchModel('time')"
                   class="ui-btn ui-btn-default ui-btn-block ui-btn-sm">
             <strong>
-              <span *ngIf="config.hours">{{ pickerDate.getHours() }}:</span>
-              <span *ngIf="config.minutes">{{ pickerDate.getMinutes() }}:</span>
-              <span *ngIf="config.seconds">{{ pickerDate.getSeconds() }}</span>
+              {{ time }}
             </strong>
           </button>
           <button *ngIf="model === 'time'" type="button" (click)="switchModel(oldModel)"

@@ -184,18 +184,16 @@ ui-input[type=date] {
 
 .ui-date-time-picker {
   height: 205px;
-  border-bottom: 1px solid $color-light;
-  overflow: hidden;
+  display: flex;
 }
 
 .ui-date-time-group {
-  float: left;
-  width: 70px;
-  height: 100%;
+  flex: 1;
+  min-width: 70px;
 }
 
 .ui-date-time-picker-head {
-  height: 29px;
+  height: 30px;
   line-height: 30px;
   text-align: center;
   background-color: $color-lighter;
@@ -216,7 +214,7 @@ ui-input[type=date] {
 .ui-date-btn-wrap {
   display: flex;
   padding: 2px 5px;
-
+  border-top: 1px solid $color-light;
   div {
     flex: 1;
     padding: 5px;

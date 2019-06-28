@@ -36,7 +36,7 @@ export function toDouble(n: number | string): string {
 export function dateFormat<T>(date: T, formatString: string): string | T {
   function format(d: Date): string {
     const year = d.getFullYear();
-    const month = d.getMonth();
+    const month = d.getMonth() + 1;
     const day = d.getDate();
     const hours = d.getHours();
     const minutes = d.getMinutes();
@@ -44,35 +44,34 @@ export function dateFormat<T>(date: T, formatString: string): string | T {
     return formatString.replace(/[yMdhms]+/g, (str: string): string => {
       switch (str) {
         case 'yy':
-          return year ? toDouble(year % 100) : '';
+          return toDouble(year % 100);
         case 'yyyy':
           return year + '';
         case 'M':
-          return (month ? month + 1 : '') + '';
+          return month + '';
         case 'MM':
-          return toDouble(month !== undefined ? month + 1 : '');
+          return toDouble(month);
         case 'd':
           return day + '';
         case 'dd':
           return toDouble(day);
         case 'h':
-          return (hours || '0') + '';
+          return hours + '';
         case 'hh':
-          return toDouble(hours) || '00';
+          return toDouble(hours);
         case 'm':
-          return (minutes || '0') + '';
+          return minutes + '';
         case 'mm':
-          return toDouble(minutes) || '00';
+          return toDouble(minutes);
         case 's':
-          return (seconds || '0') + '';
+          return seconds + '';
         case 'ss':
-          return toDouble(seconds) || '00';
+          return toDouble(seconds);
         default:
           return str;
       }
     });
   }
-
   if (typeof date === 'string') {
     return date;
   }

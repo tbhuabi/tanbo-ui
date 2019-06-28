@@ -76,6 +76,13 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
     return this._readonly;
   }
 
+  get time() {
+    return [
+      this.config.hours && this.pickerDate.getHours(),
+      this.config.minutes && this.pickerDate.getMinutes(),
+      this.config.seconds && this.pickerDate.getSeconds()].filter(item => item).join(':');
+  }
+
   config = new DateConfig();
 
   focus = false;
@@ -86,7 +93,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   minTimeInstance = new Time('00:00:00');
   maxTimeInstance = new Time('24:00:00');
   systemDate: Date;
-  pickerDate: Date;
+  pickerDate: Date = new Date();
   startYearIndex: number;
 
   years: Year[] = [];
@@ -159,7 +166,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
           this.setupPicker();
           break;
         case 'displayFormat':
-          this.displayValue = dateFormat(this.value, value || this.format);
+          this.displayValue = dateFormat(this.pickerDate, value || this.format);
           this.config.formatString = this.displayFormat || this.format;
           this.updateView();
           break;
@@ -177,10 +184,6 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
 
   setupPicker() {
     this.systemDate = new Date();
-    if (!this.pickerDate) {
-      // 如果没有传入 value，则默认高亮当前时间
-      this.pickerDate = new Date();
-    }
     this.startYearIndex = this.pickerDate.getFullYear() - this.pickerDate.getFullYear() % 32;
     this.update();
   }
