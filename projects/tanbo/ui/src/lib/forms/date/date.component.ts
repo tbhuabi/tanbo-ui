@@ -7,7 +7,8 @@ import {
   Inject,
   OnChanges,
   SimpleChanges,
-  ViewChild, ElementRef, AfterViewChecked
+  ViewChild,
+  ElementRef, OnDestroy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -38,7 +39,7 @@ import { attrToBoolean } from '../../utils';
     multi: true
   }]
 })
-export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewChecked {
+export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
   @ViewChild('hoursListWrap', {static: false, read: ElementRef}) hoursListWrap: ElementRef<HTMLDivElement>;
   @ViewChild('minutesListWrap', {static: false, read: ElementRef}) minutesListWrap: ElementRef<HTMLDivElement>;
   @ViewChild('secondsListWrap', {static: false, read: ElementRef}) secondsListWrap: ElementRef<HTMLDivElement>;
@@ -105,7 +106,8 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
   private onChange: (_: any) => any;
   private onTouched: () => any;
   private days: Array<Day> = [];
-  private viewEffects = false;
+
+  private animateId: number;
 
   constructor(@Inject(UI_SELECT_ARROW_CLASSNAME) arrowIcon: string) {
     this.arrowIconClassName = arrowIcon;
@@ -139,7 +141,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
           this.setupPicker();
           break;
         case 'maxDate':
-          this.maxDateInstance = this.getNewDateByTime(stringToDate(value), this.maxTimeInstance, false);
+          this.maxDateInstance = this.getNewDateByTime(stringToDate(value, true), this.maxTimeInstance, false);
           this.setupPicker();
           break;
         case 'minTime':
@@ -169,10 +171,8 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
     });
   }
 
-  ngAfterViewChecked(): void {
-    if (this.viewEffects) {
-      this.timePickerScrollToCenter();
-    }
+  ngOnDestroy(): void {
+    cancelAnimationFrame(this.animateId);
   }
 
   setupPicker() {
@@ -224,7 +224,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
       }
     } else if (this.config.timeModel) {
       this.model = 'time';
-      this.viewEffects = true;
+      this.timePickerScrollToCenter();
     }
   }
 
@@ -232,7 +232,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
     this.oldModel = this.model;
     this.model = newModel;
     if (this.model === 'time') {
-      this.viewEffects = true;
+      this.timePickerScrollToCenter();
     }
   }
 
@@ -334,21 +334,21 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
   updatePickerByHours(hours: number) {
     this.pickerDate.setHours(hours);
     this.insurePickerDateBetweenMinAndMax();
-    this.viewEffects = true;
+    this.timePickerScrollToCenter();
     this.update();
   }
 
   updatePickerByMinutes(minutes: number) {
     this.pickerDate.setMinutes(minutes);
     this.insurePickerDateBetweenMinAndMax();
-    this.viewEffects = true;
+    this.timePickerScrollToCenter();
     this.update();
   }
 
   updatePickerBySeconds(seconds: number) {
     this.pickerDate.setSeconds(seconds);
     this.insurePickerDateBetweenMinAndMax();
-    this.viewEffects = true;
+    this.timePickerScrollToCenter();
     this.update();
   }
 
@@ -362,22 +362,25 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
   }
 
   private timePickerScrollToCenter() {
-    const h = this.pickerDate.getHours();
-    const m = this.pickerDate.getMinutes();
-    const s = this.pickerDate.getSeconds();
-    const options: ScrollIntoViewOptions = {
-      block: 'center',
-      behavior: 'auto'
-    };
-    if (this.hoursListWrap) {
-      this.hoursListWrap.nativeElement.children[h].scrollIntoView(options);
-    }
-    if (this.minutesListWrap) {
-      this.minutesListWrap.nativeElement.children[m].scrollIntoView(options);
-    }
-    if (this.secondsListWrap) {
-      this.secondsListWrap.nativeElement.children[s].scrollIntoView(options);
-    }
+    cancelAnimationFrame(this.animateId);
+    this.animateId = requestAnimationFrame(() => {
+      const h = this.pickerDate.getHours();
+      const m = this.pickerDate.getMinutes();
+      const s = this.pickerDate.getSeconds();
+      const options: ScrollIntoViewOptions = {
+        block: 'center',
+        behavior: 'auto'
+      };
+      if (this.hoursListWrap) {
+        this.hoursListWrap.nativeElement.children[h].scrollIntoView(options);
+      }
+      if (this.minutesListWrap) {
+        this.minutesListWrap.nativeElement.children[m].scrollIntoView(options);
+      }
+      if (this.secondsListWrap) {
+        this.secondsListWrap.nativeElement.children[s].scrollIntoView(options);
+      }
+    });
   }
 
   private updateSecondsList() {

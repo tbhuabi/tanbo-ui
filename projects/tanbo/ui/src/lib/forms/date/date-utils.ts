@@ -1,4 +1,4 @@
-export function stringToDate(date: string | number | Date): Date | null {
+export function stringToDate(date: string | number | Date, toMax: boolean = false): Date | null {
   if (!date) {
     return null;
   }
@@ -17,7 +17,7 @@ export function stringToDate(date: string | number | Date): Date | null {
     return +item;
   });
   if (times.length === 3) {
-    times = times.concat([0, 0, 0]);
+    times = times.concat(toMax ? [23, 59, 59] : [0, 0, 0]);
   }
   if (times.length !== 6) {
     return null;
@@ -39,7 +39,7 @@ export function dateFormat<T>(date: T, formatString: string): string | T {
     const month = d.getMonth();
     const day = d.getDate();
     const hours = d.getHours();
-    const minutes = d.getMonth();
+    const minutes = d.getMinutes();
     const seconds = d.getSeconds();
     return formatString.replace(/[yMdhms]+/g, (str: string): string => {
       switch (str) {
