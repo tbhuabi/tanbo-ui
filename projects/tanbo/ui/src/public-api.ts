@@ -31,7 +31,7 @@ export { ButtonComponent } from './lib/forms/button/button.component';
 export { CheckboxComponent } from './lib/forms/checkbox/checkbox.component';
 export { DateComponent } from './lib/forms/date/date.component';
 export {
-  stringToDate,
+  toDate,
   DatePickerModel,
   toDouble,
   Time,

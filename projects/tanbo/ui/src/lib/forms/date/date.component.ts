@@ -14,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { UI_SELECT_ARROW_CLASSNAME } from '../help';
 import {
-  stringToDate,
+  toDate,
   dateFormat,
   toDouble,
   Hours,
@@ -139,16 +139,16 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
       const value = changes[key].currentValue;
       switch (key) {
         case 'value':
-          this.displayValue = dateFormat(this.value, this.displayFormat || value);
-          this.pickerDate = stringToDate(value);
+          this.displayValue = dateFormat(this.value, this.displayFormat || this.format);
+          this.pickerDate = toDate(value, false) || new Date();
           this.setupPicker();
           break;
         case 'minDate':
-          this.minDateInstance = this.getNewDateByTime(stringToDate(value), this.minTimeInstance, true);
+          this.minDateInstance = this.getNewDateByTime(toDate(value, false), this.minTimeInstance, true);
           this.setupPicker();
           break;
         case 'maxDate':
-          this.maxDateInstance = this.getNewDateByTime(stringToDate(value, true), this.maxTimeInstance, false);
+          this.maxDateInstance = this.getNewDateByTime(toDate(value, true), this.maxTimeInstance, false);
           this.setupPicker();
           break;
         case 'minTime':
@@ -262,6 +262,9 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
 
   writeValue(value: any) {
     this.value = value;
+    this.displayValue = dateFormat(this.value, this.displayFormat || this.format);
+    this.pickerDate = toDate(value, false) || new Date();
+    this.setupPicker();
   }
 
   registerOnChange(fn: any) {

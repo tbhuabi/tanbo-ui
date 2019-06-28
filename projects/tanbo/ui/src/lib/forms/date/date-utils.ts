@@ -1,4 +1,4 @@
-export function stringToDate(date: string | number | Date, toMax: boolean = false): Date | null {
+export function toDate(date: string | number | Date, toMax: boolean): Date | null {
   if (!date) {
     return null;
   }
@@ -13,7 +13,7 @@ export function stringToDate(date: string | number | Date, toMax: boolean = fals
   if (typeof date !== 'string') {
     return null;
   }
-  let times: Array<number> = date.match(/\d+/g).map(item => {
+  let times: Array<number> = (date.match(/\d+/g) || []).map(item => {
     return +item;
   });
   if (times.length === 3) {
@@ -43,8 +43,6 @@ export function dateFormat<T>(date: T, formatString: string): string | T {
     const seconds = d.getSeconds();
     return formatString.replace(/[yMdhms]+/g, (str: string): string => {
       switch (str) {
-        case 'yy':
-          return toDouble(year % 100);
         case 'yyyy':
           return year + '';
         case 'M':
@@ -72,6 +70,7 @@ export function dateFormat<T>(date: T, formatString: string): string | T {
       }
     });
   }
+
   if (typeof date === 'string') {
     return date;
   }
