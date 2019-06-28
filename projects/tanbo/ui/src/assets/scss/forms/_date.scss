@@ -170,8 +170,8 @@ ui-input[type=date] {
 }
 
 .ui-date-time-head {
-  height: 31px;
-  line-height: 30px;
+  height: 36px;
+  line-height: 35px;
   padding-left: 10px;
   padding-right: 10px;
   font-size: 12px;
@@ -183,7 +183,7 @@ ui-input[type=date] {
 }
 
 .ui-date-time-picker {
-  height: 210px;
+  height: 205px;
   border-bottom: 1px solid $color-light;
   overflow: hidden;
 }
@@ -195,24 +195,21 @@ ui-input[type=date] {
 }
 
 .ui-date-time-picker-head {
-  height: 24px;
-  line-height: 24px;
+  height: 29px;
+  line-height: 30px;
   text-align: center;
   background-color: $color-lighter;
   border-bottom: 1px solid $color-light;
 }
 
 .ui-date-time-picker-options {
-  height: 186px;
+  height: 175px;
   overflow-y: scroll;
-  padding-top: 5px;
-  padding-bottom: 5px;
   position: relative;
   button {
     @include linker;
     outline: none;
     text-align: center;
-
   }
 }
 

@@ -23,7 +23,7 @@ export function stringToDate(date: string | number | Date): Date | null {
     return null;
   }
   times[1] = times[1] - 1;
-  return Date.apply(new Date(), ...times);
+  return new Date(times[0], times[1], times[2], times[3], times[4], times[5], 0);
 }
 
 export function toDouble(n: number | string): string {

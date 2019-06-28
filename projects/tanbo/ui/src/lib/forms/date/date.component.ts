@@ -135,19 +135,25 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
           this.setupPicker();
           break;
         case 'minDate':
-          this.minDateInstance = stringToDate(value);
+          this.minDateInstance = this.getNewDateByTime(stringToDate(value), this.minTimeInstance, true);
           this.setupPicker();
           break;
         case 'maxDate':
-          this.maxDateInstance = stringToDate(value);
+          this.maxDateInstance = this.getNewDateByTime(stringToDate(value), this.maxTimeInstance, false);
           this.setupPicker();
           break;
         case 'minTime':
           this.minTimeInstance.timeString = value;
+          if (this.minDateInstance) {
+            this.minDateInstance = this.getNewDateByTime(this.minDateInstance, this.minTimeInstance, true);
+          }
           this.setupPicker();
           break;
         case 'maxTime':
           this.maxTimeInstance.timeString = value;
+          if (this.maxDateInstance) {
+            this.maxDateInstance = this.getNewDateByTime(this.maxDateInstance, this.maxTimeInstance, false);
+          }
           this.setupPicker();
           break;
         case 'displayFormat':
@@ -612,53 +618,46 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, A
     return a && b;
   }
 
+  private getNewDateByTime(oldDate: Date, timeInstance: Time, isLess: boolean): Date {
+    const time = Number(timeInstance.hours + toDouble(timeInstance.minutes) + toDouble(timeInstance.seconds));
+    const newDate = new Date();
+    newDate.setTime(oldDate.getTime());
+    const dateTime = Number(newDate.getHours() + toDouble(newDate.getMinutes()) + toDouble(newDate.getSeconds()));
+    if (isLess ? time > dateTime : time < dateTime) {
+      newDate.setHours(timeInstance.hours, timeInstance.minutes, timeInstance.seconds);
+    }
+    return newDate;
+  }
+
   private insurePickerDateBetweenMinAndMax() {
-    const minTimeInstance = this.minTimeInstance;
-    const maxTimeInstance = this.maxTimeInstance;
-    const pickerDate = this.pickerDate;
+    const minDate = this.minDateInstance;
+    const maxDate = this.maxDateInstance;
 
-    const minTime = Number(minTimeInstance.hours + toDouble(minTimeInstance.minutes) + toDouble(minTimeInstance.seconds));
-    const maxTime = Number(maxTimeInstance.hours + toDouble(maxTimeInstance.minutes) + toDouble(maxTimeInstance.seconds));
-
-    const minDateTime = (() => {
-      const minDate = new Date();
-      if (this.minDateInstance) {
-        minDate.setTime(this.minDateInstance.getTime());
-        const min = Number(minDate.getHours() + toDouble(minDate.getMinutes()) + toDouble(minDate.getSeconds()));
-        if (minTime > min) {
-          minDate.setHours(minTimeInstance.hours, minTimeInstance.minutes, minTimeInstance.seconds);
-          return minDate.getTime();
-        }
-        return minDate.getTime();
-      }
-      minDate.setTime(pickerDate.getTime());
-      minDate.setHours(minTimeInstance.hours, minTimeInstance.minutes, minTimeInstance.seconds);
-      return minDate.getTime();
-    })();
-
-    const maxDateTime = (() => {
-      const maxDate = new Date();
-      if (this.maxDateInstance) {
-        maxDate.setTime(this.maxDateInstance.getTime());
-        const max = Number(maxDate.getHours() + toDouble(maxDate.getMinutes()) + toDouble(maxDate.getSeconds()));
-        if (maxTime < max) {
-          maxDate.setHours(maxTimeInstance.hours, maxTimeInstance.minutes, maxTimeInstance.seconds);
-          return maxDate.getTime();
-        }
-        return maxDate.getTime();
-      }
-      maxDate.setTime(pickerDate.getTime());
-      maxDate.setHours(maxTimeInstance.hours, maxTimeInstance.minutes, maxTimeInstance.seconds);
-      return maxDate.getTime();
-    })();
-
-    if (minDateTime > maxDateTime) {
+    if (minDate.getTime() > maxDate.getTime()) {
       throw new Error('No optional date or time!');
     }
-    if (pickerDate.getTime() < minDateTime) {
-      pickerDate.setTime(minDateTime);
-    } else if (pickerDate.getTime() > maxDateTime) {
-      pickerDate.setTime(maxDateTime);
+
+    const pickerDate = this.pickerDate;
+
+    if (pickerDate.getTime() < minDate.getTime()) {
+      pickerDate.setTime(minDate.getTime());
+    } else if (pickerDate.getTime() > maxDate.getTime()) {
+      pickerDate.setTime(maxDate.getTime());
+    }
+
+    const minTime = this.minTimeInstance;
+    const maxTime = this.maxTimeInstance;
+
+    const min = Number(minTime.hours + toDouble(minTime.minutes) + toDouble(minTime.seconds));
+    const max = Number(maxTime.hours + toDouble(maxTime.minutes) + toDouble(maxTime.seconds));
+    const pickerTime = Number(pickerDate.getHours() +
+      toDouble(pickerDate.getMinutes()) +
+      toDouble(pickerDate.getSeconds()));
+
+    if (pickerTime < min) {
+      pickerDate.setHours(minTime.hours, minTime.minutes, minTime.seconds);
+    } else if (pickerTime > max) {
+      pickerDate.setHours(maxTime.hours, maxTime.minutes, maxTime.seconds);
     }
   }
 }

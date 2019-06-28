@@ -1,11 +1,20 @@
 <p>
-  <input type="text" uiInput [(ngModel)]="displayFormat">
+  displayFormat:<input type="text" uiInput [(ngModel)]="displayFormat"><br>
+  format:<input type="text" uiInput [(ngModel)]="format"><br>
+  minTime:<input type="text" uiInput [(ngModel)]="minTime"><br>
+  maxTime:<input type="text" uiInput [(ngModel)]="maxTime"><br>
+  minDate:<input type="text" uiInput [(ngModel)]="minDate"><br>
+  maxDate:<input type="text" uiInput [(ngModel)]="maxDate"><br>
+  value:<input type="text" uiInput [(ngModel)]="value">
 </p>
 <div>
   <ui-input type="date"
-            format="yyyy-MM-dd"
-            [value]="value"
+            [displayFormat]="displayFormat"
+            [format]="format"
             [minTime]="minTime"
-            [displayFormat]="displayFormat"></ui-input>
+            [maxTime]="maxTime"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+            [value]="value"></ui-input>
 </div>
 
