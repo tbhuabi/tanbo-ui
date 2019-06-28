@@ -137,7 +137,6 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   }
 
   ngOnInit() {
-    // 初始化日历组件，并缓存当前的年月日
     this.setupPicker();
   }
 
