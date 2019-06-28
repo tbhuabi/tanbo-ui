@@ -86,7 +86,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   config = new DateConfig();
 
   focus = false;
-  open = true;
+  open = false;
 
   minDateInstance: Date;
   maxDateInstance: Date;
