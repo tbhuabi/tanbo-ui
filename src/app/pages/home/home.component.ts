@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   format = 'yyyy-MM-dd hh:mm:ss';
   minTime = '3:30:12';
   maxTime = '10:34:34';
-  minDate = '';
+  minDate = '2019-6-26';
   maxDate = '';
   value = '';
 

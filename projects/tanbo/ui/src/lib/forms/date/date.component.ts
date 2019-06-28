@@ -77,10 +77,17 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   }
 
   get time() {
-    return [
-      this.config.hours && this.pickerDate.getHours(),
-      this.config.minutes && this.pickerDate.getMinutes(),
-      this.config.seconds && this.pickerDate.getSeconds()].filter(item => item).join(':');
+    const result = [];
+    if (this.config.hours) {
+      result.push(this.pickerDate.getHours());
+    }
+    if (this.config.minutes) {
+      result.push(this.pickerDate.getMinutes());
+    }
+    if (this.config.seconds) {
+      result.push(this.pickerDate.getSeconds());
+    }
+    return result.join(':');
   }
 
   config = new DateConfig();
