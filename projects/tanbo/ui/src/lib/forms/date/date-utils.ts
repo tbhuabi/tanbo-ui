@@ -49,12 +49,8 @@ export function toDate(date: string | number | Date, toMax: boolean, format?: st
         if (typeof month === 'number' && month > 0) {
           if (month === 1) {
             next = date[index + 1];
-            if (next === '0') {
-              month = 10;
-            } else if (next === '1') {
-              month = 11;
-            } else if (next === '2') {
-              month = 12;
+            if (/[012]/.test(next)) {
+              month = Number(date.substring(index, 2));
             }
           }
           d.setMonth(Number(month) - 1);
