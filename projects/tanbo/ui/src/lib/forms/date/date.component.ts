@@ -1,8 +1,32 @@
-import { Component, Input, EventEmitter, OnInit, Output, Inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  EventEmitter,
+  OnInit,
+  Output,
+  Inject,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+  ElementRef, OnDestroy
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { UI_SELECT_ARROW_CLASSNAME } from '../help';
-import { TimeDetails, timeAnalysisByTimeString, dateStringFormat } from './date-utils';
+import {
+  stringToDate,
+  dateFormat,
+  toDouble,
+  Hours,
+  Seconds,
+  Minutes,
+  Day,
+  Month,
+  Year,
+  DateConfig,
+  Time,
+  DatePickerModel
+} from './date-utils';
 
 import { attrToBoolean } from '../../utils';
 
@@ -15,16 +39,24 @@ import { attrToBoolean } from '../../utils';
     multi: true
   }]
 })
-export class DateComponent implements ControlValueAccessor, OnInit {
+export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
+  @ViewChild('hoursListWrap', {static: false, read: ElementRef}) hoursListWrap: ElementRef<HTMLDivElement>;
+  @ViewChild('minutesListWrap', {static: false, read: ElementRef}) minutesListWrap: ElementRef<HTMLDivElement>;
+  @ViewChild('secondsListWrap', {static: false, read: ElementRef}) secondsListWrap: ElementRef<HTMLDivElement>;
+  @Output() uiChange = new EventEmitter<string | number>();
   @Input() position = 'bottomLeft';
-  @Input() size: string = '';
-  @Input() placeholder: string = '';
+  @Input() size = '';
+  @Input() placeholder = '';
   @Input() forId: string;
-  @Input() value: string | number;
   @Input() name: string;
+  @Input() arrowIconClassName = '';
   @Input() displayFormat: string;
-  @Input() arrowIconClassName: string = '';
-  @Input() format: string = 'yyyy-MM-dd';
+  @Input() format = 'yyyy-MM-dd';
+  @Input() value: string | number | Date = '';
+  @Input() maxDate: string | number | Date = '';
+  @Input() minDate: string | number | Date = '';
+  @Input() minTime: string;
+  @Input() maxTime: string;
 
   @Input()
   set disabled(isDisabled: any) {
@@ -44,114 +76,125 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     return this._readonly;
   }
 
-  @Input()
-  set maxDate(value) {
-    this._maxDate = value || '';
-    this.maxDateTimeDetails = timeAnalysisByTimeString(this._maxDate);
-    this.update();
+  get time() {
+    return [
+      this.config.hours && this.pickerDate.getHours(),
+      this.config.minutes && this.pickerDate.getMinutes(),
+      this.config.seconds && this.pickerDate.getSeconds()].filter(item => item).join(':');
   }
 
-  get maxDate() {
-    return this._maxDate;
-  }
+  config = new DateConfig();
 
-  @Input()
-  set minDate(value) {
-    this._minDate = value || '';
-    this.minDateTimeDetails = timeAnalysisByTimeString(this._minDate);
-    this.update();
-  }
+  focus = false;
+  open = true;
 
-  @Output() uiChange = new EventEmitter<string | number>();
-
-  get minDate() {
-    return this._minDate;
-  }
-
-  get showHMS(): boolean {
-    return /[hms]/.test(this.format);
-  }
-
-  focus: boolean = false;
-  open: boolean = false;
-
-  dayList: Array<Array<TimeDetails>> = [];
-  minDateTimeDetails: TimeDetails = {};
-  maxDateTimeDetails: TimeDetails = {};
-  systemDateTimeDetails: TimeDetails = {};
-  currentDateTimeDetails: TimeDetails = {};
-  selectedDateTimeDetails: TimeDetails = {};
+  minDateInstance: Date;
+  maxDateInstance: Date;
+  minTimeInstance = new Time('00:00:00');
+  maxTimeInstance = new Time('24:00:00');
+  systemDate: Date;
+  pickerDate: Date = new Date();
   startYearIndex: number;
-  years: Array<any> = [];
-  months: Array<any> = [];
 
-  showType: string = '';
-  displayValue = '';
+  years: Year[] = [];
+  months: Month[] = [];
+  dayGroups: Day[][] = [];
+  hours: Hours[] = [];
+  minutes: Minutes[] = [];
+  seconds: Seconds[] = [];
 
-  private _disabled: boolean = false;
-  private _readonly: boolean = false;
-  private _maxDate = '';
-  private _minDate = '';
+  displayValue: any = '';
+
+  oldModel: DatePickerModel;
+  model: DatePickerModel = 'day';
+
+  private _disabled = false;
+  private _readonly = false;
   private onChange: (_: any) => any;
   private onTouched: () => any;
-  private days: Array<TimeDetails> = [];
+  private days: Array<Day> = [];
+
+  private animateId: number;
 
   constructor(@Inject(UI_SELECT_ARROW_CLASSNAME) arrowIcon: string) {
     this.arrowIconClassName = arrowIcon;
+    this.hours = Array.from({length: 24}).map((_, h) => {
+      return {hours: h, disable: true};
+    });
+    this.minutes = Array.from({length: 60}).map((_, m) => {
+      return {minutes: m, disable: true};
+    });
+    this.seconds = Array.from({length: 60}).map((_, s) => {
+      return {seconds: s, disable: true};
+    });
   }
 
   ngOnInit() {
     // 初始化日历组件，并缓存当前的年月日
-    let date: Date = new Date();
+    this.setupPicker();
+  }
 
-    let year = date.getFullYear();
-    let month = date.getMonth();
-    let day = date.getDate();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-    let timestamp = Date.UTC(year, month, day, hours, minutes, seconds, 0);
+  ngOnChanges(changes: SimpleChanges): void {
+    Object.keys(changes).forEach(key => {
+      const value = changes[key].currentValue;
+      switch (key) {
+        case 'value':
+          this.displayValue = dateFormat(this.value, this.displayFormat || value);
+          this.pickerDate = stringToDate(value);
+          this.setupPicker();
+          break;
+        case 'minDate':
+          this.minDateInstance = this.getNewDateByTime(stringToDate(value), this.minTimeInstance, true);
+          this.setupPicker();
+          break;
+        case 'maxDate':
+          this.maxDateInstance = this.getNewDateByTime(stringToDate(value, true), this.maxTimeInstance, false);
+          this.setupPicker();
+          break;
+        case 'minTime':
+          this.minTimeInstance.timeString = value || '00:00:00';
+          if (this.minDateInstance) {
+            this.minDateInstance = this.getNewDateByTime(this.minDateInstance, this.minTimeInstance, true);
+          }
+          this.setupPicker();
+          break;
+        case 'maxTime':
+          this.maxTimeInstance.timeString = value || '24:00:00';
+          if (this.maxDateInstance) {
+            this.maxDateInstance = this.getNewDateByTime(this.maxDateInstance, this.maxTimeInstance, false);
+          }
+          this.setupPicker();
+          break;
+        case 'displayFormat':
+          this.displayValue = dateFormat(this.pickerDate, value || this.format);
+          this.config.formatString = this.displayFormat || this.format;
+          this.updateView();
+          break;
+        case 'format':
+          this.config.formatString = this.displayFormat || this.format;
+          this.updateView();
+          break;
+      }
+    });
+  }
 
-    this.systemDateTimeDetails = {
-      year,
-      month,
-      day,
-      hours,
-      minutes,
-      seconds,
-      timestamp
-    };
-    if (this.minDate && timestamp < this.minDateTimeDetails.timestamp) {
-      this.currentDateTimeDetails = JSON.parse(JSON.stringify(this.minDateTimeDetails));
-    } else if (this.maxDate && timestamp > this.maxDateTimeDetails.timestamp) {
-      this.currentDateTimeDetails = JSON.parse(JSON.stringify(this.maxDateTimeDetails));
-    } else {
-      this.currentDateTimeDetails = {
-        year,
-        month,
-        day,
-        hours,
-        minutes,
-        seconds,
-        timestamp
-      };
-    }
-    this.startYearIndex = this.currentDateTimeDetails.year - this.currentDateTimeDetails.year % 16;
+  ngOnDestroy(): void {
+    cancelAnimationFrame(this.animateId);
+  }
+
+  setupPicker() {
+    this.systemDate = new Date();
+    this.startYearIndex = this.pickerDate.getFullYear() - this.pickerDate.getFullYear() % 32;
     this.update();
   }
 
   reset() {
     this.value = '';
     this.displayValue = '';
-    this.selectedDateTimeDetails = {};
     if (this.onChange) {
       this.onChange('');
     }
     this.uiChange.emit('');
-  }
-
-  changeShowType(type?: string) {
-    this.showType = this.showType === type ? '' : type;
   }
 
   toggle() {
@@ -173,65 +216,43 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  setYears(year: number) {
-    this.startYearIndex = year;
-    this.updateYearList();
-  }
-
-  checkYear(obj: any) {
-    if (obj.disable) {
-      return;
-    }
-    this.currentDateTimeDetails.year = obj.year;
-    this.update();
-  }
-
-  setMonth(obj: any) {
-    if (obj.isDisable) {
-      return;
-    }
-    this.currentDateTimeDetails.month = obj.month;
-    this.update();
-  }
-
-  selected(day: TimeDetails) {
-    if (day.disabled) {
-      return;
-    }
-    this.selectedDateTimeDetails.year = day.year;
-    this.selectedDateTimeDetails.month = day.month;
-    this.selectedDateTimeDetails.day = day.day;
-    this.validateSelectedDate();
-  }
-
-  testValue(max: number, key: string, $event: any) {
-    let selectedDate = this.selectedDateTimeDetails;
-    if (selectedDate[key] > max) {
-      let currentValue = (selectedDate[key] + '').replace(/\d$/, '');
-      $event.target.value = currentValue;
-      selectedDate[key] = +currentValue;
-    }
-    this.validateSelectedDate();
-  }
-
-  // 通过传入的format字符串，格式化选中后的日期数据
-  getResult() {
-    this.open = false;
-    let selectedDate: TimeDetails = this.selectedDateTimeDetails;
-    let value: string | number;
-    if (this.format) {
-      value = dateStringFormat(this.format, selectedDate);
+  updateView() {
+    if (this.config.dateModel) {
+      if (this.config.day) {
+        this.model = 'day';
+      } else if (this.config.year) {
+        this.model = 'year';
+      } else if (this.config.month) {
+        this.model = 'month';
+      } else {
+        this.model = null;
+      }
+    } else if (this.config.timeModel) {
+      this.model = 'time';
+      this.timePickerScrollToCenter();
     } else {
-      const date = new Date();
-      date.setFullYear(selectedDate.year);
-      date.setMonth(selectedDate.month);
-      date.setDate(selectedDate.day);
-      date.setHours(selectedDate.hours);
-      date.setMinutes(selectedDate.minutes);
-      date.setSeconds(selectedDate.seconds);
-      value = date.getTime();
+      this.model = null;
     }
-    this.displayValue = dateStringFormat(this.displayFormat || this.format, selectedDate);
+  }
+
+  switchModel(newModel: DatePickerModel) {
+    this.oldModel = this.model;
+    this.model = newModel;
+    if (this.model === 'time') {
+      this.timePickerScrollToCenter();
+    }
+  }
+
+  check() {
+    this.open = false;
+    const pickerDate = this.pickerDate;
+    let value: any;
+    if (this.format) {
+      value = dateFormat(pickerDate, this.format);
+    } else {
+      value = pickerDate.getTime();
+    }
+    this.displayValue = dateFormat(pickerDate, this.displayFormat || this.format);
     this.value = value;
     if (this.onChange) {
       this.onChange(value);
@@ -255,97 +276,165 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     this.disabled = isDisabled;
   }
 
-  private validateSelectedDate() {
-    let selectedDate = this.selectedDateTimeDetails;
-    if (!selectedDate.year) {
-      return;
+  toPreviousYear() {
+    this.updatePickerByYear(this.pickerDate.getFullYear() - 1);
+  }
+
+  toNextYear() {
+    this.updatePickerByYear(this.pickerDate.getFullYear() + 1);
+  }
+
+  toPrevMonth() {
+    this.updatePickerByMonth(this.pickerDate.getMonth() - 1);
+  }
+
+  toNextMonth() {
+    this.updatePickerByMonth(this.pickerDate.getMonth() + 1);
+  }
+
+  updateYearsByStart(year: number) {
+    const a = this.minDateInstance ? year + 32 >= this.minDateInstance.getFullYear() : true;
+    const b = this.maxDateInstance ? year <= this.maxDateInstance.getFullYear() : true;
+    if (a && b) {
+      this.startYearIndex = year;
+      this.updateYearList();
     }
-    let n = Date.UTC(selectedDate.year,
-        selectedDate.month,
-        selectedDate.day,
-        selectedDate.hours || 0,
-        selectedDate.minutes || 0,
-        selectedDate.seconds || 0, 0);
-    if (this.minDateTimeDetails) {
-      if (n < this.minDateTimeDetails.timestamp) {
-        this.selectedDateTimeDetails = JSON.parse(JSON.stringify(this.minDateTimeDetails));
-      } else if (this.maxDateTimeDetails && n > this.maxDateTimeDetails.timestamp) {
-        this.selectedDateTimeDetails = JSON.parse(JSON.stringify(this.maxDateTimeDetails));
-      }
-    } else if (this.maxDateTimeDetails && n > this.maxDateTimeDetails.timestamp) {
-      this.selectedDateTimeDetails = JSON.parse(JSON.stringify(this.maxDateTimeDetails));
+  }
+
+  updatePickerByYear(year: number) {
+    const month = this.pickerDate.getMonth();
+    this.pickerDate.setFullYear(year);
+
+    const newMonth = this.pickerDate.getMonth();
+    if (newMonth > month) {
+      this.pickerDate.setMonth(newMonth, 0);
     }
+    this.insurePickerDateBetweenMinAndMax();
+    this.update();
+    if (this.config.day) {
+      this.model = 'day';
+    }
+  }
+
+  updatePickerByMonth(month: number) {
+    const day = this.pickerDate.getDate();
+
+    this.pickerDate.setMonth(month + 1, 0);
+
+    if (day < this.pickerDate.getDate()) {
+      this.pickerDate.setDate(day);
+    }
+    this.insurePickerDateBetweenMinAndMax();
+    this.update();
+    if (this.config.day) {
+      this.model = 'day';
+    }
+  }
+
+  updatePickerByDay(day: Day) {
+    const date = day.date;
+    this.pickerDate.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+    this.insurePickerDateBetweenMinAndMax();
+    this.update();
+  }
+
+  updatePickerByHours(hours: number) {
+    this.pickerDate.setHours(hours);
+    this.insurePickerDateBetweenMinAndMax();
+    this.timePickerScrollToCenter();
+    this.update();
+  }
+
+  updatePickerByMinutes(minutes: number) {
+    this.pickerDate.setMinutes(minutes);
+    this.insurePickerDateBetweenMinAndMax();
+    this.timePickerScrollToCenter();
+    this.update();
+  }
+
+  updatePickerBySeconds(seconds: number) {
+    this.pickerDate.setSeconds(seconds);
+    this.insurePickerDateBetweenMinAndMax();
+    this.timePickerScrollToCenter();
+    this.update();
   }
 
   private update() {
-    // 通过当前的年月日，计算显示在日历控件中的年月日
-    let currentDate = this.currentDateTimeDetails;
-    if (!currentDate.year) {
-      return;
-    }
-    let date = new Date();
-    date.setFullYear(currentDate.year);
-    date.setMonth(currentDate.month + 1, 0);
-    let testDay = date.getDate();
-    if (currentDate.day > testDay) {
-      currentDate.day = testDay;
-    }
-    date.setDate(currentDate.day);
-    date.setHours(currentDate.hours);
-    date.setMinutes(currentDate.minutes);
-    date.setSeconds(currentDate.seconds);
-    date.setMilliseconds(currentDate.seconds);
-
-    let year = date.getFullYear();
-    let month = date.getMonth();
-    let day = date.getDate();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-
-    this.currentDateTimeDetails = {
-      year,
-      month,
-      day,
-      hours,
-      minutes,
-      seconds,
-      timestamp: Date.UTC(year, month, day, hours, minutes, seconds, 0)
-    };
-
     this.updateYearList();
     this.updateMonthList();
     this.updateDayList();
+    this.updateHoursList();
+    this.updateMinutesList();
+    this.updateSecondsList();
+  }
+
+  private timePickerScrollToCenter() {
+    cancelAnimationFrame(this.animateId);
+    this.animateId = requestAnimationFrame(() => {
+      const h = this.pickerDate.getHours();
+      const m = this.pickerDate.getMinutes();
+      const s = this.pickerDate.getSeconds();
+      const options: ScrollIntoViewOptions = {
+        block: 'center',
+        behavior: 'auto'
+      };
+      if (this.hoursListWrap) {
+        this.hoursListWrap.nativeElement.children[h].scrollIntoView(options);
+      }
+      if (this.minutesListWrap) {
+        this.minutesListWrap.nativeElement.children[m].scrollIntoView(options);
+      }
+      if (this.secondsListWrap) {
+        this.secondsListWrap.nativeElement.children[s].scrollIntoView(options);
+      }
+    });
+  }
+
+  private updateSecondsList() {
+    this.seconds.forEach(item => {
+      item.disable = !this.canSelectSeconds(item.seconds);
+    });
+  }
+
+  private updateMinutesList() {
+    this.minutes.forEach(item => {
+      item.disable = !this.canSelectMinutes(item.minutes);
+    });
+  }
+
+  private updateHoursList() {
+    this.hours.forEach(item => {
+      item.disable = !this.canSelectHours(item.hours);
+    });
   }
 
   private updateDayList() {
-    this.setDays();
-    this.dayList = [];
-    let child: Array<TimeDetails> = [];
-    let dayMaxMillisecond = 24 * 60 * 60 * 1000;
-    let timeRemainder;
-    let startDayTimestamp;
-    if (this.minDateTimeDetails) {
-      timeRemainder = this.minDateTimeDetails.timestamp % dayMaxMillisecond;
-      startDayTimestamp = this.minDateTimeDetails.timestamp - timeRemainder;
-    }
-    for (let i = 0; i < this.days.length; i++) {
-      let currentTimestamp = this.days[i].timestamp;
-      if (this.minDateTimeDetails) {
-        if (currentTimestamp < startDayTimestamp) {
-          this.days[i].disabled = true;
-        } else if (this.maxDateTimeDetails && currentTimestamp > this.maxDateTimeDetails.timestamp) {
-          this.days[i].disabled = true;
-        }
-      } else if (this.maxDateTimeDetails) {
-        this.days[i].disabled = currentTimestamp > this.maxDateTimeDetails.timestamp;
-      } else {
-        this.days[i].disabled = false;
-      }
+    this.days = [];
+    // 通过当前时间初始化date对象
+    const dateInstance: Date = new Date(this.pickerDate.getFullYear(), this.pickerDate.getMonth(), 1, 0, 0, 0, 0);
 
+    let start = -dateInstance.getDay() + 1;
+    const end = 42 + start;
+
+    const year = this.pickerDate.getFullYear();
+    const month = this.pickerDate.getMonth();
+
+    for (; start < end; start++) {
+      const date = new Date(year, month, start, 0, 0, 0, 0);
+      const day = date.getDate();
+      this.days.push({
+        date,
+        disable: !this.canSelectDay(date),
+        day
+      });
+    }
+
+    this.dayGroups = [];
+    let child: Array<Day> = [];
+    for (let i = 0; i < this.days.length; i++) {
       if (i % 7 === 0) {
         child = [];
-        this.dayList.push(child);
+        this.dayGroups.push(child);
       }
       child.push(this.days[i]);
     }
@@ -356,118 +445,232 @@ export class DateComponent implements ControlValueAccessor, OnInit {
     for (let i = 0; i < 12; i++) {
       this.months.push({
         month: i,
-        isDisable: this.isDisableMonth(i)
+        disable: !this.canSelectMonth(i)
       });
     }
   }
 
   private updateYearList() {
-    let startIndex: number = this.startYearIndex;
+    let startIndex = this.startYearIndex;
     this.years = [];
-    let endIndex = startIndex + 16;
+    const endIndex = startIndex + 32;
     while (startIndex < endIndex) {
       this.years.push({
         year: startIndex,
-        isDisable: this.isDisableYear(startIndex)
+        disable: !this.canSelectYear(startIndex)
       });
       startIndex++;
     }
   }
 
-  private isDisableMonth(month: number): boolean {
-    let r = this.isDisableYear(this.currentDateTimeDetails.year);
-    if (r) {
-      return true;
-    }
-    if (this.minDateTimeDetails && this.currentDateTimeDetails.year === this.minDateTimeDetails.year) {
-      return month < this.minDateTimeDetails.month;
-    }
-    if (this.maxDateTimeDetails && this.maxDateTimeDetails.year === this.maxDateTimeDetails.year) {
-      return month > this.maxDateTimeDetails.month;
-    }
-    return false;
+  private canSelectSeconds(seconds: number) {
+    const pickerDate = this.pickerDate;
+    const minDate = this.minDateInstance;
+    const maxDate = this.maxDateInstance;
+    const minTime = this.minTimeInstance;
+    const maxTime = this.maxTimeInstance;
+
+    const date = Number(
+      pickerDate.getFullYear() +
+      toDouble(pickerDate.getMonth()) +
+      toDouble(pickerDate.getDate()) +
+      toDouble(pickerDate.getHours()) +
+      toDouble(pickerDate.getMinutes()) +
+      toDouble(seconds));
+
+    const time = Number(pickerDate.getHours() + toDouble(pickerDate.getMinutes()) + toDouble(seconds));
+    const min = Number(minTime.hours + toDouble(minTime.minutes) + toDouble(minTime.seconds));
+    const max = Number(maxTime.hours + toDouble(maxTime.minutes) + toDouble(maxTime.seconds));
+
+    const lessIsMore = min > max;
+
+    const isLessThanMinDate = minDate ? date >= Number(
+      minDate.getFullYear() +
+      toDouble(minDate.getMonth()) +
+      toDouble(minDate.getDate()) +
+      toDouble(minDate.getHours()) +
+      toDouble(minDate.getMinutes()) +
+      toDouble(minDate.getSeconds())) : true;
+
+    const isLessThanMinTime = lessIsMore ? (time >= min && time < 240000) : time >= min;
+
+    const isMoreThanMaxDate = maxDate ? date <= Number(
+      maxDate.getFullYear() +
+      toDouble(maxDate.getMonth()) +
+      toDouble(maxDate.getDate()) +
+      toDouble(maxDate.getHours()) +
+      toDouble(maxDate.getMinutes()) +
+      toDouble(maxDate.getSeconds())) : true;
+
+    const isMoreThanMaxTime = lessIsMore ? (time <= max && max >= 0) : time <= max;
+
+    return isLessThanMinDate && isLessThanMinTime && isMoreThanMaxDate && isMoreThanMaxTime;
   }
 
-  private isDisableYear(year: number): boolean {
-    return (this.minDateTimeDetails && year < this.minDateTimeDetails.year ||
-        this.maxDateTimeDetails && year > this.maxDateTimeDetails.year);
+  private canSelectMinutes(minutes: number) {
+    const pickerDate = this.pickerDate;
+    const minDate = this.minDateInstance;
+    const maxDate = this.maxDateInstance;
+    const minTime = this.minTimeInstance;
+    const maxTime = this.maxTimeInstance;
+
+    const date = Number(
+      pickerDate.getFullYear() +
+      toDouble(pickerDate.getMonth()) +
+      toDouble(pickerDate.getDate()) +
+      toDouble(pickerDate.getHours()) +
+      toDouble(minutes));
+
+    const time = Number(pickerDate.getHours() + toDouble(minutes));
+    const min = Number(minTime.hours + toDouble(minTime.minutes));
+    const max = Number(maxTime.hours + toDouble(maxTime.minutes));
+
+    const lessIsMore = min > max;
+
+    const isLessThanMinDate = minDate ? date >= Number(
+      minDate.getFullYear() +
+      toDouble(minDate.getMonth()) +
+      toDouble(minDate.getDate()) +
+      toDouble(minDate.getHours()) +
+      toDouble(minDate.getMinutes())) : true;
+
+    const isLessThanMinTime = lessIsMore ? (time >= min && time < 2400) : time >= min;
+
+    const isMoreThanMaxDate = maxDate ? date <= Number(
+      maxDate.getFullYear() +
+      toDouble(maxDate.getMonth()) +
+      toDouble(maxDate.getDate()) +
+      toDouble(maxDate.getHours()) +
+      toDouble(maxDate.getMinutes())) : true;
+
+    const isMoreThanMaxTime = lessIsMore ? (time <= max && max >= 0) : time <= max;
+
+    return isLessThanMinDate && isLessThanMinTime && isMoreThanMaxDate && isMoreThanMaxTime;
   }
 
-  // 通过当前时间，计算上一月，当前月，及下一月的天数，并把所有天数添加到天数的集合，以更新显示在日历控件中的数据
-  private setDays() {
-    this.days = [];
-    // 通过当前时间初始化date对象
-    let dateInstance: Date = new Date();
-    dateInstance.setFullYear(this.currentDateTimeDetails.year);
-    dateInstance.setMonth(this.currentDateTimeDetails.month, 1);
-    dateInstance.setHours(0);
-    dateInstance.setMinutes(0);
-    dateInstance.setSeconds(0);
-    dateInstance.setMilliseconds(0);
+  private canSelectHours(hours: number) {
+    const pickerDate = this.pickerDate;
+    const minDate = this.minDateInstance;
+    const maxDate = this.maxDateInstance;
+    const minTime = this.minTimeInstance;
+    const maxTime = this.maxTimeInstance;
 
-    // 拿到当月第一天是星期几
-    let currentMonthStartWeek = dateInstance.getDay();
+    const date = Number(
+      pickerDate.getFullYear() +
+      toDouble(pickerDate.getMonth()) +
+      toDouble(pickerDate.getDate()) +
+      toDouble(hours));
 
-    // 把当前时间设到上一月最后一天，并拿到最后一天的大小
-    dateInstance.setDate(0);
-    let prevMonthDayStartSize = dateInstance.getDate() - currentMonthStartWeek;
+    const lessIsMore = minTime.hours > maxTime.hours;
 
-    // 获取上一月的年月
-    let month = dateInstance.getMonth();
-    let year = dateInstance.getFullYear();
-    // 添加上一月的天数到days数据中
-    for (let i = 0; i < currentMonthStartWeek; i++) {
-      this.days.push({
-        year,
-        month,
-        day: prevMonthDayStartSize + i + 1,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-        timestamp: Date.UTC(year, month, prevMonthDayStartSize + i + 1, 0, 0, 0, 0),
-      });
+    const isLessThanMinDate = minDate ? date >= Number(
+      minDate.getFullYear() +
+      toDouble(minDate.getMonth()) +
+      toDouble(minDate.getDate()) +
+      toDouble(minDate.getHours())
+    ) : true;
+
+    const isLessThanMinTime = lessIsMore ?
+      (hours >= minTime.hours && hours <= 24) :
+      hours >= minTime.hours;
+
+    const isMoreThanMaxDate = maxDate ? date <= Number(
+      maxDate.getFullYear() +
+      toDouble(maxDate.getMonth()) +
+      toDouble(maxDate.getDate()) +
+      toDouble(maxDate.getHours())) : true;
+
+    const isMoreThanMaxTime = lessIsMore ?
+      (hours <= maxTime.hours && hours >= 0) :
+      hours <= maxTime.hours;
+
+    return isLessThanMinDate && isLessThanMinTime && isMoreThanMaxDate && isMoreThanMaxTime;
+  }
+
+  private canSelectDay(day: Date): boolean {
+    const date = Number(day.getFullYear() + toDouble(day.getMonth()) + toDouble(day.getDate()));
+    const minDate = this.minDateInstance;
+    const maxDate = this.maxDateInstance;
+    const a = minDate ?
+      date >= Number(
+      minDate.getFullYear() +
+      toDouble(minDate.getMonth()) +
+      toDouble(minDate.getDate())
+      ) :
+      true;
+    const b = maxDate ?
+      date <= Number(
+      maxDate.getFullYear() +
+      toDouble(maxDate.getMonth()) +
+      toDouble(maxDate.getDate())
+      ) :
+      true;
+
+    return a && b;
+  }
+
+  private canSelectMonth(month: number): boolean {
+    const date = Number(this.pickerDate.getFullYear() + toDouble(month));
+
+    const a = this.minDateInstance ?
+      date >= Number(this.minDateInstance.getFullYear() + toDouble(this.minDateInstance.getMonth())) :
+      true;
+    const b = this.maxDateInstance ?
+      date <= Number(this.maxDateInstance.getFullYear() + toDouble(this.maxDateInstance.getMonth())) :
+      true;
+
+    return a && b;
+  }
+
+  private canSelectYear(year: number): boolean {
+    const a = this.minDateInstance ? year >= this.minDateInstance.getFullYear() : true;
+    const b = this.maxDateInstance ? year <= this.maxDateInstance.getFullYear() : true;
+    return a && b;
+  }
+
+  private getNewDateByTime(oldDate: Date, timeInstance: Time, isLess: boolean): Date {
+    if (!(oldDate instanceof Date)) {
+      return oldDate;
     }
-    // 把上一月的时间设置为1日，防止溢出
-    dateInstance.setDate(1);
-    // 把当前时间设置到下一月
-    dateInstance.setMonth(month + 2);
-    // 把当前时间设置到当月的最后一天，并获取年月，及更新相应数据
-    dateInstance.setDate(0);
-    year = dateInstance.getFullYear();
-    month = dateInstance.getMonth();
-    this.currentDateTimeDetails.year = year;
-    this.currentDateTimeDetails.month = month;
-    let currentMonthLastDayNumber = dateInstance.getDate();
-    // 添加当前月的天数到days数据中
-    for (let i = 0; i < currentMonthLastDayNumber; i++) {
-      this.days.push({
-        year,
-        month,
-        day: i + 1,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-        timestamp: Date.UTC(year, month, i + 1, 0, 0, 0, 0),
-      });
+    const time = Number(timeInstance.hours + toDouble(timeInstance.minutes) + toDouble(timeInstance.seconds));
+    const newDate = new Date();
+    newDate.setTime(oldDate.getTime());
+    const dateTime = Number(newDate.getHours() + toDouble(newDate.getMinutes()) + toDouble(newDate.getSeconds()));
+    if (isLess ? time > dateTime : time < dateTime) {
+      newDate.setHours(timeInstance.hours, timeInstance.minutes, timeInstance.seconds);
     }
-    // 把当月时间设置为1日，防止溢出
-    dateInstance.setDate(1);
-    // 把当前时间设置到下一月，并获取年月
-    dateInstance.setMonth(month + 1);
-    year = dateInstance.getFullYear();
-    month = dateInstance.getMonth();
-    let nextMonthDaysSize = 42 - this.days.length;
-    // 添加下一月的天数到days数据中
-    for (let i = 0; i < nextMonthDaysSize; i++) {
-      this.days.push({
-        year,
-        month,
-        day: i + 1,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-        timestamp: Date.UTC(year, month, i + 1, 0, 0, 0, 0)
-      });
+    return newDate;
+  }
+
+  private insurePickerDateBetweenMinAndMax() {
+    const minDate = this.minDateInstance;
+    const maxDate = this.maxDateInstance;
+
+    if (minDate && maxDate && minDate.getTime() > maxDate.getTime()) {
+      throw new Error('No optional date or time!');
+    }
+
+    const pickerDate = this.pickerDate;
+
+    if (minDate && pickerDate.getTime() < minDate.getTime()) {
+      pickerDate.setTime(minDate.getTime());
+    } else if (maxDate && pickerDate.getTime() > maxDate.getTime()) {
+      pickerDate.setTime(maxDate.getTime());
+    }
+
+    const minTime = this.minTimeInstance;
+    const maxTime = this.maxTimeInstance;
+
+    const min = Number(minTime.hours + toDouble(minTime.minutes) + toDouble(minTime.seconds));
+    const max = Number(maxTime.hours + toDouble(maxTime.minutes) + toDouble(maxTime.seconds));
+    const pickerTime = Number(pickerDate.getHours() +
+      toDouble(pickerDate.getMinutes()) +
+      toDouble(pickerDate.getSeconds()));
+
+    if (pickerTime < min) {
+      pickerDate.setHours(minTime.hours, minTime.minutes, minTime.seconds);
+    } else if (pickerTime > max) {
+      pickerDate.setHours(maxTime.hours, maxTime.minutes, maxTime.seconds);
     }
   }
 }

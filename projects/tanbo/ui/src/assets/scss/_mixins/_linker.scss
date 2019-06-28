@@ -10,17 +10,19 @@
   overflow: hidden;
   padding: 3px $container-horizontal-padding + 5px;
   cursor: pointer;
+  color: inherit;
   &:hover, &.ui-focus {
     background-color: $color-primary;
     color: #fff;
   }
-  &.ui-disabled {
-    background-color: hsla(hue($color-default), saturation($color-default), lightness($color-default), .2);
-    cursor: not-allowed;
-    color: #fff;
-  }
-  &.ui-checked {
+  &:disabled, &.ui-disabled {
     background-color: $color-light;
-    color: inherit;
+    opacity: .5;
+    cursor: not-allowed;
+    color: $color-default;
+  }
+  &.ui-checked, &.ui-active {
+    background-color: $color-light;
+    color: $color-primary;
   }
 }

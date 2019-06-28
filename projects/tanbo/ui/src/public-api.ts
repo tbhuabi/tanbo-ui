@@ -30,7 +30,20 @@ export { BtnGroupComponent } from './lib/forms/btn-group/btn-group.component';
 export { ButtonComponent } from './lib/forms/button/button.component';
 export { CheckboxComponent } from './lib/forms/checkbox/checkbox.component';
 export { DateComponent } from './lib/forms/date/date.component';
-export { TimeDetails, dateStringFormat, timeAnalysisByTimeString, toDouble } from './lib/forms/date/date-utils';
+export {
+  stringToDate,
+  DatePickerModel,
+  toDouble,
+  Time,
+  DateConfig,
+  Year,
+  Month,
+  Day,
+  Minutes,
+  Seconds,
+  Hours,
+  dateFormat
+} from './lib/forms/date/date-utils';
 export { DropdownInputComponent } from './lib/forms/dropdown-input/dropdown-input.component';
 export { EditorComponent } from './lib/forms/editor/editor.component';
 export { FileComponent } from './lib/forms/file/file.component';
@@ -52,7 +65,9 @@ export { EqualValidator } from './lib/forms/equal-validator.directive';
 export { UIFormsModule } from './lib/forms/forms.module';
 export { UI_SELECT_ARROW_CLASSNAME } from './lib/forms/help';
 export { IntegerValidator } from './lib/forms/integer-validator.directive';
-export { RequiredTrueValidator, PickerRequiredValidator, RequiredValidator } from './lib/forms/required-validator.directive';
+export {
+  RequiredTrueValidator, PickerRequiredValidator, RequiredValidator
+}from './lib/forms/required-validator.directive';
 export { SubmitDirective } from './lib/forms/submit.directive';
 export { UIValidators } from './lib/forms/validators';
 /**

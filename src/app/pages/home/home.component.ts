@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  displayFormat = 'yyyy-MM-dd hh:mm:ss';
+  format = 'yyyy-MM-dd hh:mm:ss';
+  minTime = '3:30:12';
+  maxTime = '10:34:34';
+  minDate = '';
+  maxDate = '';
+  value = '';
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    // const date = new Date();
+    // date.setDate(date.getDate() + 2);
+    // this.minDate = date;
   }
 
 }

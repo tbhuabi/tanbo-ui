@@ -11,114 +11,177 @@
           [forId]="forId"
           [size]="size"></ui-dropdown-input>
   <ui-dropdown-menu class="ui-date-dropdown-menu" [position]="position">
-    <div class="ui-date-container" (click)="changeShowType()">
-      <table class="ui-date-table">
-        <tbody class="ui-date-head">
-        <tr>
-          <td colspan="3" [ngClass]="{active: showType === 'year'}">
-            <div class="ui-date-header-content">
-              {{ currentDateTimeDetails.year }}年
-              <span class="ui-date-arrow" uiStopPropagation
-                    (click)="changeShowType('year')"
-                    [ngClass]="{'ui-active': showType==='year', 'ui-icon-arrow2-top': showType === 'year', 'ui-icon-arrow2-bottom': showType !== 'year'}"></span>
-            </div>
-            <div class="ui-date-panel ui-date-panel-year">
-              <div class="ui-date-prev" uiStopPropagation (click)="setYears(years[0].year - 16)">
-                <span class="ui-icon-arrow2-left ui-date-arrow"></span>
-              </div>
-              <div class="ui-date-next"
-                   uiStopPropagation
-                   (click)="setYears(years[years.length-1].year + 1)">
-                <span class="ui-icon-arrow2-right ui-date-arrow"></span>
-              </div>
-              <ul class="ui-date-list ui-clearfix">
-                <li *ngFor="let item of years"
-                    (click)="checkYear(item)"
-                    [ngClass]="{disabled: item.isDisable}">
-                  {{ item.year }}
-                </li>
-              </ul>
-            </div>
-          </td>
-          <td colspan="2" [ngClass]="{active: showType ==='month'}">
-            <div class="ui-date-header-content">
-              {{ currentDateTimeDetails.month + 1 }}月
-              <span class="ui-date-arrow" uiStopPropagation
-                    (click)="changeShowType('month')"
-                    [ngClass]="{'ui-active': showType==='month','ui-icon-arrow2-top': showType === 'month', 'ui-icon-arrow2-bottom': showType !== 'month'}"></span>
-            </div>
-            <div class="ui-date-panel">
-              <ul class="ui-date-list ui-clearfix">
-                <li *ngFor="let item of months"
-                    (click)="setMonth(item)"
-                    [ngClass]="{disabled: item.isDisable}">
-                  {{ item.month + 1 }}月
-                </li>
-              </ul>
-            </div>
-          </td>
-          <td colspan="2">
-            <div class="ui-pull-right ui-date-header-content">
-                <span class="ui-icon-arrow2-left ui-date-arrow"
-                      (click)="setMonth({month: currentDateTimeDetails.month - 1})"></span>
-              <span class="ui-icon-arrow2-right ui-date-arrow"
-                    (click)="setMonth({month: currentDateTimeDetails.month + 1})"></span>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-        <tbody class="ui-date-body ui-date-panel-week">
-        <tr>
-          <td>日</td>
-          <td>一</td>
-          <td>二</td>
-          <td>三</td>
-          <td>四</td>
-          <td>五</td>
-          <td>六</td>
-        </tr>
-        </tbody>
-        <tbody class="ui-date-body ui-date-panel-day">
-        <tr *ngFor="let item of dayList">
-          <td *ngFor="let day of item" (click)="selected(day)"
-              [ngClass]="{
-              'no-current-month': day.month !== currentDateTimeDetails.month,
-              'current-day': day.year === systemDateTimeDetails.year && day.month === systemDateTimeDetails.month && day.day === systemDateTimeDetails.day,
-              'selected-day': day.year === selectedDateTimeDetails.year && day.month === selectedDateTimeDetails.month && day.day === selectedDateTimeDetails.day,
-              'disabled': day.disabled
+    <div class="ui-date-container">
+      <div *ngIf="model !== 'time'">
+        <!-- 日历选择器头部 -->
+        <table class="ui-date-table">
+          <tbody class="ui-date-head">
+          <tr>
+            <td class="ui-text-right">
+              <button type="button"
+                      [style.visibility]="model === 'month' ? 'hidden' : 'visible'"
+                      (click)="model === 'year' ? updateYearsByStart(years[0].year - 32) : toPreviousYear()">&laquo;
+              </button>
+              <button [style.visibility]="model === 'day' ? 'visible' : 'hidden'"
+                      type="button"
+                      (click)="toPrevMonth()">&lsaquo;
+              </button>
+            </td>
+            <td class="ui-text-center">
+              <ng-container *ngIf="config.year">
+                <button type="button"
+                        (click)="switchModel('year')"
+                        [ngClass]="{'ui-active': model==='year'}">
+                  <strong>{{ pickerDate.getFullYear() }}</strong>
+                </button>
+                <span>年</span>
+              </ng-container>
+              <ng-container *ngIf="config.month">
+                <button type="button"
+                        (click)="switchModel('month')"
+                        [ngClass]="{'ui-active': model==='month'}">
+                  <strong>{{ pickerDate.getMonth() + 1 }}</strong>
+                </button>
+                <span>月</span>
+              </ng-container>
+            </td>
+            <td>
+              <button [style.visibility]="model === 'day' ? 'visible' : 'hidden'"
+                      type="button"
+                      (click)="toNextMonth()">&rsaquo;
+              </button>
+              <button type="button"
+                      [style.visibility]="model === 'month' ? 'hidden' : 'visible'"
+                      (click)="model === 'year' ? updateYearsByStart(years[years.length-1].year + 1): toNextYear()">
+                &raquo;
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <!-- 年选择器 -->
+        <div *ngIf="model === 'year'" class="ui-date-years">
+          <ul>
+            <li *ngFor="let item of years">
+              <button class="ui-date-key" type="button"
+                      [disabled]="item.disable"
+                      (click)="updatePickerByYear(item.year)"
+                      [ngClass]="{'ui-active': pickerDate.getFullYear() === item.year}">{{ item.year }}</button>
+            </li>
+          </ul>
+        </div>
+        <!-- 月选择器 -->
+        <div *ngIf="model === 'month'" class="ui-date-mouths">
+          <ul>
+            <li *ngFor="let item of months">
+              <button class="ui-date-key" type="button"
+                      [disabled]="item.disable"
+                      (click)="updatePickerByMonth(item.month)"
+                      [ngClass]="{'ui-active': pickerDate.getMonth() === item.month}">{{ item.month + 1 }}月
+              </button>
+            </li>
+          </ul>
+        </div>
+        <!-- 日选择器 -->
+        <table *ngIf="model === 'day'" class="ui-date-table">
+          <tbody class="ui-date-body ui-date-panel-week">
+          <tr>
+            <td>日</td>
+            <td>一</td>
+            <td>二</td>
+            <td>三</td>
+            <td>四</td>
+            <td>五</td>
+            <td>六</td>
+          </tr>
+          </tbody>
+          <tbody class="ui-date-body ui-date-panel-day">
+          <tr *ngFor="let item of dayGroups">
+            <td *ngFor="let day of item">
+              <button type="button" class="ui-date-key" (click)="updatePickerByDay(day)"
+                      [disabled]="day.disable"
+                      [ngClass]="{
+              'ui-no-current-month': day.date.getMonth() !== pickerDate.getMonth(),
+              'ui-current-day': day.date.getFullYear() === systemDate.getFullYear() && day.date.getMonth() === systemDate.getMonth() && day.day === systemDate.getDate(),
+              'ui-selected-day': day.date.getFullYear() === pickerDate.getFullYear() && day.date.getMonth() === pickerDate.getMonth() && day.day === pickerDate.getDate()
               }">
-            {{ day.day }}
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <div class="ui-date-time-details clearfix" *ngIf="showHMS">
-        <div>
-          <input placeholder="时" type="number"
-                 (input)="testValue(23, 'hours', $event)"
-                 min="0"
-                 max="23"
-                 [(ngModel)]="selectedDateTimeDetails.hours">
+                {{ day.day }}
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 时间选择器 -->
+      <div *ngIf="model === 'time'">
+        <!-- 时间选择器头部 -->
+        <div class="ui-date-time-head">
+          <span *ngIf="config.dateModel">
+            <span *ngIf="config.year"><strong>{{ pickerDate.getFullYear() }}</strong>年</span>
+            <span *ngIf="config.month"><strong>{{ pickerDate.getMonth() + 1 }}</strong>月</span>
+            <span *ngIf="config.day"><strong>{{ pickerDate.getDate() }}</strong>日 </span>
+          </span>
+          <span *ngIf="config.timeModel">
+            <span *ngIf="config.hours"><strong>{{ pickerDate.getHours() }}</strong>时</span>
+            <span *ngIf="config.minutes"><strong>{{ pickerDate.getMinutes() }}</strong>分</span>
+            <span *ngIf="config.seconds"><strong>{{ pickerDate.getSeconds() }}</strong>秒</span>
+          </span>
         </div>
-        <div>
-          <input placeholder="分" type="number"
-                 (input)="testValue(59, 'minutes', $event)"
-                 min="0"
-                 max="59"
-                 [(ngModel)]="selectedDateTimeDetails.minutes">
-        </div>
-        <div>
-          <input placeholder="秒" type="number"
-                 (input)="testValue(59, 'seconds', $event)"
-                 min="0"
-                 max="59"
-                 [(ngModel)]="selectedDateTimeDetails.seconds">
+        <div class="ui-date-time-picker">
+          <!-- 时选择器 -->
+          <div class="ui-date-time-group" *ngIf="config.hours">
+            <div class="ui-date-time-picker-head">时</div>
+            <div #hoursListWrap class="ui-date-time-picker-options">
+              <button [class.ui-active]="pickerDate.getHours() === item.hours"
+                      [disabled]="item.disable"
+                      type="button"
+                      (click)="updatePickerByHours(item.hours)"
+                      *ngFor="let item of hours">{{ item.hours }}</button>
+            </div>
+          </div>
+          <!-- 分选择器 -->
+          <div class="ui-date-time-group" *ngIf="config.minutes">
+            <div class="ui-date-time-picker-head">分</div>
+            <div #minutesListWrap class="ui-date-time-picker-options">
+              <button [class.ui-active]="pickerDate.getMinutes() === item.minutes"
+                      [disabled]="item.disable"
+                      type="button"
+                      (click)="updatePickerByMinutes(item.minutes)"
+                      *ngFor="let item of minutes">{{ item.minutes }}</button>
+            </div>
+          </div>
+          <!-- 秒选择器 -->
+          <div class="ui-date-time-group" *ngIf="config.seconds">
+            <div class="ui-date-time-picker-head">秒</div>
+            <div #secondsListWrap class="ui-date-time-picker-options">
+              <button [class.ui-active]="pickerDate.getSeconds() === item.seconds"
+                      [disabled]="item.disable"
+                      type="button"
+                      (click)="updatePickerBySeconds(item.seconds)"
+                      *ngFor="let item of seconds">{{ item.seconds }}</button>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="ui-date-btn" uiStopPropagation>
-        <button type="button" class="ui-btn ui-btn-primary ui-btn-block ui-btn-sm" [disabled]="!selectedDateTimeDetails.year"
-                (click)="getResult()">确定
-        </button>
+      <div class="ui-date-btn-wrap">
+        <!-- 日历和时间切换 -->
+        <div *ngIf="config.dateModel && config.timeModel">
+          <button *ngIf="model !== 'time'" type="button" (click)="switchModel('time')"
+                  class="ui-btn ui-btn-default ui-btn-block ui-btn-sm">
+            <strong>
+              {{ time }}
+            </strong>
+          </button>
+          <button *ngIf="model === 'time'" type="button" (click)="switchModel(oldModel)"
+                  class="ui-btn ui-btn-default ui-btn-block ui-btn-sm">选择日期
+          </button>
+        </div>
+        <!-- 确认选择结果 -->
+        <div>
+          <button type="button" class="ui-btn ui-btn-primary ui-btn-block ui-btn-sm"
+                  (click)="check()">确定
+          </button>
+        </div>
       </div>
     </div>
   </ui-dropdown-menu>
