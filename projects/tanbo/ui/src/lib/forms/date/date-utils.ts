@@ -1,4 +1,4 @@
-export function toDate(date: string | number | Date, toMax: boolean): Date | null {
+export function toDate(date: string | number | Date, toMax: boolean, format?: string): Date | null {
   if (!date) {
     return null;
   }
@@ -13,17 +13,153 @@ export function toDate(date: string | number | Date, toMax: boolean): Date | nul
   if (typeof date !== 'string') {
     return null;
   }
-  let times: Array<number> = (date.match(/\d+/g) || []).map(item => {
-    return +item;
+  if (!format) {
+    let times: Array<number> = (date.match(/\d+/g) || []).map(item => {
+      return +item;
+    });
+    if (times.length === 3) {
+      times = times.concat(toMax ? [23, 59, 59] : [0, 0, 0]);
+    }
+    if (times.length !== 6) {
+      return null;
+    }
+    times[1] = times[1] - 1;
+    return new Date(times[0], times[1], times[2], times[3], times[4], times[5], 0);
+  }
+
+  const d = new Date();
+
+  format.replace(/[yMdhms]+/g, (str, index) => {
+    let year: number;
+    let month: number;
+    let day: number;
+    let hours: number;
+    let minutes: number;
+    let seconds: number;
+    let next: string;
+    switch (str) {
+      case 'yyyy':
+        year = Number(date.substring(index, 4));
+        if (typeof year === 'number' && year >= 0) {
+          d.setFullYear(year);
+        }
+        break;
+      case 'M':
+        month = Number(date[index]);
+        if (typeof month === 'number' && month > 0) {
+          if (month === 1) {
+            next = date[index + 1];
+            if (next === '0') {
+              month = 10;
+            } else if (next === '1') {
+              month = 11;
+            } else if (next === '2') {
+              month = 12;
+            }
+          }
+          d.setMonth(Number(month) - 1);
+        }
+        break;
+      case 'MM':
+        month = Number(date.substring(index, 2));
+        if (typeof month === 'number' && month >= 1 && month <= 12) {
+          d.setMonth(month);
+        }
+        break;
+      case 'd':
+        day = Number(date[index]);
+        if (typeof day === 'number' && day > 0) {
+          if (day > 3) {
+            d.setDate(day);
+          } else if (day === 3) {
+            next = date[index + 1];
+            if (/[01]/.test(next)) {
+              d.setDate(Number(day + next));
+            } else {
+              d.setDate(3);
+            }
+          } else {
+            if (/\d/.test(date[index + 1])) {
+              day = Number(date.substring(index, 2));
+            }
+            d.setDate(day);
+          }
+        }
+        break;
+      case 'dd':
+        day = Number(date.substring(index, 2));
+        if (typeof day === 'number' && day > 0 && day < 31) {
+          d.setDate(day);
+        }
+        break;
+      case 'h':
+        hours = Number(date[index]);
+        if (typeof hours === 'number' && hours >= 0) {
+          if (hours > 2) {
+            d.setHours(hours);
+          } else if (hours === 2) {
+            next = date[index + 1];
+            if (/[01234]/.test(next)) {
+              d.setHours(Number(hours + next));
+            } else {
+              d.setHours(2);
+            }
+          } else {
+            if (/\d/.test(date[index + 1])) {
+              hours = Number(date.substring(index, 2));
+            }
+            d.setHours(hours);
+          }
+        }
+        break;
+      case 'hh':
+        hours = Number(date.substring(index, 2));
+        if (typeof hours === 'number' && hours >= 0 && hours < 24) {
+          d.setHours(day);
+        }
+        break;
+      case 'm':
+        minutes = Number(date[index]);
+        if (typeof minutes === 'number' && minutes >= 0) {
+          if (minutes > 5) {
+            d.setMinutes(minutes);
+          } else {
+            if (/\d/.test(date[index + 1])) {
+              minutes = Number(date.substring(index, 2));
+            }
+            d.setMinutes(minutes);
+          }
+        }
+        break;
+      case 'mm':
+        minutes = Number(date.substring(index, 2));
+        if (typeof minutes === 'number' && minutes >= 0 && minutes < 60) {
+          d.setMinutes(day);
+        }
+        break;
+      case 's':
+        seconds = Number(date[index]);
+        if (typeof seconds === 'number' && seconds >= 0) {
+          if (seconds > 5) {
+            d.setSeconds(seconds);
+          } else {
+            if (/\d/.test(date[index + 1])) {
+              seconds = Number(date.substring(index, 2));
+            }
+            d.setSeconds(seconds);
+          }
+        }
+        break;
+      case 'ss':
+        seconds = Number(date.substring(index, 2));
+        if (typeof seconds === 'number' && seconds >= 0 && seconds < 60) {
+          d.setSeconds(day);
+        }
+        break;
+    }
+    return str;
   });
-  if (times.length === 3) {
-    times = times.concat(toMax ? [23, 59, 59] : [0, 0, 0]);
-  }
-  if (times.length !== 6) {
-    return null;
-  }
-  times[1] = times[1] - 1;
-  return new Date(times[0], times[1], times[2], times[3], times[4], times[5], 0);
+  return d;
 }
 
 export function toDouble(n: number | string): string {

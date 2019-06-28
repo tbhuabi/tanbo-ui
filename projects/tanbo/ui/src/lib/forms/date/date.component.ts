@@ -93,7 +93,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   config = new DateConfig();
 
   focus = false;
-  open = false;
+  open = true;
 
   minDateInstance: Date;
   maxDateInstance: Date;
@@ -147,7 +147,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
       switch (key) {
         case 'value':
           this.displayValue = dateFormat(this.value, this.displayFormat || this.format);
-          this.pickerDate = toDate(value, false) || new Date();
+          this.pickerDate = toDate(value, false, this.displayFormat || this.format) || new Date();
           this.setupPicker();
           break;
         case 'minDate':
@@ -270,7 +270,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   writeValue(value: any) {
     this.value = value;
     this.displayValue = dateFormat(this.value, this.displayFormat || this.format);
-    this.pickerDate = toDate(value, false) || new Date();
+    this.pickerDate = toDate(value, false, this.displayFormat || this.format) || new Date();
     this.setupPicker();
   }
 

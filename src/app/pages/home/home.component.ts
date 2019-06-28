@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   maxTime = '10:34:34';
   minDate = '2019-6-26';
   maxDate = '';
-  value = '';
+  value = '2019-06-26';
 
   constructor() {
   }
