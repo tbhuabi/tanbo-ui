@@ -145,14 +145,14 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
           this.setupPicker();
           break;
         case 'minTime':
-          this.minTimeInstance.timeString = value;
+          this.minTimeInstance.timeString = value || '00:00:00';
           if (this.minDateInstance) {
             this.minDateInstance = this.getNewDateByTime(this.minDateInstance, this.minTimeInstance, true);
           }
           this.setupPicker();
           break;
         case 'maxTime':
-          this.maxTimeInstance.timeString = value;
+          this.maxTimeInstance.timeString = value || '24:00:00';
           if (this.maxDateInstance) {
             this.maxDateInstance = this.getNewDateByTime(this.maxDateInstance, this.maxTimeInstance, false);
           }
@@ -221,10 +221,14 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
         this.model = 'year';
       } else if (this.config.month) {
         this.model = 'month';
+      } else {
+        this.model = null;
       }
     } else if (this.config.timeModel) {
       this.model = 'time';
       this.timePickerScrollToCenter();
+    } else {
+      this.model = null;
     }
   }
 
@@ -287,7 +291,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
 
   updateYearsByStart(year: number) {
     const a = this.minDateInstance ? year + 32 >= this.minDateInstance.getFullYear() : true;
-    const b = this.maxDateInstance ? year - 32 <= this.maxDateInstance.getFullYear() : true;
+    const b = this.maxDateInstance ? year <= this.maxDateInstance.getFullYear() : true;
     if (a && b) {
       this.startYearIndex = year;
       this.updateYearList();
@@ -622,6 +626,9 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   }
 
   private getNewDateByTime(oldDate: Date, timeInstance: Time, isLess: boolean): Date {
+    if (!(oldDate instanceof Date)) {
+      return oldDate;
+    }
     const time = Number(timeInstance.hours + toDouble(timeInstance.minutes) + toDouble(timeInstance.seconds));
     const newDate = new Date();
     newDate.setTime(oldDate.getTime());
@@ -636,15 +643,15 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
     const minDate = this.minDateInstance;
     const maxDate = this.maxDateInstance;
 
-    if (minDate.getTime() > maxDate.getTime()) {
+    if (minDate && maxDate && minDate.getTime() > maxDate.getTime()) {
       throw new Error('No optional date or time!');
     }
 
     const pickerDate = this.pickerDate;
 
-    if (pickerDate.getTime() < minDate.getTime()) {
+    if (minDate && pickerDate.getTime() < minDate.getTime()) {
       pickerDate.setTime(minDate.getTime());
-    } else if (pickerDate.getTime() > maxDate.getTime()) {
+    } else if (maxDate && pickerDate.getTime() > maxDate.getTime()) {
       pickerDate.setTime(maxDate.getTime());
     }
 

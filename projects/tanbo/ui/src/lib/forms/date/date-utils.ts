@@ -89,7 +89,7 @@ export function dateFormat<T>(date: T, formatString: string): string | T {
 export class Time {
   set timeString(v: string) {
     if (typeof v === 'string') {
-      const time = v.match(/\d{1,2}/g);
+      const time = v.match(/\d{1,2}/g) || [];
       this._hours = this.insure(+time[0] || 0, 0, 24);
       this._minutes = this._hours === 24 ? 0 : this.insure(+time[1] || 0, 0, 59);
       this._seconds = this._hours === 24 ? 0 : this.insure(+time[2] || 0, 0, 59);
