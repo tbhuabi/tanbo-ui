@@ -326,6 +326,11 @@ export class DateConfig {
   get timeModel() {
     return this.hours || this.minutes || this.seconds;
   }
+
+  constructor(format: string) {
+    this.formatString = format;
+  }
+
 }
 
 export interface Year {

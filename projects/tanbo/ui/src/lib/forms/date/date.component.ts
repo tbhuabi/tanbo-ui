@@ -90,7 +90,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
     return result.join(':');
   }
 
-  config = new DateConfig();
+  config = new DateConfig(this.format);
 
   focus = false;
   open = false;
@@ -145,6 +145,9 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
       const value = changes[key].currentValue;
       switch (key) {
         case 'value':
+          if (value === undefined || value === null) {
+            this.value = '';
+          }
           this.displayValue = dateFormat(this.value, this.displayFormat || this.format);
           this.pickerDate = toDate(value, false, this.displayFormat || this.format) || new Date();
           this.setupPicker();
@@ -275,6 +278,9 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   }
 
   writeValue(value: any) {
+    if (value === undefined || value === null) {
+      value = '';
+    }
     this.value = value;
     this.displayValue = dateFormat(this.value, this.displayFormat || this.format);
     this.pickerDate = toDate(value, false, this.displayFormat || this.format) || new Date();
