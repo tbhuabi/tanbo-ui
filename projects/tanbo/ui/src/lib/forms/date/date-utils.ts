@@ -37,119 +37,154 @@ export function toDate(date: string | number | Date, toMax: boolean, format?: st
     let minutes: number;
     let seconds: number;
     let next: string;
+    let segment: string;
     switch (str) {
       case 'yyyy':
-        year = Number(date.substring(index, 4));
-        if (typeof year === 'number' && year >= 0) {
-          d.setFullYear(year);
+        segment = date.slice(index, index + 4);
+        if (segment) {
+          year = Number(segment);
+          if (typeof year === 'number' && year >= 0) {
+            d.setFullYear(year);
+          }
         }
+
         break;
       case 'M':
-        month = Number(date[index]);
-        if (typeof month === 'number' && month > 0) {
-          if (month === 1) {
-            next = date[index + 1];
-            if (/[012]/.test(next)) {
-              month = Number(date.substring(index, 2));
+        segment = date[index];
+        if (segment) {
+          month = Number(segment);
+          if (typeof month === 'number' && month > 0) {
+            if (month === 1) {
+              next = date[index + 1];
+              if (/[012]/.test(next)) {
+                month = Number(date.slice(index, index + 2));
+              }
             }
+            d.setMonth(Number(month) - 1);
           }
-          d.setMonth(Number(month) - 1);
         }
         break;
       case 'MM':
-        month = Number(date.substring(index, 2));
-        if (typeof month === 'number' && month >= 1 && month <= 12) {
-          d.setMonth(month);
+        segment = date.slice(index, index + 2);
+        if (segment) {
+          month = Number(segment);
+          if (typeof month === 'number' && month >= 1 && month <= 12) {
+            d.setMonth(month);
+          }
         }
         break;
       case 'd':
-        day = Number(date[index]);
-        if (typeof day === 'number' && day > 0) {
-          if (day > 3) {
-            d.setDate(day);
-          } else if (day === 3) {
-            next = date[index + 1];
-            if (/[01]/.test(next)) {
-              d.setDate(Number(day + next));
+        segment = date[index];
+        if (segment) {
+          day = Number(segment);
+          if (typeof day === 'number' && day > 0) {
+            if (day > 3) {
+              d.setDate(day);
+            } else if (day === 3) {
+              next = date[index + 1];
+              if (/[01]/.test(next)) {
+                d.setDate(Number(day + next));
+              } else {
+                d.setDate(3);
+              }
             } else {
-              d.setDate(3);
+              if (/\d/.test(date[index + 1])) {
+                day = Number(date.slice(index, index + 2));
+              }
+              d.setDate(day);
             }
-          } else {
-            if (/\d/.test(date[index + 1])) {
-              day = Number(date.substring(index, 2));
-            }
-            d.setDate(day);
           }
         }
         break;
       case 'dd':
-        day = Number(date.substring(index, 2));
-        if (typeof day === 'number' && day > 0 && day < 31) {
-          d.setDate(day);
+        segment = date.slice(index, index + 2);
+        if (segment) {
+          day = Number(segment);
+          if (typeof day === 'number' && day > 0 && day < 31) {
+            d.setDate(day);
+          }
         }
         break;
       case 'h':
-        hours = Number(date[index]);
-        if (typeof hours === 'number' && hours >= 0) {
-          if (hours > 2) {
-            d.setHours(hours);
-          } else if (hours === 2) {
-            next = date[index + 1];
-            if (/[01234]/.test(next)) {
-              d.setHours(Number(hours + next));
+        segment = date[index];
+        if (segment) {
+          hours = Number(segment);
+          if (typeof hours === 'number' && hours >= 0) {
+            if (hours > 2) {
+              d.setHours(hours);
+            } else if (hours === 2) {
+              next = date[index + 1];
+              if (/[01234]/.test(next)) {
+                d.setHours(Number(hours + next));
+              } else {
+                d.setHours(2);
+              }
             } else {
-              d.setHours(2);
+              if (/\d/.test(date[index + 1])) {
+                hours = Number(date.slice(index, index + 2));
+              }
+              d.setHours(hours);
             }
-          } else {
-            if (/\d/.test(date[index + 1])) {
-              hours = Number(date.substring(index, 2));
-            }
-            d.setHours(hours);
           }
         }
         break;
       case 'hh':
-        hours = Number(date.substring(index, 2));
-        if (typeof hours === 'number' && hours >= 0 && hours < 24) {
-          d.setHours(day);
+        segment = date.slice(index, index + 2);
+        if (segment) {
+          hours = Number(segment);
+          if (typeof hours === 'number' && hours >= 0 && hours < 24) {
+            d.setHours(day);
+          }
         }
         break;
       case 'm':
-        minutes = Number(date[index]);
-        if (typeof minutes === 'number' && minutes >= 0) {
-          if (minutes > 5) {
-            d.setMinutes(minutes);
-          } else {
-            if (/\d/.test(date[index + 1])) {
-              minutes = Number(date.substring(index, 2));
+        segment = date[index];
+        if (segment) {
+          minutes = Number(segment);
+          if (typeof minutes === 'number' && minutes >= 0) {
+            if (minutes > 5) {
+              d.setMinutes(minutes);
+            } else {
+              if (/\d/.test(date[index + 1])) {
+                minutes = Number(date.slice(index, index + 2));
+              }
+              d.setMinutes(minutes);
             }
-            d.setMinutes(minutes);
           }
         }
         break;
       case 'mm':
-        minutes = Number(date.substring(index, 2));
-        if (typeof minutes === 'number' && minutes >= 0 && minutes < 60) {
-          d.setMinutes(day);
+        segment = date.slice(index, index + 2);
+        if (segment) {
+          minutes = Number(segment);
+          if (typeof minutes === 'number' && minutes >= 0 && minutes < 60) {
+            d.setMinutes(day);
+          }
         }
         break;
       case 's':
-        seconds = Number(date[index]);
-        if (typeof seconds === 'number' && seconds >= 0) {
-          if (seconds > 5) {
-            d.setSeconds(seconds);
-          } else {
-            if (/\d/.test(date[index + 1])) {
-              seconds = Number(date.substring(index, 2));
+        segment = date[index];
+        if (segment) {
+          seconds = Number(segment);
+          if (typeof seconds === 'number' && seconds >= 0) {
+            if (seconds > 5) {
+              d.setSeconds(seconds);
+            } else {
+              if (/\d/.test(date[index + 1])) {
+                seconds = Number(date.slice(index, index + 2));
+              }
+              d.setSeconds(seconds);
             }
-            d.setSeconds(seconds);
           }
         }
         break;
       case 'ss':
-        seconds = Number(date.substring(index, 2));
-        if (typeof seconds === 'number' && seconds >= 0 && seconds < 60) {
-          d.setSeconds(day);
+        segment = date.slice(index, index + 2);
+        if (segment) {
+          seconds = Number(segment);
+          if (typeof seconds === 'number' && seconds >= 0 && seconds < 60) {
+            d.setSeconds(day);
+          }
         }
         break;
     }
