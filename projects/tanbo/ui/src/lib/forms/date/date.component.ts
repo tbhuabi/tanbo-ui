@@ -294,12 +294,10 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   }
 
   toPreviousYear() {
-    this.startYearIndex = this.pickerDate.getFullYear() - this.pickerDate.getFullYear() % 32;
     this.updatePickerByYear(this.pickerDate.getFullYear() - 1);
   }
 
   toNextYear() {
-    this.startYearIndex = this.pickerDate.getFullYear() - this.pickerDate.getFullYear() % 32;
     this.updatePickerByYear(this.pickerDate.getFullYear() + 1);
   }
 
@@ -323,6 +321,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   updatePickerByYear(year: number) {
     const month = this.pickerDate.getMonth();
     this.pickerDate.setFullYear(year);
+    this.startYearIndex = year - year % 32;
 
     const newMonth = this.pickerDate.getMonth();
     if (newMonth > month) {
@@ -339,6 +338,8 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
     const day = this.pickerDate.getDate();
 
     this.pickerDate.setMonth(month + 1, 0);
+
+    this.startYearIndex = this.pickerDate.getFullYear() - this.pickerDate.getFullYear() % 32;
 
     if (day < this.pickerDate.getDate()) {
       this.pickerDate.setDate(day);
