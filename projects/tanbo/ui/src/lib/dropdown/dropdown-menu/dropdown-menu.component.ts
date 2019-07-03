@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'ui-dropdown-menu',
@@ -11,5 +11,8 @@ import { Component, Input } from '@angular/core';
   }
 })
 export class DropdownMenuComponent {
-  @Input() position = 'bottomLeft';
+  position = 'bottomLeft';
+
+  constructor(public elementRef: ElementRef) {
+  }
 }

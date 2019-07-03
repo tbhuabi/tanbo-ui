@@ -44,7 +44,6 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   @ViewChild('minutesListWrap', {static: false, read: ElementRef}) minutesListWrap: ElementRef<HTMLDivElement>;
   @ViewChild('secondsListWrap', {static: false, read: ElementRef}) secondsListWrap: ElementRef<HTMLDivElement>;
   @Output() uiChange = new EventEmitter<string | number>();
-  @Input() position = 'bottomLeft';
   @Input() size = '';
   @Input() placeholder = '';
   @Input() forId: string;
