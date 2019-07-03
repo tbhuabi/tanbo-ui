@@ -39,13 +39,13 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
     return this.top + this.scrollY;
   }
 
-  position: string = 'topCenter';
+  position = 'topCenter';
 
-  private left: number = 0;
-  private top: number = 0;
+  private left = 0;
+  private top = 0;
 
-  private scrollX: number = 0;
-  private scrollY: number = 0;
+  private scrollX = 0;
+  private scrollY = 0;
 
   private unbindFn: () => any;
 
