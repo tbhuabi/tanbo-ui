@@ -31,7 +31,7 @@ ui-input[type=radio] {
   @include checkbox-style(success, $color-success);
   @include checkbox-style(danger, $color-danger);
 
-  &[disabled], &[readonly], &.ui-disabled, &.ui-readonly {
+  &[disabled], &.ui-disabled {
     opacity: .5;
     cursor: not-allowed;
   }
