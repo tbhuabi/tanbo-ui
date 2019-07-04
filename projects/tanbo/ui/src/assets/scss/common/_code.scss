@@ -2,18 +2,20 @@
 
 code, pre {
   background-color: #f6f8fa;
-
 }
 
 pre code {
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  vertical-align: inherit;
 }
 
 code {
-  padding-left: 4px;
-  padding-right: 4px;
+  padding: 1px 5px;
   border-radius: 3px;
+  border: 1px solid $color-light;
+  vertical-align: middle;
 }
 
 pre {

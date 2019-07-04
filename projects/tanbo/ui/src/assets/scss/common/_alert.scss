@@ -1,0 +1,33 @@
+@mixin alert-theme($name, $color) {
+  &.ui-alert-#{$name} {
+    border-color: rgba(red($color), green($color), blue($color), .3);
+    background-color: rgba(red($color), green($color), blue($color), .15);
+    &.ui-alert-fill {
+      color: #fff;
+      background-color: $color;
+    }
+  }
+}
+
+.ui-alert {
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: 1px solid $color-light;
+  background-color: $color-lighter;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  @include alert-theme(default, $color-default);
+  @include alert-theme(primary, $color-primary);
+  @include alert-theme(success, $color-success);
+  @include alert-theme(info, $color-info);
+  @include alert-theme(warning, $color-warning);
+  @include alert-theme(danger, $color-danger);
+  @include alert-theme(dark, $color-dark);
+  @include alert-theme(gray, $color-gray);
+
+  .ui-close {
+    padding: 0;
+    margin-top: -2px;
+  }
+}
