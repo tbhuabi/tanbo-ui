@@ -191,6 +191,9 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   }
 
   setupPicker() {
+    if (!this.value) {
+      this.insurePickerDateBetweenMinAndMax();
+    }
     this.systemDate = new Date();
     this.startYearIndex = this.pickerDate.getFullYear() - this.pickerDate.getFullYear() % 32;
     this.update();
