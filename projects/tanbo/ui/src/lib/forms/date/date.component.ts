@@ -402,18 +402,14 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
       const h = this.pickerDate.getHours();
       const m = this.pickerDate.getMinutes();
       const s = this.pickerDate.getSeconds();
-      const options: ScrollIntoViewOptions = {
-        block: 'center',
-        behavior: 'auto'
-      };
       if (this.hoursListWrap) {
-        this.hoursListWrap.nativeElement.children[h].scrollIntoView(options);
+        this.hoursListWrap.nativeElement.scrollTop = (h - 3) * 25;
       }
       if (this.minutesListWrap) {
-        this.minutesListWrap.nativeElement.children[m].scrollIntoView(options);
+        this.minutesListWrap.nativeElement.scrollTop = (m - 3) * 25;
       }
       if (this.secondsListWrap) {
-        this.secondsListWrap.nativeElement.children[s].scrollIntoView(options);
+        this.secondsListWrap.nativeElement.scrollTop = (s - 3) * 25;
       }
     });
   }
