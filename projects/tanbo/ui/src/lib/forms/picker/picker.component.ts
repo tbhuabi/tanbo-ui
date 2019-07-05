@@ -3,7 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { from, Subscription, Observable } from 'rxjs';
 
 import { attrToBoolean } from '../../utils';
-import { UI_SELECT_ARROW_CLASSNAME } from '../help';
+import { UI_DROPDOWN_ARROW_CLASSNAME } from '../../dropdown/help';
 import { PickerCell } from './picker-help';
 
 @Component({
@@ -82,7 +82,7 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   private onTouched: () => any;
   private sub: Subscription;
 
-  constructor(@Inject(UI_SELECT_ARROW_CLASSNAME) arrowIcon: string) {
+  constructor(@Inject(UI_DROPDOWN_ARROW_CLASSNAME) arrowIcon: string) {
     this.arrowIconClassName = arrowIcon;
   }
 

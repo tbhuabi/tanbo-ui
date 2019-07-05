@@ -21,8 +21,10 @@ export { UICropperModule } from './lib/cropper/cropper.module';
  * 下拉框
  */
 export { DropdownComponent } from './lib/dropdown/dropdown/dropdown.component';
+export { DropdownInputComponent } from './lib/dropdown/dropdown-input/dropdown-input.component';
 export { DropdownMenuComponent } from './lib/dropdown/dropdown-menu/dropdown-menu.component';
 export { UIDropdownModule } from './lib/dropdown/dropdown.module';
+export { UI_DROPDOWN_ARROW_CLASSNAME } from './lib/dropdown/help';
 /**
  * 表单
  */
@@ -44,7 +46,6 @@ export {
   Hours,
   dateFormat
 } from './lib/forms/date/date-utils';
-export { DropdownInputComponent } from './lib/forms/dropdown-input/dropdown-input.component';
 export { EditorComponent } from './lib/forms/editor/editor.component';
 export { FileComponent } from './lib/forms/file/file.component';
 export { InputDirective } from './lib/forms/input/input.directive';
@@ -63,7 +64,6 @@ export { SelectService } from './lib/forms/select/select.service';
 export { SwitchComponent } from './lib/forms/switch/switch.component';
 export { EqualValidator } from './lib/forms/equal-validator.directive';
 export { UIFormsModule } from './lib/forms/forms.module';
-export { UI_SELECT_ARROW_CLASSNAME } from './lib/forms/help';
 export { IntegerValidator } from './lib/forms/integer-validator.directive';
 export {
   RequiredTrueValidator, PickerRequiredValidator, RequiredValidator

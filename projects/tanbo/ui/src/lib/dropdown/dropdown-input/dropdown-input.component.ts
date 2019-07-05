@@ -2,7 +2,7 @@ import { Component, Input, Inject, Output, EventEmitter, HostListener, ElementRe
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ENTER, TAB } from '@angular/cdk/keycodes';
 
-import { UI_SELECT_ARROW_CLASSNAME } from '../help';
+import { UI_DROPDOWN_ARROW_CLASSNAME } from '../help';
 import { attrToBoolean } from '../../utils';
 
 @Component({
@@ -45,12 +45,12 @@ export class DropdownInputComponent implements ControlValueAccessor {
 
   @Output() uiClean = new EventEmitter<any>();
 
-  private _disabled: boolean = false;
-  private _readonly: boolean = false;
+  private _disabled = false;
+  private _readonly = false;
   private onChange: (_: any) => any;
   private onTouched: () => any;
 
-  constructor(@Inject(UI_SELECT_ARROW_CLASSNAME) arrowIcon: string,
+  constructor(@Inject(UI_DROPDOWN_ARROW_CLASSNAME) arrowIcon: string,
               private elementRef: ElementRef) {
     this.arrowIconClassName = arrowIcon;
   }

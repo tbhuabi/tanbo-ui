@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { UI_SELECT_ARROW_CLASSNAME } from '../help';
+import { UI_DROPDOWN_ARROW_CLASSNAME } from '../../dropdown/help';
 import {
   toDate,
   dateFormat,
@@ -122,7 +122,7 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
 
   private animateId: number;
 
-  constructor(@Inject(UI_SELECT_ARROW_CLASSNAME) arrowIcon: string) {
+  constructor(@Inject(UI_DROPDOWN_ARROW_CLASSNAME) arrowIcon: string) {
     this.arrowIconClassName = arrowIcon;
     this.hours = Array.from({length: 24}).map((_, h) => {
       return {hours: h, disable: true};

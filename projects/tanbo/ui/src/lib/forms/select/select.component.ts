@@ -4,7 +4,6 @@ import {
   AfterViewInit,
   Component,
   ContentChildren,
-  HostListener,
   EventEmitter,
   Input,
   OnDestroy,
@@ -18,10 +17,10 @@ import { BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { DropdownInputComponent } from '../dropdown-input/dropdown-input.component';
+import { DropdownInputComponent } from '../../dropdown/dropdown-input/dropdown-input.component';
+import { UI_DROPDOWN_ARROW_CLASSNAME } from '../../dropdown/help';
 import { OptionComponent } from '../option/option.component';
 import { SelectService } from './select.service';
-import { UI_SELECT_ARROW_CLASSNAME } from '../help';
 import { attrToBoolean } from '../../utils';
 
 @Component({
@@ -39,12 +38,12 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   options: QueryList<OptionComponent>;
   @ViewChild('dropdownInput', {static: true}) dropdownInput: DropdownInputComponent;
   @Input() position = 'bottomLeft';
-  @Input() size: string = '';
+  @Input() size = '';
   @Input() forId: string;
   @Input() name: string;
-  @Input() placeholder: string = '';
-  @Input() selectedIndex: number = 0;
-  @Input() arrowIconClassName: string = '';
+  @Input() placeholder = '';
+  @Input() selectedIndex = 0;
+  @Input() arrowIconClassName = '';
 
   @Input()
   set disabled(isDisabled: any) {
@@ -65,20 +64,20 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   }
 
   @Output() uiChange = new EventEmitter<string>();
-  focus: boolean = false;
-  open: boolean = false;
-  text: string = '';
-  private _disabled: boolean = false;
-  private _readonly: boolean = false;
+  focus = false;
+  open = false;
+  text = '';
+  private _disabled = false;
+  private _readonly = false;
 
-  private value: string = '';
+  private value = '';
   private onChange: (_: any) => any;
   private onTouched: () => any;
   private subs: Array<Subscription> = [];
 
   private selectedOption: OptionComponent;
   private temporaryOption: OptionComponent;
-  private isWrite: boolean = false;
+  private isWrite = false;
 
   static getTextByElement(element: HTMLElement): string {
     if (element) {
@@ -87,7 +86,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     return '';
   }
 
-  constructor(@Inject(UI_SELECT_ARROW_CLASSNAME) arrowIcon: string,
+  constructor(@Inject(UI_DROPDOWN_ARROW_CLASSNAME) arrowIcon: string,
               private selectService: SelectService,
               private changeDetectorRef: ChangeDetectorRef) {
     this.arrowIconClassName = arrowIcon;

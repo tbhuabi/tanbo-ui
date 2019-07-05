@@ -9,7 +9,6 @@ import { BtnGroupComponent } from './btn-group/btn-group.component';
 import { ButtonComponent } from './button/button.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { DateComponent } from './date/date.component';
-import { DropdownInputComponent } from './dropdown-input/dropdown-input.component';
 import { EditorComponent } from './editor/editor.component';
 import { MarkdownEditorComponent } from './markdown-editor/markdown-editor.component';
 import { FileComponent } from './file/file.component';
@@ -34,7 +33,6 @@ import {
 import { SubmitDirective } from './submit.directive';
 
 import { RadioStateService } from './radio/radio-state.service';
-import { UI_SELECT_ARROW_CLASSNAME } from './help';
 
 @NgModule({
   imports: [
@@ -48,7 +46,6 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     ButtonComponent,
     CheckboxComponent,
     DateComponent,
-    DropdownInputComponent,
     EditorComponent,
     FileComponent,
     InputDirective,
@@ -75,7 +72,6 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     ButtonComponent,
     CheckboxComponent,
     DateComponent,
-    DropdownInputComponent,
     EditorComponent,
     FileComponent,
     InputDirective,
@@ -98,10 +94,7 @@ import { UI_SELECT_ARROW_CLASSNAME } from './help';
     PickerRequiredValidator
   ],
   providers: [
-    RadioStateService, {
-      provide: UI_SELECT_ARROW_CLASSNAME,
-      useValue: 'ui-caret'
-    }
+    RadioStateService
   ]
 })
 export class UIFormsModule {
