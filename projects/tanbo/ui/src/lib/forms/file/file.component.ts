@@ -51,6 +51,7 @@ export class FileComponent {
 
   isShowLoading = false;
   progress = 0;
+  refreshState = true;
 
   @HostBinding('class.ui-focus')
   focus = false;
@@ -139,11 +140,20 @@ export class FileComponent {
     })).subscribe(response => {
       this.progress = 100;
       this.isShowLoading = false;
+      this.refresh();
       this.uiUploaded.emit(response);
     }, error => {
       this.progress = 0;
       this.isShowLoading = false;
+      this.refresh();
       this.uiUploadError.emit(error);
+    });
+  }
+
+  private refresh() {
+    this.refreshState = false;
+    Promise.resolve().then(() => {
+      this.refreshState = true;
     });
   }
 }
