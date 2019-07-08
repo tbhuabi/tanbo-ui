@@ -20,7 +20,7 @@ export class FileComponent {
   @Input() name: string;
   @Input() forId: string;
   @Input() accept: string;
-  @Input() uploader: (data: FormData) => HttpRequest<any> | Observable<HttpEvent<any>>;
+  @Input() uploader: (data: FormData) => (HttpRequest<any> | Observable<HttpEvent<any>>);
 
   @Input()
   set multiple(v: any) {

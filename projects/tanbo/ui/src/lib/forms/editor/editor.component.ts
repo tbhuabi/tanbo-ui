@@ -1,4 +1,15 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import Quill from 'quill';
 import { ImageResize } from 'quill-image-resize';
@@ -13,13 +24,13 @@ import { Observable, Subscription } from 'rxjs';
     multi: true
   }]
 })
-export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
+export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('editor', {static: true}) editorRef: ElementRef;
   @Input() value = '';
   @Input() placeholder = '请输入内容！';
   @Input() name = '';
   @Input() forId = '';
-  @Input() imageUploader: Observable<string>;
+  @Input() imageUploader: () => (string | Promise<string> | Observable<string>);
   @Output() uiChange = new EventEmitter<string>();
 
   private editor: Quill;
@@ -27,6 +38,8 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnD
   private onTouched: () => any;
 
   private sub: Subscription;
+  private defaultImageUploadHandler: () => void;
+  private toolbar: any;
 
   ngAfterViewInit() {
     const emptyArr: string[] = [];
@@ -35,18 +48,18 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnD
       'KaiTi', 'FangSong', 'Arial', 'Times-New-Roman'
     ];
     const toolbarOptions = [
-      [{'header': [1, 2, 3, 4, 5, 6, false]}],
+      [{header: [1, 2, 3, 4, 5, 6, false]}],
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
       ['blockquote', 'code-block'],
 
-      [{'list': 'ordered'}, {'list': 'bullet'}],
-      [{'script': 'sub'}, {'script': 'super'}],      // superscript/subscript
+      [{list: 'ordered'}, {list: 'bullet'}],
+      [{script: 'sub'}, {script: 'super'}],      // superscript/subscript
       // [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
       // [{'direction': 'rtl'}],                         // text direction
 
-      [{'color': emptyArr}, {'background': emptyArr}],          // dropdown with defaults from theme
-      [{'font': fonts}],
-      [{'align': emptyArr}],
+      [{color: emptyArr}, {background: emptyArr}],          // dropdown with defaults from theme
+      [{font: fonts}],
+      [{align: emptyArr}],
       // ['image', 'video'],
       ['link', 'image'],
       ['clean']                                         // remove formatting button
@@ -65,20 +78,9 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnD
       theme: 'snow'  // or 'bubble'
     });
 
-    if (this.imageUploader) {
-      const toolbar = this.editor.getModule('toolbar');
-      toolbar.addHandler('image', () => {
-        if (this.sub) {
-          this.sub.unsubscribe();
-        }
-        this.sub = this.imageUploader.subscribe(imgUrl => {
-          const range = this.editor.getSelection();
-          if (range) {
-            this.editor.insertEmbed(range.index, 'image', imgUrl);
-          }
-        });
-      });
-    }
+    this.toolbar = this.editor.getModule('toolbar');
+    this.defaultImageUploadHandler = this.toolbar.handlers.image;
+    this.bindImageHandler();
 
     if (this.value !== null && this.value !== undefined) {
       this.writeValue(this.value + '');
@@ -100,10 +102,56 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnD
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.editor) {
+      return;
+    }
+    Object.keys(changes).forEach(key => {
+      if (key === 'imageUploader') {
+        this.bindImageHandler();
+      } else if (key === 'value') {
+        this.value = changes[key].currentValue;
+        this.editor.root.innerHTML = changes[key].currentValue;
+      }
+    });
+  }
+
   ngOnDestroy() {
     if (this.sub) {
       this.sub.unsubscribe();
     }
+  }
+
+  bindImageHandler() {
+    const imageUploader = this.imageUploader;
+    if (typeof imageUploader === 'function') {
+      this.toolbar.addHandler('image', () => {
+        if (this.sub) {
+          this.sub.unsubscribe();
+        }
+        const result = imageUploader();
+        if (typeof result === 'string') {
+          const range = this.editor.getSelection();
+          if (range) {
+            this.editor.insertEmbed(range.index, 'image', result);
+          }
+        } else if (result instanceof Promise) {
+          result.then(imageUrl => {
+            const range = this.editor.getSelection();
+            this.editor.insertEmbed(range.index, 'image', imageUrl);
+          });
+        } else if (result instanceof Observable) {
+          this.sub = result.subscribe(imageUrl => {
+            this.sub.unsubscribe();
+            const range = this.editor.getSelection();
+            this.editor.insertEmbed(range.index, 'image', imageUrl);
+          });
+        }
+      });
+    } else {
+      this.toolbar.addHandler('image', this.defaultImageUploadHandler);
+    }
+
   }
 
   focus() {

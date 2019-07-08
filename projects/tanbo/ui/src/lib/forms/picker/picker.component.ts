@@ -24,7 +24,7 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   @Input() format = ',';
   @Input() displayFormat = '/';
   /*tslint:disable*/
-  @Input() dataProvide: (cell: PickerCell) => null | PickerCell[] | Promise<null | PickerCell[]> | Observable<null | PickerCell[]>;
+  @Input() dataProvide: (cell: PickerCell) => (PickerCell[] | Promise<PickerCell[]> | Observable<PickerCell[]>);
 
   /*tslint:enable*/
   @Input()
