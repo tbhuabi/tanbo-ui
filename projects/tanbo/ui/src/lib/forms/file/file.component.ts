@@ -152,7 +152,7 @@ export class FileComponent {
 
   private refresh() {
     this.refreshState = false;
-    Promise.resolve().then(() => {
+    setTimeout(() => {
       this.refreshState = true;
     });
   }

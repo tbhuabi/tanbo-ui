@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpRequest } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,12 @@ export class HomeComponent implements OnInit {
     // const date = new Date();
     // date.setDate(date.getDate() + 2);
     // this.minDate = date;
+  }
+
+  upload(data: FormData) {
+    return new HttpRequest('POST', '/upload/api', data, {
+      reportProgress: true
+    });
   }
 
 }

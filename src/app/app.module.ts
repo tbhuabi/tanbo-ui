@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { DetailComponent } from './pages/detail/detail.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DetailComponent } from './pages/detail/detail.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     UIModule.forRoot(),
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
