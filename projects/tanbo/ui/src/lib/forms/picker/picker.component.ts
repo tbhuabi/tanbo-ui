@@ -16,7 +16,6 @@ import { PickerCell } from './picker-help';
   }]
 })
 export class PickerComponent implements OnDestroy, ControlValueAccessor {
-  @Input() position = 'bottomLeft';
   @Input() size = '';
   @Input() forId: string;
   @Input() name: string;

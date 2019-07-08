@@ -37,7 +37,6 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   @ContentChildren(OptionComponent)
   options: QueryList<OptionComponent>;
   @ViewChild('dropdownInput', {static: true}) dropdownInput: DropdownInputComponent;
-  @Input() position = 'bottomLeft';
   @Input() size = '';
   @Input() forId: string;
   @Input() name: string;
