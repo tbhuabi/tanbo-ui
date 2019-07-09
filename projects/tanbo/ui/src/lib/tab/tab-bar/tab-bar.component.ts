@@ -26,7 +26,7 @@ export class TabBarComponent implements OnDestroy, AfterContentInit {
     }
   }
 
-  get tagIndex() {
+  get tabIndex() {
     return this._tabIndex;
   }
 
