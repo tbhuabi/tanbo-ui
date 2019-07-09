@@ -20,17 +20,42 @@ export function treeDepthFactory(depth: number) {
   host: {
     '[@treeAnimation]': 'expand ? "open" : "close"'
   },
-  animations: [trigger('treeAnimation', [state('open', style({
-    height: '*',
-    opacity: 1,
-    overflow: 'visible'
-  })), state('close', style({
-    height: 0,
-    opacity: 0.5,
-    paddingTop: 0,
-    paddingBottom: 0,
-    overflow: 'hidden'
-  })), transition('open <=> close', animate(150))])]
+  animations: [
+    trigger('treeAnimation', [
+        state('open', style({
+          height: '*',
+          opacity: 1,
+          overflow: 'visible'
+        })),
+        state('close', style({
+          height: 0,
+          opacity: 0.5,
+          overflow: 'hidden'
+        })),
+        transition('open <=> close', animate(150)),
+        transition(':enter', [
+          style({
+            height: 0,
+            opacity: 0.5,
+            overflow: 'hidden'
+          }),
+          animate(150, style({
+              height: '*',
+              opacity: 1,
+              overflow: 'visible'
+            })
+          )
+        ]),
+        transition(':leave', [
+          animate(150, style({
+              height: '*',
+              opacity: 1,
+              overflow: 'visible'
+            })
+          )
+        ])
+      ]
+    )]
 })
 export class TreeComponent implements OnDestroy, OnInit {
   @Input() depth = 0;

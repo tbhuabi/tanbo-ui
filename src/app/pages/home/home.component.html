@@ -1,25 +1,15 @@
-<ui-tree>
-  <ui-tree-item>
-    <ui-tree-inner>文本一</ui-tree-inner>
-  </ui-tree-item>
-  <ui-tree-item>
-    <ui-tree-inner>文本二</ui-tree-inner>
-  </ui-tree-item>
-  <ui-tree-item>
-    <ui-tree-inner>
-      <ui-tree-expand></ui-tree-expand>
-      文本三
-    </ui-tree-inner>
-    <ui-tree>
-      <ui-tree-item>
-        <ui-tree-inner>文本a</ui-tree-inner>
-      </ui-tree-item>
-      <ui-tree-item>
-        <ui-tree-inner>文本b</ui-tree-inner>
-      </ui-tree-item>
-      <ui-tree-item>
-        <ui-tree-inner>文本c</ui-tree-inner>
-      </ui-tree-item>
-    </ui-tree>
-  </ui-tree-item>
-</ui-tree>
+<ng-container [ngTemplateOutlet]="tree" [ngTemplateOutletContext]="{nodes: treeList, depth: 0, expand: true}">
+</ng-container>
+
+<ng-template #tree let-nodes="nodes" let-depth="depth" let-expand="expand">
+  <ui-tree [expand]="expand" [depth]="depth">
+    <ui-tree-item *ngFor="let item of nodes">
+      <ui-tree-inner [depth]="depth">
+        <ui-tree-expand [class.ui-hidden]="!item.hasChildren" #treeExpand (click)="getChildren(item)"></ui-tree-expand> {{ item.label }}
+      </ui-tree-inner>
+      <ng-container *ngIf="item.children"
+                    [ngTemplateOutlet]="tree"
+                    [ngTemplateOutletContext]="{nodes: item.children, depth: depth + 1, expand: treeExpand.checked}"></ng-container>
+    </ui-tree-item>
+  </ui-tree>
+</ng-template>
