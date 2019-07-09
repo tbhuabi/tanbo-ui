@@ -1,9 +1,10 @@
 ui-tree {
-  display: none;
+  //display: none;
+  display: block;
   position: relative;
-  &.ui-open {
-    display: block;
-  }
+  //&.ui-expand {
+  //  display: block;
+  //}
 }
 
 .ui-tree-line {

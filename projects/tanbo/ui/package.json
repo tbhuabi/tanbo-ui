@@ -1,6 +1,6 @@
 {
   "name": "@tanbo/ui",
-  "version": "1.0.0-alpha.36",
+  "version": "1.0.0-alpha.37",
   "dependencies": {
     "codemirror": "^5.40.2",
     "quill": "^1.3.6",

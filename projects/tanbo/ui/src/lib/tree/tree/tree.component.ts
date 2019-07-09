@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Optional, Input, SkipSelf, Inject } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
 import { TreeItemService } from '../tree-item/tree-item.service';
@@ -11,26 +12,37 @@ export function treeDepthFactory(depth: number) {
 @Component({
   selector: 'ui-tree',
   templateUrl: './tree.component.html',
-  host: {
-    '[class.ui-open]': 'open'
-  },
   providers: [{
     provide: UI_TREE_DEPTH,
     useFactory: treeDepthFactory,
     deps: [[UI_TREE_DEPTH, new SkipSelf()]]
-  }]
+  }],
+  host: {
+    '[@treeAnimation]': 'expand ? "open" : "close"'
+  },
+  animations: [trigger('treeAnimation', [state('open', style({
+    height: '*',
+    opacity: 1,
+    overflow: 'visible'
+  })), state('close', style({
+    height: 0,
+    opacity: 0.5,
+    paddingTop: 0,
+    paddingBottom: 0,
+    overflow: 'hidden'
+  })), transition('open <=> close', animate(150))])]
 })
 export class TreeComponent implements OnDestroy, OnInit {
   @Input() depth = 0;
 
   @Input()
-  set open(value: boolean) {
+  set expand(value: boolean) {
     this.isWrite = true;
-    this._open = value;
+    this._expand = value;
   }
 
-  get open() {
-    return this._open;
+  get expand() {
+    return this._expand;
   }
 
   get left() {
@@ -38,7 +50,7 @@ export class TreeComponent implements OnDestroy, OnInit {
   }
 
   private sub: Subscription;
-  private _open = false;
+  private _expand = false;
   private isWrite = false;
 
   constructor(@Optional() private treeItemService: TreeItemService,
@@ -49,11 +61,11 @@ export class TreeComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     if (this.treeItemService) {
-      this.sub = this.treeItemService.isOpen.subscribe(b => {
-        this.open = b;
+      this.sub = this.treeItemService.expand.subscribe(b => {
+        this.expand = b;
       });
     } else if (!this.isWrite) {
-      this.open = true;
+      this.expand = true;
     }
   }
 
