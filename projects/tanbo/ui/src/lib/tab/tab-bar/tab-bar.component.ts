@@ -16,21 +16,38 @@ import { TabButtonComponent } from '../tab-button/tab-button.component';
   templateUrl: './tab-bar.component.html'
 })
 export class TabBarComponent implements OnDestroy, AfterContentInit {
-  @Input() tabIndex: number = 0;
   @ContentChildren(TabButtonComponent) tabBarItems: QueryList<TabButtonComponent>;
 
-  private subs: Array<Subscription> = [];
+  @Input()
+  set tabIndex(v: number) {
+    this._tabIndex = v;
+    if (this.tabBarItems) {
+      this.tabService.publishIndex(v);
+    }
+  }
+
+  get tagIndex() {
+    return this._tabIndex;
+  }
+
+  private _tabIndex = 0;
+  private subs: Subscription[] = [];
+  private itemSubs: Subscription[] = [];
 
   constructor(private tabService: TabService) {
   }
 
   ngAfterContentInit() {
     // 当用户点击或选中某一个按扭时，发布相应事件
-    this.tabBarItems.forEach((item: TabButtonComponent, index: number) => {
-      const sub = item.uiSelected.subscribe(() => {
-        this.tabService.publishIndex(index);
+    this.tabBarItems.changes.subscribe(() => {
+      this.itemSubs.forEach(item => {
+        item.unsubscribe();
       });
-      this.subs.push(sub);
+      this.tabBarItems.forEach((item: TabButtonComponent, index: number) => {
+        this.itemSubs.push(item.uiSelected.subscribe(() => {
+          this.tabService.publishIndex(index);
+        }));
+      });
     });
     // 当用户切换tab时，显示/隐藏对应视图
     this.subs.push(this.tabService.tabIndex.subscribe((index: number) => {
@@ -44,6 +61,9 @@ export class TabBarComponent implements OnDestroy, AfterContentInit {
 
   ngOnDestroy() {
     this.subs.forEach(item => {
+      item.unsubscribe();
+    });
+    this.itemSubs.forEach(item => {
       item.unsubscribe();
     });
   }

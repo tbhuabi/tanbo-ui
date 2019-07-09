@@ -10,7 +10,7 @@ import { ENTER } from '@angular/cdk/keycodes';
 })
 export class TabButtonComponent {
   @HostBinding('class.ui-active')
-  @Input() active: boolean = false;
+  @Input() active = false;
   @Output() uiSelected = new EventEmitter();
 
   /*tslint:disable*/

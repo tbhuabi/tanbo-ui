@@ -5,7 +5,9 @@ import {
   ViewChild,
   ElementRef,
   Output,
-  EventEmitter
+  EventEmitter,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as CodeMirror from 'codemirror';
@@ -15,7 +17,7 @@ import * as marked from 'marked';
 import 'codemirror/mode/markdown/markdown.js';
 
 const md = marked.setOptions({
-  highlight (str: string, lang: string) {
+  highlight(str: string, lang: string) {
     if (lang && hljs.getLanguage(lang)) {
       try {
         return hljs.highlight(lang, str).value;
@@ -37,7 +39,7 @@ const md = marked.setOptions({
     multi: true
   }]
 })
-export class MarkdownEditorComponent implements AfterViewInit, ControlValueAccessor {
+export class MarkdownEditorComponent implements AfterViewInit, ControlValueAccessor, OnChanges {
   @ViewChild('editor', {static: true}) textarea: ElementRef;
   @Input() value = '';
   @Input() name: string;
@@ -55,6 +57,18 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
   private cmInstance: CodeMirror.Editor;
   private cmDoc: CodeMirror.Doc;
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.cmInstance) {
+      return;
+    }
+    Object.keys(changes).forEach(key => {
+      if (key === 'value') {
+        this.cmInstance.setValue(this.value);
+        this.displayHtml = md(this.value + '');
+      }
+    });
+  }
+
   ngAfterViewInit() {
     this.cmInstance = CodeMirror.fromTextArea(this.textarea.nativeElement, {
       mode: this.mode || 'markdown',
@@ -71,7 +85,7 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
       if (change.origin === 'setValue') {
         return;
       }
-      let value = instance.getValue();
+      const value = instance.getValue();
       this.value = value;
       if (this.onChange) {
         this.onChange(value);
@@ -95,10 +109,10 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
   }
 
   setBold() {
-    let selection = this.cmDoc.getSelection();
+    const selection = this.cmDoc.getSelection();
     this.cmDoc.replaceSelection('**' + selection + '**');
     this.cmInstance.focus();
-    let cursor = this.cmDoc.getCursor();
+    const cursor = this.cmDoc.getCursor();
     this.cmDoc.setCursor({
       ch: cursor.ch - 2,
       line: cursor.line
@@ -106,10 +120,10 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
   }
 
   setItalic() {
-    let selection = this.cmDoc.getSelection();
+    const selection = this.cmDoc.getSelection();
     this.cmDoc.replaceSelection('*' + selection + '*');
     this.cmInstance.focus();
-    let cursor = this.cmDoc.getCursor();
+    const cursor = this.cmDoc.getCursor();
     this.cmDoc.setCursor({
       ch: cursor.ch - 1,
       line: cursor.line
@@ -121,7 +135,7 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
     const selection = this.cmDoc.getSelection();
 
     this.cmDoc.replaceSelection(selection.replace(/^#*(\s)?/gm, (str: string, $1?: string) => {
-      let result = [];
+      const result = [];
       let len = str.length;
       if ($1) {
         len = len - $1.length;
@@ -137,10 +151,10 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
   }
 
   setDeleteLine() {
-    let selection = this.cmDoc.getSelection();
+    const selection = this.cmDoc.getSelection();
     this.cmDoc.replaceSelection('~~' + selection + '~~');
     this.cmInstance.focus();
-    let cursor = this.cmDoc.getCursor();
+    const cursor = this.cmDoc.getCursor();
     this.cmDoc.setCursor({
       ch: cursor.ch - 1,
       line: cursor.line
@@ -179,7 +193,7 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
 
   insertImage() {
     this.cmDoc.replaceSelection('![](http://image/url)');
-    let cursor = this.cmDoc.getCursor();
+    const cursor = this.cmDoc.getCursor();
     this.cmDoc.setCursor({
       ch: cursor.ch - 1,
       line: cursor.line
@@ -191,7 +205,7 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
     const selection = this.cmDoc.getSelection();
     this.cmDoc.replaceSelection('[' + selection + '](http://target/url)');
 
-    let cursor = this.cmDoc.getCursor();
+    const cursor = this.cmDoc.getCursor();
     this.cmDoc.setCursor({
       ch: cursor.ch - 1,
       line: cursor.line
@@ -200,7 +214,7 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
   }
 
   insertTable() {
-    let template = `
+    const template = `
 
 | index   | key    | value |
 | ------  | -----  | ----- |
@@ -233,7 +247,7 @@ export class MarkdownEditorComponent implements AfterViewInit, ControlValueAcces
 
   private setLineSelection() {
     const rawSelection = this.cmDoc.listSelections()[0];
-    let cursors = [rawSelection.anchor, rawSelection.head].sort((a, b) => {
+    const cursors = [rawSelection.anchor, rawSelection.head].sort((a, b) => {
       return a.line - b.line;
     });
     this.cmDoc.setSelection({

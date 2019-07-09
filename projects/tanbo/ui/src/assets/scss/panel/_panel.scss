@@ -21,6 +21,8 @@ ui-panel {
   border-radius: 3px;
   padding-left: $container-horizontal-padding;
   padding-right: $container-horizontal-padding;
+  margin-top: 1em;
+  margin-bottom: 1em;
   &.ui-fill {
     padding-left: 0;
     padding-right: 0;
