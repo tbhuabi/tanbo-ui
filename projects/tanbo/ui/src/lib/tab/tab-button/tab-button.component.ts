@@ -9,13 +9,13 @@ import { ENTER } from '@angular/cdk/keycodes';
   }
 })
 export class TabButtonComponent {
-  @HostBinding('class.ui-active')
-  @Input() active = false;
+  @HostBinding('class.ui-active') active = false;
   @Output() uiSelected = new EventEmitter();
 
   /*tslint:disable*/
   constructor(@Attribute('tabindex') public tabIndex: string) {
   }
+
   /*tslint:enable*/
 
   @HostListener('keydown', ['$event'])

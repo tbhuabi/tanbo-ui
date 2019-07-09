@@ -37,17 +37,22 @@ export class TabBarComponent implements OnDestroy, AfterContentInit {
   constructor(private tabService: TabService) {
   }
 
+  listen() {
+    this.itemSubs.forEach(item => {
+      item.unsubscribe();
+    });
+    this.tabBarItems.forEach((item: TabButtonComponent, index: number) => {
+      this.itemSubs.push(item.uiSelected.subscribe(() => {
+        this.tabService.publishIndex(index);
+      }));
+    });
+  }
+
   ngAfterContentInit() {
     // 当用户点击或选中某一个按扭时，发布相应事件
+    this.listen();
     this.tabBarItems.changes.subscribe(() => {
-      this.itemSubs.forEach(item => {
-        item.unsubscribe();
-      });
-      this.tabBarItems.forEach((item: TabButtonComponent, index: number) => {
-        this.itemSubs.push(item.uiSelected.subscribe(() => {
-          this.tabService.publishIndex(index);
-        }));
-      });
+      this.listen();
     });
     // 当用户切换tab时，显示/隐藏对应视图
     this.subs.push(this.tabService.tabIndex.subscribe((index: number) => {
