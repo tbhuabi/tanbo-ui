@@ -23,6 +23,19 @@ export class AnchorComponent implements OnInit, OnDestroy {
   params: any = {};
   queryParams: any = {};
 
+  get path() {
+    if (this.activatedRoute.routeConfig.path) {
+      return './';
+    }
+    const paths: string[] = [];
+    let route = this.activatedRoute;
+    while (route && !route.routeConfig.path) {
+      paths.push('../');
+      route = route.parent;
+    }
+    return paths.join('');
+  }
+
   private hashChangeIsFromSelf = false;
 
   private scrollObs: Observable<string>;
