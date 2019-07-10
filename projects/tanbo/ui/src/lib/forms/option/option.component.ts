@@ -18,7 +18,7 @@ import { attrToBoolean } from '../../utils';
   templateUrl: './option.component.html'
 })
 export class OptionComponent implements AfterViewInit {
-  @Input() value: string = '';
+  @Input() value = '';
 
   @Input()
   @HostBinding('class.ui-disabled')
@@ -50,8 +50,8 @@ export class OptionComponent implements AfterViewInit {
   @Output() uiChecked = new EventEmitter<OptionComponent>();
   nativeElement: HTMLElement;
 
-  private _disabled: boolean = false;
-  private _selected: boolean = false;
+  private _disabled = false;
+  private _selected = false;
 
   constructor(private elementRef: ElementRef,
               private selectService: SelectService) {

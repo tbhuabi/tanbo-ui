@@ -10,7 +10,7 @@ export class TreeItemService {
     this.expand = this.expandEvent.asObservable();
   }
 
-  change(state: boolean) {
+  changeExpand(state: boolean) {
     this.expandEvent.next(state);
   }
 }

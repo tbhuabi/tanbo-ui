@@ -72,9 +72,9 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @HostBinding('class.ui-focus')
   focus = false;
 
-  private _disabled: boolean = false;
-  private _readonly: boolean = false;
-  private _checked: boolean = false;
+  private _disabled = false;
+  private _readonly = false;
+  private _checked = false;
 
   private onChange: (_: any) => any;
   private onTouched: () => any;

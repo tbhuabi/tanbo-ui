@@ -6,6 +6,14 @@
     <ui-tree-item *ngFor="let item of nodes">
       <ui-tree-inner [depth]="depth">
         <ui-tree-expand [class.ui-hidden]="!item.hasChildren" #treeExpand (click)="getChildren(item)"></ui-tree-expand> {{ item.label }}
+        <ui-dropdown>
+          <button type="button" class="ui-btn ui-btn-primary ui-btn-sm">button</button>
+          <ui-dropdown-menu>
+            <ui-item>aaa</ui-item>
+            <ui-item>bbb</ui-item>
+            <ui-item>ccc</ui-item>
+          </ui-dropdown-menu>
+        </ui-dropdown>
       </ui-tree-inner>
       <ng-container *ngIf="item.children"
                     [ngTemplateOutlet]="tree"

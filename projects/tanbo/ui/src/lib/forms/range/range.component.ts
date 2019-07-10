@@ -98,15 +98,15 @@ export class RangeComponent implements ControlValueAccessor {
 
   @Output() uiChange = new EventEmitter<number>();
 
-  position: number = 50;
-  isTouching: boolean = false;
+  position = 50;
+  isTouching = false;
 
-  private _disabled: boolean = false;
-  private _readonly: boolean = false;
-  private _min: number = 0;
-  private _max: number = 100;
-  private _step: number = 1;
-  private _value: number = 50;
+  private _disabled = false;
+  private _readonly = false;
+  private _min = 0;
+  private _max = 100;
+  private _step = 1;
+  private _value = 50;
 
   private onChange: (_: any) => any;
   private onTouched: () => any;

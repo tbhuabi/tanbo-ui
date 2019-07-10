@@ -14,11 +14,11 @@ import { attrToBoolean } from '../../utils';
 })
 export class CheckboxComponent implements ControlValueAccessor {
   @Input() name: string;
-  @Input() text: string = '';
-  @Input() value: string = '';
+  @Input() text = '';
+  @Input() value = '';
   @Input() forId: string;
-  @Input() checkedIcon: string = 'ui-icon-checkbox-checked';
-  @Input() uncheckedIcon: string = 'ui-icon-checkbox-unchecked';
+  @Input() checkedIcon = 'ui-icon-checkbox-checked';
+  @Input() uncheckedIcon = 'ui-icon-checkbox-unchecked';
 
   @Input()
   @HostBinding('class.ui-disabled')
@@ -55,9 +55,9 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   @Output() uiChange = new EventEmitter<boolean>();
 
-  private _disabled: boolean = false;
-  private _readonly: boolean = false;
-  private _checked: boolean = false;
+  private _disabled = false;
+  private _readonly = false;
+  private _checked = false;
 
   private onChange: (_: any) => any;
   private onTouched: () => any;

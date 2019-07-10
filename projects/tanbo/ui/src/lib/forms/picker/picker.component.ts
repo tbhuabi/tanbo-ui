@@ -58,9 +58,14 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   }
 
   @Input()
-  set data(v: PickerCell[]) {
+  set options(v: PickerCell[]) {
+    this._options = v;
     this.cellsGroup = [v];
     this.update();
+  }
+
+  get options() {
+    return this._options;
   }
 
   @Output() uiItemChecked = new EventEmitter<PickerCell>();
@@ -77,6 +82,7 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   private _disabled = false;
   private _readonly = false;
   private _value: PickerCell[] = [];
+  private _options: PickerCell[];
   private onChange: (_: any) => any;
   private onTouched: () => any;
   private sub: Subscription;
