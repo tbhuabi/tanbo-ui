@@ -64,66 +64,69 @@ export class TooltipComponent implements OnInit, OnDestroy {
     }
   }
 
+  updatePosition() {
+    const distance = this.referenceElement.getBoundingClientRect();
+    switch (this.position) {
+      case 'topLeft':
+        this.left = distance.left;
+        this.top = distance.top - 6;
+        break;
+      case 'topRight':
+        this.left = distance.left + distance.width;
+        this.top = distance.top - 6;
+        break;
+      case 'rightTop':
+        this.left = distance.left + distance.width + 10;
+        this.top = distance.top;
+        break;
+      case 'rightCenter':
+        this.left = distance.left + distance.width + 10;
+        this.top = distance.top + distance.height / 2;
+        break;
+      case 'rightBottom':
+        this.left = distance.left + distance.width + 10;
+        this.top = distance.top + distance.height;
+        break;
+      case 'bottomLeft':
+        this.left = distance.left;
+        this.top = distance.top + distance.height + 6;
+        break;
+      case 'bottomCenter':
+        this.left = distance.left + distance.width / 2;
+        this.top = distance.top + distance.height + 6;
+        break;
+      case 'bottomRight':
+        this.left = distance.left + distance.width;
+        this.top = distance.top + distance.height + 6;
+        break;
+      case 'leftTop':
+        this.left = distance.left - 6;
+        this.top = distance.top;
+        break;
+      case 'leftCenter':
+        this.left = distance.left - 6;
+        this.top = distance.top + distance.height / 2;
+        break;
+      case 'leftBottom':
+        this.left = distance.left - 6;
+        this.top = distance.top + distance.height;
+        break;
+      default:
+        this.position = 'topCenter';
+        this.left = distance.left + distance.width / 2;
+        this.top = distance.top - 6;
+    }
+    this.scrollX = window.scrollX;
+    this.scrollY = window.scrollY;
+  }
+
   show() {
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
-      const distance = this.referenceElement.getBoundingClientRect();
-      switch (this.position) {
-        case 'topLeft':
-          this.left = distance.left;
-          this.top = distance.top - 6;
-          break;
-        case 'topRight':
-          this.left = distance.left + distance.width;
-          this.top = distance.top - 6;
-          break;
-        case 'rightTop':
-          this.left = distance.left + distance.width + 10;
-          this.top = distance.top;
-          break;
-        case 'rightCenter':
-          this.left = distance.left + distance.width + 10;
-          this.top = distance.top + distance.height / 2;
-          break;
-        case 'rightBottom':
-          this.left = distance.left + distance.width + 10;
-          this.top = distance.top + distance.height;
-          break;
-        case 'bottomLeft':
-          this.left = distance.left;
-          this.top = distance.top + distance.height + 6;
-          break;
-        case 'bottomCenter':
-          this.left = distance.left + distance.width / 2;
-          this.top = distance.top + distance.height + 6;
-          break;
-        case 'bottomRight':
-          this.left = distance.left + distance.width;
-          this.top = distance.top + distance.height + 6;
-          break;
-        case 'leftTop':
-          this.left = distance.left - 6;
-          this.top = distance.top;
-          break;
-        case 'leftCenter':
-          this.left = distance.left - 6;
-          this.top = distance.top + distance.height / 2;
-          break;
-        case 'leftBottom':
-          this.left = distance.left - 6;
-          this.top = distance.top + distance.height;
-          break;
-        default:
-          this.position = 'topCenter';
-          this.left = distance.left + distance.width / 2;
-          this.top = distance.top - 6;
-      }
-      this.scrollX = window.scrollX;
-      this.scrollY = window.scrollY;
+      this.updatePosition();
 
-      this.unbindFn = this.renderer.listen('window', 'scroll', () => {
-        this.scrollX = window.scrollX;
-        this.scrollY = window.scrollY;
+      this.unbindFn = this.renderer.listen('window', 'resize', () => {
+        this.updatePosition();
       });
       this.isShow = true;
     }, 150);

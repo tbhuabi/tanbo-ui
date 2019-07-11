@@ -64,7 +64,7 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
     }
   }
 
-  show() {
+  updatePosition() {
     const distance = this.referenceElement.getBoundingClientRect();
     switch (this.position) {
       case 'topLeft':
@@ -119,10 +119,12 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
 
     this.scrollX = window.scrollX;
     this.scrollY = window.scrollY;
+  }
 
-    this.unbindFn = this.renderer.listen('window', 'scroll', () => {
-      this.scrollX = window.scrollX;
-      this.scrollY = window.scrollY;
+  show() {
+    this.updatePosition();
+    this.unbindFn = this.renderer.listen('window', 'resize', () => {
+      this.updatePosition();
     });
 
     this.isShow = true;
