@@ -1,17 +1,28 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 
 import { TableService } from '../table.service';
+import { attrToBoolean } from '../../../lib/utils';
 
 @Component({
   /*tslint:disable*/
-  selector: 'tr[uiSelectable]',
+  selector: 'tr[uiTableSelectableItem]',
   /*tslint:enable*/
-  templateUrl: './selectable-item.component.html'
+  templateUrl: './table-selectable-item.component.html'
 })
-export class SelectableItemComponent implements OnDestroy, OnInit {
-  @Input() uiSelectable: any;
-  @Input() checked = false;
+export class TableSelectableItemComponent implements OnDestroy, OnInit {
   @Output() uiCheckStateChange = new EventEmitter<boolean>();
+  @Input() uiTableSelectableItem: any;
+
+  @Input()
+  set checked(v: any) {
+    this._checked = attrToBoolean(v);
+  }
+
+  get checked() {
+    return this._checked;
+  }
+
+  private _checked = false;
 
   constructor(private tableService: TableService) {
   }

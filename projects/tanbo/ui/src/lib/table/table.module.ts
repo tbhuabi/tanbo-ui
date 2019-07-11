@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { UIFormsModule } from '../forms/forms.module';
 
 import { TableDirective } from './table.directive';
-import { SelectableGroupComponent } from './selectable-group/selectable-group.component';
-import { SelectableItemComponent } from './selectable-item/selectable-item.component';
+import { TableAllSelectorComponent } from './table-all-selector/table-all-selector.component';
+import { TableSelectableItemComponent } from './table-selectable-item/table-selectable-item.component';
 import { TableResponsiveComponent } from './table-responsive/table-responsive.component';
 
 @NgModule({
@@ -13,14 +13,14 @@ import { TableResponsiveComponent } from './table-responsive/table-responsive.co
   ],
   declarations: [
     TableDirective,
-    SelectableGroupComponent,
-    SelectableItemComponent,
+    TableAllSelectorComponent,
+    TableSelectableItemComponent,
     TableResponsiveComponent
   ],
   exports: [
     TableDirective,
-    SelectableGroupComponent,
-    SelectableItemComponent,
+    TableAllSelectorComponent,
+    TableSelectableItemComponent,
     TableResponsiveComponent
   ]
 })

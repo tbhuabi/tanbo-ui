@@ -2,20 +2,20 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Subject, Observable } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 
-import { SelectableItemComponent } from '../selectable-item/selectable-item.component';
+import { TableSelectableItemComponent } from '../table-selectable-item/table-selectable-item.component';
 import { TableService } from '../table.service';
 
 @Component({
   /*tslint:disable*/
-  selector: 'tr[uiTableSelector]',
+  selector: 'tr[uiTableAllSelector]',
   /*tslint:enable*/
-  templateUrl: './selectable-group.component.html'
+  templateUrl: './table-all-selector.component.html'
 })
-export class SelectableGroupComponent implements OnDestroy, OnInit {
+export class TableAllSelectorComponent implements OnDestroy, OnInit {
   isChecked = false;
   private subs: Subscription[] = [];
-  private items: SelectableItemComponent[] = [];
-  private events: Array<{ token: SelectableItemComponent, unsub: Subscription }> = [];
+  private items: TableSelectableItemComponent[] = [];
+  private events: Array<{ token: TableSelectableItemComponent, unsub: Subscription }> = [];
   private selectedValues: any[] = [];
   private updateCheckedItemsObs: Observable<void>;
   private updateEvent = new Subject<void>();
@@ -30,7 +30,7 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
     this.subs.push(this.updateCheckedItemsObs.pipe(debounceTime(0)).subscribe(() => {
       this.updateStateAndCheckedItem();
     }));
-    this.subs.push(this.tableService.onPush.subscribe((item: SelectableItemComponent) => {
+    this.subs.push(this.tableService.onPush.subscribe((item: TableSelectableItemComponent) => {
       this.items.push(item);
       this.updateEvent.next();
       this.events.push({
@@ -40,7 +40,7 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
         })
       });
     }));
-    this.subs.push(this.tableService.onDelete.subscribe((item: SelectableItemComponent) => {
+    this.subs.push(this.tableService.onDelete.subscribe((item: TableSelectableItemComponent) => {
       const index = this.items.indexOf(item);
       if (index > -1) {
         this.items.splice(index, 1);
@@ -70,7 +70,7 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
         item.change(b);
       }
       if (b) {
-        this.selectedValues.push(item.uiSelectable);
+        this.selectedValues.push(item.uiTableSelectableItem);
       }
     });
     this.tableService.checked(this.selectedValues);
@@ -84,7 +84,7 @@ export class SelectableGroupComponent implements OnDestroy, OnInit {
       if (!item.checked) {
         isSelectedAll = false;
       } else {
-        this.selectedValues.push(item.uiSelectable);
+        this.selectedValues.push(item.uiTableSelectableItem);
       }
     }
     this.isChecked = isSelectedAll;

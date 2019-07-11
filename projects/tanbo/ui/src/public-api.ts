@@ -152,8 +152,8 @@ export { UITabModule } from './lib/tab/tab.module';
 /**
  * 表格
  */
-export { SelectableGroupComponent } from './lib/table/selectable-group/selectable-group.component';
-export { SelectableItemComponent } from './lib/table/selectable-item/selectable-item.component';
+export { TableAllSelectorComponent } from './lib/table/table-all-selector/table-all-selector.component';
+export { TableSelectableItemComponent } from './lib/table/table-selectable-item/table-selectable-item.component';
 export { TableResponsiveComponent } from './lib/table/table-responsive/table-responsive.component';
 export { TableDirective } from './lib/table/table.directive';
 export { UITableModule } from './lib/table/table.module';
