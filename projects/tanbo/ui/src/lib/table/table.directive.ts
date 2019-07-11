@@ -10,8 +10,7 @@ import { TableService } from './table.service';
   ]
 })
 export class TableDirective implements OnDestroy, OnInit {
-  @Output()
-  uiChecked = new EventEmitter<any[]>();
+  @Output() uiChange = new EventEmitter<any[]>();
   private sub: Subscription;
 
   constructor(private tableService: TableService) {
@@ -19,7 +18,7 @@ export class TableDirective implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.sub = this.tableService.onChecked.subscribe(result => {
-      this.uiChecked.emit(result);
+      this.uiChange.emit(result);
     });
   }
 
