@@ -1,5 +1,22 @@
 <ui-tag closable>tag</ui-tag>
 
+<table uiTable (uiSelectedItemsChange)="saveSelectedData($event)" class="ui-table ui-table-bordered">
+  <thead>
+  <tr uiTableAllSelector>
+    <th>姓名</th>
+    <th>年龄</th>
+    <th>职业</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr [checked]="item.checked" *ngFor="let item of dataList" [uiTableSelectableItem]="item">
+    <td>{{ item.name }}</td>
+    <td>{{ item.age }}</td>
+    <td>{{ item.job }}</td>
+  </tr>
+  </tbody>
+</table>
+
 <ng-container [ngTemplateOutlet]="tree" [ngTemplateOutletContext]="{nodes: treeList, depth: 0, expand: true}">
 </ng-container>
 

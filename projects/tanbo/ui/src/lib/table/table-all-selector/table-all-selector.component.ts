@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription, Subject, Observable } from 'rxjs';
-import { debounceTime, filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { TableSelectableItemComponent } from '../table-selectable-item/table-selectable-item.component';
 import { TableService } from '../table.service';
@@ -17,26 +17,20 @@ export class TableAllSelectorComponent implements OnDestroy, OnInit {
   private items: TableSelectableItemComponent[] = [];
   private events: Array<{ token: TableSelectableItemComponent, unsub: Subscription }> = [];
   private selectedValues: any[] = [];
-  private updateCheckedItemsObs: Observable<void>;
-  private updateEvent = new Subject<void>();
-
   private eventFromSelf = false;
 
   constructor(private tableService: TableService) {
-    this.updateCheckedItemsObs = this.updateEvent.asObservable();
   }
 
   ngOnInit() {
-    this.subs.push(this.updateCheckedItemsObs.pipe(debounceTime(0)).subscribe(() => {
-      this.updateStateAndCheckedItem();
-    }));
     this.subs.push(this.tableService.onPush.subscribe((item: TableSelectableItemComponent) => {
       this.items.push(item);
-      this.updateEvent.next();
+      this.updateStateAndSelectedValues();
       this.events.push({
         token: item,
         unsub: item.uiCheckStateChange.pipe(filter(() => !this.eventFromSelf)).subscribe(() => {
-          this.updateStateAndCheckedItem();
+          this.updateStateAndSelectedValues();
+          this.tableService.checked(this.selectedValues);
         })
       });
     }));
@@ -52,8 +46,6 @@ export class TableAllSelectorComponent implements OnDestroy, OnInit {
         }
         return true;
       });
-
-      this.updateEvent.next();
     }));
   }
 
@@ -77,7 +69,7 @@ export class TableAllSelectorComponent implements OnDestroy, OnInit {
     this.eventFromSelf = false;
   }
 
-  updateStateAndCheckedItem() {
+  updateStateAndSelectedValues() {
     this.selectedValues = [];
     let isSelectedAll = true;
     for (const item of this.items) {
@@ -88,6 +80,5 @@ export class TableAllSelectorComponent implements OnDestroy, OnInit {
       }
     }
     this.isChecked = isSelectedAll;
-    this.tableService.checked(this.selectedValues);
   }
 }

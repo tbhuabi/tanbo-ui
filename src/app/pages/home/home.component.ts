@@ -14,6 +14,27 @@ export interface TreeNode {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  dataList: any[] = [{
+    name: '张三',
+    age: 34,
+    job: '程序员',
+    checked: true
+  }, {
+    name: '李四',
+    age: 12,
+    job: '银行家',
+    checked: true
+  }, {
+    name: '王五',
+    age: 65,
+    job: '产业工人',
+    checked: true
+  }, {
+    name: '赵六',
+    age: 22,
+    job: '艺术家',
+    checked: true
+  }];
   treeList: TreeNode[] = [];
 
   ngOnInit(): void {
@@ -36,7 +57,24 @@ export class HomeComponent {
       }, 2000);
     }).subscribe(response => {
       this.treeList = response;
+      this.dataList.push({
+        name: '赵六',
+        age: 22,
+        job: '艺术家',
+        checked: false
+      }, {
+        name: '赵六',
+        age: 22,
+        job: '艺术家',
+        checked: false
+      })
     });
+  }
+
+
+
+  saveSelectedData(items: any[]) {
+    console.log(items);
   }
 
   getChildren(node: TreeNode) {
