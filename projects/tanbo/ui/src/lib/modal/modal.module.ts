@@ -8,7 +8,6 @@ import { ModalBaseComponent } from './modal-base/modal-base.component';
 import { ModalBodyComponent } from './modal-body/modal-body.component';
 import { ModalFooterComponent } from './modal-footer/modal-footer.component';
 import { ModalHeaderComponent } from './modal-header/modal-header.component';
-import { NotifyComponent } from './notify/notify.component';
 
 @NgModule({
   imports: [
@@ -21,8 +20,7 @@ import { NotifyComponent } from './notify/notify.component';
     ModalBaseComponent,
     ModalBodyComponent,
     ModalFooterComponent,
-    ModalHeaderComponent,
-    NotifyComponent
+    ModalHeaderComponent
   ],
   exports: [
     DialogComponent,
@@ -31,8 +29,7 @@ import { NotifyComponent } from './notify/notify.component';
     ModalBaseComponent,
     ModalBodyComponent,
     ModalFooterComponent,
-    ModalHeaderComponent,
-    NotifyComponent
+    ModalHeaderComponent
   ]
 })
 export class UIModalModule {

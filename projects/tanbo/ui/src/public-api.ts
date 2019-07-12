@@ -82,8 +82,6 @@ export { ModalController } from './lib/modal/modal-base/modal-controller';
 export { ModalBodyComponent } from './lib/modal/modal-body/modal-body.component';
 export { ModalFooterComponent } from './lib/modal/modal-footer/modal-footer.component';
 export { ModalHeaderComponent } from './lib/modal/modal-header/modal-header.component';
-export { NotifyComponent } from './lib/modal/notify/notify.component';
-export { NotifyConfig, NotifyController, NotifyType } from './lib/modal/notify/notify-controller';
 export { UIModalModule } from './lib/modal/modal.module';
 /**
  * 导航
@@ -95,6 +93,11 @@ export { NavItemComponent } from './lib/nav/nav-item/nav-item.component';
 export { NavItemService } from './lib/nav/nav-item/nav-item.service';
 export { NavThumbnailComponent } from './lib/nav/nav-thumbnail/nav-thumbnail.component';
 export { UINavModule } from './lib/nav/nav.module';
+/**
+ * 通知
+ */
+export { NotifyComponent } from './lib/notify/notify/notify.component';
+export { NotifyConfig, NotifyController, NotifyType } from './lib/notify/notify/notify-controller';
 /**
  * 其它
  */
