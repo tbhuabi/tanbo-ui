@@ -4,7 +4,7 @@
 /**
  * 基础模块
  */
-export { MaskComponent } from './lib/base/mask/mask.component';
+export { OverlayComponent } from './lib/base/overlay/overlay.component';
 export { UIBaseModule } from './lib/base/base.module';
 /**
  * 根模块

@@ -1,9 +1,9 @@
-ui-mask {
+ui-overlay {
   contain: size style layout;
   background: inherit;
 }
 
-.ui-mask {
+.ui-overlay {
   z-index: $mask-z-index;
   position: fixed;
   left: 0;

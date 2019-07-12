@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MaskComponent } from './mask/mask.component';
+import { OverlayComponent } from './overlay/overlay.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    MaskComponent
+    OverlayComponent
   ],
   exports: [
-    MaskComponent
+    OverlayComponent
   ]
 })
 export class UIBaseModule {
