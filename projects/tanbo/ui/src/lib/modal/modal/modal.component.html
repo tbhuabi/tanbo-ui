@@ -1,1 +1,8 @@
+<ui-modal-header *ngIf="showDefaultHeader" [ngClass]="classes">{{ title }}
+  <button (click)="uiClose.emit($event)" class="ui-close"><span class="ui-icon-close"></span></button>
+</ui-modal-header>
 <ng-content></ng-content>
+<ui-modal-footer *ngIf="showDefaultFooter">
+  <button (click)="uiClose.emit($event)" type="button" class="ui-btn ui-btn-info">{{ cancelText }}</button>
+  <button (click)="uiConfirm.emit($event)" [attr.type]="confirmBtnType" class="ui-btn ui-btn-primary">{{ confirmText }}</button>
+</ui-modal-footer>

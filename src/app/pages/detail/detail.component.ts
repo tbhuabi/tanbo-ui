@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ModalController } from '@tanbo/ui';
 
 @Component({
   selector: 'app-detail',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnInit {
+  @ViewChild('modal', {static: true}) modal: TemplateRef<any>;
 
-  constructor() { }
+  constructor(private modalController: ModalController) {
+  }
 
   ngOnInit() {
+  }
+
+  show() {
+    this.modalController.show(this.modal);
   }
 
 }
