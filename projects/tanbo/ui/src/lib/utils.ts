@@ -7,15 +7,15 @@ export interface AttrBoolean {
 }
 
 export interface AttrBooleanDecorator {
-  (): any;
-  new(): any;
+  (bindingPropertyName?: string): any;
+  new (bindingPropertyName?: string): any;
 }
 
 export const AttrBoolean: AttrBooleanDecorator = makePropDecorator<any, boolean>(attrToBoolean);
 
-function makePropDecorator<T, J>(fallback: (v: T) => J): any {
-  return function(): any {
-    return function(target: any, propertyKey: string | symbol) {
+export function makePropDecorator<T, J>(fallback: (v: T) => J): AttrBooleanDecorator {
+  function propDecoratorFactory(): any {
+    function propDecorator(target: any, propertyKey: string | symbol) {
       let rawValue: T;
       Reflect.defineProperty(target, propertyKey, {
         get(): J {
@@ -25,6 +25,8 @@ function makePropDecorator<T, J>(fallback: (v: T) => J): any {
           rawValue = v;
         }
       });
-    };
-  };
+    }
+    return propDecorator;
+  }
+  return propDecoratorFactory;
 }
