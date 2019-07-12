@@ -13,7 +13,7 @@ export interface AttrBooleanDecorator {
 
 export const AttrBoolean: AttrBooleanDecorator = makePropDecorator<any, boolean>(attrToBoolean);
 
-export function makePropDecorator<T, J>(fallback: (v: T) => J): AttrBooleanDecorator {
+export function makePropDecorator<T, J>(fallback: (v: T) => J): any {
   function propDecoratorFactory(): any {
     function propDecorator(target: any, propertyKey: string | symbol) {
       let rawValue: T;
