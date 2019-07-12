@@ -2,6 +2,7 @@ import { Component, ContentChild, EventEmitter, Input, Output } from '@angular/c
 
 import { ModalHeaderComponent } from '../modal-header/modal-header.component';
 import { ModalFooterComponent } from '../modal-footer/modal-footer.component';
+import { AttrBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-modal',
@@ -18,8 +19,8 @@ export class ModalComponent {
   @Input() title = '';
   @Input() cancelText = '取消';
   @Input() confirmText = '确定';
-  @Input() hideDefaultHeader = false;
-  @Input() hideDefaultFooter = false;
+  @Input() @AttrBoolean() hideDefaultHeader = false;
+  @Input() @AttrBoolean() hideDefaultFooter = false;
   @Input() confirmBtnType = 'button';
   @Input() theme = 'dark';
 

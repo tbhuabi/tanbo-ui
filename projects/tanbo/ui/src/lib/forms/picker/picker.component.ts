@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, Inject, OnDestroy } from '@angu
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { from, Subscription, Observable } from 'rxjs';
 
-import { attrToBoolean } from '../../utils';
+import { AttrBoolean } from '../../utils';
 import { UI_DROPDOWN_ARROW_CLASSNAME } from '../../dropdown/help';
 import { PickerCell } from './picker-help';
 
@@ -27,6 +27,8 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   @Input() dataProvide: (cell: PickerCell) => (PickerCell[] | Promise<PickerCell[]> | Observable<PickerCell[]>);
 
   /*tslint:enable*/
+  @Input() @AttrBoolean() disabled = false;
+  @Input() @AttrBoolean() readonly = false;
   @Input()
   set value(v: PickerCell[]) {
     if (Array.isArray(v)) {
@@ -37,24 +39,6 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
 
   get value() {
     return this._value;
-  }
-
-  @Input()
-  set disabled(isDisabled: any) {
-    this._disabled = attrToBoolean(isDisabled);
-  }
-
-  get disabled() {
-    return this._disabled;
-  }
-
-  @Input()
-  set readonly(isReadonly: any) {
-    this._readonly = attrToBoolean(isReadonly);
-  }
-
-  get readonly() {
-    return this._readonly;
   }
 
   @Input()
@@ -79,8 +63,6 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   }
 
   focus = false;
-  private _disabled = false;
-  private _readonly = false;
   private _value: PickerCell[] = [];
   private _options: PickerCell[];
   private onChange: (_: any) => any;

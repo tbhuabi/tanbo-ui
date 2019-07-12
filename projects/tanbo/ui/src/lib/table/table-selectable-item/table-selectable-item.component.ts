@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 
 import { TableService } from '../table.service';
-import { attrToBoolean } from '../../../lib/utils';
+import { AttrBoolean } from '../../../lib/utils';
 
 @Component({
   /*tslint:disable*/
@@ -12,17 +12,7 @@ import { attrToBoolean } from '../../../lib/utils';
 export class TableSelectableItemComponent implements OnDestroy, OnInit {
   @Output() uiCheckStateChange = new EventEmitter<boolean>();
   @Input() uiTableSelectableItem: any;
-
-  @Input()
-  set checked(v: any) {
-    this._checked = attrToBoolean(v);
-  }
-
-  get checked() {
-    return this._checked;
-  }
-
-  private _checked = false;
+  @Input() @AttrBoolean() checked = false;
 
   constructor(private tableService: TableService) {
   }

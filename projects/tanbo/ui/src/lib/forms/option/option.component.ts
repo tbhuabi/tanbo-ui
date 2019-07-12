@@ -11,7 +11,7 @@ import {
 
 import { SelectService } from '../select/select.service';
 
-import { attrToBoolean } from '../../utils';
+import { AttrBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-option',
@@ -22,23 +22,12 @@ export class OptionComponent implements AfterViewInit {
 
   @Input()
   @HostBinding('class.ui-disabled')
-  set disabled(isDisabled: any) {
-    this._disabled = attrToBoolean(isDisabled);
-  }
+  @AttrBoolean() disabled = false;
 
-  get disabled() {
-    return this._disabled;
-  }
 
   @Input()
   @HostBinding('class.ui-selected')
-  set selected(isSelected: any) {
-    this._selected = attrToBoolean(isSelected);
-  }
-
-  get selected() {
-    return this._selected;
-  }
+  @AttrBoolean() selected = false;
 
   @HostBinding('class.ui-focus')
   get isFocus() {
@@ -49,9 +38,6 @@ export class OptionComponent implements AfterViewInit {
 
   @Output() uiChecked = new EventEmitter<OptionComponent>();
   nativeElement: HTMLElement;
-
-  private _disabled = false;
-  private _selected = false;
 
   constructor(private elementRef: ElementRef,
               private selectService: SelectService) {

@@ -1,24 +1,15 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { attrToBoolean } from '../../utils';
+import { AttrBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-tag',
   templateUrl: './tag.component.html'
 })
 export class TagComponent {
-  @Input()
-  set closable(v: any) {
-    this._closable = attrToBoolean(v);
-  }
-
-  get closable() {
-    return this._closable;
-  }
+  @Input() @AttrBoolean() closable = false;
 
   @Output() uiClose = new EventEmitter<void>();
-
-  private _closable = false;
 
   close() {
     this.uiClose.emit();

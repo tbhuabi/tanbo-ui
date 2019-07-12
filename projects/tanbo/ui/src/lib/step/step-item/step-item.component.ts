@@ -5,7 +5,7 @@ import { Component, HostBinding } from '@angular/core';
   templateUrl: './step-item.component.html'
 })
 export class StepItemComponent {
-  index: number = 0;
+  index = 0;
   @HostBinding('style.maxWidth')
   get maxWidth() {
     return this._maxWidth;
@@ -29,7 +29,7 @@ export class StepItemComponent {
     this._isWaiting = status;
   }
 
-  private _isSuccess: boolean = false;
-  private _maxWidth: string = '50%';
-  private _isWaiting: boolean = false;
+  private _isSuccess = false;
+  private _maxWidth = '50%';
+  private _isWaiting = false;
 }

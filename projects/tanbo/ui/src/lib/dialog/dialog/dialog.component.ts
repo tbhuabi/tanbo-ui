@@ -35,12 +35,12 @@ import { DialogConfig, DialogController } from './dialog-controller';
 })
 
 export class DialogComponent implements OnInit, OnDestroy {
-  show: boolean = false;
+  show = false;
 
-  title: string = '';
-  content: string = '';
+  title = '';
+  content = '';
   btnsText: Array<any> = ['取消', '确认'];
-  result: boolean = false;
+  result = false;
 
   private subs: Subscription[] = [];
   private isPub = true;

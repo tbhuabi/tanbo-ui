@@ -23,42 +23,42 @@ export class CropperComponent implements OnInit {
   @ViewChild('imgRef', {static: true}) imgRef: ElementRef;
   @ViewChild('cropperRef', {static: true}) cropperRef: ElementRef;
   // 裁剪的宽度
-  @Input() cropWidth: number = 200;
+  @Input() cropWidth = 200;
   // 裁剪的高度
   @Input()
-  cropHeight: number = 200;
+  cropHeight = 200;
   @Input()
-  imageURL: string = '';
+  imageURL = '';
   @Output()
   public uiChange = new EventEmitter<CropResult>();
   // 图片相对容器右上角的偏移量
-  imageOffsetX: number = 0;
-  imageOffsetY: number = 0;
+  imageOffsetX = 0;
+  imageOffsetY = 0;
   // 缩放倍数
-  scale: number = 1;
+  scale = 1;
   // 图片缩放比例
-  private proportion: number = 1;
+  private proportion = 1;
   // 容器宽度
-  private containerWidth: number = 0;
+  private containerWidth = 0;
   // 容器高度
-  private containerHeight: number = 0;
+  private containerHeight = 0;
   // 图片原始宽度
-  private imageOriginWidth: number = 0;
+  private imageOriginWidth = 0;
   // 图片原始高度
-  private imageOriginHeight: number = 0;
+  private imageOriginHeight = 0;
   // 计算后的图片宽度
-  private imageWidth: number = 0;
+  private imageWidth = 0;
   // 计算后的图片高度
-  private imageHeight: number = 0;
+  private imageHeight = 0;
   // 裁剪框四角坐标
-  private leftTopX: number = 0;
-  private leftTopY: number = 0;
-  private rightTopX: number = 0;
-  private rightTopY: number = 0;
-  private rightBottomX: number = 0;
-  private rightBottomY: number = 0;
-  private leftBottomX: number = 0;
-  private leftBottomY: number = 0;
+  private leftTopX = 0;
+  private leftTopY = 0;
+  private rightTopX = 0;
+  private rightTopY = 0;
+  private rightBottomX = 0;
+  private rightBottomY = 0;
+  private leftBottomX = 0;
+  private leftBottomY = 0;
   // 滚轮缩放的解绑函数
   private unbindWheelFn: () => void;
   private imgElement: HTMLImageElement;

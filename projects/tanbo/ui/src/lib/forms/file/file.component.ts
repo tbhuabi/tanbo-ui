@@ -3,7 +3,7 @@ import { HttpEvent, HttpRequest, HttpClient, HttpEventType, HttpResponse } from 
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-import { attrToBoolean } from '../../utils';
+import { AttrBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-input[type=file]',
@@ -22,32 +22,9 @@ export class FileComponent {
   @Input() accept: string;
   @Input() uploader: (data: FormData) => (HttpRequest<any> | Observable<HttpEvent<any>>);
 
-  @Input()
-  set multiple(v: any) {
-    this._multiple = attrToBoolean(v);
-  }
-
-  get multiple() {
-    return this._multiple;
-  }
-
-  @Input()
-  set disabled(v: any) {
-    this._disabled = attrToBoolean(v);
-  }
-
-  get disabled() {
-    return this._disabled;
-  }
-
-  @Input()
-  set readonly(v: any) {
-    this._readonly = attrToBoolean(v);
-  }
-
-  get readonly() {
-    return this._readonly;
-  }
+  @Input() @AttrBoolean() multiple = false;
+  @Input() @AttrBoolean() disabled = false;
+  @Input() @AttrBoolean() readonly = false;
 
   isShowLoading = false;
   progress = 0;
@@ -55,10 +32,6 @@ export class FileComponent {
 
   @HostBinding('class.ui-focus')
   focus = false;
-
-  private _disabled = false;
-  private _readonly = false;
-  private _multiple = false;
 
   constructor(private http: HttpClient) {
   }

@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, Render
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
-import { attrToBoolean } from '../../utils';
+import { AttrBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-input[type=range]',
@@ -20,25 +20,8 @@ export class RangeComponent implements ControlValueAccessor {
   @Input() forId: string;
   @Input() showProgress = true;
 
-  @Input()
-  @HostBinding('class.ui-disabled')
-  set disabled(isDisabled: any) {
-    this._disabled = attrToBoolean(isDisabled);
-  }
-
-  get disabled() {
-    return this._disabled;
-  }
-
-  @Input()
-  @HostBinding('class.ui-readonly')
-  set readonly(isReadonly: any) {
-    this._readonly = attrToBoolean(isReadonly);
-  }
-
-  get readonly() {
-    return this._readonly;
-  }
+  @Input() @HostBinding('class.ui-disabled') @AttrBoolean() disabled = false;
+  @Input() @HostBinding('class.ui-readonly') @AttrBoolean() readonly = false;
 
   @Input()
   set min(min: any) {
@@ -101,8 +84,6 @@ export class RangeComponent implements ControlValueAccessor {
   position = 50;
   isTouching = false;
 
-  private _disabled = false;
-  private _readonly = false;
   private _min = 0;
   private _max = 100;
   private _step = 1;

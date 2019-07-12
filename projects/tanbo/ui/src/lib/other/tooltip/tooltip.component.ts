@@ -28,7 +28,7 @@ export class TooltipComponent implements OnInit, OnDestroy {
   text = '';
   referenceElement: HTMLElement;
 
-  position: string = 'topCenter';
+  position = 'topCenter';
 
   get x() {
     return this.left + this.scrollX;
@@ -38,11 +38,11 @@ export class TooltipComponent implements OnInit, OnDestroy {
     return this.top + this.scrollY;
   }
 
-  private left: number = 0;
-  private top: number = 0;
+  private left = 0;
+  private top = 0;
 
-  private scrollX: number = 0;
-  private scrollY: number = 0;
+  private scrollX = 0;
+  private scrollY = 0;
 
   private unbindFn: () => any;
 

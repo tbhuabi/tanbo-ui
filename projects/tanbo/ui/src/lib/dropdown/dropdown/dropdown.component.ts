@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
+import { AttrBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-dropdown',
@@ -24,7 +25,7 @@ export class DropdownComponent implements AfterContentInit {
   @ContentChild(DropdownMenuComponent, {static: false})
   dropdownMenu: DropdownMenuComponent;
   @Output() uiEscape = new EventEmitter();
-  @Input() autoDisplay = true;
+  @Input() @AttrBoolean() autoDisplay = true;
 
   @Input()
   set open(v: boolean) {

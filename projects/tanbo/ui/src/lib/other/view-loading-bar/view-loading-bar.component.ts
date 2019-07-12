@@ -17,12 +17,12 @@ import { Subscription } from 'rxjs';
   })])))])]
 })
 export class ViewLoadingBarComponent implements OnInit, OnDestroy {
-  step: number = 0;
-  loadingState: string = 'normal';
+  step = 0;
+  loadingState = 'normal';
   private sub: Subscription;
   private progress: Array<number> = [30, 60, 80, 85, 88, 90, 91, 92, 93];
   private timer: any = null;
-  private stateIndex: number = 0;
+  private stateIndex = 0;
 
   constructor(private router: Router) {
   }

@@ -21,7 +21,7 @@ import { DropdownInputComponent } from '../../dropdown/dropdown-input/dropdown-i
 import { UI_DROPDOWN_ARROW_CLASSNAME } from '../../dropdown/help';
 import { OptionComponent } from '../option/option.component';
 import { SelectService } from './select.service';
-import { attrToBoolean } from '../../utils';
+import { AttrBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-select',
@@ -43,31 +43,13 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   @Input() placeholder = '';
   @Input() selectedIndex = 0;
   @Input() arrowIconClassName = '';
-
-  @Input()
-  set disabled(isDisabled: any) {
-    this._disabled = attrToBoolean(isDisabled);
-  }
-
-  get disabled() {
-    return this._disabled;
-  }
-
-  @Input()
-  set readonly(isReadonly: any) {
-    this._readonly = attrToBoolean(isReadonly);
-  }
-
-  get readonly() {
-    return this._readonly;
-  }
+  @Input() @AttrBoolean() disabled = false;
+  @Input() @AttrBoolean() readonly = false;
 
   @Output() uiChange = new EventEmitter<string>();
   focus = false;
   open = false;
   text = '';
-  private _disabled = false;
-  private _readonly = false;
 
   private value = '';
   private onChange: (_: any) => any;

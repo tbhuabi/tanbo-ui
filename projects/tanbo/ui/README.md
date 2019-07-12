@@ -53,7 +53,7 @@ import '@tanbo/ui/index.min.css';
         /* ..other modules.. */
         UIModule.forRoot(), // 如果是子模块或异步模块，如路由模块，则不要调用
         BrowserModule,
-        BrowserAnimationsModule // UiModule 依赖动画模块
+        BrowserAnimationsModule // UIModule 依赖动画模块
     ]
 })
 

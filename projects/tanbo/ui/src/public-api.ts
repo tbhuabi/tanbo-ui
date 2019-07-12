@@ -190,5 +190,5 @@ export { UITreeModule } from './lib/tree/tree.module';
 /**
  * 主模块
  */
-export { attrToBoolean } from './lib/utils';
+export { attrToBoolean, AttrBoolean, AttrBooleanDecorator } from './lib/utils';
 export { UIModule } from './lib/tanbo-ui.module';
