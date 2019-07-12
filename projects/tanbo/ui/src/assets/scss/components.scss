@@ -6,6 +6,8 @@
 @import "./_mixins/linker";
 @import "./_mixins/list-unstyled";
 
+@import "./base/mask";
+
 @import "./breadcrumb/breadcrumb";
 @import "./breadcrumb/breadcrumb-item";
 
@@ -24,6 +26,8 @@
 @import "./common/validator-feedback";
 
 @import "./cropper/cropper";
+
+@import "./dialog/dialog";
 
 @import "./dropdown/dropdown";
 @import "./dropdown/dropdown-menu";
@@ -47,8 +51,6 @@
 @import "./forms/select";
 @import "./forms/switch";
 
-@import "./modal/dialog";
-@import "./modal/mask";
 @import "./modal/modal";
 @import "./modal/modal-base";
 @import "./modal/modal-body";

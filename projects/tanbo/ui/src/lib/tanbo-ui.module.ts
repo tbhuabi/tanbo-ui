@@ -3,6 +3,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { UIAppModule } from './app/app.module';
 import { UIBreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { UICropperModule } from './cropper/cropper.module';
+import { UIDialogModule } from './dialog/dialog.module';
 import { UIDropdownModule } from './dropdown/dropdown.module';
 import { UIFormsModule } from './forms/forms.module';
 import { UIModalModule } from './modal/modal.module';
@@ -18,7 +19,7 @@ import { UITableModule } from './table/table.module';
 import { UITimelineModule } from './timeline/timeline.module';
 import { UITreeModule } from './tree/tree.module';
 
-import { DialogController } from './modal/dialog/dialog-controller';
+import { DialogController } from './dialog/dialog/dialog-controller';
 import { ModalController } from './modal/modal-base/modal-controller';
 import { NotifyController } from './notify/notify/notify-controller';
 import { TooltipBaseService } from './other/tooltip-base/tooltip-base.service';
@@ -30,6 +31,7 @@ import { UI_ANCHOR_LINK_DISTANCE } from './quick-nav/helper';
     UIAppModule,
     UIBreadcrumbModule,
     UICropperModule,
+    UIDialogModule,
     UIDropdownModule,
     UIFormsModule,
     UIModalModule,

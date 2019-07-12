@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DialogComponent } from './dialog/dialog.component';
-import { MaskComponent } from './mask/mask.component';
+import { UIBaseModule } from '../base/base.module';
+
 import { ModalComponent } from './modal/modal.component';
 import { ModalBaseComponent } from './modal-base/modal-base.component';
 import { ModalBodyComponent } from './modal-body/modal-body.component';
@@ -11,11 +11,10 @@ import { ModalHeaderComponent } from './modal-header/modal-header.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    UIBaseModule
   ],
   declarations: [
-    DialogComponent,
-    MaskComponent,
     ModalComponent,
     ModalBaseComponent,
     ModalBodyComponent,
@@ -23,8 +22,6 @@ import { ModalHeaderComponent } from './modal-header/modal-header.component';
     ModalHeaderComponent
   ],
   exports: [
-    DialogComponent,
-    MaskComponent,
     ModalComponent,
     ModalBaseComponent,
     ModalBodyComponent,

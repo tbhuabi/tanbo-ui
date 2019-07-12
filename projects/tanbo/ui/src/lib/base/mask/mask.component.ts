@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './mask.component.html'
 })
 export class MaskComponent {
-  @Input() show: boolean = false;
+  @Input() show = false;
   @Output() uiHide = new EventEmitter<void>();
 
   done() {

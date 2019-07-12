@@ -2,6 +2,11 @@
  * Public API Surface of ui
  */
 /**
+ * 基础模块
+ */
+export { MaskComponent } from './lib/base/mask/mask.component';
+export { UIBaseModule } from './lib/base/base.module';
+/**
  * 根模块
  */
 export { AppComponent } from './lib/app/app/app.component';
@@ -17,6 +22,12 @@ export { UIBreadcrumbModule } from './lib/breadcrumb/breadcrumb.module';
  */
 export { CropperComponent } from './lib/cropper/cropper/cropper.component';
 export { UICropperModule } from './lib/cropper/cropper.module';
+/**
+ * 对话框
+ */
+export { DialogComponent } from './lib/dialog/dialog/dialog.component';
+export { DialogConfig, DialogController } from './lib/dialog/dialog/dialog-controller';
+export { UIDialogModule } from './lib/dialog/dialog.module';
 /**
  * 下拉框
  */
@@ -73,9 +84,6 @@ export { UIValidators } from './lib/forms/validators';
 /**
  * 弹窗
  */
-export { DialogComponent } from './lib/modal/dialog/dialog.component';
-export { DialogConfig, DialogController } from './lib/modal/dialog/dialog-controller';
-export { MaskComponent } from './lib/modal/mask/mask.component';
 export { ModalComponent } from './lib/modal/modal/modal.component';
 export { ModalBaseComponent } from './lib/modal/modal-base/modal-base.component';
 export { ModalController } from './lib/modal/modal-base/modal-controller';
@@ -98,6 +106,7 @@ export { UINavModule } from './lib/nav/nav.module';
  */
 export { NotifyComponent } from './lib/notify/notify/notify.component';
 export { NotifyConfig, NotifyController, NotifyType } from './lib/notify/notify/notify-controller';
+export { UINotifyModule } from './lib/notify/notify.module';
 /**
  * 其它
  */
