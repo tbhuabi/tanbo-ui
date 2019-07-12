@@ -41,10 +41,10 @@ export class ModalComponent {
   }
 
   get showDefaultHeader() {
-    return !this.modalHeader || this.hideDefaultHeader;
+    return !this.modalHeader && !this.hideDefaultHeader;
   }
 
   get showDefaultFooter() {
-    return !this.modalFooter || this.hideDefaultFooter;
+    return !this.modalFooter && !this.hideDefaultFooter;
   }
 }

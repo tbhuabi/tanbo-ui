@@ -1,7 +1,7 @@
 <button type="button" (click)="show()">show</button>
 
 <ng-template #modal>
-  <ui-modal title="标题" hideDefaultHeader="fdsa">
+  <ui-modal title="标题" [hideDefaultHeader]="null">
 <!--    <ui-modal-header>-->
 <!--      self-->
 <!--      <button class="ui-close">&times;</button>-->
@@ -17,3 +17,6 @@
 </ng-template>
 
 <ui-tag closable>fdsa</ui-tag>
+<br>
+<ui-input type="checkbox" [disabled]="disable"></ui-input>
+<input type="checkbox" [disabled]="disable">
