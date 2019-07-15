@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { TreeItemService } from '../tree-item/tree-item.service';
 import { UI_TREE_DEPTH, UI_TREE_OFFSET } from '../help';
+import { AttrNumber } from '../../utils';
 
 export function treeDepthFactory(depth: number) {
   return depth + 1;
@@ -58,7 +59,7 @@ export function treeDepthFactory(depth: number) {
     )]
 })
 export class TreeComponent implements OnDestroy, OnInit {
-  @Input() depth = 0;
+  @Input() @AttrNumber(0) depth = 0;
 
   @Input()
   set expand(value: boolean) {

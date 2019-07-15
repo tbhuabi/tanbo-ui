@@ -1,16 +1,17 @@
 /*
  * Public API Surface of ui
  */
-/**
- * 基础模块
- */
-export { OverlayComponent } from './lib/base/overlay/overlay.component';
-export { UIBaseModule } from './lib/base/base.module';
+
 /**
  * 根模块
  */
 export { AppComponent } from './lib/app/app/app.component';
 export { UIAppModule } from './lib/app/app.module';
+/**
+ * 基础模块
+ */
+export { OverlayComponent } from './lib/base/overlay/overlay.component';
+export { UIBaseModule } from './lib/base/base.module';
 /**
  * 面包屑
  */

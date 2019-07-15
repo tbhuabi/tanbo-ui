@@ -21,7 +21,7 @@ import { DropdownInputComponent } from '../../dropdown/dropdown-input/dropdown-i
 import { UI_DROPDOWN_ARROW_CLASSNAME } from '../../dropdown/help';
 import { OptionComponent } from '../option/option.component';
 import { SelectService } from './select.service';
-import { AttrBoolean } from '../../utils';
+import { AttrBoolean, AttrNumber } from '../../utils';
 
 @Component({
   selector: 'ui-select',
@@ -41,7 +41,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   @Input() forId: string;
   @Input() name: string;
   @Input() placeholder = '';
-  @Input() selectedIndex = 0;
+  @Input() @AttrNumber(0) selectedIndex = 0;
   @Input() arrowIconClassName = '';
   @Input() @AttrBoolean() disabled = false;
   @Input() @AttrBoolean() readonly = false;

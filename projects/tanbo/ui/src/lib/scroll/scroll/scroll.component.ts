@@ -7,7 +7,7 @@ import {
   HostBinding,
   OnDestroy, EventEmitter, ViewChild
 } from '@angular/core';
-import { AttrBoolean } from '../../utils';
+import { AttrBoolean, AttrNumber } from '../../utils';
 
 export interface UIScrollEvent {
   scrollLeft: number;
@@ -24,7 +24,7 @@ export class ScrollComponent implements OnDestroy {
   @Output() uiScroll = new EventEmitter<UIScrollEvent>();
   @HostBinding('class.ui-overflow-x') @Input() @AttrBoolean() overflowX = false;
   @HostBinding('class.ui-overflow-y') @Input() @AttrBoolean() overflowY = true;
-  @Input() scrollBarMinLength = 50;
+  @Input() @AttrNumber(50) scrollBarMinLength = 50;
 
   @Input()
   set scrollTop(v: number) {

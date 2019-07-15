@@ -54,7 +54,7 @@ table.ui-table {
   > tfoot {
     > tr {
       > th, > td {
-        background-color: $table-thead-bg-color + 10;
+        background-color: lighten($table-thead-bg-color, 10);
       }
     }
   }

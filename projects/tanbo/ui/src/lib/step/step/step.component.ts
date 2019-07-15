@@ -28,7 +28,7 @@ export class StepComponent implements AfterContentInit, OnDestroy {
     this.updateChildren(num);
   }
 
-  private _activeIndex: number = 0;
+  private _activeIndex = 0;
   private subscription: Subscription;
 
   ngAfterContentInit() {

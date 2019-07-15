@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, Render
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
-import { AttrBoolean } from '../../utils';
+import { AttrBoolean, AttrNumber, attrToNumber } from '../../utils';
 
 @Component({
   selector: 'ui-input[type=range]',
@@ -23,45 +23,13 @@ export class RangeComponent implements ControlValueAccessor {
   @Input() @HostBinding('class.ui-disabled') @AttrBoolean() disabled = false;
   @Input() @HostBinding('class.ui-readonly') @AttrBoolean() readonly = false;
 
-  @Input()
-  set min(min: any) {
-    const v = RangeComponent.toNumber(min);
-    if (!isNaN(v)) {
-      this._min = v;
-    }
-  }
-
-  get min() {
-    return this._min;
-  }
-
-  @Input()
-  set max(max: any) {
-    const v = RangeComponent.toNumber(max);
-    if (!isNaN(v)) {
-      this._max = v;
-    }
-  }
-
-  get max() {
-    return this._max;
-  }
-
-  @Input()
-  set step(step: any) {
-    const v = RangeComponent.toNumber(step);
-    if (!isNaN(v)) {
-      this._step = v;
-    }
-  }
-
-  get step() {
-    return this._step;
-  }
+  @Input() @AttrNumber(0) min = 0;
+  @Input() @AttrNumber(100) max = 100;
+  @Input() @AttrNumber(1) step = 1;
 
   @Input()
   set value(value: any) {
-    let v = RangeComponent.toNumber(value);
+    let v = attrToNumber(value);
     if (!isNaN(v)) {
       this._value = v;
       if (this.min <= this.max) {
@@ -84,20 +52,10 @@ export class RangeComponent implements ControlValueAccessor {
   position = 50;
   isTouching = false;
 
-  private _min = 0;
-  private _max = 100;
-  private _step = 1;
   private _value = 50;
 
   private onChange: (_: any) => any;
   private onTouched: () => any;
-
-  static toNumber(value: any): number {
-    if (typeof value === 'number') {
-      return value;
-    }
-    return Number(value);
-  }
 
   constructor(private renderer: Renderer2) {
 

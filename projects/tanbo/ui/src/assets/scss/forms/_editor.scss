@@ -29,7 +29,7 @@ ui-editor {
       margin-right: 0;
       padding-left: 3px;
       padding-right: 3px;
-      border-right: 1px solid $color-light - 30;
+      border-right: 1px solid darken($color-light, 30);
       border-left: 1px solid $color-lighter;
       &:first-child {
         padding-left: 0;

@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { AttrNumber } from '../../utils';
 
 export interface PaginationItem {
   pageIndex: number;
@@ -15,11 +16,11 @@ export interface PaginationItem {
 })
 export class PaginationComponent implements OnChanges {
   @Input() size = '';
-  @Input() btnCount = 8;
-  @Input() rows = 1;
-  @Input() pageSize = 10;
-  @Input() pages = 1;
-  @Input() currentPage = 1;
+  @Input() @AttrNumber(8) btnCount = 8;
+  @Input() @AttrNumber(1) rows = 1;
+  @Input() @AttrNumber(10) pageSize = 10;
+  @Input() @AttrNumber(1) pages = 1;
+  @Input() @AttrNumber(1) currentPage = 1;
 
   @Output() uiChange = new EventEmitter<number>();
 

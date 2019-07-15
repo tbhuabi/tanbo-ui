@@ -51,8 +51,8 @@ ui-pagination {
           background-color: $pagination-hover-bg-color;
         }
         &:active {
-          background-color: $pagination-hover-bg-color - 20;
-          border-color: $pagination-hover-bg-color - 20;
+          background-color: darken($pagination-hover-bg-color, 20);
+          border-color: darken($pagination-hover-bg-color, 20);
         }
         &.active {
           color: #fff;

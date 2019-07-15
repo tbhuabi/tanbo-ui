@@ -25,13 +25,11 @@ export class FileComponent {
   @Input() @AttrBoolean() multiple = false;
   @Input() @AttrBoolean() disabled = false;
   @Input() @AttrBoolean() readonly = false;
+  @HostBinding('class.ui-focus') @AttrBoolean() focus = false;
 
   isShowLoading = false;
   progress = 0;
   refreshState = true;
-
-  @HostBinding('class.ui-focus')
-  focus = false;
 
   constructor(private http: HttpClient) {
   }
