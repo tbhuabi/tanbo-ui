@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
+import { attrToNumber } from '../../utils';
+
 export interface PaginationItem {
   pageIndex: number;
   label: number | string;
@@ -30,12 +32,14 @@ export class PaginationComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    for (let name in changes) {
-      if (/pageSize|rows/.test(name)) {
+    Object.keys(changes).forEach(key => {
+      if (/pageSize|rows/.test(key)) {
         this.pages = Math.ceil(this.rows / this.pageSize);
-        break;
       }
-    }
+      if (key !== 'size') {
+        this[key] = attrToNumber(changes[key].currentValue);
+      }
+    });
     this.setPaginationItems();
   }
 

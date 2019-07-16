@@ -1,4 +1,15 @@
-import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, Renderer2, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnChanges,
+  Output,
+  Renderer2,
+  ViewChild,
+  SimpleChanges
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
@@ -13,12 +24,13 @@ import { attrToBoolean, attrToNumber } from '../../utils';
     multi: true
   }]
 })
-export class RangeComponent implements ControlValueAccessor {
+export class RangeComponent implements ControlValueAccessor, OnChanges {
   @ViewChild('rangeBar', {static: true}) rangeBar: ElementRef;
   @ViewChild('rangeProgressBar', {static: true}) rangeProgressBar: ElementRef;
   @Input() name: string;
   @Input() forId: string;
   @Input() showProgress = true;
+
   @Input() @HostBinding('class.ui-disabled')
   set disabled(v: boolean) {
     this._disabled = attrToBoolean(v);
@@ -36,6 +48,7 @@ export class RangeComponent implements ControlValueAccessor {
   get readonly() {
     return this._readonly;
   }
+
   @Input() min = 0;
   @Input() max = 100;
   @Input() step = 1;
@@ -74,6 +87,14 @@ export class RangeComponent implements ControlValueAccessor {
 
   constructor(private renderer: Renderer2) {
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    Object.keys(changes).forEach(key => {
+      if (/min|max|step/.test(key)) {
+        this[key] = attrToNumber(changes[key].currentValue);
+      }
+    });
   }
 
   keyDown(ev: KeyboardEvent) {

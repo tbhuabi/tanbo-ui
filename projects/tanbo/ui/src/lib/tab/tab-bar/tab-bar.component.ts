@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 
 import { TabService } from '../tab/tab.service';
 import { TabButtonComponent } from '../tab-button/tab-button.component';
+import { attrToNumber } from '../../utils';
 
 @Component({
   selector: 'ui-tab-bar',
@@ -20,7 +21,7 @@ export class TabBarComponent implements OnDestroy, AfterContentInit {
 
   @Input()
   set tabIndex(v: number) {
-    this._tabIndex = v;
+    this._tabIndex = attrToNumber(v);
     if (this.tabBarItems) {
       this.tabService.publishIndex(v);
     }

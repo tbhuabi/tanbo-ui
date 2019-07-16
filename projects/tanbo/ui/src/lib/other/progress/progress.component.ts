@@ -1,10 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+
+import { attrToNumber } from '../../utils';
 
 @Component({
   selector: 'ui-progress',
   templateUrl: './progress.component.html'
 })
-export class ProgressComponent {
+export class ProgressComponent implements OnChanges {
   @Input() value = 1;
   @Input() min = 0;
   @Input() max = 100;
@@ -25,7 +27,7 @@ export class ProgressComponent {
   }
 
   get path() {
-    const r = (this.size - this.lineWidth ) / 2;
+    const r = (this.size - this.lineWidth) / 2;
     /* tslint:disable */
     return `M ${this.size / 2} ${this.lineWidth / 2} a ${r} ${r} 0 1 1 0 ${this.size - this.lineWidth} a ${r} ${r} 0 1 1 0 ${-this.size + this.lineWidth}`;
     /* tslint:enable */
@@ -33,8 +35,16 @@ export class ProgressComponent {
 
   get dasharray() {
     return [
-      (this.size - this.lineWidth ) * Math.PI * this.percent + 'px',
-      (this.size - this.lineWidth ) * Math.PI + 'px'
+      (this.size - this.lineWidth) * Math.PI * this.percent + 'px',
+      (this.size - this.lineWidth) * Math.PI + 'px'
     ].join(',');
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    Object.keys(changes).forEach(key => {
+      if (key !== 'type') {
+        this[key] = attrToNumber(changes[key].currentValue);
+      }
+    });
   }
 }

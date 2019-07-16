@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 
 import { AnchorService } from './anchor.service';
 import { UI_ANCHOR_LINK_DISTANCE } from '../helper';
+import { attrToNumber } from '../../utils';
 
 @Component({
   /*tslint:disable*/
@@ -18,7 +19,15 @@ import { UI_ANCHOR_LINK_DISTANCE } from '../helper';
 export class AnchorComponent implements OnInit, OnDestroy {
   @Input() id = '';
   @Input() name = '';
-  @Input() offset = 0;
+
+  @Input()
+  set offset(v: number) {
+    this._offset = attrToNumber(v);
+  }
+
+  get offset() {
+    return this._offset;
+  }
 
   params: any = {};
   queryParams: any = {};
@@ -36,6 +45,7 @@ export class AnchorComponent implements OnInit, OnDestroy {
     return paths.join('');
   }
 
+  private _offset = 0;
   private hashChangeIsFromSelf = false;
 
   private scrollObs: Observable<string>;
@@ -43,10 +53,10 @@ export class AnchorComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
   constructor(private elementRef: ElementRef,
-              @Inject(UI_ANCHOR_LINK_DISTANCE) private _offset: number,
+              @Inject(UI_ANCHOR_LINK_DISTANCE) offset: number,
               private anchorService: AnchorService,
               private activatedRoute: ActivatedRoute) {
-    this.offset = _offset;
+    this.offset = offset;
     this.scrollObs = this.scrollEvent.asObservable();
   }
 

@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { StepItemComponent } from '../step-item/step-item.component';
+import { attrToNumber } from '../../utils';
 
 @Component({
   selector: 'ui-step',
@@ -24,7 +25,7 @@ export class StepComponent implements AfterContentInit, OnDestroy {
   }
 
   set activeIndex(num: number) {
-    this._activeIndex = num;
+    this._activeIndex = attrToNumber(num);
     this.updateChildren(num);
   }
 
