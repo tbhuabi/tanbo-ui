@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 
 import { AnchorService } from './anchor.service';
 import { UI_ANCHOR_LINK_DISTANCE } from '../helper';
-import { AttrNumber } from '../../utils';
 
 @Component({
   /*tslint:disable*/
@@ -19,7 +18,7 @@ import { AttrNumber } from '../../utils';
 export class AnchorComponent implements OnInit, OnDestroy {
   @Input() id = '';
   @Input() name = '';
-  @Input() @AttrNumber(0) offset = 0;
+  @Input() offset = 0;
 
   params: any = {};
   queryParams: any = {};

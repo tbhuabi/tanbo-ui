@@ -1,12 +1,3 @@
 @import "./varibles";
 
 @import "./components";
-
-
-.bg1 {
-  background: lighten($color-primary, 20)
-}
-
-.bg2 {
-  background: $color-primary+ 60
-}

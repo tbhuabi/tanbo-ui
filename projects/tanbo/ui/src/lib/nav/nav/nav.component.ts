@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { NavItemService } from '../nav-item/nav-item.service';
 import { NavService } from './nav.service';
-import { AttrBoolean, attrToBoolean } from '../../utils';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-nav',
@@ -37,7 +37,16 @@ export class NavComponent implements OnDestroy, OnInit {
     return this._thumbnail;
   }
 
-  @Input() @HostBinding('class.ui-open') @AttrBoolean() expand = false;
+  @Input() @HostBinding('class.ui-open')
+  set expand(v: boolean) {
+    this._expand = attrToBoolean(v);
+  }
+
+  get expand() {
+    return this._expand;
+  }
+
+  private _expand = false;
   private _thumbnail = false;
   private sub: Subscription;
 

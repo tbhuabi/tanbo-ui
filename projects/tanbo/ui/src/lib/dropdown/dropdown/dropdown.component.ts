@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
-import { AttrBoolean } from '../../utils';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-dropdown',
@@ -25,7 +25,15 @@ export class DropdownComponent implements AfterContentInit {
   @ContentChild(DropdownMenuComponent, {static: false})
   dropdownMenu: DropdownMenuComponent;
   @Output() uiEscape = new EventEmitter();
-  @Input() @AttrBoolean() autoDisplay = true;
+
+  @Input()
+  set autoDisplay(v: boolean) {
+    this._autoDisplay = attrToBoolean(v);
+  }
+
+  get autoDisplay() {
+    return this._autoDisplay;
+  }
 
   @Input()
   set open(v: boolean) {
@@ -38,6 +46,7 @@ export class DropdownComponent implements AfterContentInit {
   }
 
   focus = false;
+  private _autoDisplay = false;
   private _open = false;
   private isSelfClick = false;
   private unbindScrollFn: () => void;

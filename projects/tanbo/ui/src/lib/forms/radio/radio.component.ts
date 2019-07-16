@@ -14,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { RadioStateService } from './radio-state.service';
-import { AttrBoolean } from '../../utils';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-input[type=radio]',
@@ -33,9 +33,32 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() checkedIcon = 'ui-icon-radio-checked';
   @Input() uncheckedIcon = 'ui-icon-radio-unchecked';
 
-  @Input() @HostBinding('class.ui-disabled') @AttrBoolean() disabled = false;
-  @Input() @HostBinding('class.ui-readonly') @AttrBoolean() readonly = false;
-  @Input() @HostBinding('class.ui-checked') @AttrBoolean() checked = false;
+  @Input() @HostBinding('class.ui-disabled')
+  set disabled(v: boolean) {
+    this._disabled = attrToBoolean(v);
+  }
+
+  get disabled() {
+    return this._disabled;
+  }
+
+  @Input() @HostBinding('class.ui-readonly')
+  set readonly(v: boolean) {
+    this._readonly = attrToBoolean(v);
+  }
+
+  get readonly() {
+    return this._readonly;
+  }
+
+  @Input() @HostBinding('class.ui-checked')
+  set checked(v: boolean) {
+    this._checked = attrToBoolean(v);
+  }
+
+  get checked() {
+    return this._checked;
+  }
 
   @Output() uiChange = new EventEmitter<string>();
 

@@ -3,7 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ENTER, TAB } from '@angular/cdk/keycodes';
 
 import { UI_DROPDOWN_ARROW_CLASSNAME } from '../help';
-import { AttrBoolean } from '../../utils';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-dropdown-input',
@@ -24,10 +24,29 @@ export class DropdownInputComponent implements ControlValueAccessor {
   @Input() name: string;
   @Input() placeholder = '';
   @Input() arrowIconClassName = '';
-  @Input() @AttrBoolean() disabled = false;
-  @Input() @AttrBoolean() readonly = false;
+
+  @Input()
+  set disabled(v: boolean) {
+    this._disabled = attrToBoolean(v);
+  }
+
+  get disabled() {
+    return this._disabled;
+  }
+
+  @Input()
+  set readonly(v: boolean) {
+    this._readonly = attrToBoolean(v);
+  }
+
+  get readonly() {
+    return this._readonly;
+  }
 
   @Output() uiClean = new EventEmitter<any>();
+
+  private _disabled = false;
+  private _readonly = false;
 
   private onChange: (_: any) => any;
   private onTouched: () => any;

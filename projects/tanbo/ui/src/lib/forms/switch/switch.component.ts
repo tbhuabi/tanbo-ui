@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { AttrBoolean } from '../../utils';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-switch',
@@ -17,11 +17,39 @@ export class SwitchComponent implements ControlValueAccessor {
   @Input() forId: string;
   @Input() value = '';
   @Input() name: string;
-  @Input() @AttrBoolean() disabled = false;
-  @Input() @AttrBoolean() readonly = false;
-  @Input() @HostBinding('class.ui-checked') @AttrBoolean() checked = false;
+  @Input()
+  set disabled(v: boolean) {
+    this._disabled = attrToBoolean(v);
+  }
+
+  get disabled() {
+    return this._disabled;
+  }
+
+  @Input()
+  set readonly(v: boolean) {
+    this._readonly = attrToBoolean(v);
+  }
+
+  get readonly() {
+    return this._readonly;
+  }
+
+  @Input() @HostBinding('class.ui-checked')
+  set checked(v: boolean) {
+    this._checked = attrToBoolean(v);
+  }
+
+  get checked() {
+    return this._checked;
+  }
+
   @HostBinding('class.ui-focus')
   focus = false;
+
+  private _checked = false;
+  private _disabled = false;
+  private _readonly = false;
 
   private onChange: (_: any) => void;
   private onTouched: () => void;

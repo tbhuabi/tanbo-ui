@@ -8,7 +8,7 @@ import {
   OnChanges,
   SimpleChanges,
   ViewChild,
-  ElementRef, OnDestroy
+  ElementRef, OnDestroy, HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -28,7 +28,7 @@ import {
   DatePickerModel
 } from './date-utils';
 
-import { AttrBoolean } from '../../utils';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-input[type=date]',
@@ -56,8 +56,23 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   @Input() minDate: string | number | Date = '';
   @Input() minTime: string;
   @Input() maxTime: string;
-  @Input() @AttrBoolean() disabled = false;
-  @Input() @AttrBoolean() readonly = false;
+  @Input()
+  set disabled(v: boolean) {
+    this._disabled = attrToBoolean(v);
+  }
+
+  get disabled() {
+    return this._disabled;
+  }
+
+  @Input()
+  set readonly(v: boolean) {
+    this._readonly = attrToBoolean(v);
+  }
+
+  get readonly() {
+    return this._readonly;
+  }
 
   get time() {
     const result = [];
@@ -97,6 +112,9 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
 
   oldModel: DatePickerModel;
   model: DatePickerModel = 'day';
+
+  private _disabled = false;
+  private _readonly = false;
 
   private onChange: (_: any) => any;
   private onTouched: () => any;
