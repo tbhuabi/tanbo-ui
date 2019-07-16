@@ -46,7 +46,7 @@ export class DropdownComponent implements AfterContentInit {
   }
 
   focus = false;
-  private _autoDisplay = false;
+  private _autoDisplay = true;
   private _open = false;
   private isSelfClick = false;
   private unbindScrollFn: () => void;
