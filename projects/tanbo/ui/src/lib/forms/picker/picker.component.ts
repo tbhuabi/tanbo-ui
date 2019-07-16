@@ -4,7 +4,7 @@ import { from, Subscription, Observable } from 'rxjs';
 
 import { UI_DROPDOWN_ARROW_CLASSNAME } from '../../dropdown/help';
 import { PickerCell } from './picker-help';
-import { attrToBoolean } from '@tanbo/ui/src/lib/utils';
+import { attrToBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-picker',
