@@ -2,7 +2,7 @@
   &.ui-#{$name} {
     opacity: 1;
 
-    > .ui-timeline-anchor {
+    > .ui-timeline-icon {
       border-color: $color;
       background-color: $color;
     }
