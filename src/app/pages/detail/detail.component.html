@@ -1,22 +1,43 @@
-<button type="button" (click)="show()">show</button>
-
-<ng-template #modal>
-  <ui-modal title="标题" [hideDefaultHeader]="null">
-<!--    <ui-modal-header>-->
-<!--      self-->
-<!--      <button class="ui-close">&times;</button>-->
-<!--    </ui-modal-header>-->
-    <ui-modal-body>
-      body
-    </ui-modal-body>
-    <ui-modal-footer>
-      <button type="button" class="ui-btn ui-btn-info">取消</button>
-      <button type="button" class="ui-btn ui-btn-primary">确定</button>
-    </ui-modal-footer>
-  </ui-modal>
-</ng-template>
-
-<ui-tag closable>fdsa</ui-tag>
 <br>
-<ui-input type="checkbox" [disabled]="disable"></ui-input>
-<input type="checkbox" [disabled]="disable">
+<p class="bg1">1111</p>
+<p class="bg2">2222</p>
+
+<table class="ui-table ui-table-bordered">
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>姓名</th>
+    <th>年龄</th>
+    <th>职业</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>1</td>
+    <td>张三</td>
+    <td>23</td>
+    <td>程序员</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>李四</td>
+    <td>65</td>
+    <td>教授</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>王五</td>
+    <td>18</td>
+    <td>学生</td>
+  </tr>
+
+  </tbody>
+  <tfoot>
+  <tr>
+    <td>4</td>
+    <td>赵六</td>
+    <td>91</td>
+    <td>退休人员</td>
+  </tr>
+  </tfoot>
+</table>

@@ -1,6 +1,6 @@
 @mixin table-styles {
   &.ui-active {
-    background-color: lighten($table-border-color, 7);
+    background-color: lighten($table-border-color, 3);
   }
   &.ui-info {
     background-color: hsla(hue($color-info), saturation($color-info), lightness($color-info), .1);
@@ -54,7 +54,7 @@ table.ui-table {
   > tfoot {
     > tr {
       > th, > td {
-        background-color: lighten($table-thead-bg-color, 10);
+        background-color: lighten($table-thead-bg-color, 3);
       }
     }
   }

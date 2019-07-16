@@ -107,18 +107,18 @@ $pagination-font-size: $font-size-base !default;
 $pagination-font-size-sm: $pagination-font-size - 1px !default;
 $pagination-font-size-lg: $pagination-font-size + 4px !default;
 
-$pagination-border-color: lighten($color-gray-light, 5) !default;
-$pagination-disabled-color: darken($pagination-border-color, 15) !default;
-$pagination-disabled-bg-color: lighten($pagination-border-color, 7) !default;
-$pagination-hover-bg-color: lighten($pagination-border-color, 2) !default;
+$pagination-border-color: lighten($color-gray-light, 2) !default;
+$pagination-disabled-color: darken($pagination-border-color, 5.52) !default;
+$pagination-disabled-bg-color: lighten($pagination-border-color, 2.5) !default;
+$pagination-hover-bg-color: lighten($pagination-border-color, .6) !default;
 
 // 表格
 $table-cell-padding: 8px !default;
 $table-border-color: #e9e9ea !default;
-$table-thead-bg-color: lighten($table-border-color, 10) !default;
-$table-thead-border-color: darken($table-border-color, 15) !default;
+$table-thead-bg-color: lighten($table-border-color, 4) !default;
+$table-thead-border-color: darken($table-border-color, 5.58) !default;
 $table-striped-bg-color: #fbfbfc !default;
-$table-hover-bg-color: darken($table-striped-bg-color, 3) !default;
+$table-hover-bg-color: darken($table-striped-bg-color, 1.2) !default;
 
 // 列表
 $list-item-hover-bg: $color-lighter !default;

@@ -64,18 +64,7 @@ ui-markdown-editor {
     }
     table {
       @extend table.ui-table;
-      > thead > tr {
-        > th, > td {
-          border-width: 1px 1px 2px;
-          border-style: solid;
-          border-color: $table-border-color $table-border-color darken($table-border-color, 10);
-        }
-      }
-      > tbody > tr {
-        > td, > th {
-          border: 1px solid $table-border-color;
-        }
-      }
+      @extend table.ui-table-bordered;
     }
   }
 }
