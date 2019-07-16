@@ -1,35 +1,31 @@
 import { Component, HostBinding } from '@angular/core';
 
+export enum StepStatus {
+  waiting,
+  complete,
+  current
+}
+
 @Component({
   selector: 'ui-step-item',
   templateUrl: './step-item.component.html'
 })
 export class StepItemComponent {
   index = 0;
-  @HostBinding('style.maxWidth')
-  get maxWidth() {
-    return this._maxWidth;
-  }
-  set maxWidth(width: string) {
-    this._maxWidth = width;
-  }
-  @HostBinding('class.is-success')
-  get isSuccess() {
-    return this._isSuccess;
-  }
-  set isSuccess(status: boolean) {
-    this._isSuccess = status;
+  status: StepStatus = StepStatus.waiting;
+
+  @HostBinding('class.ui-complete')
+  get isComplete() {
+    return this.status === StepStatus.complete;
   }
 
-  @HostBinding('class.is-waiting')
+  @HostBinding('class.ui-waiting')
   get isWaiting() {
-    return this._isWaiting;
-  }
-  set isWaiting(status: boolean) {
-    this._isWaiting = status;
+    return this.status === StepStatus.waiting;
   }
 
-  private _isSuccess = false;
-  private _maxWidth = '50%';
-  private _isWaiting = false;
+  @HostBinding('class.ui-current')
+  get isCurrent() {
+    return this.status === StepStatus.current;
+  }
 }

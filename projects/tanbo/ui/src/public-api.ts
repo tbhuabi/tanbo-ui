@@ -150,7 +150,7 @@ export { UIScrollModule } from './lib/scroll/scroll.module';
  * 步骤条
  */
 export { StepComponent } from './lib/step/step/step.component';
-export { StepItemComponent } from './lib/step/step-item/step-item.component';
+export { StepItemComponent, StepStatus } from './lib/step/step-item/step-item.component';
 export { UIStepModule } from './lib/step/step.module';
 /**
  * tab

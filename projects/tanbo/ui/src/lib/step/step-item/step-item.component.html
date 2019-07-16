@@ -1,12 +1,10 @@
-<div class="ui-step-header">
-  <div class="ui-step-icon">
-    <div class="ui-step-icon-inner" [ngClass]="{'is-waiting': isWaiting}" *ngIf="!isSuccess">{{ index }}</div>
-    <span class="ui-icon-checkmark ui-color-primary" *ngIf="isSuccess"></span>
+<div class="ui-step-item-header">
+  <div class="ui-step-item-line">
   </div>
-  <div class="ui-step-line">
-    <div class="ui-step-line-inner"></div>
+  <div class="ui-step-item-icon">
+    {{ index + 1 }}
   </div>
 </div>
-<div class="ui-step-main">
+<div class="ui-step-item-content">
   <ng-content></ng-content>
 </div>

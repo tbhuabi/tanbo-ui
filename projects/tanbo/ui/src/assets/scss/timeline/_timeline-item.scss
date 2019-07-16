@@ -1,6 +1,7 @@
 @mixin timeline-item-style($name, $color) {
   &.ui-#{$name} {
     opacity: 1;
+
     > .ui-timeline-anchor {
       border-color: $color;
       background-color: $color;
@@ -34,6 +35,8 @@ ui-timeline-item {
   }
 
   @include timeline-item-style(checked, $color-primary);
+  @include timeline-item-style(dark, $color-dark);
+  @include timeline-item-style(gray, $color-gray);
   @include timeline-item-style(primary, $color-primary);
   @include timeline-item-style(info, $color-info);
   @include timeline-item-style(success, $color-success);
@@ -50,7 +53,7 @@ ui-timeline-item {
   border-left: 1px solid $color-gray-light;
 }
 
-.ui-timeline-anchor {
+.ui-timeline-icon {
   position: absolute;
   width: 9px;
   height: 9px;
@@ -62,9 +65,14 @@ ui-timeline-item {
 }
 
 .ui-timeline-title {
-  font-weight: bold;
+  font-weight: 500;
   margin: 0;
-  font-size: 1.428em;
+  font-size: 1.2em;
+
+  > small {
+    font-weight: normal;
+    opacity: .8;
+  }
 }
 
 .ui-timeline-content {

@@ -1,78 +1,87 @@
 ui-step-item {
   position: relative;
   flex: 1;
+
   &:last-child {
-    flex: none;
-    .ui-step-line {
+    .ui-step-item-line {
       display: none;
     }
   }
-  &.is-success {
-    .ui-step-header {
-      .ui-step-line {
-        .ui-step-line-inner {
-          color: $color-primary;
-        }
-      }
-      .ui-step-icon {
-        color: $color-primary;
-      }
+
+  &.ui-complete {
+    .ui-step-item-line {
+      border-top-color: $color-success;
+    }
+    .ui-step-item-icon {
+      background-color: $color-success;
     }
   }
-  &.is-waiting {
-    color: #c0c4cc;
-  }
-  .ui-step-header {
-    width: 100%;
-    position: relative;
-    .ui-step-line {
-      position: absolute;
-      margin: 0 10px 0 34px;
-      background-color: $color-gray-dark;
-      height: 1px;
-      top: 11px;
-      left: 0;
-      right: 0;
-      .ui-step-line-inner {
-        display: block;
-        color: #c0c4cc;
-        border-width: 0.5px;
-        border-style: solid;
-        border-color: inherit;
-        transition: .15s ease-out;
-        box-sizing: border-box;
-        height: 0;
-      }
+
+  &.ui-current {
+    .ui-step-item-line {
+      border-top-style: dashed;
     }
-    .ui-step-icon {
-      position: relative;
-      z-index: 1;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      width: 24px;
-      height: 24px;
-      font-size: 14px;
-      box-sizing: border-box;
-      background: #fff;
-      transition: .15s ease-out;
-      border-style: solid;
-      border-width: 1px;
-      border-color: inherit;
-      border-radius: 50%;
+
+    .ui-step-item-icon {
+      background-color: $color-primary;
     }
   }
-  .ui-step-main {
-    text-align: left;
-    white-space: normal;
-    .ui-step-title {
-      font-size: 16px;
-      line-height: 38px;
+
+  &.ui-waiting {
+    .ui-step-item-line {
+      border-top-style: dashed;
     }
-    .ui-step-description {
-      font-size: 12px;
-      line-height: 20px;
-      font-weight: 400;
+
+    .ui-step-item-icon {
+      background-color: $color-gray;
+    }
+
+    .ui-step-item-content {
+      opacity: .8;
     }
   }
+}
+
+.ui-step-item-header {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+.ui-step-item-icon {
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  position: relative;
+  text-align: center;
+  line-height: 1.6em;
+  color: #fff;
+  font-weight: 500;
+}
+
+.ui-step-item-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  border-top: 1px solid $color-gray-light;
+}
+
+.ui-step-item-content {
+  padding-right: 15px;
+}
+
+.ui-step-title {
+  font-weight: 500;
+  margin: 0;
+  font-size: 1.2em;
+
+  > small {
+    font-weight: normal;
+    opacity: .8;
+  }
+}
+
+.ui-step-content {
+  font-weight: normal;
+  margin: 0;
 }

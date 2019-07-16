@@ -1,15 +1,8 @@
-import {
-  Component,
-  ContentChildren,
-  QueryList,
-  AfterContentInit,
-  OnDestroy,
-  Input
-} from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, Input, OnDestroy, QueryList } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { StepItemComponent } from '../step-item/step-item.component';
+import { StepItemComponent, StepStatus } from '../step-item/step-item.component';
 import { attrToNumber } from '../../utils';
 
 @Component({
@@ -20,13 +13,13 @@ export class StepComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(StepItemComponent) items: QueryList<StepItemComponent>;
 
   @Input()
-  get activeIndex() {
-    return this._activeIndex;
-  }
-
   set activeIndex(num: number) {
     this._activeIndex = attrToNumber(num);
     this.updateChildren(num);
+  }
+
+  get activeIndex() {
+    return this._activeIndex;
   }
 
   private _activeIndex = 0;
@@ -34,7 +27,7 @@ export class StepComponent implements AfterContentInit, OnDestroy {
 
   ngAfterContentInit() {
     this.initChildren();
-    this.updateChildren(this._activeIndex);
+    this.updateChildren(this.activeIndex);
   }
 
   ngOnDestroy() {
@@ -43,20 +36,21 @@ export class StepComponent implements AfterContentInit, OnDestroy {
 
   initChildren() {
     this.subscription = this.items.changes.pipe(delay(0)).subscribe(() => {
-      this.updateChildren(this._activeIndex);
+      this.updateChildren(this.activeIndex);
     });
   }
 
   updateChildren(num: number) {
     if (this.items) {
       this.items.forEach((item: StepItemComponent, index: number) => {
-        item.isSuccess = num > index;
-        item.isWaiting = num < index;
-
-        item.index = index + 1;
-        if (index + 1 === this.items.length) {
-          item.maxWidth = `${100 / this.items.length}%`;
+        if (num > index) {
+          item.status = StepStatus.complete;
+        } else if (num < index) {
+          item.status = StepStatus.waiting;
+        } else {
+          item.status = StepStatus.current;
         }
+        item.index = index;
       });
     }
   }
