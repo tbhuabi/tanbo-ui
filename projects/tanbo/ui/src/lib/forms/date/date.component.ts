@@ -8,7 +8,8 @@ import {
   OnChanges,
   SimpleChanges,
   ViewChild,
-  ElementRef, OnDestroy, HostBinding
+  ElementRef,
+  OnDestroy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 

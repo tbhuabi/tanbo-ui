@@ -1,10 +1,11 @@
 @mixin timeline-item-style($name, $color) {
   &.ui-#{$name} {
-    color: $color;
-    &:before {
+    opacity: 1;
+    > .ui-timeline-anchor {
       border-color: $color;
       background-color: $color;
     }
+
     > .ui-timeline-line {
       border-color: $color;
     }
@@ -17,28 +18,21 @@ ui-timeline-item {
   padding-left: 1.5em;
   padding-bottom: 1em;
   font-weight: 500;
+  opacity: .76;
+  @include clearfix;
+
   &:first-of-type {
     .ui-timeline-line {
       top: 1em;
     }
   }
+
   &:last-of-type {
     .ui-timeline-line {
       bottom: calc(100% - 1em);
     }
   }
-  &:before {
-    content: "";
-    position: absolute;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    left: -5px;
-    top: .5em;
-    z-index: 1;
-    background-color: #fff;
-    border: 1px solid $color-gray;
-  }
+
   @include timeline-item-style(checked, $color-primary);
   @include timeline-item-style(primary, $color-primary);
   @include timeline-item-style(info, $color-info);
@@ -56,9 +50,24 @@ ui-timeline-item {
   border-left: 1px solid $color-gray-light;
 }
 
+.ui-timeline-anchor {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  left: -4px;
+  top: .5em;
+  background-color: #fff;
+  border: 1px solid $color-gray;
+}
+
+.ui-timeline-title {
+  font-weight: bold;
+  margin: 0;
+  font-size: 1.428em;
+}
+
 .ui-timeline-content {
   font-weight: normal;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  color: $color-dark;
+  margin: 0;
 }

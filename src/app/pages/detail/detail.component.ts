@@ -7,6 +7,7 @@ import { ModalController } from '@tanbo/ui';
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnInit {
+  time = '00:00:00';
   disable = 'true';
   @ViewChild('modal', {static: true}) modal: TemplateRef<any>;
 

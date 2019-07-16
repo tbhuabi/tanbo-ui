@@ -133,7 +133,7 @@ export function toDate(date: string | number | Date, toMax: boolean, format?: st
         if (segment) {
           hours = Number(segment);
           if (typeof hours === 'number' && hours >= 0 && hours < 24) {
-            d.setHours(day);
+            d.setHours(hours);
           }
         }
         break;
@@ -158,7 +158,7 @@ export function toDate(date: string | number | Date, toMax: boolean, format?: st
         if (segment) {
           minutes = Number(segment);
           if (typeof minutes === 'number' && minutes >= 0 && minutes < 60) {
-            d.setMinutes(day);
+            d.setMinutes(minutes);
           }
         }
         break;
@@ -183,7 +183,7 @@ export function toDate(date: string | number | Date, toMax: boolean, format?: st
         if (segment) {
           seconds = Number(segment);
           if (typeof seconds === 'number' && seconds >= 0 && seconds < 60) {
-            d.setSeconds(day);
+            d.setSeconds(seconds);
           }
         }
         break;
