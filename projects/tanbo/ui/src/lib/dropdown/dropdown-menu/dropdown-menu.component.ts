@@ -24,6 +24,7 @@ export class DropdownMenuComponent implements OnInit {
   @HostBinding('style.zIndex')
   zIndex: number;
   expand = false;
+  autoDisplay = true;
 
   constructor(public elementRef: ElementRef,
               @Inject(UI_OVERLAY_Z_INDEX) zIndex: number,
@@ -38,6 +39,8 @@ export class DropdownMenuComponent implements OnInit {
 
   @HostListener('click')
   click() {
-    this.dropdownService.click();
+    if (!this.autoDisplay) {
+      this.dropdownService.click();
+    }
   }
 }

@@ -34,6 +34,9 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
   @Input()
   set autoDisplay(v: boolean) {
     this._autoDisplay = attrToBoolean(v);
+    if (this.dropdownMenu) {
+      this.dropdownMenu.autoDisplay = this._autoDisplay;
+    }
   }
 
   get autoDisplay() {
