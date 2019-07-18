@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 
 import { DropdownRenderer } from '../../dropdown/help';
 
