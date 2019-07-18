@@ -1,47 +1,6 @@
 ui-dropdown {
   display: inline-block;
   position: relative;
-  &.ui-open {
-    > ui-dropdown-menu {
-      transform: scaleY(1);
-      opacity: 1
-    }
-  }
-  > ui-dropdown-menu {
-    transition: all .1s;
-    transform: scaleY(0);
-    opacity: 0;
-    z-index: 100;
-    position: absolute;
-    &.ui-top-left {
-      left: 0;
-      bottom: 100%;
-      right: auto;
-      top: auto;
-      transform-origin: 0 100%;
-    }
-    &.ui-top-right {
-      left: auto;
-      right: 0;
-      top: auto;
-      bottom: 100%;
-      transform-origin: 0 100%;
-    }
-    &.ui-bottom-left {
-      transform-origin: 0 0;
-      left: 0;
-      top: 100%;
-      right: auto;
-      bottom: auto;
-    }
-    &.ui-bottom-right {
-      left: auto;
-      right: 0;
-      top: 100%;
-      bottom: auto;
-      transform-origin: 0 0;
-    }
-  }
   > .ui-btn-toggle {
     padding-left: 8px;
     padding-right: 8px;

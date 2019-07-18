@@ -19,6 +19,7 @@ import { UITableModule } from './table/table.module';
 import { UITimelineModule } from './timeline/timeline.module';
 import { UITreeModule } from './tree/tree.module';
 
+import { UI_OVERLAY_Z_INDEX } from './base/help';
 import { DialogController } from './dialog/dialog/dialog-controller';
 import { ModalController } from './modal/modal-base/modal-controller';
 import { NotifyController } from './notify/notify/notify-controller';
@@ -60,6 +61,9 @@ export class UIModule {
         AnchorService, {
           provide: UI_ANCHOR_LINK_DISTANCE,
           useValue: 0
+        }, {
+          provide: UI_OVERLAY_Z_INDEX,
+          useValue: 1000
         }
       ]
     };

@@ -1,18 +1,43 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, HostBinding, HostListener, Inject, OnInit, SkipSelf } from '@angular/core';
+
+import { DropdownRenderer } from '../help';
+import { UI_OVERLAY_Z_INDEX } from '../../base/help';
+import { DropdownService } from '../dropdown/dropdown.service';
+
+export function dropdownZIndexFactory(zIndex: number) {
+  return zIndex + 10;
+}
 
 @Component({
   selector: 'ui-dropdown-menu',
   templateUrl: './dropdown-menu.component.html',
   host: {
-    '[class.ui-top-left]': 'position === "topLeft"',
-    '[class.ui-top-right]': 'position === "topRight"',
-    '[class.ui-bottom-left]': 'position === "bottomLeft"',
-    '[class.ui-bottom-right]': 'position === "bottomRight"'
-  }
+    '[class.ui-open]': 'expand'
+  },
+  providers: [{
+    provide: UI_OVERLAY_Z_INDEX,
+    useFactory: dropdownZIndexFactory,
+    deps: [[UI_OVERLAY_Z_INDEX, new SkipSelf()]]
+  }],
 })
-export class DropdownMenuComponent {
-  position = 'bottomLeft';
+export class DropdownMenuComponent implements OnInit {
+  @HostBinding('style.zIndex')
+  zIndex: number;
+  expand = false;
 
-  constructor(public elementRef: ElementRef) {
+  constructor(public elementRef: ElementRef,
+              @Inject(UI_OVERLAY_Z_INDEX) zIndex: number,
+              private dropdownService: DropdownService,
+              private renderer: DropdownRenderer) {
+    this.zIndex = zIndex;
+  }
+
+  ngOnInit(): void {
+    this.renderer.renderDropdown(this.elementRef);
+  }
+
+  @HostListener('click')
+  click() {
+    this.dropdownService.click();
   }
 }

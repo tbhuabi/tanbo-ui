@@ -12,6 +12,7 @@ export { UIAppModule } from './lib/app/app.module';
  */
 export { OverlayComponent } from './lib/base/overlay/overlay.component';
 export { UIBaseModule } from './lib/base/base.module';
+export { UI_OVERLAY_Z_INDEX } from './lib/base/help';
 /**
  * 面包屑
  */
@@ -33,10 +34,11 @@ export { UIDialogModule } from './lib/dialog/dialog.module';
  * 下拉框
  */
 export { DropdownComponent } from './lib/dropdown/dropdown/dropdown.component';
+export { DropdownService } from './lib/dropdown/dropdown/dropdown.service';
 export { DropdownInputComponent } from './lib/dropdown/dropdown-input/dropdown-input.component';
-export { DropdownMenuComponent } from './lib/dropdown/dropdown-menu/dropdown-menu.component';
+export { DropdownMenuComponent, dropdownZIndexFactory } from './lib/dropdown/dropdown-menu/dropdown-menu.component';
 export { UIDropdownModule } from './lib/dropdown/dropdown.module';
-export { UI_DROPDOWN_ARROW_CLASSNAME } from './lib/dropdown/help';
+export { UI_DROPDOWN_ARROW_CLASSNAME, DropdownRenderer } from './lib/dropdown/help';
 /**
  * 表单
  */
