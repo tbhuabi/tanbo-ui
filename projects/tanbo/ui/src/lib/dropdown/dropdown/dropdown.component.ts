@@ -113,6 +113,7 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
       return;
     }
     this.dropdownMenu.expand = this.open;
+    this.dropdownMenu.autoDisplay = this._autoDisplay;
     const childElement = this.dropdownMenu.elementRef.nativeElement;
 
     const fn = () => {
