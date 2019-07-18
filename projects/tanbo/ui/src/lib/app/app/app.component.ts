@@ -14,7 +14,12 @@ export class AppComponent implements DropdownRenderer {
   constructor(private elementRef: ElementRef<HTMLElement>) {
   }
 
-  renderDropdown(ref: ElementRef): void {
+  renderDropdown(ref: ElementRef) {
     this.elementRef.nativeElement.appendChild(ref.nativeElement);
+    return () => {
+      if (ref.nativeElement.parentNode) {
+        ref.nativeElement.parentNode.removeChild(ref.nativeElement);
+      }
+    }
   }
 }

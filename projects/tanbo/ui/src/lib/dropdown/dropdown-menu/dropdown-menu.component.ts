@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, HostListener, Inject, OnInit, SkipSelf } from '@angular/core';
+import { Component, ElementRef, HostBinding, HostListener, Inject, OnDestroy, OnInit, SkipSelf } from '@angular/core';
 
 import { DropdownRenderer } from '../help';
 import { UI_OVERLAY_Z_INDEX } from '../../base/help';
@@ -20,12 +20,13 @@ export function dropdownZIndexFactory(zIndex: number) {
     deps: [[UI_OVERLAY_Z_INDEX, new SkipSelf()]]
   }],
 })
-export class DropdownMenuComponent implements OnInit {
+export class DropdownMenuComponent implements OnInit, OnDestroy {
   @HostBinding('style.zIndex')
   zIndex: number;
   expand = false;
   autoDisplay = true;
 
+  private removeFn: () => void;
   constructor(public elementRef: ElementRef,
               @Inject(UI_OVERLAY_Z_INDEX) zIndex: number,
               private dropdownService: DropdownService,
@@ -34,7 +35,11 @@ export class DropdownMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.renderer.renderDropdown(this.elementRef);
+    this.removeFn = this.renderer.renderDropdown(this.elementRef);
+  }
+
+  ngOnDestroy(): void {
+    this.removeFn();
   }
 
   @HostListener('click')
@@ -43,4 +48,6 @@ export class DropdownMenuComponent implements OnInit {
       this.dropdownService.click();
     }
   }
+
+
 }
