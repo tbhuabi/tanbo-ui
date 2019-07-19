@@ -151,6 +151,7 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
     const childElement = this.dropdownMenu.elementRef.nativeElement;
 
     const fn = () => {
+      this.updateChildDisplayLimit(this.displayLimit);
       const clientWidth = document.documentElement.clientWidth;
       const clientHeight = document.documentElement.clientHeight;
       const parentRect = this.el.nativeElement.getBoundingClientRect();
@@ -173,7 +174,6 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
         this.renderer.setStyle(childElement, 'right', clientWidth - parentRect.right + 'px');
         this.renderer.setStyle(childElement, 'left', '');
       }
-      this.updateChildDisplayLimit(this.displayLimit);
     };
     if (this.open) {
       fn();
