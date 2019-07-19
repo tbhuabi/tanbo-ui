@@ -1,8 +1,20 @@
-import { Component, ElementRef, HostBinding, HostListener, Inject, OnInit, SkipSelf } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostBinding,
+  HostListener,
+  Input,
+  Inject,
+  OnInit,
+  SkipSelf,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 
 import { DropdownRenderer } from '../help';
 import { UI_OVERLAY_Z_INDEX } from '../../base/help';
-import { DropdownService } from '../dropdown/dropdown.service';
+import { DropdownService, DropdownDisplayLimit } from '../dropdown/dropdown.service';
 
 export function dropdownZIndexFactory(zIndex: number) {
   return zIndex + 10;
@@ -20,25 +32,16 @@ export function dropdownZIndexFactory(zIndex: number) {
     deps: [[UI_OVERLAY_Z_INDEX, new SkipSelf()]]
   }],
 })
-export class DropdownMenuComponent implements OnInit, OnDestroy {
+export class DropdownMenuComponent implements OnInit, OnDestroy, OnChanges {
   @HostBinding('style.zIndex')
   zIndex: number;
 
-  @Input()
-  set displayLimit(v: DropdownDisplayLimit) {
-    this._limit = v;
-    this.dropdownService.updateDisplayLimit(v);
-  }
-
-  get displayLimit() {
-    return this._limit;
-  }
+  @Input() displayLimit: DropdownDisplayLimit;
 
   expand = false;
   autoDisplay = true;
 
   private removeFn: () => void;
-  private _limit: DropdownDisplayLimit = null;
 
   constructor(public elementRef: ElementRef,
               @Inject(UI_OVERLAY_Z_INDEX) zIndex: number,
@@ -51,10 +54,16 @@ export class DropdownMenuComponent implements OnInit, OnDestroy {
     this.removeFn = this.renderer.renderDropdown(this.elementRef);
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    Object.keys(changes).forEach(key => {
+      if (key === 'displayLimit') {
+        this.dropdownService.updateDisplayLimit(this.displayLimit);
+      }
+    });
+  }
+
   ngOnDestroy(): void {
     this.removeFn();
-    this.dropdownService.updateDisplayLimit(this._limit);
-    this.renderer.renderDropdown(this.elementRef);
   }
 
   @HostListener('click')
