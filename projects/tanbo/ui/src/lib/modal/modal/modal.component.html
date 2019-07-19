@@ -1,5 +1,5 @@
 <ui-modal-header *ngIf="showDefaultHeader" [ngClass]="classes">{{ title }}
-  <button (click)="uiClose.emit($event)" class="ui-close"><span class="ui-icon-close"></span></button>
+  <button type="button" (click)="uiClose.emit($event)" class="ui-close"><span class="ui-icon-close"></span></button>
 </ui-modal-header>
 <ng-content></ng-content>
 <ui-modal-footer *ngIf="showDefaultFooter">
