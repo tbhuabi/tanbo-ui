@@ -10,7 +10,7 @@ import {
   ViewChild,
   Output,
   Inject,
-  QueryList, ElementRef
+  QueryList
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW } from '@angular/cdk/keycodes';
@@ -94,7 +94,6 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   }
 
   constructor(@Inject(UI_DROPDOWN_ARROW_CLASSNAME) arrowIcon: string,
-              public elementRef: ElementRef,
               private selectService: SelectService,
               private changeDetectorRef: ChangeDetectorRef) {
     this.arrowIconClassName = arrowIcon;

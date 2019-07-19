@@ -12,7 +12,7 @@ import {
 
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 import { attrToBoolean } from '../../utils';
-import { DropdownService } from './dropdown.service';
+import { DropdownDisplayLimit, DropdownService } from './dropdown.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -63,7 +63,8 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
   private topOrBottom = 'bottom';
   private leftOfRight = 'left';
 
-  private sub: Subscription;
+  private subs: Subscription[] = [];
+  private displayLimit: DropdownDisplayLimit;
 
   constructor(private el: ElementRef<HTMLElement>,
               private dropdownService: DropdownService,
@@ -71,9 +72,15 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sub = this.dropdownService.menuClick.subscribe(() => {
+    this.subs.push(this.dropdownService.menuClick.subscribe(() => {
       this.isSelfClick = true;
-    });
+    }));
+    this.subs.push(this.dropdownService.displayLimit.subscribe(v => {
+      this.displayLimit = v;
+      if (this.open) {
+        this.updateChildDisplayLimit(v);
+      }
+    }));
   }
 
   ngAfterContentInit(): void {
@@ -81,7 +88,34 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.subs.forEach(item => item.unsubscribe());
+  }
+
+  updateChildDisplayLimit(limit: DropdownDisplayLimit) {
+    if (!this.dropdownMenu) {
+      return;
+    }
+    const width = this.el.nativeElement.offsetWidth + 'px';
+    const menuElement = this.dropdownMenu.elementRef.nativeElement;
+    const styles = {
+      minWidth: '',
+      maxWidth: '',
+      width: ''
+    };
+    switch (limit) {
+      case 'maxWidth':
+        styles.maxWidth = width;
+        break;
+      case 'minWidth':
+        styles.minWidth = width;
+        break;
+      case 'width':
+        styles.width = width;
+        break;
+    }
+    Object.keys(styles).forEach(key => {
+      this.renderer.setStyle(menuElement, key, styles[key]);
+    });
   }
 
   @HostListener('uiDropdownInputBlur')
@@ -139,6 +173,7 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
         this.renderer.setStyle(childElement, 'right', clientWidth - parentRect.right + 'px');
         this.renderer.setStyle(childElement, 'left', '');
       }
+      this.updateChildDisplayLimit(this.displayLimit);
     };
     if (this.open) {
       fn();

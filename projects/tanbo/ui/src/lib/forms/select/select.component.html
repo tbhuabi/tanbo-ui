@@ -12,7 +12,7 @@
           [value]="text"
           [forId]="forId"
           [size]="size"></ui-dropdown-input>
-  <ui-dropdown-menu [style.minWidth]="elementRef.nativeElement.offsetWidth + 'px'" class="ui-select-dropdown-menu">
+  <ui-dropdown-menu displayLimit="minWidth" class="ui-select-dropdown-menu">
     <ng-content></ng-content>
   </ui-dropdown-menu>
 </ui-dropdown>

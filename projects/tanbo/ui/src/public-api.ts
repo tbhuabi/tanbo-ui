@@ -34,7 +34,7 @@ export { UIDialogModule } from './lib/dialog/dialog.module';
  * 下拉框
  */
 export { DropdownComponent } from './lib/dropdown/dropdown/dropdown.component';
-export { DropdownService } from './lib/dropdown/dropdown/dropdown.service';
+export { DropdownService, DropdownDisplayLimit } from './lib/dropdown/dropdown/dropdown.service';
 export { DropdownInputComponent } from './lib/dropdown/dropdown-input/dropdown-input.component';
 export { DropdownMenuComponent, dropdownZIndexFactory } from './lib/dropdown/dropdown-menu/dropdown-menu.component';
 export { UIDropdownModule } from './lib/dropdown/dropdown.module';
