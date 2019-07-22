@@ -42,15 +42,16 @@ ui-dropdown-input {
   font-size: 12px;
   display: none;
   > span {
-    display: inline-block;
-    width: 13px;
-    height: 13px;
+    display: inline-flex;
+    width: 14px;
+    height: 14px;
     background-color: $color-gray;
     color: #fff;
-    text-align: center;
-    line-height: 1;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
     cursor: pointer;
+    font-size: 12px;
     &:hover {
       background-color: $color-gray-dark;
     }

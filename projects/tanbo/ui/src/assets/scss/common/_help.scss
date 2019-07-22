@@ -20,6 +20,20 @@
   text-shadow: 0 1px 0 #fff;
   opacity: .2;
   outline: none;
+  &:after {
+    content: "\e636";
+    font-family: "tanbo-ui";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
   &:hover {
     opacity: .5;
   }
