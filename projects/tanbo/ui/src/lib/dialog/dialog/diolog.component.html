@@ -1,7 +1,7 @@
 <ui-overlay [show]="show" (uiHide)="hide()">
   <div class="ui-dialog" *ngIf="show" [@dialogAnimation]="show ? 'in' : 'out'">
     <div class="ui-dialog-header" *ngIf="title">
-      <button type="button" class="ui-close" (click)="checked(false)"><span class="ui-icon-close"></span></button>
+      <button type="button" class="ui-close" (click)="checked(false)"></button>
       <h4 class="ui-dialog-title">{{ title }}</h4>
     </div>
     <div class="ui-dialog-content">

@@ -14,7 +14,7 @@
     {{ config.content }}
   </div>
   <div class="ui-notify-close">
-    <button class="ui-close" (click)="close(i)" type="button"><span class="ui-icon-close"></span></button>
+    <button class="ui-close" (click)="close(i)" type="button"></button>
   </div>
   <div *ngIf="config.autoHide" class="ui-notify-time-down-bar" [ngStyle]="{width: 100 - config.proportion + '%'}"></div>
 </div>
