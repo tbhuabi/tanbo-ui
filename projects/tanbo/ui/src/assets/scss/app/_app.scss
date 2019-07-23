@@ -54,3 +54,71 @@
     margin-left: 10px;
   }
 }
+
+
+@mixin notify-theme($name, $color) {
+  &.ui-#{$name} {
+    > .ui-notify-icon {
+      color: $color;
+    }
+    > .ui-notify-time-down-bar {
+      background-color: rgba(red($color), green($color), blue($color), .5);
+    }
+  }
+}
+
+.ui-notify {
+  position: fixed;
+  z-index: $notify-z-index;
+  top: 50px;
+  left: 50%;
+  margin-left: -180px;
+}
+
+.ui-notify-item {
+  position: relative;
+  width: 360px;
+  padding: 15px $container-horizontal-padding;
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 10px hsla(hue($color-default), saturation($color-default), lightness($color-default), .25);
+  display: flex;
+  align-items: center;
+  border: 1px solid $color-light;
+  border-bottom: none;
+  background-color: #fff;
+  border-radius: $radius-base;
+  @include notify-theme(default, $color-default);
+  @include notify-theme(primary, $color-primary);
+  @include notify-theme(info, $color-info);
+  @include notify-theme(success, $color-success);
+  @include notify-theme(warning, $color-warning);
+  @include notify-theme(danger, $color-danger);
+}
+
+.ui-notify-icon {
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+}
+
+.ui-notify-context {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.ui-notify-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.ui-notify-time-down-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: hsla(hue($color-default), saturation($color-default), lightness($color-default), .5);
+}

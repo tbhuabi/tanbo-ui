@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ModalController, DialogController } from '@tanbo/ui';
+import { ModalController, DialogController, NotifyController } from '@tanbo/ui';
 
 @Component({
   selector: 'app-detail',
@@ -14,7 +14,12 @@ export class DetailComponent {
   @ViewChild('modal', {static: true}) modal: TemplateRef<any>;
 
   constructor(private modalController: ModalController,
+              private notifyController: NotifyController,
               private dialogController: DialogController) {
+  }
+
+  notify() {
+    this.notifyController.push('4321431');
   }
 
   showDialog() {

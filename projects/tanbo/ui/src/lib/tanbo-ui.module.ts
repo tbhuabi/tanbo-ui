@@ -7,7 +7,6 @@ import { UIDropdownModule } from './dropdown/dropdown.module';
 import { UIFormsModule } from './forms/forms.module';
 import { UIModalModule } from './modal/modal.module';
 import { UINavModule } from './nav/nav.module';
-import { UINotifyModule } from './notify/notify.module';
 import { UIOtherModule } from './other/other.module';
 import { UIPanelModule } from './panel/panel.module';
 import { UIQuickNavModule } from './quick-nav/quick-nav.module';
@@ -18,10 +17,9 @@ import { UITableModule } from './table/table.module';
 import { UITimelineModule } from './timeline/timeline.module';
 import { UITreeModule } from './tree/tree.module';
 
-import { DialogController } from './app/help';
+import { DialogController, NotifyController } from './app/help';
 import { ModalController } from './modal/help';
 import { UI_OVERLAY_Z_INDEX } from './base/help';
-import { NotifyController } from './notify/notify/notify-controller';
 import { TooltipBaseService } from './other/tooltip-base/tooltip-base.service';
 import { AnchorService } from './quick-nav/anchor/anchor.service';
 import { UI_ANCHOR_LINK_DISTANCE } from './quick-nav/helper';
@@ -35,7 +33,6 @@ import { UI_ANCHOR_LINK_DISTANCE } from './quick-nav/helper';
     UIFormsModule,
     UIModalModule,
     UINavModule,
-    UINotifyModule,
     UIOtherModule,
     UIPanelModule,
     UIQuickNavModule,

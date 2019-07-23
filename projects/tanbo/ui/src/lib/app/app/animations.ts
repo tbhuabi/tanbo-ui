@@ -1,4 +1,4 @@
-import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 
 export const modalAnimation = trigger('modalAnimation', [
   transition(':enter', animate(160, keyframes([
@@ -40,3 +40,16 @@ export const dialogAnimation = trigger('dialogAnimation', [
     })
   ])))
 ]);
+
+export const notifyAnimation = trigger('notifyAnimation', [state('*', style({
+  transformOrigin: '100% 0'
+})), transition(':leave', animate('.2s', style({
+  transform: 'scaleY(0)',
+  opacity: 0
+}))), transition(':enter', [style({
+  transform: 'translateY(40px)',
+  opacity: 0
+}), animate('.2s', style({
+  transform: 'translateY(0)',
+  opacity: 1
+}))])]);

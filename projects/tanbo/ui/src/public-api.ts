@@ -6,8 +6,9 @@
  * 根模块
  */
 export { AppComponent } from './lib/app/app/app.component';
+export { dialogAnimation, modalAnimation, notifyAnimation } from './lib/app/app/animations';
 export { UIAppModule } from './lib/app/app.module';
-export { DialogConfig, DialogController } from './lib/app/help';
+export { DialogConfig, DialogController, NotifyType, NotifyController, NotifyConfig } from './lib/app/help';
 /**
  * 基础模块
  */
@@ -98,12 +99,6 @@ export { NavItemComponent } from './lib/nav/nav-item/nav-item.component';
 export { NavItemService } from './lib/nav/nav-item/nav-item.service';
 export { NavThumbnailComponent } from './lib/nav/nav-thumbnail/nav-thumbnail.component';
 export { UINavModule } from './lib/nav/nav.module';
-/**
- * 通知
- */
-export { NotifyComponent } from './lib/notify/notify/notify.component';
-export { NotifyConfig, NotifyController, NotifyType } from './lib/notify/notify/notify-controller';
-export { UINotifyModule } from './lib/notify/notify.module';
 /**
  * 其它
  */
