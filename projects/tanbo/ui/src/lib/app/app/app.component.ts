@@ -5,6 +5,7 @@ import { DropdownRenderer } from '../../dropdown/help';
 import { ModalController } from '../../modal/help';
 import { DialogConfig, DialogController, NotifyController, NotifyType } from '../help';
 import { dialogAnimation, modalAnimation, notifyAnimation } from './animations';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'ui-app',
@@ -23,8 +24,8 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   modalTemplates: TemplateRef<any>[] = [];
   messageList: Array<any> = [];
 
-  get isShowOverlay() {
-    return this.modalTemplates.length > 0 || this.isShowDialog;
+  get isShowModal() {
+    return this.modalTemplates.length > 0;
   }
 
   dialogConfig: DialogConfig;
@@ -33,15 +34,25 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   private dialogCheckState = false;
   private subs: Subscription[] = [];
   private timer: any = null;
+  private hideEventFromRouteChange = false;
 
   constructor(private elementRef: ElementRef<HTMLElement>,
+              private router: Router,
               private notifyController: NotifyController,
               private modalController: ModalController,
               private dialogController: DialogController) {
   }
 
   ngOnInit(): void {
+    this.subs.push(this.router.events.subscribe(ev => {
+      if (ev instanceof NavigationStart) {
+        this.hideEventFromRouteChange = true;
+        this.hideAll();
+        this.isShowDialog = false;
+      }
+    }));
     this.subs.push(this.dialogController.config.subscribe(c => {
+      this.hideEventFromRouteChange = false;
       this.dialog(c);
     }));
     this.subs.push(this.modalController.showEvent.subscribe(temp => {
@@ -145,7 +156,9 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   }
 
   overlayHide() {
-    this.dialogController.checkState.next(this.dialogCheckState);
+    if (!this.hideEventFromRouteChange) {
+      this.dialogController.checkState.next(this.dialogCheckState);
+    }
   }
 
   close(i: number) {
