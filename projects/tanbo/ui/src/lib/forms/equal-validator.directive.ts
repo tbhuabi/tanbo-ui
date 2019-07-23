@@ -1,4 +1,4 @@
-import { Directive, Input, Optional, OnDestroy } from '@angular/core';
+import { Directive, Input, Optional, OnDestroy, forwardRef } from '@angular/core';
 import { NG_VALIDATORS, AbstractControl, ValidationErrors, Validator, NgModel, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { UIValidators } from './validators';
   /* tslint:enable */
   providers: [{
     provide: NG_VALIDATORS,
-    useExisting: EqualValidator,
+    useExisting: forwardRef(() => EqualValidator),
     multi: true
   }]
 })

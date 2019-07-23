@@ -1,5 +1,13 @@
-ui-dialog {
-
+.ui-modal {
+  border-radius: 6px;
+  overflow: hidden;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: $mask-z-index + 10;
+  transform: translateX(-50%) translateY(-50%);
+  box-shadow: 0 10px 10px hsla(hue($color-default), saturation($color-default), lightness($color-default), .15);
+  transform-origin: 0;
 }
 
 .ui-dialog {

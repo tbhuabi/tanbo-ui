@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { UIDropdownModule } from '../dropdown/dropdown.module';
-import { UIDialogModule } from '../dialog/dialog.module';
-import { UIModalModule } from '../modal/modal.module';
+import { UIBaseModule } from '../base/base.module';
 import { UINotifyModule } from '../notify/notify.module';
 import { UIOtherModule } from '../other/other.module';
 
@@ -10,9 +9,8 @@ import { AppComponent } from './app/app.component';
 
 @NgModule({
   imports: [
-    UIDropdownModule,
-    UIDialogModule,
-    UIModalModule,
+    CommonModule,
+    UIBaseModule,
     UINotifyModule,
     UIOtherModule
   ],

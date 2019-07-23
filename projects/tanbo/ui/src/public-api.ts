@@ -7,6 +7,7 @@
  */
 export { AppComponent } from './lib/app/app/app.component';
 export { UIAppModule } from './lib/app/app.module';
+export { DialogConfig, DialogController } from './lib/app/help';
 /**
  * 基础模块
  */
@@ -24,12 +25,6 @@ export { UIBreadcrumbModule } from './lib/breadcrumb/breadcrumb.module';
  */
 export { CropperComponent } from './lib/cropper/cropper/cropper.component';
 export { UICropperModule } from './lib/cropper/cropper.module';
-/**
- * 对话框
- */
-export { DialogComponent } from './lib/dialog/dialog/dialog.component';
-export { DialogConfig, DialogController } from './lib/dialog/dialog/dialog-controller';
-export { UIDialogModule } from './lib/dialog/dialog.module';
 /**
  * 下拉框
  */
@@ -88,12 +83,11 @@ export { UIValidators } from './lib/forms/validators';
  * 弹窗
  */
 export { ModalComponent } from './lib/modal/modal/modal.component';
-export { ModalBaseComponent } from './lib/modal/modal-base/modal-base.component';
-export { ModalController } from './lib/modal/modal-base/modal-controller';
 export { ModalBodyComponent } from './lib/modal/modal-body/modal-body.component';
 export { ModalFooterComponent } from './lib/modal/modal-footer/modal-footer.component';
 export { ModalHeaderComponent } from './lib/modal/modal-header/modal-header.component';
 export { UIModalModule } from './lib/modal/modal.module';
+export { ModalController } from './lib/modal/help';
 /**
  * 导航
  */

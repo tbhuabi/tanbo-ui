@@ -1,24 +1,38 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ModalController } from '@tanbo/ui';
+import { ModalController, DialogController } from '@tanbo/ui';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent {
+  @ViewChild('demoModal', {read: TemplateRef, static: true})
+  demoModal: TemplateRef<any>;
   time = '00:00:00';
   disable = 'true';
   @ViewChild('modal', {static: true}) modal: TemplateRef<any>;
 
-  constructor(private modalController: ModalController) {
+  constructor(private modalController: ModalController,
+              private dialogController: DialogController) {
   }
 
-  ngOnInit() {
+  showDialog() {
+    this.dialogController.dialog({
+      title: 'title',
+      content: 'test'
+    }).then(result => {
+      console.log(result);
+    });
+    // this.showModal()
   }
 
-  show() {
-    this.modalController.show(this.modal);
+  showModal() {
+    this.modalController.show(this.demoModal);
+  }
+
+  hideModal() {
+    this.modalController.hide();
   }
 
 }

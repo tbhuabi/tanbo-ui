@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, forwardRef } from '@angular/core';
 import { NG_VALIDATORS, AbstractControl, ValidationErrors, Validator, Validators } from '@angular/forms';
 
 import { UIValidators } from './validators';
@@ -9,7 +9,7 @@ import { UIValidators } from './validators';
   /* tslint:enable */
   providers: [{
     provide: NG_VALIDATORS,
-    useExisting: RequiredTrueValidator,
+    useExisting: forwardRef(() => RequiredTrueValidator),
     multi: true
   }]
 })

@@ -1,6 +1,22 @@
 <ui-view-loading-bar></ui-view-loading-bar>
 <ng-content></ng-content>
 <ui-tooltip-base></ui-tooltip-base>
-<ui-modal-base></ui-modal-base>
-<ui-dialog></ui-dialog>
+<ui-overlay [show]="isShowOverlay" (uiHide)="overlayHide()">
+  <div class="ui-modal" *ngFor="let item of modalTemplates" @modalAnimation>
+    <ng-container [ngTemplateOutlet]="item"></ng-container>
+  </div>
+  <div class="ui-dialog" *ngIf="isShowDialog" [@dialogAnimation]="isShowDialog ? 'in' : 'out'">
+    <div class="ui-dialog-header" *ngIf="dialogConfig?.title">
+      <button type="button" class="ui-close" (click)="dialogChecked(false)"></button>
+      <h4 class="ui-dialog-title">{{ dialogConfig.title }}</h4>
+    </div>
+    <div class="ui-dialog-content">
+      {{ dialogConfig?.content }}
+    </div>
+    <div class="ui-dialog-footer">
+      <button class="ui-btn ui-btn-default" (click)="dialogChecked(false)">{{ dialogConfig?.cancelBtnText }}</button>
+      <button class="ui-btn ui-btn-primary" (click)="dialogChecked(true)">{{ dialogConfig?.confirmBtnText }}</button>
+    </div>
+  </div>
+</ui-overlay>
 <ui-notify></ui-notify>
