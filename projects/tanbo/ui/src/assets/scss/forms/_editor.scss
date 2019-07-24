@@ -18,6 +18,7 @@ ui-editor {
   @extend ui-tool-bar;
   border-width: 0 0 1px !important;
   border-bottom-color: $color-gray-light !important;
+
   [tabindex], button {
     &:focus {
       @include focus($color-primary);
@@ -29,133 +30,119 @@ ui-editor {
       margin-right: 0;
       padding-left: 3px;
       padding-right: 3px;
-      border-right: 1px solid darken($color-light, 30);
-      border-left: 1px solid $color-lighter;
-      &:first-child {
-        padding-left: 0;
-        border-left: 0;
-      }
-      &:last-child {
-        padding-right: 0;
-        border-right: 0;
-      }
     }
+
     button {
       padding: 3px;
     }
   }
 }
 
-.ql-snow .ql-tooltip {
-  border-color: $color-lighter;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
-  color: #444;
-  padding: 5px 12px;
-  border-radius: 4px;
-  white-space: nowrap;
-}
+.ql-snow {
+  .ql-tooltip {
+    border-color: $color-lighter;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+    color: #444;
+    padding: 5px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
 
-.ql-snow .ql-tooltip[data-mode=link]::before {
-  content: "链接到：";
-}
+    &[data-mode=link]::before {
+      content: "链接到：";
+    }
 
-.ql-snow .ql-tooltip.ql-editing a.ql-action::after {
-  content: '保存';
-}
+    &.ql-editing a.ql-action::after {
+      content: '保存';
+    }
 
-.ql-snow .ql-tooltip::before {
-  content: '当前链接地址：';
-}
+    &::before {
+      content: '当前链接地址：';
+    }
 
-.ql-snow .ql-tooltip a.ql-action::after {
-  content: '编辑';
-}
+    a.ql-action::after {
+      content: '编辑';
+    }
 
-.ql-snow .ql-tooltip a.ql-remove::before {
-  content: '删除';
-}
+    a.ql-remove::before {
+      content: '删除';
+    }
+  }
 
-.ql-snow .ql-picker.ql-header .ql-picker-label::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item::before {
-  content: "正文";
-}
+  .ql-picker {
+    &.ql-header {
+      .ql-picker-label::before, .ql-picker-item::before {
+        content: "正文";
+      }
 
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
-  content: "标题1";
-}
+      .ql-picker-label[data-value="1"]::before, .ql-picker-item[data-value="1"]::before {
+        content: "标题1";
+      }
 
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
-  content: "标题2";
-}
+      .ql-picker-label[data-value="2"]::before, .ql-picker-item[data-value="2"]::before {
+        content: "标题2";
+      }
 
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
-  content: "标题3";
-}
+      .ql-picker-label[data-value="3"]::before, .ql-picker-item[data-value="3"]::before {
+        content: "标题3";
+      }
 
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="4"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="4"]::before {
-  content: "标题4";
-}
+      .ql-picker-label[data-value="4"]::before, .ql-picker-item[data-value="4"]::before {
+        content: "标题4";
+      }
 
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="5"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="5"]::before {
-  content: "标题5";
-}
+      .ql-picker-label[data-value="5"]::before, .ql-picker-item[data-value="5"]::before {
+        content: "标题5";
+      }
 
-.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="6"]::before,
-.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="6"]::before {
-  content: "标题6";
-}
+      .ql-picker-label[data-value="6"]::before, .ql-picker-item[data-value="6"]::before {
+        content: "标题6";
+      }
+    }
+    &.ql-font {
+      .ql-picker-label[data-value=SimSun]::before, .ql-picker-item[data-value=SimSun]::before {
+        content: "宋体";
+        font-family: "SimSun";
+      }
 
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=SimSun]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=SimSun]::before {
-  content: "宋体";
-  font-family: "SimSun";
-}
+      .ql-picker-label[data-value=SimHei]::before, .ql-picker-item[data-value=SimHei]::before {
+        content: "黑体";
+        font-family: "SimHei";
+      }
 
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=SimHei]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=SimHei]::before {
-  content: "黑体";
-  font-family: "SimHei";
-}
+      .ql-picker-label[data-value=Microsoft-YaHei]::before, .ql-picker-item[data-value=Microsoft-YaHei]::before {
+        content: "微软雅黑";
+        font-family: "Microsoft YaHei";
+      }
 
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=Microsoft-YaHei]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=Microsoft-YaHei]::before {
-  content: "微软雅黑";
-  font-family: "Microsoft YaHei";
-}
+      .ql-picker-label[data-value=KaiTi]::before, .ql-picker-item[data-value=KaiTi]::before {
+        content: "楷体";
+        font-family: "KaiTi";
+      }
 
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=KaiTi]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=KaiTi]::before {
-  content: "楷体";
-  font-family: "KaiTi";
-}
+      .ql-picker-label[data-value=FangSong]::before, .ql-picker-item[data-value=FangSong]::before {
+        content: "仿宋";
+        font-family: "FangSong";
+      }
 
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=FangSong]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=FangSong]::before {
-  content: "仿宋";
-  font-family: "FangSong";
-}
+      .ql-picker-label[data-value=Arial]::before, .ql-picker-item[data-value=Arial]::before {
+        content: "Arial";
+        font-family: "Arial";
+      }
 
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=Arial]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=Arial]::before {
-  content: "Arial";
-  font-family: "Arial";
-}
+      .ql-picker-label[data-value=Times-New-Roman]::before, .ql-picker-item[data-value=Times-New-Roman]::before {
+        content: "Times New Roman";
+        font-family: "Times New Roman";
+      }
 
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=Times-New-Roman]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=Times-New-Roman]::before {
-  content: "Times New Roman";
-  font-family: "Times New Roman";
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=sans-serif]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=sans-serif]::before {
-  content: "sans-serif";
-  font-family: "sans-serif";
+      .ql-picker-label[data-value=sans-serif]::before, .ql-picker-item[data-value=sans-serif]::before {
+        content: "sans-serif";
+        font-family: "sans-serif";
+      }
+    }
+    &.ql-table {
+      width: 108px;
+    }
+  }
 }
 
 .ql-font-SimSun {

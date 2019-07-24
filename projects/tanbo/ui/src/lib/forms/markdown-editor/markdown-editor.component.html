@@ -1,29 +1,44 @@
 <ui-tool-bar class="ui-markdown-editor-toolbar ui-clearfix">
   <div class="ui-pull-left">
-    <button type="button" (click)="setBold()" title="加粗"><span class="ui-icon-bold"></span></button>
-    <button type="button" (click)="setItalic()" title="斜体"><span class="ui-icon-italic"></span></button>
-    <button type="button" (click)="setDeleteLine()" title="删除线"><span class="ui-icon-strikethrough"></span></button>
-    <button type="button" (click)="setHeader()" title="标题"><span class="ui-icon-font-size"></span></button>
-    <span class="split-line"></span>
-    <button type="button" (click)="setBlockQuote()" title="引用"><span class="ui-icon-quotes-left"></span></button>
-    <button type="button" (click)="setOrderedList()" title="有序列表"><span class="ui-icon-list-numbered"></span></button>
-    <button type="button" (click)="setUnorderedList()" title="无序列表"><span class="ui-icon-list2"></span></button>
-    <span class="split-line"></span>
-    <button type="button" (click)="insertImage()" title="插入图片"><span class="ui-icon-image"></span></button>
-    <button type="button" (click)="setLink()" title="插入链接"><span class="ui-icon-link"></span></button>
-    <span class="split-line"></span>
-    <button type="button" (click)="insertTable()" title="表格"><span class="ui-icon-table"></span></button>
+    <button class="ui-markdown-editor-toolbar-key" type="button" (click)="setBold()" title="加粗"><span
+            class="ui-icon-bold"></span></button>
+    <button class="ui-markdown-editor-toolbar-key" type="button" (click)="setItalic()" title="斜体"><span
+            class="ui-icon-italic"></span></button>
+    <button class="ui-markdown-editor-toolbar-key" type="button" (click)="setDeleteLine()" title="删除线"><span
+            class="ui-icon-strikethrough"></span></button>
+    <button class="ui-markdown-editor-toolbar-key" type="button" (click)="setHeader()" title="标题"><span
+            class="ui-icon-font-size"></span></button>
+    <span class="ui-markdown-split-line"></span>
+    <button class="ui-markdown-editor-toolbar-key" type="button" (click)="setBlockQuote()" title="引用"><span
+            class="ui-icon-quotes-left"></span></button>
+    <button class="ui-markdown-editor-toolbar-key" type="button" (click)="setOrderedList()" title="有序列表"><span
+            class="ui-icon-list-numbered"></span></button>
+    <button class="ui-markdown-editor-toolbar-key" type="button" (click)="setUnorderedList()" title="无序列表"><span
+            class="ui-icon-list2"></span></button>
+    <span class="ui-markdown-split-line"></span>
+    <button class="ui-markdown-editor-toolbar-key" type="button" (click)="insertImage()" title="插入图片"><span
+            class="ui-icon-image"></span></button>
+    <button class="ui-markdown-editor-toolbar-key" type="button" (click)="setLink()" title="插入链接"><span
+            class="ui-icon-link"></span></button>
+    <span class="ui-markdown-split-line"></span>
+    <button class="ui-markdown-editor-toolbar-key" type="button" (click)="insertTable()" title="表格"><span
+            class="ui-icon-table"></span></button>
   </div>
   <div class="ui-pull-right">
-    <button type="button" title="代码模式" (click)="setDisplayState('code')"><span [class.ui-color-primary]="display === 'code'" class="ui-icon-embed"></span></button>
-    <button type="button" title="分屏模式" (click)="setDisplayState('split')"><span [class.ui-color-primary]="display === 'split'" class="ui-icon-coding-split"></span></button>
-    <button type="button" title="视图模式" (click)="setDisplayState('view')"><span [class.ui-color-primary]="display === 'view'" class="ui-icon-display"></span></button>
+    <button class="ui-markdown-editor-toolbar-key" type="button" title="代码模式" (click)="setDisplayState('code')"><span
+            [class.ui-color-primary]="display === 'code'" class="ui-icon-embed"></span></button>
+    <button class="ui-markdown-editor-toolbar-key" type="button" title="分屏模式" (click)="setDisplayState('split')"><span
+            [class.ui-color-primary]="display === 'split'" class="ui-icon-coding-split"></span></button>
+    <button class="ui-markdown-editor-toolbar-key" type="button" title="视图模式" (click)="setDisplayState('view')"><span
+            [class.ui-color-primary]="display === 'view'" class="ui-icon-display"></span></button>
   </div>
 </ui-tool-bar>
 <div class="ui-markdown-editor-body">
-  <div class="ui-markdown-editor-body-item" [ngClass]="{'ui-hide': display === 'view', 'ui-split': display === 'split'}">
+  <div class="ui-markdown-editor-body-item"
+       [ngClass]="{'ui-hide': display === 'view', 'ui-split': display === 'split'}">
     <textarea #editor [attr.name]="name" [attr.id]="forId" [value]="value" (focus)="focus()"></textarea>
   </div>
-  <div class="ui-markdown-editor-body-item ui-markdown-editor-viewer" [ngClass]="{'ui-hide': display === 'code', 'ui-split': display === 'split'}" [innerHTML]="displayHtml">
+  <div class="ui-markdown-editor-body-item ui-markdown-editor-viewer"
+       [ngClass]="{'ui-hide': display === 'code', 'ui-split': display === 'split'}" [innerHTML]="displayHtml">
   </div>
 </div>

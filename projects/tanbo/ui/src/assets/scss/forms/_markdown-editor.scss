@@ -5,67 +5,81 @@ ui-markdown-editor {
   border-radius: $radius-base;
   background-color: #fff;
   margin-bottom: 1em;
-  > .ui-markdown-editor-toolbar {
-    border-top: none;
-    line-height: 1;
-    .split-line {
-      display: inline-block;
-      height: 1.2em;
-      width: 0;
-      border-left: 1px solid $color-gray;
-      border-right: 1px solid $color-lighter;
-      vertical-align: text-bottom;
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-    button {
-      background: none;
-      border: none;
-      color: inherit;
-      cursor: pointer;
-      line-height: 1;
-      padding: 5px;
-      border-radius: 3px;
-      &:hover {
-        box-shadow: 0 0 1px 0 rgba(0, 0, 0, .4);
-      }
-      &:focus {
-        @include focus($color-primary);
-      }
-      &:active {
-        background-color: $color-gray-light;
-      }
-    }
+}
+
+.ui-markdown-editor-toolbar {
+  border-top: none;
+  line-height: 1;
+}
+
+.ui-markdown-editor-toolbar-key {
+  font-size: 14px;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  line-height: 1;
+  padding: 5px;
+  border-radius: 3px;
+
+  &:hover {
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, .4);
   }
-  .ui-markdown-editor-body {
-    height: 350px;
-    display: flex;
+
+  &:focus {
+    @include focus($color-primary);
   }
-  .ui-markdown-editor-body-item {
-    flex: 1;
-    &.ui-hide {
-      display: none;
-    }
-    &.ui-split {
-      max-width: 50%;
-    }
-    &:not(:last-child) {
-      border-right: 1px solid $color-light;
-    }
-    &:not(:first-child) {
-      border-left: 1px solid $color-light;
-    }
+
+  &:active {
+    background-color: $color-gray-light;
   }
-  .ui-markdown-editor-viewer {
-    padding: $container-horizontal-padding;
-    overflow: auto;
-    img {
-      max-width: 100%;
-    }
-    table {
-      @extend table.ui-table;
-      @extend table.ui-table-bordered;
-    }
+}
+
+.ui-markdown-split-line {
+  display: inline-block;
+  height: 1.2em;
+  width: 0;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.ui-markdown-editor-body {
+  height: 350px;
+  display: flex;
+}
+
+.ui-markdown-editor-body-item {
+  flex: 1;
+
+  &.ui-hide {
+    display: none;
+  }
+
+  &.ui-split {
+    max-width: 50%;
+  }
+
+  &:not(:last-child) {
+    border-right: 1px solid $color-light;
+  }
+
+  &:not(:first-child) {
+    border-left: 1px solid $color-light;
+  }
+}
+
+.ui-markdown-editor-viewer {
+  padding: $container-horizontal-padding;
+  overflow: auto;
+
+  img {
+    max-width: 100%;
+  }
+
+  table {
+    @extend table.ui-table;
+    @extend table.ui-table-bordered;
   }
 }
 
@@ -91,6 +105,7 @@ ui-markdown-editor {
 .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
   background-color: white; /* The little square between H and V scrollbars */
 }
+
 /* GUTTER */
 
 .CodeMirror-gutters {
