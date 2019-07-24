@@ -40,4 +40,7 @@ export class DetailComponent {
     this.modalController.hide();
   }
 
+  paste(ev: any) {
+    console.log(ev);
+  }
 }
