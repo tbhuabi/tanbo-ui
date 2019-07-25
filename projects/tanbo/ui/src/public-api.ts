@@ -8,7 +8,8 @@
 export { AppComponent } from './lib/app/app/app.component';
 export { dialogAnimation, modalAnimation, notifyAnimation } from './lib/app/app/animations';
 export { UIAppModule } from './lib/app/app.module';
-export { DialogConfig, DialogController, NotifyType, NotifyController, NotifyConfig } from './lib/app/help';
+export { DialogConfig, DialogController } from './lib/app/dialog-controller';
+export { NotifyType, NotifyController, NotifyConfig } from './lib/app/notify-controller';
 /**
  * 基础模块
  */

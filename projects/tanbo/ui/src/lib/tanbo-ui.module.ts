@@ -17,7 +17,8 @@ import { UITableModule } from './table/table.module';
 import { UITimelineModule } from './timeline/timeline.module';
 import { UITreeModule } from './tree/tree.module';
 
-import { DialogController, NotifyController } from './app/help';
+import { DialogController } from './app/dialog-controller';
+import { NotifyController } from './app/notify-controller';
 import { ModalController } from './modal/help';
 import { UI_OVERLAY_Z_INDEX } from './base/help';
 import { TooltipBaseService } from './other/tooltip-base/tooltip-base.service';

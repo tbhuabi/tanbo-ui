@@ -3,7 +3,8 @@ import { Subscription } from 'rxjs';
 
 import { DropdownRenderer } from '../../dropdown/help';
 import { ModalController } from '../../modal/help';
-import { DialogConfig, DialogController, NotifyController, NotifyType } from '../help';
+import { DialogConfig, DialogController } from '../dialog-controller';
+import { NotifyController, NotifyType } from '../notify-controller';
 import { dialogAnimation, modalAnimation, notifyAnimation } from './animations';
 import { NavigationStart, Router } from '@angular/router';
 
