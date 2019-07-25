@@ -1,12 +1,10 @@
-<ui-view-loading-bar></ui-view-loading-bar>
 <ng-content></ng-content>
-<ui-tooltip-base></ui-tooltip-base>
 <ui-overlay [show]="isShowModal">
   <div class="ui-modal" *ngFor="let item of modalTemplates" @modalAnimation>
     <ng-container [ngTemplateOutlet]="item"></ng-container>
   </div>
 </ui-overlay>
-<ui-overlay [show]="isShowDialog" (uiHide)="overlayHide()">
+<ui-overlay [show]="isShowDialog" (uiHide)="dialogOverlayHide()">
   <div class="ui-dialog" *ngIf="isShowDialog" [@dialogAnimation]="isShowDialog ? 'in' : 'out'">
     <div class="ui-dialog-header" *ngIf="dialogConfig?.title">
       <button type="button" class="ui-close" (click)="dialogChecked(false)"></button>
@@ -24,8 +22,8 @@
 <div class="ui-notify">
   <div @notifyAnimation *ngFor="let config of messageList; let i = index"
        class="ui-notify-item"
-       (mouseenter)="stop(config)"
-       (mouseleave)="restart(config)"
+       (mouseenter)="notifyStop(config)"
+       (mouseleave)="notifyRestart(config)"
        [ngClass]="'ui-' + config.type">
     <div *ngIf="config.type !== 'default'" class="ui-notify-icon" [ngSwitch]="config.type">
       <span *ngSwitchCase="'primary'" class="ui-color-primary ui-icon-notification"></span>
@@ -38,8 +36,10 @@
       {{ config.content }}
     </div>
     <div class="ui-notify-close">
-      <button class="ui-close" (click)="close(i)" type="button"></button>
+      <button class="ui-close" (click)="notifyClose(i)" type="button"></button>
     </div>
     <div *ngIf="config.autoHide" class="ui-notify-time-down-bar" [ngStyle]="{width: 100 - config.proportion + '%'}"></div>
   </div>
 </div>
+<ui-view-loading-bar></ui-view-loading-bar>
+<ui-tooltip-base></ui-tooltip-base>

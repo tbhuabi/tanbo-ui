@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Component, ElementRef, forwardRef, OnDestroy, OnInit, Renderer2, TemplateRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { DropdownRenderer } from '../../dropdown/help';
@@ -38,6 +38,7 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
 
   constructor(private elementRef: ElementRef<HTMLElement>,
               private router: Router,
+              private renderer: Renderer2,
               private notifyController: NotifyController,
               private modalController: ModalController,
               private dialogController: DialogController) {
@@ -47,22 +48,22 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
     this.subs.push(this.router.events.subscribe(ev => {
       if (ev instanceof NavigationStart) {
         this.hideEventFromRouteChange = true;
-        this.hideAll();
+        this.hideAllModal();
         this.isShowDialog = false;
       }
     }));
     this.subs.push(this.dialogController.config.subscribe(c => {
       this.hideEventFromRouteChange = false;
-      this.dialog(c);
+      this.showDialog(c);
     }));
     this.subs.push(this.modalController.showEvent.subscribe(temp => {
-      this.show(temp);
+      this.showModal(temp);
     }));
     this.subs.push(this.modalController.hideEvent.subscribe(temp => {
-      this.hide(temp);
+      this.hideModal(temp);
     }));
     this.subs.push(this.modalController.hideAllEvent.subscribe(() => {
-      this.hideAll();
+      this.hideAllModal();
     }));
     this.subs.push(this.notifyController.notify.subscribe(config => {
       if (typeof config === 'string') {
@@ -103,7 +104,7 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
       _config.proportion = 100;
 
       this.messageList.push(_config);
-      this.start();
+      this.notifyStart();
     }));
   }
 
@@ -112,19 +113,17 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   }
 
   renderDropdown(ref: ElementRef) {
-    this.elementRef.nativeElement.appendChild(ref.nativeElement);
+    this.renderer.appendChild(this.elementRef.nativeElement, ref.nativeElement);
     return () => {
-      if (ref.nativeElement.parentNode) {
-        ref.nativeElement.parentNode.removeChild(ref.nativeElement);
-      }
+      this.renderer.removeChild(this.elementRef.nativeElement, ref.nativeElement);
     };
   }
 
-  show(template: TemplateRef<any>): void {
+  showModal(template: TemplateRef<any>): void {
     this.modalTemplates.push(template);
   }
 
-  hide(template?: TemplateRef<any>): void {
+  hideModal(template?: TemplateRef<any>): void {
     if (template) {
       const index = this.modalTemplates.indexOf(template);
       if (index > -1) {
@@ -135,11 +134,11 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
     }
   }
 
-  hideAll(): void {
+  hideAllModal(): void {
     this.modalTemplates.length = 0;
   }
 
-  dialog(config: DialogConfig | string) {
+  showDialog(config: DialogConfig | string) {
     this.isShowDialog = true;
     this.dialogConfig = Object.assign<DialogConfig, DialogConfig>({
       content: '',
@@ -155,33 +154,33 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
     this.isShowDialog = false;
   }
 
-  overlayHide() {
+  dialogOverlayHide() {
     if (!this.hideEventFromRouteChange) {
       this.dialogController.checkState.next(this.dialogCheckState);
     }
   }
 
-  close(i: number) {
+  notifyClose(i: number) {
     this.messageList.splice(i, 1);
-    this.start();
+    this.notifyStart();
   }
 
-  stop(item: any) {
+  notifyStop(item: any) {
     item.time = item.rawConfig.time || 5000;
     item.currentTime = 0;
     item.proportion = 100;
     item.autoHide = false;
-    this.start();
+    this.notifyStart();
   }
 
-  restart(item: any) {
+  notifyRestart(item: any) {
     if (item.rawConfig.autoHide || item.rawConfig.autoHide === undefined) {
       item.autoHide = true;
     }
-    this.start();
+    this.notifyStart();
   }
 
-  start() {
+  notifyStart() {
     clearInterval(this.timer);
     this.timer = setInterval(() => {
       let isClear = true;
