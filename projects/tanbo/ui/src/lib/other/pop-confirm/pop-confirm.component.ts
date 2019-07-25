@@ -117,8 +117,8 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
         this.top = distance.top - 6;
     }
 
-    this.scrollX = window.scrollX;
-    this.scrollY = window.scrollY;
+    this.scrollX = document.documentElement.scrollLeft;
+    this.scrollY = document.documentElement.scrollTop;
   }
 
   show() {
