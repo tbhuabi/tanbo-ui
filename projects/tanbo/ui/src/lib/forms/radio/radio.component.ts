@@ -114,11 +114,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   writeValue(value: any) {
-    if (typeof value === 'number') {
-      this.checked = this.value === ('' + value);
-    } else {
-      this.checked = this.value === value;
-    }
+    this.checked = this.value === value;
   }
 
   registerOnChange(fn: any) {
