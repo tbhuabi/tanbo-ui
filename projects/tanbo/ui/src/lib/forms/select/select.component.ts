@@ -100,7 +100,9 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   }
 
   ngAfterContentInit() {
-    if (!this.isWrite) {
+    if (this.isWrite) {
+      this.updateByNgModel();
+    } else {
       this.updateBySelf();
     }
     this.subs.push(this.selectService.onChecked.subscribe((option: OptionComponent) => {
@@ -173,7 +175,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     if (this.open) {
       const options = this.options.toArray();
       if (keyCode === DOWN_ARROW || keyCode === UP_ARROW) {
-        let nextOption = findNext(this.selectedOption,
+        const nextOption = findNext(this.selectedOption,
           this.temporaryOption || this.selectedOption,
           options,
           keyCode === DOWN_ARROW ? 1 : -1);
