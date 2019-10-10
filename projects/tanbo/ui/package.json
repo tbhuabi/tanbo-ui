@@ -2,9 +2,8 @@
   "name": "@tanbo/ui",
   "version": "1.0.0-alpha.67",
   "dependencies": {
+    "@tanbo/editor": "^0.0.1-alpha.7",
     "codemirror": "^5.40.2",
-    "quill": "^1.3.6",
-    "quill-image-resize": "git+https://github.com/tbhuabi/quill-image-resize-module.git#338ff34c276c19deb290fbd861a1e593ed124228",
     "highlight.js": "^9.13.1",
     "marked": "^0.6.2"
   },

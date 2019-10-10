@@ -5,9 +5,8 @@
     "entryFile": "src/public-api.ts"
   },
   "whitelistedNonPeerDependencies": [
+    "@tanbo/editor",
     "codemirror",
-    "quill",
-    "quill-image-resize",
     "highlight.js",
     "marked"
   ]

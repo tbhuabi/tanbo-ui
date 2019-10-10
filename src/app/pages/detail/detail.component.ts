@@ -9,6 +9,7 @@ import { ModalController, DialogController, NotifyController } from '@tanbo/ui';
 export class DetailComponent {
   @ViewChild('demoModal', {read: TemplateRef, static: true})
   demoModal: TemplateRef<any>;
+  text = '';
   time = '00:00:00';
   disable = 'true';
   @ViewChild('modal', {static: true}) modal: TemplateRef<any>;
