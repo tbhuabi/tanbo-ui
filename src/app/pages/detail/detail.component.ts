@@ -11,6 +11,7 @@ export class DetailComponent {
   demoModal: TemplateRef<any>;
   time = '00:00:00';
   disable = 'true';
+  date = '2019-10-03 00:00:00'
   @ViewChild('modal', {static: true}) modal: TemplateRef<any>;
 
   constructor(private modalController: ModalController,
