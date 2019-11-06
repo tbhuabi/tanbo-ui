@@ -89,15 +89,7 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnD
     // args: delta, oldDelta, source
     this.editor.on('text-change', (delta, oldDelta, source) => {
       if (source === 'user') {
-        const html = this.editor.root.innerHTML;
-        this.value = html;
-        if (this.onChange) {
-          this.onChange(html);
-        }
-        if (this.onTouched) {
-          this.onTouched();
-        }
-        this.uiChange.emit(html);
+        this.selfChanged();
       }
     });
   }
@@ -134,17 +126,20 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnD
           const range = this.editor.getSelection();
           if (range) {
             this.editor.insertEmbed(range.index, 'image', result);
+            this.selfChanged();
           }
         } else if (result instanceof Promise) {
           result.then(imageUrl => {
             const range = this.editor.getSelection();
             this.editor.insertEmbed(range.index, 'image', imageUrl);
+            this.selfChanged();
           });
         } else if (result instanceof Observable) {
           this.sub = result.subscribe(imageUrl => {
             this.sub.unsubscribe();
             const range = this.editor.getSelection();
             this.editor.insertEmbed(range.index, 'image', imageUrl);
+            this.selfChanged();
           });
         }
       });
@@ -171,5 +166,17 @@ export class EditorComponent implements ControlValueAccessor, AfterViewInit, OnD
 
   registerOnTouched(fn: any) {
     this.onTouched = fn;
+  }
+
+  private selfChanged() {
+    const html = this.editor.root.innerHTML;
+    this.value = html;
+    if (this.onChange) {
+      this.onChange(html);
+    }
+    if (this.onTouched) {
+      this.onTouched();
+    }
+    this.uiChange.emit(html);
   }
 }
