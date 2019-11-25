@@ -1,2 +1,2 @@
-<div [@overlayAnimation] *ngIf="show" class="ui-overlay" (webkitTransitionEnd)="done()" (transitionend)="done()"></div>
+<div [@overlayAnimation] *ngIf="show" class="ui-overlay" (@overlayAnimation.done)="done()"></div>
 <ng-content></ng-content>
