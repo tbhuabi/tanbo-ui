@@ -2,8 +2,13 @@
 <p>{{date}}</p>
 <ui-input type="date" [(ngModel)]="date" format="yyyy-MM-dd 00:00:00" displayFormat="yyyy-MM-dd"></ui-input>
 
+
+<div>
+  <button type="button" (click)="showDialog()">dialog</button>
+</div>
 <ui-editor></ui-editor>
 
 <div>
   <ui-input type="file"></ui-input>
 </div>
+
