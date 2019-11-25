@@ -57,7 +57,6 @@ export {
   Hours,
   dateFormat
 } from './lib/forms/date/date-utils';
-export { EditorComponent } from './lib/forms/editor/editor.component';
 export { FileComponent } from './lib/forms/file/file.component';
 export { InputDirective } from './lib/forms/input/input.directive';
 export { InputAddonComponent } from './lib/forms/input-addon/input-addon.component';
