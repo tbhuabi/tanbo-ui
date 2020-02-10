@@ -9,7 +9,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { createEditor, Editor } from '@tanbo/editor';
+import { createEditor, Editor } from '@tanbo/tbus';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -56,13 +56,13 @@ export class EditorComponent implements ControlValueAccessor, OnInit, OnDestroy 
   }
 
   focus() {
-    this.editor.focus();
+    // this.editor.focus();
   }
 
   writeValue(obj: any): void {
     this.value = obj;
     if (obj || typeof obj === 'string') {
-      this.editor.updateContentHTML(obj);
+      // this.editor.updateContentHTML(obj);
     }
   }
 

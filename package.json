@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "~8.0.0",
     "@angular/router": "~8.0.0",
     "@tanbo/css-themes": "0.0.1",
-    "@tanbo/editor": "0.0.1-alpha.7",
+    "@tanbo/tbus": "0.0.1-alpha.16",
     "codemirror": "^5.47.0",
     "highlight.js": "^9.15.8",
     "marked": "^0.6.2",
