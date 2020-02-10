@@ -3,7 +3,7 @@
   <span *ngIf="!isShowLoading">+</span>
   <span *ngIf="isShowLoading" class="ui-loading-bar"></span> {{ placeholder }}
 </div>
-<input class="ui-input-file"
+<input *ngIf="refreshState" class="ui-input-file"
        (change)="selectedFiles($event)"
        [attr.id]="forId"
        (focus)="focus = true"

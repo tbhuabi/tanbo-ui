@@ -111,6 +111,7 @@ export class FileComponent {
         this.upload(request);
       }
     }
+    this.refresh();
   }
 
   private validate(ext: string, validators: RegExp[]) {
@@ -147,12 +148,12 @@ export class FileComponent {
     })).subscribe(response => {
       this.progress = 100;
       this.isShowLoading = false;
-      this.refresh();
+      // this.refresh();
       this.uiUploaded.emit(response);
     }, error => {
       this.progress = 0;
       this.isShowLoading = false;
-      this.refresh();
+      // this.refresh();
       this.uiUploadError.emit(error);
     });
   }

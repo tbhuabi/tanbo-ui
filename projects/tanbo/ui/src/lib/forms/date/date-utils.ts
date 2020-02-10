@@ -60,7 +60,7 @@ export function toDate(date: string | number | Date, toMax: boolean, format?: st
                 month = Number(date.slice(index, index + 2));
               }
             }
-            d.setMonth(Number(month) - 1);
+            d.setMonth(month - 1);
           }
         }
         break;
@@ -69,7 +69,7 @@ export function toDate(date: string | number | Date, toMax: boolean, format?: st
         if (segment) {
           month = Number(segment);
           if (typeof month === 'number' && month >= 1 && month <= 12) {
-            d.setMonth(month);
+            d.setMonth(month - 1);
           }
         }
         break;
