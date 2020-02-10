@@ -37,7 +37,6 @@ export class EditorComponent implements ControlValueAccessor, OnInit, OnDestroy 
   private sub: Subscription;
 
   ngOnInit() {
-    console.log(333);
     this.editor = createEditor(this.editorRef.nativeElement, {
       uploader: this.uploader,
       content: this.value
@@ -46,6 +45,9 @@ export class EditorComponent implements ControlValueAccessor, OnInit, OnDestroy 
     this.editor.onChange.subscribe(html => {
       this.value = html;
       this.uiChange.emit(html);
+      if (this.onChange) {
+        this.onChange(html);
+      }
     });
   }
 
@@ -61,9 +63,7 @@ export class EditorComponent implements ControlValueAccessor, OnInit, OnDestroy 
 
   writeValue(obj: any): void {
     this.value = obj;
-    if (obj || typeof obj === 'string') {
-      // this.editor.updateContentHTML(obj);
-    }
+    this.editor.setContents(obj + '');
   }
 
   registerOnChange(fn: any) {
