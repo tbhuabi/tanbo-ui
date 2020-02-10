@@ -13,8 +13,8 @@ import { attrToBoolean } from '../../utils';
   }
 })
 export class ModalComponent {
-  @ContentChild(ModalHeaderComponent, {static: false}) modalHeader: ModalHeaderComponent;
-  @ContentChild(ModalFooterComponent, {static: false}) modalFooter: ModalFooterComponent;
+  @ContentChild(ModalHeaderComponent) modalHeader: ModalHeaderComponent;
+  @ContentChild(ModalFooterComponent) modalFooter: ModalFooterComponent;
   @Input() size = '';
   @Input() title = '';
   @Input() cancelText = '取消';

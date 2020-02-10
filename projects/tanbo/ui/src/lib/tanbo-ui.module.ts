@@ -46,7 +46,7 @@ import { UI_ANCHOR_LINK_DISTANCE } from './quick-nav/helper';
   ]
 })
 export class UIModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<UIModule> {
     return {
       ngModule: UIModule,
       providers: [

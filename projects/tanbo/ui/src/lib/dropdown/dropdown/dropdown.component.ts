@@ -27,7 +27,7 @@ import { Subscription } from 'rxjs';
   ]
 })
 export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
-  @ContentChild(DropdownMenuComponent, {static: false})
+  @ContentChild(DropdownMenuComponent)
   dropdownMenu: DropdownMenuComponent;
   @Output() uiEscape = new EventEmitter();
 

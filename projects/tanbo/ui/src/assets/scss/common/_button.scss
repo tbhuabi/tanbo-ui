@@ -1,5 +1,5 @@
 @mixin btn-size($name, $v, $h, $font-size, $radius) {
-  &.ui-btn-#{$name} {
+  .ui-btn-#{$name} {
     padding: $v $h;
     font-size: $font-size;
     border-radius: $radius;
@@ -7,7 +7,7 @@
 }
 
 @mixin btn-theme($name, $color, $bg-color) {
-  &.ui-btn-#{$name} {
+  .ui-btn-#{$name} {
     color: $color;
     background-color: $bg-color;
     @if $name != default {

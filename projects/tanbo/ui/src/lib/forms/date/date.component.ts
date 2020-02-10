@@ -41,9 +41,9 @@ import { attrToBoolean } from '../../utils';
   }]
 })
 export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
-  @ViewChild('hoursListWrap', {static: false, read: ElementRef}) hoursListWrap: ElementRef<HTMLDivElement>;
-  @ViewChild('minutesListWrap', {static: false, read: ElementRef}) minutesListWrap: ElementRef<HTMLDivElement>;
-  @ViewChild('secondsListWrap', {static: false, read: ElementRef}) secondsListWrap: ElementRef<HTMLDivElement>;
+  @ViewChild('hoursListWrap', { read: ElementRef }) hoursListWrap: ElementRef<HTMLDivElement>;
+  @ViewChild('minutesListWrap', { read: ElementRef }) minutesListWrap: ElementRef<HTMLDivElement>;
+  @ViewChild('secondsListWrap', { read: ElementRef }) secondsListWrap: ElementRef<HTMLDivElement>;
   @Output() uiChange = new EventEmitter<string | number>();
   @Input() size = '';
   @Input() placeholder = '';

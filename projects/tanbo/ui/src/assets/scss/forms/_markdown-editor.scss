@@ -78,8 +78,8 @@ ui-markdown-editor {
   }
 
   table {
-    @extend table.ui-table;
-    @extend table.ui-table-bordered;
+    @extend .ui-table;
+    @extend .ui-table-bordered;
   }
 }
 
