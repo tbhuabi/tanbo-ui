@@ -4,7 +4,7 @@ import { from, Subscription, Observable } from 'rxjs';
 
 import { UI_DROPDOWN_ARROW_CLASSNAME } from '../../dropdown/help';
 import { PickerCell } from './picker-help';
-import { attrToBoolean } from '../../utils';
+import { GourdBoolean } from '../utils';
 
 @Component({
   selector: 'ui-picker',
@@ -27,23 +27,8 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   @Input() dataProvide: (cell: PickerCell) => (PickerCell[] | Promise<PickerCell[]> | Observable<PickerCell[]>);
 
   /*tslint:enable*/
-  @Input()
-  set disabled(v: boolean) {
-    this._disabled = attrToBoolean(v);
-  }
-
-  get disabled() {
-    return this._disabled;
-  }
-
-  @Input()
-  set readonly(v: boolean) {
-    this._readonly = attrToBoolean(v);
-  }
-
-  get readonly() {
-    return this._readonly;
-  }
+  @Input() @GourdBoolean() disabled = false;
+  @Input() @GourdBoolean() readonly = false;
   @Input()
   set value(v: PickerCell[]) {
     if (Array.isArray(v)) {
@@ -78,8 +63,6 @@ export class PickerComponent implements OnDestroy, ControlValueAccessor {
   }
 
   focus = false;
-  private _disabled = false;
-  private _readonly = false;
 
   private _value: PickerCell[] = [];
   private _options: PickerCell[];

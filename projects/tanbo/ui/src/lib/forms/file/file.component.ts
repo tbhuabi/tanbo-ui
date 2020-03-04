@@ -3,7 +3,7 @@ import { HttpEvent, HttpRequest, HttpClient, HttpEventType, HttpResponse } from 
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-import { attrToBoolean } from '../../utils';
+import { GourdBoolean } from '../utils';
 
 @Component({
   selector: 'ui-input[type=file]',
@@ -22,50 +22,15 @@ export class FileComponent {
   @Input() accept: string;
   @Input() uploader: (data: FormData) => (HttpRequest<any> | Observable<HttpEvent<any>>);
 
-  @HostBinding('class.ui-focus')
-  set focus(v: boolean) {
-    this._focus = attrToBoolean(v);
-  }
+  @HostBinding('class.ui-focus') @GourdBoolean() focus = false;
 
-  get focus() {
-    return this._focus;
-  }
-
-  @Input()
-  set disabled(v: boolean) {
-    this._disabled = attrToBoolean(v);
-  }
-
-  get disabled() {
-    return this._disabled;
-  }
-
-  @Input()
-  set readonly(v: boolean) {
-    this._readonly = attrToBoolean(v);
-  }
-
-  get readonly() {
-    return this._readonly;
-  }
-
-  @Input()
-  set multiple(v: boolean) {
-    this._multiple = attrToBoolean(v);
-  }
-
-  get multiple() {
-    return this._multiple;
-  }
+  @Input() @GourdBoolean() disabled = false;
+  @Input() @GourdBoolean() readonly = false;
+  @Input() @GourdBoolean() multiple = false;
 
   isShowLoading = false;
   progress = 0;
   refreshState = true;
-
-  private _multiple = false;
-  private _disabled = false;
-  private _readonly = false;
-  private _focus = false;
 
   constructor(private http: HttpClient) {
   }

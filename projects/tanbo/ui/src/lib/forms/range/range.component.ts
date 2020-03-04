@@ -13,7 +13,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
-import { attrToBoolean, attrToNumber } from '../../utils';
+import { attrToNumber } from '../../utils';
+import { GourdBoolean, GourdNumber } from '@tanbo/ui/src/lib/forms/utils';
 
 @Component({
   selector: 'ui-input[type=range]',
@@ -30,28 +31,12 @@ export class RangeComponent implements ControlValueAccessor, OnChanges {
   @Input() name: string;
   @Input() forId: string;
   @Input() showProgress = true;
+  @Input() @HostBinding('class.ui-disabled') @GourdBoolean() disabled = false;
+  @Input() @HostBinding('class.ui-readonly') @GourdBoolean() readonly = false;
 
-  @Input() @HostBinding('class.ui-disabled')
-  set disabled(v: boolean) {
-    this._disabled = attrToBoolean(v);
-  }
-
-  get disabled() {
-    return this._disabled;
-  }
-
-  @Input() @HostBinding('class.ui-readonly')
-  set readonly(v: boolean) {
-    this._readonly = attrToBoolean(v);
-  }
-
-  get readonly() {
-    return this._readonly;
-  }
-
-  @Input() min = 0;
-  @Input() max = 100;
-  @Input() step = 1;
+  @Input() @GourdNumber(0) min = 0;
+  @Input() @GourdNumber(100) max = 100;
+  @Input() @GourdNumber(1) step = 1;
 
   @Input()
   set value(value: any) {
@@ -78,8 +63,6 @@ export class RangeComponent implements ControlValueAccessor, OnChanges {
   position = 50;
   isTouching = false;
 
-  private _disabled = false;
-  private _readonly = false;
   private _value = 50;
 
   private onChange: (_: any) => any;

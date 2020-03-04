@@ -10,8 +10,7 @@ import {
 } from '@angular/core';
 
 import { SelectService } from '../select/select.service';
-
-import { attrToBoolean } from '../../utils';
+import { GourdBoolean } from '../utils';
 
 @Component({
   selector: 'ui-option',
@@ -19,27 +18,10 @@ import { attrToBoolean } from '../../utils';
 })
 export class OptionComponent implements AfterViewInit {
   @Input() value = '';
-
   @Input()
-  @HostBinding('class.ui-disabled')
-  set disabled(v: boolean) {
-    this._disabled = attrToBoolean(v);
-  }
-
-  get disabled() {
-    return this._disabled;
-  }
-
-
+  @HostBinding('class.ui-disabled') @GourdBoolean() disabled = false;
   @Input()
-  @HostBinding('class.ui-selected')
-  set selected(v: boolean) {
-    this._selected = attrToBoolean(v);
-  }
-
-  get selected() {
-    return this._selected;
-  }
+  @HostBinding('class.ui-selected') @GourdBoolean() selected = false;
 
   @HostBinding('class.ui-focus')
   get isFocus() {
@@ -50,9 +32,6 @@ export class OptionComponent implements AfterViewInit {
 
   @Output() uiChecked = new EventEmitter<OptionComponent>();
   nativeElement: HTMLElement;
-
-  private _disabled = false;
-  private _selected = false;
 
   constructor(private elementRef: ElementRef,
               private selectService: SelectService) {

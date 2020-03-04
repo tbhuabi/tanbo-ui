@@ -1,14 +1,21 @@
 <br><br>
 <form class="ui-form ui-form-inline">
   <div class="ui-form-group">
-    <label class="ui-control-label ui-control-label-sm">用户名</label>
+    <label class="ui-control-label">用户名</label>
     <div class="ui-control-value">
-      <input size="sm" uiInput type="text">
-      <div class="ui-invalid">校验未通过</div>
+      <ui-select multiple="a" #select>
+        <ui-option>aaa</ui-option>
+        <ui-option>bbb</ui-option>
+        <ui-option>ccc</ui-option>
+      </ui-select>
+      {{ select.multiple }}
+
     </div>
   </div>
   <div class="ui-form-group">
-    <label class="ui-control-label">密码<br><small>测试说着明</small></label>
+    <label class="ui-control-label">密码<br>
+      <small>测试说着明</small>
+    </label>
     <div class="ui-control-value">
       <input uiInput type="text">
     </div>
@@ -23,9 +30,11 @@
       <div class="ui-form-group">
         <label class="ui-control-label">姓名：</label>
         <div class="ui-control-value">
-          <ui-select>
-            <ui-option>test</ui-option>
+          <ui-select #select2>
+            <ui-option>111</ui-option>
+            <ui-option>222</ui-option>
           </ui-select>
+          {{ select2.multiple }}
         </div>
       </div>
     </div>
@@ -35,6 +44,11 @@
         <div class="ui-control-value">
           <input uiInput type="text">
         </div>
-      </div></div>
+      </div>
+    </div>
+    <div>
+      <button class="ui-btn ui-btn-primary" loading type="button" uiButton>button</button>
+      <button class="ui-btn ui-btn-primary" type="button" uiButton>button</button>
+    </div>
   </div>
 </form>

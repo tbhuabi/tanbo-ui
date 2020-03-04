@@ -21,7 +21,7 @@ import { DropdownInputComponent } from '../../dropdown/dropdown-input/dropdown-i
 import { UI_DROPDOWN_ARROW_CLASSNAME } from '../../dropdown/help';
 import { OptionComponent } from '../option/option.component';
 import { SelectService } from './select.service';
-import { attrToBoolean, attrToNumber } from '../../utils';
+import { GourdBoolean, GourdNumber } from '../utils';
 
 @Component({
   selector: 'ui-select',
@@ -41,41 +41,19 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   @Input() forId: string;
   @Input() name: string;
   @Input() placeholder = '';
-  @Input()
-  set selectedIndex(v: number) {
-    this._selectedIndex = attrToNumber(v, 0);
-  }
-  get selectedIndex() {
-    return this._selectedIndex;
-  }
+  @Input() @GourdBoolean() multiple = false;
+  @Input() @GourdNumber(0) selectedIndex = 0;
   @Input() arrowIconClassName = '';
 
-  @Input()
-  set disabled(v: boolean) {
-    this._disabled = attrToBoolean(v);
-  }
-
-  get disabled() {
-    return this._disabled;
-  }
-
-  @Input()
-  set readonly(v: boolean) {
-    this._readonly = attrToBoolean(v);
-  }
-
-  get readonly() {
-    return this._readonly;
-  }
+  @Input() @GourdBoolean()
+  disabled = false;
+  @Input() @GourdBoolean()
+  readonly = false;
 
   @Output() uiChange = new EventEmitter<string>();
   focus = false;
   open = false;
   text = '';
-
-  private _selectedIndex = 0;
-  private _disabled = false;
-  private _readonly = false;
 
   private value = '';
   private onChange: (_: any) => any;

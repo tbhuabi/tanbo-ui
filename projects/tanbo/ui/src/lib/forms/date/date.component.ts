@@ -29,7 +29,7 @@ import {
   DatePickerModel
 } from './date-utils';
 
-import { attrToBoolean } from '../../utils';
+import { GourdBoolean } from '../utils';
 
 @Component({
   selector: 'ui-input[type=date]',
@@ -57,23 +57,8 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   @Input() minDate: string | number | Date = '';
   @Input() minTime: string;
   @Input() maxTime: string;
-  @Input()
-  set disabled(v: boolean) {
-    this._disabled = attrToBoolean(v);
-  }
-
-  get disabled() {
-    return this._disabled;
-  }
-
-  @Input()
-  set readonly(v: boolean) {
-    this._readonly = attrToBoolean(v);
-  }
-
-  get readonly() {
-    return this._readonly;
-  }
+  @Input() @GourdBoolean() disabled = false;
+  @Input() @GourdBoolean() readonly = false;
 
   get time() {
     const result = [];
@@ -113,9 +98,6 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
 
   oldModel: DatePickerModel;
   model: DatePickerModel = 'day';
-
-  private _disabled = false;
-  private _readonly = false;
 
   private onChange: (_: any) => any;
   private onTouched: () => any;

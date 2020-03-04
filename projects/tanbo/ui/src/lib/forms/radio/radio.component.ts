@@ -14,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { RadioStateService } from './radio-state.service';
-import { attrToBoolean } from '../../utils';
+import { GourdBoolean } from '../utils';
 
 @Component({
   selector: 'ui-input[type=radio]',
@@ -32,34 +32,9 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() text = '';
   @Input() checkedIcon = 'ui-icon-radio-checked';
   @Input() uncheckedIcon = 'ui-icon-radio-unchecked';
-
-  @Input() @HostBinding('class.ui-disabled')
-  set disabled(v: boolean) {
-    this._disabled = attrToBoolean(v);
-  }
-
-  get disabled() {
-    return this._disabled;
-  }
-
-  @Input() @HostBinding('class.ui-readonly')
-  set readonly(v: boolean) {
-    this._readonly = attrToBoolean(v);
-  }
-
-  get readonly() {
-    return this._readonly;
-  }
-
-  @Input() @HostBinding('class.ui-checked')
-  set checked(v: boolean) {
-    this._checked = attrToBoolean(v);
-  }
-
-  get checked() {
-    return this._checked;
-  }
-
+  @Input() @HostBinding('class.ui-disabled') @GourdBoolean() disabled = false;
+  @Input() @HostBinding('class.ui-readonly') @GourdBoolean() readonly = false;
+  @Input() @HostBinding('class.ui-checked') @GourdBoolean() checked = false;
   @Output() uiChange = new EventEmitter<string>();
 
   @ViewChild('rawInput', {static: true})
@@ -68,10 +43,6 @@ export class RadioComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
   @HostBinding('class.ui-focus')
   focus = false;
-
-  private _disabled = false;
-  private _readonly = false;
-  private _checked = false;
 
   private onChange: (_: any) => any;
   private onTouched: () => any;
