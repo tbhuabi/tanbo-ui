@@ -1,0 +1,85 @@
+.ui-form {
+  padding: 20px $grid-column-padding;
+  overflow: hidden;
+
+  &.ui-form-flow {
+    .ui-form-group {
+      display: block;
+
+      > .ui-control-label {
+        text-align: left;
+      }
+    }
+  }
+
+  &.ui-form-inline {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    .ui-form-group {
+      display: inline-flex;
+      margin-right: 20px;
+      vertical-align: top;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.ui-form-group {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.ui-control-label {
+  display: block;
+  text-align: right;
+  padding-right: 10px;
+  padding-top: $form-control-padding-vertical + 5;
+  padding-bottom: $form-control-padding-vertical + 3;
+  line-height: 1;
+  &-sm {
+    padding-top: $form-control-padding-vertical-sm + 2;
+    padding-bottom: $form-control-padding-vertical-sm + 2;
+  }
+
+  &-lg {
+    padding-top: $form-control-padding-vertical-lg + 7;
+    padding-bottom: $form-control-padding-vertical-lg + 7;
+  }
+
+  > small {
+    font-size: .8em;
+    opacity: .9;
+  }
+
+  &-thick {
+    font-weight: bold;
+  }
+
+  &-thin {
+    font-weight: 300;
+  }
+}
+
+.ui-control-static {
+  padding-top: $form-control-padding-vertical + 3;
+  padding-bottom: $form-control-padding-vertical + 3;
+  margin: 0;
+  &-sm {
+    padding-top: $form-control-padding-vertical-sm;
+    padding-bottom: $form-control-padding-vertical-sm;
+  }
+
+  &-lg {
+    padding-top: $form-control-padding-vertical-lg + 7;
+    padding-bottom: $form-control-padding-vertical-lg + 7;
+  }
+}
+
+.ui-control-value {
+  flex: 1;
+  margin: 0;
+
+  > .ui-form-control, > ui-select, > ui-input[type=date] {
+    width: 100%;
+  }
+}

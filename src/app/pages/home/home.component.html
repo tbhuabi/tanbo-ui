@@ -1,42 +1,40 @@
-<ui-tag closable>tag</ui-tag>
-
-<table uiTable (uiSelectedItemsChange)="saveSelectedData($event)" class="ui-table ui-table-bordered">
-  <thead>
-  <tr uiTableAllSelector>
-    <th>姓名</th>
-    <th>年龄</th>
-    <th>职业</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr [checked]="item.checked" *ngFor="let item of dataList" [uiTableSelectableItem]="item">
-    <td>{{ item.name }}</td>
-    <td>{{ item.age }}</td>
-    <td>{{ item.job }}</td>
-  </tr>
-  </tbody>
-</table>
-
-<ng-container [ngTemplateOutlet]="tree" [ngTemplateOutletContext]="{nodes: treeList, depth: 0, expand: true}">
-</ng-container>
-
-<ng-template #tree let-nodes="nodes" let-depth="depth" let-expand="expand">
-  <ui-tree [expand]="expand" [depth]="depth">
-    <ui-tree-item *ngFor="let item of nodes">
-      <ui-tree-inner [depth]="depth">
-        <ui-tree-expand [class.ui-hidden]="!item.hasChildren" #treeExpand (click)="getChildren(item)"></ui-tree-expand> {{ item.label }}
-        <ui-dropdown>
-          <button type="button" class="ui-btn ui-btn-primary ui-btn-sm">button</button>
-          <ui-dropdown-menu>
-            <ui-item>aaa</ui-item>
-            <ui-item>bbb</ui-item>
-            <ui-item>ccc</ui-item>
-          </ui-dropdown-menu>
-        </ui-dropdown>
-      </ui-tree-inner>
-      <ng-container *ngIf="item.children"
-                    [ngTemplateOutlet]="tree"
-                    [ngTemplateOutletContext]="{nodes: item.children, depth: depth + 1, expand: treeExpand.checked}"></ng-container>
-    </ui-tree-item>
-  </ui-tree>
-</ng-template>
+<br><br>
+<form class="ui-form ui-form-inline">
+  <div class="ui-form-group">
+    <label class="ui-control-label ui-control-label-sm">用户名</label>
+    <div class="ui-control-value">
+      <input size="sm" uiInput type="text">
+      <div class="ui-invalid">校验未通过</div>
+    </div>
+  </div>
+  <div class="ui-form-group">
+    <label class="ui-control-label">密码<br><small>测试说着明</small></label>
+    <div class="ui-control-value">
+      <input uiInput type="text">
+    </div>
+  </div>
+  <div class="ui-form-group">
+    <label class="ui-control-label">测试</label>
+    <p class="ui-control-static">这是一段文字
+    </p>
+  </div>
+  <div class="ui-row">
+    <div class="ui-col-xs-6">
+      <div class="ui-form-group">
+        <label class="ui-control-label">姓名：</label>
+        <div class="ui-control-value">
+          <ui-select>
+            <ui-option>test</ui-option>
+          </ui-select>
+        </div>
+      </div>
+    </div>
+    <div class="ui-col-xs-6">
+      <div class="ui-form-group">
+        <label class="ui-control-label">姓名：</label>
+        <div class="ui-control-value">
+          <input uiInput type="text">
+        </div>
+      </div></div>
+  </div>
+</form>
