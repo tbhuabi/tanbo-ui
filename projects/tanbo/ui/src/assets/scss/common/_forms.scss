@@ -2,6 +2,14 @@
   padding: 20px $grid-column-padding;
   overflow: hidden;
 
+  > .ui-row {
+    margin-left: 0;
+    margin-right: 0;
+    > [class^="ui-col-"], >[class*=" ui-col-"] {
+      padding: 0;
+    }
+  }
+
   &.ui-form-flow {
     .ui-form-group {
       display: block;
@@ -43,8 +51,8 @@
   }
 
   &-lg {
-    padding-top: $form-control-padding-vertical-lg + 7;
-    padding-bottom: $form-control-padding-vertical-lg + 7;
+    padding-top: $form-control-padding-vertical-lg + 2;
+    padding-bottom: $form-control-padding-vertical-lg + 2;
   }
 
   &-compact {
@@ -75,8 +83,8 @@
   }
 
   &-lg {
-    padding-top: $form-control-padding-vertical-lg + 7;
-    padding-bottom: $form-control-padding-vertical-lg + 7;
+    padding-top: $form-control-padding-vertical-lg + 2;
+    padding-bottom: $form-control-padding-vertical-lg + 2;
   }
 }
 

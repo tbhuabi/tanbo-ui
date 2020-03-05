@@ -134,3 +134,56 @@
     </div>
   </div>
 </form>
+<form class="ui-form">
+  <div class="ui-form-group">
+    <div class="ui-control-value ui-col-xs-offset-4">
+      <h2>用户信息登记</h2>
+    </div>
+  </div>
+  <div class="ui-row">
+    <div class="ui-col-xs-12">
+      <div class="ui-form-group">
+        <label class="ui-control-label ui-col-xs-8">姓名</label>
+        <div class="ui-control-value">
+          <input type="text" uiInput name="name" placeholder="请输入姓名">
+        </div>
+      </div>
+    </div>
+    <div class="ui-col-xs-12">
+      <div class="ui-form-group">
+        <label class="ui-control-label ui-col-xs-8">手机号码</label>
+        <div class="ui-control-value">
+          <ui-input-group>
+            <ui-input-addon>86+</ui-input-addon>
+            <input type="number" name="age" uiInput placeholder="请输入号码" value="13888888888">
+          </ui-input-group>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui-form-group">
+    <label class="ui-control-label ui-col-xs-4">出生年月</label>
+    <div class="ui-control-value">
+      <ui-input type="date" name="birthday" placeholder="请选择出生年月"></ui-input>
+    </div>
+  </div>
+  <div class="ui-form-group">
+    <label class="ui-control-label ui-col-xs-4">性别</label>
+    <div class="ui-control-static">
+      <label><ui-input type="radio" name="sex"></ui-input> 男</label>&nbsp;&nbsp;<label><ui-input type="radio" name="sex"></ui-input> 女</label>
+    </div>
+  </div>
+  <div class="ui-form-group">
+    <label class="ui-control-label ui-col-xs-4">注意事项</label>
+    <div class="ui-control-static">
+      外国人不允许登记
+    </div>
+  </div>
+  <div class="ui-btn-wrap">
+    <div class="ui-col-xs-offset-4">
+      <button type="button" class="ui-btn ui-btn-primary">提 交</button>
+    </div>
+  </div>
+</form>
+
+
