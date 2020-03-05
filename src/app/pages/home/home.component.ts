@@ -37,6 +37,8 @@ export class HomeComponent {
   }];
   treeList: TreeNode[] = [];
 
+  data: any = ['aaa', 'ccc'];
+
   ngOnInit(): void {
     // 模拟从服务端获取数据
     new Observable<TreeNode[]>(subscriber => {

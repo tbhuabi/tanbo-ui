@@ -15,6 +15,7 @@
   &.ui-form-inline {
     padding-top: 5px;
     padding-bottom: 5px;
+
     .ui-form-group {
       display: inline-flex;
       margin-right: 20px;
@@ -33,9 +34,9 @@
   display: block;
   text-align: right;
   padding-right: 10px;
-  padding-top: $form-control-padding-vertical + 5;
+  padding-top: $form-control-padding-vertical + 3;
   padding-bottom: $form-control-padding-vertical + 3;
-  line-height: 1;
+
   &-sm {
     padding-top: $form-control-padding-vertical-sm + 2;
     padding-bottom: $form-control-padding-vertical-sm + 2;
@@ -44,6 +45,10 @@
   &-lg {
     padding-top: $form-control-padding-vertical-lg + 7;
     padding-bottom: $form-control-padding-vertical-lg + 7;
+  }
+
+  &-compact {
+    line-height: 1;
   }
 
   > small {
@@ -63,7 +68,7 @@
 .ui-control-static {
   padding-top: $form-control-padding-vertical + 3;
   padding-bottom: $form-control-padding-vertical + 3;
-  margin: 0;
+
   &-sm {
     padding-top: $form-control-padding-vertical-sm;
     padding-bottom: $form-control-padding-vertical-sm;
@@ -75,11 +80,26 @@
   }
 }
 
-.ui-control-value {
+.ui-control-value, .ui-control-static {
   flex: 1;
   margin: 0;
 
   > .ui-form-control, > ui-select, > ui-input[type=date] {
     width: 100%;
   }
+
+  > label {
+    display: inline-block;
+    cursor: pointer;
+
+    > ui-input {
+      vertical-align: top;
+    }
+  }
+}
+
+.ui-btn-wrap {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  @include clearfix;
 }

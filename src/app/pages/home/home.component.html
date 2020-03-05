@@ -1,54 +1,32 @@
-<br><br>
-<form class="ui-form ui-form-inline">
+<form class="ui-form">
   <div class="ui-form-group">
-    <label class="ui-control-label">用户名</label>
+    <label class="ui-control-label ui-control-label-compact">姓名 <br><small>测试文字</small></label>
     <div class="ui-control-value">
-      <ui-select multiple="a" #select>
-        <ui-option>aaa</ui-option>
-        <ui-option>bbb</ui-option>
-        <ui-option>ccc</ui-option>
-      </ui-select>
-      {{ select.multiple }}
-
+      <input type="text" uiInput name="name" placeholder="请输入姓名">
     </div>
   </div>
   <div class="ui-form-group">
-    <label class="ui-control-label">密码<br>
-      <small>测试说着明</small>
-    </label>
+    <label class="ui-control-label">手机号码</label>
     <div class="ui-control-value">
-      <input uiInput type="text">
+      <input type="number" name="age" uiInput placeholder="请输入号码">
     </div>
   </div>
   <div class="ui-form-group">
-    <label class="ui-control-label">测试</label>
-    <p class="ui-control-static">这是一段文字
-    </p>
+    <label class="ui-control-label">出生年月</label>
+    <div class="ui-control-value">
+      <ui-input type="date" name="birthday"></ui-input>
+    </div>
   </div>
-  <div class="ui-row">
-    <div class="ui-col-xs-6">
-      <div class="ui-form-group">
-        <label class="ui-control-label">姓名：</label>
-        <div class="ui-control-value">
-          <ui-select #select2>
-            <ui-option>111</ui-option>
-            <ui-option>222</ui-option>
-          </ui-select>
-          {{ select2.multiple }}
-        </div>
-      </div>
+  <div class="ui-form-group">
+    <label class="ui-control-label">性别</label>
+    <div class="ui-control-static">
+      <label><ui-input type="radio" name="sex"></ui-input> 男</label>&nbsp;&nbsp;<label><ui-input type="radio" name="sex"></ui-input> 女</label>
     </div>
-    <div class="ui-col-xs-6">
-      <div class="ui-form-group">
-        <label class="ui-control-label">姓名：</label>
-        <div class="ui-control-value">
-          <input uiInput type="text">
-        </div>
-      </div>
-    </div>
-    <div>
-      <button class="ui-btn ui-btn-primary" loading type="button" uiButton>button</button>
-      <button class="ui-btn ui-btn-primary" type="button" uiButton>button</button>
+  </div>
+  <div class="ui-form-group">
+    <label class="ui-control-label">注意事项</label>
+    <div class="ui-control-static">
+      外国人不允许注册
     </div>
   </div>
 </form>

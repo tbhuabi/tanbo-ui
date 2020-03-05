@@ -9,11 +9,11 @@ import {
   ElementRef,
   Renderer2, OnInit, OnDestroy
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 import { attrToBoolean } from '../../utils';
 import { DropdownDisplayLimit, DropdownService } from './dropdown.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ui-dropdown',

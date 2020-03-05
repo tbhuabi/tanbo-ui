@@ -1,1 +1,11 @@
-<ng-content></ng-content>
+<ng-template #template>
+  <ng-content></ng-content>
+</ng-template>
+<ng-container *ngIf="!canMultiple" [ngTemplateOutlet]="template">
+</ng-container>
+<div class="ui-option-label" *ngIf="canMultiple">
+  <ui-input type="checkbox" [disabled]="disabled" [checked]="selected"></ui-input>
+  <span>
+    <ng-container [ngTemplateOutlet]="template"></ng-container>
+  </span>
+</div>

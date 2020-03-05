@@ -3,7 +3,7 @@ import { GourdBoolean } from '../utils';
 
 @Component({
   /* tslint:disable */
-  selector: '[uiButton]',
+  selector: 'button[uiButton],input[type=button][uiButton]',
   /* tslint:enable */
   templateUrl: './button.component.html',
   host: {

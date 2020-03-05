@@ -6,8 +6,9 @@ import {
   ElementRef,
   AfterViewInit,
   HostBinding,
-  HostListener
+  HostListener, OnDestroy
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { SelectService } from '../select/select.service';
 import { GourdBoolean } from '../utils';
@@ -16,8 +17,8 @@ import { GourdBoolean } from '../utils';
   selector: 'ui-option',
   templateUrl: './option.component.html'
 })
-export class OptionComponent implements AfterViewInit {
-  @Input() value = '';
+export class OptionComponent implements AfterViewInit, OnDestroy {
+  @Input() value: any = '';
   @Input()
   @HostBinding('class.ui-disabled') @GourdBoolean() disabled = false;
   @Input()
@@ -33,8 +34,15 @@ export class OptionComponent implements AfterViewInit {
   @Output() uiChecked = new EventEmitter<OptionComponent>();
   nativeElement: HTMLElement;
 
+  @HostBinding('class.ui-option-multiple')
+  canMultiple = false;
+  private sub: Subscription;
+
   constructor(private elementRef: ElementRef,
               private selectService: SelectService) {
+    this.sub = this.selectService.isMultiple.subscribe(b => {
+      this.canMultiple = b;
+    });
   }
 
   @HostListener('click')
@@ -47,5 +55,9 @@ export class OptionComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.nativeElement = this.elementRef.nativeElement;
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

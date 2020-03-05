@@ -10,7 +10,7 @@ import {
   ViewChild,
   Output,
   Inject,
-  QueryList
+  QueryList, SimpleChanges, OnChanges
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW } from '@angular/cdk/keycodes';
@@ -33,7 +33,7 @@ import { GourdBoolean, GourdNumber } from '../utils';
   }, SelectService
   ]
 })
-export class SelectComponent implements ControlValueAccessor, AfterContentInit, OnDestroy, AfterViewInit {
+export class SelectComponent implements ControlValueAccessor, AfterContentInit, OnDestroy, AfterViewInit, OnChanges {
   @ContentChildren(OptionComponent)
   options: QueryList<OptionComponent>;
   @ViewChild('dropdownInput', {static: true}) dropdownInput: DropdownInputComponent;
@@ -50,17 +50,17 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   @Input() @GourdBoolean()
   readonly = false;
 
-  @Output() uiChange = new EventEmitter<string>();
+  @Output() uiChange = new EventEmitter<string | string[]>();
   focus = false;
   open = false;
   text = '';
 
-  private value = '';
+  private value: any = '';
   private onChange: (_: any) => any;
   private onTouched: () => any;
   private subs: Array<Subscription> = [];
 
-  private selectedOption: OptionComponent;
+  private selectedOption: OptionComponent | OptionComponent[];
   private temporaryOption: OptionComponent;
   private isWrite = false;
 
@@ -77,6 +77,14 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     this.arrowIconClassName = arrowIcon;
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    Object.keys(changes).forEach(key => {
+      if (key === 'multiple') {
+        this.selectService.canMultiple(this[key]);
+      }
+    });
+  }
+
   ngAfterContentInit() {
     if (this.isWrite) {
       this.updateByNgModel();
@@ -85,24 +93,50 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     }
     this.subs.push(this.selectService.onChecked.subscribe((option: OptionComponent) => {
       this.dropdownInput.focusIn();
-      this.open = false;
-      this.options.forEach((op: OptionComponent, index: number) => {
-        if (op === option) {
-          if (op !== this.selectedOption) {
-            this.selectedOption = op;
-            op.selected = true;
-            this.value = option.value;
-            this.text = SelectComponent.getTextByElement(option.nativeElement);
-            this.selectedIndex = index;
-            if (this.onChange) {
-              this.onChange(this.value);
-            }
-            this.uiChange.emit(this.value);
+      if (this.multiple) {
+        if (!Array.isArray(this.selectedOption)) {
+          if (this.selectedOption) {
+            this.selectedOption = [this.selectedOption];
+          } else {
+            this.selectedOption = [];
           }
-        } else {
-          op.selected = false;
         }
-      });
+        const i = this.selectedOption.indexOf(option);
+        if (i === -1) {
+          this.selectedOption.push(option);
+          option.selected = true;
+          this.text = this.selectedOption.map(op => SelectComponent.getTextByElement(op.nativeElement)).join('/');
+          this.selectedIndex = this.options.toArray().indexOf(option);
+        } else {
+          const unselectedOption = this.selectedOption.splice(i, 1)[0];
+          unselectedOption.selected = false;
+        }
+        this.text = this.selectedOption.map(op => SelectComponent.getTextByElement(op.nativeElement)).join('/');
+        const value = this.selectedOption.map(op => op.value || SelectComponent.getTextByElement(op.nativeElement));
+        if (this.onChange) {
+          this.onChange(value);
+        }
+        this.uiChange.emit(value);
+      } else {
+        this.open = false;
+        this.options.forEach((op: OptionComponent, index: number) => {
+          if (op === option) {
+            if (op !== this.selectedOption) {
+              this.selectedOption = op;
+              op.selected = true;
+              this.text = SelectComponent.getTextByElement(option.nativeElement);
+              this.value = option.value || this.text;
+              this.selectedIndex = index;
+              if (this.onChange) {
+                this.onChange(this.value);
+              }
+              this.uiChange.emit(this.value);
+            }
+          } else {
+            op.selected = false;
+          }
+        });
+      }
     }));
     this.subs.push(this.options.changes.pipe(delay(0)).subscribe(() => {
       this.updateByNgModel();
@@ -111,7 +145,9 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
 
   ngAfterViewInit() {
     if (this.selectedOption) {
-      this.text = SelectComponent.getTextByElement(this.selectedOption.nativeElement);
+      this.text = Array.isArray(this.selectedOption) ?
+        this.selectedOption.map(op => SelectComponent.getTextByElement(op.nativeElement)).join('/') :
+        SelectComponent.getTextByElement(this.selectedOption.nativeElement);
       this.changeDetectorRef.detectChanges();
     }
   }
@@ -153,8 +189,12 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     if (this.open) {
       const options = this.options.toArray();
       if (keyCode === DOWN_ARROW || keyCode === UP_ARROW) {
-        const nextOption = findNext(this.selectedOption,
-          this.temporaryOption || this.selectedOption,
+        const lastFocusOption = Array.isArray(this.selectedOption) ?
+          this.selectedOption[this.selectedOption.length - 1] :
+          this.selectedOption;
+        const nextOption = findNext(
+          lastFocusOption,
+          this.temporaryOption || lastFocusOption,
           options,
           keyCode === DOWN_ARROW ? 1 : -1);
         options.forEach(op => {
@@ -210,7 +250,11 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     this.value = '';
     this.text = '';
     this.selectedIndex = -1;
-    this.selectedOption.selected = false;
+    if (Array.isArray(this.selectedOption)) {
+      this.selectedOption.forEach(item => item.selected = false);
+    } else {
+      this.selectedOption.selected = false;
+    }
     this.selectedOption = null;
     if (this.onChange) {
       this.onChange('');
@@ -242,48 +286,101 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   }
 
   private updateByNgModel() {
-    let selectedOption: OptionComponent;
-    this.options.forEach((item: OptionComponent, index: number) => {
-      item.selected = false;
-      if (item.value === this.value || `${item.value}` === this.value || item.value === `${this.value}`) {
-        selectedOption = item;
-        this.selectedIndex = index;
+    if (this.multiple) {
+      const selectedOption: OptionComponent[] = [];
+      this.options.forEach((item: OptionComponent, index: number) => {
+        item.selected = false;
+        if (Array.isArray(this.value)) {
+          const flag = this.value.map(v => {
+            const vv = item.value || SelectComponent.getTextByElement(item.nativeElement);
+            return vv === v || `${vv}` === v || vv === `${v}`
+          }).includes(true);
+          if (flag) {
+            item.selected = true;
+            selectedOption.push(item);
+            this.selectedIndex = index;
+          }
+        }
+      });
+      if (selectedOption.length) {
+        this.text = selectedOption.map(op => SelectComponent.getTextByElement(op.nativeElement)).join('/');
+        this.selectedOption = selectedOption;
+      } else {
+        this.selectedIndex = -1;
+        this.text = '';
+        this.selectedOption = null;
       }
-    });
-    if (selectedOption) {
-      this.text = SelectComponent.getTextByElement(selectedOption.nativeElement);
-      selectedOption.selected = true;
-      this.selectedOption = selectedOption;
     } else {
-      this.selectedIndex = -1;
-      this.text = '';
-      this.selectedOption = null;
+      let selectedOption: OptionComponent;
+      this.options.forEach((item: OptionComponent, index: number) => {
+        item.selected = false;
+        const vv = item.value || SelectComponent.getTextByElement(item.nativeElement);
+        if (vv === this.value || `${vv}` === this.value || vv === `${this.value}`) {
+          selectedOption = item;
+          this.selectedIndex = index;
+        }
+      });
+      if (selectedOption) {
+        this.text = SelectComponent.getTextByElement(selectedOption.nativeElement);
+        selectedOption.selected = true;
+        this.selectedOption = selectedOption;
+      } else {
+        this.selectedIndex = -1;
+        this.text = '';
+        this.selectedOption = null;
+      }
     }
   }
 
   private updateBySelf() {
-    let defaultOption: OptionComponent;
-    this.options.forEach((option: OptionComponent, index: number) => {
-      if (option.selected) {
-        defaultOption = option;
-        this.selectedIndex = index;
-      }
-    });
-    if (!defaultOption) {
-      defaultOption = this.options.toArray()[this.selectedIndex];
-    }
-    if (!defaultOption) {
-      defaultOption = this.options.first;
-      this.selectedIndex = 0;
-    }
-    if (defaultOption) {
-      this.value = defaultOption.value;
-      setTimeout(() => {
-        if (!this.isWrite) {
-          defaultOption.selected = true;
+    if (this.multiple) {
+      let defaultOption: OptionComponent[] = [];
+      this.options.forEach((option: OptionComponent, index: number) => {
+        if (option.selected) {
+          defaultOption.push(option);
+          this.selectedIndex = index;
         }
       });
-      this.selectedOption = defaultOption;
+      if (!defaultOption.length) {
+        defaultOption = [this.options.toArray()[this.selectedIndex]];
+      }
+      if (!defaultOption.length) {
+        defaultOption = [this.options.first];
+        this.selectedIndex = 0;
+      }
+      if (defaultOption.length) {
+        this.value = defaultOption.map(op => op.value || SelectComponent.getTextByElement(op.nativeElement));
+        setTimeout(() => {
+          if (!this.isWrite) {
+            defaultOption.forEach(op => op.selected = true);
+          }
+        });
+        this.selectedOption = defaultOption;
+      }
+    } else {
+      let defaultOption: OptionComponent;
+      this.options.forEach((option: OptionComponent, index: number) => {
+        if (option.selected) {
+          defaultOption = option;
+          this.selectedIndex = index;
+        }
+      });
+      if (!defaultOption) {
+        defaultOption = this.options.toArray()[this.selectedIndex];
+      }
+      if (!defaultOption) {
+        defaultOption = this.options.first;
+        this.selectedIndex = 0;
+      }
+      if (defaultOption) {
+        this.value = defaultOption.value;
+        setTimeout(() => {
+          if (!this.isWrite) {
+            defaultOption.selected = true;
+          }
+        });
+        this.selectedOption = defaultOption;
+      }
     }
   }
 }
