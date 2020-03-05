@@ -26,7 +26,7 @@
 }
 
 .ui-form-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   display: flex;
 }
 
@@ -84,7 +84,7 @@
   flex: 1;
   margin: 0;
 
-  > .ui-form-control, > ui-select, > ui-input[type=date] {
+  > .ui-form-control, > ui-select, > ui-input[type=date], ui-input-group {
     width: 100%;
   }
 
