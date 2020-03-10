@@ -4,6 +4,15 @@
       <h2>用户信息登记</h2>
     </div>
   </div>
+
+  <div class="ui-form-group">
+    <label class="ui-control-label ui-col-xs-4">姓名</label>
+    <div class="ui-control-value">
+      <ui-select multiple>
+        <ui-option *ngFor="let item of data" [value]="item.value">{{ item.label }}</ui-option>
+      </ui-select>
+    </div>
+  </div>
   <div class="ui-form-group">
     <label class="ui-control-label ui-col-xs-4">姓名</label>
     <div class="ui-control-value">

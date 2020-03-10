@@ -1,6 +1,6 @@
 {
   "name": "@tanbo/ui",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "dependencies": {
     "@tanbo/tbus": "^0.0.1-alpha.67",
     "codemirror": "^5.40.2",

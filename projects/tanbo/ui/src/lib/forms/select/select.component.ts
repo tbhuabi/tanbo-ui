@@ -341,10 +341,11 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
           this.selectedIndex = index;
         }
       });
-      if (!defaultOption.length) {
-        defaultOption = [this.options.toArray()[this.selectedIndex]];
+      const o = this.options.toArray()[this.selectedIndex];
+      if (!defaultOption.length && o) {
+        defaultOption = [o];
       }
-      if (!defaultOption.length) {
+      if (!defaultOption.length && this.options.first) {
         defaultOption = [this.options.first];
         this.selectedIndex = 0;
       }

@@ -3,6 +3,8 @@
 ui-editor {
   display: block;
   margin-bottom: 1em;
+  position: relative;
+  z-index: 0;
 }
 
 .ui-input-editor {

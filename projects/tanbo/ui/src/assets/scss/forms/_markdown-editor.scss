@@ -5,6 +5,8 @@ ui-markdown-editor {
   border-radius: $radius-base;
   background-color: #fff;
   margin-bottom: 1em;
+  position: relative;
+  z-index: 0;
 }
 
 .ui-markdown-editor-toolbar {
