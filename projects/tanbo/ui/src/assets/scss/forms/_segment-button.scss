@@ -6,11 +6,9 @@ ui-segment-button {
   overflow: hidden;
   text-align: center;
   color: $color-primary;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: $form-control-padding-vertical 1em;
   min-width: 100px;
   border: 1px solid $color-primary;
-  line-height: 2.2em;
   transition: all ease-in-out .15s;
 
   &:not(:first-of-type) {
