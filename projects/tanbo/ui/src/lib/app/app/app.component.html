@@ -1,4 +1,7 @@
 <ng-content></ng-content>
+<ui-drawer [direction]="drawerDirection" [show]="showDrawer" (uiHide)="hideDrawer()">
+  <ng-container [ngTemplateOutlet]="drawerContent"></ng-container>
+</ui-drawer>
 <ui-overlay [show]="isShowModal">
   <div class="ui-modal" *ngFor="let item of modalTemplates" @modalAnimation>
     <ng-container [ngTemplateOutlet]="item"></ng-container>

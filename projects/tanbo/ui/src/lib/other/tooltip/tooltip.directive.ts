@@ -19,7 +19,7 @@ export class TooltipDirective implements OnDestroy {
   @Input()
   uiTooltip = '';
   @Input()
-  tooltipPosition: string = '';
+  tooltipPosition = '';
 
   private instance: TooltipComponent;
   private tooltipComponent: ComponentRef<TooltipComponent>;

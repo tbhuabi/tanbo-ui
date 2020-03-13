@@ -19,13 +19,16 @@
 
 ui-tag {
   display: inline;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: .5em;
+  padding-right: .5em;
   border-radius: 4px;
   color: $color-dark;
   background-color: $color-light;
   border: 1px solid $color-light;
-  font-size: .8em;
+  user-select: none;
+  &-sm {
+    font-size: .8em;
+  }
   &.ui-outline {
     border: 1px solid $color-light;
     background-color: #fff;

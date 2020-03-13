@@ -21,6 +21,8 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { PickerComponent } from './picker/picker.component';
 import { RadioComponent } from './radio/radio.component';
 import { RangeComponent } from './range/range.component';
+import { SegmentComponent } from './segment/segment.component';
+import { SegmentButtonComponent } from './segment-button/segment-button.component';
 import { SelectComponent } from './select/select.component';
 import { SwitchComponent } from './switch/switch.component';
 
@@ -59,6 +61,8 @@ import { RadioStateService } from './radio/radio-state.service';
     PickerComponent,
     RadioComponent,
     RangeComponent,
+    SegmentComponent,
+    SegmentButtonComponent,
     SelectComponent,
     SwitchComponent,
 
@@ -86,6 +90,8 @@ import { RadioStateService } from './radio/radio-state.service';
     PickerComponent,
     RadioComponent,
     RangeComponent,
+    SegmentComponent,
+    SegmentButtonComponent,
     SelectComponent,
     SwitchComponent,
 

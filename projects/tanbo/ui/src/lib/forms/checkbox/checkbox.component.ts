@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { GourdBoolean } from '../utils';
+import { GourdBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-input[type=checkbox]',

@@ -17,7 +17,9 @@ export interface NotifyConfig {
   time?: number;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class NotifyController {
   notify: Observable<NotifyConfig | string>;
   private notifySource = new Subject<NotifyConfig | string>();

@@ -1,4 +1,5 @@
 import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 export interface DialogConfig {
   content: string;
@@ -7,6 +8,9 @@ export interface DialogConfig {
   cancelBtnText?: string;
 }
 
+@Injectable({
+  providedIn: 'root'
+})
 export class DialogController {
   config = new Subject<DialogConfig | string>();
   checkState = new Subject<boolean>();

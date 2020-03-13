@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AnchorService {
   onAnchorInScreen: Observable<string>;
 

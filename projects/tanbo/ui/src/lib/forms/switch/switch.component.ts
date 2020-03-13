@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { GourdBoolean } from '../utils';
+import { GourdBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-switch',

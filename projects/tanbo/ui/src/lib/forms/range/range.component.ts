@@ -14,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { attrToNumber } from '../../utils';
-import { GourdBoolean, GourdNumber } from '../utils';
+import { GourdBoolean, GourdNumber } from '../../utils';
 
 @Component({
   selector: 'ui-input[type=range]',

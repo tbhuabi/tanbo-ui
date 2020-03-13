@@ -1,6 +1,9 @@
-import { TemplateRef } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
 import { Subject } from 'rxjs';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class ModalController {
   showEvent = new Subject<TemplateRef<any>>();
   hideEvent = new Subject<TemplateRef<any>>();

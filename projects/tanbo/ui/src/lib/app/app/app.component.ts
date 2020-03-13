@@ -1,4 +1,5 @@
 import { Component, ElementRef, forwardRef, OnDestroy, OnInit, Renderer2, TemplateRef } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { DropdownRenderer } from '../../dropdown/help';
@@ -6,7 +7,7 @@ import { ModalController } from '../../modal/help';
 import { DialogConfig, DialogController } from '../dialog-controller';
 import { NotifyController, NotifyType } from '../notify-controller';
 import { dialogAnimation, modalAnimation, notifyAnimation } from './animations';
-import { NavigationStart, Router } from '@angular/router';
+import { DrawerController } from '../drawer-controller';
 
 @Component({
   selector: 'ui-app',
@@ -31,7 +32,9 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
 
   dialogConfig: DialogConfig;
   isShowDialog = false;
-
+  showDrawer = false;
+  drawerDirection = 'bottom';
+  drawerContent: TemplateRef<any> = null;
   private dialogCheckState = false;
   private subs: Subscription[] = [];
   private timer: any = null;
@@ -42,7 +45,8 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
               private renderer: Renderer2,
               private notifyController: NotifyController,
               private modalController: ModalController,
-              private dialogController: DialogController) {
+              private dialogController: DialogController,
+              private drawerController: DrawerController) {
   }
 
   ngOnInit(): void {
@@ -52,6 +56,14 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
         this.hideAllModal();
         this.isShowDialog = false;
       }
+    }));
+    this.subs.push(this.drawerController.onShow.subscribe(c => {
+      this.showDrawer = true;
+      this.drawerDirection = c.direction;
+      this.drawerContent = c.content;
+    }));
+    this.subs.push(this.drawerController.onHide.subscribe(() => {
+      this.showDrawer = false;
     }));
     this.subs.push(this.dialogController.config.subscribe(c => {
       this.hideEventFromRouteChange = false;
@@ -111,6 +123,10 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.forEach(item => item.unsubscribe());
+  }
+
+  hideDrawer() {
+    this.drawerController.hide();
   }
 
   renderDropdown(ref: ElementRef) {

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { attrToBoolean } from '../../utils';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+
+import { GourdBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-overlay',
@@ -21,18 +22,10 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 export class OverlayComponent {
-  @Input()
-  set show(v: boolean) {
-    this._show = attrToBoolean(v);
-  }
-
-  get show() {
-    return this._show;
-  }
+  @Input() @GourdBoolean()
+  show = false;
 
   @Output() uiHide = new EventEmitter<void>();
-
-  private _show = false;
 
   done() {
     if (!this.show) {

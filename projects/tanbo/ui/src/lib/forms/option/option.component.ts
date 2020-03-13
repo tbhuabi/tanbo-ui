@@ -11,7 +11,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { SelectService } from '../select/select.service';
-import { GourdBoolean } from '../utils';
+import { GourdBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-option',

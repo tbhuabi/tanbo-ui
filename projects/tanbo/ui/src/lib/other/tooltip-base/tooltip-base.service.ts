@@ -1,7 +1,9 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TooltipBaseService {
   onPush: Observable<ElementRef>;
 

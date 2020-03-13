@@ -29,7 +29,7 @@ import {
   DatePickerModel
 } from './date-utils';
 
-import { GourdBoolean } from '../utils';
+import { GourdBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-input[type=date]',

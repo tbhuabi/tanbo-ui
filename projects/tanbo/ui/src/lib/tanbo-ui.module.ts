@@ -17,12 +17,7 @@ import { UITableModule } from './table/table.module';
 import { UITimelineModule } from './timeline/timeline.module';
 import { UITreeModule } from './tree/tree.module';
 
-import { DialogController } from './app/dialog-controller';
-import { NotifyController } from './app/notify-controller';
-import { ModalController } from './modal/help';
 import { UI_OVERLAY_Z_INDEX } from './base/help';
-import { TooltipBaseService } from './other/tooltip-base/tooltip-base.service';
-import { AnchorService } from './quick-nav/anchor/anchor.service';
 import { UI_ANCHOR_LINK_DISTANCE } from './quick-nav/helper';
 
 @NgModule({
@@ -49,12 +44,7 @@ export class UIModule {
   static forRoot(): ModuleWithProviders<UIModule> {
     return {
       ngModule: UIModule,
-      providers: [
-        DialogController,
-        ModalController,
-        NotifyController,
-        TooltipBaseService,
-        AnchorService, {
+      providers: [{
           provide: UI_ANCHOR_LINK_DISTANCE,
           useValue: 0
         }, {

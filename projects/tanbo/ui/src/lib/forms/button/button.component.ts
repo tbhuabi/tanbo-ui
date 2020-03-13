@@ -1,5 +1,5 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import { GourdBoolean } from '../utils';
+import { GourdBoolean } from '../../utils';
 
 @Component({
   /* tslint:disable */

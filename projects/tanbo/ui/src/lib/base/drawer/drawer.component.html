@@ -1,0 +1,6 @@
+<ui-overlay [show]="show" (click)="hide()">
+  <div *ngIf="show" uiStopPropagation class="ui-drawer" [@drawerAnimation]="direction || 'bottom'">
+    {{ direction }}
+    <ng-content></ng-content>
+  </div>
+</ui-overlay>

@@ -21,7 +21,7 @@ import { DropdownInputComponent } from '../../dropdown/dropdown-input/dropdown-i
 import { UI_DROPDOWN_ARROW_CLASSNAME } from '../../dropdown/help';
 import { OptionComponent } from '../option/option.component';
 import { SelectService } from './select.service';
-import { GourdBoolean, GourdNumber } from '../utils';
+import { GourdBoolean, GourdNumber } from '../../utils';
 
 @Component({
   selector: 'ui-select',

@@ -4,7 +4,7 @@ import { from, Subscription, Observable } from 'rxjs';
 
 import { UI_DROPDOWN_ARROW_CLASSNAME } from '../../dropdown/help';
 import { PickerCell } from './picker-help';
-import { GourdBoolean } from '../utils';
+import { GourdBoolean } from '../../utils';
 
 @Component({
   selector: 'ui-picker',
