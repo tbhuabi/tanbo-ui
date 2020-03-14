@@ -41,3 +41,5 @@ export function GourdNumber(defaultValue: number): PropertyDecorator {
     });
   }
 }
+
+export const ANIMATE_FUNCTION = 'cubic-bezier(.36, .66, .04, 1)';

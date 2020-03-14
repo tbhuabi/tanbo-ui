@@ -17,7 +17,16 @@ export class DrawerComponent {
   @Output()
   uiHide = new EventEmitter();
 
+  private isSelfClick = false;
+
   hide() {
-    this.uiHide.emit();
+    if (!this.isSelfClick) {
+      this.uiHide.emit();
+    }
+    this.isSelfClick = false;
+  }
+
+  selfClick() {
+    this.isSelfClick = true;
   }
 }

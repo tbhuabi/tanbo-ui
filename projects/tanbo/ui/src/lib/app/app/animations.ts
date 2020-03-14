@@ -1,7 +1,12 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
+import { ANIMATE_FUNCTION } from '../../utils';
 
 export const modalAnimation = trigger('modalAnimation', [
-  transition(':enter', animate(160, keyframes([
+  state('void', style({
+    marginTop: -300,
+    opacity: 0
+  })),
+  transition(':enter', animate(`160ms 200ms ${ANIMATE_FUNCTION}`, keyframes([
     style({
       marginTop: -300,
       opacity: 0,
@@ -15,27 +20,35 @@ export const modalAnimation = trigger('modalAnimation', [
   ]))),
   transition(':leave', animate(100, style({
     transform: 'scale(.8) translateX(-50%) translateY(-50%)',
-    opacity: .8
+    opacity: .5
   })))
 ]);
 export const dialogAnimation = trigger('dialogAnimation', [
-  transition(':enter', animate('.1s', keyframes([
+  state('void', style({
+    transform: 'translateY(-100%)',
+    opacity: 0
+  })),
+  transition(':enter', animate(`160ms 200ms ${ANIMATE_FUNCTION}`, keyframes([
     style({
       transform: 'translateY(-100%)',
+      opacity: 0,
       offset: 0
     }),
     style({
       transform: 'translateY(0)',
+      opacity: 1,
       offset: 1
     })
   ]))),
-  transition(':leave', animate(100, keyframes([
+  transition(':leave', animate(`160ms ease-in-out`, keyframes([
     style({
       transform: 'translateY(0)',
+      opacity: 1,
       offset: 0
     }),
     style({
       transform: 'translateY(-100%)',
+      opacity: 0,
       offset: 1
     })
   ])))

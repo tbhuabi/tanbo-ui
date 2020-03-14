@@ -1,5 +1,5 @@
 <ui-overlay [show]="show" (click)="hide()">
-  <div *ngIf="show" uiStopPropagation class="ui-drawer" [@drawerAnimation]="direction || 'bottom'">
+  <div *ngIf="show" (click)="selfClick()" class="ui-drawer" [@drawerAnimation]="direction || 'bottom'">
     <ng-content></ng-content>
   </div>
 </ui-overlay>
