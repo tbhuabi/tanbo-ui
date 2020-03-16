@@ -31,7 +31,7 @@ export const drawerAnimation = trigger('drawerAnimation', [
     bottom: 0,
     transform: 'translateY(0)'
   })),
-  transition('void => bottom', animate(`200ms 200ms ${ANIMATE_FUNCTION}`, keyframes([style({
+  transition('void => bottom', animate(`200ms 150ms ${ANIMATE_FUNCTION}`, keyframes([style({
     offset: 0,
     left: 0,
     right: 0,
@@ -61,7 +61,7 @@ export const drawerAnimation = trigger('drawerAnimation', [
     transform: 'translateY(100%)'
   })]))),
 
-  transition('void => left', animate(`200ms 200ms ${ANIMATE_FUNCTION}`, keyframes([style({
+  transition('void => left', animate(`200ms 150ms ${ANIMATE_FUNCTION}`, keyframes([style({
     offset: 0,
     left: 0,
     top: 0,
@@ -91,7 +91,7 @@ export const drawerAnimation = trigger('drawerAnimation', [
     transform: 'translateX(-100%)'
   })]))),
 
-  transition('void => right', animate(`200ms 200ms ${ANIMATE_FUNCTION}`, keyframes([style({
+  transition('void => right', animate(`200ms 150ms ${ANIMATE_FUNCTION}`, keyframes([style({
     offset: 0,
     right: 0,
     top: 0,
@@ -121,7 +121,7 @@ export const drawerAnimation = trigger('drawerAnimation', [
     transform: 'translateX(100%)'
   })]))),
 
-  transition('void => top', animate(`200ms 200ms ${ANIMATE_FUNCTION}`, keyframes([style({
+  transition('void => top', animate(`200ms 150ms ${ANIMATE_FUNCTION}`, keyframes([style({
     offset: 0,
     right: 0,
     top: 0,

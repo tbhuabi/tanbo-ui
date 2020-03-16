@@ -3,24 +3,23 @@ import { ANIMATE_FUNCTION } from '../../utils';
 
 export const modalAnimation = trigger('modalAnimation', [
   state('void', style({
-    marginTop: -300,
+    transform: 'scale(0.95) translateX(-50%) translateY(-50%)',
     opacity: 0
   })),
-  transition(':enter', animate(`160ms 200ms ${ANIMATE_FUNCTION}`, keyframes([
+  transition(':enter', animate(`160ms 150ms ${ANIMATE_FUNCTION}`, keyframes([
     style({
-      marginTop: -300,
-      opacity: 0,
+      transform: 'scale(0.95) translateX(-50%) translateY(-50%)',
+      opacity: 1,
       offset: 0
     }),
     style({
-      marginTop: 0,
-      opacity: 1,
+      transform: 'scale(1) translateX(-50%) translateY(-50%)',
       offset: 1
     })
   ]))),
   transition(':leave', animate(100, style({
     transform: 'scale(.8) translateX(-50%) translateY(-50%)',
-    opacity: .5
+    opacity: .8
   })))
 ]);
 export const dialogAnimation = trigger('dialogAnimation', [
