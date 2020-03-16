@@ -25,6 +25,7 @@ ui-dropdown-input {
   align-items: center;
   justify-content: center;
   transition: transform .15s;
+  pointer-events: none;
   &.ui-open {
     transform: rotateZ(180deg);
   }
