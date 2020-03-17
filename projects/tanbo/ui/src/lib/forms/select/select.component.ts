@@ -44,6 +44,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   @Input() @GourdBoolean() multiple = false;
   @Input() @GourdNumber(0) selectedIndex = 0;
   @Input() arrowIconClassName = '';
+  @Input() splitText = '/';
 
   @Input() @GourdBoolean()
   disabled = false;
@@ -80,7 +81,10 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
 
   ngAfterContentInit() {
     if (this.isWrite) {
-      this.updateByNgModel();
+      setTimeout(() => {
+        // 使用 FormBuilder 构建表单时，开发模式下，ng 二次检查时，option 的属性变化会导致报错，暂用 setTimeout 解决
+        this.updateByNgModel();
+      });
     } else {
       this.updateBySelf();
     }
@@ -98,13 +102,13 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
         if (i === -1) {
           this.selectedOption.push(option);
           option.selected = true;
-          this.text = this.selectedOption.map(op => op.text).join('/');
+          this.text = this.selectedOption.map(op => op.text).join(this.splitText);
           this.selectedIndex = this.options.toArray().indexOf(option);
         } else {
           const unselectedOption = this.selectedOption.splice(i, 1)[0];
           unselectedOption.selected = false;
         }
-        this.text = this.selectedOption.map(op => op.text).join('/');
+        this.text = this.selectedOption.map(op => op.text).join(this.splitText);
         const value = this.selectedOption.map(op => op.value);
         if (this.onChange) {
           this.onChange(value);
@@ -139,7 +143,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   ngAfterViewInit() {
     if (this.selectedOption) {
       this.text = Array.isArray(this.selectedOption) ?
-        this.selectedOption.map(op => op.text).join('/') :
+        this.selectedOption.map(op => op.text).join(this.splitText) :
         this.selectedOption.text;
       this.changeDetectorRef.detectChanges();
     }
@@ -296,7 +300,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
         }
       });
       if (selectedOption.length) {
-        this.text = selectedOption.map(op => op.text).join('/');
+        this.text = selectedOption.map(op => op.text).join(this.splitText);
         this.selectedOption = selectedOption;
       } else {
         this.selectedIndex = -1;

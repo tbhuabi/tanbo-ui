@@ -1,65 +1,9 @@
-<button type="button" class="ui-btn ui-btn-primary" (click)="showModal()">显示弹窗</button>
-<p><button type="button" class="ui-btn-primary ui-btn" (click)="show()">点我弹窗</button></p>
 <p>
-  <button type="button" class="ui-btn ui-btn-primary" (click)="show2()">点我弹出抽屉</button>
+  <button type="button" (click)="showModal()" class="ui-btn ui-btn-primary">show</button>
 </p>
-<p>
-  <ui-input type="date"></ui-input>
-</p>
-<ng-template #template>
-  <form class="ui-form" novalidate autocomplete="off">
-    <div class="ui-form-group">
-      <div class="ui-control-value ui-col-xs-offset-4">
-        <h2>用户信息登记</h2>
-      </div>
-    </div>
-    <div class="ui-form-group">
-      <label class="ui-control-label ui-col-xs-4">姓名</label>
-      <div class="ui-control-value">
-        <input type="text" uiInput name="name" placeholder="请输入姓名">
-        <div class="ui-invalid">必填项不能为空</div>
-      </div>
-    </div>
-    <div class="ui-form-group">
-      <label class="ui-control-label ui-col-xs-4">手机号码</label>
-      <div class="ui-control-value">
-        <ui-input-group>
-          <ui-input-addon>86+</ui-input-addon>
-          <input type="number" name="age" uiInput placeholder="请输入号码" value="13888888888">
-        </ui-input-group>
-        <div class="ui-valid">手机号填写正确</div>
-      </div>
-    </div>
-    <div class="ui-form-group">
-      <label class="ui-control-label ui-col-xs-4">出生年月</label>
-      <div class="ui-control-value">
-        <ui-input type="date" name="birthday" placeholder="请选择出生年月"></ui-input>
-      </div>
-    </div>
-    <div class="ui-form-group">
-      <label class="ui-control-label ui-col-xs-4">性别</label>
-      <div class="ui-control-static">
-        <label><ui-input type="radio" name="sex"></ui-input> 男</label>&nbsp;&nbsp;<label><ui-input type="radio" name="sex"></ui-input> 女</label>
-      </div>
-    </div>
-    <div class="ui-form-group">
-      <label class="ui-control-label ui-col-xs-4">注意事项</label>
-      <div class="ui-control-static">
-        外国人不允许登记
-      </div>
-    </div>
-    <div class="ui-btn-wrap">
-      <div class="ui-col-xs-offset-4">
-        <button type="button" (click)="submit()" class="ui-btn ui-btn-primary">提 交</button>
-      </div>
-    </div>
-  </form>
-</ng-template>
 
-<ng-template #demoModal>
-  <ui-modal title="Demo 标题" (uiClose)="hideModal()" (uiConfirm)="hideModal()">
-    <ui-modal-body>
-      这里是内容
-    </ui-modal-body>
-  </ui-modal>
-</ng-template>
+<div>
+  <ui-select multiple>
+    <ui-option *ngFor="let item of list" [value]="item.value">{{ item.label }}</ui-option>
+  </ui-select>
+</div>
