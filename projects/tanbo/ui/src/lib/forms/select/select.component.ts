@@ -64,13 +64,6 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   private temporaryOption: OptionComponent;
   private isWrite = false;
 
-  static getTextByElement(element: HTMLElement): string {
-    if (element) {
-      return element.innerText.replace(/^[\s\n\t\r]+|[\s\n\t\r]+$/g, '');
-    }
-    return '';
-  }
-
   constructor(@Inject(UI_DROPDOWN_ARROW_CLASSNAME) arrowIcon: string,
               private selectService: SelectService,
               private changeDetectorRef: ChangeDetectorRef) {
@@ -105,14 +98,14 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
         if (i === -1) {
           this.selectedOption.push(option);
           option.selected = true;
-          this.text = this.selectedOption.map(op => SelectComponent.getTextByElement(op.nativeElement)).join('/');
+          this.text = this.selectedOption.map(op => op.text).join('/');
           this.selectedIndex = this.options.toArray().indexOf(option);
         } else {
           const unselectedOption = this.selectedOption.splice(i, 1)[0];
           unselectedOption.selected = false;
         }
-        this.text = this.selectedOption.map(op => SelectComponent.getTextByElement(op.nativeElement)).join('/');
-        const value = this.selectedOption.map(op => op.value || SelectComponent.getTextByElement(op.nativeElement));
+        this.text = this.selectedOption.map(op => op.text).join('/');
+        const value = this.selectedOption.map(op => op.value);
         if (this.onChange) {
           this.onChange(value);
         }
@@ -124,7 +117,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
             if (op !== this.selectedOption) {
               this.selectedOption = op;
               op.selected = true;
-              this.text = SelectComponent.getTextByElement(option.nativeElement);
+              this.text = op.text;
               this.value = option.value || this.text;
               this.selectedIndex = index;
               if (this.onChange) {
@@ -146,8 +139,8 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   ngAfterViewInit() {
     if (this.selectedOption) {
       this.text = Array.isArray(this.selectedOption) ?
-        this.selectedOption.map(op => SelectComponent.getTextByElement(op.nativeElement)).join('/') :
-        SelectComponent.getTextByElement(this.selectedOption.nativeElement);
+        this.selectedOption.map(op => op.text).join('/') :
+        this.selectedOption.text;
       this.changeDetectorRef.detectChanges();
     }
   }
@@ -292,8 +285,8 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
         item.selected = false;
         if (Array.isArray(this.value)) {
           const flag = this.value.map(v => {
-            const vv = item.value || SelectComponent.getTextByElement(item.nativeElement);
-            return vv === v || `${vv}` === v || vv === `${v}`
+            const vv = item.value;
+            return vv === v || `${vv}` === v || vv === `${v}`;
           }).includes(true);
           if (flag) {
             item.selected = true;
@@ -303,7 +296,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
         }
       });
       if (selectedOption.length) {
-        this.text = selectedOption.map(op => SelectComponent.getTextByElement(op.nativeElement)).join('/');
+        this.text = selectedOption.map(op => op.text).join('/');
         this.selectedOption = selectedOption;
       } else {
         this.selectedIndex = -1;
@@ -314,14 +307,14 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
       let selectedOption: OptionComponent;
       this.options.forEach((item: OptionComponent, index: number) => {
         item.selected = false;
-        const vv = item.value || SelectComponent.getTextByElement(item.nativeElement);
+        const vv = item.value;
         if (vv === this.value || `${vv}` === this.value || vv === `${this.value}`) {
           selectedOption = item;
           this.selectedIndex = index;
         }
       });
       if (selectedOption) {
-        this.text = SelectComponent.getTextByElement(selectedOption.nativeElement);
+        this.text = selectedOption.text;
         selectedOption.selected = true;
         this.selectedOption = selectedOption;
       } else {
@@ -350,7 +343,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
         this.selectedIndex = 0;
       }
       if (defaultOption.length) {
-        this.value = defaultOption.map(op => op.value || SelectComponent.getTextByElement(op.nativeElement));
+        this.value = defaultOption.map(op => op.value);
         setTimeout(() => {
           if (!this.isWrite) {
             defaultOption.forEach(op => op.selected = true);

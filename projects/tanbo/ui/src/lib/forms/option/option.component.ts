@@ -4,7 +4,6 @@ import {
   Output,
   EventEmitter,
   ElementRef,
-  AfterViewInit,
   HostBinding,
   HostListener, OnDestroy
 } from '@angular/core';
@@ -17,8 +16,16 @@ import { GourdBoolean } from '../../utils';
   selector: 'ui-option',
   templateUrl: './option.component.html'
 })
-export class OptionComponent implements AfterViewInit, OnDestroy {
-  @Input() value: any = '';
+export class OptionComponent implements OnDestroy {
+  @Input()
+  set value(v: any) {
+    this._value = v;
+  }
+
+  get value() {
+    return (this._value === null || this._value === undefined) ? this.text : this._value;
+  }
+
   @Input()
   @HostBinding('class.ui-disabled') @GourdBoolean() disabled = false;
   @Input()
@@ -29,14 +36,18 @@ export class OptionComponent implements AfterViewInit, OnDestroy {
     return this.focus && !this.disabled;
   }
 
-  focus = false;
-
   @Output() uiChecked = new EventEmitter<OptionComponent>();
-  nativeElement: HTMLElement;
 
   @HostBinding('class.ui-option-multiple')
   canMultiple = false;
+
+  get text() {
+    return this.elementRef.nativeElement.innerText.replace(/^[\s\n\t\r]+|[\s\n\t\r]+$/g, '');
+  }
+
+  focus = false;
   private sub: Subscription;
+  private _value: any = '';
 
   constructor(private elementRef: ElementRef,
               private selectService: SelectService) {
@@ -51,10 +62,6 @@ export class OptionComponent implements AfterViewInit, OnDestroy {
       this.selectService.checked(this);
       this.uiChecked.emit(this);
     }
-  }
-
-  ngAfterViewInit() {
-    this.nativeElement = this.elementRef.nativeElement;
   }
 
   ngOnDestroy(): void {
