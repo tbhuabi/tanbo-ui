@@ -1,8 +1,11 @@
 ui-option {
   user-select: none;
-  &.ui-selected:not(.ui-option-multiple) {
-    background-color: rgba(red($color-primary), green($color-primary), blue($color-primary), .2);
-    color: inherit;
+  &.ui-selected {
+    background-color: $color-lighter;
+    &:not(.ui-option-multiple) {
+      background-color: rgba(red($color-primary), green($color-primary), blue($color-primary), .2);
+      color: inherit;
+    }
   }
 
   @include linker;
@@ -21,7 +24,7 @@ ui-option {
   padding: 3px 20px 3px 15px;
   cursor: inherit;
   > ui-input {
-    vertical-align: middle;
+    vertical-align: sub;
   }
   > span {
     margin-left: 10px;
