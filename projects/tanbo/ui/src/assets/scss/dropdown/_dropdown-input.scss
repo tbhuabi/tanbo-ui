@@ -2,6 +2,7 @@ ui-dropdown-input {
   position: relative;
   display: block;
   text-align: left;
+  z-index: 0;
   &:hover {
     .ui-dropdown-input-clean:not(.ui-hide) {
       display: flex;

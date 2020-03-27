@@ -10,7 +10,6 @@ import { ButtonComponent } from './button/button.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { DateComponent } from './date/date.component';
 import { EditorComponent } from './editor/editor.component';
-import { EditorQuillComponent } from './editor-quill/editor-quill.component';
 import { MarkdownEditorComponent } from './markdown-editor/markdown-editor.component';
 import { FileComponent } from './file/file.component';
 import { InputDirective } from './input/input.directive';
@@ -50,7 +49,6 @@ import { RadioStateService } from './radio/radio-state.service';
     CheckboxComponent,
     DateComponent,
     EditorComponent,
-    EditorQuillComponent,
     FileComponent,
     InputDirective,
     InputAddonComponent,
@@ -79,7 +77,6 @@ import { RadioStateService } from './radio/radio-state.service';
     CheckboxComponent,
     DateComponent,
     EditorComponent,
-    EditorQuillComponent,
     FileComponent,
     InputDirective,
     InputAddonComponent,

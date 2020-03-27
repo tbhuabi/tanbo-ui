@@ -18,14 +18,14 @@
 }
 
 ui-tag {
-  display: inline;
-  padding-left: .5em;
-  padding-right: .5em;
+  display: inline-block;
+  padding: .2em .5em;
   border-radius: 4px;
   color: $color-dark;
   background-color: $color-light;
   border: 1px solid $color-light;
   user-select: none;
+  vertical-align: middle;
   &-sm {
     font-size: .8em;
   }
