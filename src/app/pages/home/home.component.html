@@ -1,7 +1,7 @@
 <p>
   <button type="button" (click)="showModal()" class="ui-btn ui-btn-primary">show</button>
 </p>
-
+<ui-input type="file"></ui-input>
 <div>
   <ui-select multiple>
     <ui-option *ngFor="let item of list" [value]="item.value">{{ item.label }}</ui-option>

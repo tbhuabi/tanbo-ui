@@ -16,7 +16,6 @@ export class FileComponent {
   @Output() uiUploaded = new EventEmitter<any>();
   @Output() uiUploadError = new EventEmitter<Error>();
   @Input() placeholder = '上传文件';
-  @Input() ext: string | RegExp | Array<string | RegExp> = '';
   @Input() name: string;
   @Input() forId: string;
   @Input() accept: string;
@@ -39,34 +38,13 @@ export class FileComponent {
     this.progress = 0;
     this.uiChange.emit(event);
     const data = new FormData();
-    const files = event.target.files;
+    const files = event.target.files as FileList;
     if (!files.length) {
       return;
     }
 
-    const validators: RegExp[] = [];
-    if (this.ext) {
-      let ext: Array<RegExp | string>;
-      if (!Array.isArray(this.ext)) {
-        ext = [this.ext];
-      }
-      ext.forEach(item => {
-        if (typeof item === 'string') {
-          validators.push(new RegExp(`(${item})$`, 'i'));
-        } else if (item instanceof RegExp) {
-          validators.push(item);
-        }
-      });
-    }
-
-    for (const file of files) {
-      const ext = (file.name.match(/\.\w+$/) || ['.'])[0].substring(1);
-      if (this.validate(ext, validators)) {
-        data.append(this.name, file);
-      } else {
-        this.uiUploadError.emit(new Error(`不支持 "${file.name}" 上传`));
-        return;
-      }
+    for (const file of Array.from(files)) {
+      data.append(this.name, file);
     }
     if (typeof this.uploader === 'function') {
       const request = this.uploader(data);
@@ -77,15 +55,6 @@ export class FileComponent {
       }
     }
     this.refresh();
-  }
-
-  private validate(ext: string, validators: RegExp[]) {
-    for (const item of validators) {
-      if (!item.test(ext)) {
-        return false;
-      }
-    }
-    return true;
   }
 
   private upload(obs: Observable<HttpEvent<any>>) {
