@@ -27,6 +27,7 @@ ui-tag {
   border: 1px solid $color-light;
   user-select: none;
   vertical-align: middle;
+  white-space: nowrap;
   &-sm {
     font-size: .8em;
   }
