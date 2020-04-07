@@ -12,6 +12,7 @@ ui-dropdown-menu {
   opacity: 0;
   z-index: 100;
   position: fixed;
+  overflow-y: auto;
 
   &.ui-open {
     transform: scaleY(1);

@@ -148,7 +148,7 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
     }
     this.dropdownMenu.expand = this.open;
     this.dropdownMenu.autoDisplay = this._autoDisplay;
-    const childElement = this.dropdownMenu.elementRef.nativeElement;
+    const menuElement = this.dropdownMenu.elementRef.nativeElement;
 
     const fn = () => {
       this.updateChildDisplayLimit(this.displayLimit);
@@ -156,23 +156,24 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
       const clientHeight = document.documentElement.clientHeight;
       const parentRect = this.el.nativeElement.getBoundingClientRect();
 
-      this.topOrBottom = parentRect.bottom + childElement.offsetHeight > clientHeight ? 'top' : 'bottom';
-      this.leftOfRight = parentRect.left + childElement.offsetWidth > clientWidth ? 'right' : 'left';
+      this.topOrBottom = (parentRect.bottom + Math.max(menuElement.offsetHeight, menuElement.scrollHeight) > clientHeight &&
+        clientHeight - parentRect.bottom < parentRect.top) ? 'top' : 'bottom';
+      this.leftOfRight = parentRect.left + menuElement.offsetWidth > clientWidth ? 'right' : 'left';
       if (this.topOrBottom === 'top') {
-        this.renderer.setStyle(childElement, 'bottom', clientHeight - parentRect.top + 'px');
-        this.renderer.setStyle(childElement, 'top', '');
-        this.renderer.setStyle(childElement, 'transform-origin', '0 100%');
+        this.renderer.setStyle(menuElement, 'bottom', clientHeight - parentRect.top + 'px');
+        this.renderer.setStyle(menuElement, 'top', Math.max(menuElement.offsetHeight, menuElement.scrollHeight) - parentRect.top > 10 ? '10px' : '');
+        this.renderer.setStyle(menuElement, 'transform-origin', '0 100%');
       } else {
-        this.renderer.setStyle(childElement, 'top', parentRect.bottom + 'px');
-        this.renderer.setStyle(childElement, 'bottom', '');
-        this.renderer.setStyle(childElement, 'transform-origin', '0 0');
+        this.renderer.setStyle(menuElement, 'top', parentRect.bottom + 'px');
+        this.renderer.setStyle(menuElement, 'bottom', Math.max(menuElement.offsetHeight, menuElement.scrollHeight) - (clientHeight - parentRect.bottom) > 10 ? '10px' : '');
+        this.renderer.setStyle(menuElement, 'transform-origin', '0 0');
       }
       if (this.leftOfRight === 'left') {
-        this.renderer.setStyle(childElement, 'left', parentRect.left + 'px');
-        this.renderer.setStyle(childElement, 'right', '');
+        this.renderer.setStyle(menuElement, 'left', parentRect.left + 'px');
+        this.renderer.setStyle(menuElement, 'right', '');
       } else {
-        this.renderer.setStyle(childElement, 'right', clientWidth - parentRect.right + 'px');
-        this.renderer.setStyle(childElement, 'left', '');
+        this.renderer.setStyle(menuElement, 'right', clientWidth - parentRect.right + 'px');
+        this.renderer.setStyle(menuElement, 'left', '');
       }
     };
     if (this.open) {
