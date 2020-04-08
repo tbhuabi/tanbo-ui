@@ -17,6 +17,7 @@ export class FileComponent {
   @Output() uiUploadError = new EventEmitter<Error>();
   @Input() placeholder = '上传文件';
   @Input() name: string;
+  @Input() filename: string;
   @Input() forId: string;
   @Input() accept: string;
   @Input() uploader: (data: FormData) => (HttpRequest<any> | Observable<HttpEvent<any>>);
@@ -42,9 +43,8 @@ export class FileComponent {
     if (!files.length) {
       return;
     }
-
     for (const file of Array.from(files)) {
-      data.append(this.name, file);
+      data.append(this.name, file, encodeURIComponent(this.filename || file.name));
     }
     if (typeof this.uploader === 'function') {
       const request = this.uploader(data);
