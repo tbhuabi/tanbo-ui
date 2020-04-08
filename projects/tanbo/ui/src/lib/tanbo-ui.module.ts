@@ -5,6 +5,7 @@ import { UIBreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { UICropperModule } from './cropper/cropper.module';
 import { UIDropdownModule } from './dropdown/dropdown.module';
 import { UIFormsModule } from './forms/forms.module';
+import { LoadingModule } from './loading/loading.module';
 import { UIModalModule } from './modal/modal.module';
 import { UINavModule } from './nav/nav.module';
 import { UIOtherModule } from './other/other.module';
@@ -27,6 +28,7 @@ import { UI_ANCHOR_LINK_DISTANCE } from './quick-nav/helper';
     UICropperModule,
     UIDropdownModule,
     UIFormsModule,
+    LoadingModule,
     UIModalModule,
     UINavModule,
     UIOtherModule,
