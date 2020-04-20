@@ -121,6 +121,7 @@ export { TooltipBaseService } from './lib/other/tooltip-base/tooltip-base.servic
 export { ViewLoadingBarComponent } from './lib/other/view-loading-bar/view-loading-bar.component';
 export { UIOtherModule } from './lib/other/other.module';
 export { StopPropagationDirective } from './lib/other/stop-propagation.directive';
+export { DownloadDirective } from './lib/other/download.directive';
 /**
  * 面板
  */

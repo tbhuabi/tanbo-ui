@@ -42,3 +42,9 @@
 .ui-hidden {
   display: none;
 }
+
+@for $i from 1 through 24 {
+  .ui-width-#{$i}em {
+    width: #{$i}em;
+  }
+}
