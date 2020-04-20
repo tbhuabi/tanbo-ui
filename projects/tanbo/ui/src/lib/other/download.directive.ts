@@ -12,7 +12,7 @@ export class DownloadDirective {
   @Input()
   ext: string;
   @Input()
-  params: { [key: string]: string };
+  params: { [key: string]: string | string[] };
 
   @Output()
   loadingStart = new EventEmitter<void>();
