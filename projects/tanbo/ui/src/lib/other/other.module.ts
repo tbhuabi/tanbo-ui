@@ -14,6 +14,7 @@ import { TooltipBaseComponent } from './tooltip-base/tooltip-base.component';
 import { PopConfirmDirective } from './pop-confirm/pop-confirm.directive';
 import { TooltipDirective } from './tooltip/tooltip.directive';
 import { StopPropagationDirective } from './stop-propagation.directive';
+import { DownloadDirective } from './download.directive';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { StopPropagationDirective } from './stop-propagation.directive';
 
     PopConfirmDirective,
     TooltipDirective,
-    StopPropagationDirective
+    StopPropagationDirective,
+    DownloadDirective
   ],
   exports: [
     DividerComponent,
@@ -47,7 +49,8 @@ import { StopPropagationDirective } from './stop-propagation.directive';
 
     PopConfirmDirective,
     TooltipDirective,
-    StopPropagationDirective
+    StopPropagationDirective,
+    DownloadDirective
   ],
   entryComponents: [
     TooltipComponent,
