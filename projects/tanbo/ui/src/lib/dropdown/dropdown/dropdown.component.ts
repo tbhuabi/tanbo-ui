@@ -150,6 +150,19 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
     this.dropdownMenu.autoDisplay = this._autoDisplay;
     const menuElement = this.dropdownMenu.elementRef.nativeElement;
 
+    const getScrollingFrame = function(node: HTMLElement) {
+      if (node instanceof Element) {
+        const overflow = getComputedStyle(node).overflow;
+        if (overflow === 'visible' || overflow === 'hidden') {
+          node = node.parentNode as HTMLElement;
+          if (node) {
+            return getScrollingFrame(node);
+          }
+        }
+      }
+      return window;
+    };
+
     const fn = () => {
       this.updateChildDisplayLimit(this.displayLimit);
       const clientWidth = document.documentElement.clientWidth;
@@ -179,7 +192,8 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
     if (this.open) {
       fn();
       if (!this.unbindResizeFn) {
-        this.unbindScrollFn = this.renderer.listen('window', 'scroll', fn);
+        const e = getScrollingFrame(this.el.nativeElement);
+        this.unbindScrollFn = this.renderer.listen(e === window ? 'window' : e, 'scroll', fn);
         this.unbindResizeFn = this.renderer.listen('window', 'resize', fn);
       }
     } else {
