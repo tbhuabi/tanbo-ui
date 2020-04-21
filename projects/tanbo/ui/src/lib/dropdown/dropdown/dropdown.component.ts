@@ -159,6 +159,7 @@ export class DropdownComponent implements AfterContentInit, OnInit, OnDestroy {
             return getScrollingFrame(node);
           }
         }
+        return node;
       }
       return window;
     };
