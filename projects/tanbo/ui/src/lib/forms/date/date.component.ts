@@ -183,12 +183,12 @@ export class DateComponent implements ControlValueAccessor, OnInit, OnChanges, O
   }
 
   reset() {
-    this.value = '';
+    this.value = undefined;
     this.displayValue = '';
     if (this.onChange) {
-      this.onChange('');
+      this.onChange(this.value);
     }
-    this.uiChange.emit('');
+    this.uiChange.emit();
   }
 
   toggle() {

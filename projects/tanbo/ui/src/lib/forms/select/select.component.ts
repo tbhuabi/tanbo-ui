@@ -244,7 +244,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
   }
 
   reset() {
-    this.value = '';
+    this.value = undefined;
     this.text = '';
     this.selectedIndex = -1;
     if (Array.isArray(this.selectedOption)) {
@@ -254,9 +254,9 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
     }
     this.selectedOption = null;
     if (this.onChange) {
-      this.onChange('');
+      this.onChange(this.value);
     }
-    this.uiChange.emit('');
+    this.uiChange.emit();
     this.dropdownInput.focusIn();
   }
 
