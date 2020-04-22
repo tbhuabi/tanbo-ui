@@ -122,7 +122,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentInit, 
               this.selectedOption = op;
               op.selected = true;
               this.text = op.text;
-              this.value = option.value || this.text;
+              this.value = option.value;
               this.selectedIndex = index;
               if (this.onChange) {
                 this.onChange(this.value);
