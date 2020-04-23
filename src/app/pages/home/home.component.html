@@ -1,2 +1,33 @@
-<ui-editor [(ngModel)]="data"></ui-editor>
-<ui-input type="date"></ui-input>
+
+<div>
+  <button type="button" class="ui-btn ui-btn-primary" (click)="show()">button</button>
+</div>
+<div>
+  <ui-tab>
+    <ui-tab-bar [tabIndex]="1">
+      <ui-tab-button>111</ui-tab-button>
+      <ui-tab-button>222</ui-tab-button>
+    </ui-tab-bar>
+    <ui-tab-view>
+      <ui-tab-view-item>aaaa</ui-tab-view-item>
+      <ui-tab-view-item>bbbb</ui-tab-view-item>
+    </ui-tab-view>
+  </ui-tab>
+</div>
+
+<ng-template #modal>
+  <ui-modal>
+    <ui-modal-body>
+      <ui-tab>
+        <ui-tab-bar [tabIndex]="1">
+          <ui-tab-button>111</ui-tab-button>
+          <ui-tab-button>222</ui-tab-button>
+        </ui-tab-bar>
+        <ui-tab-view>
+          <ui-tab-view-item>aaaa</ui-tab-view-item>
+          <ui-tab-view-item>bbbb</ui-tab-view-item>
+        </ui-tab-view>
+      </ui-tab>
+    </ui-modal-body>
+  </ui-modal>
+</ng-template>

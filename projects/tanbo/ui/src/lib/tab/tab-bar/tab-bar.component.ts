@@ -42,6 +42,7 @@ export class TabBarComponent implements OnDestroy, AfterContentInit {
     this.itemSubs.forEach(item => {
       item.unsubscribe();
     });
+    this.itemSubs = [];
     this.tabBarItems.forEach((item: TabButtonComponent, index: number) => {
       this.itemSubs.push(item.uiSelected.subscribe(() => {
         this.tabService.publishIndex(index);

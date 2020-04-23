@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { ModalController } from '@tanbo/ui/src/lib/modal/help';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  @ViewChild('modal')
+  modal: TemplateRef<any>;
   data = {};
+
+  constructor(private modalController: ModalController) {
+  }
+
+  show() {
+    this.modalController.show(this.modal);
+  }
 }
