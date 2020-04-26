@@ -61,7 +61,7 @@ table.ui-table {
 
   > tbody, > tfoot {
     &:first-child {
-      > tr > td, > tr > th {
+      > tr:first-child > td, > tr:first-child > th {
         border-top: 1px solid $table-border-color;
       }
     }
