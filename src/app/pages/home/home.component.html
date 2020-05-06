@@ -17,7 +17,12 @@
     </ui-tab-view>
   </ui-tab>
 </div>
-
+{{ test }}
+<ui-select class="ui-input-block" [(ngModel)]="test" placeholder="请选择状态">
+  <ui-option [value]="0">正常</ui-option>
+  <ui-option [value]="1">禁用</ui-option>
+  <ui-option [value]="2">冻结</ui-option>
+</ui-select>
 <ng-template #modal>
   <ui-modal>
     <ui-modal-body>

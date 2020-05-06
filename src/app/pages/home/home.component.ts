@@ -10,6 +10,7 @@ export class HomeComponent {
   @ViewChild('modal')
   modal: TemplateRef<any>;
   data = {};
+  test = '';
 
   constructor(private modalController: ModalController) {
   }
