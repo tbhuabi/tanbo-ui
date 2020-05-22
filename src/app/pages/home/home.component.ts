@@ -9,13 +9,15 @@ import { ModalController } from '@tanbo/ui/src/lib/modal/help';
 export class HomeComponent {
   @ViewChild('modal')
   modal: TemplateRef<any>;
-  data = {};
+  data = {
+    date: ''
+  };
   test = '';
 
   constructor(private modalController: ModalController) {
   }
 
   show() {
-    this.modalController.show(this.modal);
+    console.log(this.data);
   }
 }
