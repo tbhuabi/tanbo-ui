@@ -190,15 +190,15 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
       config = this.modalTemplates[this.modalTemplates.length - 1];
     }
     cancelAnimationFrame(config.animationId);
-    let i = 20;
+    let j = 20;
     const fn = () => {
-      if (i < 0) {
+      if (j < 0) {
         this.modalTemplates.splice(this.modalTemplates.indexOf(config), 1);
         return;
       }
-      config.step = this.cubicBezier.update(i / 20);
+      config.step = this.cubicBezier.update(j / 20);
       config.styles = createModalStyles(config.step);
-      i--;
+      j--;
       requestAnimationFrame(fn);
     };
     fn();
