@@ -8,7 +8,8 @@
   </div>
 </ui-overlay>
 <ui-overlay [show]="isShowDialog" (uiHide)="dialogOverlayHide()">
-  <div class="ui-dialog" *ngIf="isShowDialog">
+<!--  <div class="ui-dialog" *ngIf="isShowDialog" [@dialogAnimation]="isShowDialog ? 'in' : 'out'">-->
+  <div class="ui-dialog" *ngIf="isShowDialog" [ngStyle]="dialogStyles">
     <div class="ui-dialog-header" *ngIf="dialogConfig?.title">
       <button type="button" class="ui-close" (click)="dialogChecked(false)"></button>
       <h4 class="ui-dialog-title">{{ dialogConfig.title }}</h4>

@@ -9,14 +9,26 @@ import { DialogConfig, DialogController } from '../dialog-controller';
 import { NotifyController, NotifyType } from '../notify-controller';
 import { DrawerController } from '../drawer-controller';
 
+const ie9Reg = /msie\s9\.0/i;
+
 function createModalStyles(step: number) {
-  return /msie\s9\.0/i.test(navigator.userAgent) ? {
+  return ie9Reg.test(navigator.userAgent) ? {
     opacity: step,
     zoom: 0.95 + 0.05 * step
   } : {
     opacity: step,
     transform: 'scale(' + (0.95 + 0.05 * step) + ') translateX(-50%) translateY(-50%)'
   };
+}
+
+function createDialogStyles(step: number) {
+  return ie9Reg.test(navigator.userAgent) ? {
+    opacity: step,
+    top: `calc(50px + ${(step - 1) * 100}%)`
+  } : {
+    opacity: step,
+    transform: `translateY(${(step - 1) * 100}%)`
+  }
 }
 
 @Component({
@@ -41,7 +53,9 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   }
 
   dialogConfig: DialogConfig;
+  dialogStyles: { [key: string]: string | number } = {};
   isShowDialog = false;
+  dialogAnimationId: number;
   showDrawer = false;
   drawerDirection = 'bottom';
   drawerContent: TemplateRef<any> = null;
@@ -209,6 +223,25 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   }
 
   showDialog(config: DialogConfig | string) {
+    let i = 0;
+    let step = 0;
+    const max = 16;
+    this.dialogStyles = createDialogStyles(0);
+    const fn = () => {
+      step = this.cubicBezier.update(i / max);
+      this.dialogStyles = createDialogStyles(step);
+      i++;
+      if (i <= max) {
+        this.dialogAnimationId = requestAnimationFrame(fn);
+      }
+    };
+
+    this.dialogAnimationId = requestAnimationFrame(() => {
+      setTimeout(() => {
+        fn();
+      }, 150);
+    });
+
     this.isShowDialog = true;
     this.dialogConfig = Object.assign<DialogConfig, DialogConfig>({
       content: '',
@@ -220,8 +253,21 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   }
 
   dialogChecked(checked: boolean) {
-    this.dialogCheckState = checked;
-    this.isShowDialog = false;
+    let j = 16;
+    let step = 0;
+    const fn = () => {
+      step = this.cubicBezier.update(j / 16);
+      this.dialogStyles = createDialogStyles(step);
+      j--;
+      if (j >= 0) {
+        this.dialogAnimationId = requestAnimationFrame(fn);
+      } else {
+        this.dialogCheckState = checked;
+        this.isShowDialog = false;
+        cancelAnimationFrame(this.dialogAnimationId);
+      }
+    };
+    fn();
   }
 
   dialogOverlayHide() {
