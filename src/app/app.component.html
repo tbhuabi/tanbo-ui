@@ -1,38 +1,12 @@
-<ui-app>
-  <ui-scroll>
-    <ui-nav [thumbnail]="is">
-      <ui-nav-item>
-        <ui-nav-inner>parent</ui-nav-inner>
-        <ui-nav [thumbnail]="is">
-          <ui-nav-item>
-            <ui-nav-inner>inner</ui-nav-inner>
-            <ui-nav [thumbnail]="is">
-              <ui-nav-item>
-                <ui-nav-inner routerLink="/home">home</ui-nav-inner>
-              </ui-nav-item>
-            </ui-nav>
-          </ui-nav-item>
-        </ui-nav>
-      </ui-nav-item>
-      <ui-nav-item>
-        <ui-nav-inner>parent2</ui-nav-inner>
-        <ui-nav>
-          <ui-nav-item>
-            <ui-nav-inner routerLink="/detail">detail</ui-nav-inner>
-          </ui-nav-item>
-          <ui-nav-item *ngFor="let item of list">
-            <ui-nav-inner>{{ item }}</ui-nav-inner>
-          </ui-nav-item>
-        </ui-nav>
-      </ui-nav-item>
+<ng-template #template>
+  <ui-modal>
+    <ui-modal-body>
+      test
+    </ui-modal-body>
+  </ui-modal>
+</ng-template>
 
-    </ui-nav>
-  </ui-scroll>
-  <div style="margin-left: 600px;">
-    <ui-switch [(ngModel)]="is" (uiChange)="change($event)"></ui-switch>
-    <div>
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</ui-app>
 
+<p>
+  <button class="ui-btn ui-btn-primary" (click)="show()">button</button>
+</p>

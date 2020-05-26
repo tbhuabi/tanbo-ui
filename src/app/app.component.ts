@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ModalController } from '@tanbo/ui';
 
 @Component({
   selector: 'app-root',
@@ -6,17 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  is = localStorage.getItem('open') === 'true';
-  title = 'tanbo-ui';
-  list: string[] = ['aaa', 'bbb', 'ccc', 'ddd', 'eee', 'fff', 'ggg', 'hhh'];
+  @ViewChild('template') template: TemplateRef<any>;
+  isShow = false;
 
-  ngOnInit(): void {
-    // setTimeout(() => {
-    //   this.list = ['aaa', 'bbb', 'ccc', 'ddd', 'eee', 'fff', 'ggg', 'hhh'];
-    // }, 2000);
+  constructor(private modalController: ModalController) {
   }
 
-  change(b: boolean) {
-    localStorage.setItem('open', b + '');
+  ngOnInit() {
+    // setTimeout(() => {
+    //   this.isShow = true;
+    // }, 1000);
+  }
+
+  show() {
+    this.modalController.show(this.template);
   }
 }
