@@ -50,11 +50,11 @@ export class OverlayComponent implements OnChanges {
   }
 
   private animateStart(fn: (n: number) => void) {
-    const steps = 30;
+    const steps = 20;
     let i = 0;
     cancelAnimationFrame(this.animationId);
     const update = () => {
-      fn(this.bezier.update(i / 30));
+      fn(this.bezier.update(i / steps));
       if (i < steps) {
         this.animationId = requestAnimationFrame(update);
       }

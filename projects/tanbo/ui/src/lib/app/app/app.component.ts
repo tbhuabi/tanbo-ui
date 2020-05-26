@@ -1,5 +1,6 @@
 import { Component, ElementRef, forwardRef, OnDestroy, OnInit, Renderer2, TemplateRef } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+import { CubicBezier } from '@tanbo/bezier';
 import { Subscription } from 'rxjs';
 
 import { DropdownRenderer } from '../../dropdown/help';
@@ -7,6 +8,16 @@ import { ModalController } from '../../modal/help';
 import { DialogConfig, DialogController } from '../dialog-controller';
 import { NotifyController, NotifyType } from '../notify-controller';
 import { DrawerController } from '../drawer-controller';
+
+function createModalStyles(step: number) {
+  return /msie\s9\.0/i.test(navigator.userAgent) ? {
+    opacity: step,
+    zoom: 0.95 + 0.05 * step
+  } : {
+    opacity: step,
+    transform: 'scale(' + (0.95 + 0.05 * step) + ') translateX(-50%) translateY(-50%)'
+  };
+}
 
 @Component({
   selector: 'ui-app',
@@ -20,6 +31,7 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   modalTemplates: Array<{
     animationId: number;
     step: number;
+    styles: { [key: string]: string | number };
     template: TemplateRef<any>;
   }> = [];
   messageList: Array<any> = [];
@@ -37,6 +49,8 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   private subs: Subscription[] = [];
   private timer: any = null;
   private hideEventFromRouteChange = false;
+
+  private cubicBezier = new CubicBezier(0.36, 0.66, 0.04, 1);
 
   constructor(private elementRef: ElementRef<HTMLElement>,
               private router: Router,
@@ -136,11 +150,12 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
 
   showModal(template: TemplateRef<any>): void {
     let i = 0;
-    const max = 30;
+    const max = 20;
     const fn = () => {
-      config.step = i / max;
+      config.step = this.cubicBezier.update(i / max);
+      config.styles = createModalStyles(config.step);
       i++;
-      if (i < max) {
+      if (i <= max) {
         config.animationId = requestAnimationFrame(fn);
       }
     };
@@ -149,15 +164,17 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
       animationId: requestAnimationFrame(() => {
         setTimeout(() => {
           fn();
-        }, 150)
+        }, 150);
       }),
-      template
+      template,
+      styles: createModalStyles(0)
     };
 
     this.modalTemplates.push(config);
   }
 
   hideModal(template?: TemplateRef<any>): void {
+    let config;
     if (template) {
       let index = -1;
       for (let i = 0; i < this.modalTemplates.length; i++) {
@@ -167,11 +184,24 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
         }
       }
       if (index > -1) {
-        this.modalTemplates.splice(index, 1);
+        config = this.modalTemplates[index];
       }
     } else {
-      this.modalTemplates.pop();
+      config = this.modalTemplates[this.modalTemplates.length - 1];
     }
+    cancelAnimationFrame(config.animationId);
+    let i = 20;
+    const fn = () => {
+      if (i < 0) {
+        this.modalTemplates.splice(this.modalTemplates.indexOf(config), 1);
+        return;
+      }
+      config.step = this.cubicBezier.update(i / 20);
+      config.styles = createModalStyles(config.step);
+      i--;
+      requestAnimationFrame(fn);
+    };
+    fn();
   }
 
   hideAllModal(): void {
