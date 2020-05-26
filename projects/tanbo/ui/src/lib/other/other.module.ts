@@ -15,6 +15,7 @@ import { PopConfirmDirective } from './pop-confirm/pop-confirm.directive';
 import { TooltipDirective } from './tooltip/tooltip.directive';
 import { StopPropagationDirective } from './stop-propagation.directive';
 import { DownloadDirective } from './download.directive';
+import { PlaceholderDirective } from './placeholder.directive';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { DownloadDirective } from './download.directive';
     PopConfirmDirective,
     TooltipDirective,
     StopPropagationDirective,
-    DownloadDirective
+    DownloadDirective,
+    PlaceholderDirective
   ],
   exports: [
     DividerComponent,
@@ -50,7 +52,8 @@ import { DownloadDirective } from './download.directive';
     PopConfirmDirective,
     TooltipDirective,
     StopPropagationDirective,
-    DownloadDirective
+    DownloadDirective,
+    PlaceholderDirective
   ],
   entryComponents: [
     TooltipComponent,

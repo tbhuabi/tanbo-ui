@@ -69,7 +69,7 @@ import { RadioStateService } from './radio/radio-state.service';
     SubmitDirective,
     RequiredTrueValidator,
     RequiredValidator,
-    PickerRequiredValidator
+    PickerRequiredValidator,
   ],
   exports: [
     BtnGroupComponent,
@@ -97,7 +97,7 @@ import { RadioStateService } from './radio/radio-state.service';
     SubmitDirective,
     RequiredTrueValidator,
     RequiredValidator,
-    PickerRequiredValidator
+    PickerRequiredValidator,
   ],
   providers: [
     RadioStateService
