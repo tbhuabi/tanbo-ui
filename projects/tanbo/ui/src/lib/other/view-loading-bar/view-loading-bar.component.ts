@@ -1,20 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ui-view-loading-bar',
-  templateUrl: './view-loading-bar.component.html',
-  animations: [trigger('loadingState', [state('*', style({
-    opacity: 1
-  })), transition(':leave', animate(600, keyframes([style({
-    width: '100%',
-    offset: 0.5
-  }), style({
-    opacity: 0,
-    offset: 1
-  })])))])]
+  templateUrl: './view-loading-bar.component.html'
 })
 export class ViewLoadingBarComponent implements OnInit, OnDestroy {
   step = 0;

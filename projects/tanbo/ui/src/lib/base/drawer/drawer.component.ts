@@ -1,12 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { drawerAnimation } from './drawer-animation';
 
 @Component({
   selector: 'ui-drawer',
-  templateUrl: './drawer.component.html',
-  animations: [
-    drawerAnimation
-  ]
+  templateUrl: './drawer.component.html'
 })
 export class DrawerComponent {
   @Input()

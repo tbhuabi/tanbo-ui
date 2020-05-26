@@ -6,7 +6,6 @@ import { DropdownRenderer } from '../../dropdown/help';
 import { ModalController } from '../../modal/help';
 import { DialogConfig, DialogController } from '../dialog-controller';
 import { NotifyController, NotifyType } from '../notify-controller';
-import { dialogAnimation, modalAnimation, notifyAnimation } from './animations';
 import { DrawerController } from '../drawer-controller';
 
 @Component({
@@ -15,12 +14,7 @@ import { DrawerController } from '../drawer-controller';
   providers: [{
     provide: DropdownRenderer,
     useExisting: forwardRef(() => AppComponent)
-  }],
-  animations: [
-    modalAnimation,
-    dialogAnimation,
-    notifyAnimation
-  ]
+  }]
 })
 export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   modalTemplates: TemplateRef<any>[] = [];

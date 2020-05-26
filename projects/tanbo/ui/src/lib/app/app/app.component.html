@@ -3,12 +3,12 @@
   <ng-container [ngTemplateOutlet]="drawerContent"></ng-container>
 </ui-drawer>
 <ui-overlay [show]="isShowModal">
-  <div class="ui-modal" *ngFor="let item of modalTemplates" @modalAnimation>
+  <div class="ui-modal" *ngFor="let item of modalTemplates">
     <ng-container [ngTemplateOutlet]="item"></ng-container>
   </div>
 </ui-overlay>
 <ui-overlay [show]="isShowDialog" (uiHide)="dialogOverlayHide()">
-  <div class="ui-dialog" *ngIf="isShowDialog" [@dialogAnimation]="isShowDialog ? 'in' : 'out'">
+  <div class="ui-dialog" *ngIf="isShowDialog">
     <div class="ui-dialog-header" *ngIf="dialogConfig?.title">
       <button type="button" class="ui-close" (click)="dialogChecked(false)"></button>
       <h4 class="ui-dialog-title">{{ dialogConfig.title }}</h4>
@@ -23,7 +23,7 @@
   </div>
 </ui-overlay>
 <div class="ui-notify">
-  <div @notifyAnimation *ngFor="let config of messageList; let i = index"
+  <div *ngFor="let config of messageList; let i = index"
        class="ui-notify-item"
        (mouseenter)="notifyStop(config)"
        (mouseleave)="notifyRestart(config)"

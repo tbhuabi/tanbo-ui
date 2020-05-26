@@ -1,5 +1,4 @@
 import { Component, Optional, OnInit, OnDestroy, HostBinding, Input } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
 import { NavItemService } from '../nav-item/nav-item.service';
@@ -9,18 +8,6 @@ import { attrToBoolean } from '../../utils';
 @Component({
   selector: 'ui-nav',
   templateUrl: './nav.component.html',
-  animations: [trigger('navAnimation', [state('open', style({
-    height: '*',
-    opacity: 1
-  })), state('close', style({
-    height: 0,
-    opacity: 0.5,
-    paddingTop: 0,
-    paddingBottom: 0
-  })), transition('open <=> close', animate(150))])],
-  host: {
-    '[@navAnimation]': 'expand ? "open" : "close"'
-  },
   providers: [
     NavService
   ]

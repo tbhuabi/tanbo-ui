@@ -6,7 +6,6 @@
  * 根模块
  */
 export { AppComponent } from './lib/app/app/app.component';
-export { dialogAnimation, modalAnimation, notifyAnimation } from './lib/app/app/animations';
 export { UIAppModule } from './lib/app/app.module';
 export { DialogConfig, DialogController } from './lib/app/dialog-controller';
 export { DrawerConfig, DrawerController } from './lib/app/drawer-controller';

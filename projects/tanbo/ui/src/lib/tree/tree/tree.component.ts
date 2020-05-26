@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, Optional, Input, SkipSelf, Inject } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
 import { TreeItemService } from '../tree-item/tree-item.service';
@@ -17,46 +16,7 @@ export function treeDepthFactory(depth: number) {
     provide: UI_TREE_DEPTH,
     useFactory: treeDepthFactory,
     deps: [[UI_TREE_DEPTH, new SkipSelf()]]
-  }],
-  host: {
-    '[@treeAnimation]': 'expand ? "open" : "close"'
-  },
-  animations: [
-    trigger('treeAnimation', [
-        state('open', style({
-          height: '*',
-          opacity: 1,
-          overflow: 'visible'
-        })),
-        state('close', style({
-          height: 0,
-          opacity: 0.5,
-          overflow: 'hidden'
-        })),
-        transition('open <=> close', animate(150)),
-        transition(':enter', [
-          style({
-            height: 0,
-            opacity: 0.5,
-            overflow: 'hidden'
-          }),
-          animate(150, style({
-              height: '*',
-              opacity: 1,
-              overflow: 'visible'
-            })
-          )
-        ]),
-        transition(':leave', [
-          animate(150, style({
-              height: '*',
-              opacity: 1,
-              overflow: 'visible'
-            })
-          )
-        ])
-      ]
-    )]
+  }]
 })
 export class TreeComponent implements OnDestroy, OnInit {
   @Input()
