@@ -15,6 +15,7 @@ export class OverlayComponent implements OnChanges {
 
   opacity = 0;
 
+  isShow = false;
   private animationId = null;
   private timer = null;
   private bezier = new CubicBezier(0.25, 0.1, 0.25, 1);
@@ -29,6 +30,7 @@ export class OverlayComponent implements OnChanges {
     Object.keys(changes).forEach(key => {
       if (key === 'show') {
         if (this.show) {
+          this.isShow = true;
           this.animateStart((n: number) => {
             this.opacity = n;
           });
@@ -37,6 +39,7 @@ export class OverlayComponent implements OnChanges {
             this.animateStart((n: number) => {
               this.opacity = 1 - n;
               if (this.opacity === 0) {
+                this.isShow = false;
                 this.done();
               }
             });

@@ -22,4 +22,8 @@ export class AppComponent implements OnInit {
   show() {
     this.modalController.show(this.template);
   }
+
+  hide() {
+    this.modalController.hide(this.template);
+  }
 }

@@ -1,11 +1,11 @@
 <ng-template #template>
-  <ui-modal>
+  <ui-modal (uiClose)="hide()">
     <ui-modal-body>
       test
     </ui-modal-body>
   </ui-modal>
 </ng-template>
-
+<ui-app></ui-app>
 
 <p>
   <button class="ui-btn ui-btn-primary" (click)="show()">button</button>

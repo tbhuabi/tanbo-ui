@@ -17,7 +17,11 @@ import { DrawerController } from '../drawer-controller';
   }]
 })
 export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
-  modalTemplates: TemplateRef<any>[] = [];
+  modalTemplates: Array<{
+    animationId: number;
+    step: number;
+    template: TemplateRef<any>;
+  }> = [];
   messageList: Array<any> = [];
 
   get isShowModal() {
@@ -131,12 +135,37 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   }
 
   showModal(template: TemplateRef<any>): void {
-    this.modalTemplates.push(template);
+    let i = 0;
+    const max = 30;
+    const fn = () => {
+      config.step = i / max;
+      i++;
+      if (i < max) {
+        config.animationId = requestAnimationFrame(fn);
+      }
+    };
+    const config = {
+      step: 0,
+      animationId: requestAnimationFrame(() => {
+        setTimeout(() => {
+          fn();
+        }, 150)
+      }),
+      template
+    };
+
+    this.modalTemplates.push(config);
   }
 
   hideModal(template?: TemplateRef<any>): void {
     if (template) {
-      const index = this.modalTemplates.indexOf(template);
+      let index = -1;
+      for (let i = 0; i < this.modalTemplates.length; i++) {
+        if (this.modalTemplates[i].template === template) {
+          index = i;
+          break;
+        }
+      }
       if (index > -1) {
         this.modalTemplates.splice(index, 1);
       }

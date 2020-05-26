@@ -3,8 +3,8 @@
   <ng-container [ngTemplateOutlet]="drawerContent"></ng-container>
 </ui-drawer>
 <ui-overlay [show]="isShowModal">
-  <div class="ui-modal" *ngFor="let item of modalTemplates">
-    <ng-container [ngTemplateOutlet]="item"></ng-container>
+  <div class="ui-modal" *ngFor="let item of modalTemplates" [ngStyle]="{opacity: item.step}">
+    <ng-container [ngTemplateOutlet]="item.template"></ng-container>
   </div>
 </ui-overlay>
 <ui-overlay [show]="isShowDialog" (uiHide)="dialogOverlayHide()">
