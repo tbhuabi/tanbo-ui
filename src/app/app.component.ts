@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ModalController } from '@tanbo/ui';
+import { DialogController, ModalController } from '@tanbo/ui';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +10,16 @@ export class AppComponent implements OnInit {
   @ViewChild('template') template: TemplateRef<any>;
   isShow = false;
 
-  constructor(private modalController: ModalController) {
+  constructor(private modalController: ModalController,
+              private dialogController: DialogController) {
   }
 
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.isShow = true;
-    // }, 1000);
+    this.dialogController.dialog({
+      content: 'test'
+    }).then(b => {
+      alert(b);
+    })
   }
 
   show() {
