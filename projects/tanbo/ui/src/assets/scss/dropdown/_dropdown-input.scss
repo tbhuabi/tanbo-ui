@@ -22,9 +22,9 @@ ui-dropdown-input {
   top: 0;
   bottom: 0;
   width: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
   transition: transform .15s;
   pointer-events: none;
   &.ui-open {

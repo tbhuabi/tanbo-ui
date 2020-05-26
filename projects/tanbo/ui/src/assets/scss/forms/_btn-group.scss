@@ -16,9 +16,10 @@
 
 ui-btn-group {
   position: relative;
-  display: inline-flex;
+  display: table;
   line-height: 1;
   > .ui-btn {
+    display: table-cell;
     border-radius: 0;
     margin-left: -1px;
     &:first-child {

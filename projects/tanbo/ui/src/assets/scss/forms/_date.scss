@@ -157,7 +157,8 @@ ui-input[type=date] {
   cursor: pointer;
   color: inherit;
   border-radius: 3px;
-
+  height: 20px;
+  line-height: 1;
   &:hover {
     color: $color-primary;
   }
@@ -189,11 +190,11 @@ ui-input[type=date] {
 
 .ui-date-time-picker {
   height: 205px;
-  display: flex;
+  display: table;
 }
 
 .ui-date-time-group {
-  flex: 1;
+  display: table-cell;
   min-width: 70px;
 }
 
@@ -218,11 +219,13 @@ ui-input[type=date] {
 }
 
 .ui-date-btn-wrap {
-  display: flex;
+  display: table;
+  width: 100%;
   padding: 2px 5px;
   border-top: 1px solid $color-light;
   div {
-    flex: 1;
+    display: table-cell;
+    width: 50%;
     padding: 5px;
   }
 }

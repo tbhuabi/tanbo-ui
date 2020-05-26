@@ -19,7 +19,7 @@
 
 @mixin input-size($v, $h, $radius, $font-size) {
   padding: $v $h;
-  line-height: $line-height;
+  line-height: 1;
   font-size: $font-size;
   border-radius: $radius;
   &.ui-disabled, &[disabled] {
