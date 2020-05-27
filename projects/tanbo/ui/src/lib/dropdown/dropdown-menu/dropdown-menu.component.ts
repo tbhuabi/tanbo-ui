@@ -9,7 +9,7 @@ import {
   SkipSelf,
   OnDestroy,
   OnChanges,
-  SimpleChanges
+  SimpleChanges, Renderer2
 } from '@angular/core';
 
 import { DropdownRenderer } from '../help';
@@ -33,7 +33,7 @@ export function dropdownZIndexFactory(zIndex: number) {
   }],
 })
 export class DropdownMenuComponent implements OnInit, OnDestroy, OnChanges {
-  @HostBinding('style.zIndex')
+  // @HostBinding('style.zIndex') // 这里使用 HostBinding ie9 会报错
   zIndex: number;
 
   @Input() displayLimit: DropdownDisplayLimit;
@@ -46,12 +46,14 @@ export class DropdownMenuComponent implements OnInit, OnDestroy, OnChanges {
   constructor(public elementRef: ElementRef,
               @Inject(UI_OVERLAY_Z_INDEX) zIndex: number,
               private dropdownService: DropdownService,
-              private renderer: DropdownRenderer) {
+              private renderer: Renderer2,
+              private dropdown: DropdownRenderer) {
     this.zIndex = zIndex;
   }
 
   ngOnInit(): void {
-    this.removeFn = this.renderer.renderDropdown(this.elementRef);
+    this.removeFn = this.dropdown.renderDropdown(this.elementRef);
+    this.renderer.setStyle(this.elementRef.nativeElement, 'zIndex', this.zIndex);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
