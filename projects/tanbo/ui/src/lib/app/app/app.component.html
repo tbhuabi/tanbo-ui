@@ -8,7 +8,6 @@
   </div>
 </ui-overlay>
 <ui-overlay [show]="isShowDialog" (uiHide)="dialogOverlayHide()">
-<!--  <div class="ui-dialog" *ngIf="isShowDialog" [@dialogAnimation]="isShowDialog ? 'in' : 'out'">-->
   <div class="ui-dialog" *ngIf="isShowDialog" [ngStyle]="dialogStyles">
     <div class="ui-dialog-header" *ngIf="dialogConfig?.title">
       <button type="button" class="ui-close" (click)="dialogChecked(false)"></button>
@@ -28,7 +27,8 @@
        class="ui-notify-item"
        (mouseenter)="notifyStop(config)"
        (mouseleave)="notifyRestart(config)"
-       [ngClass]="'ui-' + config.type">
+       [ngClass]="'ui-' + config.type"
+       [ngStyle]="config.styles">
     <div *ngIf="config.type !== 'default'" class="ui-notify-icon" [ngSwitch]="config.type">
       <span *ngSwitchCase="'primary'" class="ui-color-primary ui-icon-notification"></span>
       <span *ngSwitchCase="'info'" class="ui-color-info ui-icon-info"></span>

@@ -1,5 +1,5 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { DialogController, ModalController } from '@tanbo/ui';
+import { Component, OnInit } from '@angular/core';
+import { DialogController, NotifyController, NotifyType } from '@tanbo/ui';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { DialogController, ModalController } from '@tanbo/ui';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private modalController: ModalController,
+  constructor(private notifyController: NotifyController,
               private dialogController: DialogController) {
   }
 
@@ -17,10 +17,9 @@ export class AppComponent implements OnInit {
   }
 
   show() {
-    this.dialogController.dialog({
-      content: 'test'
-    }).then(b => {
-      alert(b);
+    this.notifyController.push({
+      content: 'test',
+      type: NotifyType.Danger
     })
   }
 }

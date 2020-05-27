@@ -31,6 +31,16 @@ function createDialogStyles(step: number) {
   }
 }
 
+function createNotifyStyles(step: number, isEnter: boolean) {
+  return ie9Reg.test(navigator.userAgent) ? {
+    opacity: step,
+  } : {
+    opacity: step,
+    transition: '0.2s height',
+    transform: isEnter ? `translateY(${(1 - step) * 100}%)` : `translateY(${(step - 1) * 100}%) scaleY(${step})`,
+  }
+}
+
 @Component({
   selector: 'ui-app',
   templateUrl: './app.component.html',
@@ -142,7 +152,26 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
       _config.currentTime = 0;
       _config.proportion = 100;
 
+      let i = 0;
+      const max = 20;
+      const fn = () => {
+        _config.step = this.cubicBezier.update(i / max);
+        _config.styles = createNotifyStyles(_config.step, true);
+        i++;
+        if (i <= max) {
+          _config.animationId = requestAnimationFrame(fn);
+        }
+      };
+      _config.step = 0;
+      _config.animationId = requestAnimationFrame(() => {
+        setTimeout(() => {
+          fn();
+        }, 150);
+      });
+      _config.styles = createNotifyStyles(0, true);
+
       this.messageList.push(_config);
+
       this.notifyStart();
     }));
   }
@@ -277,8 +306,21 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
   }
 
   notifyClose(i: number) {
-    this.messageList.splice(i, 1);
-    this.notifyStart();
+    const config = this.messageList[i];
+    cancelAnimationFrame(config.animationId);
+    let j = 20;
+    const fn = () => {
+      if (j < 0) {
+        this.messageList.splice(i, 1);
+        this.notifyStart();
+        return;
+      }
+      config.step = this.cubicBezier.update(j / 20);
+      config.styles = createNotifyStyles(config.step, false);
+      j--;
+      requestAnimationFrame(fn);
+    };
+    fn();
   }
 
   notifyStop(item: any) {
@@ -298,19 +340,34 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
 
   notifyStart() {
     clearInterval(this.timer);
+    let isClosing = false;
     this.timer = setInterval(() => {
       let isClear = true;
       for (let i = 0; i < this.messageList.length; i++) {
         const item = this.messageList[i];
         if (item.autoHide) {
           isClear = false;
-
           item.currentTime += 20;
           let n = item.currentTime / item.time;
           item.proportion = (n > 1 ? 1 : n) * 100;
-          if (n > 1) {
-            this.messageList.splice(i, 1);
-            i--;
+          if (n > 1 && !isClosing) {
+            isClosing = true;
+            const config = item;
+            cancelAnimationFrame(config.animationId);
+            let j = 20;
+            const fn = () => {
+              if (j < 0) {
+                i--;
+                this.messageList.splice(i, 1);
+                isClosing = false;
+                return;
+              }
+              config.step = this.cubicBezier.update(j / 20);
+              config.styles = createNotifyStyles(config.step, false);
+              j--;
+              requestAnimationFrame(fn);
+            };
+            fn();
           }
         }
       }
