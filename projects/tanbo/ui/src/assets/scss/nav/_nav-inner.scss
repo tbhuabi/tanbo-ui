@@ -1,5 +1,6 @@
 .ui-nav-inner {
-  display: flex;
+  display: table;
+  width: 100%;
   padding: .7em 1em;
   cursor: pointer;
   position: relative;
@@ -55,11 +56,15 @@
 }
 
 .ui-nav-inner-content {
-  flex: 1;
+  display: table-cell;
   overflow: hidden;
+  width: 100%;
 }
 
 .ui-nav-inner-arrow {
+  display: table-cell;
+  vertical-align: middle;
+  line-height: 1;
   width: 1em;
   font-size: 12px;
   margin-left: 10px;
@@ -67,6 +72,8 @@
   > span {
     display: inline-block;
     transition: transform .2s;
+    vertical-align: middle;
+    margin-top: -2px;
   }
 }
 

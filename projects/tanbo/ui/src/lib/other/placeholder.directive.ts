@@ -9,8 +9,8 @@ export class PlaceholderDirective implements AfterViewInit, OnDestroy {
   @Input()
   set placeholder(val: string) {
     this._placeholder = val;
-    if (this.shadowEle) {
-      this.shadowEle.innerText = this.elementRef.nativeElement.value ? '' : val;
+    if (this.placeholderElement) {
+      this.placeholderElement.innerText = this.value ? '' : val;
     }
   }
 
@@ -18,10 +18,25 @@ export class PlaceholderDirective implements AfterViewInit, OnDestroy {
     return this._placeholder;
   }
 
+  // @Input()
+  // set value(v: string) {
+  //   this._value = v;
+  //   if (this.placeholderElement) {
+  //     this.placeholderElement.innerText = v ? '' : this.placeholder;
+  //   }
+  // }
+  //
+  // get value() {
+  //   return this._value;
+  // }
+
+  private value = '';
+  private placeholderElement: HTMLElement;
   private shadowEle: HTMLElement;
   private _placeholder: string;
   private unbind: Array<() => void> = [];
   private inputStyles: any;
+  private animateId = null;
 
   constructor(private elementRef: ElementRef,
               private renderer2: Renderer2) {
@@ -33,6 +48,7 @@ export class PlaceholderDirective implements AfterViewInit, OnDestroy {
       const shadowEle = document.createElement('div');
       const shadowEleInner = document.createElement('div');
       this.shadowEle = shadowEle;
+      this.placeholderElement = shadowEleInner;
       const inputStyles = getComputedStyle(input);
       this.inputStyles = inputStyles;
       const shadowEleStyles = {
@@ -59,7 +75,6 @@ export class PlaceholderDirective implements AfterViewInit, OnDestroy {
         'box-sizing': 'border-box'
       };
 
-
       shadowEle.style.cssText = Object.keys(shadowEleStyles)
         .map((key) => `${key.replace(/[A-Z]/g, s => '-' + s.toLocaleLowerCase())}:${shadowEleStyles[key]}`).join(';');
       input.style.backgroundColor = 'transparent';
@@ -68,21 +83,30 @@ export class PlaceholderDirective implements AfterViewInit, OnDestroy {
       shadowEle.appendChild(shadowEleInner);
       input.parentNode.insertBefore(shadowEle, input);
 
-      shadowEleInner.innerText = input.value ? '' : this.placeholder;
       this.unbind.push(this.renderer2.listen(input, 'keyup', () => {
         shadowEleInner.innerText = input.value ? '' : this.placeholder;
+        cancelAnimationFrame(this.animateId);
+        fn();
       }));
       this.unbind.push(this.renderer2.listen(input, 'input', () => {
         shadowEleInner.innerText = input.value ? '' : this.placeholder;
+        cancelAnimationFrame(this.animateId);
+        fn();
       }));
+      const fn = () => {
+        shadowEleInner.innerText = input.value ? '' : this.placeholder;
+        this.animateId = requestAnimationFrame(fn);
+      };
+      fn();
     }
   }
 
   ngOnDestroy() {
+    cancelAnimationFrame(this.animateId);
     if (this.unbind.length) {
       const elementRef = this.elementRef.nativeElement;
       elementRef.parentNode.removeChild(this.shadowEle);
-      elementRef.style.cssText = this.inputStyles;
+      // elementRef.style.cssText = this.inputStyles;
       this.unbind.forEach(fn => fn());
     }
   }
