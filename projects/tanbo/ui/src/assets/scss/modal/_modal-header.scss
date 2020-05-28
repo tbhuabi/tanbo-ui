@@ -33,6 +33,7 @@ ui-modal-header {
 }
 
 .ui-modal-header {
+  display: table-cell;
   padding: $container-horizontal-padding + 5;
   min-height: 40px;
   border-bottom: 1px solid $color-light;
