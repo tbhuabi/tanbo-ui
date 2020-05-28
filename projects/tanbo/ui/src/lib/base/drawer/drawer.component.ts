@@ -16,8 +16,8 @@ function createStyles(step: number, direction: string) {
     top: direction === 'bottom' ? 'none' : 0,
     bottom: direction === 'top' ? 'none' : 0,
     opacity: step,
-    transform: transformMap[direction],
     '-ms-transform': transformMap[direction],
+    transform: transformMap[direction],
   };
 }
 
@@ -27,7 +27,6 @@ function createStyles(step: number, direction: string) {
 })
 
 export class DrawerComponent {
-  @ViewChild('drawer', {static: false}) drawer: ElementRef;
   @Input()
   direction = 'bottom';
 
@@ -37,26 +36,14 @@ export class DrawerComponent {
   }
 
   set show(val: boolean) {
-    if (this._show) {
-      let j = 16;
-      let step = 0;
-      const fn = () => {
-        step = this.cubicBezier.update(j / 16);
-        this.styles = createStyles(step, this.direction);
-        j--;
-        if (j >= 0) {
-          this.animationId = requestAnimationFrame(fn);
-        } else {
-          this._show = val;
-          cancelAnimationFrame(this.animationId);
-        }
-      };
-      fn();
-    } else {
+    if (val && this.canExecuteNextAnimate && !this.isFirstLoad) {
+      this.canExecuteNextAnimate = false;
       let i = 0;
       let step = 0;
-      const max = 16;
+      const max = 20;
+      this.overlayShow = val;
       this.styles = createStyles(0, this.direction);
+      this._show = val;
       const fn = () => {
         step = this.cubicBezier.update(i / max);
         this.styles = createStyles(step, this.direction);
@@ -64,29 +51,46 @@ export class DrawerComponent {
         if (i <= max) {
           this.animationId = requestAnimationFrame(fn);
         } else {
+          this.canExecuteNextAnimate = true;
+        }
+      };
+      this.animationId = requestAnimationFrame(fn);
+    } else if (!val && this.canExecuteNextAnimate && !this.isFirstLoad) {
+      this.canExecuteNextAnimate = false;
+      let j = 20;
+      let step = 0;
+      const fn = () => {
+        step = this.cubicBezier.update(j / 20);
+        this.styles = createStyles(step, this.direction);
+        j--;
+        if (j >= 0) {
+          this.animationId = requestAnimationFrame(fn);
+        } else {
+          this.canExecuteNextAnimate = true;
+          this._show = val;
+          this.overlayShow = val;
           cancelAnimationFrame(this.animationId);
         }
       };
-      this.animationId = requestAnimationFrame(() => {
-        fn();
-      });
-      this._show = val;
+      fn();
     }
+    this.isFirstLoad = false;
   }
-
-  private cubicBezier = new CubicBezier(0.36, 0.66, 0.04, 1);
-  private _show = false;
-  private animationId: number;
-
-  styles: { [key: string]: string | number } = {};
 
   @Output()
   uiHide = new EventEmitter();
 
+  private cubicBezier = new CubicBezier(0.36, 0.66, 0.04, 1);
+  private animationId: number;
+  private styles: { [key: string]: string | number } = {};
+  private _show = false;
   private isSelfClick = false;
+  private isFirstLoad = true;
+  private canExecuteNextAnimate = true;
+  public overlayShow = false;
 
   hide() {
-    if (!this.isSelfClick) {
+    if (!this.isSelfClick && this.canExecuteNextAnimate) {
       this.uiHide.emit();
     }
     this.isSelfClick = false;
