@@ -57,12 +57,10 @@ export {
   Hours,
   dateFormat
 } from './lib/forms/date/date-utils';
-export { EditorComponent } from './lib/forms/editor/editor.component';
 export { FileComponent } from './lib/forms/file/file.component';
 export { InputDirective } from './lib/forms/input/input.directive';
 export { InputAddonComponent } from './lib/forms/input-addon/input-addon.component';
 export { InputGroupComponent } from './lib/forms/input-group/input-group.component';
-export { MarkdownEditorComponent } from './lib/forms/markdown-editor/markdown-editor.component';
 export { OptionComponent } from './lib/forms/option/option.component';
 export { PaginationComponent, PaginationItem } from './lib/forms/pagination/pagination.component';
 export { PickerComponent } from './lib/forms/picker/picker.component';
@@ -129,14 +127,6 @@ export { PanelBodyComponent } from './lib/panel/panel-body/panel-body.component'
 export { PanelFooterComponent } from './lib/panel/panel-footer/panel-footer.component';
 export { PanelHeaderComponent } from './lib/panel/panel-header/panel-header.component';
 export { UIPanelModule } from './lib/panel/panel.module';
-/**
- * 锚点导航
- */
-export { AnchorComponent } from './lib/quick-nav/anchor/anchor.component';
-export { AnchorService } from './lib/quick-nav/anchor/anchor.service';
-export { AnchorLinkComponent } from './lib/quick-nav/anchor-link/anchor-link.component';
-export { UI_ANCHOR_LINK_DISTANCE } from './lib/quick-nav/helper';
-export { UIQuickNavModule } from './lib/quick-nav/quick-nav.module';
 /**
  * 滚动
  */

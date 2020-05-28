@@ -80,8 +80,16 @@ export class NavComponent implements OnDestroy, OnInit, OnChanges {
     const el = this.elementRef.nativeElement;
     if (this.expand) {
       this.renderer.setStyle(el, 'height', 'auto');
+      this.renderer.setStyle(el, 'paddingTop', '');
+      this.renderer.setStyle(el, 'paddingBottom', '');
+      this.renderer.setStyle(el, 'boxShadow', '');
+      this.renderer.setStyle(el, 'msBoxShadow', '');
     } else {
       this.renderer.setStyle(el, 'height', '0');
+      this.renderer.setStyle(el, 'paddingTop', '0');
+      this.renderer.setStyle(el, 'paddingBottom', '0');
+      this.renderer.setStyle(el, 'boxShadow', 'none');
+      this.renderer.setStyle(el, 'msBoxShadow', 'none');
     }
   }
 }

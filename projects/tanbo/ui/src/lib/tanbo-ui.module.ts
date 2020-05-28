@@ -10,7 +10,6 @@ import { UIModalModule } from './modal/modal.module';
 import { UINavModule } from './nav/nav.module';
 import { UIOtherModule } from './other/other.module';
 import { UIPanelModule } from './panel/panel.module';
-import { UIQuickNavModule } from './quick-nav/quick-nav.module';
 import { UIScrollModule } from './scroll/scroll.module';
 import { UIStepModule } from './step/step.module';
 import { UITabModule } from './tab/tab.module';
@@ -19,7 +18,6 @@ import { UITimelineModule } from './timeline/timeline.module';
 import { UITreeModule } from './tree/tree.module';
 
 import { UI_OVERLAY_Z_INDEX } from './base/help';
-import { UI_ANCHOR_LINK_DISTANCE } from './quick-nav/helper';
 
 @NgModule({
   exports: [
@@ -33,7 +31,6 @@ import { UI_ANCHOR_LINK_DISTANCE } from './quick-nav/helper';
     UINavModule,
     UIOtherModule,
     UIPanelModule,
-    UIQuickNavModule,
     UIScrollModule,
     UIStepModule,
     UITabModule,
@@ -47,9 +44,6 @@ export class UIModule {
     return {
       ngModule: UIModule,
       providers: [{
-          provide: UI_ANCHOR_LINK_DISTANCE,
-          useValue: 0
-        }, {
           provide: UI_OVERLAY_Z_INDEX,
           useValue: 1000
         }

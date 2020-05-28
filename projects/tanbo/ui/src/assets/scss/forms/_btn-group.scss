@@ -18,6 +18,7 @@ ui-btn-group {
   position: relative;
   display: table;
   line-height: 1;
+  white-space: nowrap;
   > .ui-btn {
     display: table-cell;
     border-radius: 0;

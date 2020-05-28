@@ -1,5 +1,38 @@
 ui-modal-header {
-  display: block;
+  display: table-row;
+  &.ui-dark .ui-modal-header{
+    background-color: $color-dark;
+    border-color: $color-dark;
+    color: #fff;
+  }
+  &.ui-primary .ui-modal-header{
+    background-color: $color-primary;
+    border-color: $color-primary;
+    color: #fff;
+  }
+  &.ui-info .ui-modal-header{
+    background-color: $color-info;
+    border-color: $color-info;
+    color: #fff;
+  }
+  &.ui-success .ui-modal-header{
+    background-color: $color-success;
+    border-color: $color-success;
+    color: #fff;
+  }
+  &.ui-warning .ui-modal-header{
+    background-color: $color-warning;
+    border-color: $color-warning;
+    color: #fff;
+  }
+  &.ui-danger .ui-modal-header {
+    background-color: $color-danger;
+    border-color: $color-danger;
+    color: #fff;
+  }
+}
+
+.ui-modal-header {
   padding: $container-horizontal-padding + 5;
   min-height: 40px;
   border-bottom: 1px solid $color-light;
@@ -8,35 +41,5 @@ ui-modal-header {
   color: $color-default;
   > .ui-close {
     transform: translateY(-5px);
-  }
-  &.ui-dark {
-    background-color: $color-dark;
-    border-color: $color-dark;
-    color: #fff;
-  }
-  &.ui-primary {
-    background-color: $color-primary;
-    border-color: $color-primary;
-    color: #fff;
-  }
-  &.ui-info {
-    background-color: $color-info;
-    border-color: $color-info;
-    color: #fff;
-  }
-  &.ui-success {
-    background-color: $color-success;
-    border-color: $color-success;
-    color: #fff;
-  }
-  &.ui-warning {
-    background-color: $color-warning;
-    border-color: $color-warning;
-    color: #fff;
-  }
-  &.ui-danger {
-    background-color: $color-danger;
-    border-color: $color-danger;
-    color: #fff;
   }
 }

@@ -9,8 +9,6 @@ import { BtnGroupComponent } from './btn-group/btn-group.component';
 import { ButtonComponent } from './button/button.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { DateComponent } from './date/date.component';
-import { EditorComponent } from './editor/editor.component';
-import { MarkdownEditorComponent } from './markdown-editor/markdown-editor.component';
 import { FileComponent } from './file/file.component';
 import { InputDirective } from './input/input.directive';
 import { InputAddonComponent } from './input-addon/input-addon.component';
@@ -48,12 +46,10 @@ import { RadioStateService } from './radio/radio-state.service';
     ButtonComponent,
     CheckboxComponent,
     DateComponent,
-    EditorComponent,
     FileComponent,
     InputDirective,
     InputAddonComponent,
     InputGroupComponent,
-    MarkdownEditorComponent,
     OptionComponent,
     PaginationComponent,
     PickerComponent,
@@ -76,12 +72,10 @@ import { RadioStateService } from './radio/radio-state.service';
     ButtonComponent,
     CheckboxComponent,
     DateComponent,
-    EditorComponent,
     FileComponent,
     InputDirective,
     InputAddonComponent,
     InputGroupComponent,
-    MarkdownEditorComponent,
     OptionComponent,
     PaginationComponent,
     PickerComponent,

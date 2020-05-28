@@ -1,5 +1,8 @@
 ui-modal-footer {
-  display: block;
+  display: table-row;
+}
+.ui-modal-footer {
+  display: table-cell;
   padding: 10px $container-horizontal-padding + 5;
   text-align: right;
   border-top: 1px solid $color-light;
