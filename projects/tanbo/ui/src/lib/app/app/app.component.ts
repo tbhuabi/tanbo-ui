@@ -28,7 +28,7 @@ function createDialogStyles(step: number) {
   } : {
     opacity: step,
     transform: `translateY(${(step - 1) * 100}%)`
-  }
+  };
 }
 
 function createNotifyStyles(step: number, isEnter: boolean) {
@@ -38,7 +38,7 @@ function createNotifyStyles(step: number, isEnter: boolean) {
     opacity: step,
     transition: '0.2s height',
     transform: isEnter ? `translateY(${(1 - step) * 100}%)` : `translateY(${(step - 1) * 100}%) scaleY(${step})`,
-  }
+  };
 }
 
 @Component({
@@ -164,9 +164,7 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
       };
       _config.step = 0;
       _config.animationId = requestAnimationFrame(() => {
-        setTimeout(() => {
-          fn();
-        }, 150);
+        fn();
       });
       _config.styles = createNotifyStyles(0, true);
 
@@ -205,9 +203,7 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
     const config = {
       step: 0,
       animationId: requestAnimationFrame(() => {
-        setTimeout(() => {
-          fn();
-        }, 150);
+        fn();
       }),
       template,
       styles: createModalStyles(0)
@@ -266,9 +262,7 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
     };
 
     this.dialogAnimationId = requestAnimationFrame(() => {
-      setTimeout(() => {
-        fn();
-      }, 150);
+      fn();
     });
 
     this.isShowDialog = true;
@@ -348,7 +342,7 @@ export class AppComponent implements DropdownRenderer, OnInit, OnDestroy {
         if (item.autoHide) {
           isClear = false;
           item.currentTime += 20;
-          let n = item.currentTime / item.time;
+          const n = item.currentTime / item.time;
           item.proportion = (n > 1 ? 1 : n) * 100;
           if (n > 1 && !isClosing) {
             isClosing = true;

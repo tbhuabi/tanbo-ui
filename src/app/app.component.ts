@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DialogController, NotifyController, NotifyType } from '@tanbo/ui';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { DrawerController } from '@tanbo/ui';
 
 @Component({
   selector: 'app-root',
@@ -7,19 +7,25 @@ import { DialogController, NotifyController, NotifyType } from '@tanbo/ui';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  @ViewChild('template', {static: true}) template: TemplateRef<any>;
 
-  constructor(private notifyController: NotifyController,
-              private dialogController: DialogController) {
+  constructor(private drawerController: DrawerController) {
   }
 
   ngOnInit() {
-
   }
 
   show() {
-    this.notifyController.push({
-      content: 'test',
-      type: NotifyType.Danger
-    })
+    this.drawerController.show({
+      direction: 'right', // 默认为 bottom，可选 top、right、left
+      content: this.template
+    }).then(() => {
+      console.log('隐藏完成！');
+    });
+  }
+
+  submit() {
+    // 提交表单
+    this.drawerController.hide();
   }
 }
