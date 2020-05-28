@@ -17,7 +17,8 @@ function createModalStyles(step: number) {
     zoom: 0.95 + 0.05 * step
   } : {
     opacity: step,
-    transform: 'scale(' + (0.95 + 0.05 * step) + ') translateX(-50%) translateY(-50%)'
+    transform: 'scale(' + (0.95 + 0.05 * step) + ') translateX(-50%) translateY(-50%)',
+    msTransform: 'scale(' + (0.95 + 0.05 * step) + ') translateX(-50%) translateY(-50%)'
   };
 }
 
@@ -27,7 +28,8 @@ function createDialogStyles(step: number) {
     top: `calc(50px + ${(step - 1) * 100}%)`
   } : {
     opacity: step,
-    transform: `translateY(${(step - 1) * 100}%)`
+    transform: `translateY(${(step - 1) * 100}%)`,
+    mxTransform: `translateY(${(step - 1) * 100}%)`
   };
 }
 
@@ -38,6 +40,7 @@ function createNotifyStyles(step: number, isEnter: boolean) {
     opacity: step,
     transition: '0.2s height',
     transform: isEnter ? `translateY(${(1 - step) * 100}%)` : `translateY(${(step - 1) * 100}%) scaleY(${step})`,
+    msTransform: isEnter ? `translateY(${(1 - step) * 100}%)` : `translateY(${(step - 1) * 100}%) scaleY(${step})`,
   };
 }
 
