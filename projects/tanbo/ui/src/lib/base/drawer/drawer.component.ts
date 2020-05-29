@@ -79,15 +79,15 @@ export class DrawerComponent {
 
   @Output()
   uiHide = new EventEmitter();
+  styles: { [key: string]: string | number } = {};
+  overlayShow = false;
 
   private cubicBezier = new CubicBezier(0.36, 0.66, 0.04, 1);
   private animationId: number;
-  private styles: { [key: string]: string | number } = {};
   private _show = false;
   private isSelfClick = false;
   private isFirstLoad = true;
   private canExecuteNextAnimate = true;
-  public overlayShow = false;
 
   hide() {
     if (!this.isSelfClick && this.canExecuteNextAnimate) {
