@@ -41,13 +41,14 @@ export class EditorComponent implements ControlValueAccessor, OnInit, OnDestroy 
   ngOnInit() {
     this.editor = createEditor(this.editorRef.nativeElement, {
       uploader: this.uploader,
-      content: this.value !== undefined && this.value !== null ? this.value + '' : ''
+      contents: this.value !== undefined && this.value !== null ? this.value + '' : ''
     });
 
-    this.styleSheet = this.editor.styleSheet;
-    this.editor.onChange.subscribe(doc => {
-      this.value = doc;
-      this.uiChange.emit(doc);
+    this.editor.onChange.subscribe(() => {
+      const content = this.editor.getContents();
+      this.styleSheet = content.styleSheets.join('');
+      this.value = content.contents;
+      this.uiChange.emit(this.value);
       if (this.onChange) {
         this.onChange(this.value);
       }
