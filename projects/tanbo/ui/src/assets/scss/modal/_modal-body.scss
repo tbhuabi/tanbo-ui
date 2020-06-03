@@ -1,6 +1,7 @@
 ui-modal-body {
   display: table-row;
   height: 100%;
+
   &:first-child > .ui-modal-body {
     padding-top: $container-horizontal-padding * 2;
   }
@@ -9,7 +10,23 @@ ui-modal-body {
 .ui-modal-body {
   display: table-cell;
   vertical-align: top;
+  background-color: $color-lighter;
+}
+
+.ui-modal-inner {
   padding: $container-horizontal-padding + 5;
   overflow-y: auto;
-  background-color: $color-lighter;
+  height: 281px;
+}
+
+.ui-modal-sm {
+  .ui-modal-inner {
+    height: 161px;
+  }
+}
+
+.ui-modal-lg {
+  .ui-modal-inner {
+    height: 421px;
+  }
 }

@@ -53,12 +53,13 @@
 
 ui-input-group {
   position: relative;
-  display: table;
+  display: inline-table;
   font-size: $form-control-font-size-base;
   > .ui-form-control, ui-select, ui-input[type=date] {
-    width: 100%;
+    //width: 100%;
   }
   > .ui-form-control, .ui-dropdown-input, > ui-input-addon, > .ui-btn {
+    display: table-cell;
     border-radius: 0;
   }
   > .ui-form-control, > ui-input-addon {
@@ -88,6 +89,7 @@ ui-input-group {
     }
   }
   > ui-btn-group, > ui-dropdown {
+    display: table-cell;
     &:not(:first-child) {
       margin-left: -1px;
     }

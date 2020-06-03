@@ -1,31 +1,24 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { DrawerController } from '@tanbo/ui';
+import { DrawerController, ModalController } from '@tanbo/ui';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  @ViewChild('template', {static: true}) template: TemplateRef<any>;
+export class AppComponent {
 
-  constructor(private drawerController: DrawerController) {
+  @ViewChild('demoModal', {read: TemplateRef, static: true})
+  demoModal: TemplateRef<any>;
+
+  constructor(private modalController: ModalController) {
   }
 
-  ngOnInit() {
+  showModal() {
+    this.modalController.show(this.demoModal);
   }
 
-  show() {
-    this.drawerController.show({
-      direction: 'right', // 默认为 bottom，可选 top、right、left
-      content: this.template
-    }).then(() => {
-      console.log('隐藏完成！');
-    });
-  }
-
-  submit() {
-    // 提交表单
-    this.drawerController.hide();
+  hideModal() {
+    this.modalController.hide();
   }
 }
