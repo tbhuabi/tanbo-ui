@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnDestroy, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, Output, OnDestroy, OnInit, ElementRef, Renderer2, TemplateRef } from '@angular/core';
 
 import { TooltipBaseService } from '../tooltip-base/tooltip-base.service';
 
@@ -28,8 +28,12 @@ export class PopConfirmComponent implements OnInit, OnDestroy {
   @Output() uiCancel = new EventEmitter<void>();
 
   isShow = false;
-  text = '';
+  contents: string | TemplateRef<any> = '';
   referenceElement: HTMLElement;
+
+  get contentsIsString() {
+    return typeof this.contents === 'string';
+  }
 
   get x() {
     return this.left + this.scrollX;

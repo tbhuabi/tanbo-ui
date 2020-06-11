@@ -7,7 +7,7 @@ import {
   HostListener,
   ComponentFactoryResolver,
   ComponentFactory,
-  ComponentRef
+  ComponentRef, TemplateRef
 } from '@angular/core';
 
 import { TooltipComponent } from './tooltip.component';
@@ -17,7 +17,7 @@ import { TooltipComponent } from './tooltip.component';
 })
 export class TooltipDirective implements OnDestroy {
   @Input()
-  uiTooltip = '';
+  uiTooltip: string | TemplateRef<any> = '';
   @Input()
   tooltipPosition = '';
 
@@ -37,7 +37,7 @@ export class TooltipDirective implements OnDestroy {
       this.tooltipComponent = this.viewContainerRef.createComponent(this.tooltipFactory);
       this.instance = this.tooltipComponent.instance;
     }
-    this.instance.text = this.uiTooltip;
+    this.instance.contents = this.uiTooltip;
     this.instance.referenceElement = this.elementRef.nativeElement;
     this.instance.position = this.tooltipPosition;
     this.instance.show();

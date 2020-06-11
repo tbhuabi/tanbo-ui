@@ -1,6 +1,9 @@
 <div class="ui-pop-confirm-arrow"></div>
 <div class="ui-pop-confirm" uiStopPropagation>
-  <div class="ui-pop-confirm-content">{{ text }}</div>
+  <div class="ui-pop-confirm-content">
+    <ng-container *ngIf="contentsIsString">{{ contents }}</ng-container>
+    <ng-container *ngIf="!contentsIsString" [ngTemplateOutlet]="contents"></ng-container>
+  </div>
   <div class="ui-pop-confirm-footer">
     <button type="button" (click)="cancel()" class="ui-btn ui-btn-default ui-btn-sm">取消</button>
     <button type="button" (click)="confirm()" class="ui-btn ui-btn-primary ui-btn-sm">确认</button>

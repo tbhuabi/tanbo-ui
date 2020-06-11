@@ -1,4 +1,5 @@
 <div class="ui-tooltip-arrow"></div>
 <div class="ui-tooltip">
-  {{ text }}
+  <ng-container *ngIf="contentIsString">{{ contents }}</ng-container>
+  <ng-container *ngIf="!contentIsString" [ngTemplateOutlet]="contents"></ng-container>
 </div>

@@ -9,7 +9,7 @@ import {
   ComponentFactory,
   ComponentRef,
   Output,
-  EventEmitter
+  EventEmitter, TemplateRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -20,9 +20,9 @@ import { PopConfirmComponent } from './pop-confirm.component';
 })
 export class PopConfirmDirective implements OnDestroy {
   @Input()
-  uiPopConfirm = '';
+  uiPopConfirm: string| TemplateRef<any> = '';
   @Input()
-  popConfirmPosition: string = '';
+  popConfirmPosition = '';
 
   @Output()
   uiConfirm = new EventEmitter<void>();
@@ -64,7 +64,7 @@ export class PopConfirmDirective implements OnDestroy {
       this.isShow = false;
       return;
     }
-    this.instance.text = this.uiPopConfirm;
+    this.instance.contents = this.uiPopConfirm;
     this.instance.referenceElement = this.elementRef.nativeElement;
     this.instance.position = this.popConfirmPosition;
     this.instance.show();

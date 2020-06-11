@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, ElementRef, Renderer2, TemplateRef } from '@angular/core';
 
 import { TooltipBaseService } from '../tooltip-base/tooltip-base.service';
 
@@ -25,10 +25,14 @@ import { TooltipBaseService } from '../tooltip-base/tooltip-base.service';
 })
 export class TooltipComponent implements OnInit, OnDestroy {
   isShow = false;
-  text = '';
+  contents: string | TemplateRef<any> = '';
   referenceElement: HTMLElement;
 
   position = 'topCenter';
+
+  get contentIsString() {
+    return typeof this.contents === 'string';
+  }
 
   get x() {
     return this.left + this.scrollX;
