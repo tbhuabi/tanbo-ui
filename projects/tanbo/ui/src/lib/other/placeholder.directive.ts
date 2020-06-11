@@ -98,6 +98,8 @@ export class PlaceholderDirective implements AfterViewInit, OnDestroy {
         this.animateId = requestAnimationFrame(fn);
       };
       fn();
+    } else {
+      this.elementRef.nativeElement.placeholder = this.placeholder;
     }
   }
 
