@@ -1,8 +1,8 @@
 {
   "name": "@tanbo/ui",
-  "version": "1.0.0-alpha.87",
+  "version": "1.0.0-alpha.88",
   "dependencies": {
-    "@tanbo/tbus": "^0.0.2-alpha.11",
+    "@tanbo/tbus": "^0.0.2-alpha.13",
     "codemirror": "5.47.0",
     "highlight.js": "9.15.8",
     "marked": "0.6.2"
