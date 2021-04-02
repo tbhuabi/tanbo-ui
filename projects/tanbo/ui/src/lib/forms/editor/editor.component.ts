@@ -9,7 +9,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { createEditor, Editor } from '@tanbo/textbus';
+import { createEditor, Editor, OutputContent } from '@tanbo/textbus';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -29,8 +29,7 @@ export class EditorComponent implements ControlValueAccessor, OnInit, OnDestroy 
   @Input() forId = '';
   @Input() uploader: (type: string) => (string | Promise<string> | Observable<string>);
   @Output() uiChange = new EventEmitter<string>();
-
-  styleSheet: string;
+  @Output() uiContentsChange = new EventEmitter<OutputContent<string>>();
 
   private editor: Editor;
   private onChange: (value: any) => any;
@@ -44,10 +43,10 @@ export class EditorComponent implements ControlValueAccessor, OnInit, OnDestroy 
       contents: this.value !== undefined && this.value !== null ? this.value + '' : ''
     });
 
-    this.editor.onChange.subscribe(() => {
+    this.sub = this.editor.onChange.subscribe(() => {
       const content = this.editor.getContents();
-      this.styleSheet = content.styleSheets.join('');
-      this.value = content.html;
+      this.uiContentsChange.emit(content);
+      this.value = content.content;
       this.uiChange.emit(this.value);
       if (this.onChange) {
         this.onChange(this.value);
