@@ -1,6 +1,6 @@
 {
   "name": "@tanbo/ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "dependencies": {
     "@tanbo/textbus": "^1.0.0-beta.21",
     "codemirror": "5.47.0",
@@ -9,8 +9,8 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/common": "^8.0.0 || ^9.0.0",
-    "@angular/core": "^8.0.0 || ^9.0.0"
+    "@angular/common": "^8.0.0 || ^9.0.0 || ^10.0.0 || 11.0.0",
+    "@angular/core": "^8.0.0 || ^9.0.0 || ^10.0.0 || 11.0.0"
   },
   "author": {
     "name": "Tan Bo",

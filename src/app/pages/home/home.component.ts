@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { ModalController } from '@tanbo/ui/src/lib/modal/help';
-import { createEditor } from '@tanbo/tbus';
+import { createEditor } from '@tanbo/textbus';
 import { Subject } from 'rxjs';
 
 class EventEmitter extends Subject<any> {

@@ -22,7 +22,7 @@ export class DrawerController {
 
   show(config: DrawerConfig) {
     this.showEvent.next(config);
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       const sub = this.onHide.subscribe(() => {
         resolve();
         sub.unsubscribe();
