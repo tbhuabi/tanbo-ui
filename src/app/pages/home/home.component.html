@@ -1,50 +1,6 @@
-<div #divElement>
-
-</div>
-<div>
-  <button type="button" class="ui-btn ui-btn-primary" (click)="show()">button</button>
-</div>
-<p>
-  <button [uiPopConfirm]="tip" type="button" uiDownload api="https://nnapptest.cloudbae.cn:38081/policyCashServer/policy/api/download/v1/empowerDeclare?id=18d378455dca4e668c695c3d6a5c0be8" filename="test.pdf" class="ui-btn ui-btn-primary">download</button>
-</p>
-<ng-template #tip>
-  <div>fdasfdsafdsaf</div>
-  <div>fdasfdsafdsaf</div>
-</ng-template>
-<p>
-  <ui-input type="date" [(ngModel)]="data.date" (uiChange)="show()"></ui-input>
-</p>
-<div>
-  <ui-tab>
-    <ui-tab-bar [tabIndex]="1">
-      <ui-tab-button>111</ui-tab-button>
-      <ui-tab-button>222</ui-tab-button>
-    </ui-tab-bar>
-    <ui-tab-view>
-      <ui-tab-view-item>aaaa</ui-tab-view-item>
-      <ui-tab-view-item>bbbb</ui-tab-view-item>
-    </ui-tab-view>
-  </ui-tab>
-</div>
-{{ test }}
-<ui-select class="ui-input-block" [(ngModel)]="test" placeholder="请选择状态">
-  <ui-option [value]="0">正常</ui-option>
-  <ui-option [value]="1">禁用</ui-option>
-  <ui-option [value]="2">冻结</ui-option>
-</ui-select>
-<ng-template #modal>
-  <ui-modal>
-    <ui-modal-body>
-      <ui-tab>
-        <ui-tab-bar [tabIndex]="1">
-          <ui-tab-button>111</ui-tab-button>
-          <ui-tab-button>222</ui-tab-button>
-        </ui-tab-bar>
-        <ui-tab-view>
-          <ui-tab-view-item>aaaa</ui-tab-view-item>
-          <ui-tab-view-item>bbbb</ui-tab-view-item>
-        </ui-tab-view>
-      </ui-tab>
-    </ui-modal-body>
-  </ui-modal>
-</ng-template>
+<form (uiSubmit)="show()">
+  <input type="text" uiInput>
+  <div>
+    <button type="submit">submit</button>
+  </div>
+</form>

@@ -9,7 +9,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { createEditor, Editor, OutputContent } from '@tanbo/textbus';
+import { createEditor, Editor, EditorOptions, OutputContent } from '@tanbo/textbus';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -27,7 +27,7 @@ export class EditorComponent implements ControlValueAccessor, OnInit, OnDestroy 
   @Input() placeholder = '请输入内容！';
   @Input() name = '';
   @Input() forId = '';
-  @Input() uploader: (type: string) => (string | Promise<string> | Observable<string>);
+  @Input() editorOptions: EditorOptions = {};
   @Output() uiChange = new EventEmitter<string>();
   @Output() uiContentsChange = new EventEmitter<OutputContent<string>>();
 
@@ -39,7 +39,7 @@ export class EditorComponent implements ControlValueAccessor, OnInit, OnDestroy 
 
   ngOnInit() {
     this.editor = createEditor(this.editorRef.nativeElement, {
-      uploader: this.uploader,
+      ...this.editorOptions,
       contents: this.value !== undefined && this.value !== null ? this.value + '' : ''
     });
 
