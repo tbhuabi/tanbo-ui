@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { createEditor, Editor, EditorOptions, OutputContent } from '@tanbo/textbus';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ui-editor',
@@ -31,7 +31,7 @@ export class EditorComponent implements ControlValueAccessor, OnInit, OnDestroy 
   @Output() uiChange = new EventEmitter<string>();
   @Output() uiContentsChange = new EventEmitter<OutputContent<string>>();
 
-  private editor: Editor;
+  editor: Editor;
   private onChange: (value: any) => any;
   private onTouched: () => any;
 

@@ -1,16 +1,16 @@
 {
   "name": "@tanbo/ui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "dependencies": {
-    "@tanbo/textbus": "^1.0.0-beta.29",
-    "codemirror": "5.47.0",
-    "highlight.js": "9.15.8",
-    "marked": "0.6.2",
+    "@tanbo/textbus": "^1.0.0-beta.51",
+    "codemirror": "^5.60.0",
+    "highlight.js": "^9.15.8",
+    "marked": "^0.6.2",
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/common": "^8.0.0 || ^9.0.0 || ^10.0.0 || 11.0.0",
-    "@angular/core": "^8.0.0 || ^9.0.0 || ^10.0.0 || 11.0.0"
+    "@angular/common": "^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0",
+    "@angular/core": "^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0"
   },
   "author": {
     "name": "Tan Bo",
